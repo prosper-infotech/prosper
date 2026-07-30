@@ -1,0 +1,92 @@
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { ChevronDown, Menu } from 'lucide-react'
+import { AnimatePresence } from 'framer-motion'
+import { NAV } from '../../data/navigation'
+import MegaMenu from './MegaMenu'
+import MobileMenu from './MobileMenu'
+import Button from '../ui/Button'
+
+export default function Header() {
+  const [scrolled, setScrolled] = useState(false)
+  const [openMenu, setOpenMenu] = useState(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setOpenMenu(null)
+    setMobileOpen(false)
+  }, [location.pathname])
+
+  const solid = scrolled || openMenu
+
+  return (
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        solid ? 'bg-navy shadow-md' : 'bg-navy-overlay'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
+          <Link to="/" className="font-heading font-bold text-xl text-white shrink-0">
+            Prosper<span className="text-primary">Infotech</span>
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV.map((item) => (
+              <div
+                key={item.path}
+                className="relative"
+                onMouseEnter={() => item.children && setOpenMenu(item.label)}
+                onMouseLeave={() => item.children && setOpenMenu(null)}
+              >
+                <Link
+                  to={item.path}
+                  className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-white/90 hover:text-primary transition-colors"
+                >
+                  {item.label}
+                  {item.children && (
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform ${
+                        openMenu === item.label ? 'rotate-180' : ''
+                      }`}
+                    />
+                  )}
+                </Link>
+                <AnimatePresence>
+                  {item.children && openMenu === item.label && (
+                    <MegaMenu item={item} onNavigate={() => setOpenMenu(null)} />
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </nav>
+
+          <div className="hidden lg:block">
+            <Button to="/contact" variant="filled">
+              Get in touch
+            </Button>
+          </div>
+
+          <button
+            type="button"
+            className="lg:hidden text-white"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu className="h-7 w-7" />
+          </button>
+        </div>
+      </div>
+
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </header>
+  )
+}
