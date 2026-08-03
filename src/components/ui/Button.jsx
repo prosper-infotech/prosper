@@ -10,14 +10,6 @@ const VARIANTS = {
     'bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
 }
 
-function Shine() {
-  return (
-    <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg">
-      <span className="absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-white/40 -translate-x-[150%] transition-transform duration-700 ease-out group-hover:translate-x-[400%]" />
-    </span>
-  )
-}
-
 export default function Button({
   to,
   href,
@@ -31,10 +23,9 @@ export default function Button({
 
   const content = (
     <>
-      <Shine />
-      <span className="relative z-10">{children}</span>
+      <span>{children}</span>
       {icon && (
-        <ArrowRight className="relative z-10 h-4 w-4 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+        <ArrowRight className="h-4 w-4 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
       )}
     </>
   )

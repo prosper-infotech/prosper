@@ -21,10 +21,10 @@ export default function MegaMenu({ item, onNavigate }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.15 }}
-      className={`absolute left-0 top-full z-40 pt-3 ${useTwoColumns ? 'w-[30rem]' : 'w-64'}`}
+      className={`absolute left-0 top-full z-40 pt-3 ${useTwoColumns ? 'w-[38rem]' : 'w-64'}`}
     >
       <div className="rounded-lg bg-gradient-to-b from-navy/70 to-primary-dark/70 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden">
-        <div className={useTwoColumns ? 'grid grid-cols-2 gap-x-2 py-2' : 'flex flex-col py-2'}>
+        <div className={useTwoColumns ? 'grid grid-cols-2 gap-x-1 py-2' : 'flex flex-col py-2'}>
           {columns.map((col, i) => (
             <div key={i} className="flex flex-col">
               {col.map((child) => (
@@ -32,7 +32,7 @@ export default function MegaMenu({ item, onNavigate }) {
                   key={child.path}
                   to={child.path}
                   onClick={onNavigate}
-                  className="px-5 py-2.5 text-sm font-heading font-semibold text-white hover:bg-white/10 hover:text-gold transition-colors whitespace-nowrap"
+                  className="px-5 py-2.5 text-sm font-heading font-semibold leading-snug text-white hover:bg-white/10 hover:text-gold transition-colors"
                 >
                   {child.label}
                 </Link>
