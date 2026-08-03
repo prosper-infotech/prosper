@@ -136,14 +136,11 @@ export const NAV = [
     templateGroup: 'topic',
     children: [
       { label: 'Blog', path: '/resources/blog' },
-      { label: 'Case Studies', path: '/resources/case-studies' },
-      { label: 'Brochures', path: '/resources/brochures' },
-      { label: 'White Papers', path: '/resources/white-papers' },
       { label: 'Videos', path: '/resources/videos' },
       { label: 'FAQs', path: '/resources/faqs' },
     ],
   },
-  { label: 'About', path: '/about' },
+  { label: 'About Us', path: '/about' },
   { label: 'Contact', path: '/contact' },
 ]
 

@@ -37,11 +37,13 @@ export default function StatCounter({ value, label }) {
       transition={{ duration: 0.4 }}
       className="flex flex-col items-center gap-1"
     >
-      <span className="text-4xl md:text-5xl font-heading font-bold text-white">
+      <span className="text-4xl md:text-5xl font-heading font-bold text-gold">
         {count}
         {suffix}
       </span>
-      <span className="text-sm text-ink-300 uppercase tracking-wide">{label}</span>
+      <span className="text-sm text-ink-300 uppercase tracking-wide min-h-[42px] flex items-center justify-center text-center">
+        {label}
+      </span>
     </motion.div>
   )
 }

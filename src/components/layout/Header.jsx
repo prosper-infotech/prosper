@@ -6,6 +6,7 @@ import { NAV } from '../../data/navigation'
 import MegaMenu from './MegaMenu'
 import MobileMenu from './MobileMenu'
 import Button from '../ui/Button'
+import logo from '../../assets/logo-dark.png'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -29,14 +30,14 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        solid ? 'bg-navy shadow-md' : 'bg-navy-overlay'
+      className={`sticky top-0 z-50 backdrop-blur-md transition-all duration-300 border-b ${
+        solid ? 'bg-navy/95 shadow-lg border-white/5' : 'bg-navy-overlay border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="font-heading font-bold text-xl text-white shrink-0">
-            Prosper<span className="text-primary">Infotech</span>
+          <Link to="/" className="shrink-0">
+            <img src={logo} alt="Prosper Infotech" className="h-12 w-auto" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
@@ -49,7 +50,7 @@ export default function Header() {
               >
                 <Link
                   to={item.path}
-                  className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-white/90 hover:text-primary transition-colors"
+                  className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-white/90 hover:text-gold transition-colors"
                 >
                   {item.label}
                   {item.children && (
@@ -71,7 +72,7 @@ export default function Header() {
 
           <div className="hidden lg:block">
             <Button to="/contact" variant="filled">
-              Get in touch
+              Book a demo
             </Button>
           </div>
 

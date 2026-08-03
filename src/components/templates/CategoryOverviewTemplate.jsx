@@ -2,6 +2,7 @@ import { Layers } from 'lucide-react'
 import Breadcrumb from '../ui/Breadcrumb'
 import ServiceCard from '../ui/ServiceCard'
 import CTABand from '../ui/CTABand'
+import Reveal from '../motion/Reveal'
 
 export default function CategoryOverviewTemplate({ title, description, items }) {
   return (
@@ -12,14 +13,15 @@ export default function CategoryOverviewTemplate({ title, description, items }) 
           <p className="max-w-2xl text-ink-600 text-lg mb-12">{description}</p>
         )}
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <ServiceCard
-              key={item.path}
-              icon={Layers}
-              title={item.label}
-              description={item.description ?? `Explore ${item.label}`}
-              to={item.path}
-            />
+          {items.map((item, i) => (
+            <Reveal key={item.path} delay={(i % 3) * 0.08}>
+              <ServiceCard
+                icon={Layers}
+                title={item.label}
+                description={item.description ?? `Explore ${item.label}`}
+                to={item.path}
+              />
+            </Reveal>
           ))}
         </div>
       </section>

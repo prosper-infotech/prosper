@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { MapPin, Phone } from 'lucide-react'
 import { NAV } from '../../data/navigation'
 import { OFFICES } from '../../data/offices'
+import logo from '../../assets/logo-dark.png'
 
 const FOOTER_COLUMNS = NAV.filter((item) => item.children).slice(0, 3)
 
@@ -10,10 +11,10 @@ export default function Footer() {
 
   return (
     <footer className="bg-navy text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
         <div>
-          <Link to="/" className="font-heading font-bold text-xl text-white">
-            Prosper<span className="text-primary">Infotech</span>
+          <Link to="/">
+            <img src={logo} alt="Prosper Infotech" className="h-12 w-auto" />
           </Link>
           <p className="mt-4 text-sm text-ink-300">
             Efficient Yards, Accurate Mapping, Intelligent Solutions with IoT, RFID, GPS, and AI.
@@ -26,7 +27,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2">
               {column.children.slice(0, 6).map((child) => (
                 <li key={child.path}>
-                  <Link to={child.path} className="text-sm text-ink-300 hover:text-primary transition-colors">
+                  <Link to={child.path} className="text-sm text-ink-300 hover:text-gold transition-colors">
                     {child.label}
                   </Link>
                 </li>
@@ -42,11 +43,11 @@ export default function Footer() {
               <li key={office.country} className="text-sm text-ink-300">
                 <div className="text-white font-semibold">{office.country}</div>
                 <div className="flex items-center gap-2 mt-1">
-                  <Phone className="h-3.5 w-3.5 shrink-0 text-primary" />
+                  <Phone className="h-3.5 w-3.5 shrink-0 text-gold" />
                   <span>{office.phone}</span>
                 </div>
                 <div className="flex items-start gap-2 mt-1">
-                  <MapPin className="h-3.5 w-3.5 shrink-0 text-primary mt-0.5" />
+                  <MapPin className="h-3.5 w-3.5 shrink-0 text-gold mt-0.5" />
                   <span>{office.address}</span>
                 </div>
               </li>

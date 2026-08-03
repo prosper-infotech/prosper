@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom'
 import Breadcrumb from '../ui/Breadcrumb'
 import Button from '../ui/Button'
 import CTABand from '../ui/CTABand'
+import Reveal from '../motion/Reveal'
 
 export default function TopicPageTemplate({ title, parentLabel, parentPath, siblings }) {
   return (
     <>
       <Breadcrumb title={title} parent={parentLabel} />
 
-      <section className="max-w-3xl mx-auto px-6 py-20 text-center flex flex-col items-center gap-6">
+      <Reveal className="max-w-3xl mx-auto px-6 py-20 text-center flex flex-col items-center gap-6">
         <p className="text-ink-600 text-lg">
           Content for {title} is coming soon. In the meantime, get in touch and we'll walk you
           through how Prosper Infotech can help.
@@ -36,7 +37,7 @@ export default function TopicPageTemplate({ title, parentLabel, parentPath, sibl
         <Link to={parentPath} className="text-sm font-semibold text-primary hover:text-primary-dark">
           View all {parentLabel} &rarr;
         </Link>
-      </section>
+      </Reveal>
 
       <CTABand title="Not sure where to start?" description="We'll help you find the right solution." />
     </>

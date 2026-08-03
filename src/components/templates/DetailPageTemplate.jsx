@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Breadcrumb from '../ui/Breadcrumb'
 import Button from '../ui/Button'
 import CTABand from '../ui/CTABand'
+import Reveal from '../motion/Reveal'
 
 export default function DetailPageTemplate({ title, description, parentLabel, parentPath, siblings }) {
   const capabilities = description ? description.split(',').map((c) => c.trim()) : []
@@ -11,7 +12,7 @@ export default function DetailPageTemplate({ title, description, parentLabel, pa
     <>
       <Breadcrumb title={title} parent={parentLabel} />
 
-      <section className="max-w-5xl mx-auto px-6 py-20">
+      <Reveal className="max-w-5xl mx-auto px-6 py-20">
         <div className="grid gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2 flex flex-col gap-8">
             {description && <p className="text-ink-600 text-lg">{description}</p>}
@@ -59,7 +60,7 @@ export default function DetailPageTemplate({ title, description, parentLabel, pa
             </aside>
           )}
         </div>
-      </section>
+      </Reveal>
 
       <CTABand
         title={`Ready to talk about ${title}?`}

@@ -1,14 +1,16 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { ChevronDown, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { NAV } from '../../data/navigation'
 import Button from '../ui/Button'
+import logo from '../../assets/logo-dark.png'
 
 export default function MobileMenu({ open, onClose }) {
   const [expanded, setExpanded] = useState(null)
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && (
         <>
@@ -27,7 +29,7 @@ export default function MobileMenu({ open, onClose }) {
             className="fixed inset-y-0 right-0 z-50 w-[85vw] max-w-sm overflow-y-auto bg-navy text-white lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-              <span className="font-heading font-bold text-lg">Menu</span>
+              <img src={logo} alt="Prosper Infotech" className="h-8 w-auto" />
               <button type="button" onClick={onClose} aria-label="Close menu">
                 <X className="h-6 w-6" />
               </button>
@@ -87,12 +89,13 @@ export default function MobileMenu({ open, onClose }) {
 
             <div className="px-5 py-6">
               <Button to="/contact" variant="filled" onClick={onClose} className="w-full">
-                Get in touch
+                Book a demo
               </Button>
             </div>
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   )
 }

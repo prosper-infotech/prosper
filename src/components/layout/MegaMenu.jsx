@@ -10,8 +10,10 @@ function chunk(items, size) {
 }
 
 export default function MegaMenu({ item, onNavigate }) {
-  const perColumn = Math.ceil(item.children.length / (item.children.length > 6 ? 3 : 2))
-  const columns = chunk(item.children, perColumn)
+  const useTwoColumns = item.children.length > 6
+  const columns = useTwoColumns
+    ? chunk(item.children, Math.ceil(item.children.length / 2))
+    : [item.children]
 
   return (
     <motion.div
@@ -19,39 +21,25 @@ export default function MegaMenu({ item, onNavigate }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
       transition={{ duration: 0.15 }}
-      className="absolute left-1/2 top-full z-40 w-[min(90vw,780px)] -translate-x-1/2 pt-3"
+      className={`absolute left-0 top-full z-40 pt-3 ${useTwoColumns ? 'w-[30rem]' : 'w-64'}`}
     >
-      <div className="rounded-lg bg-white shadow-xl ring-1 ring-black/5 overflow-hidden">
-        <div className="grid gap-x-8 gap-y-5 p-8" style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))` }}>
+      <div className="rounded-lg bg-gradient-to-b from-navy/70 to-primary-dark/70 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden">
+        <div className={useTwoColumns ? 'grid grid-cols-2 gap-x-2 py-2' : 'flex flex-col py-2'}>
           {columns.map((col, i) => (
-            <div key={i} className="flex flex-col gap-5">
+            <div key={i} className="flex flex-col">
               {col.map((child) => (
                 <Link
                   key={child.path}
                   to={child.path}
                   onClick={onNavigate}
-                  className="group block"
+                  className="px-5 py-2.5 text-sm font-heading font-semibold text-white hover:bg-white/10 hover:text-gold transition-colors whitespace-nowrap"
                 >
-                  <div className="font-heading font-semibold text-ink-900 group-hover:text-primary transition-colors">
-                    {child.label}
-                  </div>
-                  {child.description && (
-                    <div className="text-sm text-ink-500 mt-0.5 line-clamp-2">
-                      {child.description}
-                    </div>
-                  )}
+                  {child.label}
                 </Link>
               ))}
             </div>
           ))}
         </div>
-        <Link
-          to={item.path}
-          onClick={onNavigate}
-          className="block bg-surface-alt px-8 py-3 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
-        >
-          View all {item.label} &rarr;
-        </Link>
       </div>
     </motion.div>
   )
