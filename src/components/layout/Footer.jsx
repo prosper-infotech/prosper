@@ -13,8 +13,13 @@ export default function Footer() {
     <footer className="bg-navy text-white">
       <div className="max-w-7xl mx-auto px-6 py-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
         <div>
-          <Link to="/">
-            <img src={logo} alt="Prosper Infotech" className="h-12 w-auto" />
+          <Link to="/" className="group relative inline-flex items-center">
+            <span className="pointer-events-none absolute -inset-3 rounded-full bg-gold/0 blur-xl transition-colors duration-500 group-hover:bg-gold/25" />
+            <img
+              src={logo}
+              alt="Prosper Infotech"
+              className="relative h-12 w-auto transition-transform duration-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] group-hover:scale-105"
+            />
           </Link>
           <p className="mt-4 text-sm text-ink-300">
             Efficient Yards, Accurate Mapping, Intelligent Solutions with IoT, RFID, GPS, and AI.

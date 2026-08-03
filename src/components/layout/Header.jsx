@@ -36,8 +36,13 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="shrink-0">
-            <img src={logo} alt="Prosper Infotech" className="h-12 w-auto" />
+          <Link to="/" className="group relative flex shrink-0 items-center">
+            <span className="pointer-events-none absolute -inset-3 rounded-full bg-gold/0 blur-xl transition-colors duration-500 group-hover:bg-gold/25" />
+            <img
+              src={logo}
+              alt="Prosper Infotech"
+              className="relative h-11 w-auto transition-transform duration-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] group-hover:scale-105 md:h-12"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">

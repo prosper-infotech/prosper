@@ -29,7 +29,11 @@ export default function MobileMenu({ open, onClose }) {
             className="fixed inset-y-0 right-0 z-50 w-[85vw] max-w-sm overflow-y-auto bg-navy text-white lg:hidden"
           >
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-              <img src={logo} alt="Prosper Infotech" className="h-8 w-auto" />
+              <img
+                src={logo}
+                alt="Prosper Infotech"
+                className="h-8 w-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+              />
               <button type="button" onClick={onClose} aria-label="Close menu">
                 <X className="h-6 w-6" />
               </button>
