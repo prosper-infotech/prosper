@@ -17,6 +17,7 @@ import TestimonialCarousel from '../components/ui/TestimonialCarousel'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
+import LiveDashboardPreview from '../components/sections/LiveDashboardPreview'
 import { NAV } from '../data/navigation'
 
 const solutions = NAV.find((item) => item.label === 'Solutions').children
@@ -50,6 +51,44 @@ export default function Home() {
   return (
     <>
       <Hero />
+
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-gold/10 blur-3xl" />
+        <div className="max-w-7xl mx-auto px-6 py-20 grid gap-12 lg:grid-cols-2 items-center">
+          <Reveal className="flex flex-col gap-5">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              See It In Action
+            </span>
+            <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
+              Real-time visibility, not a status report from yesterday
+            </h2>
+            <p className="text-ink-600 text-lg">
+              Every RFID read, GPS ping, and gate event flows into one live dashboard — asset
+              counts, category breakdowns, and activity as it happens, not a spreadsheet someone
+              updates at the end of the shift.
+            </p>
+            <ul className="flex flex-col gap-2.5">
+              {[
+                'Live asset counts across every site',
+                'Category and utilization breakdowns updated continuously',
+                'Every check-in, check-out, and gate event logged automatically',
+              ].map((point) => (
+                <li key={point} className="flex items-start gap-2.5 text-sm text-ink-700">
+                  <CheckCircle2 className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            <Button to="/contact" variant="filled" className="self-start mt-2">
+              See it on your operation
+            </Button>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <LiveDashboardPreview />
+          </Reveal>
+        </div>
+      </section>
 
       <section className="bg-surface-alt">
         <div className="max-w-7xl mx-auto px-6 py-20 grid gap-12 lg:grid-cols-2 items-center">
