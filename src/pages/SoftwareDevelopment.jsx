@@ -155,8 +155,10 @@ const CATEGORIES = [
 function ItemRow({ item }) {
   const ItemIcon = item.icon
   return (
-    <div className="flex items-start gap-3 rounded-lg bg-surface-alt px-4 py-3">
-      <ItemIcon className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+    <div className="group flex items-start gap-3.5 rounded-lg border border-ink-200 bg-white px-4 py-3.5 shadow-sm hover:shadow-[0_10px_25px_-8px_rgba(20,52,109,0.25)] hover:border-gold/50 hover:-translate-y-0.5 transition-all duration-300">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold/20 to-gold/5 text-primary group-hover:from-gold group-hover:to-gold-dark transition-colors duration-300">
+        <ItemIcon className="h-4 w-4" />
+      </div>
       <div>
         <div className="text-sm font-semibold text-ink-900">{item.label}</div>
         <p className="mt-0.5 text-xs text-ink-600 leading-relaxed">{item.blurb}</p>

@@ -1,26 +1,29 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import SoftwareDevelopment from './pages/SoftwareDevelopment'
-import RFIDServices from './pages/RFIDServices'
-import IBMiAS400 from './pages/IBMiAS400'
-import ProductsSoftware from './pages/ProductsSoftware'
-import ProductsHardware from './pages/ProductsHardware'
-import Videos from './pages/Videos'
-import FAQ from './pages/FAQ'
-import Blog from './pages/Blog'
-import BlogPost from './pages/BlogPost'
-import PlaceholderPage from './pages/PlaceholderPage'
-import NotFound from './pages/NotFound'
-import CategoryOverviewTemplate from './components/templates/CategoryOverviewTemplate'
-import DetailPageTemplate from './components/templates/DetailPageTemplate'
-import SolutionDetailTemplate from './components/templates/SolutionDetailTemplate'
-import TopicPageTemplate from './components/templates/TopicPageTemplate'
+import PageLoader from './components/ui/PageLoader'
 import { NAV } from './data/navigation'
 import { SOLUTIONS_DETAIL } from './data/solutionsDetail'
 import { INDUSTRIES_DETAIL } from './data/industriesDetail'
+
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const SoftwareDevelopment = lazy(() => import('./pages/SoftwareDevelopment'))
+const RFIDServices = lazy(() => import('./pages/RFIDServices'))
+const IBMiAS400 = lazy(() => import('./pages/IBMiAS400'))
+const ProductsSoftware = lazy(() => import('./pages/ProductsSoftware'))
+const ProductsHardware = lazy(() => import('./pages/ProductsHardware'))
+const Videos = lazy(() => import('./pages/Videos'))
+const FAQ = lazy(() => import('./pages/FAQ'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const PlaceholderPage = lazy(() => import('./pages/PlaceholderPage'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const CategoryOverviewTemplate = lazy(() => import('./components/templates/CategoryOverviewTemplate'))
+const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageTemplate'))
+const SolutionDetailTemplate = lazy(() => import('./components/templates/SolutionDetailTemplate'))
+const TopicPageTemplate = lazy(() => import('./components/templates/TopicPageTemplate'))
 
 function childElement(item, child) {
   const siblings = item.children.filter((c) => c.path !== child.path)
@@ -105,42 +108,44 @@ function childElement(item, child) {
 
 function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        {NAV.filter((item) => item.path !== '/').map((item) => (
-          <Route key={item.path} path={item.path}>
-            <Route
-              index
-              element={
-                item.path === '/contact' ? (
-                  <Contact />
-                ) : item.path === '/about' ? (
-                  <About />
-                ) : item.children ? (
-                  <CategoryOverviewTemplate
-                    title={item.label}
-                    description={item.description}
-                    items={item.children}
-                  />
-                ) : (
-                  <PlaceholderPage title={item.label} description={item.description} />
-                )
-              }
-            />
-            {item.children?.map((child) => (
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          {NAV.filter((item) => item.path !== '/').map((item) => (
+            <Route key={item.path} path={item.path}>
               <Route
-                key={child.path}
-                path={child.path.slice(item.path.length + 1)}
-                element={childElement(item, child)}
+                index
+                element={
+                  item.path === '/contact' ? (
+                    <Contact />
+                  ) : item.path === '/about' ? (
+                    <About />
+                  ) : item.children ? (
+                    <CategoryOverviewTemplate
+                      title={item.label}
+                      description={item.description}
+                      items={item.children}
+                    />
+                  ) : (
+                    <PlaceholderPage title={item.label} description={item.description} />
+                  )
+                }
               />
-            ))}
-          </Route>
-        ))}
-        <Route path="/resources/blog/:slug" element={<BlogPost />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+              {item.children?.map((child) => (
+                <Route
+                  key={child.path}
+                  path={child.path.slice(item.path.length + 1)}
+                  element={childElement(item, child)}
+                />
+              ))}
+            </Route>
+          ))}
+          <Route path="/resources/blog/:slug" element={<BlogPost />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 
