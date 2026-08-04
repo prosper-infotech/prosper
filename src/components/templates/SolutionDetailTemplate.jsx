@@ -6,6 +6,12 @@ import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
+const SECTION_LINKS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'features', label: 'Key Features' },
+  { id: 'benefits', label: 'Benefits' },
+]
+
 export default function SolutionDetailTemplate({ title, parentLabel, parentPath, siblings, detail }) {
   useDocumentTitle(detail.seoTitle, detail.metaDescription)
 
@@ -13,7 +19,21 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
     <>
       <Breadcrumb title={title} parent={parentLabel} />
 
-      <section className="max-w-4xl mx-auto px-6 pt-16 pb-4">
+      <div className="sticky top-20 z-30 border-b border-ink-200 bg-white/95 backdrop-blur-sm">
+        <nav className="max-w-6xl mx-auto flex gap-1 overflow-x-auto px-6">
+          {SECTION_LINKS.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className="whitespace-nowrap border-b-2 border-transparent px-4 py-3 text-sm font-semibold text-ink-600 transition-colors hover:border-gold hover:text-primary"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <section id="overview" className="max-w-4xl mx-auto px-6 pt-16 pb-4 scroll-mt-36">
         <Reveal className="flex flex-col gap-4">
           {detail.intro.map((para, i) => (
             <p key={i} className="text-ink-600 text-lg">
@@ -23,7 +43,7 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
         </Reveal>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-14">
+      <section id="features" className="max-w-6xl mx-auto px-6 py-14 scroll-mt-36">
         <SectionHeading eyebrow="Key Features" title={`What's included in ${title}`} />
         <div className="mt-12 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {detail.keyFeatures.map((feature, i) => (
@@ -42,7 +62,7 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
         </div>
       </section>
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
+      <section id="benefits" className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden scroll-mt-36">
         <div className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16">
           <SectionHeading eyebrow="Why it matters" title="Benefits" variant="dark" className="mb-12" />

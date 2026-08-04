@@ -3,13 +3,14 @@ import { AnimatePresence, motion } from 'framer-motion'
 import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
+import StickyMobileCTA from './StickyMobileCTA'
 
 export default function Layout() {
   const location = useLocation()
   const element = useOutlet()
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pb-16 lg:pb-0">
       <TopBar />
       <Header />
       <main className="flex-1">
@@ -26,6 +27,7 @@ export default function Layout() {
         </AnimatePresence>
       </main>
       <Footer />
+      <StickyMobileCTA />
     </div>
   )
 }
