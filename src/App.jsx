@@ -8,6 +8,7 @@ import { SOLUTIONS_DETAIL } from './data/solutionsDetail'
 import { INDUSTRIES_DETAIL } from './data/industriesDetail'
 
 const About = lazy(() => import('./pages/About'))
+const SolutionsOverview = lazy(() => import('./pages/SolutionsOverview'))
 const Contact = lazy(() => import('./pages/Contact'))
 const SoftwareDevelopment = lazy(() => import('./pages/SoftwareDevelopment'))
 const RFIDServices = lazy(() => import('./pages/RFIDServices'))
@@ -68,6 +69,7 @@ function childElement(item, child) {
         parentPath={item.path}
         siblings={siblings}
         detail={SOLUTIONS_DETAIL[child.path]}
+        path={child.path}
       />
     )
   }
@@ -121,6 +123,8 @@ function App() {
                     <Contact />
                   ) : item.path === '/about' ? (
                     <About />
+                  ) : item.path === '/solutions' ? (
+                    <SolutionsOverview />
                   ) : item.children ? (
                     <CategoryOverviewTemplate
                       title={item.label}

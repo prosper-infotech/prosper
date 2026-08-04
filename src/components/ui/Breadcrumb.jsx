@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 
-export default function Breadcrumb({ title, parent }) {
+export default function Breadcrumb({ title, parent, icon: Icon }) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-navy via-primary to-primary-dark text-white">
       <div
@@ -37,7 +37,13 @@ export default function Breadcrumb({ title, parent }) {
         </nav>
 
         <div className="flex items-center gap-4">
-          <span className="hidden h-10 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-gold to-gold-dark sm:block" />
+          {Icon ? (
+            <span className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15),0_4px_12px_rgba(0,0,0,0.25)] sm:flex">
+              <Icon className="h-7 w-7" />
+            </span>
+          ) : (
+            <span className="hidden h-10 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-gold to-gold-dark sm:block" />
+          )}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white drop-shadow-md">
             {title}
           </h1>
