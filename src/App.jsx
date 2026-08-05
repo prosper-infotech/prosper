@@ -6,9 +6,14 @@ import PageLoader from './components/ui/PageLoader'
 import { NAV } from './data/navigation'
 import { SOLUTIONS_DETAIL } from './data/solutionsDetail'
 import { INDUSTRIES_DETAIL } from './data/industriesDetail'
+import { SOLUTION_ICONS } from './data/solutionIcons'
+import { INDUSTRY_ICONS } from './data/industryIcons'
 
 const About = lazy(() => import('./pages/About'))
 const SolutionsOverview = lazy(() => import('./pages/SolutionsOverview'))
+const ProductsOverview = lazy(() => import('./pages/ProductsOverview'))
+const ServicesOverview = lazy(() => import('./pages/ServicesOverview'))
+const IndustriesOverview = lazy(() => import('./pages/IndustriesOverview'))
 const Contact = lazy(() => import('./pages/Contact'))
 const SoftwareDevelopment = lazy(() => import('./pages/SoftwareDevelopment'))
 const RFIDServices = lazy(() => import('./pages/RFIDServices'))
@@ -70,6 +75,7 @@ function childElement(item, child) {
         siblings={siblings}
         detail={SOLUTIONS_DETAIL[child.path]}
         path={child.path}
+        icons={SOLUTION_ICONS}
       />
     )
   }
@@ -82,6 +88,8 @@ function childElement(item, child) {
         parentPath={item.path}
         siblings={siblings}
         detail={INDUSTRIES_DETAIL[child.path]}
+        path={child.path}
+        icons={INDUSTRY_ICONS}
       />
     )
   }
@@ -125,6 +133,12 @@ function App() {
                     <About />
                   ) : item.path === '/solutions' ? (
                     <SolutionsOverview />
+                  ) : item.path === '/products' ? (
+                    <ProductsOverview />
+                  ) : item.path === '/services' ? (
+                    <ServicesOverview />
+                  ) : item.path === '/industries' ? (
+                    <IndustriesOverview />
                   ) : item.children ? (
                     <CategoryOverviewTemplate
                       title={item.label}

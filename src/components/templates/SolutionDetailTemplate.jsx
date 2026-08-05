@@ -5,7 +5,6 @@ import SectionHeading from '../ui/SectionHeading'
 import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
-import { SOLUTION_ICONS } from '../../data/solutionIcons'
 
 const SECTION_LINKS = [
   { id: 'overview', label: 'Overview' },
@@ -13,12 +12,12 @@ const SECTION_LINKS = [
   { id: 'benefits', label: 'Benefits' },
 ]
 
-export default function SolutionDetailTemplate({ title, parentLabel, parentPath, siblings, detail, path }) {
+export default function SolutionDetailTemplate({ title, parentLabel, parentPath, siblings, detail, path, icons }) {
   useDocumentTitle(detail.seoTitle, detail.metaDescription)
 
   return (
     <>
-      <Breadcrumb title={title} parent={parentLabel} icon={SOLUTION_ICONS[path]} />
+      <Breadcrumb title={title} parent={parentLabel} icon={icons?.[path]} />
 
       <div className="sticky top-20 z-30 border-b border-ink-200 bg-white/95 backdrop-blur-sm">
         <nav className="max-w-6xl mx-auto flex gap-1 overflow-x-auto px-6">

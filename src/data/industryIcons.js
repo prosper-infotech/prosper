@@ -1,0 +1,31 @@
+import {
+  Truck,
+  Warehouse,
+  Factory,
+  Ship,
+  Container,
+  Network,
+  Boxes,
+  Snowflake,
+  HeartPulse,
+  Pill,
+  ShoppingCart,
+  HardHat,
+  Clapperboard,
+} from 'lucide-react'
+
+export const INDUSTRY_ICONS = {
+  '/industries/logistics': Truck,
+  '/industries/warehousing': Warehouse,
+  '/industries/manufacturing': Factory,
+  '/industries/ports-terminals': Ship,
+  '/industries/cfs': Container,
+  '/industries/supply-chain': Network,
+  '/industries/3pl': Boxes,
+  '/industries/cold-chain': Snowflake,
+  '/industries/healthcare': HeartPulse,
+  '/industries/pharma': Pill,
+  '/industries/retail': ShoppingCart,
+  '/industries/construction': HardHat,
+  '/industries/media-entertainment': Clapperboard,
+}
