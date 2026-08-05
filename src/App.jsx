@@ -17,6 +17,7 @@ const IndustriesOverview = lazy(() => import('./pages/IndustriesOverview'))
 const Contact = lazy(() => import('./pages/Contact'))
 const SoftwareDevelopment = lazy(() => import('./pages/SoftwareDevelopment'))
 const RFIDServices = lazy(() => import('./pages/RFIDServices'))
+const IndustrialIoTServices = lazy(() => import('./pages/IndustrialIoTServices'))
 const IBMiAS400 = lazy(() => import('./pages/IBMiAS400'))
 const ProductsSoftware = lazy(() => import('./pages/ProductsSoftware'))
 const ProductsHardware = lazy(() => import('./pages/ProductsHardware'))
@@ -40,6 +41,10 @@ function childElement(item, child) {
 
   if (child.path === '/services/rfid-services') {
     return <RFIDServices />
+  }
+
+  if (child.path === '/services/industrial-iot-services') {
+    return <IndustrialIoTServices />
   }
 
   if (child.path === '/services/ibm-i-as400') {
