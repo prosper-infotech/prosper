@@ -90,7 +90,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <Button to="/about" variant="filled" className="self-start mt-2">
+            <Button to="/about" variant="primary-dark" className="self-start mt-2">
               Learn more about us
             </Button>
           </Reveal>
@@ -136,7 +136,7 @@ export default function Home() {
           ))}
         </div>
         <Reveal className="mt-10 text-center">
-          <Button to="/solutions" variant="filled">
+          <Button to="/solutions" variant="primary-dark">
             View all Solutions
           </Button>
         </Reveal>

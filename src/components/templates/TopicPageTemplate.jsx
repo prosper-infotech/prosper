@@ -17,7 +17,7 @@ export default function TopicPageTemplate({ title, parentLabel, parentPath, sibl
         <div className="inline-flex items-center gap-2 rounded-full bg-surface-alt px-4 py-1.5 text-sm text-ink-500">
           Content coming soon
         </div>
-        <Button to="/contact" variant="filled">
+        <Button to="/contact" variant="primary-dark">
           Talk to us about {title}
         </Button>
 

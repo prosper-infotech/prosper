@@ -75,7 +75,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:block">
-            <Button to="/contact" variant="filled">
+            <Button to="/contact" variant="primary">
               Book a demo
             </Button>
           </div>

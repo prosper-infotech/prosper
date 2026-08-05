@@ -2,10 +2,16 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
 const VARIANTS = {
-  filled:
-    'bg-gradient-to-b from-gold to-gold-dark text-primary border border-gold-dark/30 shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 active:shadow-md',
+  // Primary ghost — bold gold border, for dark (navy) backgrounds
+  primary:
+    'bg-transparent text-white border-2 border-gold hover:bg-gold hover:text-primary hover:border-gold hover:shadow-lg hover:shadow-gold/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+  // Primary ghost — bold gold border, for light backgrounds
+  'primary-dark':
+    'bg-transparent text-primary border-2 border-gold-dark hover:bg-gold hover:text-primary hover:border-gold hover:shadow-lg hover:shadow-gold/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+  // Secondary ghost — subtle, for dark backgrounds
   outline:
     'bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+  // Secondary ghost — subtle, for light/gold backgrounds
   'outline-dark':
     'bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
 }
@@ -13,7 +19,7 @@ const VARIANTS = {
 export default function Button({
   to,
   href,
-  variant = 'filled',
+  variant = 'primary',
   children,
   className = '',
   icon = true,

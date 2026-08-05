@@ -37,7 +37,7 @@ export default function NotFound() {
         <p className="max-w-md text-ink-300">
           The page you're looking for doesn't exist or has moved. Let's get you back on route.
         </p>
-        <Button to="/" variant="filled">
+        <Button to="/" variant="primary">
           Back to home
         </Button>
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2">

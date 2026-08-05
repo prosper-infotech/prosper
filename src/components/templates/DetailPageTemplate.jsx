@@ -32,7 +32,7 @@ export default function DetailPageTemplate({ title, description, parentLabel, pa
               </ul>
             )}
 
-            <Button to="/contact" variant="filled" className="self-start">
+            <Button to="/contact" variant="primary-dark" className="self-start">
               Talk to us about {title}
             </Button>
           </div>

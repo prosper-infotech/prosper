@@ -108,7 +108,7 @@ export default function ContactForm() {
         {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
       </div>
 
-      <Button type="submit" variant="filled" disabled={isSubmitting} className="self-start disabled:opacity-60">
+      <Button type="submit" variant="primary-dark" disabled={isSubmitting} className="self-start disabled:opacity-60">
         {isSubmitting ? 'Sending...' : 'Send message'}
       </Button>
 

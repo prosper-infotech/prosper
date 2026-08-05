@@ -48,7 +48,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-wrap items-center justify-center gap-4 mt-2"
         >
-          <Button to="/contact" variant="filled">
+          <Button to="/contact" variant="primary">
             Book a demo
           </Button>
           <Button to="/solutions" variant="outline">
