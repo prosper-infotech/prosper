@@ -52,7 +52,14 @@ export default function Footer() {
                 </div>
                 <div className="flex items-start gap-2 mt-1">
                   <MapPin className="h-3.5 w-3.5 shrink-0 text-gold mt-0.5" />
-                  <span>{office.address}</span>
+                  <a
+                    href={office.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gold transition-colors"
+                  >
+                    {office.address}
+                  </a>
                 </div>
               </li>
             ))}

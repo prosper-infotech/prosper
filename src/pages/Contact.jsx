@@ -41,7 +41,14 @@ export default function Contact() {
                 </div>
                 <div className="flex items-start gap-3 text-ink-600">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>{office.address}</span>
+                  <a
+                    href={office.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-primary"
+                  >
+                    {office.address}
+                  </a>
                 </div>
               </div>
             ))}
