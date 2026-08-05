@@ -18,10 +18,18 @@ import {
   Cloud,
   Zap,
   Server,
+  CheckCircle2,
 } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+
+const HIGHLIGHTS = [
+  'Native and cross-platform mobile apps for iOS and Android',
+  'Enterprise web platforms, APIs, and backend systems',
+  'Modern, accessible frontend interfaces',
+  'Automated CI/CD pipelines and cloud infrastructure',
+]
 
 const CATEGORIES = [
   {
@@ -170,6 +178,31 @@ export default function SoftwareDevelopment() {
   return (
     <>
       <Breadcrumb title="Software Development" parent="Services" />
+
+      <section className="max-w-5xl mx-auto px-6 pt-16 pb-4">
+        <Reveal className="flex flex-col gap-5">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            What we build
+          </span>
+          <h2 className="text-3xl md:text-[38px] md:leading-[44px] font-heading font-bold text-primary">
+            Full-stack software development, built around your operation
+          </h2>
+          <p className="text-ink-600 text-lg">
+            From native mobile apps to enterprise web platforms and the cloud infrastructure
+            that keeps them running, our engineering team designs, builds, and ships production
+            software across the full stack. Explore the four disciplines below to see the
+            frameworks and technologies behind each one.
+          </p>
+          <ul className="grid gap-2.5 sm:grid-cols-2">
+            {HIGHLIGHTS.map((point) => (
+              <li key={point} className="flex items-start gap-2.5 text-sm text-ink-700">
+                <CheckCircle2 className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
 
       {/* Desktop: hover-preview two-column layout */}
       <section className="hidden lg:block max-w-6xl mx-auto px-6 py-20">

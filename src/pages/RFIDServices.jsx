@@ -1,8 +1,15 @@
 import { useState } from 'react'
-import { Lightbulb, Wrench, Cable, LifeBuoy } from 'lucide-react'
+import { Lightbulb, Wrench, Cable, LifeBuoy, CheckCircle2 } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+
+const HIGHLIGHTS = [
+  'Strategic technology consulting before you invest in hardware',
+  'Full hardware and software deployment across every site',
+  'Direct integration with your ERP, WMS, and business systems',
+  'Ongoing monitoring, tuning, and support once you go live',
+]
 
 const POINTS = [
   {
@@ -46,6 +53,31 @@ export default function RFIDServices() {
   return (
     <>
       <Breadcrumb title="RFID Services" parent="Services" />
+
+      <section className="max-w-5xl mx-auto px-6 pt-16 pb-4">
+        <Reveal className="flex flex-col gap-5">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            How we help
+          </span>
+          <h2 className="text-3xl md:text-[38px] md:leading-[44px] font-heading font-bold text-primary">
+            End-to-end RFID deployment, from first pilot to full rollout
+          </h2>
+          <p className="text-ink-600 text-lg">
+            RFID only pays off when it's implemented right. From evaluating your operation and
+            recommending the right hardware, through installation, system integration, and
+            ongoing support, our team handles every stage so your RFID investment actually works
+            as intended from day one.
+          </p>
+          <ul className="grid gap-2.5 sm:grid-cols-2">
+            {HIGHLIGHTS.map((point) => (
+              <li key={point} className="flex items-start gap-2.5 text-sm text-ink-700">
+                <CheckCircle2 className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </section>
 
       {/* Desktop: hover-preview two-column layout */}
       <section className="hidden lg:block max-w-6xl mx-auto px-6 py-20">
