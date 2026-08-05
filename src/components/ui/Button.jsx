@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
+// Primary is a flat solid gold fill — opaque, so it reads the same on
+// dark and light sections. Both keys share one style; kept separate so
+// call sites don't need to change if a light/dark split is needed later.
+const PRIMARY_STYLE =
+  'bg-gold text-primary shadow-md hover:bg-gold-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95'
+
 const VARIANTS = {
-  // Primary ghost — bold gold border, for dark (navy) backgrounds
-  primary:
-    'bg-transparent text-white border-2 border-gold hover:bg-gold hover:text-primary hover:border-gold hover:shadow-lg hover:shadow-gold/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
-  // Primary ghost — bold gold border, for light backgrounds
-  'primary-dark':
-    'bg-transparent text-primary border-2 border-gold-dark hover:bg-gold hover:text-primary hover:border-gold hover:shadow-lg hover:shadow-gold/30 hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+  primary: PRIMARY_STYLE,
+  'primary-dark': PRIMARY_STYLE,
   // Secondary ghost — subtle, for dark backgrounds
   outline:
     'bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
