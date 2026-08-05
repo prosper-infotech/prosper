@@ -21,7 +21,7 @@
   --color-surface-alt: #f5f5f5;
 
   --font-heading: "Roboto", sans-serif;
-  --font-body: "Open Sans", sans-serif;
+  --font-body: "Roboto", sans-serif;
 }
 
 @layer base {
