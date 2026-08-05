@@ -1,8 +1,4 @@
 import { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import { Lightbulb, Wrench, Cable, LifeBuoy } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
@@ -108,19 +104,13 @@ export default function RFIDServices() {
         </div>
       </section>
 
-      {/* Mobile/tablet: sliding cards, one point per slide */}
+      {/* Mobile/tablet: stacked cards, one point per row */}
       <section className="lg:hidden max-w-xl mx-auto px-6 py-14">
-        <Swiper
-          modules={[Pagination]}
-          pagination={{ clickable: true }}
-          spaceBetween={20}
-          slidesPerView={1}
-          className="pb-10"
-        >
-          {POINTS.map((point) => {
+        <div className="flex flex-col gap-6">
+          {POINTS.map((point, i) => {
             const Icon = point.icon
             return (
-              <SwiperSlide key={point.key}>
+              <Reveal key={point.key} delay={(i % 3) * 0.06}>
                 <div className="rounded-2xl border-l-4 border-gold bg-white shadow-xl p-6">
                   <div className="flex items-center gap-4 mb-3">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/20 text-primary">
@@ -135,10 +125,10 @@ export default function RFIDServices() {
                   </div>
                   <p className="mt-3 text-sm text-ink-600 leading-relaxed">{point.blurb}</p>
                 </div>
-              </SwiperSlide>
+              </Reveal>
             )
           })}
-        </Swiper>
+        </div>
       </section>
 
       <CTABand

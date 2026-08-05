@@ -1,8 +1,4 @@
 import { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import {
   Smartphone,
   Globe,
@@ -236,19 +232,13 @@ export default function SoftwareDevelopment() {
         </div>
       </section>
 
-      {/* Mobile/tablet: sliding cards, one category per slide, sub-items listed below */}
+      {/* Mobile/tablet: stacked cards, one category per row */}
       <section className="lg:hidden max-w-xl mx-auto px-6 py-14">
-        <Swiper
-          modules={[Pagination]}
-          pagination={{ clickable: true }}
-          spaceBetween={20}
-          slidesPerView={1}
-          className="pb-10"
-        >
-          {CATEGORIES.map((category) => {
+        <div className="flex flex-col gap-6">
+          {CATEGORIES.map((category, i) => {
             const Icon = category.icon
             return (
-              <SwiperSlide key={category.key}>
+              <Reveal key={category.key} delay={(i % 3) * 0.06}>
                 <div className="rounded-2xl border-l-4 border-gold bg-white shadow-xl p-6">
                   <div className="flex items-center gap-4 mb-2">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/20 text-primary">
@@ -268,10 +258,10 @@ export default function SoftwareDevelopment() {
                     ))}
                   </div>
                 </div>
-              </SwiperSlide>
+              </Reveal>
             )
           })}
-        </Swiper>
+        </div>
       </section>
 
       <CTABand
