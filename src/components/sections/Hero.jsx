@@ -11,6 +11,9 @@ const CAPABILITIES = [
   { icon: Satellite, label: 'GPS Tracking' },
 ]
 
+const HALO =
+  '[text-shadow:0_0_10px_rgba(255,255,255,0.95),0_0_10px_rgba(255,255,255,0.95),0_0_4px_rgba(255,255,255,0.95),0_1px_2px_rgba(255,255,255,0.9)]'
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
@@ -19,7 +22,6 @@ export default function Hero() {
         alt="Prosper Infotech AI-powered warehouse and port visibility platform"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-white/85 lg:bg-gradient-to-r lg:from-white lg:via-white/85 lg:to-white/10" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -31,7 +33,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-primary text-sm font-semibold uppercase tracking-widest"
+          className={`text-primary text-sm font-semibold uppercase tracking-widest ${HALO}`}
         >
           IoT &middot; RFID &middot; GPS &middot; AI
         </motion.span>
@@ -41,14 +43,14 @@ export default function Hero() {
           scroll={false}
           text="Transform Logistics With AI-Powered Visibility"
           highlightWords={['AI-Powered', 'Visibility']}
-          className="text-4xl xl:text-5xl font-heading font-bold leading-tight text-primary"
+          className={`text-4xl xl:text-5xl font-heading font-bold leading-tight text-primary ${HALO}`}
         />
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-ink-600 text-lg"
+          className={`text-ink-600 text-lg ${HALO}`}
         >
           AI, OCR, RFID, GPS, and edge intelligence &mdash; all working together to give your
           yard, warehouse, and fleet real-time visibility instead of guesswork.
@@ -63,7 +65,11 @@ export default function Hero() {
           <Button to="/contact" variant="primary-dark">
             Book a demo
           </Button>
-          <Button to="/solutions" variant="outline-dark">
+          <Button
+            to="/solutions"
+            variant="outline-dark"
+            className="!border-white !bg-white/85 backdrop-blur-md"
+          >
             Explore solutions
           </Button>
         </motion.div>
@@ -76,10 +82,12 @@ export default function Hero() {
         >
           {CAPABILITIES.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-col items-start gap-2">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-primary">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-md text-primary">
                 <Icon className="h-4.5 w-4.5" />
               </span>
-              <span className="text-xs font-semibold text-ink-700 leading-tight">{label}</span>
+              <span className={`text-xs font-semibold text-ink-700 leading-tight ${HALO}`}>
+                {label}
+              </span>
             </div>
           ))}
         </motion.div>
