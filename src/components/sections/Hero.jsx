@@ -11,9 +11,6 @@ const CAPABILITIES = [
   { icon: Satellite, label: 'GPS Tracking' },
 ]
 
-const HALO =
-  '[text-shadow:0_0_10px_rgba(255,255,255,0.95),0_0_10px_rgba(255,255,255,0.95),0_0_4px_rgba(255,255,255,0.95),0_1px_2px_rgba(255,255,255,0.9)]'
-
 export default function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
@@ -22,19 +19,18 @@ export default function Hero() {
         alt="Prosper Infotech AI-powered warehouse and port visibility platform"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-white/85 lg:bg-gradient-to-r lg:from-white lg:from-0% lg:via-white/70 lg:via-25% lg:to-white/0 lg:to-45%" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 lg:pl-12 xl:pl-20 py-16 lg:py-0"
+        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 lg:pl-12 xl:pl-20 py-10 lg:py-10 backdrop-blur-md"
       >
         <motion.span
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className={`text-primary text-sm font-semibold uppercase tracking-widest ${HALO}`}
+          className="text-primary text-sm font-semibold uppercase tracking-widest"
         >
           IoT &middot; RFID &middot; GPS &middot; AI
         </motion.span>
@@ -44,14 +40,14 @@ export default function Hero() {
           scroll={false}
           text="Transform Logistics With AI-Powered Visibility"
           highlightWords={['AI-Powered', 'Visibility']}
-          className={`text-4xl xl:text-5xl font-heading font-bold leading-tight text-primary ${HALO}`}
+          className="text-4xl xl:text-5xl font-heading font-bold leading-tight text-primary"
         />
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className={`text-ink-600 text-lg ${HALO}`}
+          className="text-ink-600 text-lg"
         >
           AI, OCR, RFID, GPS, and edge intelligence &mdash; all working together to give your
           yard, warehouse, and fleet real-time visibility instead of guesswork.
@@ -86,9 +82,7 @@ export default function Hero() {
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-md text-primary">
                 <Icon className="h-4.5 w-4.5" />
               </span>
-              <span className={`text-xs font-semibold text-ink-700 leading-tight ${HALO}`}>
-                {label}
-              </span>
+              <span className="text-xs font-semibold text-ink-700 leading-tight">{label}</span>
             </div>
           ))}
         </motion.div>
