@@ -24,7 +24,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 lg:pl-12 xl:pl-20 py-10 lg:py-10 backdrop-blur-md"
+        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 py-10 lg:px-12 lg:py-12 xl:px-16 bg-white/95 shadow-xl lg:rounded-r-2xl"
       >
         <motion.span
           initial={{ opacity: 0, y: 12 }}
