@@ -106,6 +106,11 @@ export const NAV = [
         path: '/services/ibm-i-as400',
         description: 'Development, Modernization, Migration, Support',
       },
+      {
+        label: '24x7 Help Desk',
+        path: '/services/24x7-help-desk',
+        description: 'Live Support, Multi-Channel Assistance, Issue Tracking, Remote Assistance',
+      },
     ],
   },
   {
