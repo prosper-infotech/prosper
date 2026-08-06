@@ -2,11 +2,22 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../ui/Button'
 
-// TODO: wire up a real submission endpoint (Formspree or EmailJS per MASTER_PLAN.md
-// Section 3) once the user has an account/API key for one of those services.
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
+
 async function submitEnquiry(data) {
-  console.info('Contact form submission (no backend wired yet):', data)
-  await new Promise((resolve) => setTimeout(resolve, 400))
+  if (!FORMSPREE_ID) {
+    throw new Error('Formspree is not configured — set VITE_FORMSPREE_ID in .env')
+  }
+
+  const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(data),
+  })
+
+  if (!response.ok) {
+    throw new Error('Formspree submission failed')
+  }
 }
 
 const inputClasses =
