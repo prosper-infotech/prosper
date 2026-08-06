@@ -10,7 +10,7 @@ const SOCIAL_LINKS = [
 
 export default function TopBar() {
   return (
-    <div className="bg-primary-dark text-white text-xs md:text-sm">
+    <div className="bg-primary-dark text-white text-xs md:text-sm lg:sticky lg:top-0 lg:z-50">
       <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (

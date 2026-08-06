@@ -30,7 +30,7 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 backdrop-blur-md transition-all duration-300 border-b ${
+      className={`sticky top-0 z-50 lg:top-9 backdrop-blur-md transition-all duration-300 border-b ${
         solid ? 'bg-navy/95 shadow-lg border-white/5' : 'bg-navy-overlay border-transparent'
       }`}
     >
