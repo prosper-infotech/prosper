@@ -22,7 +22,7 @@ export default function Hero() {
         alt="Prosper Infotech AI-powered warehouse and port visibility platform"
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/75 via-35% to-white/0" />
+      <div className="absolute inset-0 bg-white/85 lg:bg-gradient-to-r lg:from-white lg:from-0% lg:via-white/70 lg:via-25% lg:to-white/0 lg:to-45%" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
