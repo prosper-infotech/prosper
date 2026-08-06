@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import PageLoader from './components/ui/PageLoader'
@@ -19,7 +19,6 @@ const SoftwareDevelopment = lazy(() => import('./pages/SoftwareDevelopment'))
 const RFIDServices = lazy(() => import('./pages/RFIDServices'))
 const IndustrialIoTServices = lazy(() => import('./pages/IndustrialIoTServices'))
 const IBMiAS400 = lazy(() => import('./pages/IBMiAS400'))
-const HelpDesk = lazy(() => import('./pages/HelpDesk'))
 const ProductsSoftware = lazy(() => import('./pages/ProductsSoftware'))
 const ProductsHardware = lazy(() => import('./pages/ProductsHardware'))
 const Videos = lazy(() => import('./pages/Videos'))
@@ -135,8 +134,6 @@ function App() {
                     <About />
                   ) : item.path === '/ibm-i-as400' ? (
                     <IBMiAS400 />
-                  ) : item.path === '/24x7-help-desk' ? (
-                    <HelpDesk />
                   ) : item.path === '/solutions' ? (
                     <SolutionsOverview />
                   ) : item.path === '/products' ? (
@@ -166,6 +163,7 @@ function App() {
             </Route>
           ))}
           <Route path="/resources/blog/:slug" element={<BlogPost />} />
+          <Route path="/24x7-help-desk" element={<Navigate to="/contact" replace />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
