@@ -13,85 +13,77 @@ const CAPABILITIES = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-surface">
-      <div className="flex flex-col lg:flex-row lg:items-stretch">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
+    <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
+      <img
+        src={heroBanner}
+        alt="Prosper Infotech AI-powered warehouse and port visibility platform"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-white/85 lg:bg-gradient-to-r lg:from-white lg:via-white/85 lg:to-white/10" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 lg:pl-12 xl:pl-20 py-16 lg:py-0"
+      >
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full lg:w-[40%] shrink-0 flex flex-col justify-center gap-5 px-6 lg:pl-12 xl:pl-20 lg:pr-8 py-16 lg:py-20"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-primary text-sm font-semibold uppercase tracking-widest"
         >
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-primary text-sm font-semibold uppercase tracking-widest"
-          >
-            IoT &middot; RFID &middot; GPS &middot; AI
-          </motion.span>
+          IoT &middot; RFID &middot; GPS &middot; AI
+        </motion.span>
 
-          <AnimatedText
-            as="h1"
-            scroll={false}
-            text="Transform Logistics With AI-Powered Visibility"
-            highlightWords={['AI-Powered', 'Visibility']}
-            className="text-4xl xl:text-5xl font-heading font-bold leading-tight text-primary"
-          />
+        <AnimatedText
+          as="h1"
+          scroll={false}
+          text="Transform Logistics With AI-Powered Visibility"
+          highlightWords={['AI-Powered', 'Visibility']}
+          className="text-4xl xl:text-5xl font-heading font-bold leading-tight text-primary"
+        />
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-ink-600 text-lg"
-          >
-            AI, OCR, RFID, GPS, and edge intelligence &mdash; all working together to give your
-            yard, warehouse, and fleet real-time visibility instead of guesswork.
-          </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-ink-600 text-lg"
+        >
+          AI, OCR, RFID, GPS, and edge intelligence &mdash; all working together to give your
+          yard, warehouse, and fleet real-time visibility instead of guesswork.
+        </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap items-center gap-4"
-          >
-            <Button to="/contact" variant="primary-dark">
-              Book a demo
-            </Button>
-            <Button to="/solutions" variant="outline-dark">
-              Explore solutions
-            </Button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-2 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-5"
-          >
-            {CAPABILITIES.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex flex-col items-start gap-2">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-primary">
-                  <Icon className="h-4.5 w-4.5" />
-                </span>
-                <span className="text-xs font-semibold text-ink-700 leading-tight">{label}</span>
-              </div>
-            ))}
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap items-center gap-4"
+        >
+          <Button to="/contact" variant="primary-dark">
+            Book a demo
+          </Button>
+          <Button to="/solutions" variant="outline-dark">
+            Explore solutions
+          </Button>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full lg:flex-1 min-h-[280px] lg:min-h-[560px]"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-5"
         >
-          <img
-            src={heroBanner}
-            alt="Prosper Infotech AI-powered warehouse and port visibility platform"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          {CAPABILITIES.map(({ icon: Icon, label }) => (
+            <div key={label} className="flex flex-col items-start gap-2">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-primary">
+                <Icon className="h-4.5 w-4.5" />
+              </span>
+              <span className="text-xs font-semibold text-ink-700 leading-tight">{label}</span>
+            </div>
+          ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
