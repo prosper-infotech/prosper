@@ -54,7 +54,7 @@ export default function Header() {
               >
                 <Link
                   to={item.path}
-                  className="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-white/90 hover:text-gold transition-colors"
+                  className="flex items-center gap-1 whitespace-nowrap px-2.5 py-2 text-sm font-semibold text-white/90 hover:text-gold transition-colors"
                 >
                   {item.label}
                   {item.children && (

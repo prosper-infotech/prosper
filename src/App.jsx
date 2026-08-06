@@ -48,14 +48,6 @@ function childElement(item, child) {
     return <IndustrialIoTServices />
   }
 
-  if (child.path === '/services/ibm-i-as400') {
-    return <IBMiAS400 />
-  }
-
-  if (child.path === '/services/24x7-help-desk') {
-    return <HelpDesk />
-  }
-
   if (child.path === '/products/software') {
     return <ProductsSoftware />
   }
@@ -141,6 +133,10 @@ function App() {
                     <Contact />
                   ) : item.path === '/about' ? (
                     <About />
+                  ) : item.path === '/ibm-i-as400' ? (
+                    <IBMiAS400 />
+                  ) : item.path === '/24x7-help-desk' ? (
+                    <HelpDesk />
                   ) : item.path === '/solutions' ? (
                     <SolutionsOverview />
                   ) : item.path === '/products' ? (

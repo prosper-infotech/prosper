@@ -190,7 +190,7 @@ const WHY_CHOOSE_US = [
 export default function IBMiAS400() {
   return (
     <>
-      <Breadcrumb title="IBM i / AS400" parent="Services" />
+      <Breadcrumb title="IBM i / AS400" />
 
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-8 text-center">
         <Reveal className="flex flex-col items-center gap-4">

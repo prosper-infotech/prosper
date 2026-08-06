@@ -11,7 +11,6 @@ export default function ServicesOverview() {
       heading="Development, implementation, and support across our full solution stack"
       items={services}
       icons={SERVICE_ICONS}
-      columns={2}
       ctaTitle="Have a question about our Services?"
       ctaDescription="Talk to our team about the right fit for your operation."
     />

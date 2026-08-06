@@ -42,7 +42,7 @@ const OFFERINGS = [
 export default function HelpDesk() {
   return (
     <>
-      <Breadcrumb title="24x7 Help Desk" parent="Services" icon={Headset} />
+      <Breadcrumb title="24x7 Help Desk" icon={Headset} />
 
       <section className="max-w-5xl mx-auto px-6 pt-16 pb-4">
         <Reveal className="flex flex-col gap-5">
