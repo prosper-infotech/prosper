@@ -139,7 +139,7 @@ export default function AssetTracking() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex items-center justify-center max-w-sm">
+            <div className="relative flex items-center justify-center max-w-md">
               <div className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl" />
               <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
                 <img
