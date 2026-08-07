@@ -183,11 +183,7 @@ export default function AS400Development() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <motion.div
-              className="relative flex items-center justify-center max-w-md"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            <div className="relative flex items-center justify-center max-w-sm">
               <motion.div
                 className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
                 animate={{ opacity: [0.6, 1, 0.6] }}
@@ -210,7 +206,7 @@ export default function AS400Development() {
               >
                 On-Call Support
               </motion.span>
-            </motion.div>
+            </div>
           </Reveal>
         </div>
       </section>
