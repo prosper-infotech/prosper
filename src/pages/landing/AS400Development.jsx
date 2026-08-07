@@ -357,7 +357,15 @@ export default function AS400Development() {
             <p className="text-sm text-ink-600 mb-5">
               Tell us about your environment — we'll respond within one business day.
             </p>
-            <LandingLeadForm />
+            <LandingLeadForm
+              serviceOptions={[
+                'AS400 Development (RPG/RPGLE)',
+                'AS400 Support / Help Desk',
+                'AS400 Modernization',
+                'Migration / Cloud Integration',
+                'Not sure — need guidance',
+              ]}
+            />
           </Reveal>
         </div>
       </section>

@@ -23,9 +23,19 @@ async function submitLead(data) {
 const inputClasses =
   'w-full rounded-md border border-ink-300 px-4 py-2.5 text-ink-900 placeholder:text-ink-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent'
 
+const DEFAULT_SERVICE_OPTIONS = [
+  'AS400 Development (RPG/RPGLE)',
+  'AS400 Support / Help Desk',
+  'AS400 Modernization',
+  'Migration / Cloud Integration',
+  'Not sure — need guidance',
+]
+
 export default function LandingLeadForm({
   campaign = 'AS400 Development Landing Page',
   submitLabel = 'Get a free consultation',
+  serviceLabel = 'What do you need help with?',
+  serviceOptions = DEFAULT_SERVICE_OPTIONS,
 }) {
   const {
     register,
@@ -39,11 +49,12 @@ export default function LandingLeadForm({
     try {
       await submitLead({
         ...data,
-        _subject: `New lead — ${campaign}`,
+        _subject: `New lead — ${campaign} (${data.service})`,
         source: campaign,
       })
       window.gtag?.('event', 'generate_lead', {
         event_category: campaign,
+        event_label: data.service,
       })
       setStatus('success')
       reset()
@@ -117,14 +128,36 @@ export default function LandingLeadForm({
       </div>
 
       <div>
+        <label htmlFor="lp-service" className="block text-sm font-semibold text-ink-900 mb-1.5">
+          {serviceLabel}
+        </label>
+        <select
+          id="lp-service"
+          className={inputClasses}
+          defaultValue=""
+          {...register('service', { required: 'Please select an option' })}
+        >
+          <option value="" disabled>
+            Select an option
+          </option>
+          {serviceOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        {errors.service && <p className="mt-1 text-sm text-red-600">{errors.service.message}</p>}
+      </div>
+
+      <div>
         <label htmlFor="lp-message" className="block text-sm font-semibold text-ink-900 mb-1.5">
-          What do you need help with? <span className="text-ink-500 font-normal">(optional)</span>
+          Anything else we should know? <span className="text-ink-500 font-normal">(optional)</span>
         </label>
         <textarea
           id="lp-message"
-          rows={3}
+          rows={2}
           className={inputClasses}
-          placeholder="e.g. RPGLE support, modernization, ongoing 24x7 coverage..."
+          placeholder="Add any extra detail about your environment or timeline..."
           {...register('message')}
         />
       </div>

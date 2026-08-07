@@ -271,7 +271,17 @@ export default function AssetTracking() {
             <p className="text-sm text-ink-600 mb-5">
               Tell us about your assets — we'll respond within one business day.
             </p>
-            <LandingLeadForm campaign="Asset Tracking Landing Page" submitLabel="Get a free demo" />
+            <LandingLeadForm
+              campaign="Asset Tracking Landing Page"
+              submitLabel="Get a free demo"
+              serviceLabel="What best describes your situation?"
+              serviceOptions={[
+                'New RFID + GPS deployment',
+                'Expanding an existing deployment',
+                'Evaluating / comparing vendors',
+                'Just researching for now',
+              ]}
+            />
           </Reveal>
         </div>
       </section>
