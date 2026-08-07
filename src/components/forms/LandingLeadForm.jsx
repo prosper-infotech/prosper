@@ -39,12 +39,11 @@ export default function LandingLeadForm({
     try {
       await submitLead({
         ...data,
-        _subject: `New AS400 lead — ${campaign}`,
+        _subject: `New lead — ${campaign}`,
         source: campaign,
       })
       window.gtag?.('event', 'generate_lead', {
-        event_category: 'AS400 Landing Page',
-        event_label: campaign,
+        event_category: campaign,
       })
       setStatus('success')
       reset()
