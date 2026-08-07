@@ -21,6 +21,7 @@ import {
   Boxes,
   Mail,
 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -114,7 +115,16 @@ export default function AS400Development() {
   return (
     <>
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
-        <div className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+        <motion.div
+          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
+          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
+          animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
@@ -140,7 +150,7 @@ export default function AS400Development() {
                 return (
                   <span
                     key={badge.label}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white"
+                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
                   >
                     <Icon className="h-4 w-4 text-gold" />
                     {badge.label}
@@ -150,9 +160,12 @@ export default function AS400Development() {
             </div>
 
             <div className="flex flex-wrap gap-4 mt-4">
-              <Button href="#lead-form" variant="primary-dark">
-                Get a Free Consultation
-              </Button>
+              <div className="relative">
+                <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
+                <Button href="#lead-form" variant="primary-dark" className="relative">
+                  Get a Free Consultation
+                </Button>
+              </div>
               <Button
                 href={`tel:${usaPhone.replace(/\s+/g, '')}`}
                 variant="outline"
@@ -170,18 +183,34 @@ export default function AS400Development() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex items-center justify-center max-w-md">
-              <div className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl" />
+            <motion.div
+              className="relative flex items-center justify-center max-w-md"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <motion.div
+                className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
               <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
                 <img src={as400Hero} alt="IBM i AS/400 server" className="w-full" />
               </div>
-              <span className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white">
+              <motion.span
+                className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
                 IBM i / AS400
-              </span>
-              <span className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary">
+              </motion.span>
+              <motion.span
+                className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+              >
                 On-Call Support
-              </span>
-            </div>
+              </motion.span>
+            </motion.div>
           </Reveal>
         </div>
       </section>
@@ -200,10 +229,10 @@ export default function AS400Development() {
             </div>
           </div>
           <div className="flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2 text-sm font-semibold text-ink-900 shadow-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2 text-sm font-semibold text-ink-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-gold">
               <MapPin className="h-4 w-4 text-primary" /> USA Team Coordination
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2 text-sm font-semibold text-ink-900 shadow-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2 text-sm font-semibold text-ink-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-gold">
               <MapPin className="h-4 w-4 text-primary" /> Offshore Team Delivery
             </span>
           </div>
@@ -216,7 +245,7 @@ export default function AS400Development() {
             const Icon = col.icon
             return (
               <Reveal key={col.key} delay={i * 0.08}>
-                <div className="h-full rounded-2xl border border-ink-300 bg-white shadow-md hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300 overflow-hidden">
+                <div className="h-full rounded-2xl border border-ink-300 bg-white shadow-md hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300 overflow-hidden">
                   <div className={`h-1.5 ${col.barStyle}`} />
                   <div className="p-7">
                     <div className={`flex h-11 w-11 items-center justify-center rounded-full ${col.iconStyle}`}>
@@ -255,7 +284,7 @@ export default function AS400Development() {
               return (
                 <div
                   key={reason.label}
-                  className="flex flex-col items-center text-center gap-3 rounded-lg bg-white border border-ink-300 px-5 py-6 shadow-sm"
+                  className="flex flex-col items-center text-center gap-3 rounded-lg bg-white border border-ink-300 px-5 py-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_-8px_rgba(247,221,0,0.4),0_20px_40px_-12px_rgba(0,0,0,0.2)]"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
                     <Icon className="h-5 w-5" />
@@ -281,7 +310,7 @@ export default function AS400Development() {
             return (
               <span
                 key={industry.label}
-                className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 shadow-sm"
+                className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:text-primary hover:shadow-md"
               >
                 <Icon className="h-4 w-4 text-primary" />
                 {industry.label}
