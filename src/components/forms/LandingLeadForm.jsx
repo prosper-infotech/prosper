@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import Button from '../ui/Button'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
@@ -40,10 +41,10 @@ export default function LandingLeadForm({
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
   } = useForm()
   const [status, setStatus] = useState(null)
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     try {
@@ -56,8 +57,8 @@ export default function LandingLeadForm({
         event_category: campaign,
         event_label: data.service,
       })
-      setStatus('success')
-      reset()
+      sessionStorage.setItem('lp_lead_submitted', campaign)
+      navigate(`/lp/thank-you?campaign=${encodeURIComponent(campaign)}`)
     } catch {
       setStatus('error')
     }
@@ -171,11 +172,6 @@ export default function LandingLeadForm({
         {isSubmitting ? 'Sending...' : submitLabel}
       </Button>
 
-      {status === 'success' && (
-        <p className="text-sm text-accent-green font-semibold">
-          Thanks — our team will reach out shortly.
-        </p>
-      )}
       {status === 'error' && (
         <p className="text-sm text-red-600 font-semibold">Something went wrong. Please try again.</p>
       )}
