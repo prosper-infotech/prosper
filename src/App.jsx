@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/layout/Layout'
+import LandingLayout from './components/layout/LandingLayout'
 import Home from './pages/Home'
 import PageLoader from './components/ui/PageLoader'
 import { NAV } from './data/navigation'
@@ -27,6 +28,7 @@ const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const PlaceholderPage = lazy(() => import('./pages/PlaceholderPage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const AS400Development = lazy(() => import('./pages/landing/AS400Development'))
 const CategoryOverviewTemplate = lazy(() => import('./components/templates/CategoryOverviewTemplate'))
 const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageTemplate'))
 const SolutionDetailTemplate = lazy(() => import('./components/templates/SolutionDetailTemplate'))
@@ -121,6 +123,9 @@ function App() {
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
+        <Route element={<LandingLayout />}>
+          <Route path="/lp/as400-development" element={<AS400Development />} />
+        </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           {NAV.filter((item) => item.path !== '/').map((item) => (
