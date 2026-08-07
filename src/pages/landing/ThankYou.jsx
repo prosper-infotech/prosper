@@ -5,11 +5,14 @@ import Button from '../../components/ui/Button'
 import { OFFICES } from '../../data/offices'
 import { SOCIAL_LINKS } from '../../data/socialLinks'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
+import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
+import logo from '../../assets/logo-dark.png'
 
 const usaPhone = OFFICES[0].phone
 
 export default function ThankYou() {
   const navigate = useNavigate()
+  useAnalyticsPageView()
 
   useDocumentTitle(
     'Thank You | Prosper Infotech',
@@ -33,39 +36,42 @@ export default function ThankYou() {
   }, [navigate])
 
   return (
-    <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden min-h-[70vh] flex items-center">
+    <section className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-primary-dark to-navy flex flex-col items-center justify-center px-6">
       <div className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
-      <div className="relative max-w-2xl mx-auto px-6 py-20 text-center flex flex-col items-center gap-6">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[0_0_60px_-8px_rgba(247,221,0,0.5)]">
-          <CheckCircle2 className="h-9 w-9" />
+
+      <img src={logo} alt="Prosper Infotech" className="absolute top-6 left-6 h-9 w-auto" />
+
+      <div className="relative max-w-lg mx-auto text-center flex flex-col items-center gap-4">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[0_0_60px_-8px_rgba(247,221,0,0.5)]">
+          <CheckCircle2 className="h-7 w-7" />
         </div>
-        <h1 className="text-white text-3xl md:text-4xl">You're all set!</h1>
-        <p className="text-white/80 text-lg max-w-lg">
+        <h1 className="text-white text-2xl sm:text-3xl md:text-4xl">You're all set!</h1>
+        <p className="text-white/80 text-base sm:text-lg">
           Thanks for reaching out. Our team will get back to you within one business day.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 mt-2">
+        <div className="flex flex-col sm:flex-row gap-3 mt-1">
           <a
             href={`tel:${usaPhone.replace(/\s+/g, '')}`}
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/5 border border-white/15 px-5 py-3 text-white font-semibold hover:bg-white/10 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm text-white font-semibold hover:bg-white/10 transition-colors"
           >
             <PhoneCall className="h-4 w-4 text-gold" /> {usaPhone}
           </a>
           <a
             href="mailto:sales@prosperinfotech.com"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/5 border border-white/15 px-5 py-3 text-white font-semibold hover:bg-white/10 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm text-white font-semibold hover:bg-white/10 transition-colors"
           >
             <Mail className="h-4 w-4 text-gold" /> sales@prosperinfotech.com
           </a>
         </div>
-        <Button to="/" variant="primary-dark" className="mt-4">
+        <Button to="/" variant="primary-dark" className="mt-2">
           Back to homepage
         </Button>
 
-        <div className="flex flex-col items-center gap-3 mt-6 pt-6 border-t border-white/10 w-full max-w-xs">
-          <span className="text-xs font-semibold uppercase tracking-widest text-white/50">
+        <div className="flex flex-col items-center gap-2.5 mt-3 pt-3 border-t border-white/10 w-full max-w-xs">
+          <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50">
             Follow us
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
@@ -73,9 +79,9 @@ export default function ThankYou() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 border border-white/15 text-white/70 hover:text-gold hover:border-gold/40 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 border border-white/15 text-white/70 hover:text-gold hover:border-gold/40 transition-colors"
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-3.5 w-3.5" />
               </a>
             ))}
           </div>

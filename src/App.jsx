@@ -125,10 +125,10 @@ function App() {
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
+        <Route path="/lp/thank-you" element={<ThankYou />} />
         <Route element={<LandingLayout />}>
           <Route path="/lp/as400-development" element={<AS400Development />} />
           <Route path="/lp/asset-tracking" element={<AssetTracking />} />
-          <Route path="/lp/thank-you" element={<ThankYou />} />
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
