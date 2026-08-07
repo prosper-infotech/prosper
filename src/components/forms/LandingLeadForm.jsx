@@ -23,7 +23,10 @@ async function submitLead(data) {
 const inputClasses =
   'w-full rounded-md border border-ink-300 px-4 py-2.5 text-ink-900 placeholder:text-ink-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent'
 
-export default function LandingLeadForm({ campaign = 'AS400 Development Landing Page' }) {
+export default function LandingLeadForm({
+  campaign = 'AS400 Development Landing Page',
+  submitLabel = 'Get a free consultation',
+}) {
   const {
     register,
     handleSubmit,
@@ -133,7 +136,7 @@ export default function LandingLeadForm({ campaign = 'AS400 Development Landing 
         disabled={isSubmitting}
         className="self-stretch sm:self-start disabled:opacity-60"
       >
-        {isSubmitting ? 'Sending...' : 'Get a free consultation'}
+        {isSubmitting ? 'Sending...' : submitLabel}
       </Button>
 
       {status === 'success' && (
