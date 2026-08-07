@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import {
   Warehouse,
   Boxes,
@@ -8,12 +7,10 @@ import {
   Cpu,
   Eye,
   Users,
-  Server,
   Gauge,
   ShieldCheck,
   Lock,
   Cloud,
-  ArrowRight,
 } from 'lucide-react'
 import { CheckCircle2 } from 'lucide-react'
 import Button from '../components/ui/Button'
@@ -25,21 +22,6 @@ import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
 import { NAV } from '../data/navigation'
-
-const PRODUCT_HIGHLIGHTS = [
-  {
-    icon: Cpu,
-    name: 'Prosper AI EdgeBox',
-    tagline: 'AI-Powered Edge Computer',
-    description: 'Real-time computer vision, OCR, sensor fusion, and edge AI at the yard or dock.',
-  },
-  {
-    icon: Server,
-    name: 'Prosper EdgeBox Gateway IIoT',
-    tagline: 'Industrial IIoT Gateway',
-    description: 'Bridges RFID, sensors, PLCs, and cameras into one secure, reliable data stream.',
-  },
-]
 
 const TRUST_ITEMS = [
   { icon: Eye, label: 'Real-Time Visibility' },
@@ -81,43 +63,14 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="border-y border-ink-200 bg-white">
+      <section className="bg-navy">
         <div className="max-w-7xl mx-auto px-6 py-10 grid gap-4 grid-cols-2 md:grid-cols-5">
           {TRUST_ITEMS.map(({ icon: Icon, label }) => (
             <div key={label} className="flex items-center justify-center gap-2 text-center md:justify-start">
-              <Icon className="h-4.5 w-4.5 shrink-0 text-primary" />
-              <span className="text-xs font-semibold text-ink-700">{label}</span>
+              <Icon className="h-4.5 w-4.5 shrink-0 text-gold" />
+              <span className="text-xs font-semibold text-white">{label}</span>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <SectionHeading eyebrow="Edge hardware" title="Built for real-time edge intelligence" />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {PRODUCT_HIGHLIGHTS.map((product, i) => {
-            const Icon = product.icon
-            return (
-              <Reveal key={product.name} delay={i * 0.1}>
-                <Link
-                  to="/products/hardware"
-                  className="group relative flex h-full flex-col gap-4 rounded-lg border border-ink-300 bg-white p-7 shadow-md hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15)]">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-semibold text-lg text-primary">{product.name}</h3>
-                    <p className="mt-0.5 text-sm font-semibold text-ink-500">{product.tagline}</p>
-                    <p className="mt-2 text-sm text-ink-600">{product.description}</p>
-                  </div>
-                  <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                    Learn more <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Link>
-              </Reveal>
-            )
-          })}
         </div>
       </section>
 
