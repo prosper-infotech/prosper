@@ -141,7 +141,7 @@ export default function LandingLeadForm({
 
       {status === 'success' && (
         <p className="text-sm text-accent-green font-semibold">
-          Thanks — our AS400 team will reach out shortly.
+          Thanks — our team will reach out shortly.
         </p>
       )}
       {status === 'error' && (
