@@ -19,7 +19,6 @@ import {
   Landmark,
   ShoppingCart,
   Boxes,
-  Server,
   Mail,
 } from 'lucide-react'
 import Button from '../../components/ui/Button'
@@ -27,6 +26,7 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
+import as400Hero from '../../assets/as400-hero.png'
 
 const usaPhone = OFFICES[0].phone
 
@@ -170,15 +170,15 @@ export default function AS400Development() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex h-72 w-72 items-center justify-center rounded-full bg-white/5 border border-white/10">
-              <div className="absolute inset-6 rounded-full border border-gold/30" />
-              <div className="flex h-28 w-28 items-center justify-center rounded-2xl bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[0_0_60px_-8px_rgba(247,221,0,0.5)]">
-                <Server className="h-14 w-14" />
+            <div className="relative flex items-center justify-center max-w-xs">
+              <div className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl" />
+              <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
+                <img src={as400Hero} alt="IBM i AS/400 server" className="w-full" />
               </div>
-              <span className="absolute -top-3 left-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 text-xs font-semibold text-white">
+              <span className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 text-xs font-semibold text-white">
                 IBM i / AS400
               </span>
-              <span className="absolute bottom-2 -right-4 rounded-full bg-gold px-3 py-1.5 text-xs font-semibold text-primary">
+              <span className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-3 py-1.5 text-xs font-semibold text-primary">
                 On-Call Support
               </span>
             </div>
