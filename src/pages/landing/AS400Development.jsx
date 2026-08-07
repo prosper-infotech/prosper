@@ -175,10 +175,10 @@ export default function AS400Development() {
               <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
                 <img src={as400Hero} alt="IBM i AS/400 server" className="w-full" />
               </div>
-              <span className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1.5 text-xs font-semibold text-white">
+              <span className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white">
                 IBM i / AS400
               </span>
-              <span className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-3 py-1.5 text-xs font-semibold text-primary">
+              <span className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary">
                 On-Call Support
               </span>
             </div>
