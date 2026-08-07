@@ -4,10 +4,12 @@ import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
 import StickyMobileCTA from './StickyMobileCTA'
+import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 
 export default function Layout() {
   const location = useLocation()
   const element = useOutlet()
+  useAnalyticsPageView()
 
   return (
     <div className="min-h-screen flex flex-col pb-16 lg:pb-0">
