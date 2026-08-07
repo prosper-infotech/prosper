@@ -34,7 +34,7 @@ export default function ContactForm() {
 
   const onSubmit = async (data) => {
     try {
-      await submitEnquiry(data)
+      await submitEnquiry({ ...data, source: 'Website' })
       setStatus('success')
       reset()
     } catch {
