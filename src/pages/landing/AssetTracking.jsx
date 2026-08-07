@@ -24,6 +24,7 @@ import {
   PhoneCall,
   Mail,
 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -147,12 +148,20 @@ export default function AssetTracking() {
                   className="w-full"
                 />
               </div>
-              <span className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white">
+              <motion.span
+                className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
                 RFID + GPS
-              </span>
-              <span className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary">
+              </motion.span>
+              <motion.span
+                className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+              >
                 AI Powered
-              </span>
+              </motion.span>
             </div>
           </Reveal>
         </div>
