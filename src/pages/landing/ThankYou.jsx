@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CheckCircle2, PhoneCall, Mail } from 'lucide-react'
 import Button from '../../components/ui/Button'
 import { OFFICES } from '../../data/offices'
+import { SOCIAL_LINKS } from '../../data/socialLinks'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const usaPhone = OFFICES[0].phone
@@ -63,6 +64,26 @@ export default function ThankYou() {
         <Button to="/" variant="primary-dark" className="mt-4">
           Back to homepage
         </Button>
+
+        <div className="flex flex-col items-center gap-3 mt-6 pt-6 border-t border-white/10 w-full max-w-xs">
+          <span className="text-xs font-semibold uppercase tracking-widest text-white/50">
+            Follow us
+          </span>
+          <div className="flex items-center gap-4">
+            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 border border-white/15 text-white/70 hover:text-gold hover:border-gold/40 transition-colors"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
