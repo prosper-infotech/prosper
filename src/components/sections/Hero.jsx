@@ -19,12 +19,19 @@ export default function Hero() {
         alt="Prosper Infotech AI-powered warehouse and port visibility platform"
         className="absolute inset-0 h-full w-full object-cover"
       />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 900px 700px at 22% 40%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.5) 55%, rgba(255,255,255,0.15) 75%, rgba(255,255,255,0) 90%)',
+        }}
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 py-10 lg:px-12 lg:py-12 xl:px-16 bg-white/95 shadow-xl lg:rounded-r-2xl"
+        className="relative z-10 w-full max-w-xl flex flex-col gap-5 px-6 lg:pl-12 xl:pl-20 py-16 lg:py-0"
       >
         <motion.span
           initial={{ opacity: 0, y: 12 }}
@@ -62,11 +69,7 @@ export default function Hero() {
           <Button to="/contact" variant="primary-dark">
             Book a demo
           </Button>
-          <Button
-            to="/solutions"
-            variant="outline-dark"
-            className="!border-white !bg-white/85 backdrop-blur-md"
-          >
+          <Button to="/solutions" variant="outline-dark">
             Explore solutions
           </Button>
         </motion.div>
@@ -79,7 +82,7 @@ export default function Hero() {
         >
           {CAPABILITIES.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-col items-start gap-2">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm shadow-md text-primary">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-primary">
                 <Icon className="h-4.5 w-4.5" />
               </span>
               <span className="text-xs font-semibold text-ink-700 leading-tight">{label}</span>
