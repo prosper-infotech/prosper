@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CheckCircle2, PhoneCall, Mail } from 'lucide-react'
 import Button from '../../components/ui/Button'
 import { OFFICES } from '../../data/offices'
@@ -9,9 +9,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle'
 const usaPhone = OFFICES[0].phone
 
 export default function ThankYou() {
-  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
-  const campaign = searchParams.get('campaign')
 
   useDocumentTitle(
     'Thank You | Prosper Infotech',
@@ -43,9 +41,7 @@ export default function ThankYou() {
         </div>
         <h1 className="text-white text-3xl md:text-4xl">You're all set!</h1>
         <p className="text-white/80 text-lg max-w-lg">
-          {campaign
-            ? `Thanks for reaching out about ${campaign.replace(' Landing Page', '')}. Our team will get back to you within one business day.`
-            : "Thanks for reaching out. Our team will get back to you within one business day."}
+          Thanks for reaching out. Our team will get back to you within one business day.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-2">
           <a

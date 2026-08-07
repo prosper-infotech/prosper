@@ -2,11 +2,13 @@ import { Phone } from 'lucide-react'
 import { useOutlet } from 'react-router-dom'
 import logo from '../../assets/logo-dark.png'
 import { OFFICES } from '../../data/offices'
+import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 
 const usaPhone = OFFICES[0].phone
 
 export default function LandingLayout() {
   const element = useOutlet()
+  useAnalyticsPageView()
 
   return (
     <div className="min-h-screen flex flex-col">
