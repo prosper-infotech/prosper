@@ -1,7 +1,6 @@
 import {
   Tag,
   Warehouse,
-  Truck,
   Camera,
   Satellite,
   UserCheck,
@@ -76,39 +75,6 @@ const PRODUCTS = [
       'Actionable Insights',
     ],
     idealFor: ['Distribution Centers', 'Warehouses', 'Manufacturing', 'Retail Fulfillment', 'Cold Chain', '3PL / Logistics'],
-  },
-  {
-    key: 'yms',
-    icon: Truck,
-    name: 'Prosper YMS',
-    tagline: 'Yard Management System',
-    description:
-      'Inventory, gate, reefer, appointment, and yard move intelligence for empty and full containers — AI-powered with RFID and GPS.',
-    process: [
-      'Carrier Appointment',
-      'Gate Arrival',
-      'Reefer Guard',
-      'RFID Inventory',
-      'Trailer Move Management',
-      'Gate Departure',
-    ],
-    features: [
-      'Supports empty, loaded, OOS, dedicated, dirty, drop, and live arrivals',
-      'RFID and GPS-based real-time inventory for dry and reefer containers',
-      'Reefer Guard inspection with temperature / fuel / defrost alerts',
-      'Intelligent gate arrivals and departures with appointment verification',
-      'Auto-assigned trailer spot / pull tasks with full audit trail',
-      'Real-time alerts for dwell time and reefer exceptions',
-      "Interactive bird's-eye yard view",
-      'Reports, audits & KPI visibility',
-    ],
-    highlights: [
-      'Real-Time Visibility',
-      'Faster Gate Turnaround',
-      'Reefer Compliance',
-      'Automated Yard Moves',
-      'Actionable Reports & KPIs',
-    ],
   },
   {
     key: 'yardvision-ai',
