@@ -13,6 +13,8 @@ export default function IndustriesOverview() {
       icons={INDUSTRY_ICONS}
       ctaTitle="Have a question about your industry?"
       ctaDescription="Talk to our team about the right fit for your operation."
+      seoTitle="Industries We Serve | Prosper Infotech"
+      seoDescription="Purpose-built RFID, GPS, IoT, and AI solutions across logistics, manufacturing, healthcare, retail, and more industries Prosper Infotech serves."
     />
   )
 }

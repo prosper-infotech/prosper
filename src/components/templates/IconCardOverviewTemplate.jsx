@@ -4,6 +4,7 @@ import Breadcrumb from '../ui/Breadcrumb'
 import SectionHeading from '../ui/SectionHeading'
 import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 export default function IconCardOverviewTemplate({
   title,
@@ -14,7 +15,11 @@ export default function IconCardOverviewTemplate({
   columns = 3,
   ctaTitle,
   ctaDescription,
+  seoTitle,
+  seoDescription,
 }) {
+  useDocumentTitle(seoTitle || `${title} | Prosper Infotech`, seoDescription)
+
   const gridCols = columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'
 
   return (

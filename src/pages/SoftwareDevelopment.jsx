@@ -23,6 +23,7 @@ import {
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const HIGHLIGHTS = [
   'Native and cross-platform mobile apps for iOS and Android',
@@ -172,6 +173,11 @@ function ItemRow({ item }) {
 }
 
 export default function SoftwareDevelopment() {
+  useDocumentTitle(
+    'Software Development Services | Prosper Infotech',
+    'Full-stack software development — mobile, web, frontend, and DevOps — built around your logistics operation, from native apps to cloud infrastructure.'
+  )
+
   const [active, setActive] = useState(CATEGORIES[0].key)
   const activeCategory = CATEGORIES.find((c) => c.key === active)
 

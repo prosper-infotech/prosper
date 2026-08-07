@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import Reveal from '../components/motion/Reveal'
 import { BLOG_POSTS } from '../data/blogPosts'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', {
@@ -13,6 +14,11 @@ function formatDate(dateStr) {
 }
 
 export default function Blog() {
+  useDocumentTitle(
+    'Blog | Prosper Infotech',
+    'Practical guides and perspectives from the Prosper Infotech team on warehouse, yard, and fleet technology — RFID, GPS, IoT, and AI logistics insights.'
+  )
+
   return (
     <>
       <Breadcrumb title="Blog" parent="Resources" />

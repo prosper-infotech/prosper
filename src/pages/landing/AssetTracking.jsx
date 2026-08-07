@@ -28,6 +28,7 @@ import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import { OFFICES } from '../../data/offices'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const usaPhone = OFFICES[0].phone
 
@@ -69,6 +70,11 @@ const INDUSTRIES = [
 ]
 
 export default function AssetTracking() {
+  useDocumentTitle(
+    'Prosper Asset Tracking | RFID + GPS Asset Visibility',
+    'Real-time RFID + GPS asset tracking with $0 upfront hardware, automated check-in/out, and multi-yard support. Book a free demo with Prosper Infotech.'
+  )
+
   return (
     <>
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">

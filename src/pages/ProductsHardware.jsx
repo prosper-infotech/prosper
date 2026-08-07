@@ -2,6 +2,7 @@ import { Radio, Satellite, Cpu, Server, Check } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const PRODUCTS = [
   {
@@ -105,6 +106,11 @@ const PRODUCTS = [
 ]
 
 export default function ProductsHardware() {
+  useDocumentTitle(
+    'Hardware Products | Prosper Infotech',
+    'Industrial-grade RFID readers, GPS-enabled edge devices, AI Edge Box, and IoT gateways engineered for continuous operation in warehouses, yards, and ports.'
+  )
+
   return (
     <>
       <Breadcrumb title="Hardware" parent="Products" />

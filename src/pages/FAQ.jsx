@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const FAQS = [
   {
@@ -90,6 +91,11 @@ function FAQItem({ faq, isOpen, onToggle }) {
 }
 
 export default function FAQ() {
+  useDocumentTitle(
+    'FAQs | Prosper Infotech',
+    "Answers to common questions about Prosper Infotech's RFID, GPS, IoT, AI, and AS400 solutions — hardware, implementation, integration, and support."
+  )
+
   const [openIndex, setOpenIndex] = useState(0)
 
   return (

@@ -14,6 +14,8 @@ export default function ProductsOverview() {
       columns={2}
       ctaTitle="Have a question about our Products?"
       ctaDescription="Talk to our team about the right fit for your operation."
+      seoTitle="Products | Prosper Infotech"
+      seoDescription="Software platforms and industrial hardware built for RFID, GPS, and IoT deployments — explore Prosper Infotech's products."
     />
   )
 }

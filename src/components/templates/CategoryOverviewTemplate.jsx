@@ -3,8 +3,14 @@ import Breadcrumb from '../ui/Breadcrumb'
 import ServiceCard from '../ui/ServiceCard'
 import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 export default function CategoryOverviewTemplate({ title, description, items }) {
+  useDocumentTitle(
+    `${title} | Prosper Infotech`,
+    description || `Explore ${title} from Prosper Infotech.`
+  )
+
   return (
     <>
       <Breadcrumb title={title} />

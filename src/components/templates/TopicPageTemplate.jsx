@@ -3,8 +3,14 @@ import Breadcrumb from '../ui/Breadcrumb'
 import Button from '../ui/Button'
 import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 export default function TopicPageTemplate({ title, parentLabel, parentPath, siblings }) {
+  useDocumentTitle(
+    `${title} | Prosper Infotech`,
+    `Learn about ${title}, part of our ${parentLabel} offering, from Prosper Infotech.`
+  )
+
   return (
     <>
       <Breadcrumb title={title} parent={parentLabel} />

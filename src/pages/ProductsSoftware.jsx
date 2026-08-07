@@ -11,6 +11,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import SectionHeading from '../components/ui/SectionHeading'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const PRODUCTS = [
   {
@@ -140,6 +141,11 @@ const PRODUCTS = [
 ]
 
 export default function ProductsSoftware() {
+  useDocumentTitle(
+    'Software Products | Prosper Infotech',
+    "Explore Prosper Infotech's software platforms — asset tracking, WMS, YardVision AI, RFID+GPS inventory tracking, and video-based attendance systems."
+  )
+
   return (
     <>
       <Breadcrumb title="Software" parent="Products" />

@@ -3,6 +3,7 @@ import { Play } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const VIDEOS = [
   { id: 'aU3I6Tw6S5I', title: 'Prosper Infotech LLC, Dallas, TX, USA' },
@@ -61,6 +62,11 @@ function VideoCard({ video, delay }) {
 }
 
 export default function Videos() {
+  useDocumentTitle(
+    'Videos | Prosper Infotech',
+    "Watch Prosper Infotech's RFID, GPS, and geofencing solutions in action across real warehouse, yard, and fleet deployments."
+  )
+
   return (
     <>
       <Breadcrumb title="Videos" parent="Resources" />

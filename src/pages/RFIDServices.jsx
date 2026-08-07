@@ -3,6 +3,7 @@ import { Lightbulb, Wrench, Cable, LifeBuoy, CheckCircle2 } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const HIGHLIGHTS = [
   'Strategic technology consulting before you invest in hardware',
@@ -47,6 +48,11 @@ const POINTS = [
 ]
 
 export default function RFIDServices() {
+  useDocumentTitle(
+    'RFID Services | Prosper Infotech',
+    'End-to-end RFID deployment — consulting, implementation, system integration, and ongoing support — so your RFID investment works from day one.'
+  )
+
   const [active, setActive] = useState(POINTS[0].key)
   const activePoint = POINTS.find((p) => p.key === active)
 

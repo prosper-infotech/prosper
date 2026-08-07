@@ -1,7 +1,13 @@
 import Breadcrumb from '../components/ui/Breadcrumb'
 import Button from '../components/ui/Button'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 export default function PlaceholderPage({ title, description, parent }) {
+  useDocumentTitle(
+    `${title} | Prosper Infotech`,
+    description || `Learn about ${title} from Prosper Infotech.`
+  )
+
   return (
     <>
       <Breadcrumb title={title} parent={parent} />

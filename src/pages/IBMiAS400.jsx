@@ -18,6 +18,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import SectionHeading from '../components/ui/SectionHeading'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const SERVICE_CATEGORIES = [
   {
@@ -188,6 +189,11 @@ const WHY_CHOOSE_US = [
 ]
 
 export default function IBMiAS400() {
+  useDocumentTitle(
+    'AS400 / IBM i Services | Prosper Infotech',
+    'End-to-end IBM i (AS400) consulting, development, modernization, migration, and 24/7 support — RPG/RPGLE, COBOL, system administration, and cloud integration.'
+  )
+
   return (
     <>
       <Breadcrumb title="IBM i / AS400" />

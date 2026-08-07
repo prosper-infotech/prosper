@@ -4,8 +4,14 @@ import Breadcrumb from '../ui/Breadcrumb'
 import Button from '../ui/Button'
 import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 export default function DetailPageTemplate({ title, description, parentLabel, parentPath, siblings }) {
+  useDocumentTitle(
+    `${title} | Prosper Infotech`,
+    description || `Learn about ${title}, part of our ${parentLabel} offering, from Prosper Infotech.`
+  )
+
   const capabilities = description ? description.split(',').map((c) => c.trim()) : []
 
   return (

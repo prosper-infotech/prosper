@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Compass } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const QUICK_LINKS = [
   { label: 'Solutions', to: '/solutions' },
@@ -11,6 +12,11 @@ const QUICK_LINKS = [
 ]
 
 export default function NotFound() {
+  useDocumentTitle(
+    'Page Not Found | Prosper Infotech',
+    "The page you're looking for doesn't exist or has moved. Return to Prosper Infotech's homepage or explore our solutions, products, and services."
+  )
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-navy via-primary to-primary-dark text-white">
       <div

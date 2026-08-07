@@ -22,6 +22,7 @@ import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
 import { NAV } from '../data/navigation'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const TRUST_ITEMS = [
   { icon: Eye, label: 'Real-Time Visibility' },
@@ -59,6 +60,11 @@ const STATS = [
 const TESTIMONIALS = []
 
 export default function Home() {
+  useDocumentTitle(
+    'Prosper Infotech | AI-Powered RFID, GPS & IoT Logistics Solutions',
+    'IoT, RFID, GPS, and AI-powered visibility for warehouses, yards, and fleets — real-time tracking, asset visibility, and logistics automation from Prosper Infotech.'
+  )
+
   return (
     <>
       <Hero />

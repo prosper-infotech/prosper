@@ -4,6 +4,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import ContactForm from '../components/forms/ContactForm'
 import Reveal from '../components/motion/Reveal'
 import { OFFICES } from '../data/offices'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const OFFERINGS = [
   {
@@ -41,6 +42,11 @@ const OFFERINGS = [
 ]
 
 export default function Contact() {
+  useDocumentTitle(
+    '24x7 Help Desk & Contact | Prosper Infotech',
+    "Reach Prosper Infotech's 24x7 support team by phone, email, or contact form — get help with AS400, RFID, GPS, and IoT deployments any time, day or night."
+  )
+
   return (
     <>
       <Breadcrumb title="24x7 Help Desk" icon={Headset} />

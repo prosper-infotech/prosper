@@ -5,6 +5,7 @@ import StatCounter from '../components/ui/StatCounter'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import { OFFICES } from '../data/offices'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const APPROACH = [
   {
@@ -44,6 +45,11 @@ const STATS = [
 ]
 
 export default function About() {
+  useDocumentTitle(
+    'About Us | Prosper Infotech',
+    'Prosper Infotech is a Dallas-based technology company delivering RFID, GPS, IoT, and AI logistics solutions, backed by 100+ engineers across offices in the USA and India.'
+  )
+
   return (
     <>
       <Breadcrumb title="About Us" />

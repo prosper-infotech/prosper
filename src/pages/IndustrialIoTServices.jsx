@@ -3,6 +3,7 @@ import { Code2, Radio, Camera, Cpu, Cloud, CheckCircle2 } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const HIGHLIGHTS = [
   'Custom IoT firmware and software development',
@@ -55,6 +56,11 @@ const POINTS = [
 ]
 
 export default function IndustrialIoTServices() {
+  useDocumentTitle(
+    'Industrial IoT Services | Prosper Infotech',
+    'Custom IoT firmware, LoRaWAN networks, device and camera integration, edge AI, and cloud connectivity for connected industrial and factory operations.'
+  )
+
   const [active, setActive] = useState(POINTS[0].key)
   const activePoint = POINTS.find((p) => p.key === active)
 

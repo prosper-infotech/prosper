@@ -26,6 +26,7 @@ import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import { OFFICES } from '../../data/offices'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const usaPhone = OFFICES[0].phone
 
@@ -105,6 +106,11 @@ const INDUSTRIES = [
 ]
 
 export default function AS400Development() {
+  useDocumentTitle(
+    'AS400 Development & 24x7 Support | Prosper Infotech',
+    'USA + offshore AS400 (IBM i) development, support, and modernization — RPG/RPGLE builds, 24x7x365 coverage, and a dedicated calling line. Get a free consultation.'
+  )
+
   return (
     <>
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
