@@ -29,11 +29,11 @@ export default function TopBar() {
             <span className="hidden sm:inline">sales@prosperinfotech.com</span>
           </a>
           <a
-            href="tel:+19452934120"
+            href="tel:+19407583271"
             className="flex items-center gap-1.5 text-white/80 hover:text-gold transition-colors"
           >
             <Phone className="h-3.5 w-3.5 shrink-0" />
-            <span>+1 945 293 4120</span>
+            <span>+1 940 758 3271</span>
           </a>
         </div>
       </div>

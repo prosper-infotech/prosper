@@ -2,7 +2,7 @@
 export const OFFICES = [
   {
     country: 'USA',
-    phone: '+1 945 293 4120',
+    phone: '+1 940 758 3271',
     address: '4245 N Central Expy, #490, Dallas, TX 75205',
     mapUrl: 'https://maps.app.goo.gl/JvMVPbPK2Wxz5nG76',
   },
