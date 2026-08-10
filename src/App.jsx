@@ -28,6 +28,7 @@ const Blog = lazy(() => import('./pages/Blog'))
 const BlogPost = lazy(() => import('./pages/BlogPost'))
 const PlaceholderPage = lazy(() => import('./pages/PlaceholderPage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const AS400Development = lazy(() => import('./pages/landing/AS400Development'))
 const AssetTracking = lazy(() => import('./pages/landing/AssetTracking'))
 const ThankYou = lazy(() => import('./pages/landing/ThankYou'))
@@ -172,6 +173,7 @@ function App() {
             </Route>
           ))}
           <Route path="/resources/blog/:slug" element={<BlogPost />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/24x7-help-desk" element={<Navigate to="/contact" replace />} />
           <Route path="*" element={<NotFound />} />
         </Route>

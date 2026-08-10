@@ -1,5 +1,5 @@
 import { Mail, Phone } from 'lucide-react'
-import { useOutlet } from 'react-router-dom'
+import { Link, useOutlet } from 'react-router-dom'
 import logo from '../../assets/logo-dark.png'
 import { OFFICES } from '../../data/offices'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
@@ -43,6 +43,9 @@ export default function LandingLayout() {
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-300">
           <span>&copy; {new Date().getFullYear()} Prosper Infotech. All rights reserved.</span>
           <div className="flex items-center gap-4">
+            <Link to="/privacy-policy" className="hover:text-gold transition-colors">
+              Privacy Policy
+            </Link>
             <a href="mailto:sales@prosperinfotech.com" className="hover:text-gold transition-colors">
               sales@prosperinfotech.com
             </a>
