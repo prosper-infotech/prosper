@@ -64,14 +64,29 @@ export default function MobileMenu({ open, onClose }) {
                           >
                             <div className="flex flex-col gap-1 pb-2 pl-3">
                               {item.children.map((child) => (
-                                <Link
-                                  key={child.path}
-                                  to={child.path}
-                                  onClick={onClose}
-                                  className="py-1.5 text-sm text-ink-300 hover:text-white"
-                                >
-                                  {child.label}
-                                </Link>
+                                <div key={child.path} className="flex flex-col">
+                                  <Link
+                                    to={child.path}
+                                    onClick={onClose}
+                                    className="py-1.5 text-sm text-ink-300 hover:text-white"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                  {child.children && (
+                                    <div className="flex flex-col gap-1 pl-3">
+                                      {child.children.map((grandchild) => (
+                                        <Link
+                                          key={grandchild.path}
+                                          to={grandchild.path}
+                                          onClick={onClose}
+                                          className="py-1 text-xs text-ink-300/80 hover:text-white"
+                                        >
+                                          {grandchild.label}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
                               ))}
                             </div>
                           </motion.div>

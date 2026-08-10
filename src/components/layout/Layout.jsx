@@ -5,11 +5,13 @@ import Header from './Header'
 import Footer from './Footer'
 import StickyMobileCTA from './StickyMobileCTA'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
+import useScrollToHash from '../../hooks/useScrollToHash'
 
 export default function Layout() {
   const location = useLocation()
   const element = useOutlet()
   useAnalyticsPageView()
+  useScrollToHash()
 
   return (
     <div className="min-h-screen flex flex-col pb-16 lg:pb-0">
