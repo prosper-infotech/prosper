@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Lightbulb, Wrench, Cable, LifeBuoy, CheckCircle2 } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
@@ -53,8 +54,16 @@ export default function RFIDServices() {
     'End-to-end RFID deployment — consulting, implementation, system integration, and ongoing support — so your RFID investment works from day one.'
   )
 
-  const [active, setActive] = useState(POINTS[0].key)
+  const location = useLocation()
+  const [active, setActive] = useState(
+    () => POINTS.find((p) => p.key === location.hash.slice(1))?.key ?? POINTS[0].key
+  )
   const activePoint = POINTS.find((p) => p.key === active)
+
+  useEffect(() => {
+    const key = location.hash.slice(1)
+    if (POINTS.some((p) => p.key === key)) setActive(key)
+  }, [location.hash])
 
   return (
     <>
@@ -95,10 +104,11 @@ export default function RFIDServices() {
               return (
                 <Reveal key={point.key} delay={i * 0.06}>
                   <button
+                    id={point.key}
                     type="button"
                     onMouseEnter={() => setActive(point.key)}
                     onClick={() => setActive(point.key)}
-                    className={`w-full text-left rounded-lg border-l-4 bg-white p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.45),0_25px_50px_-12px_rgba(0,0,0,0.35)] ${
+                    className={`scroll-mt-32 w-full text-left rounded-lg border-l-4 bg-white p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.45),0_25px_50px_-12px_rgba(0,0,0,0.35)] ${
                       isActive ? 'border-gold shadow-lg' : 'border-ink-300'
                     }`}
                   >

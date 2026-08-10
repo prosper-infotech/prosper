@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   Smartphone,
   Globe,
@@ -178,8 +179,16 @@ export default function SoftwareDevelopment() {
     'Full-stack software development — mobile, web, frontend, and DevOps — built around your logistics operation, from native apps to cloud infrastructure.'
   )
 
-  const [active, setActive] = useState(CATEGORIES[0].key)
+  const location = useLocation()
+  const [active, setActive] = useState(
+    () => CATEGORIES.find((c) => c.key === location.hash.slice(1))?.key ?? CATEGORIES[0].key
+  )
   const activeCategory = CATEGORIES.find((c) => c.key === active)
+
+  useEffect(() => {
+    const key = location.hash.slice(1)
+    if (CATEGORIES.some((c) => c.key === key)) setActive(key)
+  }, [location.hash])
 
   return (
     <>
@@ -220,10 +229,11 @@ export default function SoftwareDevelopment() {
               return (
                 <Reveal key={category.key} delay={i * 0.06}>
                   <button
+                    id={category.key}
                     type="button"
                     onMouseEnter={() => setActive(category.key)}
                     onClick={() => setActive(category.key)}
-                    className={`w-full text-left rounded-lg border-l-4 bg-white p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.45),0_25px_50px_-12px_rgba(0,0,0,0.35)] ${
+                    className={`scroll-mt-32 w-full text-left rounded-lg border-l-4 bg-white p-6 shadow-md transition-all duration-300 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.45),0_25px_50px_-12px_rgba(0,0,0,0.35)] ${
                       isActive ? 'border-gold shadow-lg' : 'border-ink-300'
                     }`}
                   >
