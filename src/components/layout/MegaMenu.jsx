@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { ChevronRight } from 'lucide-react'
 
 function chunk(items, size) {
   const chunks = []
@@ -38,9 +39,10 @@ export default function MegaMenu({ item, onNavigate }) {
                   to={child.path}
                   onClick={onNavigate}
                   onMouseEnter={() => setHoveredChild(child.children ? child : null)}
-                  className="px-5 py-2.5 text-sm font-heading font-semibold leading-snug text-white hover:bg-white/10 hover:text-gold transition-colors"
+                  className="flex items-center justify-between gap-2 px-5 py-2.5 text-sm font-heading font-semibold leading-snug text-white hover:bg-white/10 hover:text-gold transition-colors"
                 >
                   {child.label}
+                  {child.children && <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/40" />}
                 </Link>
               ))}
             </div>
