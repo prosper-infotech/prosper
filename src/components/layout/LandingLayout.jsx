@@ -31,7 +31,7 @@ export default function LandingLayout() {
               className="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-xs sm:text-sm font-semibold text-primary shadow-sm hover:bg-gold-dark transition-colors"
             >
               <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">On-Call Support:</span> {usaPhone}
+              Call {usaPhone}
             </a>
           </div>
         </div>
