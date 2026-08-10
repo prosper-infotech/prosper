@@ -56,9 +56,6 @@ export default function MegaMenu({ item, onNavigate }) {
           className="w-64 rounded-lg bg-gradient-to-b from-navy/70 to-primary-dark/70 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden"
         >
           <div className="flex flex-col py-2">
-            <span className="px-5 pb-1.5 pt-1 text-xs font-semibold uppercase tracking-wide text-white/50">
-              {hoveredChild.label}
-            </span>
             {hoveredChild.children.map((grandchild) => (
               <Link
                 key={grandchild.path}
