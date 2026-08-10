@@ -5,7 +5,6 @@ import {
   Clock,
   CalendarCheck,
   PhoneCall,
-  Globe2,
   MapPin,
   Check,
   Award,
@@ -127,9 +126,6 @@ export default function AS400Development() {
         />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
-            <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
-              USA + Offshore AS400 Support Team
-            </span>
             <h1 className="text-white text-4xl md:text-5xl leading-tight">
               24x7x365 <span className="text-gold">Dedicated Support</span>
             </h1>
@@ -208,30 +204,6 @@ export default function AS400Development() {
               </motion.span>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-surface-alt border-b border-ink-300">
-        <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Globe2 className="h-5 w-5" />
-            </div>
-            <div>
-              <h2 className="font-heading font-semibold text-primary text-lg">
-                USA &amp; Offshore Coverage Model
-              </h2>
-              <p className="text-sm text-ink-600">US-based coordination + offshore delivery team</p>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2 text-sm font-semibold text-ink-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-gold">
-              <MapPin className="h-4 w-4 text-primary" /> USA Team Coordination
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2 text-sm font-semibold text-ink-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-gold">
-              <MapPin className="h-4 w-4 text-primary" /> Offshore Team Delivery
-            </span>
-          </div>
         </div>
       </section>
 
