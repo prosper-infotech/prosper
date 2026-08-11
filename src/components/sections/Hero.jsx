@@ -18,7 +18,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-x-0 top-0 h-[24%] z-10 flex flex-col items-center justify-center gap-3 px-6 text-center"
+        className="absolute inset-x-0 top-0 h-[30%] z-10 flex flex-col items-center justify-start pt-24 lg:pt-28 gap-3 px-6 text-center"
       >
         <span className="text-gold text-sm font-semibold uppercase tracking-widest">
           IoT &middot; RFID &middot; GPS &middot; AI
