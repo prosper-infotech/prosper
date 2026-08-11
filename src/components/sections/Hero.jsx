@@ -5,11 +5,11 @@ import heroBg from '../../assets/home-hero-bg.jpg'
 
 export default function Hero() {
   return (
-    <section className="relative h-[85vh] min-h-[560px] max-h-[820px] overflow-hidden bg-navy">
+    <section className="relative h-[85vh] min-h-[560px] max-h-[820px] lg:h-auto lg:aspect-[1672/941] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
       <img
         src={heroBg}
         alt="Prosper Infotech AI-powered warehouse and logistics visibility platform"
-        className="absolute inset-0 h-full w-full object-contain object-center"
+        className="absolute inset-0 h-full w-full object-cover lg:object-contain object-center"
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-black/70 via-black/25 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
