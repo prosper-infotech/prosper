@@ -21,7 +21,11 @@
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-      gtag('config', 'G-3ZLHC0MC7F');
+      // send_page_view is off here because this is a client-side-routed SPA —
+      // useAnalyticsPageView fires the page_view for every route (including
+      // the first one) instead, so GA4 doesn't get one from here AND one from
+      // the hook on initial load.
+      gtag('config', 'G-3ZLHC0MC7F', { send_page_view: false });
     </script>
   </head>
   <body>
