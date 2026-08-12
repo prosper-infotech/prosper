@@ -18,13 +18,15 @@ import {
   PhoneCall,
   Mail,
 } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
+import ScrollProgressBar from '../../components/ui/ScrollProgressBar'
 import { OFFICES } from '../../data/offices'
 import assetTrackingHero from '../../assets/asset-tracking-hero.png'
 import galleryRfidScan from '../../assets/asset-tracking-gallery-rfid-scan.jpg'
@@ -137,8 +139,53 @@ export default function AssetTracking() {
     'Real-time RFID + GPS asset tracking with $0 upfront hardware, automated check-in/out, and multi-yard support. Book a free demo with Prosper Infotech.'
   )
 
+  const [showFloatingCta, setShowFloatingCta] = useState(false)
+  useEffect(() => {
+    function onScroll() {
+      setShowFloatingCta(window.scrollY > 700)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const tiltX = useMotionValue(0)
+  const tiltY = useMotionValue(0)
+  const rotateX = useTransform(tiltY, [-0.5, 0.5], [8, -8])
+  const rotateY = useTransform(tiltX, [-0.5, 0.5], [-8, 8])
+  function handleHeroTilt(e) {
+    const rect = e.currentTarget.getBoundingClientRect()
+    tiltX.set((e.clientX - rect.left) / rect.width - 0.5)
+    tiltY.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+  function resetHeroTilt() {
+    tiltX.set(0)
+    tiltY.set(0)
+  }
+
   return (
     <>
+      <ScrollProgressBar />
+
+      <AnimatePresence>
+        {showFloatingCta && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="hidden lg:block fixed bottom-6 right-6 z-40"
+          >
+            <div className="relative">
+              <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
+              <Button href="#lead-form" variant="primary-dark" className="relative shadow-2xl">
+                Book a Demo
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
         <motion.div
           className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
@@ -171,16 +218,19 @@ export default function AssetTracking() {
             </span>
 
             <div className="flex flex-wrap gap-3 mt-2">
-              {STAT_BADGES.map((badge) => {
+              {STAT_BADGES.map((badge, i) => {
                 const Icon = badge.icon
                 return (
-                  <span
+                  <motion.span
                     key={badge.label}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
                     className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
                   >
                     <Icon className="h-4 w-4 text-gold" />
                     {badge.label}
-                  </span>
+                  </motion.span>
                 )
               })}
             </div>
@@ -219,19 +269,27 @@ export default function AssetTracking() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex items-center justify-center max-w-md">
+            <div
+              className="relative flex items-center justify-center max-w-md"
+              style={{ perspective: 800 }}
+              onMouseMove={handleHeroTilt}
+              onMouseLeave={resetHeroTilt}
+            >
               <motion.div
                 className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
+              <motion.div
+                className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
+                style={{ rotateX, rotateY }}
+              >
                 <img
                   src={assetTrackingHero}
                   alt="Prosper Asset Tracking hardware and dashboard"
                   className="w-full"
                 />
-              </div>
+              </motion.div>
               <motion.span
                 className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
                 animate={{ y: [0, -10, 0] }}
@@ -261,14 +319,21 @@ export default function AssetTracking() {
         <ProcessSteps steps={PROCESS_STEPS} />
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 pb-16 lg:pb-20">
-        <Reveal className="text-center mb-10">
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 pb-16 lg:pb-20">
+        <motion.div
+          className="pointer-events-none absolute -top-10 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
+          animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.15, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <Reveal className="relative text-center mb-10">
           <span className="text-primary text-sm font-semibold uppercase tracking-widest">
             See It In Action
           </span>
           <h2 className="mt-2 text-3xl">Real environments, real-time visibility</h2>
         </Reveal>
-        <VisualGallery items={GALLERY} />
+        <div className="relative">
+          <VisualGallery items={GALLERY} />
+        </div>
       </section>
 
       <section className="bg-surface-alt border-b border-ink-300">
@@ -300,14 +365,19 @@ export default function AssetTracking() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
-        <Reveal className="text-center mb-10">
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-16 lg:py-20">
+        <motion.div
+          className="pointer-events-none absolute bottom-0 -left-10 h-72 w-72 rounded-full bg-primary/5 blur-3xl"
+          animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.15, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+        />
+        <Reveal className="relative text-center mb-10">
           <span className="text-primary text-sm font-semibold uppercase tracking-widest">
             Why Prosper Asset Tracking
           </span>
           <h2 className="mt-2 text-3xl">Built for real-time control</h2>
         </Reveal>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature, i) => {
             const Icon = feature.icon
             return (
