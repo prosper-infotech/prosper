@@ -99,19 +99,6 @@ export default function Hero() {
     >
       <AnimatePresence mode="sync">
         <motion.img
-          key={`blur-${active}`}
-          src={slide.image}
-          aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.6 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: 'easeInOut' }}
-          className="hidden lg:block absolute inset-0 h-full w-full object-cover scale-110 blur-2xl"
-        />
-      </AnimatePresence>
-
-      <AnimatePresence mode="sync">
-        <motion.img
           key={`sharp-${active}`}
           src={slide.image}
           alt={slide.alt}
@@ -119,7 +106,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease: 'easeInOut' }}
-          className="absolute inset-0 h-full w-full object-cover lg:object-contain object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </AnimatePresence>
 
