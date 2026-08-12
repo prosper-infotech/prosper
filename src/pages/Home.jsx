@@ -15,6 +15,9 @@ import {
   Network,
   Code2,
   Server,
+  Award,
+  RefreshCcw,
+  Headset,
 } from 'lucide-react'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
@@ -104,6 +107,29 @@ const REGIONS = [
     Flag: FlagJapan,
     country: 'Japan',
     description: 'AI/IoT engineering collaboration, technology delivery, and regional support.',
+  },
+]
+
+const WHY_CHOOSE_STRIP = [
+  {
+    icon: Award,
+    title: '10+ Years',
+    description: 'Logistics & Enterprise Technology Expertise',
+  },
+  {
+    icon: Users,
+    title: 'AI + IoT Engineering Teams',
+    description: 'USA · India · Japan',
+  },
+  {
+    icon: RefreshCcw,
+    title: 'End-to-End Delivery',
+    description: 'Consulting → Engineering → Deployment → Integration → Support',
+  },
+  {
+    icon: Headset,
+    title: '24×7 Support',
+    description: 'Production Monitoring & Technical Help Desk',
   },
 ]
 
@@ -261,6 +287,32 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <Reveal>
+          <div className="rounded-2xl bg-gradient-to-b from-primary-dark to-navy border border-white/10 shadow-xl overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {WHY_CHOOSE_STRIP.map((item, i) => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={item.title}
+                    className={`flex flex-col items-center text-center gap-3 px-6 py-10 ${
+                      i > 0 ? 'lg:border-l lg:border-white/10' : ''
+                    }`}
+                  >
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold/60 text-gold">
+                      <Icon className="h-7 w-7" />
+                    </span>
+                    <h3 className="font-heading font-bold text-lg text-white">{item.title}</h3>
+                    <p className="text-sm text-white/70">{item.description}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="bg-navy py-14 overflow-hidden">
