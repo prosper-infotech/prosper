@@ -174,7 +174,7 @@ export default function Hero() {
         className="absolute inset-x-0 bottom-0 h-[24%] z-10 flex flex-col items-center justify-center gap-4 px-6"
       >
         <div className="flex items-center justify-center gap-4">
-          <Button to="/contact" variant="primary-dark">
+          <Button to="/contact#contact-form" variant="primary-dark">
             Book a demo
           </Button>
           <Button to="/solutions" variant="outline">

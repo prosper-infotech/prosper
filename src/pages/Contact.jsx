@@ -119,7 +119,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-20">
+      <section id="contact-form" className="max-w-6xl mx-auto px-6 py-20 scroll-mt-28">
         <div className="grid gap-16 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <h2 className="text-2xl font-heading font-bold text-ink-900 mb-6">Send us a message</h2>
