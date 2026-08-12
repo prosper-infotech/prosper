@@ -5,7 +5,12 @@ import heroBg from '../../assets/home-hero-bg.jpg'
 
 export default function Hero() {
   return (
-    <section className="relative h-[85vh] min-h-[560px] max-h-[820px] lg:h-auto lg:aspect-[1672/941] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
+    <section className="relative h-[85vh] min-h-[560px] max-h-[820px] lg:h-[720px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
+      <img
+        src={heroBg}
+        aria-hidden="true"
+        className="hidden lg:block absolute inset-0 h-full w-full object-cover scale-110 blur-2xl opacity-60"
+      />
       <img
         src={heroBg}
         alt="Prosper Infotech AI-powered warehouse and logistics visibility platform"
