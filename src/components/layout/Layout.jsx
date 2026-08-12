@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
-import StickyMobileCTA from './StickyMobileCTA'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import useScrollToHash from '../../hooks/useScrollToHash'
 
@@ -14,7 +13,7 @@ export default function Layout() {
   useScrollToHash()
 
   return (
-    <div className="min-h-screen flex flex-col pb-16 lg:pb-0">
+    <div className="min-h-screen flex flex-col">
       <TopBar />
       <Header />
       <main className="flex-1">
@@ -31,7 +30,6 @@ export default function Layout() {
         </AnimatePresence>
       </main>
       <Footer />
-      <StickyMobileCTA />
     </div>
   )
 }
