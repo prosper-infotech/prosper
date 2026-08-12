@@ -28,6 +28,8 @@ import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
+import ProcessSteps from '../../components/ui/ProcessSteps'
+import FAQAccordion from '../../components/ui/FAQAccordion'
 import { OFFICES } from '../../data/offices'
 import assetTrackingHero from '../../assets/asset-tracking-hero.png'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
@@ -71,6 +73,52 @@ const INDUSTRIES = [
   { icon: GraduationCap, label: 'Schools / Campuses' },
 ]
 
+const PROCESS_STEPS = [
+  {
+    title: 'Free Consultation',
+    description: 'We assess your assets, tagging needs, and site layout — no cost, no obligation.',
+  },
+  {
+    title: 'Tag & Deploy',
+    description: 'RFID tags, fixed/handheld readers, and gateways installed with $0 upfront hardware.',
+  },
+  {
+    title: 'Go Live',
+    description: 'Your cloud dashboard and mobile app start tracking assets in real time.',
+  },
+  {
+    title: 'Ongoing Support',
+    description: 'Our team monitors, maintains, and scales the system with you as you grow.',
+  },
+]
+
+const FAQS = [
+  {
+    question: 'Do we have to pay anything upfront for hardware?',
+    answer:
+      "No — hardware is provided at $0 upfront, and your first 2 months are free. You pay a simple monthly fee after that.",
+  },
+  {
+    question: 'How long does deployment take?',
+    answer:
+      'Most single-site deployments go live within a few weeks of your free consultation, depending on the number of assets and readers involved.',
+  },
+  {
+    question: 'Can it integrate with our existing systems?',
+    answer:
+      'Yes — Prosper Asset Tracking is built with open APIs and integrates with common ERP, WMS, and inventory systems.',
+  },
+  {
+    question: "What if we're just comparing vendors right now?",
+    answer:
+      "That's fine — the demo is free with no obligation. Most teams use it to compare real dashboards and hardware side by side before deciding.",
+  },
+  {
+    question: 'Is support included?',
+    answer: 'Yes, ongoing monitoring and support are included as part of your monthly plan.',
+  },
+]
+
 export default function AssetTracking() {
   useDocumentTitle(
     'Prosper Asset Tracking | RFID + GPS Asset Visibility',
@@ -80,7 +128,16 @@ export default function AssetTracking() {
   return (
     <>
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
-        <div className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+        <motion.div
+          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
+          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
+          animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
@@ -107,7 +164,7 @@ export default function AssetTracking() {
                 return (
                   <span
                     key={badge.label}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white"
+                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
                   >
                     <Icon className="h-4 w-4 text-gold" />
                     {badge.label}
@@ -117,9 +174,12 @@ export default function AssetTracking() {
             </div>
 
             <div className="flex flex-wrap gap-4 mt-4">
-              <Button href="#lead-form" variant="primary-dark">
-                Book a Demo
-              </Button>
+              <div className="relative">
+                <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
+                <Button href="#lead-form" variant="primary-dark" className="relative">
+                  Book a Demo
+                </Button>
+              </div>
               <Button
                 href={`tel:${usaPhone.replace(/\s+/g, '')}`}
                 variant="outline"
@@ -140,7 +200,11 @@ export default function AssetTracking() {
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
             <div className="relative flex items-center justify-center max-w-md">
-              <div className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl" />
+              <motion.div
+                className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
               <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
                 <img
                   src={assetTrackingHero}
@@ -165,6 +229,16 @@ export default function AssetTracking() {
             </div>
           </Reveal>
         </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+        <Reveal className="text-center mb-12">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            How It Works
+          </span>
+          <h2 className="mt-2 text-3xl">From consultation to live tracking</h2>
+        </Reveal>
+        <ProcessSteps steps={PROCESS_STEPS} />
       </section>
 
       <section className="bg-surface-alt border-b border-ink-300">
@@ -239,6 +313,18 @@ export default function AssetTracking() {
             })}
           </div>
         </div>
+      </section>
+
+      <section className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
+        <Reveal className="text-center mb-10">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            Common Questions
+          </span>
+          <h2 className="mt-2 text-3xl">Before you book a demo</h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <FAQAccordion items={FAQS} />
+        </Reveal>
       </section>
 
       <section id="lead-form" className="relative bg-gradient-to-b from-navy to-primary-dark overflow-hidden">

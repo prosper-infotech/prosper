@@ -24,6 +24,8 @@ import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
+import ProcessSteps from '../../components/ui/ProcessSteps'
+import FAQAccordion from '../../components/ui/FAQAccordion'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import as400Hero from '../../assets/as400-hero.png'
@@ -103,6 +105,51 @@ const INDUSTRIES = [
   { icon: Landmark, label: 'Banking & Finance' },
   { icon: ShoppingCart, label: 'Retail' },
   { icon: Boxes, label: 'Supply Chain & 3PL' },
+]
+
+const PROCESS_STEPS = [
+  {
+    title: 'Free Consultation',
+    description: "We review your AS400 environment, codebase, and goals — no cost, no obligation.",
+  },
+  {
+    title: 'Scoped Proposal',
+    description: 'You get a clear plan — development, support, or modernization, priced up front.',
+  },
+  {
+    title: 'Team Onboarded',
+    description: 'A US-coordinated, offshore-backed team starts working in your environment.',
+  },
+  {
+    title: '24x7x365 Coverage',
+    description: 'Ongoing development, support, and monitoring — day or night, every day of the year.',
+  },
+]
+
+const FAQS = [
+  {
+    question: 'Do you work with our existing AS400/IBM i environment, or only new builds?',
+    answer:
+      'Both — most of our engagements are enhancements, support, and modernization on systems already in production.',
+  },
+  {
+    question: 'Is support really available 24x7x365?',
+    answer: 'Yes — including holidays, with a dedicated calling line for urgent issues.',
+  },
+  {
+    question: 'Do you offer short-term or project-based work, or only long-term contracts?',
+    answer:
+      'Both. We support one-off development projects as well as ongoing support and modernization retainers.',
+  },
+  {
+    question: 'Where is your team located?',
+    answer:
+      'We run a US-coordinated, offshore-backed model — you get local-hours communication with the cost advantages of a distributed team.',
+  },
+  {
+    question: 'What does the free consultation actually involve?',
+    answer: 'A short call to understand your AS400 environment and goals — no obligation, no sales pressure.',
+  },
 ]
 
 export default function AS400Development() {
@@ -208,6 +255,16 @@ export default function AS400Development() {
       </section>
 
       <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+        <Reveal className="text-center mb-12">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            How It Works
+          </span>
+          <h2 className="mt-2 text-3xl">From consultation to dedicated coverage</h2>
+        </Reveal>
+        <ProcessSteps steps={PROCESS_STEPS} />
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
         <div className="grid gap-6 lg:grid-cols-3">
           {SERVICE_COLUMNS.map((col, i) => {
             const Icon = col.icon
@@ -286,6 +343,18 @@ export default function AS400Development() {
             )
           })}
         </div>
+      </section>
+
+      <section className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
+        <Reveal className="text-center mb-10">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            Common Questions
+          </span>
+          <h2 className="mt-2 text-3xl">Before you get in touch</h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <FAQAccordion items={FAQS} />
+        </Reveal>
       </section>
 
       <section id="lead-form" className="relative bg-gradient-to-b from-navy to-primary-dark overflow-hidden">
