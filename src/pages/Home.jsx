@@ -1,24 +1,4 @@
-import {
-  Warehouse,
-  Boxes,
-  Truck,
-  Radio,
-  Tag,
-  Cpu,
-  Eye,
-  Users,
-  Gauge,
-  ShieldCheck,
-  Lock,
-  Cloud,
-  Bot,
-  Network,
-  Code2,
-  Server,
-  Award,
-  RefreshCcw,
-  Headset,
-} from 'lucide-react'
+import { Warehouse, Boxes, Truck, Radio, Tag, Cpu, Eye, Users, Gauge, ShieldCheck, Lock, Cloud } from 'lucide-react'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ServiceCard from '../components/ui/ServiceCard'
@@ -28,6 +8,8 @@ import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
 import { NAV } from '../data/navigation'
+import { CAPABILITIES, REGIONS, WHY_CHOOSE } from '../data/company'
+import { FLAG_COMPONENTS } from '../components/ui/RegionFlags'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const TRUST_ITEMS = [
@@ -53,128 +35,6 @@ const HOME_ICONS = {
 }
 
 const featuredSolutions = solutions.filter((s) => HOME_ICONS[s.label])
-
-function FlagUSA() {
-  return (
-    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-ink-300 shadow-sm">
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'repeating-linear-gradient(180deg, #B22234 0px, #B22234 4px, #FFFFFF 4px, #FFFFFF 8px)',
-        }}
-      />
-      <div className="absolute left-0 top-0 h-[46%] w-[46%] bg-[#3C3B6E]" />
-    </div>
-  )
-}
-
-function FlagIndia() {
-  return (
-    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-ink-300 shadow-sm">
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(180deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%)',
-        }}
-      />
-      <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#000080]" />
-    </div>
-  )
-}
-
-function FlagJapan() {
-  return (
-    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-ink-300 shadow-sm bg-white">
-      <div className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#BC002D]" />
-    </div>
-  )
-}
-
-const REGIONS = [
-  {
-    Flag: FlagUSA,
-    country: 'USA',
-    description: 'Customer engagement, solution architecture, consulting, implementation, and support.',
-  },
-  {
-    Flag: FlagIndia,
-    country: 'India',
-    description: 'AI/ML, software engineering, IoT, cloud, integrations, testing, and 24×7 delivery excellence.',
-  },
-  {
-    Flag: FlagJapan,
-    country: 'Japan',
-    description: 'AI/IoT engineering collaboration, technology delivery, and regional support.',
-  },
-]
-
-const WHY_CHOOSE_STRIP = [
-  {
-    icon: Award,
-    title: '10+ Years',
-    description: 'Logistics & Enterprise Technology Expertise',
-  },
-  {
-    icon: Users,
-    title: 'AI + IoT Engineering Teams',
-    description: 'USA · India · Japan',
-  },
-  {
-    icon: RefreshCcw,
-    title: 'End-to-End Delivery',
-    description: 'Consulting → Engineering → Deployment → Integration → Support',
-  },
-  {
-    icon: Headset,
-    title: '24×7 Support',
-    description: 'Production Monitoring & Technical Help Desk',
-  },
-]
-
-const WHO_WE_ARE_CAPABILITIES = [
-  {
-    icon: Eye,
-    label: 'AI & Computer Vision',
-    description: 'OCR, object detection, video analytics, tracking, recognition, and operational intelligence.',
-  },
-  {
-    icon: Radio,
-    label: 'RFID & GPS/RTK',
-    description: 'Asset, trailer, equipment, container, and inventory visibility.',
-  },
-  {
-    icon: Cpu,
-    label: 'Industrial IoT & Edge AI',
-    description: 'Sensors, PLCs, gateways, Prosper AI EdgeBox, and real-time edge processing.',
-  },
-  {
-    icon: Warehouse,
-    label: 'Logistics Platforms',
-    description: 'YMS, WMS, Dock Management, Gate Automation, Fleet and Asset Tracking.',
-  },
-  {
-    icon: Bot,
-    label: 'Specialized AI Products',
-    description: 'ContainerVision AI, ForkliftVision AI, GateVision AI, and DockVision AI.',
-  },
-  {
-    icon: Network,
-    label: 'Enterprise Integration',
-    description: 'ERP, WMS, TMS, REST APIs, cloud platforms, dashboards, and reporting.',
-  },
-  {
-    icon: Code2,
-    label: 'Software Engineering',
-    description: '.NET, Angular, Python, cloud, SaaS, mobile, embedded, and edge applications.',
-  },
-  {
-    icon: Server,
-    label: 'AS400 / IBM i',
-    description: 'Development, modernization, integration, and 24x7 production support.',
-  },
-]
 
 // Placeholder figures — replace with verified numbers before launch.
 const STATS = [
@@ -253,7 +113,7 @@ export default function Home() {
           </div>
 
           <div className="mt-16 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {WHO_WE_ARE_CAPABILITIES.map(({ icon: Icon, label, description }, i) => (
+            {CAPABILITIES.map(({ icon: Icon, label, description }, i) => (
               <Reveal key={label} delay={(i % 4) * 0.08}>
                 <div className="h-full rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
                   <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15)]">
@@ -274,17 +134,20 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-20">
           <SectionHeading title="Global Engineering. Local Accountability." className="mb-12" />
           <div className="grid gap-6 sm:grid-cols-3">
-            {REGIONS.map(({ Flag, country, description }, i) => (
-              <Reveal key={country} delay={i * 0.1}>
-                <div className="h-full flex items-start gap-4 rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                  <Flag />
-                  <div>
-                    <h3 className="font-heading font-bold text-lg text-primary">{country}</h3>
-                    <p className="mt-1.5 text-sm text-ink-600">{description}</p>
+            {REGIONS.map(({ flagKey, country, description }, i) => {
+              const Flag = FLAG_COMPONENTS[flagKey]
+              return (
+                <Reveal key={country} delay={i * 0.1}>
+                  <div className="h-full flex items-start gap-4 rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
+                    <Flag />
+                    <div>
+                      <h3 className="font-heading font-bold text-lg text-primary">{country}</h3>
+                      <p className="mt-1.5 text-sm text-ink-600">{description}</p>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -293,7 +156,7 @@ export default function Home() {
         <Reveal>
           <div className="rounded-2xl bg-gradient-to-b from-primary-dark to-navy border border-white/10 shadow-xl overflow-hidden">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-              {WHY_CHOOSE_STRIP.map((item, i) => {
+              {WHY_CHOOSE.map((item, i) => {
                 const Icon = item.icon
                 return (
                   <div
