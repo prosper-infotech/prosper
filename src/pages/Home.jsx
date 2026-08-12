@@ -127,57 +127,64 @@ export default function Home() {
       </section>
 
       <section className="bg-surface-alt">
-        <div className="max-w-7xl mx-auto px-6 py-20 grid gap-12 lg:grid-cols-2 items-start">
-          <Reveal>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/aU3I6Tw6S5I?autoplay=1&mute=1&playsinline=1"
-                title="About Prosper Infotech"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.15} className="flex flex-col gap-5">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-              Who We Are
-            </span>
-            <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
-              Engineering AI, IoT &amp; Logistics Solutions for Real-World Operations
-            </h2>
-            <p className="text-ink-600 text-lg">
-              For more than a decade, Prosper Infotech has been designing, developing,
-              integrating, and supporting technology solutions for logistics, warehousing,
-              transportation, CFS/container terminals, manufacturing, and enterprise operations.
-            </p>
-            <p className="text-ink-600 text-lg">
-              Our engineering teams across the USA, India, and Japan bring together deep
-              expertise in Artificial Intelligence, Computer Vision, OCR, RFID, GPS/RTK,
-              Industrial IoT, Edge Computing, cloud platforms, and enterprise software
-              development.
-            </p>
-            <p className="text-ink-600 text-lg">
-              From intelligent gates and yards to warehouses, docks, forklifts, containers,
-              assets, and legacy enterprise systems, we help customers connect physical
-              operations with real-time digital intelligence.
-            </p>
-            <ul className="flex flex-col gap-4 mt-2">
-              {WHO_WE_ARE_CAPABILITIES.map(({ icon: Icon, label, description }) => (
-                <li key={label} className="flex items-start gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-primary">
-                    <Icon className="h-4.5 w-4.5" />
-                  </span>
-                  <span className="text-sm text-ink-700">
-                    <span className="font-semibold text-ink-900">{label}:</span> {description}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <Button to="/about" variant="primary-dark" className="self-start mt-2">
-              Learn more about us
-            </Button>
-          </Reveal>
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="grid gap-12 lg:grid-cols-2 items-start">
+            <Reveal>
+              <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/aU3I6Tw6S5I?autoplay=1&mute=1&playsinline=1"
+                  title="About Prosper Infotech"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </Reveal>
+            <Reveal delay={0.15} className="flex flex-col gap-5">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+                Who We Are
+              </span>
+              <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
+                Engineering AI, IoT &amp; Logistics Solutions for Real-World Operations
+              </h2>
+              <p className="text-ink-600 text-lg">
+                For more than a decade, Prosper Infotech has been designing, developing,
+                integrating, and supporting technology solutions for logistics, warehousing,
+                transportation, CFS/container terminals, manufacturing, and enterprise
+                operations.
+              </p>
+              <p className="text-ink-600 text-lg">
+                Our engineering teams across the USA, India, and Japan bring together deep
+                expertise in Artificial Intelligence, Computer Vision, OCR, RFID, GPS/RTK,
+                Industrial IoT, Edge Computing, cloud platforms, and enterprise software
+                development.
+              </p>
+              <p className="text-ink-600 text-lg">
+                From intelligent gates and yards to warehouses, docks, forklifts, containers,
+                assets, and legacy enterprise systems, we help customers connect physical
+                operations with real-time digital intelligence.
+              </p>
+              <Button to="/about" variant="primary-dark" className="self-start mt-2">
+                Learn more about us
+              </Button>
+            </Reveal>
+          </div>
+
+          <div className="mt-16 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {WHO_WE_ARE_CAPABILITIES.map(({ icon: Icon, label, description }, i) => (
+              <Reveal key={label} delay={(i % 4) * 0.08}>
+                <div className="h-full rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15)]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-heading font-semibold text-base text-primary">
+                    {label}
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-600">{description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
