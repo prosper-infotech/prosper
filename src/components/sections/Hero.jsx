@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from '../ui/Button'
 import AnimatedText from '../motion/AnimatedText'
 import heroBg from '../../assets/home-hero-bg.jpg'
@@ -86,6 +87,9 @@ export default function Hero() {
     return () => clearInterval(timer)
   }, [paused])
 
+  const goPrev = () => setActive((i) => (i - 1 + SLIDES.length) % SLIDES.length)
+  const goNext = () => setActive((i) => (i + 1) % SLIDES.length)
+
   const slide = SLIDES[active]
 
   return (
@@ -120,8 +124,29 @@ export default function Hero() {
         />
       </AnimatePresence>
 
+      <div className="pointer-events-none absolute inset-0 bg-black/20" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-black/70 via-black/25 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+      {active !== 0 && (
+        <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[20%] z-[5] bg-gradient-to-b from-transparent via-black/40 to-transparent" />
+      )}
+
+      <button
+        type="button"
+        onClick={goPrev}
+        aria-label="Previous slide"
+        className="group absolute left-3 lg:left-6 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 lg:h-11 lg:w-11 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition-colors hover:bg-black/55"
+      >
+        <ChevronLeft className="h-5 w-5 lg:h-6 lg:w-6" />
+      </button>
+      <button
+        type="button"
+        onClick={goNext}
+        aria-label="Next slide"
+        className="group absolute right-3 lg:right-6 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 lg:h-11 lg:w-11 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition-colors hover:bg-black/55"
+      >
+        <ChevronRight className="h-5 w-5 lg:h-6 lg:w-6" />
+      </button>
 
       <AnimatePresence mode="wait">
         {active === 0 ? (
@@ -131,21 +156,31 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-0 h-[30%] z-10 flex flex-col items-center justify-start pt-24 lg:pt-28 gap-3 px-6 text-center"
+            className="absolute inset-x-0 top-0 h-[30%] z-10 flex flex-col items-center justify-start pt-24 lg:pt-28 gap-3 px-14 sm:px-16 lg:px-20 text-center"
           >
-            <span className="text-gold text-sm font-semibold uppercase tracking-widest">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+            >
               {slide.eyebrow}
-            </span>
+            </motion.span>
             <AnimatedText
               as="h1"
               scroll={false}
               text={slide.title}
               highlightWords={slide.highlightWords}
-              className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white drop-shadow-md"
+              className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
             />
-            <p className="hidden sm:block text-white/85 text-base lg:text-lg max-w-2xl">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="hidden sm:block text-white text-base lg:text-lg max-w-2xl [text-shadow:0_2px_14px_rgba(0,0,0,0.9)]"
+            >
               {slide.subtitle}
-            </p>
+            </motion.p>
           </motion.div>
         ) : (
           <motion.div
@@ -154,21 +189,31 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-[24%] bottom-[24%] z-10 flex flex-col items-center justify-center gap-3 px-6 text-center"
+            className="absolute inset-x-0 top-[24%] bottom-[24%] z-10 flex flex-col items-center justify-center gap-3 px-14 sm:px-16 lg:px-20 text-center"
           >
-            <span className="text-gold text-sm font-semibold uppercase tracking-widest">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+            >
               {slide.eyebrow}
-            </span>
+            </motion.span>
             <AnimatedText
               as="h1"
               scroll={false}
               text={slide.title}
               highlightWords={slide.highlightWords}
-              className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white drop-shadow-md"
+              className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
             />
-            <p className="hidden sm:block text-white/85 text-base lg:text-lg max-w-2xl">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="hidden sm:block text-white text-base lg:text-lg max-w-2xl [text-shadow:0_2px_14px_rgba(0,0,0,0.9)]"
+            >
               {slide.subtitle}
-            </p>
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
