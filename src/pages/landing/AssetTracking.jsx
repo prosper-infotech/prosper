@@ -30,8 +30,13 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
+import VisualGallery from '../../components/ui/VisualGallery'
 import { OFFICES } from '../../data/offices'
 import assetTrackingHero from '../../assets/asset-tracking-hero.png'
+import galleryRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
+import galleryIotYard from '../../assets/hero-slide-iot-yard.jpg'
+import galleryDockAi from '../../assets/hero-slide-dock-ai.jpg'
+import galleryDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const usaPhone = OFFICES[0].phone
@@ -71,6 +76,13 @@ const INDUSTRIES = [
   { icon: Truck, label: 'Fleet Yards' },
   { icon: Factory, label: 'Manufacturing' },
   { icon: GraduationCap, label: 'Schools / Campuses' },
+]
+
+const GALLERY = [
+  { image: galleryRfidWarehouse, caption: 'RFID scanning across warehouse aisles' },
+  { image: galleryIotYard, caption: 'IoT-connected yard and trailer tracking' },
+  { image: galleryDockAi, caption: 'AI-powered dock and yard automation' },
+  { image: galleryDockMonitoring, caption: 'Smart dock door and operations monitoring' },
 ]
 
 const PROCESS_STEPS = [
@@ -239,6 +251,16 @@ export default function AssetTracking() {
           <h2 className="mt-2 text-3xl">From consultation to live tracking</h2>
         </Reveal>
         <ProcessSteps steps={PROCESS_STEPS} />
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 pb-16 lg:pb-20">
+        <Reveal className="text-center mb-10">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            See It In Action
+          </span>
+          <h2 className="mt-2 text-3xl">Real environments, real-time visibility</h2>
+        </Reveal>
+        <VisualGallery items={GALLERY} />
       </section>
 
       <section className="bg-surface-alt border-b border-ink-300">

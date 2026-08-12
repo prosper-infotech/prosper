@@ -26,9 +26,14 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
+import VisualGallery from '../../components/ui/VisualGallery'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import as400Hero from '../../assets/as400-hero.png'
+import galleryDistributionCenter from '../../assets/hero-slide-distribution-center.jpg'
+import galleryFleetGps from '../../assets/hero-slide-fleet-gps.jpg'
+import galleryRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
+import galleryDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
 
 const usaPhone = OFFICES[0].phone
 
@@ -105,6 +110,13 @@ const INDUSTRIES = [
   { icon: Landmark, label: 'Banking & Finance' },
   { icon: ShoppingCart, label: 'Retail' },
   { icon: Boxes, label: 'Supply Chain & 3PL' },
+]
+
+const GALLERY = [
+  { image: galleryDistributionCenter, caption: 'Enterprise-scale distribution centers running on AS400' },
+  { image: galleryFleetGps, caption: 'Fleet and logistics operations backed by AS400 systems' },
+  { image: galleryRfidWarehouse, caption: 'Warehouse operations supported by reliable AS400 infrastructure' },
+  { image: galleryDockMonitoring, caption: 'Dock and distribution operations running on AS400' },
 ]
 
 const PROCESS_STEPS = [
@@ -262,6 +274,16 @@ export default function AS400Development() {
           <h2 className="mt-2 text-3xl">From consultation to dedicated coverage</h2>
         </Reveal>
         <ProcessSteps steps={PROCESS_STEPS} />
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 pb-16 lg:pb-20">
+        <Reveal className="text-center mb-10">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            See It In Action
+          </span>
+          <h2 className="mt-2 text-3xl">The operations AS400 keeps running</h2>
+        </Reveal>
+        <VisualGallery items={GALLERY} />
       </section>
 
       <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
