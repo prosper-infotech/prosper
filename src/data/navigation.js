@@ -100,14 +100,18 @@ export const NAV = [
     templateGroup: 'detail',
     children: [
       {
-        label: 'Software Development',
-        path: '/services/software-development',
-        description: 'Custom, Enterprise, AI/CV/OCR/ML Development',
+        label: 'AI Software Development',
+        path: '/services/ai-software-development',
+        description:
+          'AI, ML, Computer Vision, OCR, Automation, Analytics, Edge AI and Logistics Technology Engineering',
         children: [
-          { label: 'Mobile App Development', path: '/services/software-development#mobile' },
-          { label: 'Web Development', path: '/services/software-development#web' },
-          { label: 'Frontend', path: '/services/software-development#frontend' },
-          { label: 'DevOps', path: '/services/software-development#devops' },
+          { label: 'AI & Machine Learning Development', path: '/services/ai-software-development/ai-machine-learning-development' },
+          { label: 'AI Computer Vision & OCR', path: '/services/ai-software-development/ai-computer-vision-ocr' },
+          { label: 'AI Automation Development', path: '/services/ai-software-development/ai-automation-development' },
+          { label: 'AI Analytics & Predictive Intelligence', path: '/services/ai-software-development/ai-analytics-predictive-intelligence' },
+          { label: 'AI Integration & Enterprise APIs', path: '/services/ai-software-development/ai-integration-enterprise-apis' },
+          { label: 'Edge AI & IoT Software Development', path: '/services/ai-software-development/edge-ai-iot-software-development' },
+          { label: 'Custom Logistics AI Software', path: '/services/ai-software-development/custom-logistics-ai-software' },
         ],
       },
       {

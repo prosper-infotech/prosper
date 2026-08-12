@@ -9,6 +9,7 @@ import { SOLUTIONS_DETAIL } from './data/solutionsDetail'
 import { INDUSTRIES_DETAIL } from './data/industriesDetail'
 import { SOLUTION_ICONS } from './data/solutionIcons'
 import { INDUSTRY_ICONS } from './data/industryIcons'
+import { AI_SERVICES_DETAIL } from './data/aiServicesDetail'
 
 const About = lazy(() => import('./pages/About'))
 const SolutionsOverview = lazy(() => import('./pages/SolutionsOverview'))
@@ -16,7 +17,7 @@ const ProductsOverview = lazy(() => import('./pages/ProductsOverview'))
 const ServicesOverview = lazy(() => import('./pages/ServicesOverview'))
 const IndustriesOverview = lazy(() => import('./pages/IndustriesOverview'))
 const Contact = lazy(() => import('./pages/Contact'))
-const SoftwareDevelopment = lazy(() => import('./pages/SoftwareDevelopment'))
+const AIServicesHub = lazy(() => import('./pages/AIServicesHub'))
 const RFIDServices = lazy(() => import('./pages/RFIDServices'))
 const IndustrialIoTServices = lazy(() => import('./pages/IndustrialIoTServices'))
 const IBMiAS400 = lazy(() => import('./pages/IBMiAS400'))
@@ -36,12 +37,13 @@ const CategoryOverviewTemplate = lazy(() => import('./components/templates/Categ
 const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageTemplate'))
 const SolutionDetailTemplate = lazy(() => import('./components/templates/SolutionDetailTemplate'))
 const TopicPageTemplate = lazy(() => import('./components/templates/TopicPageTemplate'))
+const AIServiceDetailTemplate = lazy(() => import('./components/templates/AIServiceDetailTemplate'))
 
 function childElement(item, child) {
   const siblings = item.children.filter((c) => c.path !== child.path)
 
-  if (child.path === '/services/software-development') {
-    return <SoftwareDevelopment />
+  if (child.path === '/services/ai-software-development') {
+    return <AIServicesHub />
   }
 
   if (child.path === '/services/rfid-services') {
@@ -163,13 +165,32 @@ function App() {
                   )
                 }
               />
-              {item.children?.map((child) => (
-                <Route
-                  key={child.path}
-                  path={child.path.slice(item.path.length + 1)}
-                  element={childElement(item, child)}
-                />
-              ))}
+              {item.children?.map((child) => {
+                const detailGrandchildren = (child.children ?? []).filter(
+                  (gc) => AI_SERVICES_DETAIL[gc.path]
+                )
+                if (detailGrandchildren.length > 0) {
+                  return (
+                    <Route key={child.path} path={child.path.slice(item.path.length + 1)}>
+                      <Route index element={childElement(item, child)} />
+                      {detailGrandchildren.map((gc) => (
+                        <Route
+                          key={gc.path}
+                          path={gc.path.slice(child.path.length + 1)}
+                          element={<AIServiceDetailTemplate detail={AI_SERVICES_DETAIL[gc.path]} />}
+                        />
+                      ))}
+                    </Route>
+                  )
+                }
+                return (
+                  <Route
+                    key={child.path}
+                    path={child.path.slice(item.path.length + 1)}
+                    element={childElement(item, child)}
+                  />
+                )
+              })}
             </Route>
           ))}
           <Route path="/resources/blog/:slug" element={<BlogPost />} />
