@@ -162,8 +162,8 @@ export default function AssetTracking() {
               Real-Time Tracking, Alerts &amp; Control for Every Asset
             </p>
             <p className="text-white/80 text-lg max-w-xl">
-              Track assets, tools, equipment, and inventory with RFID tags, fixed and handheld
-              readers, and a cloud-based dashboard built for real-time visibility.
+              RFID tags, fixed and handheld readers, and a live cloud dashboard — everything you
+              need for real-time visibility into assets, tools, and equipment.
             </p>
 
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-gold/15 border border-gold/40 px-4 py-2 text-sm font-semibold text-gold">
@@ -208,6 +208,14 @@ export default function AssetTracking() {
                 </span>
               </Button>
             </div>
+          </Reveal>
+
+          <Reveal delay={0.15} className="lg:hidden mt-2">
+            <img
+              src={assetTrackingHero}
+              alt="Prosper Asset Tracking hardware and dashboard"
+              className="w-full max-w-sm mx-auto rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
+            />
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
