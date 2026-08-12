@@ -51,6 +51,62 @@ const HOME_ICONS = {
 
 const featuredSolutions = solutions.filter((s) => HOME_ICONS[s.label])
 
+function FlagUSA() {
+  return (
+    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-ink-300 shadow-sm">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'repeating-linear-gradient(180deg, #B22234 0px, #B22234 4px, #FFFFFF 4px, #FFFFFF 8px)',
+        }}
+      />
+      <div className="absolute left-0 top-0 h-[46%] w-[46%] bg-[#3C3B6E]" />
+    </div>
+  )
+}
+
+function FlagIndia() {
+  return (
+    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-ink-300 shadow-sm">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%)',
+        }}
+      />
+      <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#000080]" />
+    </div>
+  )
+}
+
+function FlagJapan() {
+  return (
+    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-ink-300 shadow-sm bg-white">
+      <div className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#BC002D]" />
+    </div>
+  )
+}
+
+const REGIONS = [
+  {
+    Flag: FlagUSA,
+    country: 'USA',
+    description: 'Customer engagement, solution architecture, consulting, implementation, and support.',
+  },
+  {
+    Flag: FlagIndia,
+    country: 'India',
+    description: 'AI/ML, software engineering, IoT, cloud, integrations, testing, and 24×7 delivery excellence.',
+  },
+  {
+    Flag: FlagJapan,
+    country: 'Japan',
+    description: 'AI/IoT engineering collaboration, technology delivery, and regional support.',
+  },
+]
+
 const WHO_WE_ARE_CAPABILITIES = [
   {
     icon: Eye,
@@ -181,6 +237,25 @@ export default function Home() {
                     {label}
                   </h3>
                   <p className="mt-2 text-sm text-ink-600">{description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <SectionHeading title="Global Engineering. Local Accountability." className="mb-12" />
+          <div className="grid gap-6 sm:grid-cols-3">
+            {REGIONS.map(({ Flag, country, description }, i) => (
+              <Reveal key={country} delay={i * 0.1}>
+                <div className="h-full flex items-start gap-4 rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
+                  <Flag />
+                  <div>
+                    <h3 className="font-heading font-bold text-lg text-primary">{country}</h3>
+                    <p className="mt-1.5 text-sm text-ink-600">{description}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
