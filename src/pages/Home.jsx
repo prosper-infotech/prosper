@@ -11,8 +11,11 @@ import {
   ShieldCheck,
   Lock,
   Cloud,
+  Bot,
+  Network,
+  Code2,
+  Server,
 } from 'lucide-react'
-import { CheckCircle2 } from 'lucide-react'
 import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ServiceCard from '../components/ui/ServiceCard'
@@ -48,6 +51,49 @@ const HOME_ICONS = {
 
 const featuredSolutions = solutions.filter((s) => HOME_ICONS[s.label])
 
+const WHO_WE_ARE_CAPABILITIES = [
+  {
+    icon: Eye,
+    label: 'AI & Computer Vision',
+    description: 'OCR, object detection, video analytics, tracking, recognition, and operational intelligence.',
+  },
+  {
+    icon: Radio,
+    label: 'RFID & GPS/RTK',
+    description: 'Asset, trailer, equipment, container, and inventory visibility.',
+  },
+  {
+    icon: Cpu,
+    label: 'Industrial IoT & Edge AI',
+    description: 'Sensors, PLCs, gateways, Prosper AI EdgeBox, and real-time edge processing.',
+  },
+  {
+    icon: Warehouse,
+    label: 'Logistics Platforms',
+    description: 'YMS, WMS, Dock Management, Gate Automation, Fleet and Asset Tracking.',
+  },
+  {
+    icon: Bot,
+    label: 'Specialized AI Products',
+    description: 'ContainerVision AI, ForkliftVision AI, GateVision AI, and DockVision AI.',
+  },
+  {
+    icon: Network,
+    label: 'Enterprise Integration',
+    description: 'ERP, WMS, TMS, REST APIs, cloud platforms, dashboards, and reporting.',
+  },
+  {
+    icon: Code2,
+    label: 'Software Engineering',
+    description: '.NET, Angular, Python, cloud, SaaS, mobile, embedded, and edge applications.',
+  },
+  {
+    icon: Server,
+    label: 'AS400 / IBM i',
+    description: 'Development, modernization, integration, and 24x7 production support.',
+  },
+]
+
 // Placeholder figures — replace with verified numbers before launch.
 const STATS = [
   { value: '15+', label: 'Years of Engineering Experience' },
@@ -81,7 +127,7 @@ export default function Home() {
       </section>
 
       <section className="bg-surface-alt">
-        <div className="max-w-7xl mx-auto px-6 py-20 grid gap-12 lg:grid-cols-2 items-center">
+        <div className="max-w-7xl mx-auto px-6 py-20 grid gap-12 lg:grid-cols-2 items-start">
           <Reveal>
             <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
               <iframe
@@ -98,24 +144,33 @@ export default function Home() {
               Who We Are
             </span>
             <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
-              Engineering the future of logistics visibility
+              Engineering AI, IoT &amp; Logistics Solutions for Real-World Operations
             </h2>
             <p className="text-ink-600 text-lg">
-              For over a decade, Prosper Infotech has helped logistics, warehousing, and
-              manufacturing teams trade guesswork for real-time data. From our teams in Dallas
-              and Pune, we design, build, and support the RFID, GPS, IoT, and AI systems that
-              give operators complete visibility over their yards, warehouses, and fleets.
+              For more than a decade, Prosper Infotech has been designing, developing,
+              integrating, and supporting technology solutions for logistics, warehousing,
+              transportation, CFS/container terminals, manufacturing, and enterprise operations.
             </p>
-            <ul className="flex flex-col gap-2.5">
-              {[
-                '10+ years of logistics technology expertise',
-                '100+ engineers and consultants',
-                'Offices in Dallas, TX and Pune, India',
-                'End-to-end: consulting, development, deployment, and support',
-              ].map((point) => (
-                <li key={point} className="flex items-start gap-2.5 text-sm text-ink-700">
-                  <CheckCircle2 className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                  <span>{point}</span>
+            <p className="text-ink-600 text-lg">
+              Our engineering teams across the USA, India, and Japan bring together deep
+              expertise in Artificial Intelligence, Computer Vision, OCR, RFID, GPS/RTK,
+              Industrial IoT, Edge Computing, cloud platforms, and enterprise software
+              development.
+            </p>
+            <p className="text-ink-600 text-lg">
+              From intelligent gates and yards to warehouses, docks, forklifts, containers,
+              assets, and legacy enterprise systems, we help customers connect physical
+              operations with real-time digital intelligence.
+            </p>
+            <ul className="flex flex-col gap-4 mt-2">
+              {WHO_WE_ARE_CAPABILITIES.map(({ icon: Icon, label, description }) => (
+                <li key={label} className="flex items-start gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-primary">
+                    <Icon className="h-4.5 w-4.5" />
+                  </span>
+                  <span className="text-sm text-ink-700">
+                    <span className="font-semibold text-ink-900">{label}:</span> {description}
+                  </span>
                 </li>
               ))}
             </ul>
