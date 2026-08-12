@@ -1,10 +1,4 @@
 import {
-  Tag,
-  Box,
-  Radio,
-  Scan,
-  LayoutDashboard,
-  Smartphone,
   Eye,
   Bell,
   ClipboardCheck,
@@ -33,10 +27,16 @@ import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
 import { OFFICES } from '../../data/offices'
 import assetTrackingHero from '../../assets/asset-tracking-hero.png'
-import galleryRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
-import galleryIotYard from '../../assets/hero-slide-iot-yard.jpg'
-import galleryDockAi from '../../assets/hero-slide-dock-ai.jpg'
-import galleryDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
+import galleryRfidScan from '../../assets/asset-tracking-gallery-rfid-scan.jpg'
+import galleryDashboard from '../../assets/asset-tracking-gallery-dashboard.jpg'
+import galleryYard from '../../assets/asset-tracking-gallery-yard.jpg'
+import galleryInstall from '../../assets/asset-tracking-gallery-install.jpg'
+import cardRfidLabelTag from '../../assets/asset-tracking-card-rfid-label-tag.jpg'
+import cardRuggedTag from '../../assets/asset-tracking-card-rugged-tag.jpg'
+import cardFixedReader from '../../assets/asset-tracking-card-fixed-reader.jpg'
+import cardHandheldReader from '../../assets/asset-tracking-card-handheld-reader.jpg'
+import cardDashboard from '../../assets/asset-tracking-card-dashboard.jpg'
+import cardMobileApp from '../../assets/asset-tracking-card-mobile-app.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const usaPhone = OFFICES[0].phone
@@ -48,12 +48,12 @@ const STAT_BADGES = [
 ]
 
 const COMPONENTS = [
-  { icon: Tag, label: 'RFID Label Tag' },
-  { icon: Box, label: 'Rugged RFID Tag' },
-  { icon: Radio, label: 'Fixed RFID Reader Setup' },
-  { icon: Scan, label: 'Handheld RFID Reader Setup' },
-  { icon: LayoutDashboard, label: 'Cloud Software Dashboard' },
-  { icon: Smartphone, label: 'Mobile App' },
+  { image: cardRfidLabelTag, label: 'RFID Label Tag' },
+  { image: cardRuggedTag, label: 'Rugged RFID Tag' },
+  { image: cardFixedReader, label: 'Fixed RFID Reader Setup' },
+  { image: cardHandheldReader, label: 'Handheld RFID Reader Setup' },
+  { image: cardDashboard, label: 'Cloud Software Dashboard' },
+  { image: cardMobileApp, label: 'Mobile App' },
 ]
 
 const FEATURES = [
@@ -79,10 +79,10 @@ const INDUSTRIES = [
 ]
 
 const GALLERY = [
-  { image: galleryRfidWarehouse, caption: 'RFID scanning across warehouse aisles' },
-  { image: galleryIotYard, caption: 'IoT-connected yard and trailer tracking' },
-  { image: galleryDockAi, caption: 'AI-powered dock and yard automation' },
-  { image: galleryDockMonitoring, caption: 'Smart dock door and operations monitoring' },
+  { image: galleryRfidScan, caption: 'Scanning RFID tags in the warehouse' },
+  { image: galleryDashboard, caption: 'Live dashboard, right on the warehouse floor' },
+  { image: galleryYard, caption: 'Tracking trailers and containers in the yard' },
+  { image: galleryInstall, caption: 'Our team installs and supports every deployment' },
 ]
 
 const PROCESS_STEPS = [
@@ -279,19 +279,23 @@ export default function AssetTracking() {
             </span>
             <h2 className="mt-2 text-2xl md:text-3xl">Everything you need, out of the box</h2>
           </Reveal>
-          <div className="flex flex-wrap justify-center gap-3">
-            {COMPONENTS.map((item) => {
-              const Icon = item.icon
-              return (
-                <span
-                  key={item.label}
-                  className="inline-flex items-center gap-2 rounded-full bg-white border border-ink-300 px-4 py-2.5 text-sm font-semibold text-ink-900 shadow-sm"
-                >
-                  <Icon className="h-4 w-4 text-primary" />
-                  {item.label}
-                </span>
-              )
-            })}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {COMPONENTS.map((item, i) => (
+              <Reveal key={item.label} delay={(i % 6) * 0.06}>
+                <div className="flex flex-col items-center gap-3 rounded-xl border border-ink-300 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-8px_rgba(247,221,0,0.35),0_20px_40px_-12px_rgba(0,0,0,0.2)]">
+                  <div className="aspect-square w-full overflow-hidden rounded-lg bg-surface-alt">
+                    <img
+                      src={item.image}
+                      alt={item.label}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <span className="text-sm font-semibold text-ink-900 text-center">
+                    {item.label}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
