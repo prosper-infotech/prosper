@@ -93,7 +93,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative h-[70vh] min-h-[480px] max-h-[640px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy"
+      className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
