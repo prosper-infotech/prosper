@@ -181,7 +181,7 @@ export default function Hero() {
               >
                 {slide.subtitle}
               </motion.p>
-              <div className="hidden sm:grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-3 py-1">
+              <div className="hidden sm:grid grid-cols-2 gap-x-4 gap-y-3 py-1">
                 {slide.features.map(({ icon: Icon, label }) => (
                   <div key={label} className="flex items-center gap-2">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-sm">
