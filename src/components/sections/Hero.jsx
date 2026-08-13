@@ -172,8 +172,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 z-10 flex items-center px-14 sm:px-16 lg:px-20"
+            className="absolute inset-0 z-10 flex items-center"
           >
+            <div className="w-full max-w-7xl mx-auto pl-14 sm:pl-16 lg:pl-20 min-[1400px]:pl-6 pr-6">
             <div className="flex flex-col items-start gap-3 lg:gap-4 max-w-xl lg:max-w-2xl text-left">
               <motion.span
                 initial={{ opacity: 0, y: 10 }}
@@ -219,6 +220,7 @@ export default function Hero() {
                   </span>
                 </Button>
               </div>
+            </div>
             </div>
           </motion.div>
         ) : (
