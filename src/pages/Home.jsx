@@ -115,7 +115,7 @@ export default function Home() {
       </section>
 
       <section className="bg-white">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto px-6 pt-20 pb-16">
           <SectionHeading title="Global Engineering. Local Accountability." className="mb-12" />
           <div className="grid gap-6 sm:grid-cols-3">
             {REGIONS.map(({ flagKey, country, description }, i) => {
@@ -133,33 +133,31 @@ export default function Home() {
               )
             })}
           </div>
-        </div>
-      </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <Reveal>
-          <div className="rounded-2xl bg-gradient-to-b from-primary-dark to-navy border border-white/10 shadow-xl overflow-hidden">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-              {WHY_CHOOSE.map((item, i) => {
-                const Icon = item.icon
-                return (
-                  <div
-                    key={item.title}
-                    className={`flex flex-col items-center text-center gap-3 px-6 py-10 ${
-                      i > 0 ? 'lg:border-l lg:border-white/10' : ''
-                    }`}
-                  >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold/60 text-gold">
-                      <Icon className="h-7 w-7" />
-                    </span>
-                    <h3 className="font-heading font-bold text-lg text-white">{item.title}</h3>
-                    <p className="text-sm text-white/70">{item.description}</p>
-                  </div>
-                )
-              })}
+          <Reveal className="mt-12">
+            <div className="rounded-2xl bg-gradient-to-b from-primary-dark to-navy border border-white/10 shadow-xl overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                {WHY_CHOOSE.map((item, i) => {
+                  const Icon = item.icon
+                  return (
+                    <div
+                      key={item.title}
+                      className={`flex flex-col items-center text-center gap-3 px-6 py-10 ${
+                        i > 0 ? 'lg:border-l lg:border-white/10' : ''
+                      }`}
+                    >
+                      <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold/60 text-gold">
+                        <Icon className="h-7 w-7" />
+                      </span>
+                      <h3 className="font-heading font-bold text-lg text-white">{item.title}</h3>
+                      <p className="text-sm text-white/70">{item.description}</p>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
 
       <section className="bg-navy py-14 overflow-hidden">
