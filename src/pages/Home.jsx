@@ -8,7 +8,7 @@ import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
 import { NAV } from '../data/navigation'
-import { CAPABILITIES, REGIONS, WHY_CHOOSE } from '../data/company'
+import { REGIONS, WHY_CHOOSE } from '../data/company'
 import { FLAG_COMPONENTS } from '../components/ui/RegionFlags'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
@@ -70,7 +70,7 @@ export default function Home() {
 
       <section className="bg-surface-alt">
         <div className="max-w-7xl mx-auto px-6 py-20">
-          <div className="grid gap-12 lg:grid-cols-2 items-start">
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
             <Reveal>
               <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
                 <iframe
@@ -110,22 +110,6 @@ export default function Home() {
                 Learn more about us
               </Button>
             </Reveal>
-          </div>
-
-          <div className="mt-16 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {CAPABILITIES.map(({ icon: Icon, label, description }, i) => (
-              <Reveal key={label} delay={(i % 4) * 0.08}>
-                <div className="h-full rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15)]">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mt-4 font-heading font-semibold text-base text-primary">
-                    {label}
-                  </h3>
-                  <p className="mt-2 text-sm text-ink-600">{description}</p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>
