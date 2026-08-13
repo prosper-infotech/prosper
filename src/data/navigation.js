@@ -77,6 +77,8 @@ export const NAV = [
           { label: 'Prosper YardVision AI', path: '/products/software#yardvision-ai' },
           { label: 'RFID + GPS Inventory Tracking', path: '/products/software#rfid-gps' },
           { label: 'Video-Based Attendance System', path: '/products/software#video-attendance' },
+          { label: 'Prosper DockVisionAI', path: '/products/software#dockvision-ai' },
+          { label: 'Prosper ContainerVisionAI', path: '/products/software#containervision-ai' },
         ],
       },
       {
