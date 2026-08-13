@@ -29,6 +29,106 @@ import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const PRODUCTS = [
   {
+    key: 'dockvision-ai',
+    icon: DoorOpen,
+    name: 'Prosper DockVisionAI',
+    tagline: 'IoT Dock Door Monitoring — Proof of Concept Architecture',
+    description:
+      'Wide warehouse / distribution facility monitoring across ~50 to 60 dock doors — real-time door, trailer, and restraint status streamed from the edge to the cloud.',
+    badge: 'Proof of Concept · Architecture',
+    architecture: [
+      {
+        title: 'Per Dock Door (Typical)',
+        steps: [
+          { icon: DoorOpen, title: 'Dock Door Panel', description: 'Existing control panel at each dock door.' },
+          { icon: Cpu, title: 'Delta DVP-16SP PLC / Dock Controller', description: 'Reads door & dock sensors and status.' },
+          { icon: Cable, title: 'RS485 Modbus RTU', description: 'Local connection (2-wire RS485), A(+) B(-).' },
+          { icon: Router, title: 'Milesight UC100 LoRaWAN Converter', description: 'Reads Modbus registers from the PLC, encodes a small status payload, and sends at heartbeat interval or on status change.' },
+        ],
+      },
+      {
+        title: 'Site & Cloud Infrastructure',
+        steps: [
+          { icon: Radio, title: 'LoRaWAN Uplink From Many Doors', description: 'Milesight UC100 sends status payloads over LoRaWAN.' },
+          { icon: Server, title: 'Site Edge Device', description: 'Seeed reComputer + integrated LoRaWAN Gateway + 4G + Wi-Fi (one per facility) — receives LoRaWAN data from all dock doors, local buffering + logic (door status, alarms, faults), time sync & heartbeat monitoring, 4G/Wi-Fi backhaul for resilient connectivity.' },
+          { icon: CloudUpload, title: 'MQTT/TLS Uplink to Cloud', description: 'Secure, encrypted telemetry and events over port 8883.' },
+          { icon: Cloud, title: 'Cloud Platform Options', description: 'Microsoft Azure IoT Hub or AWS IoT Core.' },
+          { icon: LayoutDashboard, title: 'Applications & Integrations', description: 'Dashboards/web portal, alerts & notifications (email, SMS, Teams, webhooks), reports & analytics, database/time-series storage, and APIs into MES, WMS, CMMS, and BI tools.' },
+        ],
+      },
+    ],
+    dataPoints: [
+      'Door Open / Closed',
+      'Trailer Present / Not Present',
+      'Restraint Engaged / Not Engaged',
+      'Leveler Deployed / Stowed',
+      'Fault Code / Alarm Status',
+      'Heartbeat / Last Seen',
+    ],
+    highlights: ['Real-Time Door Status', 'Automated Fault & Alarm Alerts', 'Long-Range LoRaWAN Connectivity', 'Cloud-Native Integration'],
+  },
+  {
+    key: 'containervision-ai',
+    icon: Boxes,
+    name: 'Prosper ContainerVisionAI',
+    tagline: 'AI-Powered Container Freight Station (CFS) & Container Terminal Automation',
+    description: 'Real-time container visibility across Gate Arrival → Yard → Inspection → Departure workflows.',
+    architecture: [
+      {
+        title: 'Gate → Yard → Inspection → Departure',
+        steps: [
+          {
+            icon: LogIn,
+            title: 'GateVision AI (Arrival)',
+            status: 'Container Arrival Logged',
+            items: ['Detect container number automatically', 'Log arrivals in real time', 'Identify damage / exceptions'],
+          },
+          {
+            icon: Truck,
+            title: 'ReachStackerVision AI',
+            status: 'Task Assigned · Move In Progress',
+            items: ['Assign tasks automatically', 'Track pickup / drop activity', 'Capture container movement events'],
+          },
+          {
+            icon: ScanSearch,
+            title: 'YardVision AI & Inspection',
+            status: 'Yard Location Updated',
+            items: ['Track exact yard location & tier', 'Support customs / inspection workflows', 'Maintain live inventory visibility'],
+          },
+          {
+            icon: LogOut,
+            title: 'GateVision AI (Departure)',
+            status: 'Departure Verified',
+            items: ['Validate departures automatically', 'Log gate-out in real time', 'Confirm release status'],
+          },
+        ],
+      },
+      {
+        title: 'Prosper AI EdgeBox — The Core Brain',
+        steps: [
+          { icon: Camera, title: 'Capture Platform', items: ['AI cameras', 'Edge gateways', 'GPS / RTK', 'Industrial sensors'] },
+          { icon: Cpu, title: 'AI / Decision Layer', items: ['OpenCV / GStreamer', 'YOLO object detection', 'OCR engine', 'Task & rules engine', 'NVIDIA TensorRT acceleration'] },
+          { icon: Router, title: 'Hardware & I/O', items: ['Cameras', 'Ethernet', 'Storage', 'Wi-Fi / 4G', 'GPS', 'Power'] },
+          { icon: LayoutDashboard, title: 'Integration Layer', items: ['Container inventory updates', 'Task & status APIs', 'ERP integration', 'Reports / alerts'] },
+        ],
+      },
+    ],
+    reachStackerPanel: {
+      title: 'Reach Stacker AI Automation',
+      subtitle: 'OCR Camera · Industrial Sensors · GPS/RTK Antenna · Prosper AI EdgeBox',
+      pickup: ['OCR confirms container ID', 'Sensors detect container contact', 'Lift action confirms pickup event'],
+      drop: ['RTK target confirmed', 'Height / tier verified', 'Release action detected', 'Inventory updated automatically'],
+    },
+    highlights: [
+      'Real-Time Container Visibility',
+      'Reduced Manual Dependency',
+      'AI + OCR + GPS Fusion',
+      'Fast ERP Integration',
+      'Pickup / Drop Validation',
+      'AI EdgeBox Powered',
+    ],
+  },
+  {
     key: 'asset-tracking',
     icon: Tag,
     name: 'Prosper Asset Tracking',
@@ -151,106 +251,6 @@ const PRODUCTS = [
     ],
     highlights: ['Track Attendance', 'Measure Productivity', 'Improve Performance'],
     idealFor: ['Corporate Offices', 'Manufacturing Plants', 'Warehouses', 'Educational Institutions', 'Healthcare Facilities'],
-  },
-  {
-    key: 'dockvision-ai',
-    icon: DoorOpen,
-    name: 'Prosper DockVisionAI',
-    tagline: 'IoT Dock Door Monitoring — Proof of Concept Architecture',
-    description:
-      'Wide warehouse / distribution facility monitoring across ~50 to 60 dock doors — real-time door, trailer, and restraint status streamed from the edge to the cloud.',
-    badge: 'Proof of Concept · Architecture',
-    architecture: [
-      {
-        title: 'Per Dock Door (Typical)',
-        steps: [
-          { icon: DoorOpen, title: 'Dock Door Panel', description: 'Existing control panel at each dock door.' },
-          { icon: Cpu, title: 'Delta DVP-16SP PLC / Dock Controller', description: 'Reads door & dock sensors and status.' },
-          { icon: Cable, title: 'RS485 Modbus RTU', description: 'Local connection (2-wire RS485), A(+) B(-).' },
-          { icon: Router, title: 'Milesight UC100 LoRaWAN Converter', description: 'Reads Modbus registers from the PLC, encodes a small status payload, and sends at heartbeat interval or on status change.' },
-        ],
-      },
-      {
-        title: 'Site & Cloud Infrastructure',
-        steps: [
-          { icon: Radio, title: 'LoRaWAN Uplink From Many Doors', description: 'Milesight UC100 sends status payloads over LoRaWAN.' },
-          { icon: Server, title: 'Site Edge Device', description: 'Seeed reComputer + integrated LoRaWAN Gateway + 4G + Wi-Fi (one per facility) — receives LoRaWAN data from all dock doors, local buffering + logic (door status, alarms, faults), time sync & heartbeat monitoring, 4G/Wi-Fi backhaul for resilient connectivity.' },
-          { icon: CloudUpload, title: 'MQTT/TLS Uplink to Cloud', description: 'Secure, encrypted telemetry and events over port 8883.' },
-          { icon: Cloud, title: 'Cloud Platform Options', description: 'Microsoft Azure IoT Hub or AWS IoT Core.' },
-          { icon: LayoutDashboard, title: 'Applications & Integrations', description: 'Dashboards/web portal, alerts & notifications (email, SMS, Teams, webhooks), reports & analytics, database/time-series storage, and APIs into MES, WMS, CMMS, and BI tools.' },
-        ],
-      },
-    ],
-    dataPoints: [
-      'Door Open / Closed',
-      'Trailer Present / Not Present',
-      'Restraint Engaged / Not Engaged',
-      'Leveler Deployed / Stowed',
-      'Fault Code / Alarm Status',
-      'Heartbeat / Last Seen',
-    ],
-    highlights: ['Real-Time Door Status', 'Automated Fault & Alarm Alerts', 'Long-Range LoRaWAN Connectivity', 'Cloud-Native Integration'],
-  },
-  {
-    key: 'containervision-ai',
-    icon: Boxes,
-    name: 'Prosper ContainerVisionAI',
-    tagline: 'AI-Powered Container Freight Station (CFS) & Container Terminal Automation',
-    description: 'Real-time container visibility across Gate Arrival → Yard → Inspection → Departure workflows.',
-    architecture: [
-      {
-        title: 'Gate → Yard → Inspection → Departure',
-        steps: [
-          {
-            icon: LogIn,
-            title: 'GateVision AI (Arrival)',
-            status: 'Container Arrival Logged',
-            items: ['Detect container number automatically', 'Log arrivals in real time', 'Identify damage / exceptions'],
-          },
-          {
-            icon: Truck,
-            title: 'ReachStackerVision AI',
-            status: 'Task Assigned · Move In Progress',
-            items: ['Assign tasks automatically', 'Track pickup / drop activity', 'Capture container movement events'],
-          },
-          {
-            icon: ScanSearch,
-            title: 'YardVision AI & Inspection',
-            status: 'Yard Location Updated',
-            items: ['Track exact yard location & tier', 'Support customs / inspection workflows', 'Maintain live inventory visibility'],
-          },
-          {
-            icon: LogOut,
-            title: 'GateVision AI (Departure)',
-            status: 'Departure Verified',
-            items: ['Validate departures automatically', 'Log gate-out in real time', 'Confirm release status'],
-          },
-        ],
-      },
-      {
-        title: 'Prosper AI EdgeBox — The Core Brain',
-        steps: [
-          { icon: Camera, title: 'Capture Platform', items: ['AI cameras', 'Edge gateways', 'GPS / RTK', 'Industrial sensors'] },
-          { icon: Cpu, title: 'AI / Decision Layer', items: ['OpenCV / GStreamer', 'YOLO object detection', 'OCR engine', 'Task & rules engine', 'NVIDIA TensorRT acceleration'] },
-          { icon: Router, title: 'Hardware & I/O', items: ['Cameras', 'Ethernet', 'Storage', 'Wi-Fi / 4G', 'GPS', 'Power'] },
-          { icon: LayoutDashboard, title: 'Integration Layer', items: ['Container inventory updates', 'Task & status APIs', 'ERP integration', 'Reports / alerts'] },
-        ],
-      },
-    ],
-    reachStackerPanel: {
-      title: 'Reach Stacker AI Automation',
-      subtitle: 'OCR Camera · Industrial Sensors · GPS/RTK Antenna · Prosper AI EdgeBox',
-      pickup: ['OCR confirms container ID', 'Sensors detect container contact', 'Lift action confirms pickup event'],
-      drop: ['RTK target confirmed', 'Height / tier verified', 'Release action detected', 'Inventory updated automatically'],
-    },
-    highlights: [
-      'Real-Time Container Visibility',
-      'Reduced Manual Dependency',
-      'AI + OCR + GPS Fusion',
-      'Fast ERP Integration',
-      'Pickup / Drop Validation',
-      'AI EdgeBox Powered',
-    ],
   },
 ]
 
