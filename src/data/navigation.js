@@ -160,6 +160,8 @@ export const NAV = [
       { label: 'Media & Entertainment', path: '/industries/media-entertainment' },
     ],
   },
+  { label: 'AS400', path: '/ibm-i-as400' },
+  { label: '24x7 Help Desk', path: '/contact' },
   {
     label: 'Resources',
     path: '/resources',
@@ -171,9 +173,7 @@ export const NAV = [
       { label: 'FAQs', path: '/resources/faqs' },
     ],
   },
-  { label: 'AS400', path: '/ibm-i-as400' },
   { label: 'About Us', path: '/about' },
-  { label: '24x7 Help Desk', path: '/contact' },
 ]
 
 // Flat list of every route implied by NAV (top-level items + their children).
