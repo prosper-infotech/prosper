@@ -111,7 +111,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease: 'easeInOut' }}
-          className={`absolute inset-0 h-full w-full object-cover ${isFeature ? 'object-left lg:object-center' : 'object-center'}`}
+          className={`absolute inset-0 h-full w-full object-cover ${isFeature ? 'object-left lg:object-top' : 'object-center'}`}
         />
       </AnimatePresence>
 
