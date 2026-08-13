@@ -69,8 +69,8 @@ const SLIDES = [
     image: slideDockMonitoring,
     alt: 'Smart dock door status monitoring inside a warehouse',
     eyebrow: 'Dock Operations',
-    title: 'Smart Dock Door & Operations Monitoring',
-    highlightWords: ['Smart', 'Monitoring'],
+    title: 'DockVision AI — AI-Powered Dock Door Monitoring Solution',
+    highlightWords: ['DockVision', 'AI-Powered'],
     subtitle: 'Live dock status, automated alerts, and real-time dashboards right on the floor.',
   },
   {
