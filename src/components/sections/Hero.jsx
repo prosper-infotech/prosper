@@ -103,16 +103,39 @@ export default function Hero() {
   return (
     <section className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
       <AnimatePresence mode="sync">
-        <motion.img
-          key={`sharp-${active}`}
-          src={slide.image}
-          alt={slide.alt}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease: 'easeInOut' }}
-          className={`absolute inset-0 h-full w-full object-cover ${isFeature ? 'object-left' : 'object-center'}`}
-        />
+        {isFeature ? (
+          <motion.div
+            key={`sharp-${active}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: 'easeInOut' }}
+            className="absolute inset-0"
+          >
+            <img
+              src={slide.image}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 hidden h-full w-full scale-110 object-cover object-center blur-2xl brightness-[0.85] lg:block"
+            />
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              className="absolute inset-0 h-full w-full object-cover object-left lg:object-contain lg:object-center"
+            />
+          </motion.div>
+        ) : (
+          <motion.img
+            key={`sharp-${active}`}
+            src={slide.image}
+            alt={slide.alt}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: 'easeInOut' }}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+        )}
       </AnimatePresence>
 
       {!isFeature && (
