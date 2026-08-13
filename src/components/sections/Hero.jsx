@@ -101,13 +101,7 @@ export default function Hero() {
   const isFeature = slide.layout === 'feature'
 
   return (
-    <section
-      className={`relative overflow-hidden bg-navy ${
-        isFeature
-          ? 'h-[82vh] min-h-[560px] max-h-[760px] lg:h-auto lg:aspect-[1920/800] lg:max-h-[820px]'
-          : 'h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none'
-      }`}
-    >
+    <section className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
       <AnimatePresence mode="sync">
         {isFeature ? (
           <motion.div
