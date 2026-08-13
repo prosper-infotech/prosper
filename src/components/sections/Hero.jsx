@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Eye, Cpu, MapPin, ShieldCheck, Play } from 'lucide-react'
 import Button from '../ui/Button'
@@ -91,8 +91,12 @@ const SLIDES = [
   },
 ]
 
+const FEATURE_IMAGE_ASPECT = 1920 / 800
+
 export default function Hero() {
   const [active, setActive] = useState(0)
+  const sectionRef = useRef(null)
+  const [featureHeight, setFeatureHeight] = useState(null)
 
   const goPrev = () => setActive((i) => (i - 1 + SLIDES.length) % SLIDES.length)
   const goNext = () => setActive((i) => (i + 1) % SLIDES.length)
@@ -100,8 +104,39 @@ export default function Hero() {
   const slide = SLIDES[active]
   const isFeature = slide.layout === 'feature'
 
+  useEffect(() => {
+    if (!isFeature) {
+      setFeatureHeight(null)
+      return
+    }
+    const el = sectionRef.current
+    if (!el) return
+
+    const updateHeight = () => {
+      const width = el.getBoundingClientRect().width
+      if (width >= 1024) {
+        setFeatureHeight(Math.min(820, Math.max(560, width / FEATURE_IMAGE_ASPECT)))
+      } else {
+        setFeatureHeight(null)
+      }
+    }
+
+    updateHeight()
+    const observer = new ResizeObserver(updateHeight)
+    observer.observe(el)
+    window.addEventListener('resize', updateHeight)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateHeight)
+    }
+  }, [isFeature])
+
   return (
-    <section className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
+    <section
+      ref={sectionRef}
+      style={featureHeight != null ? { height: featureHeight, minHeight: 0, maxHeight: 'none' } : undefined}
+      className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy"
+    >
       <AnimatePresence mode="sync">
         {isFeature ? (
           <motion.div
