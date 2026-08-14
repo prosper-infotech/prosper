@@ -131,18 +131,56 @@ export default function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative">
+            {/* Desktop: full image, natural aspect, no crop */}
+            <div className="relative hidden lg:block">
               <img src={slide.image} alt={slide.alt} className="block w-full h-auto" />
               {arrows}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[max(16%,72px)] bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[max(10%,56px)] flex-col items-center justify-center gap-1.5 px-6">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[24%] flex-col items-center justify-center gap-4 px-6">
                 <AnimatedText
                   as="h1"
                   scroll={false}
                   text={slide.title}
                   highlightWords={slide.highlightWords}
-                  className="text-xs sm:text-sm lg:text-base xl:text-lg font-heading font-bold leading-tight text-white text-center [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+                  className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
                 />
+                {dots}
+              </div>
+            </div>
+
+            {/* Mobile/tablet: same fixed-height cropped pattern as every other slide */}
+            <div className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:hidden overflow-hidden">
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-black/20" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-black/70 via-black/25 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[20%] z-[5] bg-gradient-to-b from-transparent via-black/40 to-transparent" />
+
+              {arrows}
+
+              <div className="absolute inset-x-0 top-[24%] bottom-[24%] z-10 flex flex-col items-center justify-center gap-3 px-14 sm:px-16 text-center">
+                <AnimatedText
+                  as="h1"
+                  scroll={false}
+                  text={slide.title}
+                  highlightWords={slide.highlightWords}
+                  className="text-3xl md:text-4xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
+                />
+              </div>
+
+              <div className="absolute inset-x-0 bottom-0 h-[24%] z-10 flex flex-col items-center justify-center gap-4 px-6">
+                <div className="flex items-center justify-center gap-4">
+                  <Button to="/contact#contact-form" variant="primary-dark">
+                    Book a demo
+                  </Button>
+                  <Button to="/solutions" variant="outline">
+                    Explore solutions
+                  </Button>
+                </div>
                 {dots}
               </div>
             </div>
