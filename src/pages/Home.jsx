@@ -57,10 +57,15 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="bg-navy">
-        <div className="max-w-7xl mx-auto px-6 py-10 grid gap-4 grid-cols-2 md:grid-cols-5">
-          {TRUST_ITEMS.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center justify-center gap-2 text-center md:justify-start">
+      <section className="bg-navy border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6 py-9 grid gap-y-4 grid-cols-2 md:grid-cols-5">
+          {TRUST_ITEMS.map(({ icon: Icon, label }, i) => (
+            <div
+              key={label}
+              className={`flex items-center justify-center gap-2 text-center md:justify-start md:px-4 ${
+                i > 0 ? 'md:border-l md:border-white/10' : ''
+              }`}
+            >
               <Icon className="h-4.5 w-4.5 shrink-0 text-gold" />
               <span className="text-xs font-semibold text-white">{label}</span>
             </div>
@@ -68,18 +73,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-surface-alt">
-        <div className="max-w-7xl mx-auto px-6 py-20">
+      <section className="relative bg-surface-alt overflow-hidden">
+        <div className="pointer-events-none absolute top-1/2 left-0 h-72 w-72 -translate-x-1/3 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-7xl mx-auto px-6 py-20">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <Reveal>
-              <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-                <iframe
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/aU3I6Tw6S5I?autoplay=1&mute=1&playsinline=1"
-                  title="About Prosper Infotech"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+              <div className="relative">
+                <div className="pointer-events-none absolute -inset-3 rounded-2xl border border-gold/20" />
+                <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/aU3I6Tw6S5I?autoplay=1&mute=1&playsinline=1"
+                    title="About Prosper Infotech"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </Reveal>
             <Reveal delay={0.15} className="flex flex-col gap-5">
@@ -171,13 +180,13 @@ export default function Home() {
             WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
           }}
         >
-          <div className="flex w-max animate-marquee gap-12 md:gap-16">
+          <div className="flex w-max animate-marquee items-center gap-12 md:gap-16">
             {[...industries, ...industries].map((industry, i) => (
-              <span
-                key={i}
-                className="text-lg md:text-xl font-heading font-semibold text-white/70 whitespace-nowrap"
-              >
-                {industry.label}
+              <span key={i} className="flex items-center gap-12 md:gap-16 whitespace-nowrap">
+                <span className="text-lg md:text-xl font-heading font-semibold text-white/70">
+                  {industry.label}
+                </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-gold/50" />
               </span>
             ))}
           </div>
@@ -226,18 +235,11 @@ export default function Home() {
         </div>
       </section>
 
-      {TESTIMONIALS.length > 0 ? (
+      {TESTIMONIALS.length > 0 && (
         <section className="max-w-4xl mx-auto px-6 py-20">
           <SectionHeading eyebrow="Testimonials" title="What our clients say" />
           <Reveal className="mt-12">
             <TestimonialCarousel testimonials={TESTIMONIALS} />
-          </Reveal>
-        </section>
-      ) : (
-        <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <SectionHeading eyebrow="Testimonials" title="What our clients say" />
-          <Reveal>
-            <p className="mt-6 text-ink-500">Client stories coming soon.</p>
           </Reveal>
         </section>
       )}
