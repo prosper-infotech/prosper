@@ -137,7 +137,7 @@ export default function Hero() {
               {arrows}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[24%] flex-col items-center justify-center gap-3 px-6">
+              <div className="absolute inset-x-0 bottom-[24%] z-10 flex items-end justify-center px-6 pb-3">
                 <AnimatedText
                   as="h1"
                   scroll={false}
@@ -145,6 +145,9 @@ export default function Hero() {
                   highlightWords={slide.highlightWords}
                   className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
                 />
+              </div>
+
+              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[24%] flex-col items-center justify-center gap-4 px-6">
                 <div className="flex items-center justify-center gap-4">
                   <Button to="/contact#contact-form" variant="primary-dark">
                     Book a demo
