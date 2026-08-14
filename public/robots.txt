@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://prosperinfotech.com/sitemap.xml
+Sitemap: https://www.prosperinfotech.com/sitemap.xml
