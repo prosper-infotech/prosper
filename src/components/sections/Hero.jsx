@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Eye, Cpu, MapPin, ShieldCheck, Play } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from '../ui/Button'
 import AnimatedText from '../motion/AnimatedText'
 import slideAiVisionIot from '../../assets/hero-slide-ai-vision-iot.jpg'
@@ -15,20 +15,11 @@ const SLIDES = [
   {
     image: slideAiVisionIot,
     alt: 'AI-powered DockVision, YardVision, ForkliftVision, and ContainerVision system across a distribution center',
-    layout: 'feature',
-    badge: 'AI + VISION + IoT',
+    eyebrow: 'AI + VISION + IoT',
     title: 'Transform Logistics With AI-Powered Visibility',
     highlightWords: ['AI-Powered', 'Visibility'],
     subtitle:
       'AI, OCR, RFID, GPS, and edge intelligence — real-time visibility for your yard, warehouse, and fleet.',
-    features: [
-      { icon: Eye, label: 'Real-Time Visibility' },
-      { icon: Cpu, label: 'AI-Powered Automation' },
-      { icon: MapPin, label: 'Accurate Decisions' },
-      { icon: ShieldCheck, label: 'Secure & Scalable' },
-    ],
-    ctaPrimary: { label: 'Explore Solutions', to: '/solutions' },
-    ctaSecondary: { label: 'Watch Overview', to: '/resources/videos' },
   },
   {
     image: slideDockAi,
@@ -88,113 +79,6 @@ export default function Hero() {
   const goNext = () => setActive((i) => (i + 1) % SLIDES.length)
 
   const slide = SLIDES[active]
-  const isFeature = slide.layout === 'feature'
-
-  const dots = (
-    <div className="flex items-center gap-2">
-      {SLIDES.map((_, i) => (
-        <button
-          key={i}
-          type="button"
-          onClick={() => setActive(i)}
-          aria-label={`Show slide ${i + 1}`}
-          className="p-2 -m-2"
-        >
-          <span
-            className={`block h-1.5 rounded-full transition-all duration-300 ${
-              i === active ? 'w-6 bg-gold' : 'w-1.5 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        </button>
-      ))}
-    </div>
-  )
-
-  if (isFeature) {
-    return (
-      <section className="relative overflow-hidden bg-navy">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`feature-${active}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="relative">
-              <img src={slide.image} alt={slide.alt} className="block w-full h-auto" />
-              <button
-                type="button"
-                onClick={goPrev}
-                aria-label="Previous slide"
-                className="group absolute left-3 lg:left-6 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 lg:h-11 lg:w-11 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition-colors hover:bg-black/55"
-              >
-                <ChevronLeft className="h-5 w-5 lg:h-6 lg:w-6" />
-              </button>
-              <button
-                type="button"
-                onClick={goNext}
-                aria-label="Next slide"
-                className="group absolute right-3 lg:right-6 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 lg:h-11 lg:w-11 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm transition-colors hover:bg-black/55"
-              >
-                <ChevronRight className="h-5 w-5 lg:h-6 lg:w-6" />
-              </button>
-            </div>
-
-            <div className="px-6 py-10 sm:py-12 lg:py-14">
-              <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 text-center">
-                <motion.span
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                  className="rounded-full bg-gold px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary"
-                >
-                  {slide.badge}
-                </motion.span>
-                <AnimatedText
-                  as="h1"
-                  scroll={false}
-                  text={slide.title}
-                  highlightWords={slide.highlightWords}
-                  className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white"
-                />
-                <motion.p
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  className="text-white/75 text-sm lg:text-base max-w-2xl"
-                >
-                  {slide.subtitle}
-                </motion.p>
-                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 py-1">
-                  {slide.features.map(({ icon: Icon, label }) => (
-                    <div key={label} className="flex items-center gap-2">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-sm">
-                        <Icon className="h-4 w-4" />
-                      </span>
-                      <span className="text-xs font-semibold text-white leading-tight">{label}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-wrap items-center justify-center gap-3 mt-1">
-                  <Button to={slide.ctaPrimary.to} variant="primary">
-                    {slide.ctaPrimary.label}
-                  </Button>
-                  <Button to={slide.ctaSecondary.to} variant="outline" icon={false}>
-                    <span className="inline-flex items-center gap-2">
-                      <Play className="h-3.5 w-3.5 fill-current" />
-                      {slide.ctaSecondary.label}
-                    </span>
-                  </Button>
-                </div>
-                <div className="mt-1">{dots}</div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </section>
-    )
-  }
 
   return (
     <section className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
@@ -282,7 +166,23 @@ export default function Hero() {
             Explore solutions
           </Button>
         </div>
-        {dots}
+        <div className="flex items-center gap-2">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`Show slide ${i + 1}`}
+              className="p-2 -m-2"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? 'w-6 bg-gold' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                }`}
+              />
+            </button>
+          ))}
+        </div>
       </motion.div>
     </section>
   )
