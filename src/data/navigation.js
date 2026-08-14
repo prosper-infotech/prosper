@@ -170,9 +170,21 @@ export const NAV = [
     description: 'Guides, case studies, and updates from the Prosper Infotech team.',
     templateGroup: 'topic',
     children: [
-      { label: 'Blog', path: '/resources/blog' },
-      { label: 'Videos', path: '/resources/videos' },
-      { label: 'FAQs', path: '/resources/faqs' },
+      {
+        label: 'Blog',
+        path: '/resources/blog',
+        description: 'Practical guides and perspectives on RFID, GPS, IoT, and AI logistics technology.',
+      },
+      {
+        label: 'Videos',
+        path: '/resources/videos',
+        description: 'See our RFID, GPS, and geofencing solutions demonstrated on real deployments.',
+      },
+      {
+        label: 'FAQs',
+        path: '/resources/faqs',
+        description: 'Answers to the questions we hear most about our solutions and support.',
+      },
     ],
   },
   { label: 'About Us', path: '/about' },

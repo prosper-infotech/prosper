@@ -16,6 +16,7 @@ const SolutionsOverview = lazy(() => import('./pages/SolutionsOverview'))
 const ProductsOverview = lazy(() => import('./pages/ProductsOverview'))
 const ServicesOverview = lazy(() => import('./pages/ServicesOverview'))
 const IndustriesOverview = lazy(() => import('./pages/IndustriesOverview'))
+const ResourcesOverview = lazy(() => import('./pages/ResourcesOverview'))
 const Contact = lazy(() => import('./pages/Contact'))
 const AIServicesHub = lazy(() => import('./pages/AIServicesHub'))
 const RFIDServices = lazy(() => import('./pages/RFIDServices'))
@@ -154,6 +155,8 @@ function App() {
                     <ServicesOverview />
                   ) : item.path === '/industries' ? (
                     <IndustriesOverview />
+                  ) : item.path === '/resources' ? (
+                    <ResourcesOverview />
                   ) : item.children ? (
                     <CategoryOverviewTemplate
                       title={item.label}
