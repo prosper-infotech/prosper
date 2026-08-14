@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Eye, Cpu, MapPin, ShieldCheck, Play } from 'lucide-react'
 import Button from '../ui/Button'
 import AnimatedText from '../motion/AnimatedText'
-import heroBg from '../../assets/home-hero-bg.jpg'
 import slideAiVisionIot from '../../assets/hero-slide-ai-vision-iot.jpg'
 import slideDockAi from '../../assets/hero-slide-dock-ai.jpg'
 import slideRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
@@ -18,10 +17,10 @@ const SLIDES = [
     alt: 'AI-powered DockVision, YardVision, ForkliftVision, and ContainerVision system across a distribution center',
     layout: 'feature',
     badge: 'AI + VISION + IoT',
-    title: 'Intelligent Logistics Solutions that Drive Real-World Results',
-    highlightWords: ['Real-World', 'Results'],
+    title: 'Transform Logistics With AI-Powered Visibility',
+    highlightWords: ['AI-Powered', 'Visibility'],
     subtitle:
-      'We build AI-powered software, IoT and computer vision solutions that optimize yard, warehouse and fleet operations with real-time visibility, automation and actionable insights.',
+      'AI, OCR, RFID, GPS, and edge intelligence — real-time visibility for your yard, warehouse, and fleet.',
     features: [
       { icon: Eye, label: 'Real-Time Visibility' },
       { icon: Cpu, label: 'AI-Powered Automation' },
@@ -30,15 +29,6 @@ const SLIDES = [
     ],
     ctaPrimary: { label: 'Explore Solutions', to: '/solutions' },
     ctaSecondary: { label: 'Watch Overview', to: '/resources/videos' },
-  },
-  {
-    image: heroBg,
-    alt: 'Prosper Infotech AI-powered warehouse and logistics visibility platform',
-    eyebrow: 'IoT · RFID · GPS · AI',
-    title: 'Transform Logistics With AI-Powered Visibility',
-    highlightWords: ['AI-Powered', 'Visibility'],
-    subtitle:
-      'AI, OCR, RFID, GPS, and edge intelligence — real-time visibility for your yard, warehouse, and fleet.',
   },
   {
     image: slideDockAi,
