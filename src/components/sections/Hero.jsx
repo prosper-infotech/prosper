@@ -137,13 +137,13 @@ export default function Hero() {
               {arrows}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-[24%] z-10 flex items-end justify-center px-6 pb-3">
+              <div className="absolute inset-x-0 bottom-[24%] z-10 flex items-end justify-center px-6 pb-0.5">
                 <AnimatedText
                   as="h1"
                   scroll={false}
                   text={slide.title}
                   highlightWords={slide.highlightWords}
-                  className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
+                  className="text-xl md:text-2xl xl:text-3xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
                 />
               </div>
 
