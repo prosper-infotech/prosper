@@ -134,16 +134,17 @@ export default function Hero() {
             <div className="relative">
               <img src={slide.image} alt={slide.alt} className="block w-full h-auto" />
               {arrows}
-            </div>
-            <div className="flex flex-col items-center justify-center gap-4 px-6 py-6">
-              <AnimatedText
-                as="h1"
-                scroll={false}
-                text={slide.title}
-                highlightWords={slide.highlightWords}
-                className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold leading-tight text-white text-center"
-              />
-              {dots}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[max(16%,72px)] bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[max(10%,56px)] flex-col items-center justify-center gap-1.5 px-6">
+                <AnimatedText
+                  as="h1"
+                  scroll={false}
+                  text={slide.title}
+                  highlightWords={slide.highlightWords}
+                  className="text-xs sm:text-sm lg:text-base xl:text-lg font-heading font-bold leading-tight text-white text-center [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+                />
+                {dots}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
