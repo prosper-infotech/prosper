@@ -153,7 +153,8 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-[560px] lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
+    <section className="relative overflow-hidden bg-navy">
+      <img src={slideAiVisionIot} alt="" aria-hidden="true" className="invisible block w-full h-auto" />
       <AnimatePresence mode="sync">
         <motion.img
           key={`sharp-${active}`}
@@ -181,13 +182,13 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-x-0 top-[24%] bottom-[24%] z-10 flex flex-col items-center justify-center gap-3 px-14 sm:px-16 lg:px-20 text-center"
+          className="absolute inset-x-0 top-[24%] bottom-[24%] z-10 flex flex-col items-center justify-center gap-1 sm:gap-3 px-8 sm:px-16 lg:px-20 text-center"
         >
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+            className="text-gold text-[10px] sm:text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
           >
             {slide.eyebrow}
           </motion.span>
@@ -196,7 +197,7 @@ export default function Hero() {
             scroll={false}
             text={slide.title}
             highlightWords={slide.highlightWords}
-            className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
+            className="text-sm sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
           />
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -213,9 +214,9 @@ export default function Hero() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-x-0 bottom-0 h-[24%] z-10 flex flex-col items-center justify-center gap-4 px-6"
+        className="absolute inset-x-0 bottom-0 h-[24%] z-10 flex flex-col items-center justify-center gap-1.5 sm:gap-4 px-6"
       >
-        <div className="flex items-center justify-center gap-4">
+        <div className="hidden sm:flex items-center justify-center gap-4">
           <Button to="/contact#contact-form" variant="primary-dark">
             Book a demo
           </Button>
