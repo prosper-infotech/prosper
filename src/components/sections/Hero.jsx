@@ -15,6 +15,7 @@ const SLIDES = [
   {
     image: slideAiVisionIot,
     alt: 'AI-powered DockVision, YardVision, ForkliftVision, and ContainerVision system across a distribution center',
+    fit: 'contain',
     eyebrow: 'AI + VISION + IoT',
     title: 'Transform Logistics With AI-Powered Visibility',
     highlightWords: ['AI-Powered', 'Visibility'],
@@ -91,7 +92,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease: 'easeInOut' }}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className={`absolute inset-0 h-full w-full object-center ${slide.fit === 'contain' ? 'object-contain' : 'object-cover'}`}
         />
       </AnimatePresence>
 
