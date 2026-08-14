@@ -113,8 +113,12 @@ export default function Hero() {
     if (!el) return
 
     const updateHeight = () => {
+      if (window.innerWidth < 1024) {
+        setFeatureHeight(null)
+        return
+      }
       const width = el.getBoundingClientRect().width
-      setFeatureHeight(width >= 1024 ? Math.max(560, width / FEATURE_IMAGE_ASPECT) : null)
+      setFeatureHeight(width / FEATURE_IMAGE_ASPECT)
     }
 
     updateHeight()
