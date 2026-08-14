@@ -136,14 +136,26 @@ export default function Hero() {
               <img src={slide.image} alt={slide.alt} className="block w-full h-auto" />
               {arrows}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[24%] flex-col items-center justify-center gap-4 px-6">
+
+              <div className="absolute inset-x-0 top-[24%] bottom-[24%] z-10 flex flex-col items-center justify-center gap-3 px-14 sm:px-16 lg:px-20 text-center">
                 <AnimatedText
                   as="h1"
                   scroll={false}
                   text={slide.title}
                   highlightWords={slide.highlightWords}
-                  className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
+                  className="text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
                 />
+              </div>
+
+              <div className="absolute inset-x-0 bottom-0 z-10 flex h-[24%] flex-col items-center justify-center gap-4 px-6">
+                <div className="flex items-center justify-center gap-4">
+                  <Button to="/contact#contact-form" variant="primary-dark">
+                    Book a demo
+                  </Button>
+                  <Button to="/solutions" variant="outline">
+                    Explore solutions
+                  </Button>
+                </div>
                 {dots}
               </div>
             </div>
