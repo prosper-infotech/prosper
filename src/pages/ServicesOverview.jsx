@@ -13,7 +13,7 @@ export default function ServicesOverview() {
       icons={SERVICE_ICONS}
       ctaTitle="Have a question about our Services?"
       ctaDescription="Talk to our team about the right fit for your operation."
-      seoTitle="Services | Prosper Infotech"
+      seoTitle="RFID, IoT & AI Software Development Services | Prosper Infotech"
       seoDescription="Development, implementation, and support services across software, RFID, IoT, and AS400 — explore what Prosper Infotech offers."
     />
   )

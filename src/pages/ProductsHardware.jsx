@@ -107,7 +107,7 @@ const PRODUCTS = [
 
 export default function ProductsHardware() {
   useDocumentTitle(
-    'Hardware Products | Prosper Infotech',
+    'RFID Readers, GPS Devices & AI Edge Hardware | Prosper Infotech',
     'Industrial-grade RFID readers, GPS-enabled edge devices, AI Edge Box, and IoT gateways engineered for continuous operation in warehouses, yards, and ports.'
   )
 

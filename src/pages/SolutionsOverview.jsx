@@ -13,7 +13,7 @@ export default function SolutionsOverview() {
       icons={SOLUTION_ICONS}
       ctaTitle="Have a question about Solutions?"
       ctaDescription="Talk to our team about the right fit for your operation."
-      seoTitle="Solutions | Prosper Infotech"
+      seoTitle="RFID, GPS, IoT & AI Logistics Solutions | Prosper Infotech"
       seoDescription="IoT, RFID, GPS, and AI solutions for warehouses, yards, fleets, and ports — explore Prosper Infotech's full solutions lineup."
     />
   )

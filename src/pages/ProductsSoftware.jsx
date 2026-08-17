@@ -296,7 +296,7 @@ function ConnectedSteps({ steps }) {
 
 export default function ProductsSoftware() {
   useDocumentTitle(
-    'Software Products | Prosper Infotech',
+    'RFID & AI Vision Software Platforms | WMS, YardVision, DockVision AI | Prosper Infotech',
     "Explore Prosper Infotech's software platforms — asset tracking, WMS, YardVision AI, RFID+GPS inventory tracking, and video-based attendance systems."
   )
 
