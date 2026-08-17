@@ -8,6 +8,7 @@ export const BLOG_POSTS = [
       "If your team is still relying on manual cycle counts and spreadsheets, these are the warning signs that it's time to move to RFID.",
     date: '2026-01-15',
     readTime: '5 min read',
+    relatedLinks: [{ label: 'Warehouse Solutions', path: '/solutions/warehouse-solutions' }],
     sections: [
       {
         body: "Most warehouses don't switch to RFID because they read about it — they switch because the cracks in their current process become impossible to ignore. If any of the following sound familiar, it's worth taking a closer look at what RFID could fix.",
@@ -46,6 +47,7 @@ export const BLOG_POSTS = [
       "Barcode and RFID both track inventory, but they solve very different problems. Here's how to decide which one fits your operation.",
     date: '2026-01-22',
     readTime: '6 min read',
+    relatedLinks: [{ label: 'RFID & GPS Solutions', path: '/solutions/rfid-gps-solutions' }],
     sections: [
       {
         body: "The barcode-versus-RFID question comes up in almost every warehouse and yard modernization conversation. The honest answer is that neither technology is universally \"better\" — they're built for different problems.",
@@ -81,6 +83,10 @@ export const BLOG_POSTS = [
       'Camera-based AI is replacing manual gate inspections and spotter trucks at ports and container terminals. Here\'s what that actually looks like in practice.',
     date: '2026-02-03',
     readTime: '6 min read',
+    relatedLinks: [
+      { label: 'Gate/Yard/Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' },
+      { label: 'Ports & Terminals', path: '/industries/ports-terminals' },
+    ],
     sections: [
       {
         body: 'Container terminals have historically relied on people — gate clerks reading container numbers, spotters driving the yard to locate trailers, inspectors walking around equipment looking for damage. AI vision is not replacing the need for oversight, but it is replacing the manual, repetitive parts of that work.',
@@ -116,6 +122,7 @@ export const BLOG_POSTS = [
       "Detention fees are only the visible cost of a congested yard. Here's what else it's costing you — and how yard management software fixes it.",
     date: '2026-02-12',
     readTime: '5 min read',
+    relatedLinks: [{ label: 'Yard Solutions', path: '/solutions/yard-solutions' }],
     sections: [
       {
         body: 'Detention and demurrage charges are the cost of yard congestion everyone talks about, because they show up on an invoice. But they are rarely the biggest cost — they are just the easiest one to point to.',
@@ -151,6 +158,7 @@ export const BLOG_POSTS = [
       "Replacing a working AS400 system is expensive and risky. Here are the modernization paths that let you keep what works and upgrade what doesn't.",
     date: '2026-02-20',
     readTime: '6 min read',
+    relatedLinks: [{ label: 'AS400 / IBM i Services', path: '/ibm-i-as400' }],
     sections: [
       {
         body: "Every few years, someone suggests replacing the IBM i (AS400) system that's been quietly running core operations for decades. It's an understandable instinct — the interface looks dated, and the RPG or COBOL codebase can feel like a black box. But \"replace it\" is rarely the fastest or safest path to modernization.",
@@ -186,6 +194,7 @@ export const BLOG_POSTS = [
       'A single undetected temperature excursion can mean a lost shipment and a compliance violation. Here\'s what real-time reefer monitoring catches before it becomes a loss.',
     date: '2026-03-01',
     readTime: '5 min read',
+    relatedLinks: [{ label: 'Cold Chain', path: '/industries/cold-chain' }],
     sections: [
       {
         body: "Cold chain logistics has zero margin for \"we'll catch it eventually.\" A reefer unit that fails silently for even a few hours can spoil an entire load — and by the time anyone notices, there's no fixing it, only documenting it.",
@@ -221,6 +230,7 @@ export const BLOG_POSTS = [
       "GPS tracking gets sold as a dot on a map. The real return comes from what that data lets you stop doing manually — and what it catches before it becomes an incident.",
     date: '2026-03-18',
     readTime: '5 min read',
+    relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
         body: "Most fleet managers already know where their trucks are, roughly, because dispatchers are on the phone with drivers all day. GPS tracking doesn't just replace that phone call — it replaces the guesswork that happens between calls, and that's where the real savings show up.",
@@ -256,6 +266,7 @@ export const BLOG_POSTS = [
       "Fingerprint and face scanners aren't the only way to automate attendance anymore. Here's how camera-based attendance compares — and why it's winning out in some facilities.",
     date: '2026-04-02',
     readTime: '5 min read',
+    relatedLinks: [{ label: 'Workforce Management', path: '/solutions/workforce-management' }],
     sections: [
       {
         body: "Biometric time clocks solved the buddy-punching problem, but they introduced new ones: shared touchpoints, enrollment friction, and — increasingly — employee pushback over storing fingerprint or facial biometric data. Video-based attendance is a different approach to the same problem.",
@@ -291,6 +302,9 @@ export const BLOG_POSTS = [
       "Running AI inference on-site instead of in the cloud isn't just a latency decision — it changes what you can monitor, how fast you find out, and what data leaves your facility.",
     date: '2026-04-20',
     readTime: '6 min read',
+    relatedLinks: [
+      { label: 'Edge AI & IoT Software Development', path: '/services/ai-software-development/edge-ai-iot-software-development' },
+    ],
     sections: [
       {
         body: "Cloud AI and edge AI can run the same model and produce the same detection — the difference is where the inference actually happens, and that decision has real operational consequences most teams don't think through until after deployment.",
@@ -326,6 +340,10 @@ export const BLOG_POSTS = [
       "Locating a missing infusion pump is the obvious use case. The bigger return from RFID asset tracking in healthcare comes from what it prevents, not just what it finds.",
     date: '2026-05-05',
     readTime: '5 min read',
+    relatedLinks: [
+      { label: 'Asset Tracking', path: '/solutions/asset-tracking' },
+      { label: 'Healthcare', path: '/industries/healthcare' },
+    ],
     sections: [
       {
         body: "Ask any hospital biomed team what their day looks like, and 'searching for equipment' is usually near the top. RFID asset tracking gets pitched around solving that specific pain point — but in practice, the bigger wins show up in areas that never make the initial sales conversation.",
@@ -361,6 +379,10 @@ export const BLOG_POSTS = [
       "WiFi and cellular don't reach every corner of a large industrial site. Here's when a LoRaWAN sensor network is the right call — and when it isn't.",
     date: '2026-05-19',
     readTime: '5 min read',
+    relatedLinks: [
+      { label: 'Industrial IoT', path: '/solutions/industrial-iot' },
+      { label: 'Industrial IoT Services', path: '/services/industrial-iot-services' },
+    ],
     sections: [
       {
         body: "Every industrial IoT conversation eventually hits the same wall: the sensor needs to go somewhere WiFi doesn't reach and cellular is unreliable or too expensive to run at scale. That's the specific problem LoRaWAN was built to solve — not a general-purpose replacement for WiFi, but the right tool for a particular set of constraints.",
@@ -396,6 +418,7 @@ export const BLOG_POSTS = [
       "Every new client a 3PL takes on adds inventory, SLAs, and reporting requirements. Here's how the right warehouse technology keeps that growth from turning into operational chaos.",
     date: '2026-06-03',
     readTime: '5 min read',
+    relatedLinks: [{ label: '3PL', path: '/industries/3pl' }],
     sections: [
       {
         body: "A 3PL's growth problem is different from a single-warehouse operator's. Every new client adds not just volume, but a distinct set of SKUs, service levels, and reporting expectations — and the systems that worked fine for three clients often buckle under ten.",
@@ -431,6 +454,9 @@ export const BLOG_POSTS = [
       "Most warehouses already collect more data than anyone looks at. The gap isn't data collection — it's turning that data into something that actually changes a decision.",
     date: '2026-06-21',
     readTime: '5 min read',
+    relatedLinks: [
+      { label: 'AI Analytics & Predictive Intelligence', path: '/services/ai-software-development/ai-analytics-predictive-intelligence' },
+    ],
     sections: [
       {
         body: "Ask most operations teams if they have data, and the answer is yes — RFID reads, GPS pings, gate transactions, dock sensor logs. Ask if that data is actually driving decisions, and the answer is usually a dashboard nobody opens after the first week.",

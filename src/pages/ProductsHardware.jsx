@@ -108,7 +108,17 @@ const PRODUCTS = [
 export default function ProductsHardware() {
   useDocumentTitle(
     'RFID Readers, GPS Devices & AI Edge Hardware | Prosper Infotech',
-    'Industrial-grade RFID readers, GPS-enabled edge devices, AI Edge Box, and IoT gateways engineered for continuous operation in warehouses, yards, and ports.'
+    'Industrial-grade RFID readers, GPS-enabled edge devices, AI Edge Box, and IoT gateways engineered for continuous operation in warehouses, yards, and ports.',
+    {
+      '@context': 'https://schema.org',
+      '@graph': PRODUCTS.map((p) => ({
+        '@type': 'Product',
+        name: p.name,
+        description: p.tagline ? `${p.tagline} — ${p.description}` : p.description,
+        brand: { '@type': 'Brand', name: 'Prosper Infotech' },
+        ...(p.badge === 'Coming Soon' ? {} : { url: `https://www.prosperinfotech.com/products/hardware#${p.key}` }),
+      })),
+    }
   )
 
   return (

@@ -297,7 +297,18 @@ function ConnectedSteps({ steps }) {
 export default function ProductsSoftware() {
   useDocumentTitle(
     'RFID & AI Vision Software Platforms | WMS, YardVision, DockVision AI | Prosper Infotech',
-    "Explore Prosper Infotech's software platforms — asset tracking, WMS, YardVision AI, RFID+GPS inventory tracking, and video-based attendance systems."
+    "Explore Prosper Infotech's software platforms — asset tracking, WMS, YardVision AI, RFID+GPS inventory tracking, and video-based attendance systems.",
+    {
+      '@context': 'https://schema.org',
+      '@graph': PRODUCTS.map((p) => ({
+        '@type': 'SoftwareApplication',
+        name: p.name,
+        description: p.tagline ? `${p.tagline} — ${p.description}` : p.description,
+        applicationCategory: 'BusinessApplication',
+        brand: { '@type': 'Brand', name: 'Prosper Infotech' },
+        url: `https://www.prosperinfotech.com/products/software#${p.key}`,
+      })),
+    }
   )
 
   return (

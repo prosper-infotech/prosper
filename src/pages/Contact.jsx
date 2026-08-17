@@ -44,7 +44,39 @@ const OFFERINGS = [
 export default function Contact() {
   useDocumentTitle(
     '24x7 Help Desk & Contact | Prosper Infotech',
-    "Reach Prosper Infotech's 24x7 support team by phone, email, or contact form — get help with AS400, RFID, GPS, and IoT deployments any time, day or night."
+    "Reach Prosper Infotech's 24x7 support team by phone, email, or contact form — get help with AS400, RFID, GPS, and IoT deployments any time, day or night.",
+    {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'LocalBusiness',
+          name: 'Prosper Infotech LLC — Dallas, TX',
+          telephone: '+1-940-758-3271',
+          url: 'https://www.prosperinfotech.com/contact',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: '4245 N Central Expy, #490',
+            addressLocality: 'Dallas',
+            addressRegion: 'TX',
+            postalCode: '75205',
+            addressCountry: 'US',
+          },
+        },
+        {
+          '@type': 'LocalBusiness',
+          name: 'Prosper Infotech — Pune',
+          telephone: '+91-922-689-1830',
+          url: 'https://www.prosperinfotech.com/contact',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Ganesham A Commercial, Office No. 17-18, 3rd Floor, Pimple Saudagar',
+            addressLocality: 'Pune',
+            postalCode: '411027',
+            addressCountry: 'IN',
+          },
+        },
+      ],
+    }
   )
 
   return (

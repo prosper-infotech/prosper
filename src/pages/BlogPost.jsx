@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { Calendar, Clock, ArrowLeft } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, ArrowRight } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
@@ -75,9 +75,25 @@ export default function BlogPost() {
             </div>
           ))}
 
+          {post.relatedLinks?.length > 0 && (
+            <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-ink-200 pt-6">
+              <span className="text-sm font-semibold text-ink-900">See also:</span>
+              {post.relatedLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className="group inline-flex items-center gap-1 rounded-full border border-ink-300 px-3.5 py-1.5 text-sm text-ink-700 transition-colors hover:border-primary hover:text-primary"
+                >
+                  {link.label}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
+              ))}
+            </div>
+          )}
+
           <Link
             to="/resources/blog"
-            className="mt-6 inline-flex items-center gap-2 self-start text-sm font-semibold text-primary hover:text-primary-dark"
+            className="mt-2 inline-flex items-center gap-2 self-start text-sm font-semibold text-primary hover:text-primary-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to all articles
