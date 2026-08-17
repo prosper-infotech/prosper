@@ -212,4 +212,144 @@ export const BLOG_POSTS = [
       },
     ],
   },
+
+  {
+    slug: 'gps-fleet-tracking-roi',
+    title: 'GPS Fleet Tracking: What Real-Time Visibility Actually Fixes',
+    category: 'Fleet Management',
+    excerpt:
+      "GPS tracking gets sold as a dot on a map. The real return comes from what that data lets you stop doing manually — and what it catches before it becomes an incident.",
+    date: '2026-03-18',
+    readTime: '5 min read',
+    sections: [
+      {
+        body: "Most fleet managers already know where their trucks are, roughly, because dispatchers are on the phone with drivers all day. GPS tracking doesn't just replace that phone call — it replaces the guesswork that happens between calls, and that's where the real savings show up.",
+      },
+      {
+        heading: "'Where's my truck' calls disappear",
+        body: 'Every inbound call asking for a location update is a dispatcher pulled away from actually dispatching. A live map that customers or internal teams can check themselves removes an entire category of interruption, not just for drivers but for the office staff fielding those calls.',
+      },
+      {
+        heading: 'Idle time becomes visible, not anecdotal',
+        body: "Fuel and engine-hour costs from excessive idling are easy to suspect and hard to prove without data. GPS-linked telematics turns 'I think that truck idles a lot' into an exact number, by vehicle, by day — which is what actually changes driver behavior or route planning.",
+      },
+      {
+        heading: 'Geofencing catches deviations before they matter',
+        body: "A truck that drifts off its assigned route or enters a restricted area triggers an alert immediately, instead of surfacing three weeks later during a fuel-cost review. For regulated freight or high-value loads, that early warning is often the entire point of the system.",
+      },
+      {
+        heading: 'ETA accuracy compounds downstream',
+        body: 'A dock or yard that knows a trailer will arrive in 12 minutes, not just "later today," can staff and stage accordingly. Real-time GPS feeding into yard management software is what turns appointment scheduling from a guess into a plan.',
+      },
+      {
+        heading: 'What to look for in a fleet GPS platform',
+        body: "The hardware is the easy part — most GPS trackers report similar data. The differentiator is whether that data integrates with your existing dispatch, yard, and maintenance systems, or whether it becomes one more standalone dashboard your team has to remember to check.",
+      },
+    ],
+  },
+
+  {
+    slug: 'video-attendance-vs-biometric',
+    title: "Video-Based Attendance vs. Biometric Scanners: What's the Difference?",
+    category: 'Workforce Management',
+    excerpt:
+      "Fingerprint and face scanners aren't the only way to automate attendance anymore. Here's how camera-based attendance compares — and why it's winning out in some facilities.",
+    date: '2026-04-02',
+    readTime: '5 min read',
+    sections: [
+      {
+        body: "Biometric time clocks solved the buddy-punching problem, but they introduced new ones: shared touchpoints, enrollment friction, and — increasingly — employee pushback over storing fingerprint or facial biometric data. Video-based attendance is a different approach to the same problem.",
+      },
+      {
+        heading: 'How video-based attendance actually works',
+        body: 'Instead of requiring each worker to touch or scan a device, cameras positioned at entry points recognize and log employees as they pass through — no physical contact, no queue forming at a single scanner during shift change.',
+      },
+      {
+        heading: 'The privacy and compliance angle',
+        body: "Biometric data — fingerprints, facial templates — falls under stricter data-privacy regulations in many states and countries, and employees are increasingly wary of it being stored indefinitely. Video-based systems that process recognition on-premise, without exporting biometric templates off-site, sidestep a real and growing compliance concern.",
+      },
+      {
+        heading: 'Throughput at shift change',
+        body: "A single fingerprint or badge scanner creates a bottleneck when fifty people need to clock in within a five-minute window. Camera-based recognition at multiple entry points processes that same crowd without a physical line forming.",
+      },
+      {
+        heading: 'Where biometric scanners still make sense',
+        body: "For small teams, single-entry facilities, or environments where cameras aren't practical (certain cleanroom or secure-area requirements), a badge or fingerprint scanner is still a simpler, cheaper option. Video-based attendance earns its cost at scale — multiple entrances, high headcount, or shift patterns that create crowding.",
+      },
+      {
+        heading: 'Integration matters more than the capture method',
+        body: "Whichever method you choose, the real value comes from attendance data flowing directly into payroll and HRMS without manual reconciliation. A capture method that isn't connected to your existing systems just moves the manual work from the time clock to a spreadsheet.",
+      },
+    ],
+  },
+
+  {
+    slug: 'edge-ai-vs-cloud-ai-inspection',
+    title: 'Edge AI vs. Cloud AI: Where Should Your Inspection Models Actually Run?',
+    category: 'Edge AI & IoT',
+    excerpt:
+      "Running AI inference on-site instead of in the cloud isn't just a latency decision — it changes what you can monitor, how fast you find out, and what data leaves your facility.",
+    date: '2026-04-20',
+    readTime: '6 min read',
+    sections: [
+      {
+        body: "Cloud AI and edge AI can run the same model and produce the same detection — the difference is where the inference actually happens, and that decision has real operational consequences most teams don't think through until after deployment.",
+      },
+      {
+        heading: 'The latency problem cloud inference creates',
+        body: "Sending every camera frame to the cloud for processing, then waiting for a response, adds delay — usually small, but not zero. For a gate camera that just needs to log a container number after the fact, that's fine. For a safety system meant to stop equipment before a collision, a few hundred milliseconds is the difference between a warning and an incident report.",
+      },
+      {
+        heading: 'Connectivity you can\'t always count on',
+        body: 'Yards, ports, and remote industrial sites don\'t always have reliable, high-bandwidth connectivity. An edge AI box keeps inspecting, detecting, and logging locally even when the uplink to the cloud drops — buffering and syncing once connectivity returns, instead of going blind.',
+      },
+      {
+        heading: 'Bandwidth costs add up fast at scale',
+        body: "Streaming continuous high-resolution video from dozens of cameras to the cloud for processing is expensive, both in bandwidth and in cloud compute. Running inference at the edge and sending only the results — events, alerts, metadata — cuts that cost dramatically.",
+      },
+      {
+        heading: 'Keeping sensitive footage on-site',
+        body: "For facilities with contractual or regulatory restrictions on where video data can be stored or transmitted, edge processing means raw footage never has to leave the building. Only the derived data — a detection, a count, an alert — goes to the cloud.",
+      },
+      {
+        heading: 'The hybrid answer most deployments land on',
+        body: "In practice, most production systems use both: edge AI for real-time detection and safety-critical response, cloud for aggregation, long-term analytics, and cross-site dashboards. The question isn't edge versus cloud — it's which decisions need to happen in milliseconds on-site, and which can wait for a dashboard.",
+      },
+    ],
+  },
+
+  {
+    slug: 'rfid-asset-tracking-healthcare',
+    title: 'RFID Asset Tracking in Healthcare: Beyond Just Finding Equipment',
+    category: 'Asset Tracking',
+    excerpt:
+      "Locating a missing infusion pump is the obvious use case. The bigger return from RFID asset tracking in healthcare comes from what it prevents, not just what it finds.",
+    date: '2026-05-05',
+    readTime: '5 min read',
+    sections: [
+      {
+        body: "Ask any hospital biomed team what their day looks like, and 'searching for equipment' is usually near the top. RFID asset tracking gets pitched around solving that specific pain point — but in practice, the bigger wins show up in areas that never make the initial sales conversation.",
+      },
+      {
+        heading: 'The obvious win: finding equipment faster',
+        body: "Infusion pumps, wheelchairs, and monitors that wander between floors and departments cost real staff time to track down. A real-time RFID location system turns 'has anyone seen the third pump' into a two-second lookup.",
+      },
+      {
+        heading: 'Rental and loaner equipment reconciliation',
+        body: "Hospitals often rent specialized equipment for temporary needs, billed by the day. Without accurate tracking, rental units linger on-site past their return date and keep accruing charges. RFID tagging on rental equipment flags exactly when and where a unit needs to go back.",
+      },
+      {
+        heading: 'Preventive maintenance compliance',
+        body: 'Equipment due for calibration or preventive maintenance is easy to miss when biomed teams don\'t know where a given asset physically is. Location tracking combined with maintenance scheduling means a unit overdue for service can be found and pulled, not discovered broken during a code.',
+      },
+      {
+        heading: 'Shrinkage and loss prevention',
+        body: "High-value portable equipment — ultrasound units, specialty monitors — has a way of disappearing between facilities or during transfers. RFID gate readers at exits and elevators create an automatic record of when a tagged asset leaves a zone it shouldn't, without adding a security checkpoint.",
+      },
+      {
+        heading: 'What makes a healthcare RFID deployment succeed',
+        body: "The clinical environment adds constraints a warehouse doesn't have — tags need to survive sterilization cycles, readers can't interfere with medical equipment, and staff workflows can't be disrupted. A deployment scoped around actual clinical workflows, not just asset counts, is what determines whether the system gets used or gets ignored.",
+      },
+    ],
+  },
 ]
