@@ -1,8 +1,38 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 
 export default function Breadcrumb({ title, parent, icon: Icon }) {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    const itemListElement = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.prosperinfotech.com/' },
+    ]
+    if (parent) {
+      itemListElement.push({ '@type': 'ListItem', position: 2, name: parent })
+    }
+    itemListElement.push({
+      '@type': 'ListItem',
+      position: itemListElement.length + 1,
+      name: title,
+      item: `https://www.prosperinfotech.com${pathname}`,
+    })
+
+    const schemaTag = document.createElement('script')
+    schemaTag.type = 'application/ld+json'
+    schemaTag.setAttribute('data-breadcrumb-schema', 'true')
+    schemaTag.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement,
+    })
+    document.head.appendChild(schemaTag)
+
+    return () => schemaTag.remove()
+  }, [title, parent, pathname])
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-navy via-primary to-primary-dark text-white">
       <div

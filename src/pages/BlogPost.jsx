@@ -20,7 +20,22 @@ export default function BlogPost() {
 
   useDocumentTitle(
     post ? `${post.title} | Prosper Infotech Blog` : undefined,
-    post ? post.excerpt : undefined
+    post ? post.excerpt : undefined,
+    post && {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      image: 'https://www.prosperinfotech.com/og-image.jpg',
+      author: { '@type': 'Organization', name: 'Prosper Infotech' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Prosper Infotech',
+        logo: { '@type': 'ImageObject', url: 'https://www.prosperinfotech.com/favicon.png' },
+      },
+      mainEntityOfPage: `https://www.prosperinfotech.com/resources/blog/${post.slug}`,
+    }
   )
 
   if (!post) {

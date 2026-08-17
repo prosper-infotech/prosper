@@ -93,7 +93,16 @@ function FAQItem({ faq, isOpen, onToggle }) {
 export default function FAQ() {
   useDocumentTitle(
     'FAQs | Prosper Infotech',
-    "Answers to common questions about Prosper Infotech's RFID, GPS, IoT, AI, and AS400 solutions — hardware, implementation, integration, and support."
+    "Answers to common questions about Prosper Infotech's RFID, GPS, IoT, AI, and AS400 solutions — hardware, implementation, integration, and support.",
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    }
   )
 
   const [openIndex, setOpenIndex] = useState(0)
