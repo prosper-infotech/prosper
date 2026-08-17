@@ -352,4 +352,109 @@ export const BLOG_POSTS = [
       },
     ],
   },
+
+  {
+    slug: 'lorawan-industrial-iot-sensors',
+    title: 'LoRaWAN for Industrial IoT: When Long-Range Sensors Actually Make Sense',
+    category: 'Industrial IoT',
+    excerpt:
+      "WiFi and cellular don't reach every corner of a large industrial site. Here's when a LoRaWAN sensor network is the right call — and when it isn't.",
+    date: '2026-05-19',
+    readTime: '5 min read',
+    sections: [
+      {
+        body: "Every industrial IoT conversation eventually hits the same wall: the sensor needs to go somewhere WiFi doesn't reach and cellular is unreliable or too expensive to run at scale. That's the specific problem LoRaWAN was built to solve — not a general-purpose replacement for WiFi, but the right tool for a particular set of constraints.",
+      },
+      {
+        heading: 'Range and power are the whole pitch',
+        body: 'A single LoRaWAN gateway can cover a large industrial site — sometimes several kilometers — and battery-powered sensors on that network can run for years without a change-out, because the protocol is built for infrequent, small data payloads rather than continuous streaming.',
+      },
+      {
+        heading: 'What LoRaWAN is not good at',
+        body: "LoRaWAN moves small amounts of data slowly, on purpose. It is not the right choice for video, high-frequency telemetry, or anything needing near-instant response. If a use case needs to stream continuous data or respond within milliseconds, LoRaWAN is the wrong protocol — that's a job for WiFi, cellular, or a wired connection.",
+      },
+      {
+        heading: 'Where it earns its cost',
+        body: 'Tank level monitoring, remote equipment status, environmental sensors spread across a large yard or facility, asset location beacons — anywhere you need periodic status updates from many sensors spread over a wide area, without running power or network cable to each one.',
+      },
+      {
+        heading: 'Gateway placement determines whether it works at all',
+        body: "A LoRaWAN network lives or dies on gateway placement and site survey — metal structures, terrain, and building density all affect range in ways that look fine on paper and don't hold up in the field. A network designed without walking the actual site tends to have coverage gaps that only show up after sensors are already installed.",
+      },
+      {
+        heading: 'Combining LoRaWAN with other connectivity',
+        body: "Most real deployments aren't LoRaWAN-only. A site edge device typically aggregates LoRaWAN sensor data locally, then backhauls it over WiFi, 4G, or ethernet to the cloud — using LoRaWAN for what it's good at (many remote sensors, low power) and a faster connection for the parts that need it.",
+      },
+    ],
+  },
+
+  {
+    slug: '3pl-multi-client-warehouse-technology',
+    title: 'Managing Multiple Clients Without Multiplying Systems: Technology for 3PL Warehouses',
+    category: '3PL',
+    excerpt:
+      "Every new client a 3PL takes on adds inventory, SLAs, and reporting requirements. Here's how the right warehouse technology keeps that growth from turning into operational chaos.",
+    date: '2026-06-03',
+    readTime: '5 min read',
+    sections: [
+      {
+        body: "A 3PL's growth problem is different from a single-warehouse operator's. Every new client adds not just volume, but a distinct set of SKUs, service levels, and reporting expectations — and the systems that worked fine for three clients often buckle under ten.",
+      },
+      {
+        heading: 'Client segregation without physical walls',
+        body: "Physically separating every client's inventory into dedicated zones doesn't scale — space is too valuable. RFID and barcode-driven inventory systems that track ownership at the item or location level let clients share warehouse space without their inventory getting mixed up or misattributed.",
+      },
+      {
+        heading: 'One system, different SLAs per client',
+        body: 'Different clients often have different fulfillment speed and accuracy commitments. A WMS that can enforce and report against per-client SLAs — not just aggregate warehouse metrics — is what lets a 3PL prove it\'s meeting individual contract terms without a manual reporting exercise for every account.',
+      },
+      {
+        heading: 'Billing accuracy depends on activity data, not estimates',
+        body: "Storage, handling, and pick fees are usually billed per client, and that billing is only as accurate as the underlying activity data. Automated tracking of exactly what moved, when, and for which client removes the disputes that come from estimated or manually logged activity.",
+      },
+      {
+        heading: 'Client-facing visibility is now a competitive requirement',
+        body: "Clients increasingly expect to see their own inventory and order status in real time, not wait for a weekly report. A platform that can expose a client-specific view into their own inventory — without giving them visibility into other clients' data — has become a real differentiator in 3PL sales conversations.",
+      },
+      {
+        heading: 'What to prioritize when scaling past a handful of clients',
+        body: "The 3PLs that scale smoothly past 5-10 clients are usually the ones that invested in multi-tenant-capable WMS and RFID infrastructure early, rather than layering workarounds onto a single-client system. Retrofitting client segregation onto an existing warehouse is possible, but it's a much bigger project than building it in from the start.",
+      },
+    ],
+  },
+
+  {
+    slug: 'ai-analytics-logistics-decisions',
+    title: 'AI Analytics for Logistics: Turning Sensor Data Into Decisions, Not Just Dashboards',
+    category: 'AI Analytics',
+    excerpt:
+      "Most warehouses already collect more data than anyone looks at. The gap isn't data collection — it's turning that data into something that actually changes a decision.",
+    date: '2026-06-21',
+    readTime: '5 min read',
+    sections: [
+      {
+        body: "Ask most operations teams if they have data, and the answer is yes — RFID reads, GPS pings, gate transactions, dock sensor logs. Ask if that data is actually driving decisions, and the answer is usually a dashboard nobody opens after the first week.",
+      },
+      {
+        heading: 'The gap between data and a dashboard',
+        body: "A dashboard shows you what happened. It doesn't tell you what to do about it, or flag the one anomaly that matters buried in a thousand normal readings. That gap — between having data and having a decision — is what AI analytics is actually meant to close, and most implementations stop short of it.",
+      },
+      {
+        heading: 'Anomaly detection over static thresholds',
+        body: "Static alert thresholds (flag anything over X) generate either too much noise or miss real problems, because normal operating ranges shift by time of day, season, and site. Models trained on your actual historical data catch deviations from what's normal for that specific context — a meaningfully different, more useful signal.",
+      },
+      {
+        heading: 'Predictive maintenance from equipment telemetry',
+        body: 'Dock door sensors, reader uptime logs, and vehicle telemetry all carry early signals of equipment degradation, if anyone is modeling trends instead of just logging current status. Predictive maintenance models flag a reader or a dock mechanism likely to fail before it does, instead of after it takes down a lane.',
+      },
+      {
+        heading: 'Demand and dwell-time forecasting',
+        body: "Historical yard, gate, and warehouse activity data can forecast trailer dwell time, appointment congestion, and seasonal demand patterns — turning yard and labor planning from a reactive scramble into something scheduled ahead of the surge, not during it.",
+      },
+      {
+        heading: 'Starting with one decision, not a data lake',
+        body: "The AI analytics projects that actually get used start by picking one specific decision to improve — which trailers to prioritize, which equipment to service first — and building the model around that, rather than starting with 'let's analyze all our data' and hoping something useful falls out.",
+      },
+    ],
+  },
 ]
