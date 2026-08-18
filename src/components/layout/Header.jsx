@@ -7,6 +7,7 @@ import MegaMenu from './MegaMenu'
 import MobileMenu from './MobileMenu'
 import Button from '../ui/Button'
 import WhatsAppLink from './WhatsAppLink'
+import CallDropdown from './CallDropdown'
 import logo from '../../assets/logo-dark.png'
 
 export default function Header() {
@@ -84,6 +85,7 @@ export default function Header() {
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] shadow-md transition-transform hover:scale-105"
               iconClassName="h-6 w-6"
             />
+            <CallDropdown />
           </div>
 
           <button
