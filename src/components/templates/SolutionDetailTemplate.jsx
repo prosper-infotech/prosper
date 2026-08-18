@@ -17,7 +17,7 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
 
   return (
     <>
-      <Breadcrumb title={title} parent={parentLabel} icon={icons?.[path]} />
+      <Breadcrumb title={title} parent={parentLabel} parentPath={parentPath} icon={icons?.[path]} />
 
       <div className="sticky top-20 z-30 border-b border-ink-200 bg-white/95 backdrop-blur-sm">
         <nav className="max-w-6xl mx-auto flex gap-1 overflow-x-auto px-6">

@@ -3,15 +3,23 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 
-export default function Breadcrumb({ title, parent, icon: Icon }) {
+export default function Breadcrumb({ title, parent, parentPath, icon: Icon }) {
   const { pathname } = useLocation()
 
   useEffect(() => {
     const itemListElement = [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.prosperinfotech.com/' },
     ]
-    if (parent) {
-      itemListElement.push({ '@type': 'ListItem', position: 2, name: parent })
+    // Every non-final ListItem requires an `item` URL, so only add the parent
+    // crumb when we actually have a path for it — otherwise skip straight to
+    // the current page rather than emitting an invalid entry.
+    if (parent && parentPath) {
+      itemListElement.push({
+        '@type': 'ListItem',
+        position: itemListElement.length + 1,
+        name: parent,
+        item: `https://www.prosperinfotech.com${parentPath}`,
+      })
     }
     itemListElement.push({
       '@type': 'ListItem',
@@ -31,7 +39,7 @@ export default function Breadcrumb({ title, parent, icon: Icon }) {
     document.head.appendChild(schemaTag)
 
     return () => schemaTag.remove()
-  }, [title, parent, pathname])
+  }, [title, parent, parentPath, pathname])
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-navy via-primary to-primary-dark text-white">

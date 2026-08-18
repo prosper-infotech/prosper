@@ -155,7 +155,12 @@ export default function AIServiceDetailTemplate({ detail }) {
 
   return (
     <>
-      <Breadcrumb title={label} parent="AI Software Development" icon={Icon} />
+      <Breadcrumb
+        title={label}
+        parent="AI Software Development"
+        parentPath="/services/ai-software-development"
+        icon={Icon}
+      />
 
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-4 text-center">
         <Reveal className="flex flex-col items-center gap-4">

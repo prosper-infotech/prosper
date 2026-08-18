@@ -46,7 +46,7 @@ export default function BlogPost() {
 
   return (
     <>
-      <Breadcrumb title={post.title} parent="Blog" />
+      <Breadcrumb title={post.title} parent="Blog" parentPath="/resources/blog" />
 
       <section className="max-w-3xl mx-auto px-6 pt-16 pb-4">
         <Reveal className="flex flex-col gap-4">

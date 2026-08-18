@@ -69,7 +69,7 @@ export default function Videos() {
 
   return (
     <>
-      <Breadcrumb title="Videos" parent="Resources" />
+      <Breadcrumb title="Videos" parent="Resources" parentPath="/resources" />
 
       <section className="max-w-3xl mx-auto px-6 pt-16 pb-8 text-center">
         <Reveal className="flex flex-col items-center gap-4">

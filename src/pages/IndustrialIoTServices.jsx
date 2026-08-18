@@ -75,7 +75,7 @@ export default function IndustrialIoTServices() {
 
   return (
     <>
-      <Breadcrumb title="Industrial IoT Services" parent="Services" />
+      <Breadcrumb title="Industrial IoT Services" parent="Services" parentPath="/services" />
 
       <section className="max-w-5xl mx-auto px-6 pt-16 pb-4">
         <Reveal className="flex flex-col gap-5">

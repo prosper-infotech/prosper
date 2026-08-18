@@ -16,7 +16,7 @@ export default function DetailPageTemplate({ title, description, parentLabel, pa
 
   return (
     <>
-      <Breadcrumb title={title} parent={parentLabel} />
+      <Breadcrumb title={title} parent={parentLabel} parentPath={parentPath} />
 
       <Reveal className="max-w-5xl mx-auto px-6 py-20">
         <div className="grid gap-12 lg:grid-cols-3">

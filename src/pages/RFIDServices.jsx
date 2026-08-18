@@ -67,7 +67,7 @@ export default function RFIDServices() {
 
   return (
     <>
-      <Breadcrumb title="RFID Services" parent="Services" />
+      <Breadcrumb title="RFID Services" parent="Services" parentPath="/services" />
 
       <section className="max-w-5xl mx-auto px-6 pt-16 pb-4">
         <Reveal className="flex flex-col gap-5">

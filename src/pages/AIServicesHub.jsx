@@ -106,7 +106,7 @@ export default function AIServicesHub() {
 
   return (
     <>
-      <Breadcrumb title="AI Software Development" parent="Services" />
+      <Breadcrumb title="AI Software Development" parent="Services" parentPath="/services" />
 
       <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark to-navy">
         <NeuralBackground />

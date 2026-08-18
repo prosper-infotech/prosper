@@ -13,7 +13,7 @@ export default function TopicPageTemplate({ title, parentLabel, parentPath, sibl
 
   return (
     <>
-      <Breadcrumb title={title} parent={parentLabel} />
+      <Breadcrumb title={title} parent={parentLabel} parentPath={parentPath} />
 
       <Reveal className="max-w-3xl mx-auto px-6 py-20 text-center flex flex-col items-center gap-6">
         <p className="text-ink-600 text-lg">
