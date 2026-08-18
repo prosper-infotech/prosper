@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
+import WhatsAppButton from './WhatsAppButton'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import useScrollToHash from '../../hooks/useScrollToHash'
 
@@ -30,6 +31,7 @@ export default function Layout() {
         </AnimatePresence>
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   )
 }

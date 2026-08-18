@@ -13,6 +13,45 @@ function chunk(items, size) {
 
 export default function MegaMenu({ item, onNavigate }) {
   const [hoveredChild, setHoveredChild] = useState(null)
+
+  if (item.flattenColumns) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 8 }}
+        transition={{ duration: 0.15 }}
+        className="absolute left-0 top-full z-40 pt-3"
+      >
+        <div className="rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden w-[38rem]">
+          <div className="grid grid-cols-2 gap-x-1 py-2">
+            {item.children.map((category) => (
+              <div key={category.path} className="flex flex-col">
+                <Link
+                  to={category.path}
+                  onClick={onNavigate}
+                  className="px-5 pt-2 pb-1.5 text-xs font-heading font-bold uppercase tracking-wide text-gold"
+                >
+                  {category.label}
+                </Link>
+                {(category.children ?? []).map((child) => (
+                  <Link
+                    key={child.path}
+                    to={child.path}
+                    onClick={onNavigate}
+                    className="px-5 py-2 text-sm text-white/90 hover:bg-white/10 hover:text-gold transition-colors"
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    )
+  }
+
   const useTwoColumns = item.children.length > 6
   const columns = useTwoColumns
     ? chunk(item.children, Math.ceil(item.children.length / 2))
@@ -28,7 +67,7 @@ export default function MegaMenu({ item, onNavigate }) {
       className="absolute left-0 top-full z-40 pt-3 flex items-start gap-1.5"
     >
       <div
-        className={`rounded-lg bg-gradient-to-b from-navy/70 to-primary-dark/70 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden ${width}`}
+        className={`rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden ${width}`}
       >
         <div className={useTwoColumns ? 'grid grid-cols-2 gap-x-1 py-2' : 'flex flex-col py-2'}>
           {columns.map((col, i) => (
@@ -55,7 +94,7 @@ export default function MegaMenu({ item, onNavigate }) {
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.15 }}
-          className="w-64 rounded-lg bg-gradient-to-b from-navy/70 to-primary-dark/70 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden"
+          className="w-64 rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden"
         >
           <div className="flex flex-col py-2">
             {hoveredChild.children.map((grandchild) => (

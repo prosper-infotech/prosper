@@ -3,7 +3,7 @@ import Button from '../components/ui/Button'
 import SectionHeading from '../components/ui/SectionHeading'
 import ServiceCard from '../components/ui/ServiceCard'
 import StatCounter from '../components/ui/StatCounter'
-import TestimonialCarousel from '../components/ui/TestimonialCarousel'
+import ClientShowcase from '../components/ui/ClientShowcase'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
@@ -43,9 +43,6 @@ const STATS = [
   { value: '50+', label: 'Enterprise Clients' },
   { value: '24/7', label: 'Support Coverage' },
 ]
-
-// No testimonials sourced yet — swap in real client quotes during content backfill.
-const TESTIMONIALS = []
 
 export default function Home() {
   useDocumentTitle(
@@ -235,14 +232,12 @@ export default function Home() {
         </div>
       </section>
 
-      {TESTIMONIALS.length > 0 && (
-        <section className="max-w-4xl mx-auto px-6 py-20">
-          <SectionHeading eyebrow="Testimonials" title="What our clients say" />
-          <Reveal className="mt-12">
-            <TestimonialCarousel testimonials={TESTIMONIALS} />
-          </Reveal>
-        </section>
-      )}
+      <section className="max-w-5xl mx-auto px-6 py-20">
+        <SectionHeading eyebrow="Trusted by" title="Clients who rely on us" />
+        <div className="mt-12">
+          <ClientShowcase />
+        </div>
+      </section>
 
       <CTABand
         title="Ready to get accurate, real-time visibility?"

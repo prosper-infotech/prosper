@@ -65,6 +65,7 @@ export const NAV = [
     path: '/products',
     description: 'Software platforms and hardware built for RFID, GPS, and IoT deployments.',
     templateGroup: 'detail',
+    flattenColumns: true,
     children: [
       {
         label: 'Software',
