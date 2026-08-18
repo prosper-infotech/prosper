@@ -189,7 +189,9 @@ export const NAV = [
       },
     ],
   },
-  { label: 'About Us', path: '/about' },
+  // Kept out of the header/mobile nav (footer-only link) but still needs a
+  // NAV entry so the route-generation loop below creates the /about route.
+  { label: 'About Us', path: '/about', hideFromNav: true },
 ]
 
 // Flat list of every route implied by NAV (top-level items + their children).

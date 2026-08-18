@@ -46,7 +46,7 @@ export default function Header() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
-            {NAV.map((item) => (
+            {NAV.filter((item) => !item.hideFromNav).map((item) => (
               <div
                 key={item.path}
                 className="relative"
