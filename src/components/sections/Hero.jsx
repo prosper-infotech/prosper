@@ -51,6 +51,7 @@ const SLIDES = [
     title: 'DockVision AI — AI-Powered Dock Door Monitoring Solution',
     highlightWords: ['DockVision', 'AI-Powered'],
     subtitle: 'Live dock status, automated alerts, and real-time dashboards right on the floor.',
+    lightOverlay: true,
   },
   {
     image: slideDistributionCenter,
@@ -218,10 +219,20 @@ export default function Hero() {
         />
       </AnimatePresence>
 
-      <div className="pointer-events-none absolute inset-0 bg-black/20" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-black/70 via-black/25 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[20%] z-[5] bg-gradient-to-b from-transparent via-black/40 to-transparent" />
+      {!slide.lightOverlay && <div className="pointer-events-none absolute inset-0 bg-black/20" />}
+      <div
+        className={`pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b to-transparent ${
+          slide.lightOverlay ? 'from-black/40 via-black/10' : 'from-black/70 via-black/25'
+        }`}
+      />
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t to-transparent ${
+          slide.lightOverlay ? 'from-black/45 via-black/10' : 'from-black/75 via-black/25'
+        }`}
+      />
+      {!slide.lightOverlay && (
+        <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[20%] z-[5] bg-gradient-to-b from-transparent via-black/40 to-transparent" />
+      )}
 
       {arrows}
 
