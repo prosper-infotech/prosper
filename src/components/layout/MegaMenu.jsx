@@ -15,6 +15,10 @@ export default function MegaMenu({ item, onNavigate }) {
   const [hoveredChild, setHoveredChild] = useState(null)
 
   if (item.flattenColumns) {
+    const columnCount = item.children.length
+    const widthClass = columnCount >= 3 ? 'w-[56rem]' : 'w-[38rem]'
+    const gridColsClass = columnCount >= 3 ? 'grid-cols-3' : 'grid-cols-2'
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 8 }}
@@ -23,8 +27,10 @@ export default function MegaMenu({ item, onNavigate }) {
         transition={{ duration: 0.15 }}
         className="absolute left-0 top-full z-40 pt-3"
       >
-        <div className="rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden w-[38rem]">
-          <div className="grid grid-cols-2 gap-x-1 py-2">
+        <div
+          className={`rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden ${widthClass}`}
+        >
+          <div className={`grid ${gridColsClass} gap-x-1 py-2`}>
             {item.children.map((category) => (
               <div key={category.path} className="flex flex-col">
                 <Link

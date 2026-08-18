@@ -101,6 +101,7 @@ export const NAV = [
     path: '/services',
     description: 'Development, implementation, and support across our full solution stack.',
     templateGroup: 'detail',
+    flattenColumns: true,
     children: [
       {
         label: 'AI Software Development',
