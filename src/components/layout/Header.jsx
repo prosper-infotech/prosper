@@ -88,14 +88,17 @@ export default function Header() {
             <CallDropdown />
           </div>
 
-          <button
-            type="button"
-            className="lg:hidden text-white"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu className="h-7 w-7" />
-          </button>
+          <div className="flex items-center gap-3 lg:hidden">
+            <CallDropdown />
+            <button
+              type="button"
+              className="text-white"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu className="h-7 w-7" />
+            </button>
+          </div>
         </div>
       </div>
 
