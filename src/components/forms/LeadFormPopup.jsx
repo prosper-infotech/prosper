@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { X } from 'lucide-react'
+import { Sparkles, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import LandingLeadForm from './LandingLeadForm'
 
@@ -34,34 +34,53 @@ export default function LeadFormPopup({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-navy/70 backdrop-blur-sm p-4"
           onClick={close}
         >
           <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            initial={{ opacity: 0, y: 32, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.96 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: 20, scale: 0.94 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 22 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg rounded-2xl bg-white p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-lg"
           >
-            <button
-              type="button"
-              onClick={close}
-              aria-label="Close"
-              className="absolute right-4 top-4 text-ink-500 hover:text-primary transition-colors"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <h3 className="font-heading font-bold text-primary text-2xl pr-8 mb-1">{title}</h3>
-            <p className="text-sm text-ink-600 mb-5">{description}</p>
-            <LandingLeadForm
-              campaign={campaign}
-              submitLabel={submitLabel}
-              serviceLabel={serviceLabel}
-              serviceOptions={serviceOptions}
+            <motion.div
+              className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-gold/20 blur-2xl"
+              animate={{ opacity: [0.5, 0.9, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             />
+
+            <div className="relative rounded-2xl bg-white shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)] ring-2 ring-gold/50 max-h-[90vh] overflow-y-auto">
+              <div className="h-2 rounded-t-2xl bg-gradient-to-r from-gold via-gold-dark to-gold" />
+
+              <div className="p-6 sm:p-8">
+                <button
+                  type="button"
+                  onClick={close}
+                  aria-label="Close"
+                  className="absolute right-4 top-6 flex h-8 w-8 items-center justify-center rounded-full text-ink-500 transition-colors hover:bg-surface-alt hover:text-primary"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                  <Sparkles className="h-3.5 w-3.5 text-gold-dark" />
+                  Limited availability
+                </span>
+
+                <h3 className="mt-3 pr-8 font-heading font-bold text-primary text-2xl">{title}</h3>
+                <p className="text-sm text-ink-600 mt-1 mb-5">{description}</p>
+
+                <LandingLeadForm
+                  campaign={campaign}
+                  submitLabel={submitLabel}
+                  serviceLabel={serviceLabel}
+                  serviceOptions={serviceOptions}
+                />
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       )}
