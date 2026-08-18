@@ -76,14 +76,14 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
+            <Button to="/contact" variant="primary">
+              Book a demo
+            </Button>
             <WhatsAppLink
               eventCategory="Header"
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] shadow-md transition-transform hover:scale-105"
               iconClassName="h-6 w-6"
             />
-            <Button to="/contact" variant="primary">
-              Book a demo
-            </Button>
           </div>
 
           <button
