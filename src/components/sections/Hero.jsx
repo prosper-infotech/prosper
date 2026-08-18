@@ -143,7 +143,7 @@ export default function Hero() {
                   scroll={false}
                   text={slide.title}
                   highlightWords={slide.highlightWords}
-                  className="text-xl md:text-2xl xl:text-3xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_1px_2px_rgba(0,0,0,1),0_2px_8px_rgba(0,0,0,0.95),0_4px_24px_rgba(0,0,0,0.9)]"
+                  className="text-2xl md:text-3xl xl:text-4xl font-heading font-bold leading-tight text-white text-center [text-shadow:0_1px_2px_rgba(0,0,0,1),0_2px_8px_rgba(0,0,0,0.95),0_4px_24px_rgba(0,0,0,0.9)]"
                 />
               </div>
 
@@ -180,7 +180,7 @@ export default function Hero() {
                   scroll={false}
                   text={slide.title}
                   highlightWords={slide.highlightWords}
-                  className="text-3xl md:text-4xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
+                  className="text-4xl md:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]"
                 />
               </div>
 
