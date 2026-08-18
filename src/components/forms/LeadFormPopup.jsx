@@ -10,7 +10,7 @@ export default function LeadFormPopup({
   submitLabel,
   serviceLabel,
   serviceOptions,
-  delay = 6000,
+  delay = 3000,
 }) {
   const [open, setOpen] = useState(false)
 
