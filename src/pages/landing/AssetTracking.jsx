@@ -18,11 +18,11 @@ import {
   PhoneCall,
   Mail,
 } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
+import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
@@ -140,16 +140,6 @@ export default function AssetTracking() {
     'Real-time RFID + GPS asset tracking with $0 upfront hardware, automated check-in/out, and multi-yard support. Book a free demo with Prosper Infotech.'
   )
 
-  const [showFloatingCta, setShowFloatingCta] = useState(false)
-  useEffect(() => {
-    function onScroll() {
-      setShowFloatingCta(window.scrollY > 700)
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
   const tiltX = useMotionValue(0)
   const tiltY = useMotionValue(0)
   const rotateX = useTransform(tiltY, [-0.5, 0.5], [8, -8])
@@ -168,24 +158,19 @@ export default function AssetTracking() {
     <>
       <ScrollProgressBar />
 
-      <AnimatePresence>
-        {showFloatingCta && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="hidden lg:block fixed bottom-6 right-6 z-40"
-          >
-            <div className="relative">
-              <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
-              <Button href="#lead-form" variant="primary-dark" className="relative shadow-2xl">
-                Book a Demo
-              </Button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <LeadFormPopup
+        campaign="Asset Tracking Landing Page (Popup)"
+        title="Book your free asset tracking demo"
+        description="See real-time dashboards, RFID reads, and alerts — no cost, no obligation."
+        submitLabel="Get a free demo"
+        serviceLabel="What best describes your situation?"
+        serviceOptions={[
+          'New RFID + GPS deployment',
+          'Expanding an existing deployment',
+          'Evaluating / comparing vendors',
+          'Just researching for now',
+        ]}
+      />
 
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
         <motion.div

@@ -28,6 +28,7 @@ import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
+import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import as400Hero from '../../assets/as400-hero.jpg'
@@ -173,6 +174,19 @@ export default function AS400Development() {
 
   return (
     <>
+      <LeadFormPopup
+        campaign="AS400 Development Landing Page (Popup)"
+        title="Get your free AS400 consultation"
+        description="Tell us about your environment — we'll respond within one business day."
+        serviceOptions={[
+          'AS400 Development (RPG/RPGLE)',
+          'AS400 Support / Help Desk',
+          'AS400 Modernization',
+          'Migration / Cloud Integration',
+          'Not sure — need guidance',
+        ]}
+      />
+
       <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
         <motion.div
           className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
