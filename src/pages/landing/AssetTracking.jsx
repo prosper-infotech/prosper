@@ -27,6 +27,7 @@ import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
 import ScrollProgressBar from '../../components/ui/ScrollProgressBar'
+import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import { OFFICES } from '../../data/offices'
 import assetTrackingHero from '../../assets/asset-tracking-hero.jpg'
 import galleryRfidScan from '../../assets/asset-tracking-gallery-rfid-scan.jpg'
@@ -309,14 +310,18 @@ export default function AssetTracking() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
-        <Reveal className="text-center mb-12">
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            How It Works
-          </span>
-          <h2 className="mt-2 text-3xl">From consultation to live tracking</h2>
-        </Reveal>
-        <ProcessSteps steps={PROCESS_STEPS} />
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-10 left-0 h-72 w-72 -translate-x-1/3 rounded-full bg-gold/10 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 right-0 h-56 w-56 translate-x-1/3 rounded-full bg-primary/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-12">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              How It Works
+            </span>
+            <h2 className="mt-2 text-3xl">From consultation to live tracking</h2>
+          </Reveal>
+          <ProcessSteps steps={PROCESS_STEPS} />
+        </div>
       </section>
 
       <section className="relative overflow-hidden max-w-6xl mx-auto px-6 pb-16 lg:pb-20">
@@ -394,13 +399,14 @@ export default function AssetTracking() {
         </div>
       </section>
 
-      <section className="bg-surface-alt">
-        <div className="max-w-6xl mx-auto px-6 py-16">
+      <section className="relative overflow-hidden bg-gradient-to-b from-navy to-primary-dark">
+        <div className="pointer-events-none absolute top-0 left-1/3 h-72 w-72 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16">
           <Reveal className="text-center mb-10">
-            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            <span className="text-gold text-sm font-semibold uppercase tracking-widest">
               Who we help
             </span>
-            <h2 className="mt-2 text-3xl">Trusted across every asset-heavy operation</h2>
+            <h2 className="mt-2 text-3xl text-white">Trusted across every asset-heavy operation</h2>
           </Reveal>
           <div className="flex flex-wrap justify-center gap-3">
             {INDUSTRIES.map((industry) => {
@@ -408,9 +414,9 @@ export default function AssetTracking() {
               return (
                 <span
                   key={industry.label}
-                  className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-white/10 hover:text-gold"
                 >
-                  <Icon className="h-4 w-4 text-primary" />
+                  <Icon className="h-4 w-4 text-gold" />
                   {industry.label}
                 </span>
               )
@@ -419,16 +425,31 @@ export default function AssetTracking() {
         </div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
-        <Reveal className="text-center mb-10">
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            Common Questions
-          </span>
-          <h2 className="mt-2 text-3xl">Before you book a demo</h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <FAQAccordion items={FAQS} />
-        </Reveal>
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 translate-x-1/3 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-5xl mx-auto px-6 py-16">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Our Clients
+            </span>
+            <h2 className="mt-2 text-3xl">Companies that trust Prosper Infotech</h2>
+          </Reveal>
+          <ClientLogoStrip />
+        </div>
+      </section>
+
+      <section className="bg-surface-alt">
+        <div className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Common Questions
+            </span>
+            <h2 className="mt-2 text-3xl">Before you book a demo</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <FAQAccordion items={FAQS} />
+          </Reveal>
+        </div>
       </section>
 
       <section id="lead-form" className="relative bg-gradient-to-b from-navy to-primary-dark overflow-hidden">

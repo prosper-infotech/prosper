@@ -27,6 +27,7 @@ import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
+import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import as400Hero from '../../assets/as400-hero.jpg'
@@ -266,27 +267,35 @@ export default function AS400Development() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
-        <Reveal className="text-center mb-12">
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            How It Works
-          </span>
-          <h2 className="mt-2 text-3xl">From consultation to dedicated coverage</h2>
-        </Reveal>
-        <ProcessSteps steps={PROCESS_STEPS} />
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -top-10 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-56 w-56 -translate-x-1/3 rounded-full bg-primary/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-12">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              How It Works
+            </span>
+            <h2 className="mt-2 text-3xl">From consultation to dedicated coverage</h2>
+          </Reveal>
+          <ProcessSteps steps={PROCESS_STEPS} />
+        </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 pb-16 lg:pb-20">
-        <Reveal className="text-center mb-10">
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            See It In Action
-          </span>
-          <h2 className="mt-2 text-3xl">The operations AS400 keeps running</h2>
-        </Reveal>
-        <VisualGallery items={GALLERY} />
+      <section className="bg-surface-alt">
+        <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              See It In Action
+            </span>
+            <h2 className="mt-2 text-3xl">The operations AS400 keeps running</h2>
+          </Reveal>
+          <VisualGallery items={GALLERY} />
+        </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute top-0 right-1/4 h-64 w-64 rounded-full bg-accent-green/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
         <div className="grid gap-6 lg:grid-cols-3">
           {SERVICE_COLUMNS.map((col, i) => {
             const Icon = col.icon
@@ -314,6 +323,7 @@ export default function AS400Development() {
               </Reveal>
             )
           })}
+        </div>
         </div>
       </section>
 
@@ -344,39 +354,57 @@ export default function AS400Development() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <Reveal className="text-center mb-10">
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            Who we help
-          </span>
-          <h2 className="mt-2 text-3xl">Trusted by enterprises across industries</h2>
-        </Reveal>
-        <div className="flex flex-wrap justify-center gap-3">
-          {INDUSTRIES.map((industry) => {
-            const Icon = industry.icon
-            return (
-              <span
-                key={industry.label}
-                className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:text-primary hover:shadow-md"
-              >
-                <Icon className="h-4 w-4 text-primary" />
-                {industry.label}
-              </span>
-            )
-          })}
+      <section className="relative overflow-hidden bg-gradient-to-b from-navy to-primary-dark">
+        <div className="pointer-events-none absolute top-0 left-1/3 h-72 w-72 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16">
+          <Reveal className="text-center mb-10">
+            <span className="text-gold text-sm font-semibold uppercase tracking-widest">
+              Who we help
+            </span>
+            <h2 className="mt-2 text-3xl text-white">Trusted by enterprises across industries</h2>
+          </Reveal>
+          <div className="flex flex-wrap justify-center gap-3">
+            {INDUSTRIES.map((industry) => {
+              const Icon = industry.icon
+              return (
+                <span
+                  key={industry.label}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:bg-white/10 hover:text-gold"
+                >
+                  <Icon className="h-4 w-4 text-gold" />
+                  {industry.label}
+                </span>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 translate-x-1/3 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-5xl mx-auto px-6 py-16">
         <Reveal className="text-center mb-10">
           <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            Common Questions
+            Our Clients
           </span>
-          <h2 className="mt-2 text-3xl">Before you get in touch</h2>
+          <h2 className="mt-2 text-3xl">Companies that trust Prosper Infotech</h2>
         </Reveal>
-        <Reveal delay={0.1}>
-          <FAQAccordion items={FAQS} />
-        </Reveal>
+        <ClientLogoStrip />
+        </div>
+      </section>
+
+      <section className="bg-surface-alt">
+        <div className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Common Questions
+            </span>
+            <h2 className="mt-2 text-3xl">Before you get in touch</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <FAQAccordion items={FAQS} />
+          </Reveal>
+        </div>
       </section>
 
       <section id="lead-form" className="relative bg-gradient-to-b from-navy to-primary-dark overflow-hidden">
