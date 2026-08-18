@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Button from '../ui/Button'
@@ -76,6 +76,13 @@ export default function Hero() {
 
   const goPrev = () => setActive((i) => (i - 1 + SLIDES.length) % SLIDES.length)
   const goNext = () => setActive((i) => (i + 1) % SLIDES.length)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setActive((i) => (i + 1) % SLIDES.length)
+    }, 6000)
+    return () => clearTimeout(timer)
+  }, [active])
 
   const slide = SLIDES[active]
   const isNatural = slide.layout === 'natural'
@@ -219,19 +226,16 @@ export default function Hero() {
         />
       </AnimatePresence>
 
-      {!slide.lightOverlay && <div className="pointer-events-none absolute inset-0 bg-black/20" />}
-      <div
-        className={`pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b to-transparent ${
-          slide.lightOverlay ? 'from-black/40 via-black/10' : 'from-black/70 via-black/25'
-        }`}
-      />
-      <div
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t to-transparent ${
-          slide.lightOverlay ? 'from-black/45 via-black/10' : 'from-black/75 via-black/25'
-        }`}
-      />
-      {!slide.lightOverlay && (
-        <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[20%] z-[5] bg-gradient-to-b from-transparent via-black/40 to-transparent" />
+      {slide.lightOverlay ? (
+        // Shade only the text band itself, leaving the rest of the image clear.
+        <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[22%] bg-gradient-to-b from-black/0 via-black/35 to-black/0" />
+      ) : (
+        <>
+          <div className="pointer-events-none absolute inset-0 bg-black/20" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[38%] bg-gradient-to-b from-black/70 via-black/25 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[20%] z-[5] bg-gradient-to-b from-transparent via-black/40 to-transparent" />
+        </>
       )}
 
       {arrows}
