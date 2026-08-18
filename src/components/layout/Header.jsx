@@ -76,7 +76,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Button to="/contact" variant="primary">
+            <Button to="/contact" variant="primary" icon={false} className="whitespace-nowrap">
               Book a demo
             </Button>
             <WhatsAppLink
