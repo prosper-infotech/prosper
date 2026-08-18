@@ -15,10 +15,6 @@ export default function MegaMenu({ item, onNavigate }) {
   const [hoveredChild, setHoveredChild] = useState(null)
 
   if (item.flattenColumns) {
-    const columnCount = item.children.length
-    const widthClass = columnCount >= 3 ? 'w-[56rem]' : 'w-[38rem]'
-    const gridColsClass = columnCount >= 3 ? 'grid-cols-3' : 'grid-cols-2'
-
     return (
       <motion.div
         initial={{ opacity: 0, y: 8 }}
@@ -27,16 +23,14 @@ export default function MegaMenu({ item, onNavigate }) {
         transition={{ duration: 0.15 }}
         className="absolute left-0 top-full z-40 pt-3"
       >
-        <div
-          className={`rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden ${widthClass}`}
-        >
-          <div className={`grid ${gridColsClass} gap-x-1 py-2`}>
+        <div className="w-max max-w-[90vw] rounded-lg bg-gradient-to-b from-navy/90 to-primary-dark/90 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden">
+          <div className="flex items-start gap-x-4 py-2">
             {item.children.map((category) => (
               <div key={category.path} className="flex flex-col">
                 <Link
                   to={category.path}
                   onClick={onNavigate}
-                  className="px-5 pt-2 pb-1.5 text-xs font-heading font-bold uppercase tracking-wide text-gold"
+                  className="px-5 pt-2 pb-1.5 text-xs font-heading font-bold uppercase tracking-wide text-gold whitespace-nowrap"
                 >
                   {category.label}
                 </Link>
@@ -45,7 +39,7 @@ export default function MegaMenu({ item, onNavigate }) {
                     key={child.path}
                     to={child.path}
                     onClick={onNavigate}
-                    className="px-5 py-2 text-sm text-white/90 hover:bg-white/10 hover:text-gold transition-colors"
+                    className="px-5 py-2 text-sm font-semibold text-white/90 whitespace-nowrap hover:bg-white/10 hover:text-gold transition-colors"
                   >
                     {child.label}
                   </Link>
