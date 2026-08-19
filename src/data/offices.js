@@ -8,7 +8,7 @@ export const OFFICES = [
   },
   {
     country: 'India',
-    phone: '+91 922 689 1830',
+    phone: '+91 801 081 2735',
     address: 'Ganesham A Commercial, Office No. 17-18, 3rd Floor, Pimple Saudagar, Pune 411027',
     mapUrl: 'https://maps.app.goo.gl/xkgqrqMRJyjxpTn59',
   },
