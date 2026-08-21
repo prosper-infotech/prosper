@@ -28,6 +28,7 @@ import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
 import ScrollProgressBar from '../../components/ui/ScrollProgressBar'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
+import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
 import assetTrackingHero from '../../assets/asset-tracking-hero.jpg'
@@ -42,8 +43,6 @@ import cardHandheldReader from '../../assets/asset-tracking-card-handheld-reader
 import cardDashboard from '../../assets/asset-tracking-card-dashboard.jpg'
 import cardMobileApp from '../../assets/asset-tracking-card-mobile-app.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
-
-const usaPhone = OFFICES[0].phone
 
 const STAT_BADGES = [
   { icon: Eye, label: 'Real-Time Visibility' },
@@ -229,21 +228,14 @@ export default function AssetTracking() {
                   Book a Demo
                 </Button>
               </div>
-              <Button
-                href={`tel:${usaPhone.replace(/\s+/g, '')}`}
-                variant="outline"
-                icon={false}
-                onClick={() =>
-                  window.gtag?.('event', 'click_to_call', {
-                    event_category: 'Asset Tracking Landing Page',
-                  })
-                }
+              <CallDropdown
+                eventCategory="Asset Tracking Landing Page"
+                align="left"
+                triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
               >
-                <span className="inline-flex items-center gap-2">
-                  <PhoneCall className="h-4 w-4" />
-                  Call {usaPhone}
-                </span>
-              </Button>
+                <PhoneCall className="h-4 w-4" />
+                Call Us
+              </CallDropdown>
             </div>
           </Reveal>
 
@@ -450,18 +442,22 @@ export default function AssetTracking() {
               walked through by our team.
             </p>
             <div className="flex flex-col gap-4 mt-2">
-              <a
-                href={`tel:${usaPhone.replace(/\s+/g, '')}`}
-                onClick={() =>
-                  window.gtag?.('event', 'click_to_call', {
-                    event_category: 'Asset Tracking Landing Page',
-                  })
-                }
-                className="inline-flex items-center gap-3 rounded-lg bg-white/5 border border-white/15 px-5 py-4 text-white font-semibold hover:bg-white/10 transition-colors"
-              >
-                <PhoneCall className="h-5 w-5 text-gold" />
-                {usaPhone}
-              </a>
+              {OFFICES.map((office) => (
+                <a
+                  key={office.country}
+                  href={`tel:${office.phone.replace(/\s+/g, '')}`}
+                  onClick={() =>
+                    window.gtag?.('event', 'click_to_call', {
+                      event_category: 'Asset Tracking Landing Page',
+                      event_label: office.country,
+                    })
+                  }
+                  className="inline-flex items-center gap-3 rounded-lg bg-white/5 border border-white/15 px-5 py-4 text-white font-semibold hover:bg-white/10 transition-colors"
+                >
+                  <PhoneCall className="h-5 w-5 text-gold" />
+                  {office.country}: {office.phone}
+                </a>
+              ))}
               <a
                 href="mailto:sales@prosperinfotech.com"
                 className="inline-flex items-center gap-3 rounded-lg bg-white/5 border border-white/15 px-5 py-4 text-white font-semibold hover:bg-white/10 transition-colors"
@@ -471,8 +467,8 @@ export default function AssetTracking() {
               </a>
               <span className="inline-flex items-center gap-3 rounded-lg bg-white/5 border border-white/15 px-5 py-4 text-white/80 text-sm">
                 <MapPin className="h-5 w-5 text-gold shrink-0" />
-                Proudly based in Dallas, Texas, USA — delivering AI-powered logistics solutions
-                across the USA
+                Offices in Dallas, Texas, USA and Pune, India — delivering AI-powered logistics
+                solutions worldwide
               </span>
             </div>
           </Reveal>

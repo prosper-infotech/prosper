@@ -3,7 +3,12 @@ import { Phone } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { OFFICES } from '../../data/offices'
 
-export default function CallDropdown() {
+export default function CallDropdown({
+  eventCategory = 'Header',
+  align = 'right',
+  triggerClassName = 'flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold text-primary shadow-md transition-transform hover:scale-105',
+  children,
+}) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef(null)
 
@@ -31,9 +36,9 @@ export default function CallDropdown() {
         onClick={() => setOpen((v) => !v)}
         aria-label="Call us"
         aria-expanded={open}
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold text-primary shadow-md transition-transform hover:scale-105"
+        className={triggerClassName}
       >
-        <Phone className="h-5 w-5" />
+        {children ?? <Phone className="h-5 w-5" />}
       </button>
 
       <AnimatePresence>
@@ -43,7 +48,7 @@ export default function CallDropdown() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.96 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-40 mt-3 w-60 rounded-lg bg-gradient-to-b from-navy/95 to-primary-dark/95 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden"
+            className={`absolute ${align === 'right' ? 'right-0' : 'left-0'} top-full z-40 mt-3 w-60 rounded-lg bg-gradient-to-b from-navy/95 to-primary-dark/95 backdrop-blur-md shadow-xl ring-1 ring-white/10 overflow-hidden`}
           >
             {OFFICES.map((office) => (
               <a
@@ -51,7 +56,7 @@ export default function CallDropdown() {
                 href={`tel:${office.phone.replace(/\s+/g, '')}`}
                 onClick={() => {
                   window.gtag?.('event', 'click_to_call', {
-                    event_category: 'Header',
+                    event_category: eventCategory,
                     event_label: office.country,
                   })
                   setOpen(false)
