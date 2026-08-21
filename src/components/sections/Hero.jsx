@@ -248,8 +248,12 @@ export default function Hero() {
       </AnimatePresence>
 
       {slide.lightOverlay ? (
-        // Shade only the text band itself, leaving the rest of the image clear.
-        <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[22%] bg-gradient-to-b from-black/0 via-black/35 to-black/0" />
+        <>
+          {/* Shade only the text band itself, leaving the rest of the image clear. */}
+          <div className="pointer-events-none absolute inset-x-0 top-[20%] bottom-[22%] bg-gradient-to-b from-black/0 via-black/35 to-black/0" />
+          {/* Soft backdrop so the translucent "Explore solutions" button stays legible. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[26%] bg-gradient-to-t from-black/40 to-transparent" />
+        </>
       ) : (
         <>
           <div className="pointer-events-none absolute inset-0 bg-black/20" />
