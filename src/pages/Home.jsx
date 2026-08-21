@@ -4,6 +4,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import ServiceCard from '../components/ui/ServiceCard'
 import StatCounter from '../components/ui/StatCounter'
 import ClientShowcase from '../components/ui/ClientShowcase'
+import { SHOW_CLIENTS } from '../data/clients'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import Hero from '../components/sections/Hero'
@@ -232,12 +233,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-6 py-20">
-        <SectionHeading eyebrow="Trusted by" title="Clients who rely on us" />
-        <div className="mt-12">
-          <ClientShowcase />
-        </div>
-      </section>
+      {SHOW_CLIENTS && (
+        <section className="max-w-5xl mx-auto px-6 py-20">
+          <SectionHeading eyebrow="Trusted by" title="Clients who rely on us" />
+          <div className="mt-12">
+            <ClientShowcase />
+          </div>
+        </section>
+      )}
 
       <CTABand
         title="Ready to get accurate, real-time visibility?"

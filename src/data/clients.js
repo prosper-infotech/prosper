@@ -26,6 +26,10 @@ import laPhotoLogo from '../assets/clients/la-photo-party.png'
 import bhartiLogo from '../assets/clients/bharti-hospital.png'
 import devamLogo from '../assets/clients/devam-projects.png'
 
+// Toggle off while client showcase content/logos are being revisited —
+// hides it on the homepage and both landing pages at once.
+export const SHOW_CLIENTS = false
+
 export const CLIENTS = [
   {
     name: 'Lazer Logistics',

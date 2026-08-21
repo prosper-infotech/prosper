@@ -28,6 +28,7 @@ import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
+import { SHOW_CLIENTS } from '../../data/clients'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
@@ -394,18 +395,20 @@ export default function AS400Development() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 translate-x-1/3 rounded-full bg-gold/10 blur-3xl" />
-        <div className="relative max-w-5xl mx-auto px-6 py-16">
-        <Reveal className="text-center mb-10">
-          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-            Our Clients
-          </span>
-          <h2 className="mt-2 text-3xl">Companies that trust Prosper Infotech</h2>
-        </Reveal>
-        <ClientLogoStrip />
-        </div>
-      </section>
+      {SHOW_CLIENTS && (
+        <section className="relative overflow-hidden">
+          <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 translate-x-1/3 rounded-full bg-gold/10 blur-3xl" />
+          <div className="relative max-w-5xl mx-auto px-6 py-16">
+            <Reveal className="text-center mb-10">
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+                Our Clients
+              </span>
+              <h2 className="mt-2 text-3xl">Companies that trust Prosper Infotech</h2>
+            </Reveal>
+            <ClientLogoStrip />
+          </div>
+        </section>
+      )}
 
       <section className="bg-surface-alt">
         <div className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
