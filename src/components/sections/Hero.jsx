@@ -78,6 +78,7 @@ const SLIDES = [
     title: 'AI-Powered CFS & Container Terminal Automation Platform',
     highlightWords: ['AI-Powered', 'CFS'],
     subtitle: 'Smart container visibility from gate arrival to yard movement.',
+    lightOverlay: true,
   },
   {
     image: slideForklift,
@@ -87,6 +88,7 @@ const SLIDES = [
     highlightWords: ['ForkliftVision', 'AI'],
     subtitle:
       'Automate pallet pickup, putaway, staging, and trailer loading with OCR, 3D depth sensing, and Edge AI.',
+    lightOverlay: true,
   },
 ]
 
