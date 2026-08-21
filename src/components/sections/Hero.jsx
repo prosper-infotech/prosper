@@ -10,6 +10,8 @@ import slideIotYard from '../../assets/hero-slide-iot-yard.jpg'
 import slideDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
 import slideDistributionCenter from '../../assets/hero-slide-distribution-center.jpg'
 import slideFleetGps from '../../assets/hero-slide-fleet-gps.jpg'
+import slideCfs from '../../assets/hero-slide-cfs.jpg'
+import slideForklift from '../../assets/hero-slide-forklift.jpg'
 
 const SLIDES = [
   {
@@ -68,6 +70,23 @@ const SLIDES = [
     title: 'GPS & Fleet Tracking, Anywhere On The Road',
     highlightWords: ['GPS', 'Fleet Tracking'],
     subtitle: 'Live location, speed, and condition data for every vehicle — wherever the road takes it.',
+  },
+  {
+    image: slideCfs,
+    alt: 'AI-powered CFS and container terminal automation with OCR and GPS tracking',
+    eyebrow: 'Container Terminal Automation',
+    title: 'AI-Powered CFS & Container Terminal Automation Platform',
+    highlightWords: ['AI-Powered', 'CFS'],
+    subtitle: 'Smart container visibility from gate arrival to yard movement.',
+  },
+  {
+    image: slideForklift,
+    alt: 'ForkliftVision AI sensor module automating pallet pickup in a warehouse',
+    eyebrow: 'AI-Powered Warehouse Automation',
+    title: 'ForkliftVision AI',
+    highlightWords: ['ForkliftVision', 'AI'],
+    subtitle:
+      'Automate pallet pickup, putaway, staging, and trailer loading with OCR, 3D depth sensing, and Edge AI.',
   },
 ]
 
