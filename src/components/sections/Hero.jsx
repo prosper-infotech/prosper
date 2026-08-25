@@ -20,29 +20,12 @@ const SLIDES = [
     highlightWords: ['AI-Powered', 'Visibility'],
   },
   {
-    image: slideDockAi,
-    alt: 'AI and drone-powered dock and yard automation',
-    eyebrow: 'AI & Drone Visibility',
-    title: 'AI-Powered Yard & Dock Automation',
-    highlightWords: ['AI-Powered', 'Automation'],
-    subtitle:
-      'Drones, sensors, and AI track every trailer, dock door, and asset across your yard in real time.',
-  },
-  {
     image: slideRfidWarehouse,
     alt: 'RFID-powered warehouse inventory tracking',
     eyebrow: 'RFID Warehouse Intelligence',
     title: 'RFID-Driven Warehouse Intelligence',
     highlightWords: ['RFID-Driven', 'Intelligence'],
     subtitle: 'Scan, track, and count every pallet automatically — no manual audits, no guesswork.',
-  },
-  {
-    image: slideIotYard,
-    alt: 'IoT-connected yard and trailer tracking network',
-    eyebrow: 'Connected Yard',
-    title: 'End-to-End IoT Yard Tracking',
-    highlightWords: ['End-to-End', 'IoT'],
-    subtitle: 'WiFi and IoT sensors keep every trailer and asset visible the moment it enters your yard.',
   },
   {
     image: slideDockMonitoring,
@@ -72,20 +55,44 @@ const SLIDES = [
       'Automate pallet pickup, putaway, staging, and trailer loading with OCR, 3D depth sensing, and Edge AI.',
     lightOverlay: true,
   },
+  {
+    image: slideDockAi,
+    alt: 'AI and drone-powered dock and yard automation',
+    eyebrow: 'AI & Drone Visibility',
+    title: 'AI-Powered Yard & Dock Automation',
+    highlightWords: ['AI-Powered', 'Automation'],
+    subtitle:
+      'Drones, sensors, and AI track every trailer, dock door, and asset across your yard in real time.',
+  },
+  {
+    image: slideIotYard,
+    alt: 'IoT-connected yard and trailer tracking network',
+    eyebrow: 'Connected Yard',
+    title: 'End-to-End IoT Yard Tracking',
+    highlightWords: ['End-to-End', 'IoT'],
+    subtitle: 'WiFi and IoT sensors keep every trailer and asset visible the moment it enters your yard.',
+  },
 ]
 
 export default function Hero() {
   const [active, setActive] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
 
   const goPrev = () => setActive((i) => (i - 1 + SLIDES.length) % SLIDES.length)
   const goNext = () => setActive((i) => (i + 1) % SLIDES.length)
 
   useEffect(() => {
+    if (isHovered) return
     const timer = setTimeout(() => {
       setActive((i) => (i + 1) % SLIDES.length)
     }, 6000)
     return () => clearTimeout(timer)
-  }, [active])
+  }, [active, isHovered])
+
+  const hoverHandlers = {
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+  }
 
   const slide = SLIDES[active]
   const isNatural = slide.layout === 'natural'
@@ -133,7 +140,7 @@ export default function Hero() {
 
   if (isNatural) {
     return (
-      <section className="relative overflow-hidden bg-navy">
+      <section className="relative overflow-hidden bg-navy" {...hoverHandlers}>
         <AnimatePresence mode="wait">
           <motion.div
             key={`natural-${active}`}
@@ -214,7 +221,10 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-auto lg:min-h-0 lg:max-h-none overflow-hidden bg-navy">
+    <section
+      className="relative h-[82vh] min-h-[560px] max-h-[760px] lg:h-auto lg:min-h-0 lg:max-h-none overflow-hidden bg-navy"
+      {...hoverHandlers}
+    >
       <img src={slideAiVisionIot} alt="" aria-hidden="true" className="invisible hidden lg:block w-full h-auto" />
       <AnimatePresence mode="sync">
         <motion.img
