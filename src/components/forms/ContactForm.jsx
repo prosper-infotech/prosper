@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../ui/Button'
+import { submitToPrivyr } from './privyr'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
 
@@ -35,6 +36,13 @@ export default function ContactForm() {
   const onSubmit = async (data) => {
     try {
       await submitEnquiry({ ...data, source: 'Website' })
+      submitToPrivyr({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        message: [data.company && `Company: ${data.company}`, data.message].filter(Boolean).join(' | '),
+        source: 'Website Contact Form',
+      })
       setStatus('success')
       reset()
     } catch {

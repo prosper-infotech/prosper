@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import Button from '../ui/Button'
+import { submitToPrivyr } from './privyr'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
 
@@ -51,6 +52,19 @@ export default function LandingLeadForm({
       await submitLead({
         ...data,
         _subject: `New lead — ${campaign} (${data.service})`,
+        source: campaign,
+      })
+      submitToPrivyr({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        message: [
+          data.service && `Interested in: ${data.service}`,
+          data.company && `Company: ${data.company}`,
+          data.message,
+        ]
+          .filter(Boolean)
+          .join(' | '),
         source: campaign,
       })
       window.gtag?.('event', 'generate_lead', {
