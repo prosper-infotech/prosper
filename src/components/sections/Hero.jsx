@@ -8,8 +8,6 @@ import slideDockAi from '../../assets/hero-slide-dock-ai.jpg'
 import slideRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
 import slideIotYard from '../../assets/hero-slide-iot-yard.jpg'
 import slideDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
-import slideDistributionCenter from '../../assets/hero-slide-distribution-center.jpg'
-import slideFleetGps from '../../assets/hero-slide-fleet-gps.jpg'
 import slideCfs from '../../assets/hero-slide-cfs.jpg'
 import slideForklift from '../../assets/hero-slide-forklift.jpg'
 
@@ -54,22 +52,6 @@ const SLIDES = [
     highlightWords: ['DockVision', 'AI-Powered'],
     subtitle: 'Live dock status, automated alerts, and real-time dashboards right on the floor.',
     lightOverlay: true,
-  },
-  {
-    image: slideDistributionCenter,
-    alt: 'Aerial view of a large distribution center with IoT-tracked dock doors',
-    eyebrow: 'Enterprise Scale',
-    title: 'Enterprise-Scale Distribution Center Visibility',
-    highlightWords: ['Enterprise-Scale', 'Visibility'],
-    subtitle: 'Monitor hundreds of dock doors and trailers across your entire network from one platform.',
-  },
-  {
-    image: slideFleetGps,
-    alt: 'GPS-tracked truck on the highway with live telemetry',
-    eyebrow: 'GPS Fleet Tracking',
-    title: 'GPS & Fleet Tracking, Anywhere On The Road',
-    highlightWords: ['GPS', 'Fleet Tracking'],
-    subtitle: 'Live location, speed, and condition data for every vehicle — wherever the road takes it.',
   },
   {
     image: slideCfs,
