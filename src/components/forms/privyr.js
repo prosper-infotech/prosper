@@ -5,6 +5,11 @@ const PRIVYR_WEBHOOK_URL = import.meta.env.VITE_PRIVYR_WEBHOOK_URL
 export function submitToPrivyr({ name, email, phone, message, source }) {
   if (!PRIVYR_WEBHOOK_URL || !name) return
 
+  // `lead_source_name` may or may not surface prominently in Privyr's UI
+  // depending on account setup, so also stamp the source at the top of the
+  // message itself — that's guaranteed visible on every lead card.
+  const fullMessage = [source && `Source: ${source}`, message].filter(Boolean).join('\n')
+
   fetch(PRIVYR_WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -12,7 +17,7 @@ export function submitToPrivyr({ name, email, phone, message, source }) {
       name,
       email,
       phone_number: phone,
-      message,
+      message: fullMessage,
       lead_source_name: source,
     }),
   }).catch(() => {})
