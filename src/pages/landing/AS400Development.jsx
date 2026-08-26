@@ -1,4 +1,5 @@
 import {
+  Lightbulb,
   Terminal,
   Headset,
   TrendingUp,
@@ -46,10 +47,25 @@ const STAT_BADGES = [
 
 const SERVICE_COLUMNS = [
   {
-    key: 'development',
-    icon: Terminal,
+    key: 'consulting',
+    icon: Lightbulb,
     iconStyle: 'bg-gradient-to-br from-gold to-gold-dark text-primary',
     barStyle: 'bg-gold',
+    title: 'AS400 / IBM i Consulting',
+    items: [
+      'IBM i Environment Assessment',
+      'Technology & Architecture Roadmap',
+      'Vendor-Neutral Advisory',
+      'Modernization Strategy & Planning',
+      'Security & Compliance Consulting',
+      'Cost & Licensing Optimization',
+    ],
+  },
+  {
+    key: 'development',
+    icon: Terminal,
+    iconStyle: 'bg-navy text-white',
+    barStyle: 'bg-navy',
     title: 'AS400 Development',
     items: [
       'RPG / RPGLE / CL / CLLE Development',
@@ -64,8 +80,8 @@ const SERVICE_COLUMNS = [
   {
     key: 'support',
     icon: Headset,
-    iconStyle: 'bg-navy text-white',
-    barStyle: 'bg-navy',
+    iconStyle: 'bg-accent-green text-white',
+    barStyle: 'bg-accent-green',
     title: 'AS400 Support',
     items: [
       '24x7 Help Desk & On-Call Support',
@@ -80,8 +96,8 @@ const SERVICE_COLUMNS = [
   {
     key: 'modernization',
     icon: TrendingUp,
-    iconStyle: 'bg-accent-green text-white',
-    barStyle: 'bg-accent-green',
+    iconStyle: 'bg-gradient-to-br from-gold to-gold-dark text-primary',
+    barStyle: 'bg-gold',
     title: 'AS400 Modernization',
     items: [
       'Legacy Application Assessment',
@@ -203,6 +219,11 @@ const PROCESS_STEPS = [
 
 const FAQS = [
   {
+    question: 'Do you offer standalone IBM i / AS400 consulting, or only full development work?',
+    answer:
+      'Both — we take on standalone consulting engagements (environment assessments, architecture roadmaps, advisory) as well as full development, support, and modernization work.',
+  },
+  {
     question: 'Do you work with our existing AS400/IBM i environment, or only new builds?',
     answer:
       'Both — most of our engagements are enhancements, support, and modernization on systems already in production.',
@@ -229,8 +250,8 @@ const FAQS = [
 
 export default function AS400Development() {
   useDocumentTitle(
-    'AS400 Development & 24x7 Support | Prosper Infotech',
-    'USA + offshore AS400 (IBM i) development, support, and modernization — RPG/RPGLE builds, 24x7x365 coverage, and a dedicated calling line. Get a free consultation.'
+    'AS400 (IBM i) Consulting, Development & 24x7 Support | Prosper Infotech',
+    'IBM i / AS400 consulting, development, support, and modernization — RPG/RPGLE builds, 24x7x365 coverage, and a dedicated calling line. Get a free consultation.'
   )
 
   return (
@@ -240,6 +261,7 @@ export default function AS400Development() {
         title="Get your free AS400 consultation"
         description="Tell us about your environment — we'll respond within one business day."
         serviceOptions={[
+          'AS400 / IBM i Consulting',
           'AS400 Development (RPG/RPGLE)',
           'AS400 Support / Help Desk',
           'AS400 Modernization',
@@ -266,13 +288,13 @@ export default function AS400Development() {
             </h1>
             <p className="text-2xl md:text-3xl font-heading font-bold leading-snug">
               <span className="text-white">AS400 (IBM i) </span>
-              <span className="text-gold">Development</span>
-              <span className="text-white">, Support &amp; Modernization</span>
+              <span className="text-gold">Consulting</span>
+              <span className="text-white">, Development &amp; Support</span>
             </p>
             <p className="text-white/80 text-lg max-w-xl">
-              A specialized AS400 development team already serving live enterprise environments —
-              RPG/RPGLE builds, enhancements, and integrations delivered by a US-coordinated,
-              offshore-backed team.
+              A specialized AS400 / IBM i consulting and development team already serving live
+              enterprise environments — assessments, RPG/RPGLE builds, enhancements, and
+              modernization delivered by a US-coordinated, offshore-backed team.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-2">
@@ -458,7 +480,7 @@ export default function AS400Development() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute top-0 right-1/4 h-64 w-64 rounded-full bg-accent-green/10 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICE_COLUMNS.map((col, i) => {
             const Icon = col.icon
             return (
@@ -614,6 +636,7 @@ export default function AS400Development() {
             </p>
             <LandingLeadForm
               serviceOptions={[
+                'AS400 / IBM i Consulting',
                 'AS400 Development (RPG/RPGLE)',
                 'AS400 Support / Help Desk',
                 'AS400 Modernization',
