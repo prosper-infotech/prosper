@@ -129,16 +129,15 @@ export default function LandingLeadForm({
 
         <div>
           <label htmlFor="lp-phone" className="block text-sm font-semibold text-ink-900 mb-1.5">
-            Phone
+            Phone <span className="text-ink-500 font-normal">(optional)</span>
           </label>
           <input
             id="lp-phone"
             type="tel"
             className={inputClasses}
             placeholder="+1 234 567 8900"
-            {...register('phone', { required: 'Phone is required' })}
+            {...register('phone')}
           />
-          {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
         </div>
       </div>
 
