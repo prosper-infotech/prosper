@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import {
   BrainCircuit,
   Cpu,
@@ -20,8 +21,9 @@ import {
   ShoppingCart,
   HeartPulse,
   Mail,
+  Globe,
 } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -159,6 +161,33 @@ const PROCESS_STEPS = [
   },
 ]
 
+const STATS = [
+  { value: 10, suffix: '+', label: 'Years of Technology Delivery' },
+  { value: 50, suffix: '+', label: 'Engineers Deployed' },
+  { value: 100, suffix: '+', label: 'Projects Delivered' },
+  { value: 2, suffix: '', label: 'Global Delivery Hubs' },
+]
+
+const HUB_ROLES = ['Coordination Hub', 'Delivery Hub']
+
+const TECH_STACK = [
+  'Python',
+  'TensorFlow',
+  'PyTorch',
+  'OpenCV',
+  'React',
+  'Node.js',
+  'AWS',
+  'Azure',
+  'Docker',
+  'Kubernetes',
+  'LoRaWAN',
+  'MQTT',
+  'Tesseract OCR',
+  'PostgreSQL',
+  'MongoDB',
+]
+
 const FAQS = [
   {
     question: 'Do you provide dedicated resources or project-based delivery?',
@@ -189,6 +218,34 @@ function Eyebrow({ children, className = '' }) {
   return (
     <span className={`${MONO_FONT} text-xs font-semibold uppercase tracking-widest text-[#6b5f00] ${className}`}>
       {children}
+    </span>
+  )
+}
+
+function AnimatedCounter({ to, suffix = '', duration = 1.6 }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [value, setValue] = useState(0)
+
+  useEffect(() => {
+    if (!inView) return
+    let start = null
+    let frame
+    function step(ts) {
+      if (start === null) start = ts
+      const progress = Math.min((ts - start) / (duration * 1000), 1)
+      setValue(Math.floor(progress * to))
+      if (progress < 1) frame = requestAnimationFrame(step)
+      else setValue(to)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [inView, to, duration])
+
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
     </span>
   )
 }
@@ -284,6 +341,66 @@ export default function TechOutsourcing() {
         </div>
       </section>
 
+      {/* Stats bar */}
+      <section className={`relative overflow-hidden ${SURFACE} border-y ${BORDER}`}>
+        <div className="max-w-6xl mx-auto px-6 py-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {STATS.map((stat, i) => (
+              <Reveal key={stat.label} delay={i * 0.08} className="text-center">
+                <div className={`${HEADING_FONT} ${NAVY} text-4xl font-extrabold`}>
+                  <AnimatedCounter to={stat.value} suffix={stat.suffix} />
+                </div>
+                <p className={`mt-1 text-sm ${CHARCOAL} font-semibold`}>{stat.label}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Global delivery model */}
+      <section className="relative overflow-hidden bg-white">
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
+        <div className="relative max-w-5xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-14">
+            <Eyebrow>Global Delivery Model</Eyebrow>
+            <h2 className={`${HEADING_FONT} ${NAVY} mt-2 text-3xl font-bold`}>
+              A US-coordinated, offshore-backed delivery bridge
+            </h2>
+            <p className={`mt-3 ${CHARCOAL} max-w-xl mx-auto`}>
+              Two connected hubs working as one team — local-hours coordination with the cost
+              advantages of offshore engineering.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-[1fr_auto_1fr] items-center gap-8">
+            {OFFICES.map((office, i) => (
+              <div key={office.country} className={i === 1 ? 'md:order-3' : ''}>
+                <Reveal delay={i * 0.1}>
+                  <div className={`rounded-xl border ${BORDER} bg-white p-6 text-center shadow-sm`}>
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
+                      <MapPin className="h-6 w-6 text-gold-dark" />
+                    </div>
+                    <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-lg font-bold`}>{office.country}</h3>
+                    <p className={`text-sm ${CHARCOAL} mt-1`}>{HUB_ROLES[i]}</p>
+                    <p className={`mt-3 text-sm font-semibold ${NAVY}`}>{office.phone}</p>
+                  </div>
+                </Reveal>
+              </div>
+            ))}
+            <div className="hidden md:flex md:order-2 flex-col items-center gap-3 px-2">
+              <Globe className="h-6 w-6 text-gold-dark" />
+              <div className={`relative h-0.5 w-20 rounded-full ${SURFACE} border ${BORDER} overflow-hidden`}>
+                <motion.div
+                  className="absolute top-0 h-full w-6 bg-gradient-to-r from-transparent via-gold-dark to-transparent"
+                  animate={{ x: ['-100%', '400%'] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="relative overflow-hidden bg-white">
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
@@ -307,6 +424,31 @@ export default function TechOutsourcing() {
             </h2>
           </Reveal>
           <VisualGallery items={CAPABILITY_VISUALS} />
+        </div>
+      </section>
+
+      {/* Tech stack marquee */}
+      <section className={`relative overflow-hidden border-y ${BORDER} bg-white py-8`}>
+        <Reveal className="text-center mb-6">
+          <Eyebrow>Technologies We Work With</Eyebrow>
+        </Reveal>
+        <div
+          className="relative overflow-hidden"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          }}
+        >
+          <div className="flex w-max animate-marquee items-center gap-4">
+            {[...TECH_STACK, ...TECH_STACK].map((tech, i) => (
+              <span
+                key={i}
+                className={`${MONO_FONT} whitespace-nowrap rounded-full border ${BORDER} ${SURFACE} px-4 py-2 text-xs font-semibold uppercase tracking-wide ${NAVY}`}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
