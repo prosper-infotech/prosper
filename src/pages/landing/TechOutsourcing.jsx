@@ -27,12 +27,18 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
-import TechIllustration from '../../components/ui/TechIllustration'
+import VisualGallery from '../../components/ui/VisualGallery'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import { SHOW_CLIENTS } from '../../data/clients'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
+import heroTeamImg from '../../assets/tech-outsourcing-hero-team.jpg'
+import aiMlImg from '../../assets/tech-outsourcing-ai-ml.jpg'
+import iotImg from '../../assets/tech-outsourcing-iot.jpg'
+import ocrImg from '../../assets/tech-outsourcing-ocr.jpg'
+import devSupportImg from '../../assets/tech-outsourcing-dev-support.jpg'
+import supportTeamImg from '../../assets/tech-outsourcing-support-team.jpg'
 
 const usaPhone = OFFICES[0].phone
 
@@ -116,10 +122,10 @@ const INDUSTRIES = [
 ]
 
 const CAPABILITY_VISUALS = [
-  { variant: 'ai', caption: 'AI & ML models trained and deployed for real production workloads' },
-  { variant: 'iot', caption: 'IoT sensor networks and edge devices engineered end-to-end' },
-  { variant: 'ocr', caption: 'OCR and document intelligence built into live business workflows' },
-  { variant: 'dev', caption: 'Full-stack software delivery, from API to production deploy' },
+  { image: aiMlImg, caption: 'AI & ML models trained and deployed for real production workloads' },
+  { image: iotImg, caption: 'IoT sensor networks and edge devices engineered end-to-end' },
+  { image: ocrImg, caption: 'OCR and document intelligence built into live business workflows' },
+  { image: devSupportImg, caption: 'Full-stack software delivery, from API to production deploy' },
 ]
 
 const PROCESS_STEPS = [
@@ -253,8 +259,12 @@ export default function TechOutsourcing() {
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative z-10 aspect-square w-full overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
-                <TechIllustration variant="hero" className="h-full w-full" />
+              <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
+                <img
+                  src={heroTeamImg}
+                  alt="Prosper Infotech AI, IoT, and software engineering team collaborating"
+                  className="w-full"
+                />
               </div>
               <motion.span
                 className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
@@ -297,18 +307,7 @@ export default function TechOutsourcing() {
             </span>
             <h2 className="mt-2 text-3xl">The technology our engineers deliver</h2>
           </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {CAPABILITY_VISUALS.map((item, i) => (
-              <Reveal key={item.variant} delay={i * 0.08}>
-                <div className="group overflow-hidden rounded-xl border border-ink-300 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]">
-                  <TechIllustration variant={item.variant} className="aspect-[4/3]" />
-                  <p className="bg-white px-4 py-3 text-sm font-semibold text-ink-700 leading-snug">
-                    {item.caption}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <VisualGallery items={CAPABILITY_VISUALS} />
         </div>
       </section>
 
@@ -370,6 +369,26 @@ export default function TechOutsourcing() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Real Support, Real People
+            </span>
+            <h2 className="mt-2 text-3xl">A dedicated team behind every engagement</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="overflow-hidden rounded-2xl shadow-xl">
+              <img
+                src={supportTeamImg}
+                alt="Prosper Infotech support and engineering team"
+                className="w-full"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
