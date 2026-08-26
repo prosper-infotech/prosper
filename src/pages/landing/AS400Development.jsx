@@ -19,6 +19,7 @@ import {
   ShoppingCart,
   Boxes,
   Mail,
+  Globe,
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
@@ -34,6 +35,8 @@ import useDocumentTitle from '../../hooks/useDocumentTitle'
 import as400Hero from '../../assets/as400-hero.jpg'
 
 const usaPhone = OFFICES[0].phone
+
+const HUB_ROLES = ['Coordination Hub', 'Delivery Hub']
 
 const STAT_BADGES = [
   { icon: Clock, label: '24x7 Monitoring' },
@@ -115,6 +118,7 @@ const AS400_VISUALS = [
     title: '5250 Terminal Session',
     caption: 'Live AS/400 terminal sessions we work in every day',
     color: 'text-[#39ff6a]',
+    cursor: true,
     lines: [
       'AS/400 Main Menu',
       '',
@@ -125,7 +129,7 @@ const AS400_VISUALS = [
       ' 8. Problem Handling',
       '',
       'Selection or command',
-      '===> _',
+      '===>',
     ],
   },
   {
@@ -339,6 +343,51 @@ export default function AS400Development() {
       </section>
 
       <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
+        <div className="relative max-w-5xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-14">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Global Delivery Model
+            </span>
+            <h2 className="mt-2 text-3xl">A US-coordinated, offshore-backed delivery bridge</h2>
+            <p className="mt-3 text-ink-600 max-w-xl mx-auto">
+              Two connected hubs working as one team — local-hours coordination with the cost
+              advantages of offshore engineering.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-[1fr_auto_1fr] items-center gap-8">
+            {OFFICES.map((office, i) => (
+              <div key={office.country} className={i === 1 ? 'md:order-3' : ''}>
+                <Reveal delay={i * 0.1}>
+                  <div className="rounded-xl border border-ink-300 bg-white p-6 text-center shadow-sm">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
+                      <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="mt-4 font-heading font-semibold text-lg text-primary">
+                      {office.country}
+                    </h3>
+                    <p className="text-sm text-ink-600 mt-1">{HUB_ROLES[i]}</p>
+                    <p className="mt-3 text-sm font-semibold text-primary">{office.phone}</p>
+                  </div>
+                </Reveal>
+              </div>
+            ))}
+            <div className="hidden md:flex md:order-2 flex-col items-center gap-3 px-2">
+              <Globe className="h-6 w-6 text-gold" />
+              <div className="relative h-0.5 w-20 rounded-full bg-ink-300 overflow-hidden">
+                <motion.div
+                  className="absolute top-0 h-full w-6 bg-gradient-to-r from-transparent via-gold to-transparent"
+                  animate={{ x: ['-100%', '400%'] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute -top-10 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
         <div className="pointer-events-none absolute bottom-0 left-0 h-56 w-56 -translate-x-1/3 rounded-full bg-primary/10 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
@@ -370,9 +419,30 @@ export default function AS400Development() {
                       <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
                       <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
                     </div>
-                    <pre className={`font-mono text-[10px] leading-relaxed whitespace-pre-wrap ${v.color}`}>
-                      {v.lines.join('\n')}
-                    </pre>
+                    <motion.pre
+                      className={`font-mono text-[10px] leading-relaxed whitespace-pre-wrap ${v.color}`}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: '-40px' }}
+                      variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+                    >
+                      {v.lines.map((line, li) => (
+                        <motion.span
+                          key={li}
+                          className="block"
+                          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+                        >
+                          {line}
+                          {v.cursor && li === v.lines.length - 1 && (
+                            <motion.span
+                              className="ml-1 inline-block h-3 w-1.5 -mb-0.5 bg-current align-middle"
+                              animate={{ opacity: [1, 1, 0, 0] }}
+                              transition={{ duration: 1, repeat: Infinity, times: [0, 0.5, 0.5, 1] }}
+                            />
+                          )}
+                        </motion.span>
+                      ))}
+                    </motion.pre>
                   </div>
                   <div className="bg-white px-4 py-3">
                     <h3 className="text-sm font-semibold text-primary">{v.title}</h3>
