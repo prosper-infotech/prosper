@@ -26,17 +26,12 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
-import VisualGallery from '../../components/ui/VisualGallery'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import { SHOW_CLIENTS } from '../../data/clients'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import as400Hero from '../../assets/as400-hero.jpg'
-import galleryDistributionCenter from '../../assets/hero-slide-distribution-center.jpg'
-import galleryFleetGps from '../../assets/hero-slide-fleet-gps.jpg'
-import galleryRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
-import galleryDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
 
 const usaPhone = OFFICES[0].phone
 
@@ -115,11 +110,72 @@ const INDUSTRIES = [
   { icon: Boxes, label: 'Supply Chain & 3PL' },
 ]
 
-const GALLERY = [
-  { image: galleryDistributionCenter, caption: 'Enterprise-scale distribution centers running on AS400' },
-  { image: galleryFleetGps, caption: 'Fleet and logistics operations backed by AS400 systems' },
-  { image: galleryRfidWarehouse, caption: 'Warehouse operations supported by reliable AS400 infrastructure' },
-  { image: galleryDockMonitoring, caption: 'Dock and distribution operations running on AS400' },
+const AS400_VISUALS = [
+  {
+    title: '5250 Terminal Session',
+    caption: 'Live AS/400 terminal sessions we work in every day',
+    color: 'text-[#39ff6a]',
+    lines: [
+      'AS/400 Main Menu',
+      '',
+      ' 1. User Tasks',
+      ' 2. Office Tasks',
+      ' 5. Programming',
+      ' 6. Communications',
+      ' 8. Problem Handling',
+      '',
+      'Selection or command',
+      '===> _',
+    ],
+  },
+  {
+    title: 'RPGLE Development',
+    caption: 'Modern free-format RPGLE, built and maintained daily',
+    color: 'text-[#7dd3fc]',
+    lines: [
+      '**FREE',
+      'dcl-proc getCustomer;',
+      '  dcl-pi *n char(50);',
+      '    custId packed(7:0);',
+      '  end-pi;',
+      '  exec sql',
+      '    select name into :custName',
+      '    from CUSTMAST',
+      '    where CUSTID = :custId;',
+      'end-proc;',
+    ],
+  },
+  {
+    title: 'DB2/400 Query Console',
+    caption: 'DB2/400 performance tuning and query optimization',
+    color: 'text-[#facc15]',
+    lines: [
+      'SELECT CUSTID, NAME, BALANCE',
+      'FROM CUSTMAST',
+      'WHERE BALANCE > 10000',
+      'ORDER BY BALANCE DESC;',
+      '',
+      ' CUSTID  NAME        BALANCE',
+      ' 100234  Acme Corp   45,210.00',
+      ' 100118  Globex Ltd  38,904.50',
+      ' 100061  Initech     22,300.00',
+    ],
+  },
+  {
+    title: '24x7 Monitoring',
+    caption: 'Round-the-clock system health and support monitoring',
+    color: 'text-[#f472b6]',
+    lines: [
+      'System Status:     ONLINE',
+      'CPU Utilization:       42%',
+      'Job Queue:        3 active',
+      'Disk (ASP1):       61% used',
+      'Uptime:          412 days',
+      '',
+      'Open Tickets:            2',
+      'Avg Response Time:  8 min',
+    ],
+  },
 ]
 
 const PROCESS_STEPS = [
@@ -215,22 +271,7 @@ export default function AS400Development() {
               offshore-backed team.
             </p>
 
-            <div className="flex flex-wrap gap-3 mt-2">
-              {STAT_BADGES.map((badge) => {
-                const Icon = badge.icon
-                return (
-                  <span
-                    key={badge.label}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
-                  >
-                    <Icon className="h-4 w-4 text-gold" />
-                    {badge.label}
-                  </span>
-                )
-              })}
-            </div>
-
-            <div className="flex flex-wrap gap-4 mt-4">
+            <div className="flex flex-wrap gap-4 mt-2">
               <div className="relative">
                 <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
                 <Button href="#lead-form" variant="primary-dark" className="relative">
@@ -250,6 +291,21 @@ export default function AS400Development() {
                   Call {usaPhone}
                 </span>
               </Button>
+            </div>
+
+            <div className="flex flex-wrap gap-3 mt-2">
+              {STAT_BADGES.map((badge) => {
+                const Icon = badge.icon
+                return (
+                  <span
+                    key={badge.label}
+                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+                  >
+                    <Icon className="h-4 w-4 text-gold" />
+                    {badge.label}
+                  </span>
+                )
+              })}
             </div>
           </Reveal>
 
@@ -302,9 +358,30 @@ export default function AS400Development() {
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">
               See It In Action
             </span>
-            <h2 className="mt-2 text-3xl">The operations AS400 keeps running</h2>
+            <h2 className="mt-2 text-3xl">The work behind the scenes on AS400</h2>
           </Reveal>
-          <VisualGallery items={GALLERY} />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {AS400_VISUALS.map((v, i) => (
+              <Reveal key={v.title} delay={i * 0.08}>
+                <div className="group overflow-hidden rounded-xl border border-ink-300 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+                  <div className="aspect-[4/3] bg-[#0d1117] p-4 overflow-hidden">
+                    <div className="flex gap-1.5 mb-3">
+                      <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
+                    </div>
+                    <pre className={`font-mono text-[10px] leading-relaxed whitespace-pre-wrap ${v.color}`}>
+                      {v.lines.join('\n')}
+                    </pre>
+                  </div>
+                  <div className="bg-white px-4 py-3">
+                    <h3 className="text-sm font-semibold text-primary">{v.title}</h3>
+                    <p className="mt-0.5 text-xs text-ink-600">{v.caption}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
