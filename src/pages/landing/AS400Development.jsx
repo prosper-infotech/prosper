@@ -480,7 +480,7 @@ export default function AS400Development() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute top-0 right-1/4 h-64 w-64 rounded-full bg-accent-green/10 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
           {SERVICE_COLUMNS.map((col, i) => {
             const Icon = col.icon
             return (
