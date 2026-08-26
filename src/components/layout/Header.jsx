@@ -42,7 +42,7 @@ export default function Header() {
             <img
               src={logo}
               alt="Prosper Infotech"
-              className="h-12 w-auto transition-opacity duration-200 hover:opacity-90 md:h-14"
+              className="h-14 w-auto transition-opacity duration-200 hover:opacity-90 md:h-16"
             />
           </Link>
 

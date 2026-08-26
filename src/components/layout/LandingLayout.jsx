@@ -4,6 +4,7 @@ import logo from '../../assets/logo-dark.png'
 import { OFFICES } from '../../data/offices'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import WhatsAppButton from './WhatsAppButton'
+import FloatingCallButton from './FloatingCallButton'
 import CallDropdown from './CallDropdown'
 
 const usaPhone = OFFICES[0].phone
@@ -56,6 +57,7 @@ export default function LandingLayout() {
         </div>
       </footer>
       <WhatsAppButton />
+      <FloatingCallButton />
     </div>
   )
 }

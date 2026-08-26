@@ -4,6 +4,7 @@ import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
+import FloatingCallButton from './FloatingCallButton'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import useScrollToHash from '../../hooks/useScrollToHash'
 
@@ -32,6 +33,7 @@ export default function Layout() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <FloatingCallButton />
     </div>
   )
 }
