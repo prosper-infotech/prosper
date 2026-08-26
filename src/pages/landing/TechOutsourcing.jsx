@@ -27,16 +27,12 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
-import VisualGallery from '../../components/ui/VisualGallery'
+import TechIllustration from '../../components/ui/TechIllustration'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import { SHOW_CLIENTS } from '../../data/clients'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
-import techHero from '../../assets/hero-slide-ai-vision-iot.jpg'
-import galleryDockAi from '../../assets/hero-slide-dock-ai.jpg'
-import galleryIotYard from '../../assets/hero-slide-iot-yard.jpg'
-import galleryRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
 
 const usaPhone = OFFICES[0].phone
 
@@ -119,11 +115,11 @@ const INDUSTRIES = [
   { icon: HeartPulse, label: 'Healthcare' },
 ]
 
-const GALLERY = [
-  { image: techHero, caption: 'AI-powered vision and IoT systems built for real operations' },
-  { image: galleryDockAi, caption: 'AI models trained and deployed for dock and gate automation' },
-  { image: galleryIotYard, caption: 'IoT sensor networks engineered for end-to-end yard visibility' },
-  { image: galleryRfidWarehouse, caption: 'OCR and data capture solutions built into live warehouse workflows' },
+const CAPABILITY_VISUALS = [
+  { variant: 'ai', caption: 'AI & ML models trained and deployed for real production workloads' },
+  { variant: 'iot', caption: 'IoT sensor networks and edge devices engineered end-to-end' },
+  { variant: 'ocr', caption: 'OCR and document intelligence built into live business workflows' },
+  { variant: 'dev', caption: 'Full-stack software delivery, from API to production deploy' },
 ]
 
 const PROCESS_STEPS = [
@@ -251,14 +247,14 @@ export default function TechOutsourcing() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex items-center justify-center max-w-sm">
+            <div className="relative flex w-full max-w-sm items-center justify-center">
               <motion.div
                 className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
-                <img src={techHero} alt="AI, IoT, and OCR technology engineering" className="w-full" />
+              <div className="relative z-10 aspect-square w-full overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
+                <TechIllustration variant="hero" className="h-full w-full" />
               </div>
               <motion.span
                 className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
@@ -297,11 +293,22 @@ export default function TechOutsourcing() {
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-              See It In Action
+              What We Build
             </span>
-            <h2 className="mt-2 text-3xl">The technology our engineers build</h2>
+            <h2 className="mt-2 text-3xl">The technology our engineers deliver</h2>
           </Reveal>
-          <VisualGallery items={GALLERY} />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {CAPABILITY_VISUALS.map((item, i) => (
+              <Reveal key={item.variant} delay={i * 0.08}>
+                <div className="group overflow-hidden rounded-xl border border-ink-300 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+                  <TechIllustration variant={item.variant} className="aspect-[4/3]" />
+                  <p className="bg-white px-4 py-3 text-sm font-semibold text-ink-700 leading-snug">
+                    {item.caption}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
