@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Mail, Phone } from 'lucide-react'
 import { Link, useOutlet } from 'react-router-dom'
 import logo from '../../assets/logo-dark.png'
@@ -6,12 +7,17 @@ import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import WhatsAppButton from './WhatsAppButton'
 import FloatingCallButton from './FloatingCallButton'
 import CallDropdown from './CallDropdown'
+import { captureUtmParams } from '../../utils/attribution'
 
 const usaPhone = OFFICES[0].phone
 
 export default function LandingLayout() {
   const element = useOutlet()
   useAnalyticsPageView()
+
+  useEffect(() => {
+    captureUtmParams()
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col">

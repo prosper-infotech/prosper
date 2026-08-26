@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
+import { attributeSource, captureUtmParams } from '../../utils/attribution'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
 
@@ -49,10 +50,14 @@ export default function LandingLeadForm({
 
   const onSubmit = async (data) => {
     try {
+      const utm = captureUtmParams()
+      const source = attributeSource(campaign)
+
       await submitLead({
         ...data,
         _subject: `New lead — ${campaign} (${data.service})`,
-        source: campaign,
+        source,
+        ...utm,
       })
       submitToPrivyr({
         name: data.name,
@@ -65,7 +70,7 @@ export default function LandingLeadForm({
         ]
           .filter(Boolean)
           .join(' | '),
-        source: campaign,
+        source,
       })
       window.gtag?.('event', 'generate_lead', {
         event_category: campaign,
