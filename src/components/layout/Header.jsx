@@ -77,7 +77,14 @@ export default function Header() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Button to="/contact" variant="primary" icon={false} className="whitespace-nowrap">
+            <Button
+              href="https://calendly.com/prosperinfotech-sales/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              icon={false}
+              className="whitespace-nowrap"
+            >
               Book a demo
             </Button>
             <WhatsAppLink

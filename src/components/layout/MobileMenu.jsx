@@ -107,7 +107,14 @@ export default function MobileMenu({ open, onClose }) {
             </nav>
 
             <div className="px-5 py-6">
-              <Button to="/contact" variant="primary" onClick={onClose} className="w-full">
+              <Button
+                href="https://calendly.com/prosperinfotech-sales/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                onClick={onClose}
+                className="w-full"
+              >
                 Book a demo
               </Button>
             </div>

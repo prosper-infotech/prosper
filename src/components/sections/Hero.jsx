@@ -167,7 +167,12 @@ export default function Hero() {
 
               <div className="absolute inset-x-0 bottom-0 z-10 flex h-[24%] flex-col items-center justify-center gap-4 px-6">
                 <div className="flex items-center justify-center gap-4">
-                  <Button to="/contact#contact-form" variant="primary-dark">
+                  <Button
+                    href="https://calendly.com/prosperinfotech-sales/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="primary-dark"
+                  >
                     Book a demo
                   </Button>
                   <Button to="/solutions" variant="outline">
@@ -204,7 +209,12 @@ export default function Hero() {
 
               <div className="absolute inset-x-0 bottom-0 h-[24%] z-10 flex flex-col items-center justify-center gap-4 px-6">
                 <div className="flex items-center justify-center gap-4">
-                  <Button to="/contact#contact-form" variant="primary-dark">
+                  <Button
+                    href="https://calendly.com/prosperinfotech-sales/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="primary-dark"
+                  >
                     Book a demo
                   </Button>
                   <Button to="/solutions" variant="outline">
@@ -299,7 +309,12 @@ export default function Hero() {
         className="absolute inset-x-0 bottom-0 h-[24%] z-10 flex flex-col items-center justify-center gap-4 px-6"
       >
         <div className="flex items-center justify-center gap-4">
-          <Button to="/contact#contact-form" variant="primary-dark">
+          <Button
+            href="https://calendly.com/prosperinfotech-sales/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="primary-dark"
+          >
             Book a demo
           </Button>
           <Button to="/solutions" variant="outline">

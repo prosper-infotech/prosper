@@ -1,7 +1,10 @@
 import Button from './Button'
 import Reveal from '../motion/Reveal'
 
-export default function CTABand({ title, description, ctaLabel = 'Book a demo', ctaTo = '/contact' }) {
+const BOOK_DEMO_URL = 'https://calendly.com/prosperinfotech-sales/30min'
+
+export default function CTABand({ title, description, ctaLabel = 'Book a demo', ctaTo = BOOK_DEMO_URL }) {
+  const isExternal = /^https?:\/\//.test(ctaTo)
   return (
     <section className="max-w-7xl mx-auto px-6 py-16 md:py-20">
       <Reveal
@@ -15,9 +18,21 @@ export default function CTABand({ title, description, ctaLabel = 'Book a demo', 
           <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary">{title}</h3>
           {description && <p className="mt-2 text-primary/80">{description}</p>}
         </div>
-        <Button to={ctaTo} variant="outline-dark" className="relative z-10 shrink-0">
-          {ctaLabel}
-        </Button>
+        {isExternal ? (
+          <Button
+            href={ctaTo}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="outline-dark"
+            className="relative z-10 shrink-0"
+          >
+            {ctaLabel}
+          </Button>
+        ) : (
+          <Button to={ctaTo} variant="outline-dark" className="relative z-10 shrink-0">
+            {ctaLabel}
+          </Button>
+        )}
       </Reveal>
     </section>
   )
