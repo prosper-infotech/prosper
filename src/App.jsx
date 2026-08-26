@@ -33,6 +33,7 @@ const NotFound = lazy(() => import('./pages/NotFound'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const AS400Development = lazy(() => import('./pages/landing/AS400Development'))
 const AssetTracking = lazy(() => import('./pages/landing/AssetTracking'))
+const TechOutsourcing = lazy(() => import('./pages/landing/TechOutsourcing'))
 const ThankYou = lazy(() => import('./pages/landing/ThankYou'))
 const CategoryOverviewTemplate = lazy(() => import('./components/templates/CategoryOverviewTemplate'))
 const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageTemplate'))
@@ -133,6 +134,7 @@ function App() {
         <Route element={<LandingLayout />}>
           <Route path="/lp/as400-development" element={<AS400Development />} />
           <Route path="/lp/asset-tracking" element={<AssetTracking />} />
+          <Route path="/lp/tech-outsourcing" element={<TechOutsourcing />} />
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
