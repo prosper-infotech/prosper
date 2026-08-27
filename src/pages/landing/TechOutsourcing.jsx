@@ -422,7 +422,7 @@ export default function TechOutsourcing() {
           animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
-        <div className="relative max-w-4xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
           <Reveal className="flex flex-col items-center gap-5">
             <span
               className={`${MONO_FONT} inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 to-gold/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#6b5f00] shadow-sm`}
@@ -438,7 +438,7 @@ export default function TechOutsourcing() {
               Technology Resource Outsourcing &amp; Product Engineering for Real-World Logistics Operations
               <span className="absolute -bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-gold-dark" />
             </p>
-            <p className={`${CHARCOAL} text-lg max-w-2xl mt-2`}>
+            <p className={`${CHARCOAL} text-lg max-w-none mt-2`}>
               Extend your engineering team with specialists who already understand AI/ML, Computer
               Vision, OCR, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS, YMS, CFS and
               container automation. From a single specialist to a complete engineering pod, Prosper
