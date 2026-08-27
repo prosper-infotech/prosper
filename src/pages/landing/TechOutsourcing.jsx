@@ -524,15 +524,18 @@ export default function TechOutsourcing() {
               const Icon = item.icon
               return (
                 <Reveal key={item.title} delay={(i % 5) * 0.06}>
-                  <div className={`group relative h-full overflow-hidden rounded-xl border ${BORDER} bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
-                    <span className={`${MONO_FONT} absolute top-3 right-4 text-[10px] font-semibold text-[#E2E8F0] group-hover:text-gold transition-colors`}>
+                  <div className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.4)]`}>
+                    <span
+                      className={`${MONO_FONT} pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-[#0F172A]/[0.04] group-hover:text-gold/10 transition-colors`}
+                    >
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gold/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                       <Icon className="h-5 w-5 text-[#6b5f00]" />
                     </div>
-                    <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-sm font-bold`}>{item.title}</h3>
-                    <p className={`mt-2 text-xs ${CHARCOAL} leading-relaxed`}>{item.description}</p>
+                    <h3 className={`${HEADING_FONT} ${NAVY} relative mt-4 text-sm font-bold`}>{item.title}</h3>
+                    <p className={`relative mt-2 text-xs ${CHARCOAL} leading-relaxed`}>{item.description}</p>
+                    <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-gold to-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
                   </div>
                 </Reveal>
               )
@@ -560,7 +563,7 @@ export default function TechOutsourcing() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SOLUTIONS.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.08}>
-                <div className={`group overflow-hidden rounded-xl border ${BORDER} bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]`}>
+                <div className={`group overflow-hidden rounded-2xl border ${BORDER} bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]`}>
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={item.image}
@@ -611,14 +614,20 @@ export default function TechOutsourcing() {
             {IP_CHECKLIST.map((item, i) => (
               <Reveal key={item} delay={i * 0.05}>
                 <div
-                  className={`flex h-full flex-col items-center text-center gap-3 rounded-xl border ${BORDER} bg-white px-5 py-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}
+                  className={`group relative flex h-full items-center gap-4 overflow-hidden rounded-2xl border ${BORDER} bg-white px-5 py-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}
                 >
-                  <div
-                    className={`flex h-11 w-11 items-center justify-center rounded-full ${i % 2 === 0 ? 'bg-gold/20' : 'bg-[#0F172A]/10'}`}
-                  >
-                    <Lock className={`h-5 w-5 ${i % 2 === 0 ? 'text-[#6b5f00]' : 'text-[#0F172A]'}`} />
+                  <div className={`absolute inset-y-0 left-0 w-1 ${i % 2 === 0 ? 'bg-gold' : 'bg-[#0F172A]'} opacity-70`} />
+                  <div className="relative shrink-0">
+                    <div
+                      className={`flex h-11 w-11 items-center justify-center rounded-full ${i % 2 === 0 ? 'bg-gradient-to-br from-gold/30 to-gold/5 ring-1 ring-inset ring-gold/25' : 'bg-gradient-to-br from-[#0F172A]/15 to-[#0F172A]/5 ring-1 ring-inset ring-[#0F172A]/15'}`}
+                    >
+                      <Lock className={`h-5 w-5 ${i % 2 === 0 ? 'text-[#6b5f00]' : 'text-[#0F172A]'}`} />
+                    </div>
+                    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow ring-1 ring-inset ring-gold/40">
+                      <Check className="h-2.5 w-2.5 text-gold-dark" />
+                    </span>
                   </div>
-                  <span className={`text-sm font-semibold ${CHARCOAL}`}>{item}</span>
+                  <span className={`text-left text-sm font-semibold ${CHARCOAL}`}>{item}</span>
                 </div>
               </Reveal>
             ))}
@@ -638,11 +647,27 @@ export default function TechOutsourcing() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {ENGAGEMENT_MODELS.map((model, i) => {
               const Icon = model.icon
+              const featured = i === 1
               return (
                 <Reveal key={model.title} delay={i * 0.08}>
-                  <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1`}>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20">
-                      <Icon className="h-5 w-5 text-[#6b5f00]" />
+                  <div
+                    className={`relative h-full rounded-2xl border bg-white p-6 pt-8 transition-all duration-300 hover:-translate-y-1.5 ${
+                      featured
+                        ? 'border-gold shadow-[0_0_0_1px_rgba(247,221,0,0.4),0_20px_45px_-15px_rgba(247,221,0,0.5)]'
+                        : `${BORDER} shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`
+                    }`}
+                  >
+                    {featured && (
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-gold to-gold-dark px-4 py-1 text-[10px] font-bold uppercase tracking-wide text-primary shadow-md">
+                        Most Requested
+                      </span>
+                    )}
+                    <div
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                        featured ? 'bg-gradient-to-br from-gold to-gold-dark shadow-md' : 'bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20'
+                      }`}
+                    >
+                      <Icon className={`h-6 w-6 ${featured ? 'text-primary' : 'text-[#6b5f00]'}`} />
                     </div>
                     <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-base font-bold`}>{model.title}</h3>
                     <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{model.description}</p>
@@ -668,18 +693,18 @@ export default function TechOutsourcing() {
               const Icon = group.icon
               return (
                 <Reveal key={group.title} delay={i * 0.06}>
-                  <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]`}>
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gold/20 shrink-0">
-                        <Icon className="h-4 w-4 text-[#6b5f00]" />
+                  <div className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]`}>
+                    <div className={`flex items-center gap-3 ${TINT_GOLD} px-6 py-4 border-b ${BORDER}`}>
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-inset ring-gold/25 shrink-0 transition-transform duration-300 group-hover:scale-110">
+                        <Icon className="h-[18px] w-[18px] text-[#6b5f00]" />
                       </div>
                       <h3 className={`${HEADING_FONT} ${NAVY} text-sm font-bold uppercase tracking-wide`}>{group.title}</h3>
                     </div>
-                    <div className="mt-4 flex flex-wrap gap-1.5">
+                    <div className="p-6 flex flex-wrap gap-1.5">
                       {group.items.map((tech) => (
                         <span
                           key={tech}
-                          className={`${MONO_FONT} rounded-full ${SURFACE} border ${BORDER} px-2.5 py-1 text-[10px] font-semibold ${CHARCOAL}`}
+                          className={`${MONO_FONT} rounded-full ${SURFACE} border ${BORDER} px-2.5 py-1 text-[10px] font-semibold ${CHARCOAL} transition-colors group-hover:border-gold/40`}
                         >
                           {tech}
                         </span>
@@ -734,18 +759,26 @@ export default function TechOutsourcing() {
                 transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
               />
             </div>
-            {GLOBAL_HUBS.map((hub, i) => (
-              <Reveal key={hub.country} delay={i * 0.1}>
-                <div className={`relative z-10 h-full rounded-xl border ${BORDER} bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
-                    <MapPin className="h-6 w-6 text-gold-dark" />
+            {GLOBAL_HUBS.map((hub, i) => {
+              const accent = ['from-gold to-gold-dark', 'from-[#0F172A] to-[#1E293B]', 'from-[#6b5f00] to-gold-dark'][i]
+              return (
+                <Reveal key={hub.country} delay={i * 0.1}>
+                  <div className={`group relative z-10 h-full overflow-hidden rounded-2xl border ${BORDER} bg-white text-center shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
+                    <div className={`h-1.5 w-full bg-gradient-to-r ${accent}`} />
+                    <div className="p-6">
+                      <div
+                        className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br ${accent} shadow-md transition-transform duration-300 group-hover:scale-110`}
+                      >
+                        <MapPin className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-lg font-bold`}>{hub.country}</h3>
+                      <p className={`text-sm ${CHARCOAL} mt-2 leading-relaxed`}>{hub.role}</p>
+                      {hub.phone && <p className={`mt-3 text-sm font-semibold ${NAVY}`}>{hub.phone}</p>}
+                    </div>
                   </div>
-                  <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-lg font-bold`}>{hub.country}</h3>
-                  <p className={`text-sm ${CHARCOAL} mt-2 leading-relaxed`}>{hub.role}</p>
-                  {hub.phone && <p className={`mt-3 text-sm font-semibold ${NAVY}`}>{hub.phone}</p>}
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              )
+            })}
           </div>
           <Reveal delay={0.2} className={`mt-8 rounded-xl border ${BORDER} ${SURFACE} px-6 py-4 text-center max-w-2xl mx-auto`}>
             <p className={`${HEADING_FONT} ${NAVY} font-semibold`}>
@@ -782,12 +815,17 @@ export default function TechOutsourcing() {
               const Icon = useCase.icon
               return (
                 <Reveal key={useCase.title} delay={i * 0.06}>
-                  <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1`}>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20">
+                  <div className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
+                    <span
+                      className={`${HEADING_FONT} pointer-events-none absolute -bottom-4 -right-2 text-7xl font-black text-[#0F172A]/[0.035] group-hover:text-gold/10 transition-colors`}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-5 w-5 text-[#6b5f00]" />
                     </div>
-                    <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-base font-bold`}>{useCase.title}</h3>
-                    <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{useCase.description}</p>
+                    <h3 className={`${HEADING_FONT} ${NAVY} relative mt-4 text-base font-bold`}>{useCase.title}</h3>
+                    <p className={`relative mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{useCase.description}</p>
                   </div>
                 </Reveal>
               )
@@ -806,14 +844,24 @@ export default function TechOutsourcing() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {WHY_PROSPER.map((reason, i) => {
               const Icon = reason.icon
+              const gold = i % 2 === 0
               return (
                 <Reveal key={reason.label} delay={i * 0.06}>
-                  <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1`}>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20">
-                      <Icon className="h-5 w-5 text-[#6b5f00]" />
+                  <div
+                    className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}
+                  >
+                    <div
+                      className={`pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl transition-opacity duration-300 opacity-60 group-hover:opacity-100 ${gold ? 'bg-gold/15' : 'bg-[#0F172A]/10'}`}
+                    />
+                    <div
+                      className={`relative flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 ${
+                        gold ? 'bg-gradient-to-br from-gold to-gold-dark' : 'bg-gradient-to-br from-[#0F172A] to-[#1E293B]'
+                      }`}
+                    >
+                      <Icon className={`h-6 w-6 ${gold ? 'text-primary' : 'text-white'}`} />
                     </div>
-                    <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-base font-bold`}>{reason.label}</h3>
-                    <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{reason.description}</p>
+                    <h3 className={`${HEADING_FONT} ${NAVY} relative mt-4 text-base font-bold`}>{reason.label}</h3>
+                    <p className={`relative mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{reason.description}</p>
                   </div>
                 </Reveal>
               )
