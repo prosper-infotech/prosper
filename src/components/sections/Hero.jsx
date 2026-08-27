@@ -5,11 +5,12 @@ import Button from '../ui/Button'
 import AnimatedText from '../motion/AnimatedText'
 import slideAiVisionIot from '../../assets/hero-slide-ai-vision-iot.jpg'
 import slideDockAi from '../../assets/hero-slide-dock-ai.jpg'
-import slideRfidWarehouse from '../../assets/hero-slide-rfid-warehouse.jpg'
+import slideRfidWarehouse from '../../assets/hero-slide-rfid-driven-warehouse.jpg'
 import slideIotYard from '../../assets/hero-slide-iot-yard.jpg'
 import slideDockMonitoring from '../../assets/hero-slide-dock-monitoring.jpg'
 import slideCfs from '../../assets/hero-slide-cfs.jpg'
 import slideForklift from '../../assets/hero-slide-forklift.jpg'
+import slideAssetTracking from '../../assets/hero-slide-asset-tracking.jpg'
 
 const SLIDES = [
   {
@@ -21,7 +22,7 @@ const SLIDES = [
   },
   {
     image: slideRfidWarehouse,
-    alt: 'RFID-powered warehouse inventory tracking',
+    alt: 'RFID-powered warehouse inventory tracking with real-time rack location and pallet detection',
     eyebrow: 'RFID Warehouse Intelligence',
     title: 'RFID-Driven Warehouse Intelligence',
     highlightWords: ['RFID-Driven', 'Intelligence'],
@@ -71,6 +72,14 @@ const SLIDES = [
     title: 'End-to-End IoT Yard Tracking',
     highlightWords: ['End-to-End', 'IoT'],
     subtitle: 'WiFi and IoT sensors keep every trailer and asset visible the moment it enters your yard.',
+  },
+  {
+    image: slideAssetTracking,
+    alt: 'RFID, GPS, BLE and LoRaWAN asset tracking system architecture with a live fleet dashboard',
+    eyebrow: 'Asset & Fleet Tracking',
+    title: 'Know Where Every Asset Is, Always',
+    highlightWords: ['Every', 'Always'],
+    subtitle: 'RFID, GPS, BLE, and LoRaWAN trackers feed one live dashboard — across the yard, the warehouse, and the road.',
   },
 ]
 
