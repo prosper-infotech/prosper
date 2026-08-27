@@ -359,8 +359,8 @@ export default function TechOutsourcing() {
           animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.15, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-          <Reveal className="flex flex-col gap-5">
+        <div className="relative max-w-4xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
+          <Reveal className="flex flex-col items-center gap-5">
             <Eyebrow>US-Coordinated Delivery &bull; Global Engineering &bull; Logistics-Focused</Eyebrow>
 
             <h1 className={`${HEADING_FONT} ${NAVY} text-4xl md:text-5xl font-bold leading-tight`}>
@@ -369,7 +369,7 @@ export default function TechOutsourcing() {
             <p className={`${HEADING_FONT} ${NAVY} text-xl md:text-2xl font-bold leading-snug`}>
               Technology Resource Outsourcing &amp; Product Engineering for Real-World Logistics Operations
             </p>
-            <p className={`${CHARCOAL} text-lg max-w-xl`}>
+            <p className={`${CHARCOAL} text-lg max-w-2xl`}>
               Extend your engineering team with specialists who already understand AI/ML, Computer
               Vision, OCR, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS, YMS, CFS and
               container automation. From a single specialist to a complete engineering pod, Prosper
@@ -377,7 +377,7 @@ export default function TechOutsourcing() {
               logistics technology.
             </p>
 
-            <div className="flex flex-wrap gap-4 mt-2">
+            <div className="flex flex-wrap justify-center gap-4 mt-2">
               <Button href="#lead-form" variant="primary">
                 Talk to an Engineering Lead
               </Button>
@@ -386,7 +386,7 @@ export default function TechOutsourcing() {
               </Button>
             </div>
 
-            <div className={`flex flex-wrap gap-x-6 gap-y-3 pt-6 mt-2 border-t ${BORDER}`}>
+            <div className={`flex flex-wrap justify-center gap-x-6 gap-y-3 pt-6 mt-2 border-t ${BORDER}`}>
               {TRUST_STRIP.map((label) => (
                 <span key={label} className={`inline-flex items-center gap-2 text-sm font-bold ${NAVY}`}>
                   <Check className="h-4 w-4 text-gold-dark" />
@@ -396,17 +396,15 @@ export default function TechOutsourcing() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex w-full max-w-sm items-center justify-center">
-              <div
-                className={`relative z-10 overflow-hidden rounded-xl border ${BORDER} shadow-[0_20px_50px_-15px_rgba(15,23,42,0.15)]`}
-              >
-                <img
-                  src={heroTeamImg}
-                  alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
-                  className="w-full"
-                />
-              </div>
+          <Reveal delay={0.1} className="w-full mt-4">
+            <div
+              className={`relative mx-auto max-w-3xl overflow-hidden rounded-xl border ${BORDER} shadow-[0_20px_50px_-15px_rgba(15,23,42,0.15)]`}
+            >
+              <img
+                src={heroTeamImg}
+                alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
+                className="w-full"
+              />
             </div>
           </Reveal>
         </div>
