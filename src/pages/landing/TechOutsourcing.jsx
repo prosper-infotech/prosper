@@ -546,7 +546,7 @@ export default function TechOutsourcing() {
               Build the Team Around the Skills the Project Actually Needs
             </h2>
           </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-5 sm:grid-cols-2 max-w-4xl mx-auto">
             {EXPERTISE.map((item, i) => {
               const Icon = item.icon
               return (
