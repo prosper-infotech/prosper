@@ -36,6 +36,7 @@ import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import heroTeamImg from '../../assets/tech-outsourcing-hero-team.jpg'
+import dockVisionImg from '../../assets/hero-slide-dock-monitoring.jpg'
 import yardVisionImg from '../../assets/hero-slide-iot-yard.jpg'
 import assetTrackingProductImg from '../../assets/hero-slide-asset-tracking.jpg'
 import forkliftVisionImg from '../../assets/hero-slide-forklift.jpg'
@@ -143,6 +144,13 @@ const EXPERTISE = [
 ]
 
 const SOLUTIONS = [
+  {
+    image: dockVisionImg,
+    title: 'DockVision AI',
+    subtitle: 'IoT-Powered Dock Visibility',
+    caption:
+      'LoRaWAN sensors, PLC integration and analytics for door position, trailer presence, restraint, leveler and dock utilization.',
+  },
   {
     image: yardVisionImg,
     title: 'YardVision AI',
