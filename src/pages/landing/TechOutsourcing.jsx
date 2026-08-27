@@ -424,15 +424,21 @@ export default function TechOutsourcing() {
         />
         <div className="relative max-w-4xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
           <Reveal className="flex flex-col items-center gap-5">
-            <Eyebrow>US-Coordinated Delivery &bull; Global Engineering &bull; Logistics-Focused</Eyebrow>
+            <span
+              className={`${MONO_FONT} inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 to-gold/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#6b5f00] shadow-sm`}
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              US-Coordinated Delivery &bull; Global Engineering &bull; Logistics-Focused
+            </span>
 
             <h1 className={`${HEADING_FONT} ${NAVY} text-4xl md:text-5xl font-bold leading-tight`}>
               Build Logistics Technology Faster with <span className="text-gold-dark">AI, IoT &amp; Automation</span> Engineers
             </h1>
-            <p className={`${HEADING_FONT} ${NAVY} text-xl md:text-2xl font-bold leading-snug`}>
+            <p className={`${HEADING_FONT} ${NAVY} relative inline-block text-xl md:text-2xl font-bold leading-snug`}>
               Technology Resource Outsourcing &amp; Product Engineering for Real-World Logistics Operations
+              <span className="absolute -bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-gold-dark" />
             </p>
-            <p className={`${CHARCOAL} text-lg max-w-2xl`}>
+            <p className={`${CHARCOAL} text-lg max-w-2xl mt-2`}>
               Extend your engineering team with specialists who already understand AI/ML, Computer
               Vision, OCR, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS, YMS, CFS and
               container automation. From a single specialist to a complete engineering pod, Prosper
@@ -449,10 +455,15 @@ export default function TechOutsourcing() {
               </Button>
             </div>
 
-            <div className={`flex flex-wrap justify-center gap-x-6 gap-y-3 pt-6 mt-2 border-t ${BORDER}`}>
+            <div className="flex flex-wrap justify-center gap-3 pt-6 mt-2">
               {TRUST_STRIP.map((label) => (
-                <span key={label} className={`inline-flex items-center gap-2 text-sm font-bold ${NAVY}`}>
-                  <Check className="h-4 w-4 text-gold-dark" />
+                <span
+                  key={label}
+                  className={`inline-flex items-center gap-2 rounded-full border ${BORDER} bg-white px-4 py-2 text-sm font-bold ${NAVY} shadow-[0_2px_8px_-2px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-[0_8px_20px_-6px_rgba(247,221,0,0.35)]`}
+                >
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark">
+                    <Check className="h-3 w-3 text-primary" />
+                  </span>
                   {label}
                 </span>
               ))}
