@@ -23,7 +23,8 @@ import {
   Globe,
   Mail,
 } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -391,6 +392,20 @@ export default function TechOutsourcing() {
     'Extend your engineering team with logistics-focused AI/ML, Computer Vision, OCR, RFID, GPS/RTK, LoRaWAN, Edge AI, WMS/YMS and container automation engineers. US-coordinated global delivery from Prosper Infotech.'
   )
 
+  const [showStickyBar, setShowStickyBar] = useState(false)
+
+  useEffect(() => {
+    const heroEnd = document.getElementById('lead-form')
+    const onScroll = () => {
+      const pastHero = window.scrollY > window.innerHeight * 0.9
+      const atForm = heroEnd ? window.scrollY + window.innerHeight > heroEnd.offsetTop : false
+      setShowStickyBar(pastHero && !atForm)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <div className={`${BODY_FONT} ${CHARCOAL}`}>
       <LeadFormPopup
@@ -447,10 +462,29 @@ export default function TechOutsourcing() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mt-2">
-              <Button href="#lead-form" variant="primary">
+              <Button
+                href="#lead-form"
+                variant="primary"
+                onClick={() =>
+                  window.gtag?.('event', 'cta_click', {
+                    event_category: 'Tech Outsourcing Landing Page',
+                    event_label: 'Hero - Talk to an Engineering Lead',
+                  })
+                }
+              >
                 Talk to an Engineering Lead
               </Button>
-              <Button href="#expertise" variant="outline-dark" icon={false}>
+              <Button
+                href="#expertise"
+                variant="outline-dark"
+                icon={false}
+                onClick={() =>
+                  window.gtag?.('event', 'cta_click', {
+                    event_category: 'Tech Outsourcing Landing Page',
+                    event_label: 'Hero - Explore Engineering Expertise',
+                  })
+                }
+              >
                 Explore Our Engineering Expertise
               </Button>
             </div>
@@ -478,6 +512,7 @@ export default function TechOutsourcing() {
                 <img
                   src={heroTeamImg}
                   alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
+                  fetchpriority="high"
                   className="w-full"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/30 via-transparent to-transparent" />
@@ -595,6 +630,8 @@ export default function TechOutsourcing() {
                     <img
                       src={item.image}
                       alt={item.title}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -980,6 +1017,33 @@ export default function TechOutsourcing() {
           </Reveal>
         </div>
       </section>
+
+      {/* Sticky mobile lead CTA */}
+      <AnimatePresence>
+        {showStickyBar && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className={`fixed inset-x-0 bottom-0 z-30 sm:hidden border-t ${BORDER} bg-white/95 backdrop-blur-sm px-4 py-3 shadow-[0_-8px_24px_-8px_rgba(15,23,42,0.15)]`}
+          >
+            <a
+              href="#lead-form"
+              onClick={() =>
+                window.gtag?.('event', 'cta_click', {
+                  event_category: 'Tech Outsourcing Landing Page',
+                  event_label: 'Sticky Mobile Bar',
+                })
+              }
+              className="flex items-center justify-center gap-2 rounded-lg bg-gold px-4 py-3 text-sm font-bold text-primary shadow-md transition-transform active:scale-95"
+            >
+              Talk to an Engineering Lead
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
