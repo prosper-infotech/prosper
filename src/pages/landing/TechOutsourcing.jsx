@@ -461,17 +461,6 @@ export default function TechOutsourcing() {
 
           <Reveal delay={0.1} className="w-full mt-6">
             <div className="relative mx-auto max-w-3xl">
-              {/* Decorative gradient frame */}
-              <div className="absolute -inset-2 rounded-[32px] bg-gradient-to-br from-gold via-white to-[#0F172A]/15 opacity-80 blur-[2px]" />
-              <motion.div
-                className="pointer-events-none absolute -inset-2 rounded-[32px]"
-                style={{
-                  background: 'conic-gradient(from 0deg, transparent, #F7DD00AA, transparent 30%)',
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-              />
-
               <div
                 className={`relative z-10 overflow-hidden rounded-[28px] border ${BORDER} shadow-[0_30px_70px_-20px_rgba(15,23,42,0.3)] ring-4 ring-white`}
               >
