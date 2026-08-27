@@ -36,9 +36,8 @@ import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import heroTeamImg from '../../assets/tech-outsourcing-hero-team.jpg'
-import gateVisionImg from '../../assets/hero-slide-dock-monitoring.jpg'
 import yardVisionImg from '../../assets/hero-slide-iot-yard.jpg'
-import dockVisionImg from '../../assets/hero-slide-dock-ai.jpg'
+import assetTrackingProductImg from '../../assets/hero-slide-asset-tracking.jpg'
 import forkliftVisionImg from '../../assets/hero-slide-forklift.jpg'
 import containerVisionImg from '../../assets/hero-slide-cfs.jpg'
 import assetFleetImg from '../../assets/hero-slide-fleet-gps.jpg'
@@ -145,23 +144,17 @@ const EXPERTISE = [
 
 const SOLUTIONS = [
   {
-    image: gateVisionImg,
-    title: 'GateVision AI',
-    subtitle: 'AI-Powered Gate Automation',
-    caption:
-      'OCR and computer vision for trailer identification, container numbers, license plates, arrival/departure verification and gate workflow automation.',
-  },
-  {
     image: yardVisionImg,
     title: 'YardVision AI',
     subtitle: 'Real-Time Yard Intelligence',
     caption: 'RFID, GPS/RTK, OCR and AI for trailer inventory, spotter operations, yard location and movement visibility.',
   },
   {
-    image: dockVisionImg,
-    title: 'DockVision AI',
-    subtitle: 'IoT-Powered Dock Visibility',
-    caption: 'LoRaWAN sensors, PLC integration and analytics for door position, trailer presence, restraint, leveler and dock utilization.',
+    image: assetTrackingProductImg,
+    title: 'AssetTrack Platform',
+    subtitle: 'End-to-End Asset Tracking Hardware & Software',
+    caption:
+      'RFID tags, fixed and handheld readers, GPS/BLE/LoRaWAN trackers and a cloud dashboard — one connected system from tag to report.',
   },
   {
     image: forkliftVisionImg,
