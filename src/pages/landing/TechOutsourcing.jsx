@@ -404,6 +404,14 @@ export default function TechOutsourcing() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-white">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.4]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #0F172A14 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+            maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 90%)',
+          }}
+        />
         <motion.div
           className="pointer-events-none absolute top-1/4 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
           animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.15, 1] }}
@@ -451,26 +459,45 @@ export default function TechOutsourcing() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="w-full mt-4">
+          <Reveal delay={0.1} className="w-full mt-6">
             <div className="relative mx-auto max-w-3xl">
+              {/* Decorative gradient frame */}
+              <div className="absolute -inset-2 rounded-[32px] bg-gradient-to-br from-gold via-white to-[#0F172A]/15 opacity-80 blur-[2px]" />
+              <motion.div
+                className="pointer-events-none absolute -inset-2 rounded-[32px]"
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent, #F7DD00AA, transparent 30%)',
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              />
+
               <div
-                className={`relative z-10 overflow-hidden rounded-xl border ${BORDER} shadow-[0_20px_50px_-15px_rgba(15,23,42,0.15)]`}
+                className={`relative z-10 overflow-hidden rounded-[28px] border ${BORDER} shadow-[0_30px_70px_-20px_rgba(15,23,42,0.3)] ring-4 ring-white`}
               >
                 <img
                   src={heroTeamImg}
                   alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
                   className="w-full"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/30 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset ring-white/10" />
               </div>
+
               <motion.span
-                className={`${MONO_FONT} absolute -top-3 left-4 sm:left-8 z-20 rounded-full bg-white border ${BORDER} shadow-md px-4 py-2 text-[11px] font-semibold uppercase tracking-wide ${NAVY}`}
+                className={`${MONO_FONT} absolute -top-4 left-4 sm:left-8 z-20 inline-flex items-center gap-2 rounded-full bg-white border ${BORDER} shadow-lg px-4 py-2 text-[11px] font-semibold uppercase tracking-wide ${NAVY}`}
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
               >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
                 Real Engineering Team
               </motion.span>
               <motion.span
-                className="absolute -bottom-3 right-4 sm:right-8 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary shadow-md"
+                className="absolute -bottom-4 right-4 sm:right-8 z-20 rounded-full bg-gradient-to-r from-gold to-gold-dark px-4 py-2 text-sm font-semibold text-primary shadow-lg"
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               >
