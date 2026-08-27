@@ -68,7 +68,12 @@ const SERVICE_OPTIONS = [
   'Other',
 ]
 
-const TRUST_STRIP = ['AI & IoT Engineering', 'Fast Team Extension', 'Flexible Engagement', 'USA + Global Delivery']
+const FEATURE_STRIP = [
+  { icon: BrainCircuit, label: 'AI & IoT Engineering' },
+  { icon: Zap, label: 'Fast Team Extension' },
+  { icon: UsersRound, label: 'Flexible Engagement' },
+  { icon: Globe, label: 'USA + Global Delivery' },
+]
 
 const STAFF_AUG_FLOW = [
   'Camera / RFID / GPS / Sensor / PLC',
@@ -403,42 +408,33 @@ export default function TechOutsourcing() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-white">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.4]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, #0F172A14 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-            maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 90%)',
-          }}
-        />
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark to-navy">
         <motion.div
           className="pointer-events-none absolute top-1/4 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
           animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.15, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#0F172A]/5 blur-3xl"
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
           animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
-        <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
+        <div className="relative max-w-5xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
           <Reveal className="flex flex-col items-center gap-5">
             <span
-              className={`${MONO_FONT} inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 to-gold/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#6b5f00] shadow-sm`}
+              className={`${MONO_FONT} inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white/80`}
             >
-              <Sparkles className="h-3.5 w-3.5" />
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" />
               US-Coordinated Delivery &bull; Global Engineering &bull; Logistics-Focused
             </span>
 
-            <h1 className={`${HEADING_FONT} ${NAVY} text-4xl md:text-5xl font-bold leading-tight`}>
-              Build Logistics Technology Faster with <span className="text-gold-dark">AI, IoT &amp; Automation</span> Engineers
+            <h1 className={`${HEADING_FONT} text-white text-4xl md:text-5xl font-bold leading-tight`}>
+              Build Logistics Technology Faster with <span className="text-gold">AI, IoT &amp; Automation</span> Engineers
             </h1>
-            <p className={`${HEADING_FONT} ${NAVY} relative inline-block text-xl md:text-2xl font-bold leading-snug`}>
+            <p className={`${HEADING_FONT} text-white/90 text-xl md:text-2xl font-bold leading-snug`}>
               Technology Resource Outsourcing &amp; Product Engineering for Real-World Logistics Operations
-              <span className="absolute -bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-gold-dark" />
             </p>
-            <p className={`${CHARCOAL} text-lg max-w-none mt-2`}>
+            <p className="text-white/70 text-lg max-w-2xl mt-2">
               Extend your engineering team with specialists who already understand AI/ML, Computer
               Vision, OCR, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS, YMS, CFS and
               container automation. From a single specialist to a complete engineering pod, Prosper
@@ -447,64 +443,43 @@ export default function TechOutsourcing() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mt-2">
-              <Button href="#lead-form" variant="primary">
+              <Button href="#lead-form" variant="primary-dark">
                 Talk to an Engineering Lead
               </Button>
-              <Button href="#expertise" variant="outline-dark" icon={false}>
+              <Button href="#expertise" variant="outline" icon={false}>
                 Explore Our Engineering Expertise
               </Button>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-3 pt-6 mt-2">
-              {TRUST_STRIP.map((label) => (
-                <span
-                  key={label}
-                  className={`inline-flex items-center gap-2 rounded-full border ${BORDER} bg-white px-4 py-2 text-sm font-bold ${NAVY} shadow-[0_2px_8px_-2px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:shadow-[0_8px_20px_-6px_rgba(247,221,0,0.35)]`}
-                >
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark">
-                    <Check className="h-3 w-3 text-primary" />
-                  </span>
-                  {label}
-                </span>
-              ))}
             </div>
           </Reveal>
 
           <Reveal delay={0.1} className="w-full mt-6">
             <div className="relative mx-auto max-w-3xl">
-              <div
-                className={`relative z-10 overflow-hidden rounded-[28px] border ${BORDER} shadow-[0_30px_70px_-20px_rgba(15,23,42,0.3)] ring-4 ring-white`}
-              >
+              <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
                 <img
                   src={heroTeamImg}
                   alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
                   className="w-full"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/30 via-transparent to-transparent" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent" />
-                <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset ring-white/10" />
               </div>
-
-              <motion.span
-                className={`${MONO_FONT} absolute -top-4 left-4 sm:left-8 z-20 inline-flex items-center gap-2 rounded-full bg-white border ${BORDER} shadow-lg px-4 py-2 text-[11px] font-semibold uppercase tracking-wide ${NAVY}`}
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
-                Real Engineering Team
-              </motion.span>
-              <motion.span
-                className="absolute -bottom-4 right-4 sm:right-8 z-20 rounded-full bg-gradient-to-r from-gold to-gold-dark px-4 py-2 text-sm font-semibold text-primary shadow-lg"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-              >
-                Live Product Dashboards
-              </motion.span>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* Feature Strip */}
+      <section className="bg-white border-b border-[#E2E8F0]">
+        <div className="max-w-5xl mx-auto px-6 py-8 flex flex-wrap items-center justify-center divide-y sm:divide-y-0 sm:divide-x divide-[#E2E8F0]">
+          {FEATURE_STRIP.map((item) => {
+            const Icon = item.icon
+            return (
+              <div key={item.label} className="flex flex-col items-center gap-2 px-8 py-2 min-w-[9rem]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/15">
+                  <Icon className="h-5 w-5 text-[#6b5f00]" />
+                </div>
+                <span className={`${NAVY} text-sm font-semibold text-center`}>{item.label}</span>
+              </div>
+            )
+          })}
         </div>
       </section>
 
