@@ -62,7 +62,7 @@ export default function LandingLayout() {
           </div>
         </div>
       </footer>
-      <WhatsAppButton />
+      <WhatsAppButton tight />
       <FloatingCallButton />
     </div>
   )
