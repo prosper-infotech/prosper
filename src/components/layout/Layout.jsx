@@ -32,7 +32,7 @@ export default function Layout() {
         </AnimatePresence>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <WhatsAppButton tight={location.pathname === '/'} />
       <FloatingCallButton />
     </div>
   )
