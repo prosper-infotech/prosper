@@ -144,33 +144,39 @@ const SOLUTIONS = [
   {
     image: gateVisionImg,
     title: 'GateVision AI',
+    subtitle: 'AI-Powered Gate Automation',
     caption:
-      'AI-powered gate automation: trailer/container/license-plate OCR, arrival/departure verification and gate workflow automation.',
+      'OCR and computer vision for trailer identification, container numbers, license plates, arrival/departure verification and gate workflow automation.',
   },
   {
     image: yardVisionImg,
     title: 'YardVision AI',
-    caption: 'RFID + GPS/RTK + OCR + AI for trailer inventory, spotter operations, yard location and movement visibility.',
+    subtitle: 'Real-Time Yard Intelligence',
+    caption: 'RFID, GPS/RTK, OCR and AI for trailer inventory, spotter operations, yard location and movement visibility.',
   },
   {
     image: dockVisionImg,
     title: 'DockVision AI',
-    caption: 'LoRaWAN sensors and PLC integration for door position, trailer presence, restraint, leveler, dock utilization, alerts and analytics.',
+    subtitle: 'IoT-Powered Dock Visibility',
+    caption: 'LoRaWAN sensors, PLC integration and analytics for door position, trailer presence, restraint, leveler and dock utilization.',
   },
   {
     image: forkliftVisionImg,
     title: 'ForkLift Vision AI',
+    subtitle: 'AI-Powered Pallet & Location Intelligence',
     caption: '8MP cameras, 3D depth sensing, OCR and Edge AI for pallet pickup, rack location, putaway, staging and inventory validation.',
   },
   {
     image: containerVisionImg,
     title: 'ContainerVision AI',
-    caption: 'AI, OCR, GPS/RTK and sensors supporting container gate, yard, reach stacker, inspection and departure workflows.',
+    subtitle: 'CFS & Container Terminal Automation',
+    caption: 'AI, OCR, GPS/RTK and industrial sensors supporting container gate, yard, reach stacker, inspection and departure workflows.',
   },
   {
     image: assetFleetImg,
     title: 'Asset & Fleet Tracking',
-    caption: 'SIM GPS, LoRaWAN, BLE, GNSS and RFID solutions for trailers, equipment, vehicles and high-value assets.',
+    subtitle: 'RFID + GPS + IoT Asset Visibility',
+    caption: 'SIM-based GPS, LoRaWAN, BLE, GNSS and RFID solutions for equipment, trailers, vehicles and high-value assets.',
   },
 ]
 
@@ -466,11 +472,18 @@ export default function TechOutsourcing() {
       {/* Real-World Engineering Experience */}
       <section className={SURFACE}>
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
-          <Reveal className="text-center mb-10">
-            <Eyebrow>Proof Through Real Solutions</Eyebrow>
+          <Reveal className="text-center mb-6">
+            <Eyebrow>Real-World Engineering Experience</Eyebrow>
             <h2 className={`${HEADING_FONT} ${NAVY} mt-2 text-3xl font-bold`}>
-              Show What Prosper Engineers Are Already Building
+              Our Engineers Work on the Same Technologies You Need
             </h2>
+          </Reveal>
+          <Reveal delay={0.05} className="max-w-2xl mx-auto text-center mb-10">
+            <p className={CHARCOAL}>
+              Our teams are not learning logistics technology after they join your project. We are
+              actively designing and developing intelligent systems for yards, warehouses, docks,
+              gates, fleets and container operations.
+            </p>
           </Reveal>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SOLUTIONS.map((item, i) => (
@@ -485,7 +498,10 @@ export default function TechOutsourcing() {
                   </div>
                   <div className="p-5">
                     <h3 className={`${HEADING_FONT} ${NAVY} text-base font-bold`}>{item.title}</h3>
-                    <p className={`mt-1.5 text-sm ${CHARCOAL} leading-relaxed`}>{item.caption}</p>
+                    <p className={`mt-1 text-xs font-semibold uppercase tracking-wide text-[#6b5f00]`}>
+                      {item.subtitle}
+                    </p>
+                    <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{item.caption}</p>
                   </div>
                 </div>
               </Reveal>
@@ -580,6 +596,7 @@ export default function TechOutsourcing() {
           <Reveal>
             <Eyebrow>From Sensor to SaaS</Eyebrow>
             <h2 className={`${HEADING_FONT} ${NAVY} mt-2 text-3xl font-bold`}>One Engineering Partner</h2>
+            <p className={`mt-2 ${CHARCOAL}`}>We bridge operational technology and enterprise software.</p>
           </Reveal>
           <Reveal delay={0.1} className={`mt-8 rounded-xl border ${BORDER} bg-white p-6 overflow-x-auto`}>
             <FlowChips steps={SENSOR_TO_SAAS_FLOW} />
@@ -600,6 +617,10 @@ export default function TechOutsourcing() {
           <Reveal className="text-center mb-14">
             <Eyebrow>Global Delivery</Eyebrow>
             <h2 className={`${HEADING_FONT} ${NAVY} mt-2 text-3xl font-bold`}>Global Engineering. Local Accountability.</h2>
+            <p className={`mt-3 ${CHARCOAL} max-w-xl mx-auto`}>
+              Prosper Infotech combines global engineering capacity with customer-facing
+              coordination and accountability.
+            </p>
           </Reveal>
 
           <div className="grid gap-6 sm:grid-cols-3">
@@ -722,12 +743,12 @@ export default function TechOutsourcing() {
       <section id="lead-form" className={`relative overflow-hidden ${SURFACE}`}>
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20 grid lg:grid-cols-2 gap-10 items-start">
           <Reveal className="flex flex-col gap-5">
-            <Eyebrow>Final Step</Eyebrow>
+            <Eyebrow>Need Engineering Capacity?</Eyebrow>
             <h2 className={`${HEADING_FONT} ${NAVY} text-3xl font-bold`}>Tell Us What You&apos;re Building.</h2>
             <p className={`${CHARCOAL} text-lg`}>
-              Whether you need one specialist or a complete AI, IoT, and logistics engineering
-              team, describe the project and we&apos;ll connect you directly with an engineering
-              lead.
+              Whether you need one specialist or a complete AI, IoT and logistics engineering
+              team, share your project with us. We&apos;ll help identify the right technical
+              skills, engagement model and fastest path to productive delivery.
             </p>
             <div className="flex flex-col gap-4 mt-2">
               <a
