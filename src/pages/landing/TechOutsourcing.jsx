@@ -27,7 +27,6 @@ import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
-import ProcessSteps from '../../components/ui/ProcessSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import { SHOW_CLIENTS } from '../../data/clients'
@@ -49,6 +48,8 @@ const NAVY = 'text-[#0F172A]'
 const CHARCOAL = 'text-[#334155]'
 const BORDER = 'border-[#E2E8F0]'
 const SURFACE = 'bg-[#F8FAFC]'
+const TINT_GOLD = 'bg-gradient-to-b from-[#FFFBEA] via-[#FFFDF5] to-white'
+const TINT_NAVY = 'bg-gradient-to-b from-[#EFF4FC] via-[#F5F8FD] to-white'
 const HEADING_FONT = "font-['Plus_Jakarta_Sans']"
 const BODY_FONT = "font-['Inter']"
 const MONO_FONT = "font-['JetBrains_Mono']"
@@ -213,12 +214,12 @@ const ENGAGEMENT_MODELS = [
 ]
 
 const TECH_STACK_GROUPS = [
-  { title: 'AI / Vision', items: 'Python • YOLO • OpenCV • TensorRT • NVIDIA • Machine Learning • OCR • Video Analytics' },
-  { title: 'IoT / Edge', items: 'LoRaWAN • MQTT • Modbus • RS485 • PLC • BLE • 4G/5G • Industrial Gateways' },
-  { title: 'Location & Identification', items: 'RFID • GPS • GNSS • RTK • Barcode • QR/DataMatrix • OCR' },
-  { title: 'Enterprise Development', items: '.NET / C# • Python • Angular • REST APIs • PostgreSQL • SQL Server' },
-  { title: 'Cloud', items: 'Microsoft Azure • AWS • IoT Hub • Containerized Applications • Edge-to-Cloud Integration' },
-  { title: 'Logistics Platforms', items: 'YMS • WMS • TMS • Dock • Gate • Fleet • Asset Tracking • CFS / Container Automation' },
+  { title: 'AI / Vision', icon: BrainCircuit, items: ['Python', 'YOLO', 'OpenCV', 'TensorRT', 'NVIDIA', 'Machine Learning', 'OCR', 'Video Analytics'] },
+  { title: 'IoT / Edge', icon: Cpu, items: ['LoRaWAN', 'MQTT', 'Modbus', 'RS485', 'PLC', 'BLE', '4G/5G', 'Industrial Gateways'] },
+  { title: 'Location & Identification', icon: Satellite, items: ['RFID', 'GPS', 'GNSS', 'RTK', 'Barcode', 'QR/DataMatrix', 'OCR'] },
+  { title: 'Enterprise Development', icon: Link2, items: ['.NET / C#', 'Python', 'Angular', 'REST APIs', 'PostgreSQL', 'SQL Server'] },
+  { title: 'Cloud', icon: Globe, items: ['Microsoft Azure', 'AWS', 'IoT Hub', 'Containerized Applications', 'Edge-to-Cloud Integration'] },
+  { title: 'Logistics Platforms', icon: Package, items: ['YMS', 'WMS', 'TMS', 'Dock', 'Gate', 'Fleet', 'Asset Tracking', 'CFS / Container Automation'] },
 ]
 
 const SENSOR_TO_SAAS_FLOW = [
@@ -320,17 +321,66 @@ function Eyebrow({ children, className = '' }) {
 
 function FlowChips({ steps }) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2">
+    <motion.div
+      className="flex flex-wrap items-center justify-center gap-2"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-60px' }}
+      variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+    >
       {steps.map((step, i) => (
-        <div key={step} className="flex items-center gap-2">
+        <motion.div
+          key={step}
+          className="flex items-center gap-2"
+          variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0 } }}
+        >
           <span
-            className={`${MONO_FONT} rounded-full border ${BORDER} bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide ${NAVY}`}
+            className={`${MONO_FONT} rounded-full border ${BORDER} bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide ${NAVY} shadow-sm transition-transform hover:-translate-y-0.5 hover:border-gold`}
           >
             {step}
           </span>
-          {i < steps.length - 1 && <ArrowRight className="h-4 w-4 text-gold-dark shrink-0" />}
-        </div>
+          {i < steps.length - 1 && (
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
+            >
+              <ArrowRight className="h-4 w-4 text-gold-dark shrink-0" />
+            </motion.span>
+          )}
+        </motion.div>
       ))}
+    </motion.div>
+  )
+}
+
+function Timeline({ steps }) {
+  return (
+    <div className="relative">
+      <div className="hidden lg:block absolute top-6 left-0 right-0 h-0.5 bg-[#E2E8F0]">
+        <motion.div
+          className="h-full bg-gradient-to-r from-gold via-gold-dark to-gold origin-left"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+        />
+      </div>
+      <div className="grid gap-8 lg:grid-cols-5">
+        {steps.map((step, i) => (
+          <Reveal key={step.title} delay={i * 0.12} className="relative flex flex-col items-center text-center gap-3">
+            <motion.div
+              className={`${HEADING_FONT} relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary font-bold text-lg shadow-[0_0_0_4px_white]`}
+              whileInView={{ scale: [0.6, 1.15, 1] }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+            >
+              {i + 1}
+            </motion.div>
+            <h3 className={`${HEADING_FONT} ${NAVY} font-bold text-base`}>{step.title}</h3>
+            <p className={`text-sm ${CHARCOAL} max-w-[14rem]`}>{step.description}</p>
+          </Reveal>
+        ))}
+      </div>
     </div>
   )
 }
@@ -358,6 +408,11 @@ export default function TechOutsourcing() {
           className="pointer-events-none absolute top-1/4 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
           animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.15, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#0F172A]/5 blur-3xl"
+          animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
         <div className="relative max-w-4xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
           <Reveal className="flex flex-col items-center gap-5">
@@ -397,21 +452,37 @@ export default function TechOutsourcing() {
           </Reveal>
 
           <Reveal delay={0.1} className="w-full mt-4">
-            <div
-              className={`relative mx-auto max-w-3xl overflow-hidden rounded-xl border ${BORDER} shadow-[0_20px_50px_-15px_rgba(15,23,42,0.15)]`}
-            >
-              <img
-                src={heroTeamImg}
-                alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
-                className="w-full"
-              />
+            <div className="relative mx-auto max-w-3xl">
+              <div
+                className={`relative z-10 overflow-hidden rounded-xl border ${BORDER} shadow-[0_20px_50px_-15px_rgba(15,23,42,0.15)]`}
+              >
+                <img
+                  src={heroTeamImg}
+                  alt="Prosper Infotech engineering team reviewing logistics AI, IoT, and automation dashboards"
+                  className="w-full"
+                />
+              </div>
+              <motion.span
+                className={`${MONO_FONT} absolute -top-3 left-4 sm:left-8 z-20 rounded-full bg-white border ${BORDER} shadow-md px-4 py-2 text-[11px] font-semibold uppercase tracking-wide ${NAVY}`}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                Real Engineering Team
+              </motion.span>
+              <motion.span
+                className="absolute -bottom-3 right-4 sm:right-8 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary shadow-md"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+              >
+                Live Product Dashboards
+              </motion.span>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* More Than Staff Augmentation */}
-      <section className={SURFACE}>
+      <section className={TINT_GOLD}>
         <div className="max-w-5xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <Eyebrow>More Than Staff Augmentation</Eyebrow>
@@ -453,8 +524,11 @@ export default function TechOutsourcing() {
               const Icon = item.icon
               return (
                 <Reveal key={item.title} delay={(i % 5) * 0.06}>
-                  <div className={`h-full rounded-xl border ${BORDER} bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1`}>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gold/20">
+                  <div className={`group relative h-full overflow-hidden rounded-xl border ${BORDER} bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
+                    <span className={`${MONO_FONT} absolute top-3 right-4 text-[10px] font-semibold text-[#E2E8F0] group-hover:text-gold transition-colors`}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gold/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                       <Icon className="h-5 w-5 text-[#6b5f00]" />
                     </div>
                     <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-sm font-bold`}>{item.title}</h3>
@@ -468,7 +542,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Real-World Engineering Experience */}
-      <section className={SURFACE}>
+      <section className={TINT_NAVY}>
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-6">
             <Eyebrow>Real-World Engineering Experience</Eyebrow>
@@ -487,16 +561,24 @@ export default function TechOutsourcing() {
             {SOLUTIONS.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.08}>
                 <div className={`group overflow-hidden rounded-xl border ${BORDER} bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]`}>
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <span
+                      className={`${MONO_FONT} absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold uppercase tracking-wide ${NAVY} shadow-sm`}
+                    >
+                      Prosper Product
+                    </span>
+                    <span className={`${HEADING_FONT} absolute bottom-3 left-3 text-base font-bold text-white drop-shadow`}>
+                      {item.title}
+                    </span>
                   </div>
                   <div className="p-5">
-                    <h3 className={`${HEADING_FONT} ${NAVY} text-base font-bold`}>{item.title}</h3>
-                    <p className={`mt-1 text-xs font-semibold uppercase tracking-wide text-[#6b5f00]`}>
+                    <p className={`text-xs font-semibold uppercase tracking-wide text-[#6b5f00]`}>
                       {item.subtitle}
                     </p>
                     <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{item.caption}</p>
@@ -525,12 +607,18 @@ export default function TechOutsourcing() {
               product.
             </p>
           </Reveal>
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 max-w-2xl mx-auto">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
             {IP_CHECKLIST.map((item, i) => (
               <Reveal key={item} delay={i * 0.05}>
-                <div className={`flex items-start gap-2.5 rounded-lg border ${BORDER} bg-white px-4 py-3 text-sm ${CHARCOAL}`}>
-                  <Lock className="h-4 w-4 text-gold-dark shrink-0 mt-0.5" />
-                  <span>{item}</span>
+                <div
+                  className={`flex h-full flex-col items-center text-center gap-3 rounded-xl border ${BORDER} bg-white px-5 py-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}
+                >
+                  <div
+                    className={`flex h-11 w-11 items-center justify-center rounded-full ${i % 2 === 0 ? 'bg-gold/20' : 'bg-[#0F172A]/10'}`}
+                  >
+                    <Lock className={`h-5 w-5 ${i % 2 === 0 ? 'text-[#6b5f00]' : 'text-[#0F172A]'}`} />
+                  </div>
+                  <span className={`text-sm font-semibold ${CHARCOAL}`}>{item}</span>
                 </div>
               </Reveal>
             ))}
@@ -539,7 +627,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Engagement Models */}
-      <section className={SURFACE}>
+      <section className={TINT_GOLD}>
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <Eyebrow>Engagement Models</Eyebrow>
@@ -576,20 +664,37 @@ export default function TechOutsourcing() {
             </h2>
           </Reveal>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {TECH_STACK_GROUPS.map((group, i) => (
-              <Reveal key={group.title} delay={i * 0.06}>
-                <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 shadow-sm`}>
-                  <h3 className={`${HEADING_FONT} ${NAVY} text-sm font-bold uppercase tracking-wide`}>{group.title}</h3>
-                  <p className={`mt-3 text-sm ${CHARCOAL} leading-relaxed`}>{group.items}</p>
-                </div>
-              </Reveal>
-            ))}
+            {TECH_STACK_GROUPS.map((group, i) => {
+              const Icon = group.icon
+              return (
+                <Reveal key={group.title} delay={i * 0.06}>
+                  <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]`}>
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gold/20 shrink-0">
+                        <Icon className="h-4 w-4 text-[#6b5f00]" />
+                      </div>
+                      <h3 className={`${HEADING_FONT} ${NAVY} text-sm font-bold uppercase tracking-wide`}>{group.title}</h3>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {group.items.map((tech) => (
+                        <span
+                          key={tech}
+                          className={`${MONO_FONT} rounded-full ${SURFACE} border ${BORDER} px-2.5 py-1 text-[10px] font-semibold ${CHARCOAL}`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* Sensor to SaaS */}
-      <section className={SURFACE}>
+      <section className={TINT_NAVY}>
         <div className="max-w-5xl mx-auto px-6 py-16 lg:py-20 text-center">
           <Reveal>
             <Eyebrow>From Sensor to SaaS</Eyebrow>
@@ -621,10 +726,17 @@ export default function TechOutsourcing() {
             </p>
           </Reveal>
 
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="relative grid gap-6 sm:grid-cols-3">
+            <div className="hidden sm:block absolute top-12 left-[16.5%] right-[16.5%] h-1 z-0 rounded-full bg-gold-dark/50 overflow-hidden">
+              <motion.div
+                className="absolute inset-y-0 w-1/3 rounded-full bg-gradient-to-r from-transparent via-gold to-transparent"
+                animate={{ left: ['-33%', '100%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+              />
+            </div>
             {GLOBAL_HUBS.map((hub, i) => (
               <Reveal key={hub.country} delay={i * 0.1}>
-                <div className={`h-full rounded-xl border ${BORDER} bg-white p-6 text-center shadow-sm`}>
+                <div className={`relative z-10 h-full rounded-xl border ${BORDER} bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
                     <MapPin className="h-6 w-6 text-gold-dark" />
                   </div>
@@ -644,7 +756,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Engagement Process */}
-      <section className={SURFACE}>
+      <section className={TINT_GOLD}>
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-12">
             <Eyebrow>Engagement Process</Eyebrow>
@@ -652,7 +764,7 @@ export default function TechOutsourcing() {
               From Requirement to Productive Engineering — Fast
             </h2>
           </Reveal>
-          <ProcessSteps steps={ENGAGEMENT_STEPS} />
+          <Timeline steps={ENGAGEMENT_STEPS} />
         </div>
       </section>
 
@@ -685,7 +797,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Why Prosper */}
-      <section className={SURFACE}>
+      <section className={TINT_NAVY}>
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <Eyebrow>Why Technology Teams Work With Prosper</Eyebrow>
@@ -738,7 +850,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Final CTA + Lead form */}
-      <section id="lead-form" className={`relative overflow-hidden ${SURFACE}`}>
+      <section id="lead-form" className={`relative overflow-hidden ${TINT_GOLD}`}>
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20 grid lg:grid-cols-2 gap-10 items-start">
           <Reveal className="flex flex-col gap-5">
             <Eyebrow>Need Engineering Capacity?</Eyebrow>
