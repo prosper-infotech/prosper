@@ -184,6 +184,10 @@ export default function AIPoweredCFS() {
         <div className="pointer-events-none absolute inset-0 bg-navy/15" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/55 via-navy/10 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 via-navy/15 to-transparent" />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 65% 75% at center, rgba(15,23,42,0.55), transparent 70%)' }}
+        />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
