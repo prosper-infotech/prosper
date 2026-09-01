@@ -305,27 +305,46 @@ export default function WMS() {
               const Icon = step.icon
               return (
                 <Reveal key={step.title} delay={i * 0.06} className="flex items-center gap-3">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink-900 shadow-sm">
-                    <Icon className="h-4 w-4 text-primary" />
+                  <span className="group inline-flex items-center gap-2 rounded-full border border-ink-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:shadow-[0_8px_20px_-6px_rgba(247,221,0,0.4)]">
+                    <Icon className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
                     {step.title}
                   </span>
-                  {i < WORKFLOW.length - 1 && <span className="text-ink-400">&rarr;</span>}
+                  {i < WORKFLOW.length - 1 && (
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
+                      className="text-gold-dark"
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </motion.span>
+                  )}
                 </Reveal>
               )
             })}
           </div>
 
-          <Reveal delay={0.1} className="mt-10 rounded-xl border border-ink-300 bg-white p-6 overflow-x-auto">
-            <p className="text-center text-xs font-semibold uppercase tracking-widest text-primary mb-4">
+          <Reveal
+            delay={0.1}
+            className="relative mt-10 overflow-hidden rounded-2xl border border-ink-300 bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] overflow-x-auto"
+          >
+            <div className="pointer-events-none absolute -top-8 right-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+            <p className="relative text-center text-xs font-semibold uppercase tracking-widest text-primary mb-4">
               How the data moves
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="relative flex flex-wrap items-center justify-center gap-2">
               {DATA_FLOW.map((step, i) => (
                 <div key={step} className="flex items-center gap-2">
-                  <span className="rounded-full border border-ink-300 bg-surface-alt px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-900">
+                  <span className="rounded-full border border-ink-300 bg-surface-alt px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-900 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold">
                     {step}
                   </span>
-                  {i < DATA_FLOW.length - 1 && <ArrowRight className="h-4 w-4 text-primary shrink-0" />}
+                  {i < DATA_FLOW.length - 1 && (
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
+                    >
+                      <ArrowRight className="h-4 w-4 text-gold-dark shrink-0" />
+                    </motion.span>
+                  )}
                 </div>
               ))}
             </div>
@@ -360,12 +379,16 @@ export default function WMS() {
             const Icon = feature.icon
             return (
               <Reveal key={feature.label} delay={(i % 4) * 0.06}>
-                <div className="h-full rounded-lg bg-white border border-ink-300 px-5 py-5 shadow-sm hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
+                <div className="group relative h-full overflow-hidden rounded-2xl bg-white border border-ink-300 px-5 py-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.4)]">
+                  <span className="pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-primary/[0.04] group-hover:text-gold/10 transition-colors">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 text-ink-900 text-sm font-bold">{feature.label}</h3>
-                  <p className="mt-1.5 text-sm text-ink-600 leading-relaxed">{feature.description}</p>
+                  <h3 className="relative mt-4 text-ink-900 text-sm font-bold">{feature.label}</h3>
+                  <p className="relative mt-1.5 text-sm text-ink-600 leading-relaxed">{feature.description}</p>
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-gold to-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
                 </div>
               </Reveal>
             )
@@ -373,8 +396,9 @@ export default function WMS() {
         </div>
       </section>
 
-      <section className="bg-surface-alt border-y border-ink-300">
-        <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+      <section className="relative overflow-hidden bg-surface-alt border-y border-ink-300">
+        <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">
               Engagement Options
@@ -384,11 +408,27 @@ export default function WMS() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {ENGAGEMENT_MODELS.map((model, i) => {
               const Icon = model.icon
+              const featured = i === 2
               return (
                 <Reveal key={model.title} delay={i * 0.08}>
-                  <div className="h-full rounded-lg bg-white border border-ink-300 px-5 py-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
-                      <Icon className="h-5 w-5" />
+                  <div
+                    className={`relative h-full rounded-2xl border bg-white px-5 py-6 transition-all duration-300 hover:-translate-y-1.5 ${
+                      featured
+                        ? 'border-gold shadow-[0_0_0_1px_rgba(247,221,0,0.4),0_20px_45px_-15px_rgba(247,221,0,0.5)]'
+                        : 'border-ink-300 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]'
+                    }`}
+                  >
+                    {featured && (
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-gold to-gold-dark px-4 py-1 text-[10px] font-bold uppercase tracking-wide text-primary shadow-md">
+                        Most Chosen
+                      </span>
+                    )}
+                    <div
+                      className={`flex h-11 w-11 items-center justify-center rounded-xl ${
+                        featured ? 'bg-gradient-to-br from-gold to-gold-dark shadow-md' : 'bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5 text-primary" />
                     </div>
                     <h3 className="mt-4 text-ink-900 text-base font-bold">{model.title}</h3>
                     <p className="mt-2 text-sm text-ink-600 leading-relaxed">{model.description}</p>
@@ -412,16 +452,19 @@ export default function WMS() {
             const Icon = group.icon
             return (
               <Reveal key={group.title} delay={i * 0.06}>
-                <div className="h-full rounded-lg bg-white border border-ink-300 shadow-sm overflow-hidden">
-                  <div className="flex items-center gap-2.5 bg-surface-alt border-b border-ink-300 px-5 py-4">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gold/20 shrink-0">
+                <div className="group h-full overflow-hidden rounded-2xl bg-white border border-ink-300 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]">
+                  <div className="flex items-center gap-2.5 bg-gradient-to-b from-[#FFFBEA] to-white border-b border-ink-300 px-5 py-4">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-inset ring-gold/25 shrink-0 transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-4 w-4 text-primary" />
                     </div>
                     <h3 className="text-ink-900 text-sm font-bold uppercase tracking-wide">{group.title}</h3>
                   </div>
-                  <div className="p-5 flex flex-col gap-1.5">
+                  <div className="p-5 flex flex-wrap gap-1.5">
                     {group.items.map((item) => (
-                      <span key={item} className="text-sm text-ink-600">
+                      <span
+                        key={item}
+                        className="rounded-full bg-surface-alt border border-ink-300 px-2.5 py-1 text-[11px] font-semibold text-ink-600 transition-colors group-hover:border-gold/40"
+                      >
                         {item}
                       </span>
                     ))}
@@ -529,7 +572,11 @@ export default function WMS() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="rounded-2xl bg-white p-6 sm:p-8 shadow-xl">
+          <Reveal
+            delay={0.1}
+            className="relative overflow-hidden rounded-2xl border-t-4 border-t-gold bg-white p-6 sm:p-8 shadow-xl"
+          >
+            <div className="pointer-events-none absolute top-0 right-0 w-40 h-40 bg-gold/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
             <h3 className="font-heading font-semibold text-primary text-xl mb-1">
               Get a free WMS demo
             </h3>
