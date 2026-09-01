@@ -181,23 +181,24 @@ export default function AIPoweredCFS() {
           fetchPriority="high"
           className="absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full w-full object-contain lg:object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-[linear-gradient(to_right,rgba(15,23,42,0.65),rgba(15,23,42,0.35)_35%,transparent_60%)]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-navy/20" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-b from-navy/75 via-navy/15 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/80 via-navy/25 to-transparent" />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20 md:py-24 lg:py-28 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl mx-auto rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
+              <Reveal className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-2xl mx-auto">
+                <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
                   AI-Powered CFS Automation
                 </span>
-                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]">
                   Prosper <span className="text-gold">ContainerVision AI</span>
                 </h1>
-                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
+                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]">
                   Real-Time Container Visibility, Gate to Departure
                 </p>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
+                <p className="text-white/90 text-sm sm:text-base md:text-lg [text-shadow:0_2px_14px_rgba(0,0,0,0.9)]">
                   AI cameras, OCR, GPS/RTK and industrial sensors automate container gate, yard,
                   reach stacker, inspection and departure workflows — powered by the Prosper AI
                   EdgeBox.
