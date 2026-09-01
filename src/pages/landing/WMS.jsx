@@ -190,19 +190,19 @@ export default function WMS() {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-navy h-[600px] sm:h-[640px] md:h-[680px] lg:h-[720px]">
+      <section className="relative overflow-hidden bg-navy">
         <img
           src={wmsHero}
           alt="Prosper WMS warehouse operations"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.65),rgba(15,23,42,0.35)_35%,transparent_60%)]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-navy/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full bg-[linear-gradient(to_right,rgba(15,23,42,0.65),rgba(15,23,42,0.35)_35%,transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
 
-        <div className="relative h-full flex flex-col">
-          <div className="flex-1 min-h-0 flex items-center overflow-hidden">
-            <div className="max-w-6xl mx-auto px-6 w-full">
+        <div className="relative flex flex-col">
+          <div className="flex items-center">
+            <div className="max-w-6xl mx-auto px-6 py-16 lg:py-24 w-full">
               <Reveal className="flex flex-col gap-2 sm:gap-3 max-w-xl">
                 <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Warehouse Management System
