@@ -20,6 +20,13 @@ import {
   PackageSearch,
   PackagePlus,
   PackageX,
+  ArrowRight,
+  Link2,
+  Cloud,
+  LayoutDashboard,
+  Package,
+  Wrench,
+  UsersRound,
 } from 'lucide-react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import Button from '../../components/ui/Button'
@@ -33,7 +40,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import wmsHero from '../../assets/hero-slide-rfid-driven-warehouse.jpg'
+import wmsHero from '../../assets/wms-hero.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
@@ -49,6 +56,29 @@ const WORKFLOW = [
   { icon: PackageSearch, title: 'Picking' },
   { icon: PackagePlus, title: 'Packing' },
   { icon: PackageX, title: 'Dispatch' },
+]
+
+const DATA_FLOW = [
+  'Barcode / RFID Scan',
+  'WMS Engine',
+  'Task Assignment',
+  'Mobile / Handheld Device',
+  'ERP / TMS Sync',
+  'Dashboard & Reports',
+]
+
+const TECH_STACK_GROUPS = [
+  { title: 'Hardware', icon: ScanBarcode, items: ['Barcode Scanners', 'RFID Readers & Antennas', 'Handheld Mobile Computers', 'Label Printers'] },
+  { title: 'Software Platform', icon: LayoutDashboard, items: ['Cloud Dashboard', 'Mobile App', 'Rules Engine', 'Reporting & Analytics'] },
+  { title: 'Integration', icon: Link2, items: ['REST APIs', 'EDI', 'SAP / NetSuite / Dynamics', 'TMS Integration'] },
+  { title: 'Cloud & Infrastructure', icon: Cloud, items: ['Microsoft Azure', 'AWS', 'Multi-Tenant SaaS', 'Role-Based Access Control'] },
+]
+
+const ENGAGEMENT_MODELS = [
+  { icon: Package, title: 'Software Only', description: 'Bring your own barcode/RFID hardware — connect to Prosper WMS software and dashboards.' },
+  { icon: Boxes, title: 'Software + Hardware Bundle', description: 'Barcode scanners, RFID readers and handheld devices included and configured for you.' },
+  { icon: Wrench, title: 'Managed Implementation', description: 'Full setup, data migration, staff training and go-live support handled by our team.' },
+  { icon: UsersRound, title: 'Enterprise / Multi-Site', description: 'Custom SLAs, dedicated account management and multi-warehouse rollout planning.' },
 ]
 
 const FEATURES = [
@@ -110,6 +140,22 @@ const FAQS = [
   {
     question: "What if we're still comparing WMS vendors?",
     answer: "That's fine — the consultation and demo are free with no obligation, so you can compare real workflows and dashboards before deciding.",
+  },
+  {
+    question: 'Can you migrate our existing inventory data?',
+    answer: 'Yes — our implementation team handles data migration from your current system or spreadsheets as part of onboarding.',
+  },
+  {
+    question: 'Does it work if our warehouse has poor or no connectivity in some zones?',
+    answer: 'Yes — handheld devices can keep scanning in low-connectivity areas and sync automatically once back in range, so work never has to stop.',
+  },
+  {
+    question: 'Is staff training included?',
+    answer: 'Yes — training for your receiving, picking, packing and dispatch teams is included as part of implementation.',
+  },
+  {
+    question: 'How is our data secured?',
+    answer: 'Data is hosted on Microsoft Azure or AWS with role-based access control, so each user only sees the locations and functions their role requires.',
   },
 ]
 
@@ -283,6 +329,22 @@ export default function WMS() {
               )
             })}
           </div>
+
+          <Reveal delay={0.1} className="mt-10 rounded-xl border border-ink-300 bg-white p-6 overflow-x-auto">
+            <p className="text-center text-xs font-semibold uppercase tracking-widest text-primary mb-4">
+              How the data moves
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {DATA_FLOW.map((step, i) => (
+                <div key={step} className="flex items-center gap-2">
+                  <span className="rounded-full border border-ink-300 bg-surface-alt px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-900">
+                    {step}
+                  </span>
+                  {i < DATA_FLOW.length - 1 && <ArrowRight className="h-4 w-4 text-primary shrink-0" />}
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -319,6 +381,66 @@ export default function WMS() {
                   </div>
                   <h3 className="mt-4 text-ink-900 text-sm font-bold">{feature.label}</h3>
                   <p className="mt-1.5 text-sm text-ink-600 leading-relaxed">{feature.description}</p>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="bg-surface-alt border-y border-ink-300">
+        <div className="max-w-6xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Engagement Options
+            </span>
+            <h2 className="mt-2 text-3xl">Choose how you want to run Prosper WMS</h2>
+          </Reveal>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {ENGAGEMENT_MODELS.map((model, i) => {
+              const Icon = model.icon
+              return (
+                <Reveal key={model.title} delay={i * 0.08}>
+                  <div className="h-full rounded-lg bg-white border border-ink-300 px-5 py-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-4 text-ink-900 text-base font-bold">{model.title}</h3>
+                    <p className="mt-2 text-sm text-ink-600 leading-relaxed">{model.description}</p>
+                  </div>
+                </Reveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-16 lg:py-20">
+        <Reveal className="text-center mb-10">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            Technology Stack
+          </span>
+          <h2 className="mt-2 text-3xl">What's under the hood</h2>
+        </Reveal>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TECH_STACK_GROUPS.map((group, i) => {
+            const Icon = group.icon
+            return (
+              <Reveal key={group.title} delay={i * 0.06}>
+                <div className="h-full rounded-lg bg-white border border-ink-300 shadow-sm overflow-hidden">
+                  <div className="flex items-center gap-2.5 bg-surface-alt border-b border-ink-300 px-5 py-4">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gold/20 shrink-0">
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <h3 className="text-ink-900 text-sm font-bold uppercase tracking-wide">{group.title}</h3>
+                  </div>
+                  <div className="p-5 flex flex-col gap-1.5">
+                    {group.items.map((item) => (
+                      <span key={item} className="text-sm text-ink-600">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Reveal>
             )
