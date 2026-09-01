@@ -37,20 +37,13 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import cfsHero from '../../assets/hero-slide-cfs.jpg'
+import cfsHero from '../../assets/ai-powered-cfs-hero.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
   { icon: ScanSearch, label: 'Real-Time Container Visibility' },
   { icon: ShieldCheck, label: 'Pickup / Drop Validation' },
   { icon: Puzzle, label: 'Fast ERP Integration' },
-]
-
-const GATE_PROCESS = [
-  { icon: LogIn, title: 'GateVision AI (Arrival)', description: 'Detect container number and log arrivals automatically.' },
-  { icon: Truck, title: 'ReachStackerVision AI', description: 'Assign tasks and track pickup / drop activity.' },
-  { icon: ScanSearch, title: 'YardVision AI & Inspection', description: 'Track yard location and support inspection workflows.' },
-  { icon: LogOut, title: 'GateVision AI (Departure)', description: 'Validate and log departures in real time.' },
 ]
 
 const DATA_FLOW = [
@@ -193,8 +186,8 @@ export default function AIPoweredCFS() {
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
-            <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 lg:items-start lg:text-left max-w-xl mx-auto lg:mx-0 rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0">
+            <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20 md:py-24 lg:py-28 w-full">
+              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl mx-auto rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   AI-Powered CFS Automation
                 </span>
@@ -210,7 +203,7 @@ export default function AIPoweredCFS() {
                   EdgeBox.
                 </p>
 
-                <div className="hidden md:flex flex-wrap gap-3 mt-1">
+                <div className="hidden md:flex flex-wrap justify-center gap-3 mt-1">
                   {STAT_BADGES.map((badge, i) => {
                     const Icon = badge.icon
                     return (
@@ -228,7 +221,7 @@ export default function AIPoweredCFS() {
                   })}
                 </div>
 
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-1 sm:mt-2">
+                <div className="flex flex-wrap justify-center gap-3 mt-1 sm:mt-2">
                   <div className="relative">
                     <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
                     <Button
@@ -286,38 +279,6 @@ export default function AIPoweredCFS() {
               </Reveal>
             </div>
           </div>
-
-          <Reveal delay={0.2} className="shrink-0 pt-3 sm:pt-4 lg:pt-5 pb-9 sm:pb-11 md:pb-12 lg:pb-14">
-            <div className="max-w-6xl mx-auto px-6">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3 [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
-                Gate-to-Departure Container Process
-              </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-                {GATE_PROCESS.map((step, i) => {
-                  const Icon = step.icon
-                  return (
-                    <div
-                      key={step.title}
-                      className="flex flex-col gap-1 rounded-lg border border-white/15 bg-navy/40 backdrop-blur-[2px] p-2 sm:p-3"
-                    >
-                      <div className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold text-primary text-[10px] font-bold shrink-0">
-                          {i + 1}
-                        </span>
-                        <Icon className="h-3.5 w-3.5 text-gold shrink-0" />
-                      </div>
-                      <h4 className="text-white text-[11px] sm:text-xs font-bold leading-snug line-clamp-2">
-                        {step.title}
-                      </h4>
-                      <p className="hidden sm:block text-[11px] text-white/70 leading-snug line-clamp-2">
-                        {step.description}
-                      </p>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 
