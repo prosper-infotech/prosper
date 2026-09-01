@@ -196,15 +196,20 @@ export default function WMS() {
           src={wmsHero}
           alt="Prosper WMS warehouse operations"
           fetchPriority="high"
-          className="absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full w-full object-contain lg:object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-[linear-gradient(to_right,rgba(15,23,42,0.65),rgba(15,23,42,0.35)_35%,transparent_60%)]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
+        <div className="pointer-events-none absolute inset-0 bg-navy/15" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/55 via-navy/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 via-navy/15 to-transparent" />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 65% 75% at center, rgba(15,23,42,0.55), transparent 70%)' }}
+        />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl mx-auto rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0">
+              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl mx-auto">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Prosper WMS
                 </span>
