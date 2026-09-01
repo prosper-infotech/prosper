@@ -256,9 +256,9 @@ export default function WMS() {
             </div>
           </div>
 
-          <Reveal delay={0.2} className="shrink-0 border-t border-white/10 bg-navy/85 backdrop-blur-sm py-3 sm:py-4">
+          <Reveal delay={0.2} className="shrink-0 py-7 sm:py-9 md:py-11 lg:py-14">
             <div className="max-w-6xl mx-auto px-6">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3 [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
                 RFID-Powered Warehouse Process
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
@@ -267,7 +267,7 @@ export default function WMS() {
                   return (
                     <div
                       key={step.title}
-                      className="flex flex-col gap-1 rounded-lg border border-white/10 bg-white/5 p-2 sm:p-3"
+                      className="flex flex-col gap-1 rounded-lg border border-white/15 bg-navy/40 backdrop-blur-[2px] p-2 sm:p-3"
                     >
                       <div className="flex items-center gap-1.5">
                         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold text-primary text-[10px] font-bold shrink-0">
