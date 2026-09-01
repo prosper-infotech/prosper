@@ -28,7 +28,7 @@ import {
   Wrench,
   UsersRound,
 } from 'lucide-react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -165,20 +165,6 @@ export default function WMS() {
     'Real-time inventory control, put-away, picking, packing and dispatch. Prosper WMS integrates with your ERP/TMS for faster fulfillment and fewer errors. Book a free demo.'
   )
 
-  const tiltX = useMotionValue(0)
-  const tiltY = useMotionValue(0)
-  const rotateX = useTransform(tiltY, [-0.5, 0.5], [8, -8])
-  const rotateY = useTransform(tiltX, [-0.5, 0.5], [-8, 8])
-  function handleHeroTilt(e) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    tiltX.set((e.clientX - rect.left) / rect.width - 0.5)
-    tiltY.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-  function resetHeroTilt() {
-    tiltX.set(0)
-    tiltY.set(0)
-  }
-
   return (
     <>
       <ScrollProgressBar />
@@ -197,19 +183,18 @@ export default function WMS() {
         ]}
       />
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
-        <motion.div
-          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
-          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      <section className="relative overflow-hidden bg-navy">
+        <img
+          src={wmsHero}
+          alt="Prosper WMS warehouse operations"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
-          animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-          <Reveal className="flex flex-col gap-5">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/30" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-navy/40" />
+
+        <div className="relative max-w-6xl mx-auto px-6 py-20 lg:py-28">
+          <Reveal className="flex flex-col gap-5 max-w-xl">
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
               Warehouse Management System
             </span>
@@ -219,7 +204,7 @@ export default function WMS() {
             <p className="text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
               Real-Time Inventory Control, Faster Fulfillment
             </p>
-            <p className="text-white/80 text-lg max-w-xl">
+            <p className="text-white/80 text-lg">
               Receiving, put-away, picking, packing and dispatch — one connected system with live
               inventory visibility and full ERP/TMS integration.
             </p>
@@ -257,49 +242,6 @@ export default function WMS() {
                 <PhoneCall className="h-4 w-4" />
                 Call Us
               </CallDropdown>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15} className="lg:hidden mt-2">
-            <img
-              src={wmsHero}
-              alt="Prosper WMS warehouse operations"
-              className="w-full max-w-sm mx-auto rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-            />
-          </Reveal>
-
-          <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div
-              className="relative flex items-center justify-center max-w-md"
-              style={{ perspective: 800 }}
-              onMouseMove={handleHeroTilt}
-              onMouseLeave={resetHeroTilt}
-            >
-              <motion.div
-                className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.div
-                className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-                style={{ rotateX, rotateY }}
-              >
-                <img src={wmsHero} alt="Prosper WMS warehouse operations" className="w-full" />
-              </motion.div>
-              <motion.span
-                className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                Live Inventory
-              </motion.span>
-              <motion.span
-                className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-              >
-                ERP Connected
-              </motion.span>
             </div>
           </Reveal>
         </div>
