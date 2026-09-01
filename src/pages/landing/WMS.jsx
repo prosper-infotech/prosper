@@ -49,6 +49,13 @@ const STAT_BADGES = [
   { icon: Puzzle, label: 'ERP / TMS Integration' },
 ]
 
+const RFID_PROCESS = [
+  { icon: ScanBarcode, title: 'RFID Tunnel / Conveyor Read', description: 'Automatically scan each box RFID before palletizing.' },
+  { icon: Boxes, title: 'Pallet Build — RFID Tracking', description: 'Link each box and serial number to the pallet as it is built.' },
+  { icon: ShieldCheck, title: 'Stretch-Wrapper RFID Verification', description: 'Verify box RFID tags while the pallet is being wrapped.' },
+  { icon: PackageCheck, title: 'Full-Pallet RFID Read', description: 'Read the completed pallet using a multi-antenna RFID setup.' },
+]
+
 const WORKFLOW = [
   { icon: LogIn, title: 'Receiving' },
   { icon: ArrowDownToLine, title: 'Put-Away' },
@@ -245,6 +252,36 @@ export default function WMS() {
             </div>
           </Reveal>
         </div>
+
+        <Reveal delay={0.2} className="relative border-t border-white/10 bg-navy/80 backdrop-blur-sm">
+          <div className="max-w-6xl mx-auto px-6 py-6 lg:py-7">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gold mb-4">
+              RFID-Powered Warehouse Process
+            </p>
+            <div className="flex items-stretch gap-3 overflow-x-auto sm:grid sm:grid-cols-4 sm:overflow-visible">
+              {RFID_PROCESS.map((step, i) => {
+                const Icon = step.icon
+                return (
+                  <div key={step.title} className="flex items-center gap-3 shrink-0 sm:shrink">
+                    <div className="flex flex-col gap-2 rounded-xl border border-white/10 bg-white/5 p-4 w-56 sm:w-auto">
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold text-primary text-xs font-bold shrink-0">
+                          {i + 1}
+                        </span>
+                        <Icon className="h-4 w-4 text-gold shrink-0" />
+                      </div>
+                      <h4 className="text-white text-sm font-bold leading-snug">{step.title}</h4>
+                      <p className="text-xs text-white/70 leading-relaxed">{step.description}</p>
+                    </div>
+                    {i < RFID_PROCESS.length - 1 && (
+                      <ArrowRight className="h-4 w-4 text-gold shrink-0 hidden sm:block" />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="relative overflow-hidden">
