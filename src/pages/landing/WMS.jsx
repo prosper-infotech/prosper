@@ -190,11 +190,11 @@ export default function WMS() {
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-navy/30" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-navy/40" />
+        <div className="pointer-events-none absolute inset-0 bg-navy/35" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 lg:py-28">
-          <Reveal className="flex flex-col gap-5 max-w-xl">
+          <Reveal className="flex flex-col gap-5 max-w-xl rounded-2xl bg-navy/55 backdrop-blur-sm border border-white/10 p-6 sm:p-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]">
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
               Warehouse Management System
             </span>
