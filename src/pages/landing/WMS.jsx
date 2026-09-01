@@ -219,7 +219,7 @@ export default function WMS() {
                   live inventory visibility and full ERP/TMS integration.
                 </p>
 
-                <div className="hidden md:flex flex-wrap justify-center gap-3 mt-1">
+                <div className="flex flex-wrap justify-center gap-3 mt-1">
                   {STAT_BADGES.map((badge, i) => {
                     const Icon = badge.icon
                     return (
