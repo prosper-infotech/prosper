@@ -34,6 +34,9 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const AS400Development = lazy(() => import('./pages/landing/AS400Development'))
 const AssetTracking = lazy(() => import('./pages/landing/AssetTracking'))
 const TechOutsourcing = lazy(() => import('./pages/landing/TechOutsourcing'))
+const WMS = lazy(() => import('./pages/landing/WMS'))
+const AIPoweredCFS = lazy(() => import('./pages/landing/AIPoweredCFS'))
+const ForkliftVisionAI = lazy(() => import('./pages/landing/ForkliftVisionAI'))
 const ThankYou = lazy(() => import('./pages/landing/ThankYou'))
 const CategoryOverviewTemplate = lazy(() => import('./components/templates/CategoryOverviewTemplate'))
 const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageTemplate'))
@@ -135,6 +138,9 @@ function App() {
           <Route path="/lp/as400-development" element={<AS400Development />} />
           <Route path="/lp/asset-tracking" element={<AssetTracking />} />
           <Route path="/lp/tech-outsourcing" element={<TechOutsourcing />} />
+          <Route path="/lp/wms" element={<WMS />} />
+          <Route path="/lp/ai-powered-cfs" element={<AIPoweredCFS />} />
+          <Route path="/lp/forklift-vision-ai" element={<ForkliftVisionAI />} />
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
