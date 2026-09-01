@@ -190,98 +190,104 @@ export default function WMS() {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-navy">
+      <section className="relative overflow-hidden bg-navy h-[600px] sm:h-[640px] md:h-[680px] lg:h-[720px]">
         <img
           src={wmsHero}
           alt="Prosper WMS warehouse operations"
           fetchPriority="high"
-          className="absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full bg-navy/35" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
+        <div className="pointer-events-none absolute inset-0 bg-navy/35" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/10 to-navy/10" />
 
-        <div className="relative max-w-6xl mx-auto px-6 py-20 lg:py-28">
-          <Reveal className="flex flex-col gap-5 max-w-xl rounded-2xl bg-navy/55 backdrop-blur-sm border border-white/10 p-6 sm:p-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]">
-            <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
-              Warehouse Management System
-            </span>
-            <h1 className="text-white text-4xl md:text-5xl leading-tight">
-              Prosper <span className="text-gold">WMS</span>
-            </h1>
-            <p className="text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
-              Real-Time Inventory Control, Faster Fulfillment
-            </p>
-            <p className="text-white/80 text-lg">
-              Receiving, put-away, picking, packing and dispatch — one connected system with live
-              inventory visibility and full ERP/TMS integration.
-            </p>
+        <div className="relative h-full flex flex-col">
+          <div className="flex-1 min-h-0 flex items-center overflow-hidden">
+            <div className="max-w-6xl mx-auto px-6 w-full">
+              <Reveal className="flex flex-col gap-2 sm:gap-3 max-w-xl rounded-2xl bg-navy/55 backdrop-blur-sm border border-white/10 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]">
+                <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
+                  Warehouse Management System
+                </span>
+                <h1 className="text-white text-2xl sm:text-4xl md:text-5xl leading-tight">
+                  Prosper <span className="text-gold">WMS</span>
+                </h1>
+                <p className="text-lg sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
+                  Real-Time Inventory Control, Faster Fulfillment
+                </p>
+                <p className="hidden sm:block text-white/80 text-base md:text-lg">
+                  Receiving, put-away, picking, packing and dispatch — one connected system with
+                  live inventory visibility and full ERP/TMS integration.
+                </p>
 
-            <div className="flex flex-wrap gap-3 mt-2">
-              {STAT_BADGES.map((badge, i) => {
-                const Icon = badge.icon
-                return (
-                  <motion.span
-                    key={badge.label}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+                <div className="hidden md:flex flex-wrap gap-3 mt-1">
+                  {STAT_BADGES.map((badge, i) => {
+                    const Icon = badge.icon
+                    return (
+                      <motion.span
+                        key={badge.label}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                        className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+                      >
+                        <Icon className="h-4 w-4 text-gold" />
+                        {badge.label}
+                      </motion.span>
+                    )
+                  })}
+                </div>
+
+                <div className="flex flex-wrap gap-3 mt-1 sm:mt-2">
+                  <div className="relative">
+                    <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
+                    <Button href="#lead-form" variant="primary-dark" className="relative">
+                      Book a Demo
+                    </Button>
+                  </div>
+                  <CallDropdown
+                    eventCategory="WMS Landing Page"
+                    align="left"
+                    triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
                   >
-                    <Icon className="h-4 w-4 text-gold" />
-                    {badge.label}
-                  </motion.span>
-                )
-              })}
+                    <PhoneCall className="h-4 w-4" />
+                    Call Us
+                  </CallDropdown>
+                </div>
+              </Reveal>
             </div>
+          </div>
 
-            <div className="flex flex-wrap gap-4 mt-4">
-              <div className="relative">
-                <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
-                <Button href="#lead-form" variant="primary-dark" className="relative">
-                  Book a Demo
-                </Button>
+          <Reveal delay={0.2} className="shrink-0 border-t border-white/10 bg-navy/85 backdrop-blur-sm py-3 sm:py-4">
+            <div className="max-w-6xl mx-auto px-6">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3">
+                RFID-Powered Warehouse Process
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                {RFID_PROCESS.map((step, i) => {
+                  const Icon = step.icon
+                  return (
+                    <div
+                      key={step.title}
+                      className="flex flex-col gap-1 rounded-lg border border-white/10 bg-white/5 p-2 sm:p-3"
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold text-primary text-[10px] font-bold shrink-0">
+                          {i + 1}
+                        </span>
+                        <Icon className="h-3.5 w-3.5 text-gold shrink-0" />
+                      </div>
+                      <h4 className="text-white text-[11px] sm:text-xs font-bold leading-snug line-clamp-2">
+                        {step.title}
+                      </h4>
+                      <p className="hidden sm:block text-[11px] text-white/70 leading-snug line-clamp-2">
+                        {step.description}
+                      </p>
+                    </div>
+                  )
+                })}
               </div>
-              <CallDropdown
-                eventCategory="WMS Landing Page"
-                align="left"
-                triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-              >
-                <PhoneCall className="h-4 w-4" />
-                Call Us
-              </CallDropdown>
             </div>
           </Reveal>
         </div>
-
-        <Reveal delay={0.2} className="relative border-t border-white/10 bg-navy/80 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6 py-8 lg:py-10">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gold mb-5">
-              RFID-Powered Warehouse Process
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {RFID_PROCESS.map((step, i) => {
-                const Icon = step.icon
-                return (
-                  <div key={step.title} className="relative h-full">
-                    {i < RFID_PROCESS.length - 1 && (
-                      <ArrowRight className="hidden lg:block absolute -right-5 top-6 h-4 w-4 text-gold/70 z-10" />
-                    )}
-                    <div className="h-full flex flex-col gap-2.5 rounded-xl border border-white/10 bg-white/5 p-5">
-                      <div className="flex items-center gap-2.5">
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gold text-primary text-xs font-bold shrink-0">
-                          {i + 1}
-                        </span>
-                        <Icon className="h-4 w-4 text-gold shrink-0" />
-                      </div>
-                      <h4 className="text-white text-sm font-bold leading-snug min-h-[2.5rem]">{step.title}</h4>
-                      <p className="text-xs text-white/70 leading-relaxed">{step.description}</p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </Reveal>
       </section>
 
       <section className="relative overflow-hidden">
