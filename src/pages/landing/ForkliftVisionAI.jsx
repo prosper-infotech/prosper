@@ -30,7 +30,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import forkliftHero from '../../assets/wms-hero.jpg'
+import forkliftHero from '../../assets/forklift-vision-hero.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
@@ -134,7 +134,7 @@ export default function ForkliftVisionAI() {
           src={forkliftHero}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-[20%_center] lg:object-center"
         />
         <div className="pointer-events-none absolute inset-0 bg-navy/15" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-transparent" />
