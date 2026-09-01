@@ -203,17 +203,17 @@ export default function WMS() {
         <div className="relative h-full flex flex-col">
           <div className="flex-1 min-h-0 flex items-center overflow-hidden">
             <div className="max-w-6xl mx-auto px-6 w-full">
-              <Reveal className="flex flex-col gap-2 sm:gap-3 max-w-xl rounded-2xl bg-navy/55 backdrop-blur-sm border border-white/10 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]">
+              <Reveal className="flex flex-col gap-2 sm:gap-3 max-w-xl">
                 <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Warehouse Management System
                 </span>
-                <h1 className="text-white text-2xl sm:text-4xl md:text-5xl leading-tight">
+                <h1 className="text-white text-2xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
                   Prosper <span className="text-gold">WMS</span>
                 </h1>
-                <p className="text-lg sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
+                <p className="text-lg sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
                   Real-Time Inventory Control, Faster Fulfillment
                 </p>
-                <p className="hidden sm:block text-white/80 text-base md:text-lg">
+                <p className="hidden sm:block text-white/90 text-base md:text-lg [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
                   Receiving, put-away, picking, packing and dispatch — one connected system with
                   live inventory visibility and full ERP/TMS integration.
                 </p>
