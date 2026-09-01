@@ -181,9 +181,9 @@ export default function AIPoweredCFS() {
           fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-0 bg-navy/50" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/80 via-navy/25 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/85 via-navy/30 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-navy/15" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/55 via-navy/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 via-navy/15 to-transparent" />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
