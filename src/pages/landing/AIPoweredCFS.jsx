@@ -17,8 +17,15 @@ import {
   Mail,
   MapPin,
   MessageCircle,
+  ArrowRight,
+  Package,
+  Boxes,
+  Wrench,
+  UsersRound,
+  Link2,
+  Cloud,
 } from 'lucide-react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -37,6 +44,35 @@ const STAT_BADGES = [
   { icon: ScanSearch, label: 'Real-Time Container Visibility' },
   { icon: ShieldCheck, label: 'Pickup / Drop Validation' },
   { icon: Puzzle, label: 'Fast ERP Integration' },
+]
+
+const GATE_PROCESS = [
+  { icon: LogIn, title: 'GateVision AI (Arrival)', description: 'Detect container number and log arrivals automatically.' },
+  { icon: Truck, title: 'ReachStackerVision AI', description: 'Assign tasks and track pickup / drop activity.' },
+  { icon: ScanSearch, title: 'YardVision AI & Inspection', description: 'Track yard location and support inspection workflows.' },
+  { icon: LogOut, title: 'GateVision AI (Departure)', description: 'Validate and log departures in real time.' },
+]
+
+const DATA_FLOW = [
+  'Camera / Sensor Capture',
+  'AI EdgeBox (OCR + YOLO)',
+  'Task / Event Detection',
+  'TOS / ERP Sync',
+  'Dashboard & Alerts',
+]
+
+const TECH_STACK_GROUPS = [
+  { title: 'Hardware', icon: Camera, items: ['AI Cameras', 'GPS / RTK Antennas', 'Industrial Sensors', 'Prosper AI EdgeBox'] },
+  { title: 'AI / Vision Software', icon: Cpu, items: ['YOLO Object Detection', 'OCR Engine', 'NVIDIA TensorRT', 'Rules Engine'] },
+  { title: 'Integration', icon: Link2, items: ['REST APIs', 'TOS / ERP Connectors', 'EDI', 'Event Webhooks'] },
+  { title: 'Cloud & Infrastructure', icon: Cloud, items: ['Microsoft Azure', 'AWS', 'Edge-to-Cloud Sync', 'Role-Based Access Control'] },
+]
+
+const ENGAGEMENT_MODELS = [
+  { icon: Package, title: 'Camera & Sensor Only', description: 'Bring your own gate/yard infrastructure — connect Prosper AI EdgeBox and dashboards.' },
+  { icon: Boxes, title: 'Full Hardware + Software Bundle', description: 'AI cameras, GPS/RTK antennas and EdgeBox units included and configured for you.' },
+  { icon: Wrench, title: 'Managed Deployment', description: 'Full install, calibration, model tuning and go-live support handled by our team.' },
+  { icon: UsersRound, title: 'Enterprise / Multi-Terminal', description: 'Custom SLAs, dedicated account management and multi-facility rollout planning.' },
 ]
 
 const WORKFLOW = [
@@ -103,6 +139,22 @@ const FAQS = [
     question: 'Is support included after go-live?',
     answer: 'Yes — ongoing monitoring, model tuning and support are included as part of your plan.',
   },
+  {
+    question: 'Do the cameras and sensors hold up in outdoor gate/yard conditions?',
+    answer: 'Yes — the hardware is rated for outdoor use, including rain, dust and varying light conditions typical of container yards and gates.',
+  },
+  {
+    question: 'Can it run across multiple terminals or facilities?',
+    answer: 'Yes — Prosper ContainerVision AI supports multi-terminal deployments from a single system, with facility-level and network-level visibility.',
+  },
+  {
+    question: 'Does it work if connectivity at the yard is unreliable?',
+    answer: 'Yes — the Prosper AI EdgeBox processes detection locally and syncs to the cloud once connectivity is available, so gate and yard operations never stop.',
+  },
+  {
+    question: 'How is our data secured?',
+    answer: 'Data is hosted on Microsoft Azure or AWS with role-based access control, so each user only sees the facilities and functions their role requires.',
+  },
 ]
 
 export default function AIPoweredCFS() {
@@ -110,20 +162,6 @@ export default function AIPoweredCFS() {
     'Prosper ContainerVision AI | AI-Powered CFS & Container Terminal Automation',
     'Real-time container visibility across gate arrival, yard, inspection and departure. AI cameras, OCR, GPS/RTK and the Prosper AI EdgeBox automate CFS and container terminal operations.'
   )
-
-  const tiltX = useMotionValue(0)
-  const tiltY = useMotionValue(0)
-  const rotateX = useTransform(tiltY, [-0.5, 0.5], [8, -8])
-  const rotateY = useTransform(tiltX, [-0.5, 0.5], [-8, 8])
-  function handleHeroTilt(e) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    tiltX.set((e.clientX - rect.left) / rect.width - 0.5)
-    tiltY.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-  function resetHeroTilt() {
-    tiltX.set(0)
-    tiltY.set(0)
-  }
 
   return (
     <>
@@ -143,148 +181,141 @@ export default function AIPoweredCFS() {
         ]}
       />
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
-        <motion.div
-          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
-          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      <section className="relative overflow-hidden bg-navy">
+        <img
+          src={cfsHero}
+          alt="AI-powered CFS and container terminal operations"
+          fetchPriority="high"
+          className="absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full w-full object-contain lg:object-cover object-center"
         />
-        <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
-          animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-          <Reveal className="flex flex-col gap-5">
-            <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
-              AI-Powered CFS &amp; Container Terminal Automation
-            </span>
-            <h1 className="text-white text-4xl md:text-5xl leading-tight">
-              Prosper <span className="text-gold">ContainerVision AI</span>
-            </h1>
-            <p className="text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
-              Real-Time Container Visibility, Gate to Departure
-            </p>
-            <p className="text-white/80 text-lg max-w-xl">
-              AI cameras, OCR, GPS/RTK and industrial sensors automate container gate, yard, reach
-              stacker, inspection and departure workflows — powered by the Prosper AI EdgeBox.
-            </p>
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-[linear-gradient(to_right,rgba(15,23,42,0.65),rgba(15,23,42,0.35)_35%,transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
 
-            <div className="flex flex-wrap gap-3 mt-2">
-              {STAT_BADGES.map((badge, i) => {
-                const Icon = badge.icon
-                return (
-                  <motion.span
-                    key={badge.label}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+        <div className="relative flex flex-col">
+          <div className="flex items-center">
+            <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
+              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 lg:items-start lg:text-left max-w-xl mx-auto lg:mx-0 rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
+                  AI-Powered CFS Automation
+                </span>
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
+                  Prosper <span className="text-gold">ContainerVision AI</span>
+                </h1>
+                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
+                  Real-Time Container Visibility, Gate to Departure
+                </p>
+                <p className="text-white/90 text-sm sm:text-base md:text-lg [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
+                  AI cameras, OCR, GPS/RTK and industrial sensors automate container gate, yard,
+                  reach stacker, inspection and departure workflows — powered by the Prosper AI
+                  EdgeBox.
+                </p>
+
+                <div className="hidden md:flex flex-wrap gap-3 mt-1">
+                  {STAT_BADGES.map((badge, i) => {
+                    const Icon = badge.icon
+                    return (
+                      <motion.span
+                        key={badge.label}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                        className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+                      >
+                        <Icon className="h-4 w-4 text-gold" />
+                        {badge.label}
+                      </motion.span>
+                    )
+                  })}
+                </div>
+
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-1 sm:mt-2">
+                  <div className="relative">
+                    <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
+                    <Button
+                      href="https://calendly.com/prosperinfotech-sales/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="primary-dark"
+                      className="relative"
+                      onClick={() =>
+                        window.gtag?.('event', 'cta_click', {
+                          event_category: 'AI-Powered CFS Landing Page',
+                          event_label: 'Hero - Book a Demo',
+                        })
+                      }
+                    >
+                      Book a Demo
+                    </Button>
+                  </div>
+                  <CallDropdown
+                    eventCategory="AI-Powered CFS Landing Page"
+                    align="left"
+                    triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
                   >
-                    <Icon className="h-4 w-4 text-gold" />
-                    {badge.label}
-                  </motion.span>
-                )
-              })}
+                    <PhoneCall className="h-4 w-4" />
+                    Call Us
+                  </CallDropdown>
+                  <a
+                    href={`https://wa.me/19407583271?text=${encodeURIComponent(
+                      "Hi, I'd like to know more about Prosper ContainerVision AI."
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      window.gtag?.('event', 'click_whatsapp', { event_category: 'AI-Powered CFS Landing Page (Hero)' })
+                    }
+                    className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/15 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#25D366]/25 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                  >
+                    <svg viewBox="0 0 32 32" className="h-4 w-4 fill-[#25D366]" aria-hidden="true">
+                      <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.702 4.607 1.912 6.472L4 29l7.72-1.876A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.83-.562-5.4-1.535l-.387-.23-4.583 1.114 1.13-4.47-.253-.398A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.94-8.144c-.325-.163-1.925-.95-2.223-1.058-.298-.109-.516-.163-.733.163-.217.325-.842 1.058-1.033 1.276-.19.217-.38.244-.706.081-.325-.163-1.374-.506-2.617-1.612-.968-.862-1.622-1.927-1.812-2.252-.19-.325-.02-.5.143-.663.147-.146.325-.38.488-.57.163-.19.217-.325.325-.543.109-.217.054-.407-.027-.57-.081-.163-.733-1.765-1.004-2.417-.264-.635-.532-.55-.733-.56l-.625-.011c-.217 0-.57.081-.868.407-.298.325-1.137 1.112-1.137 2.712 0 1.6 1.164 3.147 1.326 3.364.163.217 2.29 3.497 5.55 4.904.775.335 1.38.535 1.852.684.778.247 1.486.212 2.046.129.624-.093 1.925-.787 2.196-1.547.271-.76.271-1.412.19-1.548-.081-.135-.298-.216-.624-.38Z" />
+                    </svg>
+                    WhatsApp
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.gtag?.('event', 'click_chat', { event_category: 'AI-Powered CFS Landing Page (Hero)' })
+                      window.Tawk_API?.maximize?.()
+                    }}
+                    className="inline-flex items-center gap-2 rounded-lg bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Chat
+                  </button>
+                </div>
+              </Reveal>
             </div>
+          </div>
 
-            <div className="flex flex-wrap gap-4 mt-4">
-              <div className="relative">
-                <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
-                <Button
-                  href="https://calendly.com/prosperinfotech-sales/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="primary-dark"
-                  className="relative"
-                  onClick={() =>
-                    window.gtag?.('event', 'cta_click', {
-                      event_category: 'AI-Powered CFS Landing Page',
-                      event_label: 'Hero - Book a Demo',
-                    })
-                  }
-                >
-                  Book a Demo
-                </Button>
+          <Reveal delay={0.2} className="shrink-0 pt-3 sm:pt-4 lg:pt-5 pb-9 sm:pb-11 md:pb-12 lg:pb-14">
+            <div className="max-w-6xl mx-auto px-6">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3 [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
+                Gate-to-Departure Container Process
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                {GATE_PROCESS.map((step, i) => {
+                  const Icon = step.icon
+                  return (
+                    <div
+                      key={step.title}
+                      className="flex flex-col gap-1 rounded-lg border border-white/15 bg-navy/40 backdrop-blur-[2px] p-2 sm:p-3"
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold text-primary text-[10px] font-bold shrink-0">
+                          {i + 1}
+                        </span>
+                        <Icon className="h-3.5 w-3.5 text-gold shrink-0" />
+                      </div>
+                      <h4 className="text-white text-[11px] sm:text-xs font-bold leading-snug line-clamp-2">
+                        {step.title}
+                      </h4>
+                      <p className="hidden sm:block text-[11px] text-white/70 leading-snug line-clamp-2">
+                        {step.description}
+                      </p>
+                    </div>
+                  )
+                })}
               </div>
-              <CallDropdown
-                eventCategory="AI-Powered CFS Landing Page"
-                align="left"
-                triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-              >
-                <PhoneCall className="h-4 w-4" />
-                Call Us
-              </CallDropdown>
-              <a
-                href={`https://wa.me/19407583271?text=${encodeURIComponent(
-                  "Hi, I'd like to know more about Prosper ContainerVision AI."
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  window.gtag?.('event', 'click_whatsapp', { event_category: 'AI-Powered CFS Landing Page (Hero)' })
-                }
-                className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/15 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#25D366]/25 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-              >
-                <svg viewBox="0 0 32 32" className="h-4 w-4 fill-[#25D366]" aria-hidden="true">
-                  <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.702 4.607 1.912 6.472L4 29l7.72-1.876A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.83-.562-5.4-1.535l-.387-.23-4.583 1.114 1.13-4.47-.253-.398A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.94-8.144c-.325-.163-1.925-.95-2.223-1.058-.298-.109-.516-.163-.733.163-.217.325-.842 1.058-1.033 1.276-.19.217-.38.244-.706.081-.325-.163-1.374-.506-2.617-1.612-.968-.862-1.622-1.927-1.812-2.252-.19-.325-.02-.5.143-.663.147-.146.325-.38.488-.57.163-.19.217-.325.325-.543.109-.217.054-.407-.027-.57-.081-.163-.733-1.765-1.004-2.417-.264-.635-.532-.55-.733-.56l-.625-.011c-.217 0-.57.081-.868.407-.298.325-1.137 1.112-1.137 2.712 0 1.6 1.164 3.147 1.326 3.364.163.217 2.29 3.497 5.55 4.904.775.335 1.38.535 1.852.684.778.247 1.486.212 2.046.129.624-.093 1.925-.787 2.196-1.547.271-.76.271-1.412.19-1.548-.081-.135-.298-.216-.624-.38Z" />
-                </svg>
-                WhatsApp
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  window.gtag?.('event', 'click_chat', { event_category: 'AI-Powered CFS Landing Page (Hero)' })
-                  window.Tawk_API?.maximize?.()
-                }}
-                className="inline-flex items-center gap-2 rounded-lg bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Chat
-              </button>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15} className="lg:hidden mt-2">
-            <img
-              src={cfsHero}
-              alt="AI-powered CFS and container terminal automation"
-              className="w-full max-w-sm mx-auto rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-            />
-          </Reveal>
-
-          <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div
-              className="relative flex items-center justify-center max-w-md"
-              style={{ perspective: 800 }}
-              onMouseMove={handleHeroTilt}
-              onMouseLeave={resetHeroTilt}
-            >
-              <motion.div
-                className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.div
-                className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-                style={{ rotateX, rotateY }}
-              >
-                <img src={cfsHero} alt="AI-powered CFS and container terminal automation" className="w-full" />
-              </motion.div>
-              <motion.span
-                className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                AI + OCR + GPS
-              </motion.span>
-              <motion.span
-                className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-              >
-                EdgeBox Powered
-              </motion.span>
             </div>
           </Reveal>
         </div>
@@ -305,23 +336,51 @@ export default function AIPoweredCFS() {
               const Icon = stage.icon
               return (
                 <Reveal key={stage.title} delay={i * 0.08}>
-                  <div className="h-full rounded-lg bg-white border border-ink-300 px-5 py-5 shadow-sm hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
+                  <div className="group relative h-full overflow-hidden rounded-2xl bg-white border border-ink-300 px-5 py-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.4)]">
+                    <span className="pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-primary/[0.04] group-hover:text-gold/10 transition-colors">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="mt-4 text-ink-900 text-sm font-bold">{stage.title}</h3>
-                    <ul className="mt-2 space-y-1">
+                    <h3 className="relative mt-4 text-ink-900 text-sm font-bold">{stage.title}</h3>
+                    <ul className="relative mt-2 space-y-1">
                       {stage.items.map((item) => (
                         <li key={item} className="text-xs text-ink-600 leading-relaxed">
                           &middot; {item}
                         </li>
                       ))}
                     </ul>
+                    <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-gold to-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
                   </div>
                 </Reveal>
               )
             })}
           </div>
+
+          <Reveal delay={0.1} className="relative mt-10 overflow-hidden rounded-2xl border border-ink-300 bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] overflow-x-auto">
+            <div className="pointer-events-none absolute -top-8 right-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+            <p className="relative text-center text-xs font-semibold uppercase tracking-widest text-primary mb-4">
+              How the data moves
+            </p>
+            <div className="relative flex flex-wrap items-center justify-center gap-2">
+              {DATA_FLOW.map((step, i) => (
+                <div key={step} className="flex items-center gap-2">
+                  <span className="rounded-full border border-ink-300 bg-surface-alt px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-ink-900 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold">
+                    {step}
+                  </span>
+                  {i < DATA_FLOW.length - 1 && (
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
+                    >
+                      <ArrowRight className="h-4 w-4 text-gold-dark shrink-0" />
+                    </motion.span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -352,12 +411,96 @@ export default function AIPoweredCFS() {
             const Icon = feature.icon
             return (
               <Reveal key={feature.label} delay={(i % 3) * 0.08}>
-                <div className="h-full rounded-lg bg-white border border-ink-300 px-5 py-5 shadow-sm hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
+                <div className="group relative h-full overflow-hidden rounded-2xl bg-white border border-ink-300 px-5 py-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.4)]">
+                  <span className="pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-primary/[0.04] group-hover:text-gold/10 transition-colors">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-4 text-ink-900 text-sm font-bold">{feature.label}</h3>
-                  <p className="mt-1.5 text-sm text-ink-600 leading-relaxed">{feature.description}</p>
+                  <h3 className="relative mt-4 text-ink-900 text-sm font-bold">{feature.label}</h3>
+                  <p className="relative mt-1.5 text-sm text-ink-600 leading-relaxed">{feature.description}</p>
+                  <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-gold to-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-surface-alt border-y border-ink-300">
+        <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-gold/10 blur-3xl" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
+          <Reveal className="text-center mb-10">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+              Engagement Options
+            </span>
+            <h2 className="mt-2 text-3xl">Choose how you want to run ContainerVision AI</h2>
+          </Reveal>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {ENGAGEMENT_MODELS.map((model, i) => {
+              const Icon = model.icon
+              const featured = i === 2
+              return (
+                <Reveal key={model.title} delay={i * 0.08}>
+                  <div
+                    className={`relative h-full rounded-2xl border bg-white px-5 py-6 transition-all duration-300 hover:-translate-y-1.5 ${
+                      featured
+                        ? 'border-gold shadow-[0_0_0_1px_rgba(247,221,0,0.4),0_20px_45px_-15px_rgba(247,221,0,0.5)]'
+                        : 'border-ink-300 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]'
+                    }`}
+                  >
+                    {featured && (
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-gold to-gold-dark px-4 py-1 text-[10px] font-bold uppercase tracking-wide text-primary shadow-md">
+                        Most Chosen
+                      </span>
+                    )}
+                    <div
+                      className={`flex h-11 w-11 items-center justify-center rounded-xl ${
+                        featured ? 'bg-gradient-to-br from-gold to-gold-dark shadow-md' : 'bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="mt-4 text-ink-900 text-base font-bold">{model.title}</h3>
+                    <p className="mt-2 text-sm text-ink-600 leading-relaxed">{model.description}</p>
+                  </div>
+                </Reveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden max-w-6xl mx-auto px-6 py-16 lg:py-20">
+        <Reveal className="text-center mb-10">
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest">
+            Technology Stack
+          </span>
+          <h2 className="mt-2 text-3xl">What's under the hood</h2>
+        </Reveal>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TECH_STACK_GROUPS.map((group, i) => {
+            const Icon = group.icon
+            return (
+              <Reveal key={group.title} delay={i * 0.06}>
+                <div className="group h-full overflow-hidden rounded-2xl bg-white border border-ink-300 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]">
+                  <div className="flex items-center gap-2.5 bg-gradient-to-b from-[#FFFBEA] to-white border-b border-ink-300 px-5 py-4">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-inset ring-gold/25 shrink-0 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <h3 className="text-ink-900 text-sm font-bold uppercase tracking-wide">{group.title}</h3>
+                  </div>
+                  <div className="p-5 flex flex-wrap gap-1.5">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full bg-surface-alt border border-ink-300 px-2.5 py-1 text-[11px] font-semibold text-ink-600 transition-colors group-hover:border-gold/40"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Reveal>
             )
@@ -461,7 +604,11 @@ export default function AIPoweredCFS() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="rounded-2xl bg-white p-6 sm:p-8 shadow-xl">
+          <Reveal
+            delay={0.1}
+            className="relative overflow-hidden rounded-2xl border-t-4 border-t-gold bg-white p-6 sm:p-8 shadow-xl"
+          >
+            <div className="pointer-events-none absolute top-0 right-0 w-40 h-40 bg-gold/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
             <h3 className="font-heading font-semibold text-primary text-xl mb-1">
               Get a free CFS automation demo
             </h3>
