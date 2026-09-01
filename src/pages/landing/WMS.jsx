@@ -202,7 +202,7 @@ export default function WMS() {
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
-            <div className="max-w-6xl mx-auto px-6 py-8 sm:py-10 lg:py-12 w-full">
+            <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
               <Reveal className="flex flex-col gap-2 sm:gap-3 max-w-xl">
                 <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Warehouse Management System
@@ -256,7 +256,7 @@ export default function WMS() {
             </div>
           </div>
 
-          <Reveal delay={0.2} className="shrink-0 py-7 sm:py-9 md:py-11 lg:py-14">
+          <Reveal delay={0.2} className="shrink-0 pt-3 sm:pt-4 lg:pt-5 pb-9 sm:pb-11 md:pb-12 lg:pb-14">
             <div className="max-w-6xl mx-auto px-6">
               <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3 [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
                 RFID-Powered Warehouse Process
