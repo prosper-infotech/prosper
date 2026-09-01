@@ -205,10 +205,10 @@ export default function WMS() {
             <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
               <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 lg:items-start lg:text-left max-w-xl mx-auto lg:mx-0 rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
-                  Warehouse Management System
+                  Prosper WMS
                 </span>
                 <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
-                  Prosper <span className="text-gold">WMS</span>
+                  Prosper <span className="text-gold">Warehouse Management System</span>
                 </h1>
                 <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
                   Real-Time Inventory Control, Faster Fulfillment
