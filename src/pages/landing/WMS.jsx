@@ -195,7 +195,7 @@ export default function WMS() {
           src={wmsHero}
           alt="Prosper WMS warehouse operations"
           fetchPriority="high"
-          className="absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full w-full object-cover object-center"
+          className="absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full w-full object-contain object-center"
         />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-[linear-gradient(to_right,rgba(15,23,42,0.65),rgba(15,23,42,0.35)_35%,transparent_60%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
