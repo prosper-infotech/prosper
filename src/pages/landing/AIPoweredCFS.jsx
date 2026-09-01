@@ -188,7 +188,7 @@ export default function AIPoweredCFS() {
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20 md:py-24 lg:py-28 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-2xl mx-auto">
+              <Reveal className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-2xl md:max-w-3xl mx-auto">
                 <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
                   AI-Powered CFS Automation
                 </span>
