@@ -18,7 +18,7 @@ import {
   PackageSearch,
   MessageCircle,
 } from 'lucide-react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
@@ -30,7 +30,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import forkliftHero from '../../assets/hero-slide-forklift.jpg'
+import forkliftHero from '../../assets/wms-hero.jpg'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
@@ -111,20 +111,6 @@ export default function ForkliftVisionAI() {
     '8MP cameras, 3D depth sensing, OCR and Edge AI for pallet pickup, rack location, putaway, staging and inventory validation. Book a free demo with Prosper Infotech.'
   )
 
-  const tiltX = useMotionValue(0)
-  const tiltY = useMotionValue(0)
-  const rotateX = useTransform(tiltY, [-0.5, 0.5], [8, -8])
-  const rotateY = useTransform(tiltX, [-0.5, 0.5], [-8, 8])
-  function handleHeroTilt(e) {
-    const rect = e.currentTarget.getBoundingClientRect()
-    tiltX.set((e.clientX - rect.left) / rect.width - 0.5)
-    tiltY.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-  function resetHeroTilt() {
-    tiltX.set(0)
-    tiltY.set(0)
-  }
-
   return (
     <>
       <ScrollProgressBar />
@@ -143,7 +129,16 @@ export default function ForkliftVisionAI() {
         ]}
       />
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
+      <section className="relative overflow-hidden bg-navy">
+        <img
+          src={forkliftHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-navy/15" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/70 via-transparent to-transparent" />
         <motion.div
           className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
           animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
@@ -154,8 +149,8 @@ export default function ForkliftVisionAI() {
           animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
-          <Reveal className="flex flex-col gap-5">
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24">
+          <Reveal className="flex flex-col gap-5 max-w-2xl">
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
               AI-Powered Pallet &amp; Location Intelligence
             </span>
@@ -242,49 +237,6 @@ export default function ForkliftVisionAI() {
                 <MessageCircle className="h-4 w-4" />
                 Chat
               </button>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15} className="lg:hidden mt-2">
-            <img
-              src={forkliftHero}
-              alt="ForkliftVision AI pallet and rack location detection"
-              className="w-full max-w-sm mx-auto rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-            />
-          </Reveal>
-
-          <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div
-              className="relative flex items-center justify-center max-w-md"
-              style={{ perspective: 800 }}
-              onMouseMove={handleHeroTilt}
-              onMouseLeave={resetHeroTilt}
-            >
-              <motion.div
-                className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.div
-                className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-                style={{ rotateX, rotateY }}
-              >
-                <img src={forkliftHero} alt="ForkliftVision AI pallet and rack location detection" className="w-full" />
-              </motion.div>
-              <motion.span
-                className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                3D Depth Sensing
-              </motion.span>
-              <motion.span
-                className="absolute bottom-6 -right-4 z-20 rounded-full bg-gold px-4 py-2 text-sm font-semibold text-primary"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-              >
-                Edge AI Powered
-              </motion.span>
             </div>
           </Reveal>
         </div>
