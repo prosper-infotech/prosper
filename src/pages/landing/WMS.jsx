@@ -203,7 +203,7 @@ export default function WMS() {
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-2 sm:items-start sm:text-left sm:gap-3 max-w-xl mx-auto sm:mx-0 rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:bg-transparent sm:backdrop-blur-none sm:border-0 sm:p-0">
+              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 lg:items-start lg:text-left max-w-xl mx-auto lg:mx-0 rounded-2xl bg-navy/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:p-0">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Warehouse Management System
                 </span>
@@ -236,7 +236,7 @@ export default function WMS() {
                   })}
                 </div>
 
-                <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-1 sm:mt-2">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-1 sm:mt-2">
                   <div className="relative">
                     <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
                     <Button href="#lead-form" variant="primary-dark" className="relative">
