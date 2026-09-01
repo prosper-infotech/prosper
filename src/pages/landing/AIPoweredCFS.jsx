@@ -179,11 +179,11 @@ export default function AIPoweredCFS() {
           src={cfsHero}
           alt="AI-powered CFS and container terminal operations"
           fetchPriority="high"
-          className="absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full w-full object-contain lg:object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-navy/20" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-b from-navy/75 via-navy/15 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[210px] sm:h-[360px] md:h-[430px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/80 via-navy/25 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-navy/50" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/80 via-navy/25 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/85 via-navy/30 to-transparent" />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
