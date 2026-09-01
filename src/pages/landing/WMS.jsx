@@ -202,7 +202,7 @@ export default function WMS() {
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
-            <div className="max-w-6xl mx-auto px-6 py-16 lg:py-24 w-full">
+            <div className="max-w-6xl mx-auto px-6 py-8 sm:py-10 lg:py-12 w-full">
               <Reveal className="flex flex-col gap-2 sm:gap-3 max-w-xl">
                 <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Warehouse Management System
