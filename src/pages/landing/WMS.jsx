@@ -233,7 +233,7 @@ export default function WMS() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-                        className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+                        className="inline-flex items-center gap-2 rounded-lg bg-navy/40 backdrop-blur-[2px] border border-white/20 px-4 py-2.5 text-sm font-semibold text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)] transition-all duration-300 hover:bg-navy/55 hover:-translate-y-0.5"
                       >
                         <Icon className="h-4 w-4 text-gold" />
                         {badge.label}
