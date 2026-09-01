@@ -188,10 +188,10 @@ export default function WMS() {
           src={wmsHero}
           alt="Prosper WMS warehouse operations"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full w-full object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-0 bg-navy/35" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full bg-navy/35" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] sm:h-[480px] md:h-[540px] lg:inset-y-0 lg:h-full bg-gradient-to-t from-navy/70 via-transparent to-navy/10" />
 
         <div className="relative max-w-6xl mx-auto px-6 py-20 lg:py-28">
           <Reveal className="flex flex-col gap-5 max-w-xl rounded-2xl bg-navy/55 backdrop-blur-sm border border-white/10 p-6 sm:p-8 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)]">
