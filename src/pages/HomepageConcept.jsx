@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ArrowRight, ScanLine, Truck, Warehouse, Ship, Boxes } from 'lucide-react'
+import { ChevronDown, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import { NAV } from '../data/navigation'
@@ -13,6 +13,7 @@ import containerVisionImg from '../assets/container vision ai.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
+import visionAISuiteImg from '../assets/vision ai suite.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
@@ -97,24 +98,6 @@ const PRODUCTS = [
     desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
     to: '/lp/as400-development',
   },
-]
-
-// Nodes for the hero's Vision AI suite illustration: one hand-drawn
-// isometric object per product, linked with dotted connectors and
-// labeled pill callouts, in the style of the ATAI reference.
-const VISION_NODES = [
-  { kind: 'gate', label: 'GateVision AI', desc: 'AI gate automation & OCR', Icon: ScanLine, x: 120, y: 520 },
-  { kind: 'yard', label: 'YardVision AI', desc: 'Real-time yard & vehicle visibility', Icon: Truck, x: 330, y: 250 },
-  { kind: 'warehouse', label: 'DockVision AI', desc: 'Automated dock & warehouse ops', Icon: Warehouse, x: 570, y: 300 },
-  { kind: 'crane', label: 'ContainerVision AI', desc: 'AI-powered terminal tracking', Icon: Ship, x: 850, y: 220 },
-  { kind: 'forklift', label: 'ForkliftVision AI', desc: 'Forklift & pallet movement AI', Icon: Boxes, x: 780, y: 500 },
-]
-
-const VISION_LINKS = [
-  [0, 1],
-  [1, 2],
-  [2, 3],
-  [2, 4],
 ]
 
 const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/')
@@ -369,8 +352,11 @@ export default function HomepageConcept() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <VisionAIIllustration />
-              <VisionAILegend />
+              <img
+                src={visionAISuiteImg}
+                alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
+                className="w-full rounded-3xl shadow-xl"
+              />
             </Reveal>
           </div>
         </section>
@@ -734,245 +720,3 @@ function CTAIllustration() {
   )
 }
 
-function GateShape({ x, y }) {
-  const booth = isoBox(x, y, 26, 15, 46)
-  return (
-    <>
-      <polygon points={booth.top} fill="url(#visNavyTop)" />
-      <polygon points={booth.rightFace} fill="url(#visGoldRight)" />
-      <polygon points={booth.leftFace} fill="url(#visNavyLeft)" />
-      <line x1={x + 18} y1={y - 6} x2={x + 92} y2={y - 44} stroke="#0e2851" strokeWidth="7" strokeLinecap="round" />
-      <line
-        x1={x + 18}
-        y1={y - 6}
-        x2={x + 92}
-        y2={y - 44}
-        stroke="#f7dd00"
-        strokeWidth="7"
-        strokeLinecap="round"
-        strokeDasharray="10 9"
-      />
-      <circle cx={x + 18} cy={y - 6} r="5" fill="#0e2851" />
-    </>
-  )
-}
-
-function YardTruckShape({ x, y }) {
-  const cab = isoBox(x - 24, y, 20, 12, 38)
-  const bed = isoBox(x + 22, y + 4, 32, 14, 16)
-  return (
-    <>
-      <polygon points={bed.top} fill="url(#visNavyTop)" />
-      <polygon points={bed.rightFace} fill="url(#visNavyRight)" />
-      <polygon points={bed.leftFace} fill="url(#visNavyLeft)" />
-      <polygon points={cab.top} fill="url(#visGoldTop)" />
-      <polygon points={cab.rightFace} fill="url(#visGoldRight)" />
-      <polygon points={cab.leftFace} fill="url(#visGoldLeft)" />
-      <circle cx={x - 30} cy={y + 30} r="8" fill="#0e2851" />
-      <circle cx={x + 4} cy={y + 30} r="8" fill="#0e2851" />
-      <circle cx={x + 50} cy={y + 34} r="8" fill="#0e2851" />
-    </>
-  )
-}
-
-function WarehouseShape({ x, y }) {
-  const main = isoBox(x, y, 92, 50, 110)
-  return (
-    <>
-      <polygon points={main.top} fill="url(#visNavyTop)" />
-      <polygon points={main.rightFace} fill="url(#visNavyRight)" />
-      <polygon points={main.leftFace} fill="url(#visGoldLeft)" />
-      <rect x={x + 22} y={y - 62} width="26" height="52" fill="#081a3d" opacity="0.6" />
-    </>
-  )
-}
-
-function CraneShape({ x, y }) {
-  const boxA = isoBox(x - 10, y, 38, 22, 36)
-  const boxB = isoBox(x - 30, y - 34, 38, 22, 36)
-  return (
-    <>
-      <line x1={x - 60} y1={y - 40} x2={x - 60} y2={y - 220} stroke="#0e2851" strokeWidth="6" strokeLinecap="round" />
-      <line x1={x + 60} y1={y - 10} x2={x + 60} y2={y - 220} stroke="#0e2851" strokeWidth="6" strokeLinecap="round" />
-      <line x1={x - 60} y1={y - 220} x2={x + 90} y2={y - 220} stroke="#0e2851" strokeWidth="6" strokeLinecap="round" />
-      <line x1={x - 60} y1={y - 150} x2={x + 60} y2={y - 190} stroke="#0e2851" strokeWidth="4" strokeLinecap="round" />
-      <line
-        x1={x + 10}
-        y1={y - 220}
-        x2={x + 10}
-        y2={y - 60}
-        stroke="#f7dd00"
-        strokeWidth="3"
-        strokeDasharray="4 5"
-      />
-      <polygon points={boxA.top} fill="url(#visGoldTop)" />
-      <polygon points={boxA.rightFace} fill="url(#visGoldRight)" />
-      <polygon points={boxA.leftFace} fill="url(#visGoldLeft)" />
-      <polygon points={boxB.top} fill="url(#visNavyTop)" />
-      <polygon points={boxB.rightFace} fill="url(#visNavyRight)" />
-      <polygon points={boxB.leftFace} fill="url(#visNavyLeft)" />
-    </>
-  )
-}
-
-function ForkliftShape({ x, y }) {
-  const body = isoBox(x - 20, y, 22, 13, 30)
-  return (
-    <>
-      {/* pallet racking frame */}
-      <rect x={x + 50} y={y - 150} width="90" height="150" fill="none" stroke="#14346d" strokeWidth="3" opacity="0.5" />
-      <line x1={x + 50} y1={y - 100} x2={x + 140} y2={y - 100} stroke="#14346d" strokeWidth="3" opacity="0.5" />
-      <line x1={x + 50} y1={y - 50} x2={x + 140} y2={y - 50} stroke="#14346d" strokeWidth="3" opacity="0.5" />
-      <rect x={x + 60} y={y - 96} width="26" height="26" fill="url(#visGoldTop)" opacity="0.9" />
-      <rect x={x + 100} y={y - 46} width="26" height="26" fill="url(#visNavyTop)" opacity="0.9" />
-
-      {/* forklift body */}
-      <polygon points={body.top} fill="url(#visGoldTop)" />
-      <polygon points={body.rightFace} fill="url(#visGoldRight)" />
-      <polygon points={body.leftFace} fill="url(#visGoldLeft)" />
-      <rect x={x - 6} y={y - 74} width="6" height="60" fill="#0e2851" />
-      <circle cx={x - 34} cy={y + 16} r="9" fill="#0e2851" />
-      <circle cx={x + 2} cy={y + 16} r="9" fill="#0e2851" />
-      <line x1={x - 50} y1={y + 2} x2={x - 6} y2={y - 18} stroke="#0e2851" strokeWidth="4" strokeLinecap="round" />
-      <line x1={x - 50} y1={y + 12} x2={x - 6} y2={y - 8} stroke="#0e2851" strokeWidth="4" strokeLinecap="round" />
-    </>
-  )
-}
-
-const VISION_SHAPES = {
-  gate: GateShape,
-  yard: YardTruckShape,
-  warehouse: WarehouseShape,
-  crane: CraneShape,
-  forklift: ForkliftShape,
-}
-
-function VisionAIIllustration() {
-  return (
-    <div className="relative mx-auto w-full" style={{ aspectRatio: '1000 / 700' }}>
-      <svg
-        viewBox="0 0 1000 700"
-        preserveAspectRatio="none"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="visNavyTop" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3a5a99" />
-            <stop offset="100%" stopColor="#1c407f" />
-          </linearGradient>
-          <linearGradient id="visNavyRight" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#14346d" />
-            <stop offset="100%" stopColor="#0e2851" />
-          </linearGradient>
-          <linearGradient id="visNavyLeft" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#0e2851" />
-            <stop offset="100%" stopColor="#081a3d" />
-          </linearGradient>
-          <linearGradient id="visGoldTop" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ffe94d" />
-            <stop offset="100%" stopColor="#f7dd00" />
-          </linearGradient>
-          <linearGradient id="visGoldRight" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#e0c700" />
-            <stop offset="100%" stopColor="#c9a800" />
-          </linearGradient>
-          <linearGradient id="visGoldLeft" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#c9a800" />
-            <stop offset="100%" stopColor="#a88900" />
-          </linearGradient>
-        </defs>
-
-        {VISION_NODES.map((node) => (
-          <ellipse key={node.label} cx={node.x} cy={node.y + 20} rx="70" ry="12" fill="#14346d" opacity="0.08" />
-        ))}
-
-        {VISION_LINKS.map(([a, b], i) => {
-          const from = VISION_NODES[a]
-          const to = VISION_NODES[b]
-          const cx = (from.x + to.x) / 2
-          const cy = Math.min(from.y, to.y) - 40
-          const midX = 0.25 * from.x + 0.5 * cx + 0.25 * to.x
-          const midY = 0.25 * from.y + 0.5 * cy + 0.25 * to.y
-          return (
-            // eslint-disable-next-line react/no-array-index-key
-            <g key={i}>
-              <path
-                d={`M ${from.x} ${from.y} Q ${cx} ${cy} ${to.x} ${to.y}`}
-                stroke="#14346d"
-                strokeWidth="2"
-                strokeDasharray="2 8"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.3"
-              />
-              <circle cx={midX} cy={midY} r="5" fill="#fff" stroke="#f7dd00" strokeWidth="2" />
-              <circle className="hc-scene-ping" cx={midX} cy={midY} r="5" fill="none" stroke="#f7dd00" strokeWidth="1.5" />
-            </g>
-          )
-        })}
-
-        {VISION_NODES.map((node) => {
-          const Shape = VISION_SHAPES[node.kind]
-          return (
-            <g key={node.label} className="hc-scene-float">
-              <Shape x={node.x} y={node.y} />
-            </g>
-          )
-        })}
-
-        {VISION_NODES.map((node) => (
-          <circle key={`${node.label}-pulse`} cx={node.x} cy={node.y} r="4" fill="#f7dd00" opacity="0.8" />
-        ))}
-      </svg>
-
-      {VISION_NODES.map((node) => {
-        const xPct = node.x / 1000
-        const xShift = xPct < 0.25 ? '0%' : xPct > 0.75 ? '-100%' : '-50%'
-        return (
-          <div
-            key={node.label}
-            className="absolute hidden sm:block"
-            style={{
-              left: `${xPct * 100}%`,
-              top: `${(node.y / 700) * 100}%`,
-              transform: `translate(${xShift}, -195%)`,
-            }}
-          >
-            <div className="flex items-center gap-2.5 whitespace-nowrap rounded-2xl border border-gold-dark/25 bg-white px-3 py-2 shadow-md">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-gold">
-                <node.Icon className="h-4 w-4" />
-              </span>
-              <span className="flex flex-col leading-tight">
-                <span className="text-[12px] font-bold">
-                  <span className="text-gold-dark">Prosper</span> <span className="text-primary">{node.label}</span>
-                </span>
-                <span className="text-[10px] text-ink-500">{node.desc}</span>
-              </span>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-function VisionAILegend() {
-  return (
-    <div className="mt-6 flex flex-col gap-3 sm:hidden">
-      {VISION_NODES.map((node) => (
-        <div key={node.label} className="flex items-center gap-3 rounded-2xl border border-gold-dark/25 bg-white px-3 py-2 shadow-sm">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-gold">
-            <node.Icon className="h-4 w-4" />
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-[13px] font-bold">
-              <span className="text-gold-dark">Prosper</span> <span className="text-primary">{node.label}</span>
-            </span>
-            <span className="text-[11px] text-ink-500">{node.desc}</span>
-          </span>
-        </div>
-      ))}
-    </div>
-  )
-}
