@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
@@ -314,11 +315,25 @@ export default function HomepageConcept() {
                 AI-Powered Logistics Platform
               </span>
               <h1 className="mt-5 text-4xl md:text-[52px] font-extrabold leading-tight tracking-tight">
-                Automate your
+                Automate
                 <br />
-                <span className="text-gold-dark transition-opacity duration-200">{HERO_WORDS[wordIndex]}</span> Operations
+                <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={HERO_WORDS[wordIndex]}
+                      initial={{ y: '100%', opacity: 0 }}
+                      animate={{ y: '0%', opacity: 1 }}
+                      exit={{ y: '-100%', opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute inset-0 text-gold-dark"
+                    >
+                      {HERO_WORDS[wordIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+                Operations with
                 <br />
-                with our AI platform
+                Our AI platform
               </h1>
               <p className="mt-5 text-lg text-ink-600 max-w-lg">
                 We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
