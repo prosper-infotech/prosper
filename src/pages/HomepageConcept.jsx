@@ -177,12 +177,13 @@ function ConceptHeader() {
             <div key={item.path} className="group relative">
               <Link
                 to={item.path}
-                className="flex items-center gap-1 whitespace-nowrap px-4 py-2 text-[15px] font-medium text-ink-900 transition-colors hover:text-primary"
+                className="relative flex items-center gap-1 whitespace-nowrap px-4 py-2 text-[15px] font-medium text-ink-900 transition-colors hover:text-primary"
               >
                 {item.label}
                 {item.children && (
                   <ChevronDown className="h-4 w-4 text-ink-500 transition-transform group-hover:rotate-180" />
                 )}
+                <span className="absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full bg-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
               {item.children && (
                 <NavDropdown item={item} align={i >= NAV_ITEMS.length - 2 ? 'right' : 'center'} />
@@ -193,7 +194,7 @@ function ConceptHeader() {
 
         <Link
           to="/contact"
-          className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+          className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-all duration-200 hover:scale-105 hover:border-primary hover:bg-primary hover:text-white"
         >
           Book A Demo
           <ArrowRight className="h-4 w-4" />
@@ -229,7 +230,7 @@ function ConceptFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-300 text-ink-600 transition-colors hover:border-primary hover:text-primary"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-300 text-ink-600 transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 hover:border-primary hover:text-primary"
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -292,6 +293,14 @@ export default function HomepageConcept() {
     }
   }, [])
 
+  useEffect(() => {
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap'
+    document.head.appendChild(link)
+    return () => link.remove()
+  }, [])
+
   const [wordIndex, setWordIndex] = useState(0)
   useEffect(() => {
     const id = setInterval(() => setWordIndex((i) => (i + 1) % HERO_WORDS.length), 2400)
@@ -299,7 +308,10 @@ export default function HomepageConcept() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
+    <div
+      className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]"
+      style={{ '--font-heading': "'Plus Jakarta Sans', 'Open Sans', sans-serif" }}
+    >
       <div className="bg-primary text-white text-center text-xs font-semibold py-1.5 px-4">
         Concept layout for review &mdash; not the live homepage
       </div>
@@ -309,53 +321,74 @@ export default function HomepageConcept() {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden pt-6 pb-10">
-          <div className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl" />
+          <motion.div
+            className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl"
+            animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="pointer-events-none absolute bottom-[-140px] left-[-100px] h-[380px] w-[380px] rounded-full bg-primary/10 blur-3xl"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
+            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          />
           <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] items-center">
-            <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
-                AI-Powered Logistics Platform
-              </span>
-              <h1 className="mt-5 text-4xl md:text-[52px] font-extrabold leading-tight tracking-tight">
-                Automate your
-                <br />
-                <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={HERO_WORDS[wordIndex]}
-                      initial={{ y: '100%', opacity: 0 }}
-                      animate={{ y: '0%', opacity: 1 }}
-                      exit={{ y: '-100%', opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0 text-gold-dark"
-                    >
-                      {HERO_WORDS[wordIndex]} Operations
-                    </motion.span>
-                  </AnimatePresence>
+            <div>
+              <Reveal>
+                <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
+                  AI-Powered Logistics Platform
                 </span>
-                with our AI platform
-              </h1>
-              <p className="mt-5 text-lg text-ink-600 max-w-lg">
-                We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary">
-                  Book a Demo
-                </Button>
-                <Button to="/solutions" variant="outline-dark">
-                  Learn More
-                </Button>
-              </div>
-              <p className="mt-8 max-w-md text-sm text-ink-500">
-                Harness the power of Prosper&rsquo;s AI platform, fortified by computer vision, RFID/GPS and deep-learning
-                models trained on real warehouse and yard operations, to transform your supply chain.
-              </p>
-            </Reveal>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h1 className="mt-5 text-4xl md:text-[52px] font-extrabold leading-tight tracking-tight">
+                  Automate your
+                  <br />
+                  <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={HERO_WORDS[wordIndex]}
+                        initial={{ y: '100%', opacity: 0 }}
+                        animate={{ y: '0%', opacity: 1 }}
+                        exit={{ y: '-100%', opacity: 0 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute inset-0 text-gold-dark"
+                      >
+                        {HERO_WORDS[wordIndex]} Operations
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                  with our AI platform
+                </h1>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <p className="mt-5 text-lg text-ink-600 max-w-lg">
+                  We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
+                </p>
+              </Reveal>
+              <Reveal delay={0.24}>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
+                    Book a Demo
+                  </Button>
+                  <Button to="/solutions" variant="outline-dark" className="hover:scale-105">
+                    Learn More
+                  </Button>
+                </div>
+              </Reveal>
+              <Reveal delay={0.32}>
+                <p className="mt-8 max-w-md text-sm text-ink-500">
+                  Harness the power of Prosper&rsquo;s AI platform, fortified by computer vision, RFID/GPS and deep-learning
+                  models trained on real warehouse and yard operations, to transform your supply chain.
+                </p>
+              </Reveal>
+            </div>
 
-            <Reveal delay={0.15}>
-              <img
+            <Reveal delay={0.2}>
+              <motion.img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
                 className="w-full drop-shadow-2xl"
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               />
             </Reveal>
           </div>
@@ -369,11 +402,13 @@ export default function HomepageConcept() {
               ['500+', 'Devices deployed'],
               ['50+', 'Enterprise clients'],
               ['24/7', 'Support coverage'],
-            ].map(([n, label]) => (
-              <div key={label} className="flex items-baseline gap-2">
-                <b className="font-heading text-2xl text-primary">{n}</b>
-                <span className="text-sm text-ink-500">{label}</span>
-              </div>
+            ].map(([n, label], i) => (
+              <Reveal key={label} delay={i * 0.08} y={12}>
+                <div className="flex items-baseline gap-2 transition-transform duration-200 hover:scale-110">
+                  <b className="font-heading text-2xl text-primary">{n}</b>
+                  <span className="text-sm text-ink-500">{label}</span>
+                </div>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -445,14 +480,18 @@ export default function HomepageConcept() {
                     <p className="mt-2 text-sm text-ink-600 max-w-[85%]">{p.desc}</p>
                     <div className="relative mt-4 flex flex-1 items-end justify-center pt-4">
                       <div className="pointer-events-none absolute bottom-[-10%] left-1/2 h-[220px] w-[220px] -translate-x-1/2 rounded-full bg-gold/35 blur-3xl" />
-                      <img src={p.img} alt={`Isometric render representing Prosper ${p.name}`} className="relative w-full max-w-[230px] drop-shadow-[0_14px_18px_rgba(20,52,109,0.18)]" />
+                      <img
+                        src={p.img}
+                        alt={`Isometric render representing Prosper ${p.name}`}
+                        className="relative w-full max-w-[230px] drop-shadow-[0_14px_18px_rgba(20,52,109,0.18)] transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
                   </Link>
                 </Reveal>
               ))}
 
               <Reveal delay={0.24}>
-                <div className="flex h-full flex-col rounded-[22px] bg-gradient-to-br from-primary to-primary-dark p-6 text-white">
+                <div className="flex h-full flex-col rounded-[22px] bg-gradient-to-br from-primary to-primary-dark p-6 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(20,52,109,0.5)]">
                   <h3 className="text-[22px] font-extrabold leading-tight">Not sure where to start?</h3>
                   <p className="mt-2 text-sm text-white/75">
                     Tell us about your warehouse, yard or terminal and we&rsquo;ll map the right products to your operation &mdash; free consultation, no obligation.
@@ -578,7 +617,7 @@ export default function HomepageConcept() {
                     href="https://calendly.com/prosperinfotech-sales/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-primary-dark"
                   >
                     Book A Demo
                     <ArrowRight className="h-4 w-4" />
