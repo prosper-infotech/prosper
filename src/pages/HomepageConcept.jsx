@@ -325,13 +325,13 @@ export default function HomepageConcept() {
                       animate={{ y: '0%', opacity: 1 }}
                       exit={{ y: '-100%', opacity: 0 }}
                       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0 text-gold-dark"
+                      className="absolute inset-0"
                     >
-                      {HERO_WORDS[wordIndex]}
+                      <span className="text-gold-dark">{HERO_WORDS[wordIndex]}</span> Operations
                     </motion.span>
                   </AnimatePresence>
                 </span>
-                Operations with
+                with
                 <br />
                 Our AI platform
               </h1>
