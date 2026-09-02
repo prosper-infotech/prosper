@@ -53,3 +53,40 @@
 .animate-marquee {
   animation: marquee 28s linear infinite;
 }
+
+/* Homepage concept hero illustration */
+@keyframes hcIdleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes hcDriveForklift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(46px); }
+}
+@keyframes hcLiftMast {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-9px); }
+}
+@keyframes hcWheelSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes hcRadarPing {
+  0% { transform: scale(0.6); opacity: 0.65; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes hcPutAway {
+  0%, 8% { transform: translate(0, 46px); opacity: 0; }
+  28%, 60% { transform: translate(0, 0); opacity: 1; }
+  82%, 100% { transform: translate(0, -4px); opacity: 0; }
+}
+.hc-scene-float { animation: hcIdleFloat 6s ease-in-out infinite; }
+.hc-scene-forklift { animation: hcDriveForklift 5.5s ease-in-out infinite alternate; }
+.hc-scene-mast { transform-box: fill-box; transform-origin: bottom center; animation: hcLiftMast 2.3s ease-in-out infinite alternate; }
+.hc-scene-wheel { transform-box: fill-box; transform-origin: center; animation: hcWheelSpin 0.9s linear infinite; }
+.hc-scene-ping { transform-box: fill-box; transform-origin: center; animation: hcRadarPing 2.4s ease-out infinite; }
+.hc-scene-pallet { transform-box: fill-box; transform-origin: center; animation: hcPutAway 4.5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hc-scene-float, .hc-scene-forklift, .hc-scene-mast, .hc-scene-wheel, .hc-scene-ping, .hc-scene-pallet {
+    animation: none !important;
+  }
+}
