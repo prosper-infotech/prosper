@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronDown, Phone, MapPin } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import StatCounter from '../components/ui/StatCounter'
 import CTABand from '../components/ui/CTABand'
-import { NAV } from '../data/navigation'
-import { OFFICES } from '../data/offices'
 import useDocumentTitle from '../hooks/useDocumentTitle'
-import logo from '../assets/logo-dark.png'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
@@ -55,123 +52,6 @@ const PRODUCTS = [
   },
 ]
 
-const FOOTER_COLUMNS = NAV.filter((item) => item.children).slice(0, 3)
-const NAV_DROPDOWN_ITEMS = NAV.filter((item) => !item.hideFromNav)
-
-function ConceptHeader() {
-  return (
-    <header className="sticky top-0 z-50 bg-navy-overlay backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20 gap-6">
-          <Link to="/" className="flex shrink-0 items-center">
-            <img src={logo} alt="Prosper Infotech" className="h-13 w-auto" />
-          </Link>
-
-          <nav className="hidden lg:flex items-center gap-1">
-            {NAV_DROPDOWN_ITEMS.map((item) => (
-              <div key={item.path} className="relative group">
-                <span className="flex cursor-pointer items-center gap-1 whitespace-nowrap px-2.5 py-2 text-sm font-semibold text-white/90 group-hover:text-gold transition-colors">
-                  {item.label}
-                  {item.children && (
-                    <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
-                  )}
-                </span>
-                {item.children && (
-                  <div className="invisible absolute left-1/2 top-full z-50 min-w-[230px] -translate-x-1/2 translate-y-[-6px] rounded-2xl bg-white p-2 opacity-0 shadow-[0_24px_48px_-16px_rgba(14,40,81,0.35)] transition-all duration-200 group-hover:visible group-hover:translate-y-2 group-hover:opacity-100">
-                    {item.children.slice(0, 8).map((child) => (
-                      <span
-                        key={child.path}
-                        className="block cursor-pointer rounded-lg px-3 py-2 text-[13.5px] font-semibold text-primary hover:bg-gold/15"
-                      >
-                        {child.label}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          <Button
-            href="https://calendly.com/prosperinfotech-sales/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="primary"
-            className="hidden lg:inline-flex whitespace-nowrap"
-          >
-            Book a Demo
-          </Button>
-        </div>
-      </div>
-    </header>
-  )
-}
-
-function ConceptFooter() {
-  const year = new Date().getFullYear()
-  return (
-    <footer className="bg-navy text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
-        <div>
-          <Link to="/" className="inline-flex items-center">
-            <img src={logo} alt="Prosper Infotech" className="h-12 w-auto" />
-          </Link>
-          <p className="mt-4 text-sm text-ink-300">
-            Efficient Yards, Accurate Mapping, Intelligent Solutions with IoT, RFID, GPS, and AI.
-          </p>
-        </div>
-
-        {FOOTER_COLUMNS.map((column) => (
-          <div key={column.path}>
-            <h3 className="font-heading font-semibold text-white mb-4">{column.label}</h3>
-            <ul className="flex flex-col gap-2">
-              {column.children.slice(0, 6).map((child) => (
-                <li key={child.path}>
-                  <span className="text-sm text-ink-300">{child.label}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-
-        <div>
-          <h3 className="font-heading font-semibold text-white mb-4">Contact</h3>
-          <ul className="flex flex-col gap-4">
-            {OFFICES.map((office) => (
-              <li key={office.country} className="text-sm text-ink-300">
-                <div className="text-white font-semibold">{office.country}</div>
-                <div className="flex items-center gap-2 mt-1">
-                  <Phone className="h-3.5 w-3.5 shrink-0 text-gold" />
-                  <span>{office.phone}</span>
-                </div>
-                <div className="flex items-start gap-2 mt-1">
-                  <MapPin className="h-3.5 w-3.5 shrink-0 text-gold mt-0.5" />
-                  <span>{office.address}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-ink-300">
-          <span>&copy; {year} Prosper Infotech. All rights reserved.</span>
-          <div className="flex items-center gap-4">
-            <Link to="/about" className="hover:text-gold transition-colors">
-              About Us
-            </Link>
-            <Link to="/privacy-policy" className="hover:text-gold transition-colors">
-              Privacy Policy
-            </Link>
-            <span>Dallas, TX &middot; Pune, India</span>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
 export default function HomepageConcept() {
   useDocumentTitle(
     'Homepage Concept | Prosper Infotech',
@@ -200,8 +80,6 @@ export default function HomepageConcept() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
-      <ConceptHeader />
-
       <div className="bg-primary text-white text-center text-xs font-semibold py-1.5 px-4">
         Concept layout for review &mdash; not the live homepage
       </div>
@@ -428,8 +306,6 @@ export default function HomepageConcept() {
           description="Talk to our team about warehouse, yard, fleet and container AI built for your operation — no cost, no obligation."
         />
       </main>
-
-      <ConceptFooter />
     </div>
   )
 }
