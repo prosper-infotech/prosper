@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ChevronDown, ArrowRight, Brain, Radio, Cpu } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import { NAV } from '../data/navigation'
@@ -97,6 +97,30 @@ const PRODUCTS = [
     desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
     to: '/lp/as400-development',
   },
+]
+
+// Nodes for the hero's connected network illustration: our 5 products
+// (real isometric renders) plus our core services (icon nodes), linked
+// with dotted connectors to tell one "everything we build" story.
+const NETWORK_NODES = [
+  { type: 'product', label: 'WMS', img: wmsImg, x: 460, y: 110 },
+  { type: 'product', label: 'ContainerVision', img: containerVisionImg, x: 770, y: 90 },
+  { type: 'product', label: 'Forklift', img: forkliftVisionImg, x: 850, y: 360 },
+  { type: 'product', label: 'Tracking', img: assetTrackingImg, x: 220, y: 430 },
+  { type: 'product', label: 'AS400', img: as400Img, x: 180, y: 610 },
+  { type: 'service', label: 'AI Development', Icon: Brain, x: 650, y: 230 },
+  { type: 'service', label: 'RFID Services', Icon: Radio, x: 560, y: 430 },
+  { type: 'service', label: 'IoT Services', Icon: Cpu, x: 350, y: 250 },
+]
+
+const NETWORK_LINKS = [
+  [0, 1],
+  [1, 5],
+  [0, 7],
+  [5, 2],
+  [7, 6],
+  [6, 3],
+  [3, 4],
 ]
 
 const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/')
@@ -298,7 +322,7 @@ export default function HomepageConcept() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
+    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
       <div className="bg-primary text-white text-center text-xs font-semibold py-1.5 px-4">
         Concept layout for review &mdash; not the live homepage
       </div>
@@ -309,7 +333,7 @@ export default function HomepageConcept() {
         {/* Hero */}
         <section className="relative overflow-hidden pt-6 pb-10">
           <div className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl" />
-          <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] items-center">
+          <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] items-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
                 AI-Powered Logistics Platform
@@ -341,36 +365,35 @@ export default function HomepageConcept() {
                   Book a Demo
                 </Button>
                 <Button to="/solutions" variant="outline-dark">
-                  Explore the Platform
+                  Learn More
                 </Button>
               </div>
+              <p className="mt-8 max-w-md text-sm text-ink-500">
+                Harness the power of Prosper&rsquo;s AI platform, fortified by computer vision, RFID/GPS and deep-learning
+                models trained on real warehouse and yard operations, to transform your supply chain.
+              </p>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <HeroIllustration />
+              <NetworkIllustration />
             </Reveal>
           </div>
         </section>
 
         {/* Trust strip */}
         <section className="border-y border-ink-300 py-10">
-          <div className="max-w-7xl mx-auto px-6 grid gap-8 lg:grid-cols-[1.1fr_1fr] items-center">
-            <p className="text-lg text-ink-600">
-              Harness the power of Prosper&rsquo;s AI platform &mdash; fortified by computer vision, RFID/GPS and deep-learning models trained on real warehouse and yard operations &mdash; to transform your supply chain.
-            </p>
-            <div className="flex flex-wrap gap-x-10 gap-y-4">
-              {[
-                ['15+', 'Years engineering'],
-                ['500+', 'Devices deployed'],
-                ['50+', 'Enterprise clients'],
-                ['24/7', 'Support coverage'],
-              ].map(([n, label]) => (
-                <div key={label} className="flex items-baseline gap-2">
-                  <b className="font-heading text-2xl text-primary">{n}</b>
-                  <span className="text-sm text-ink-500">{label}</span>
-                </div>
-              ))}
-            </div>
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-center gap-x-16 gap-y-4">
+            {[
+              ['15+', 'Years engineering'],
+              ['500+', 'Devices deployed'],
+              ['50+', 'Enterprise clients'],
+              ['24/7', 'Support coverage'],
+            ].map(([n, label]) => (
+              <div key={label} className="flex items-baseline gap-2">
+                <b className="font-heading text-2xl text-primary">{n}</b>
+                <span className="text-sm text-ink-500">{label}</span>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -716,50 +739,84 @@ function CTAIllustration() {
   )
 }
 
-function HeroIllustration() {
+function NetworkIllustration() {
   return (
-    <svg viewBox="0 0 560 440" role="img" aria-label="Animated isometric illustration of a warehouse, pallet racking and a forklift moving pallets in a yard">
-      <circle cx="330" cy="230" r="220" fill="#f7dd00" opacity="0.08" />
-      <ellipse cx="247" cy="378" rx="150" ry="18" fill="#14346d" opacity="0.06" />
-      <ellipse cx="182" cy="395" rx="90" ry="12" fill="#14346d" opacity="0.06" />
+    <div className="relative mx-auto w-full" style={{ aspectRatio: '1000 / 680' }}>
+      <svg
+        viewBox="0 0 1000 680"
+        preserveAspectRatio="none"
+        className="absolute inset-0 h-full w-full"
+        aria-hidden="true"
+      >
+        {NETWORK_LINKS.map(([a, b], i) => {
+          const from = NETWORK_NODES[a]
+          const to = NETWORK_NODES[b]
+          return (
+            <line
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              x1={from.x}
+              y1={from.y}
+              x2={to.x}
+              y2={to.y}
+              stroke="#14346d"
+              strokeWidth="2"
+              strokeDasharray="2 8"
+              strokeLinecap="round"
+              opacity="0.3"
+            />
+          )
+        })}
+        {NETWORK_NODES.map((node, i) => (
+          <circle
+            // eslint-disable-next-line react/no-array-index-key
+            key={i}
+            cx={node.x}
+            cy={node.y}
+            r="4"
+            fill={node.type === 'product' ? '#f7dd00' : '#14346d'}
+            opacity="0.7"
+          />
+        ))}
+      </svg>
 
-      <g className="hc-scene-float">
-        <polygon points="230,140 366,220 264,280 128,200" fill="#3a5a99" />
-        <polygon points="366,220 264,280 264,370 366,310" fill="#14346d" />
-        <polygon points="128,200 264,280 264,370 128,290" fill="#0e2851" />
-
-        <polygon points="230,113 366,193 264,253 128,173" fill="#f7dd00" />
-        <polygon points="366,193 264,253 264,280 366,220" fill="#e0c700" />
-        <polygon points="128,173 264,253 264,280 128,200" fill="#c9a800" />
-
-        <polygon points="390,260 424,280 390,300 356,280" fill="#ffe94d" />
-        <polygon points="424,280 390,300 390,343 424,343" fill="#e0c700" />
-        <polygon points="356,280 390,300 390,343 356,343" fill="#c9a800" />
-        <rect className="hc-scene-pallet" x="368" y="290" width="20" height="16" rx="2" fill="#0e2851" />
-
-        <polygon points="420,300 454,320 420,340 386,320" fill="#ffe94d" />
-        <polygon points="454,320 420,340 420,385 454,365" fill="#e0c700" />
-        <polygon points="386,320 420,340 420,385 386,365" fill="#c9a800" />
-
-        <g className="hc-scene-forklift">
-          <polygon points="150,320 201,350 167,370 116,340" fill="#f7dd00" />
-          <polygon points="201,350 167,370 167,388 201,368" fill="#e0c700" />
-          <polygon points="116,340 167,370 167,388 116,358" fill="#c9a800" />
-
-          <circle cx="140" cy="392" r="11" fill="#0e2851" />
-          <line className="hc-scene-wheel" x1="140" y1="384" x2="140" y2="400" stroke="#f7dd00" strokeWidth="2" />
-          <circle cx="185" cy="392" r="11" fill="#0e2851" />
-          <line className="hc-scene-wheel" x1="185" y1="384" x2="185" y2="400" stroke="#f7dd00" strokeWidth="2" />
-
-          <g className="hc-scene-mast">
-            <rect x="159" y="326" width="7" height="62" fill="#0e2851" />
-            <line x1="6" x2="116" y1="392" y2="366" stroke="#0e2851" strokeWidth="4" strokeLinecap="round" />
-            <line x1="6" x2="116" y1="399" y2="373" stroke="#0e2851" strokeWidth="4" strokeLinecap="round" />
-            <circle cx="163" cy="322" r="4" fill="#14346d" />
-            <circle className="hc-scene-ping" cx="163" cy="322" r="9" fill="none" stroke="#14346d" strokeWidth="1.5" />
-          </g>
-        </g>
-      </g>
-    </svg>
+      {NETWORK_NODES.map((node, i) => (
+        <div
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          className="absolute flex flex-col items-center hc-scene-float"
+          style={{
+            left: `${(node.x / 1000) * 100}%`,
+            top: `${(node.y / 680) * 100}%`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <span
+            className={`mb-2 max-w-[92px] text-center leading-tight sm:max-w-none sm:whitespace-nowrap rounded-full border px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[11px] font-bold shadow-sm ${
+              node.type === 'product' ? 'border-gold-dark/30 bg-white' : 'border-primary/20 bg-white/90 font-semibold text-ink-700'
+            }`}
+          >
+            {node.type === 'product' ? (
+              <>
+                <span className="text-gold-dark">Prosper</span> <span className="text-primary">{node.label}</span>
+              </>
+            ) : (
+              node.label
+            )}
+          </span>
+          {node.type === 'product' ? (
+            <img
+              src={node.img}
+              alt={`Prosper ${node.label}`}
+              className="w-16 md:w-20 drop-shadow-[0_10px_14px_rgba(20,52,109,0.18)]"
+            />
+          ) : (
+            <div className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
+              <node.Icon className="h-5 w-5" />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   )
 }
