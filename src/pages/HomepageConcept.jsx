@@ -167,7 +167,7 @@ function ConceptHeader() {
     <header className="relative z-50">
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between gap-6">
         <Link to="/" className="shrink-0">
-          <img src={logo} alt="Prosper Infotech" className="h-9 w-auto" />
+          <img src={logo} alt="Prosper Infotech" className="h-14 w-auto" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -210,7 +210,7 @@ function ConceptFooter() {
       <div className="max-w-7xl mx-auto px-6 py-16 grid gap-12 lg:grid-cols-[1.1fr_2fr]">
         <div>
           <Link to="/" className="inline-flex items-center">
-            <img src={logo} alt="Prosper Infotech" className="h-10 w-auto" />
+            <img src={logo} alt="Prosper Infotech" className="h-14 w-auto" />
           </Link>
           <p className="mt-4 text-sm font-semibold text-ink-900">
             Automating global logistics operations using AI.
