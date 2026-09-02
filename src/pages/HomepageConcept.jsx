@@ -374,12 +374,6 @@ export default function HomepageConcept() {
                   </Button>
                 </div>
               </Reveal>
-              <Reveal delay={0.32}>
-                <p className="mt-8 max-w-md text-sm text-ink-500">
-                  Harness the power of Prosper&rsquo;s AI platform, fortified by computer vision, RFID/GPS and deep-learning
-                  models trained on real warehouse and yard operations, to transform your supply chain.
-                </p>
-              </Reveal>
             </div>
 
             <Reveal delay={0.2}>
@@ -390,63 +384,6 @@ export default function HomepageConcept() {
                 animate={{ y: [0, -14, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* Trust strip */}
-        <section className="border-y border-ink-300 py-10">
-          <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-center gap-x-16 gap-y-4">
-            {[
-              ['15+', 'Years engineering'],
-              ['500+', 'Devices deployed'],
-              ['50+', 'Enterprise clients'],
-              ['24/7', 'Support coverage'],
-            ].map(([n, label], i) => (
-              <Reveal key={label} delay={i * 0.08} y={12}>
-                <div className="flex items-baseline gap-2 transition-transform duration-200 hover:scale-110">
-                  <b className="font-heading text-2xl text-primary">{n}</b>
-                  <span className="text-sm text-ink-500">{label}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* About */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-2 items-center">
-            <Reveal>
-              <div className="relative">
-                <div className="pointer-events-none absolute -inset-3 rounded-2xl border border-gold/20" />
-                <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/aU3I6Tw6S5I?mute=1"
-                    title="About Prosper Infotech"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={0.15} className="flex flex-col gap-5">
-              <span className="text-primary text-sm font-semibold uppercase tracking-widest">Who We Are</span>
-              <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
-                Engineering AI, IoT &amp; Logistics Solutions for Real-World Operations
-              </h2>
-              <p className="text-ink-600 text-lg">
-                For more than a decade, Prosper Infotech has been designing, developing, integrating, and supporting technology solutions for logistics, warehousing, transportation, CFS/container terminals, manufacturing, and enterprise operations.
-              </p>
-              <p className="text-ink-600 text-lg">
-                Our engineering teams across the USA, India, and Japan bring together deep expertise in Artificial Intelligence, Computer Vision, OCR, RFID, GPS/RTK, Industrial IoT, Edge Computing, cloud platforms, and enterprise software development.
-              </p>
-              <p className="text-ink-600 text-lg">
-                From intelligent gates and yards to warehouses, docks, forklifts, containers, assets, and legacy enterprise systems, we help customers connect physical operations with real-time digital intelligence.
-              </p>
-              <Button to="/about" variant="primary" className="self-start mt-2">
-                Learn more about us
-              </Button>
             </Reveal>
           </div>
         </section>
