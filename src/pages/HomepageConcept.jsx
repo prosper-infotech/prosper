@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { ChevronDown, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
-import StatCounter from '../components/ui/StatCounter'
 import CTABand from '../components/ui/CTABand'
 import { NAV } from '../data/navigation'
 import useDocumentTitle from '../hooks/useDocumentTitle'
@@ -15,6 +14,51 @@ import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
+
+// Decorative particle field for the stats band: a fan of arcs sweeping
+// up-right from a focal point, plus two denser corner clusters.
+const STAT_DOT_FIELD = (() => {
+  const dots = []
+  const cx = 260
+  const cy = 520
+  const startAngle = -8
+  const endAngle = 78
+  const minR = 70
+  const maxR = 760
+  const ringCount = 34
+
+  for (let ring = 0; ring < ringCount; ring++) {
+    const r = minR + (ring / (ringCount - 1)) * (maxR - minR)
+    const spacingDeg = Math.max(2.2, 420 / r)
+    for (let angle = startAngle; angle <= endAngle; angle += spacingDeg) {
+      const rad = (angle * Math.PI) / 180
+      const x = cx + r * Math.cos(rad)
+      const y = cy - r * Math.sin(rad)
+      if (x < -20 || x > 920 || y < -20 || y > 540) continue
+      const t = (r - minR) / (maxR - minR)
+      dots.push({ x, y, r: 0.7 + t * 2.1, opacity: 0.1 + t * 0.5 })
+    }
+  }
+
+  const clusters = [
+    { cx: 830, cy: 60, spread: 130, count: 90, maxSize: 3.4 },
+    { cx: 40, cy: 40, spread: 70, count: 40, maxSize: 2.4 },
+  ]
+  clusters.forEach(({ cx: ccx, cy: ccy, spread, count, maxSize }) => {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2
+      const dist = Math.random() * spread
+      dots.push({
+        x: ccx + Math.cos(angle) * dist,
+        y: ccy + Math.sin(angle) * dist,
+        r: 0.6 + Math.random() * maxSize,
+        opacity: 0.25 + Math.random() * 0.6,
+      })
+    }
+  })
+
+  return dots
+})()
 
 const PRODUCTS = [
   {
@@ -384,27 +428,49 @@ export default function HomepageConcept() {
         </section>
 
         {/* Stats */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark to-navy">
-          <div className="pointer-events-none absolute top-0 left-1/3 h-72 w-72 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
-          <div className="relative max-w-7xl mx-auto px-6 py-20">
-            <Reveal className="text-center mb-12">
-              <span className="text-gold text-sm font-semibold uppercase tracking-widest">By the numbers</span>
-              <h2 className="mt-2 text-3xl text-white">Engineering experience you can rely on</h2>
-            </Reveal>
-            <div className="grid gap-6 grid-cols-2 md:grid-cols-4">
-              {[
-                ['15+', 'Years of Engineering Experience'],
-                ['500+', 'Devices Deployed'],
-                ['50+', 'Enterprise Clients'],
-                ['24/7', 'Support Coverage'],
-              ].map(([value, label], i) => (
-                <Reveal key={label} delay={i * 0.1} y={16} className="h-full">
-                  <div className="h-full min-h-[160px] flex flex-col items-center pt-6 text-center rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] px-4 pb-6">
-                    <StatCounter value={value} label={label} />
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <Reveal>
+              <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] px-8 py-14 md:px-16 md:py-16">
+                <svg
+                  viewBox="0 0 900 540"
+                  preserveAspectRatio="xMidYMid slice"
+                  className="pointer-events-none absolute inset-0 h-full w-full"
+                  aria-hidden="true"
+                >
+                  {STAT_DOT_FIELD.map((d, i) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="#f7dd00" opacity={d.opacity} />
+                  ))}
+                </svg>
+
+                <div className="relative grid gap-12 lg:grid-cols-[1fr_1fr] items-center">
+                  <h2 className="text-4xl md:text-[44px] font-extrabold leading-[1.15] text-white">
+                    Driving
+                    <br />
+                    Real Efficiency &amp;
+                    <br />
+                    Building
+                    <br />
+                    Lasting Value
+                  </h2>
+
+                  <div className="grid grid-cols-2 gap-x-10 gap-y-10">
+                    {[
+                      ['15+', 'Years of Engineering Experience'],
+                      ['500+', 'Devices Deployed'],
+                      ['50+', 'Enterprise Clients'],
+                      ['24/7', 'Support Coverage'],
+                    ].map(([value, label]) => (
+                      <div key={label}>
+                        <div className="text-4xl md:text-5xl font-extrabold text-white">{value}</div>
+                        <div className="mt-2 text-sm text-white/70">{label}</div>
+                      </div>
+                    ))}
                   </div>
-                </Reveal>
-              ))}
-            </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
