@@ -164,7 +164,7 @@ function NavDropdown({ item, align }) {
 
 function ConceptHeader() {
   return (
-    <header className="relative z-50">
+    <header className="sticky top-0 z-50 bg-[#fffdf6]/90 backdrop-blur-md border-b border-ink-300/40">
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between gap-6">
         <Link to="/" className="shrink-0">
           <img src={logo} alt="Prosper Infotech" className="h-14 w-auto" />
