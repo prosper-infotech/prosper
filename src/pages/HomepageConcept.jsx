@@ -13,7 +13,7 @@ import containerVisionImg from '../assets/container vision ai.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
-import visionAISuiteImg from '../assets/vision ai suite.png'
+import visionAISuiteImg from '../assets/new ai suite.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
@@ -355,7 +355,7 @@ export default function HomepageConcept() {
               <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
-                className="w-full rounded-3xl shadow-xl"
+                className="w-full drop-shadow-2xl"
               />
             </Reveal>
           </div>
