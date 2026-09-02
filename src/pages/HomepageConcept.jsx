@@ -377,12 +377,10 @@ export default function HomepageConcept() {
             </div>
 
             <Reveal delay={0.2}>
-              <motion.img
+              <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
                 className="w-full drop-shadow-2xl"
-                animate={{ y: [0, -14, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               />
             </Reveal>
           </div>
