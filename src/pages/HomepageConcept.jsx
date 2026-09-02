@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ChevronDown, ArrowRight, ScanLine, Truck, Warehouse, Ship, Boxes } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import { NAV } from '../data/navigation'
@@ -103,11 +103,11 @@ const PRODUCTS = [
 // isometric object per product, linked with dotted connectors and
 // labeled pill callouts, in the style of the ATAI reference.
 const VISION_NODES = [
-  { kind: 'gate', label: 'GateVision AI', x: 120, y: 520 },
-  { kind: 'yard', label: 'YardVision AI', x: 330, y: 250 },
-  { kind: 'warehouse', label: 'DockVision AI', x: 570, y: 300 },
-  { kind: 'crane', label: 'ContainerVision AI', x: 850, y: 220 },
-  { kind: 'forklift', label: 'ForkliftVision AI', x: 780, y: 500 },
+  { kind: 'gate', label: 'GateVision AI', desc: 'AI gate automation & OCR', Icon: ScanLine, x: 120, y: 520 },
+  { kind: 'yard', label: 'YardVision AI', desc: 'Real-time yard & vehicle visibility', Icon: Truck, x: 330, y: 250 },
+  { kind: 'warehouse', label: 'DockVision AI', desc: 'Automated dock & warehouse ops', Icon: Warehouse, x: 570, y: 300 },
+  { kind: 'crane', label: 'ContainerVision AI', desc: 'AI-powered terminal tracking', Icon: Ship, x: 850, y: 220 },
+  { kind: 'forklift', label: 'ForkliftVision AI', desc: 'Forklift & pallet movement AI', Icon: Boxes, x: 780, y: 500 },
 ]
 
 const VISION_LINKS = [
@@ -370,6 +370,7 @@ export default function HomepageConcept() {
 
             <Reveal delay={0.15}>
               <VisionAIIllustration />
+              <VisionAILegend />
             </Reveal>
           </div>
         </section>
@@ -889,18 +890,25 @@ function VisionAIIllustration() {
         {VISION_LINKS.map(([a, b], i) => {
           const from = VISION_NODES[a]
           const to = VISION_NODES[b]
+          const cx = (from.x + to.x) / 2
+          const cy = Math.min(from.y, to.y) - 40
+          const midX = 0.25 * from.x + 0.5 * cx + 0.25 * to.x
+          const midY = 0.25 * from.y + 0.5 * cy + 0.25 * to.y
           return (
-            <path
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              d={`M ${from.x} ${from.y} Q ${(from.x + to.x) / 2} ${Math.min(from.y, to.y) - 40} ${to.x} ${to.y}`}
-              stroke="#14346d"
-              strokeWidth="2"
-              strokeDasharray="2 8"
-              strokeLinecap="round"
-              fill="none"
-              opacity="0.3"
-            />
+            // eslint-disable-next-line react/no-array-index-key
+            <g key={i}>
+              <path
+                d={`M ${from.x} ${from.y} Q ${cx} ${cy} ${to.x} ${to.y}`}
+                stroke="#14346d"
+                strokeWidth="2"
+                strokeDasharray="2 8"
+                strokeLinecap="round"
+                fill="none"
+                opacity="0.3"
+              />
+              <circle cx={midX} cy={midY} r="5" fill="#fff" stroke="#f7dd00" strokeWidth="2" />
+              <circle className="hc-scene-ping" cx={midX} cy={midY} r="5" fill="none" stroke="#f7dd00" strokeWidth="1.5" />
+            </g>
           )
         })}
 
@@ -920,23 +928,51 @@ function VisionAIIllustration() {
 
       {VISION_NODES.map((node) => {
         const xPct = node.x / 1000
-        const xShift = xPct < 0.2 ? '0%' : xPct > 0.8 ? '-100%' : '-50%'
+        const xShift = xPct < 0.25 ? '0%' : xPct > 0.75 ? '-100%' : '-50%'
         return (
           <div
             key={node.label}
-            className="absolute"
+            className="absolute hidden sm:block"
             style={{
               left: `${xPct * 100}%`,
               top: `${(node.y / 700) * 100}%`,
-              transform: `translate(${xShift}, -180%)`,
+              transform: `translate(${xShift}, -195%)`,
             }}
           >
-            <span className="whitespace-nowrap rounded-full border border-gold-dark/30 bg-white px-2 py-0.5 text-[9px] font-bold shadow-sm sm:px-3 sm:py-1 sm:text-[11px]">
-              <span className="text-gold-dark">Prosper</span> <span className="text-primary">{node.label}</span>
-            </span>
+            <div className="flex items-center gap-2.5 whitespace-nowrap rounded-2xl border border-gold-dark/25 bg-white px-3 py-2 shadow-md">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-gold">
+                <node.Icon className="h-4 w-4" />
+              </span>
+              <span className="flex flex-col leading-tight">
+                <span className="text-[12px] font-bold">
+                  <span className="text-gold-dark">Prosper</span> <span className="text-primary">{node.label}</span>
+                </span>
+                <span className="text-[10px] text-ink-500">{node.desc}</span>
+              </span>
+            </div>
           </div>
         )
       })}
+    </div>
+  )
+}
+
+function VisionAILegend() {
+  return (
+    <div className="mt-6 flex flex-col gap-3 sm:hidden">
+      {VISION_NODES.map((node) => (
+        <div key={node.label} className="flex items-center gap-3 rounded-2xl border border-gold-dark/25 bg-white px-3 py-2 shadow-sm">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-gold">
+            <node.Icon className="h-4 w-4" />
+          </span>
+          <span className="flex flex-col leading-tight">
+            <span className="text-[13px] font-bold">
+              <span className="text-gold-dark">Prosper</span> <span className="text-primary">{node.label}</span>
+            </span>
+            <span className="text-[11px] text-ink-500">{node.desc}</span>
+          </span>
+        </div>
+      ))}
     </div>
   )
 }
