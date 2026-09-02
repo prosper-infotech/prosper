@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import StatCounter from '../components/ui/StatCounter'
 import CTABand from '../components/ui/CTABand'
+import { NAV } from '../data/navigation'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import logo from '../assets/logo-light.png'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
@@ -52,6 +54,109 @@ const PRODUCTS = [
   },
 ]
 
+const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/')
+
+function NavDropdown({ item, align }) {
+  const groups = item.children
+  const hasNestedGroups = groups.some((group) => group.children)
+
+  return (
+    <div
+      className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 ${
+        align === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'
+      }`}
+    >
+      <div className="rounded-2xl border border-ink-300/60 bg-white p-6 shadow-[0_24px_48px_-16px_rgba(20,52,109,0.25)]">
+        {hasNestedGroups ? (
+          <div
+            className="grid gap-x-10 gap-y-1"
+            style={{ gridTemplateColumns: `repeat(${groups.length}, minmax(190px, 1fr))` }}
+          >
+            {groups.map((group) => (
+              <div key={group.path}>
+                <Link
+                  to={group.path}
+                  className="mb-3 block text-xs font-bold uppercase tracking-wide text-primary hover:text-gold-dark"
+                >
+                  {group.label}
+                </Link>
+                <ul className="flex flex-col gap-2">
+                  {(group.children ?? []).map((child) => (
+                    <li key={child.path}>
+                      <Link to={child.path} className="block text-sm text-ink-600 hover:text-primary">
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            className="grid gap-x-10 gap-y-1"
+            style={{
+              gridTemplateColumns: `repeat(${groups.length > 8 ? 3 : groups.length > 4 ? 2 : 1}, minmax(200px, 1fr))`,
+            }}
+          >
+            {groups.map((child) => (
+              <Link
+                key={child.path}
+                to={child.path}
+                className="rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-gold/10 hover:text-primary"
+              >
+                {child.label}
+                {child.description && (
+                  <span className="mt-0.5 block text-xs font-normal text-ink-500">{child.description}</span>
+                )}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function ConceptHeader() {
+  return (
+    <header className="relative z-50">
+      <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between gap-6">
+        <Link to="/" className="shrink-0">
+          <img src={logo} alt="Prosper Infotech" className="h-9 w-auto" />
+        </Link>
+
+        <nav className="hidden lg:flex items-center gap-1">
+          {NAV_ITEMS.map((item, i) => (
+            <div key={item.path} className="group relative">
+              <Link
+                to={item.path}
+                className="flex items-center gap-1 whitespace-nowrap px-4 py-2 text-[15px] font-medium text-ink-900 transition-colors hover:text-primary"
+              >
+                {item.label}
+                {item.children && (
+                  <ChevronDown className="h-4 w-4 text-ink-500 transition-transform group-hover:rotate-180" />
+                )}
+              </Link>
+              {item.children && (
+                <NavDropdown item={item} align={i >= NAV_ITEMS.length - 2 ? 'right' : 'center'} />
+              )}
+            </div>
+          ))}
+        </nav>
+
+        <Link
+          to="/contact"
+          className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+        >
+          Book A Demo
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </header>
+  )
+}
+
 export default function HomepageConcept() {
   useDocumentTitle(
     'Homepage Concept | Prosper Infotech',
@@ -84,9 +189,11 @@ export default function HomepageConcept() {
         Concept layout for review &mdash; not the live homepage
       </div>
 
+      <ConceptHeader />
+
       <main className="flex-1">
         {/* Hero */}
-        <header className="relative overflow-hidden pt-16 pb-10">
+        <section className="relative overflow-hidden pt-6 pb-10">
           <div className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl" />
           <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] items-center">
             <Reveal>
@@ -117,7 +224,7 @@ export default function HomepageConcept() {
               <HeroIllustration />
             </Reveal>
           </div>
-        </header>
+        </section>
 
         {/* Trust strip */}
         <section className="border-y border-ink-300 py-10">
