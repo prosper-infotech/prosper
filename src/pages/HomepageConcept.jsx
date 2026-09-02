@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { ChevronDown, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
-import CTABand from '../components/ui/CTABand'
 import { NAV } from '../data/navigation'
+import { SOCIAL_LINKS } from '../data/socialLinks'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import logo from '../assets/logo-light.png'
 import wmsImg from '../assets/prosper wms.png'
@@ -198,6 +198,75 @@ function ConceptHeader() {
         </Link>
       </div>
     </header>
+  )
+}
+
+const FOOTER_COLUMNS = NAV.filter((item) => item.children).slice(0, 3)
+
+function ConceptFooter() {
+  const year = new Date().getFullYear()
+  return (
+    <footer className="border-t border-ink-300/60">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-12 lg:grid-cols-[1.1fr_2fr]">
+        <div>
+          <Link to="/" className="inline-flex items-center">
+            <img src={logo} alt="Prosper Infotech" className="h-10 w-auto" />
+          </Link>
+          <p className="mt-4 text-sm font-semibold text-ink-900">
+            Automating global logistics operations using AI.
+          </p>
+          <p className="mt-3 max-w-sm text-sm text-ink-500">
+            Prosper Infotech engineers AI, computer vision, RFID, GPS and IoT platforms that bring real-time
+            visibility and automation to warehouses, yards, fleets and container terminals.
+          </p>
+          <div className="mt-6 flex items-center gap-3">
+            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-300 text-ink-600 transition-colors hover:border-primary hover:text-primary"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          {FOOTER_COLUMNS.map((column) => (
+            <div key={column.path}>
+              <h3 className="mb-4 font-heading font-semibold text-primary">{column.label}</h3>
+              <ul className="flex flex-col gap-2.5">
+                {column.children.slice(0, 7).map((child) => (
+                  <li key={child.path}>
+                    <Link to={child.path} className="text-sm text-ink-600 hover:text-primary">
+                      {child.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-t border-ink-300/60">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-between gap-3 px-6 py-5 text-xs text-ink-500 sm:flex-row">
+          <span>&copy; {year} Prosper Infotech. All rights reserved.</span>
+          <div className="flex items-center gap-6">
+            <Link to="/about" className="transition-colors hover:text-primary">
+              About Us
+            </Link>
+            <Link to="/privacy-policy" className="transition-colors hover:text-primary">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
   )
 }
 
@@ -474,12 +543,163 @@ export default function HomepageConcept() {
           </div>
         </section>
 
-        <CTABand
-          title="Ready to see it live?"
-          description="Talk to our team about warehouse, yard, fleet and container AI built for your operation — no cost, no obligation."
-        />
+        {/* Closing CTA */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <Reveal>
+              <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#fffdf0] via-[#fff3c4] to-[#ffe58a] px-8 py-12 md:px-14 md:py-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
+                <div>
+                  <h2 className="text-3xl md:text-[40px] font-extrabold leading-tight text-primary">
+                    Ready to Streamline
+                    <br />
+                    Your Operations?
+                  </h2>
+                  <p className="mt-4 max-w-md text-lg text-ink-600">
+                    We&rsquo;re here to help transform your operations with a bespoke solution, engineered to address your unique warehouse, yard, fleet and terminal challenges.
+                  </p>
+                  <a
+                    href="https://calendly.com/prosperinfotech-sales/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+                  >
+                    Book A Demo
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+                <CTAIllustration />
+              </div>
+            </Reveal>
+          </div>
+        </section>
       </main>
+
+      <ConceptFooter />
     </div>
+  )
+}
+
+// Returns the three visible-face polygons of an isometric box, given the
+// bottom-front-corner anchor, a right/left footprint vector and a height.
+function isoBox(ax, ay, rx, ry, height) {
+  const front = { x: ax, y: ay - height }
+  const right = { x: front.x + rx, y: front.y + ry }
+  const back = { x: front.x, y: front.y + 2 * ry }
+  const left = { x: front.x - rx, y: front.y + ry }
+  const bottomFront = { x: ax, y: ay }
+  const bottomRight = { x: right.x, y: right.y + height }
+  const bottomLeft = { x: left.x, y: left.y + height }
+  const pts = (list) => list.map((p) => `${p.x},${p.y}`).join(' ')
+  return {
+    top: pts([front, right, back, left]),
+    rightFace: pts([front, right, bottomRight, bottomFront]),
+    leftFace: pts([front, left, bottomLeft, bottomFront]),
+  }
+}
+
+function CTAIllustration() {
+  const warehouse = isoBox(190, 300, 90, 50, 120)
+  const trailerBed = isoBox(400, 320, 60, 22, 16)
+  const trailerBox = isoBox(400, 304, 60, 22, 46)
+  const cab = isoBox(322, 320, 22, 14, 42)
+  const boxA = isoBox(540, 290, 44, 26, 42)
+  const boxB = isoBox(516, 248, 44, 26, 42)
+
+  return (
+    <svg
+      viewBox="0 0 640 380"
+      role="img"
+      aria-label="Isometric illustration of a warehouse, a delivery truck and stacked containers connected on one network"
+      className="w-full"
+    >
+      <defs>
+        <linearGradient id="ctaNavyTop" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#3a5a99" />
+          <stop offset="100%" stopColor="#1c407f" />
+        </linearGradient>
+        <linearGradient id="ctaNavyRight" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#14346d" />
+          <stop offset="100%" stopColor="#0e2851" />
+        </linearGradient>
+        <linearGradient id="ctaNavyLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#0e2851" />
+          <stop offset="100%" stopColor="#081a3d" />
+        </linearGradient>
+        <linearGradient id="ctaGoldTop" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffe94d" />
+          <stop offset="100%" stopColor="#f7dd00" />
+        </linearGradient>
+        <linearGradient id="ctaGoldRight" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#e0c700" />
+          <stop offset="100%" stopColor="#c9a800" />
+        </linearGradient>
+        <linearGradient id="ctaGoldLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#c9a800" />
+          <stop offset="100%" stopColor="#a88900" />
+        </linearGradient>
+      </defs>
+
+      <ellipse cx="200" cy="384" rx="150" ry="16" fill="#14346d" opacity="0.08" />
+      <ellipse cx="400" cy="384" rx="90" ry="12" fill="#14346d" opacity="0.08" />
+      <ellipse cx="520" cy="356" rx="70" ry="10" fill="#14346d" opacity="0.08" />
+
+      {/* connecting network */}
+      <path
+        d="M 240 260 Q 320 200 380 280"
+        stroke="#14346d"
+        strokeWidth="2"
+        strokeDasharray="2 8"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.35"
+      />
+      <path
+        d="M 420 270 Q 470 220 500 260"
+        stroke="#14346d"
+        strokeWidth="2"
+        strokeDasharray="2 8"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.35"
+      />
+      <circle cx="240" cy="260" r="4" fill="#f7dd00" />
+      <circle cx="380" cy="280" r="4" fill="#f7dd00" />
+      <circle cx="500" cy="260" r="4" fill="#f7dd00" />
+      <circle className="hc-scene-ping" cx="380" cy="280" r="4" fill="none" stroke="#14346d" strokeWidth="1.5" />
+
+      <g className="hc-scene-float">
+        {/* warehouse */}
+        <polygon points={warehouse.top} fill="url(#ctaNavyTop)" />
+        <polygon points={warehouse.rightFace} fill="url(#ctaNavyRight)" />
+        <polygon points={warehouse.leftFace} fill="url(#ctaNavyLeft)" />
+        <rect x="118" y="330" width="30" height="46" fill="#081a3d" opacity="0.7" />
+        <line x1="90" y1="300" x2="90" y2="230" stroke="#f7dd00" strokeWidth="2" opacity="0.7" />
+        <circle cx="90" cy="222" r="5" fill="#f7dd00" />
+
+        {/* truck */}
+        <polygon points={trailerBed.top} fill="url(#ctaNavyTop)" />
+        <polygon points={trailerBed.rightFace} fill="url(#ctaNavyRight)" />
+        <polygon points={trailerBed.leftFace} fill="url(#ctaNavyLeft)" />
+        <polygon points={trailerBox.top} fill="url(#ctaGoldTop)" />
+        <polygon points={trailerBox.rightFace} fill="url(#ctaGoldRight)" />
+        <polygon points={trailerBox.leftFace} fill="url(#ctaGoldLeft)" />
+        <polygon points={cab.top} fill="url(#ctaNavyTop)" />
+        <polygon points={cab.rightFace} fill="url(#ctaNavyRight)" />
+        <polygon points={cab.leftFace} fill="url(#ctaNavyLeft)" />
+        <circle cx="316" cy="372" r="9" fill="#0e2851" />
+        <circle cx="356" cy="372" r="9" fill="#0e2851" />
+        <circle cx="430" cy="372" r="9" fill="#0e2851" />
+        <circle cx="466" cy="372" r="9" fill="#0e2851" />
+
+        {/* container stack */}
+        <polygon points={boxA.top} fill="url(#ctaGoldTop)" />
+        <polygon points={boxA.rightFace} fill="url(#ctaGoldRight)" />
+        <polygon points={boxA.leftFace} fill="url(#ctaGoldLeft)" />
+        <polygon points={boxB.top} fill="url(#ctaNavyTop)" />
+        <polygon points={boxB.rightFace} fill="url(#ctaNavyRight)" />
+        <polygon points={boxB.leftFace} fill="url(#ctaNavyLeft)" />
+      </g>
+    </svg>
   )
 }
 
