@@ -332,8 +332,8 @@ export default function HomepageConcept() {
             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
             transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
-          <div className="relative max-w-7xl mx-auto px-6 flex flex-col lg:flex-row lg:items-center gap-10">
-            <div className="lg:flex-1">
+          <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
+            <div className="md:flex-1">
               <Reveal>
                 <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
                   AI-Powered Logistics Platform
@@ -381,7 +381,7 @@ export default function HomepageConcept() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.2} className="md:max-w-[460px] md:mx-auto lg:max-w-none lg:mx-0 lg:w-[620px] lg:shrink-0">
+            <Reveal delay={0.2} className="md:w-[300px] md:shrink-0 lg:w-[620px]">
               <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
