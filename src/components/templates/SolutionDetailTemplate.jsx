@@ -145,12 +145,12 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
             </div>
           </section>
         )}
-      </div>
 
-      <CTABand
-        title={`Ready to talk about ${title}?`}
-        description="We'll walk through your requirements and recommend the right approach."
-      />
+        <CTABand
+          title={`Ready to talk about ${title}?`}
+          description="We'll walk through your requirements and recommend the right approach."
+        />
+      </div>
     </>
   )
 }
