@@ -42,52 +42,50 @@ export default function Breadcrumb({ title, parent, parentPath, icon: Icon }) {
   }, [title, parent, parentPath, pathname])
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#fffdf6] via-[#fff8dc] to-[#ffe58a]">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(20,52,109,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(20,52,109,0.9) 1px, transparent 1px)',
-          backgroundSize: '44px 44px',
-        }}
-      />
-      <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-gold-dark/25 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold-dark to-transparent" />
-
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 max-w-6xl mx-auto px-6 py-16 md:py-20"
-      >
-        <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-ink-500">
-          <Link to="/" className="rounded-full px-2.5 py-1 transition-colors hover:bg-primary/5 hover:text-primary">
+    <section className="relative bg-[#fffdf6] px-6 pt-8 pb-10 md:pt-10">
+      <div className="max-w-6xl mx-auto">
+        <nav className="mb-5 flex flex-wrap items-center gap-1.5 text-xs font-semibold uppercase tracking-wide">
+          <Link
+            to="/"
+            className="rounded-full bg-white px-3 py-1.5 text-ink-500 shadow-sm ring-1 ring-ink-300/60 transition-colors hover:text-primary"
+          >
             Home
           </Link>
           {parent && (
             <>
-              <ChevronRight className="h-3 w-3 text-primary/25" />
-              <span className="rounded-full px-2.5 py-1 text-ink-600">{parent}</span>
+              <ChevronRight className="h-3 w-3 text-ink-300" />
+              <span className="rounded-full bg-white px-3 py-1.5 text-ink-500 shadow-sm ring-1 ring-ink-300/60">
+                {parent}
+              </span>
             </>
           )}
-          <ChevronRight className="h-3 w-3 text-primary/25" />
-          <span className="rounded-full bg-primary/8 px-2.5 py-1 text-primary-dark">{title}</span>
+          <ChevronRight className="h-3 w-3 text-ink-300" />
+          <span className="rounded-full bg-primary px-3 py-1.5 text-gold shadow-sm">{title}</span>
         </nav>
 
-        <div className="flex items-center gap-4">
-          {Icon ? (
-            <span className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary-dark text-gold shadow-[inset_0_2px_3px_rgba(255,255,255,0.15),0_10px_24px_-6px_rgba(20,52,109,0.45)] sm:flex">
-              <Icon className="h-7 w-7" />
-            </span>
-          ) : (
-            <span className="hidden h-10 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-primary to-primary-dark sm:block" />
-          )}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-primary">
-            {title}
-          </h1>
-        </div>
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-primary via-primary to-primary-dark px-8 py-10 shadow-[0_24px_50px_-20px_rgba(20,52,109,0.45)] md:px-12 md:py-12"
+        >
+          <div className="pointer-events-none absolute -top-16 -right-10 h-56 w-56 rounded-full bg-gold/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 left-1/3 h-48 w-48 rounded-full bg-white/5 blur-3xl" />
+
+          <div className="relative flex items-center gap-5 md:gap-6">
+            {Icon ? (
+              <span className="hidden h-16 w-16 shrink-0 -rotate-6 items-center justify-center rounded-2xl bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),0_10px_20px_-4px_rgba(0,0,0,0.35)] sm:flex">
+                <Icon className="h-8 w-8" />
+              </span>
+            ) : (
+              <span className="hidden h-12 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-gold to-gold-dark sm:block" />
+            )}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-white drop-shadow-sm">
+              {title}
+            </h1>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }
