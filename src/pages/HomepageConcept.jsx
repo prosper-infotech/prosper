@@ -415,7 +415,7 @@ export default function HomepageConcept() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.2} className="md:w-[330px] md:shrink-0 lg:w-[660px]">
+            <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
               <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
