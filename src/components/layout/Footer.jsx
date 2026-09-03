@@ -11,7 +11,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-navy text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="inline-flex items-center">
             <img
@@ -25,18 +25,34 @@ export default function Footer() {
           </p>
         </div>
 
-        {FOOTER_COLUMNS.map((column) => (
-          <div key={column.path}>
-            <h3 className="font-heading font-semibold text-white mb-4">{column.label}</h3>
-            <ul className="flex flex-col gap-2">
-              {column.children.slice(0, 6).map((child) => (
-                <li key={child.path}>
-                  <Link to={child.path} className="text-sm text-ink-300 hover:text-gold transition-colors">
-                    {child.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        {FOOTER_COLUMNS.slice(0, 2).map((column, i) => (
+          <div key={column.path} className={i === 1 ? 'flex flex-col gap-8' : undefined}>
+            <div>
+              <h3 className="font-heading font-semibold text-white mb-4">{column.label}</h3>
+              <ul className="flex flex-col gap-2">
+                {column.children.slice(0, 6).map((child) => (
+                  <li key={child.path}>
+                    <Link to={child.path} className="text-sm text-ink-300 hover:text-gold transition-colors">
+                      {child.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {i === 1 && FOOTER_COLUMNS[2] && (
+              <div>
+                <h3 className="font-heading font-semibold text-white mb-4">{FOOTER_COLUMNS[2].label}</h3>
+                <ul className="flex flex-col gap-2">
+                  {FOOTER_COLUMNS[2].children.slice(0, 6).map((child) => (
+                    <li key={child.path}>
+                      <Link to={child.path} className="text-sm text-ink-300 hover:text-gold transition-colors">
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
 
