@@ -340,7 +340,7 @@ export default function HomepageConcept() {
                 </span>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-5 text-2xl sm:text-3xl lg:text-[42px] font-extrabold leading-tight tracking-tight">
+                <h1 className="mt-5 text-2xl sm:text-3xl md:text-[27px] lg:text-[42px] font-extrabold leading-tight tracking-tight">
                   Automate and
                   <br />
                   Optimize Your
@@ -381,7 +381,7 @@ export default function HomepageConcept() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.2} className="md:w-[300px] md:shrink-0 lg:w-[620px]">
+            <Reveal delay={0.2} className="md:w-[330px] md:shrink-0 lg:w-[620px]">
               <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
