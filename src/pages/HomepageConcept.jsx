@@ -13,7 +13,7 @@ import containerVisionImg from '../assets/container vision ai.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
-import visionAISuiteImg from '../assets/new ai suite.png'
+import visionAISuiteImg from '../assets/new homepage image.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
