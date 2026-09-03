@@ -7,84 +7,18 @@ import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { AI_SERVICES } from '../../data/aiServicesDetail'
 
-const ACCENT = {
-  violet: {
-    badge: 'bg-gradient-to-br from-violet-500 to-violet-700',
-    text: 'text-violet-600',
-    border: 'border-violet-300',
-    hoverBorder: 'hover:border-violet-400',
-    dot: 'bg-violet-500',
-    line: 'bg-gradient-to-r from-violet-500 to-violet-700',
-    lineV: 'bg-gradient-to-b from-violet-500 to-violet-700',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(139,92,246,0.4)]',
-    chip: 'bg-violet-50 border-violet-200 text-violet-800',
-  },
-  blue: {
-    badge: 'bg-gradient-to-br from-blue-500 to-blue-700',
-    text: 'text-blue-600',
-    border: 'border-blue-300',
-    hoverBorder: 'hover:border-blue-400',
-    dot: 'bg-blue-500',
-    line: 'bg-gradient-to-r from-blue-500 to-blue-700',
-    lineV: 'bg-gradient-to-b from-blue-500 to-blue-700',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(59,130,246,0.4)]',
-    chip: 'bg-blue-50 border-blue-200 text-blue-800',
-  },
-  orange: {
-    badge: 'bg-gradient-to-br from-orange-500 to-orange-700',
-    text: 'text-orange-600',
-    border: 'border-orange-300',
-    hoverBorder: 'hover:border-orange-400',
-    dot: 'bg-orange-500',
-    line: 'bg-gradient-to-r from-orange-500 to-orange-700',
-    lineV: 'bg-gradient-to-b from-orange-500 to-orange-700',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(249,115,22,0.4)]',
-    chip: 'bg-orange-50 border-orange-200 text-orange-800',
-  },
-  emerald: {
-    badge: 'bg-gradient-to-br from-emerald-500 to-emerald-700',
-    text: 'text-emerald-600',
-    border: 'border-emerald-300',
-    hoverBorder: 'hover:border-emerald-400',
-    dot: 'bg-emerald-500',
-    line: 'bg-gradient-to-r from-emerald-500 to-emerald-700',
-    lineV: 'bg-gradient-to-b from-emerald-500 to-emerald-700',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(16,185,129,0.4)]',
-    chip: 'bg-emerald-50 border-emerald-200 text-emerald-800',
-  },
-  cyan: {
-    badge: 'bg-gradient-to-br from-cyan-500 to-cyan-700',
-    text: 'text-cyan-600',
-    border: 'border-cyan-300',
-    hoverBorder: 'hover:border-cyan-400',
-    dot: 'bg-cyan-500',
-    line: 'bg-gradient-to-r from-cyan-500 to-cyan-700',
-    lineV: 'bg-gradient-to-b from-cyan-500 to-cyan-700',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(34,211,238,0.4)]',
-    chip: 'bg-cyan-50 border-cyan-200 text-cyan-800',
-  },
-  indigo: {
-    badge: 'bg-gradient-to-br from-indigo-500 to-indigo-700',
-    text: 'text-indigo-600',
-    border: 'border-indigo-300',
-    hoverBorder: 'hover:border-indigo-400',
-    dot: 'bg-indigo-500',
-    line: 'bg-gradient-to-r from-indigo-500 to-indigo-700',
-    lineV: 'bg-gradient-to-b from-indigo-500 to-indigo-700',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(99,102,241,0.4)]',
-    chip: 'bg-indigo-50 border-indigo-200 text-indigo-800',
-  },
-  gold: {
-    badge: 'bg-gradient-to-br from-gold to-gold-dark',
-    text: 'text-primary',
-    border: 'border-gold/40',
-    hoverBorder: 'hover:border-gold/60',
-    dot: 'bg-gold',
-    line: 'bg-gradient-to-r from-gold to-gold-dark',
-    lineV: 'bg-gradient-to-b from-gold to-gold-dark',
-    glowShadow: 'shadow-[0_0_50px_-8px_rgba(247,221,0,0.45)]',
-    chip: 'bg-gold/10 border-gold/30 text-primary',
-  },
+// Single navy/gold style set, used for every AI service category
+// regardless of its `accent` field, to keep the theme consistent.
+const STYLES = {
+  badge: 'bg-gradient-to-br from-gold to-gold-dark',
+  text: 'text-primary',
+  border: 'border-gold/40',
+  hoverBorder: 'hover:border-gold/60',
+  dot: 'bg-gold',
+  line: 'bg-gradient-to-r from-gold to-gold-dark',
+  lineV: 'bg-gradient-to-b from-gold to-gold-dark',
+  glowShadow: 'shadow-[0_0_50px_-8px_rgba(247,221,0,0.45)]',
+  chip: 'bg-gold/10 border-gold/30 text-primary',
 }
 
 function FlowDiagram({ stages, styles }) {
@@ -147,8 +81,8 @@ function FlowDiagram({ stages, styles }) {
 }
 
 export default function AIServiceDetailTemplate({ detail }) {
-  const { label, seoTitle, seoDescription, icon: Icon, accent, heading, intro, categories, techFlow, techTags, techNote, cta, path } = detail
-  const styles = ACCENT[accent]
+  const { label, seoTitle, seoDescription, icon: Icon, heading, intro, categories, techFlow, techTags, techNote, cta, path } = detail
+  const styles = STYLES
   const siblings = AI_SERVICES.filter((s) => s.path !== path)
 
   useDocumentTitle(seoTitle, seoDescription)
@@ -236,7 +170,7 @@ export default function AIServiceDetailTemplate({ detail }) {
           <div className="grid gap-3 sm:grid-cols-2">
             {siblings.map((sibling) => {
               const SiblingIcon = sibling.icon
-              const siblingStyles = ACCENT[sibling.accent]
+              const siblingStyles = STYLES
               return (
                 <Link
                   key={sibling.path}

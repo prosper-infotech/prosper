@@ -10,25 +10,8 @@ import { AI_SERVICES } from '../data/aiServicesDetail'
 
 const INDUSTRY_FOCUS = ['Logistics', 'Supply Chain', 'Warehousing', 'Transportation', 'CFS / Container Terminals', 'Manufacturing']
 
-const ACCENT_BADGE = {
-  violet: 'bg-gradient-to-br from-violet-500 to-violet-700',
-  blue: 'bg-gradient-to-br from-blue-500 to-blue-700',
-  orange: 'bg-gradient-to-br from-orange-500 to-orange-700',
-  emerald: 'bg-gradient-to-br from-emerald-500 to-emerald-700',
-  cyan: 'bg-gradient-to-br from-cyan-500 to-cyan-700',
-  indigo: 'bg-gradient-to-br from-indigo-500 to-indigo-700',
-  gold: 'bg-gradient-to-br from-gold to-gold-dark',
-}
-
-const ACCENT_CONIC = {
-  violet: 'bg-[conic-gradient(from_0deg,#8b5cf6,#e879f9,#8b5cf6)]',
-  blue: 'bg-[conic-gradient(from_0deg,#3b82f6,#22d3ee,#3b82f6)]',
-  orange: 'bg-[conic-gradient(from_0deg,#f97316,#fbbf24,#f97316)]',
-  emerald: 'bg-[conic-gradient(from_0deg,#10b981,#2dd4bf,#10b981)]',
-  cyan: 'bg-[conic-gradient(from_0deg,#22d3ee,#38bdf8,#22d3ee)]',
-  indigo: 'bg-[conic-gradient(from_0deg,#6366f1,#818cf8,#6366f1)]',
-  gold: 'bg-[conic-gradient(from_0deg,#f7dd00,#fff4a3,#f7dd00)]',
-}
+const ACCENT_BADGE = 'bg-gradient-to-br from-gold to-gold-dark'
+const ACCENT_CONIC = 'bg-[conic-gradient(from_0deg,#f7dd00,#fff4a3,#f7dd00)]'
 
 const NODES = [
   [8, 20], [22, 55], [15, 80], [35, 15], [40, 60], [55, 30], [62, 78],
@@ -79,12 +62,12 @@ function ServiceCard({ service }) {
       className="group relative rounded-2xl p-[1.5px] overflow-hidden transition-transform duration-300 hover:-translate-y-1.5"
     >
       <motion.div
-        className={`absolute inset-[-60%] ${ACCENT_CONIC[service.accent]}`}
+        className={`absolute inset-[-60%] ${ACCENT_CONIC}`}
         animate={{ rotate: hovered ? 360 : 0 }}
         transition={{ duration: 3, repeat: hovered ? Infinity : 0, ease: 'linear' }}
       />
       <Link to={service.path} className="relative flex h-full flex-col gap-3 rounded-2xl bg-white p-6">
-        <span className={`flex h-11 w-11 items-center justify-center rounded-full text-white ${ACCENT_BADGE[service.accent]}`}>
+        <span className={`flex h-11 w-11 items-center justify-center rounded-full text-white ${ACCENT_BADGE}`}>
           <Icon className="h-5 w-5" />
         </span>
         <h3 className="font-heading font-semibold text-lg text-primary">{service.label}</h3>
