@@ -179,8 +179,8 @@ function ConceptHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
-        scrolled ? 'bg-[#fffdf6]/90 backdrop-blur-md border-ink-300/40' : 'bg-transparent border-transparent'
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled ? 'bg-[#fffdf6]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center gap-6">
