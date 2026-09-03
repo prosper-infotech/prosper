@@ -394,10 +394,10 @@ export default function HomepageConcept() {
         {/* Product suite */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6">
-            <Reveal className="max-w-xl mb-12">
+            <Reveal className="mb-12">
               <span className="text-primary text-sm font-semibold uppercase tracking-widest">Our Platform</span>
-              <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px]">One AI platform. Every operation, automated.</h2>
-              <p className="mt-3 text-ink-600 text-lg">
+              <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px] md:whitespace-nowrap">One AI platform. Every operation, automated.</h2>
+              <p className="mt-3 max-w-2xl text-ink-600 text-lg">
                 Five purpose-built products, engineered on AI, computer vision and RFID/GPS &mdash; each solving one part of your operation end to end.
               </p>
             </Reveal>
