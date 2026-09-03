@@ -22,51 +22,6 @@ import ctaSuiteImg from '../assets/Ready to streamlime.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
-// Decorative particle field for the stats band: a fan of arcs sweeping
-// up-right from a focal point, plus two denser corner clusters.
-const STAT_DOT_FIELD = (() => {
-  const dots = []
-  const cx = 260
-  const cy = 520
-  const startAngle = -8
-  const endAngle = 78
-  const minR = 70
-  const maxR = 760
-  const ringCount = 34
-
-  for (let ring = 0; ring < ringCount; ring++) {
-    const r = minR + (ring / (ringCount - 1)) * (maxR - minR)
-    const spacingDeg = Math.max(2.2, 420 / r)
-    for (let angle = startAngle; angle <= endAngle; angle += spacingDeg) {
-      const rad = (angle * Math.PI) / 180
-      const x = cx + r * Math.cos(rad)
-      const y = cy - r * Math.sin(rad)
-      if (x < -20 || x > 920 || y < -20 || y > 540) continue
-      const t = (r - minR) / (maxR - minR)
-      dots.push({ x, y, r: 0.7 + t * 2.1, opacity: 0.1 + t * 0.5 })
-    }
-  }
-
-  const clusters = [
-    { cx: 830, cy: 60, spread: 130, count: 90, maxSize: 3.4 },
-    { cx: 40, cy: 40, spread: 70, count: 40, maxSize: 2.4 },
-  ]
-  clusters.forEach(({ cx: ccx, cy: ccy, spread, count, maxSize }) => {
-    for (let i = 0; i < count; i++) {
-      const angle = Math.random() * Math.PI * 2
-      const dist = Math.random() * spread
-      dots.push({
-        x: ccx + Math.cos(angle) * dist,
-        y: ccy + Math.sin(angle) * dist,
-        r: 0.6 + Math.random() * maxSize,
-        opacity: 0.25 + Math.random() * 0.6,
-      })
-    }
-  })
-
-  return dots
-})()
-
 const PRODUCTS = [
   {
     name: 'WMS',
@@ -633,17 +588,9 @@ export default function HomepageConcept() {
           <div className="max-w-7xl mx-auto px-6">
             <Reveal>
               <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] px-8 py-14 md:px-16 md:py-16">
-                <svg
-                  viewBox="0 0 900 540"
-                  preserveAspectRatio="xMidYMid slice"
-                  className="pointer-events-none absolute inset-0 h-full w-full"
-                  aria-hidden="true"
-                >
-                  {STAT_DOT_FIELD.map((d, i) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <circle key={i} cx={d.x} cy={d.y} r={d.r} fill="#f7dd00" opacity={d.opacity} />
-                  ))}
-                </svg>
+                <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/25 blur-[110px]" />
+                <div className="pointer-events-none absolute top-1/2 left-1/3 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
+                <div className="pointer-events-none absolute -bottom-28 -left-20 h-[380px] w-[380px] rounded-full bg-[#3a5a99]/40 blur-[110px]" />
 
                 <div className="relative grid gap-12 lg:grid-cols-[1fr_1fr] items-center">
                   <h2 className="text-4xl md:text-[44px] font-extrabold leading-[1.15] text-white">
