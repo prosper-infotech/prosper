@@ -83,9 +83,11 @@ export default function Breadcrumb({ title, parent, parentPath }) {
           <p className="mb-3 text-xs font-bold uppercase tracking-widest text-gold-dark">{parent}</p>
         )}
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-primary">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-primary">
           {title}
         </h1>
+
+        <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-gradient-to-r from-gold to-gold-dark" />
       </motion.div>
     </section>
   )
