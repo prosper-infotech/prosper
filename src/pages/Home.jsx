@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { ChevronDown, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
@@ -77,6 +77,38 @@ const PRODUCTS = [
   },
 ]
 
+function AnimatedStat({ value, label }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+  const numeric = parseInt(value.match(/^\d+/)?.[0] ?? '0', 10)
+  const suffix = value.replace(/^\d+/, '')
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!inView) return
+    const duration = 1200
+    const start = performance.now()
+    let frame
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1)
+      setCount(Math.round(numeric * progress))
+      if (progress < 1) frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [inView, numeric])
+
+  return (
+    <div ref={ref}>
+      <div className="text-4xl md:text-5xl font-extrabold text-white">
+        {count}
+        {suffix}
+      </div>
+      <div className="mt-2 text-sm text-white/70">{label}</div>
+    </div>
+  )
+}
+
 export default function Home() {
   useDocumentTitle(
     'Prosper Infotech | AI-Powered RFID, GPS & IoT Logistics Solutions',
@@ -148,10 +180,12 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
-            <img
+            <motion.img
               src={visionAISuiteImg}
               alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
               className="w-full"
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             />
           </Reveal>
         </div>
@@ -265,9 +299,17 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] px-8 py-14 md:px-16 md:py-16">
-              <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/25 blur-[110px]" />
+              <motion.div
+                className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/25 blur-[110px]"
+                animate={{ scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+              />
               <div className="pointer-events-none absolute top-1/2 left-1/3 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
-              <div className="pointer-events-none absolute -bottom-28 -left-20 h-[380px] w-[380px] rounded-full bg-[#3a5a99]/40 blur-[110px]" />
+              <motion.div
+                className="pointer-events-none absolute -bottom-28 -left-20 h-[380px] w-[380px] rounded-full bg-[#3a5a99]/40 blur-[110px]"
+                animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.9, 0.6] }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+              />
 
               <div className="relative grid gap-12 lg:grid-cols-[1fr_1fr] items-center">
                 <h2 className="text-4xl md:text-[44px] font-extrabold leading-[1.15] text-white">
@@ -287,10 +329,7 @@ export default function Home() {
                     ['50+', 'Enterprise Clients'],
                     ['24/7', 'Support Coverage'],
                   ].map(([value, label]) => (
-                    <div key={label}>
-                      <div className="text-4xl md:text-5xl font-extrabold text-white">{value}</div>
-                      <div className="mt-2 text-sm text-white/70">{label}</div>
-                    </div>
+                    <AnimatedStat key={label} value={value} label={label} />
                   ))}
                 </div>
               </div>
@@ -323,10 +362,12 @@ export default function Home() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-              <img
+              <motion.img
                 src={ctaSuiteImg}
                 alt="Prosper Vision AI suite connected across a warehouse, gate, yard, container terminal and AS400 modernization services"
                 className="w-full"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
               />
             </div>
           </Reveal>
