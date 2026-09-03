@@ -97,7 +97,7 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
-        solid ? 'bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-transparent'
+        solid ? 'bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-[#fffdf6]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center gap-6">
