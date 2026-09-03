@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, ArrowRight, Menu, X } from 'lucide-react'
 import { NAV } from '../../data/navigation'
 import logo from '../../assets/logo-light.png'
@@ -74,6 +74,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openAccordion, setOpenAccordion] = useState(null)
+  const location = useLocation()
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -90,10 +92,12 @@ export default function Header() {
     }
   }, [mobileOpen])
 
+  const solid = !isHome || scrolled || mobileOpen
+
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled || mobileOpen ? 'bg-[#fffdf6]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-transparent'
+        solid ? 'bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center gap-6">
