@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ChevronDown, ArrowRight, Phone, MapPin } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import { NAV } from '../data/navigation'
 import { SOCIAL_LINKS } from '../data/socialLinks'
+import { OFFICES } from '../data/offices'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import logo from '../assets/logo-light.png'
 import wmsImg from '../assets/prosper wms.png'
@@ -278,7 +279,7 @@ function ConceptFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.path}>
               <h3 className="mb-4 font-heading font-semibold text-primary">{column.label}</h3>
@@ -293,6 +294,30 @@ function ConceptFooter() {
               </ul>
             </div>
           ))}
+
+          <div>
+            <h3 className="mb-4 font-heading font-semibold text-primary">Contact</h3>
+            <ul className="flex flex-col gap-4">
+              {OFFICES.map((office) => (
+                <li key={office.country} className="text-sm text-ink-600">
+                  <div className="font-semibold text-ink-900">{office.country}</div>
+                  <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="mt-1 flex items-center gap-2 hover:text-primary">
+                    <Phone className="h-3.5 w-3.5 shrink-0 text-gold-dark" />
+                    <span>{office.phone}</span>
+                  </a>
+                  <a
+                    href={office.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 flex items-start gap-2 hover:text-primary"
+                  >
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-dark" />
+                    <span>{office.address}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
