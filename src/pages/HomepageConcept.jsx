@@ -309,19 +309,35 @@ function ConceptFooter() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {FOOTER_COLUMNS.map((column) => (
-            <div key={column.path}>
-              <h3 className="mb-4 font-heading font-semibold text-primary">{column.label}</h3>
-              <ul className="flex flex-col gap-2.5">
-                {column.children.slice(0, 7).map((child) => (
-                  <li key={child.path}>
-                    <Link to={child.path} className="text-sm text-ink-600 hover:text-primary">
-                      {child.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          {FOOTER_COLUMNS.slice(0, 2).map((column, i) => (
+            <div key={column.path} className={i === 1 ? 'flex flex-col gap-8' : undefined}>
+              <div>
+                <h3 className="mb-4 font-heading font-semibold text-primary">{column.label}</h3>
+                <ul className="flex flex-col gap-2.5">
+                  {column.children.slice(0, 7).map((child) => (
+                    <li key={child.path}>
+                      <Link to={child.path} className="text-sm text-ink-600 hover:text-primary">
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {i === 1 && FOOTER_COLUMNS[2] && (
+                <div>
+                  <h3 className="mb-4 font-heading font-semibold text-primary">{FOOTER_COLUMNS[2].label}</h3>
+                  <ul className="flex flex-col gap-2.5">
+                    {FOOTER_COLUMNS[2].children.slice(0, 7).map((child) => (
+                      <li key={child.path}>
+                        <Link to={child.path} className="text-sm text-ink-600 hover:text-primary">
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))}
 
