@@ -134,7 +134,6 @@ function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/lp/thank-you" element={<ThankYou />} />
-        <Route path="/" element={<Home />} />
         <Route element={<LandingLayout />}>
           <Route path="/lp/as400-development" element={<AS400Development />} />
           <Route path="/lp/asset-tracking" element={<AssetTracking />} />
@@ -144,6 +143,7 @@ function App() {
           <Route path="/lp/forklift-vision-ai" element={<ForkliftVisionAI />} />
         </Route>
         <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
           {NAV.filter((item) => item.path !== '/').map((item) => (
             <Route key={item.path} path={item.path}>
               <Route

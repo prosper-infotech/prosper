@@ -1,6 +1,5 @@
 import { useLocation, useOutlet } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
@@ -16,7 +15,6 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <TopBar />
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait">
