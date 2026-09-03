@@ -95,24 +95,24 @@ function NavDropdown({ item, align }) {
         align === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'
       }`}
     >
-      <div className="rounded-2xl border border-ink-300/60 bg-white p-6 shadow-[0_24px_48px_-16px_rgba(20,52,109,0.25)]">
+      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] p-8 shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)]">
         {hasNestedGroups ? (
           <div
-            className="grid gap-x-10 gap-y-1"
+            className="grid gap-x-14 gap-y-1"
             style={{ gridTemplateColumns: `repeat(${groups.length}, minmax(190px, 1fr))` }}
           >
             {groups.map((group) => (
               <div key={group.path}>
                 <Link
                   to={group.path}
-                  className="mb-3 block text-xs font-bold uppercase tracking-wide text-primary hover:text-gold-dark"
+                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-white/40 hover:text-gold"
                 >
                   {group.label}
                 </Link>
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-3">
                   {(group.children ?? []).map((child) => (
                     <li key={child.path}>
-                      <Link to={child.path} className="block text-sm text-ink-600 hover:text-primary">
+                      <Link to={child.path} className="block text-sm font-medium text-white/90 hover:text-gold">
                         {child.label}
                       </Link>
                     </li>
@@ -132,11 +132,11 @@ function NavDropdown({ item, align }) {
               <Link
                 key={child.path}
                 to={child.path}
-                className="rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-gold/10 hover:text-primary"
+                className="rounded-lg px-2 py-2 text-sm font-semibold text-white/90 hover:bg-white/5 hover:text-gold"
               >
                 {child.label}
                 {child.description && (
-                  <span className="mt-0.5 block text-xs font-normal text-ink-500">{child.description}</span>
+                  <span className="mt-0.5 block text-xs font-normal text-white/40">{child.description}</span>
                 )}
               </Link>
             ))}
