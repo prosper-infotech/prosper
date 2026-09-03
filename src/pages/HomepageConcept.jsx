@@ -12,6 +12,7 @@ import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
 import gateVisionImg from '../assets/gate vision ai.png'
 import videoAttendanceImg from '../assets/video based system.png'
+import dockVisionImg from '../assets/dock vision.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
@@ -72,6 +73,13 @@ const PRODUCTS = [
     img: wmsImg,
     desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
     to: '/lp/wms',
+  },
+  {
+    name: 'DockVision',
+    tag: 'Dock & Loading',
+    img: dockVisionImg,
+    desc: 'AI cameras monitor every dock door, confirming safe loading and unloading without manual checks.',
+    to: '/products/software#dockvision-ai',
   },
   {
     name: 'GateVision',
