@@ -14,6 +14,7 @@ import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
 import visionAISuiteImg from '../assets/new homepage image.png'
+import ctaSuiteImg from '../assets/Ready to streamlime.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
@@ -558,7 +559,11 @@ export default function HomepageConcept() {
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>
-                <CTAIllustration />
+                <img
+                  src={ctaSuiteImg}
+                  alt="Prosper Vision AI suite connected across a warehouse, gate, yard, container terminal and AS400 modernization services"
+                  className="w-full"
+                />
               </div>
             </Reveal>
           </div>
@@ -569,128 +574,3 @@ export default function HomepageConcept() {
     </div>
   )
 }
-
-// Returns the three visible-face polygons of an isometric box, given the
-// bottom-front-corner anchor, a right/left footprint vector and a height.
-function isoBox(ax, ay, rx, ry, height) {
-  const front = { x: ax, y: ay - height }
-  const right = { x: front.x + rx, y: front.y + ry }
-  const back = { x: front.x, y: front.y + 2 * ry }
-  const left = { x: front.x - rx, y: front.y + ry }
-  const bottomFront = { x: ax, y: ay }
-  const bottomRight = { x: right.x, y: right.y + height }
-  const bottomLeft = { x: left.x, y: left.y + height }
-  const pts = (list) => list.map((p) => `${p.x},${p.y}`).join(' ')
-  return {
-    top: pts([front, right, back, left]),
-    rightFace: pts([front, right, bottomRight, bottomFront]),
-    leftFace: pts([front, left, bottomLeft, bottomFront]),
-  }
-}
-
-function CTAIllustration() {
-  const warehouse = isoBox(190, 300, 90, 50, 120)
-  const trailerBed = isoBox(400, 320, 60, 22, 16)
-  const trailerBox = isoBox(400, 304, 60, 22, 46)
-  const cab = isoBox(322, 320, 22, 14, 42)
-  const boxA = isoBox(540, 290, 44, 26, 42)
-  const boxB = isoBox(516, 248, 44, 26, 42)
-
-  return (
-    <svg
-      viewBox="0 0 640 380"
-      role="img"
-      aria-label="Isometric illustration of a warehouse, a delivery truck and stacked containers connected on one network"
-      className="w-full"
-    >
-      <defs>
-        <linearGradient id="ctaNavyTop" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3a5a99" />
-          <stop offset="100%" stopColor="#1c407f" />
-        </linearGradient>
-        <linearGradient id="ctaNavyRight" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#14346d" />
-          <stop offset="100%" stopColor="#0e2851" />
-        </linearGradient>
-        <linearGradient id="ctaNavyLeft" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#0e2851" />
-          <stop offset="100%" stopColor="#081a3d" />
-        </linearGradient>
-        <linearGradient id="ctaGoldTop" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ffe94d" />
-          <stop offset="100%" stopColor="#f7dd00" />
-        </linearGradient>
-        <linearGradient id="ctaGoldRight" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#e0c700" />
-          <stop offset="100%" stopColor="#c9a800" />
-        </linearGradient>
-        <linearGradient id="ctaGoldLeft" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#c9a800" />
-          <stop offset="100%" stopColor="#a88900" />
-        </linearGradient>
-      </defs>
-
-      <ellipse cx="200" cy="384" rx="150" ry="16" fill="#14346d" opacity="0.08" />
-      <ellipse cx="400" cy="384" rx="90" ry="12" fill="#14346d" opacity="0.08" />
-      <ellipse cx="520" cy="356" rx="70" ry="10" fill="#14346d" opacity="0.08" />
-
-      {/* connecting network */}
-      <path
-        d="M 240 260 Q 320 200 380 280"
-        stroke="#14346d"
-        strokeWidth="2"
-        strokeDasharray="2 8"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.35"
-      />
-      <path
-        d="M 420 270 Q 470 220 500 260"
-        stroke="#14346d"
-        strokeWidth="2"
-        strokeDasharray="2 8"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.35"
-      />
-      <circle cx="240" cy="260" r="4" fill="#f7dd00" />
-      <circle cx="380" cy="280" r="4" fill="#f7dd00" />
-      <circle cx="500" cy="260" r="4" fill="#f7dd00" />
-      <circle className="hc-scene-ping" cx="380" cy="280" r="4" fill="none" stroke="#14346d" strokeWidth="1.5" />
-
-      <g className="hc-scene-float">
-        {/* warehouse */}
-        <polygon points={warehouse.top} fill="url(#ctaNavyTop)" />
-        <polygon points={warehouse.rightFace} fill="url(#ctaNavyRight)" />
-        <polygon points={warehouse.leftFace} fill="url(#ctaNavyLeft)" />
-        <rect x="118" y="330" width="30" height="46" fill="#081a3d" opacity="0.7" />
-        <line x1="90" y1="300" x2="90" y2="230" stroke="#f7dd00" strokeWidth="2" opacity="0.7" />
-        <circle cx="90" cy="222" r="5" fill="#f7dd00" />
-
-        {/* truck */}
-        <polygon points={trailerBed.top} fill="url(#ctaNavyTop)" />
-        <polygon points={trailerBed.rightFace} fill="url(#ctaNavyRight)" />
-        <polygon points={trailerBed.leftFace} fill="url(#ctaNavyLeft)" />
-        <polygon points={trailerBox.top} fill="url(#ctaGoldTop)" />
-        <polygon points={trailerBox.rightFace} fill="url(#ctaGoldRight)" />
-        <polygon points={trailerBox.leftFace} fill="url(#ctaGoldLeft)" />
-        <polygon points={cab.top} fill="url(#ctaNavyTop)" />
-        <polygon points={cab.rightFace} fill="url(#ctaNavyRight)" />
-        <polygon points={cab.leftFace} fill="url(#ctaNavyLeft)" />
-        <circle cx="316" cy="372" r="9" fill="#0e2851" />
-        <circle cx="356" cy="372" r="9" fill="#0e2851" />
-        <circle cx="430" cy="372" r="9" fill="#0e2851" />
-        <circle cx="466" cy="372" r="9" fill="#0e2851" />
-
-        {/* container stack */}
-        <polygon points={boxA.top} fill="url(#ctaGoldTop)" />
-        <polygon points={boxA.rightFace} fill="url(#ctaGoldRight)" />
-        <polygon points={boxA.leftFace} fill="url(#ctaGoldLeft)" />
-        <polygon points={boxB.top} fill="url(#ctaNavyTop)" />
-        <polygon points={boxB.rightFace} fill="url(#ctaNavyRight)" />
-        <polygon points={boxB.leftFace} fill="url(#ctaNavyLeft)" />
-      </g>
-    </svg>
-  )
-}
-
