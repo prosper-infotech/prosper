@@ -332,7 +332,7 @@ export default function HomepageConcept() {
             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
             transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
-          <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] items-center">
+          <div className="relative max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[1fr_1fr] items-center">
             <div>
               <Reveal>
                 <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
@@ -340,7 +340,7 @@ export default function HomepageConcept() {
                 </span>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-5 text-lg sm:text-4xl md:text-[52px] font-extrabold leading-tight tracking-tight">
+                <h1 className="mt-5 text-lg sm:text-3xl md:text-4xl lg:text-[38px] font-extrabold leading-tight tracking-tight">
                   Automate and Optimize Your
                   <br />
                   <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
