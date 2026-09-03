@@ -391,7 +391,8 @@ export default function HomepageConcept() {
   useEffect(() => {
     const link = document.createElement('link')
     link.rel = 'stylesheet'
-    link.href = 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap'
+    link.href =
+      'https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap'
     document.head.appendChild(link)
     return () => link.remove()
   }, [])
@@ -405,7 +406,10 @@ export default function HomepageConcept() {
   return (
     <div
       className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]"
-      style={{ '--font-heading': "'Plus Jakarta Sans', 'Open Sans', sans-serif" }}
+      style={{
+        '--font-heading': "'Sora', 'Open Sans', sans-serif",
+        fontFamily: "'Inter', 'Open Sans', sans-serif",
+      }}
     >
       <div className="bg-primary text-white text-center text-xs font-semibold py-1.5 px-4">
         Concept layout for review &mdash; not the live homepage
