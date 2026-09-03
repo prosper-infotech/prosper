@@ -10,7 +10,7 @@ const FOOTER_COLUMNS = NAV.filter((item) => item.children).slice(0, 3)
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="border-t border-ink-300/60">
+    <footer className="border-t border-ink-300/60 bg-[#fff8dc]">
       <div className="max-w-7xl mx-auto px-6 py-16 grid gap-12 lg:grid-cols-[1.1fr_2fr]">
         <div>
           <Link to="/" className="inline-flex items-center">
