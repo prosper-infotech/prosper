@@ -38,7 +38,6 @@ const WMS = lazy(() => import('./pages/landing/WMS'))
 const AIPoweredCFS = lazy(() => import('./pages/landing/AIPoweredCFS'))
 const ForkliftVisionAI = lazy(() => import('./pages/landing/ForkliftVisionAI'))
 const ThankYou = lazy(() => import('./pages/landing/ThankYou'))
-const HomepageConcept = lazy(() => import('./pages/HomepageConcept'))
 const CategoryOverviewTemplate = lazy(() => import('./components/templates/CategoryOverviewTemplate'))
 const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageTemplate'))
 const SolutionDetailTemplate = lazy(() => import('./components/templates/SolutionDetailTemplate'))
@@ -135,7 +134,6 @@ function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/lp/thank-you" element={<ThankYou />} />
-        <Route path="/homepage-concept" element={<HomepageConcept />} />
         <Route element={<LandingLayout />}>
           <Route path="/lp/as400-development" element={<AS400Development />} />
           <Route path="/lp/asset-tracking" element={<AssetTracking />} />
