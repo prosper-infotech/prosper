@@ -10,9 +10,6 @@ const PRIMARY_STYLE =
 const VARIANTS = {
   primary: PRIMARY_STYLE,
   'primary-dark': PRIMARY_STYLE,
-  // Solid navy fill — for light/gold backgrounds that need a stronger anchor than outline-dark
-  solid:
-    'bg-primary text-white shadow-md hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
   // Secondary ghost — subtle, for dark backgrounds
   outline:
     'bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
