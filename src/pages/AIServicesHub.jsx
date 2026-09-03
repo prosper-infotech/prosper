@@ -91,7 +91,10 @@ export default function AIServicesHub() {
     <>
       <Breadcrumb title="AI Software Development" parent="Services" parentPath="/services" />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary-dark to-navy">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-navy to-[#081a3d]">
+        <div className="pointer-events-none absolute -top-16 -right-10 h-72 w-72 rounded-full bg-gold/25 blur-[110px]" />
+        <div className="pointer-events-none absolute top-1/2 left-1/3 h-64 w-64 -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
+        <div className="pointer-events-none absolute -bottom-16 -left-10 h-64 w-64 rounded-full bg-[#3a5a99]/40 blur-[110px]" />
         <NeuralBackground />
         <div className="relative max-w-4xl mx-auto px-6 py-16 text-center">
           <Reveal className="flex flex-col items-center gap-5">

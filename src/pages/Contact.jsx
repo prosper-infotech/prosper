@@ -122,8 +122,10 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
-        <div className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-3xl" />
+      <section className="relative bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] overflow-hidden">
+        <div className="pointer-events-none absolute -top-16 -right-10 h-72 w-72 rounded-full bg-gold/25 blur-[110px]" />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
+        <div className="pointer-events-none absolute -bottom-16 -left-10 h-64 w-64 rounded-full bg-[#3a5a99]/40 blur-[110px]" />
         <div className="relative max-w-3xl mx-auto px-6 py-16 text-center">
           <Reveal>
             <p className="text-xl md:text-2xl font-heading font-semibold text-white leading-relaxed">

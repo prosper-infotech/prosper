@@ -74,17 +74,18 @@ export default function About() {
     <>
       <Breadcrumb title="About Us" />
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
+      <section className="relative bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] overflow-hidden">
         <motion.div
-          className="pointer-events-none absolute top-0 right-0 h-80 w-80 rounded-full bg-gold/10 blur-3xl"
+          className="pointer-events-none absolute top-0 right-0 h-80 w-80 rounded-full bg-gold/25 blur-[110px]"
           animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-white/5 blur-3xl"
+          className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-gold-dark/15 blur-[100px]"
           animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
+        <div className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3a5a99]/40 blur-[110px]" />
         <div className="relative max-w-4xl mx-auto px-6 py-20 text-center">
           <Reveal className="flex flex-col items-center gap-5">
             <span className="text-gold text-sm font-semibold uppercase tracking-widest">
