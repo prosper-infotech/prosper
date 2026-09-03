@@ -6,12 +6,14 @@ import WhatsAppButton from './WhatsAppButton'
 import FloatingCallButton from './FloatingCallButton'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import useScrollToHash from '../../hooks/useScrollToHash'
+import useScrollToTop from '../../hooks/useScrollToTop'
 
 export default function Layout() {
   const location = useLocation()
   const element = useOutlet()
   useAnalyticsPageView()
   useScrollToHash()
+  useScrollToTop()
 
   return (
     <div className="min-h-screen flex flex-col">
