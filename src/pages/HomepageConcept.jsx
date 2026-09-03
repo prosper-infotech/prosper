@@ -340,7 +340,7 @@ export default function HomepageConcept() {
                 </span>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-5 text-lg sm:text-3xl md:text-4xl lg:text-[52px] font-extrabold leading-tight tracking-tight">
+                <h1 className="mt-5 text-3xl sm:text-4xl lg:text-[52px] font-extrabold leading-tight tracking-tight">
                   Automate and Optimize Your
                   <br />
                   <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
