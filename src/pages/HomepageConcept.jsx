@@ -10,6 +10,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle'
 import logo from '../assets/logo-light.png'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
+import gateVisionImg from '../assets/gate vision ai.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
@@ -70,6 +71,13 @@ const PRODUCTS = [
     img: wmsImg,
     desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
     to: '/lp/wms',
+  },
+  {
+    name: 'GateVision',
+    tag: 'Gate & OCR',
+    img: gateVisionImg,
+    desc: 'AI cameras and OCR automate gate check-in, container scanning and access control — no manual logging.',
+    to: '/solutions/gate-yard-dock-vision-ai',
   },
   {
     name: 'ContainerVision',
