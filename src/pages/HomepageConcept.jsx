@@ -340,7 +340,7 @@ export default function HomepageConcept() {
               </Reveal>
               <Reveal delay={0.08}>
                 <h1 className="mt-5 text-4xl md:text-[52px] font-extrabold leading-tight tracking-tight">
-                  Automate your
+                  Automate and Optimize Your
                   <br />
                   <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
                     <AnimatePresence mode="wait">
@@ -356,7 +356,7 @@ export default function HomepageConcept() {
                       </motion.span>
                     </AnimatePresence>
                   </span>
-                  with our AI platform
+                  with our AI+EdgeBox Platform
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
