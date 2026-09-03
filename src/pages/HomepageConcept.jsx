@@ -168,14 +168,27 @@ function NavDropdown({ item, align }) {
 }
 
 function ConceptHeader() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 bg-[#fffdf6]/90 backdrop-blur-md border-b border-ink-300/40">
-      <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between gap-6">
+    <header
+      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+        scrolled ? 'bg-[#fffdf6]/90 backdrop-blur-md border-ink-300/40' : 'bg-transparent border-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-6 flex items-center gap-6">
         <Link to="/" className="shrink-0">
           <img src={logo} alt="Prosper Infotech" className="h-11 w-auto" />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1 ml-auto">
           {NAV_ITEMS.map((item, i) => (
             <div key={item.path} className="group relative">
               <Link
@@ -328,11 +341,6 @@ export default function HomepageConcept() {
             className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl"
             animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="pointer-events-none absolute bottom-[-140px] left-[-100px] h-[380px] w-[380px] rounded-full bg-primary/10 blur-3xl"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.9, 0.5] }}
-            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
           <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
             <div className="md:flex-1">
