@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, ArrowRight, Phone, MapPin } from 'lucide-react'
+import { ChevronDown, ArrowRight, Phone, MapPin, Menu, X } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import { NAV } from '../data/navigation'
@@ -194,6 +194,8 @@ function NavDropdown({ item, align }) {
 
 function ConceptHeader() {
   const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [openAccordion, setOpenAccordion] = useState(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -202,14 +204,22 @@ function ConceptHeader() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!mobileOpen) return
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'bg-[#fffdf6]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-transparent'
+        scrolled || mobileOpen ? 'bg-[#fffdf6]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center gap-6">
-        <Link to="/" className="shrink-0">
+        <Link to="/" className="shrink-0" onClick={() => setMobileOpen(false)}>
           <img src={logo} alt="Prosper Infotech" className="h-11 w-auto" />
         </Link>
 
@@ -240,7 +250,72 @@ function ConceptHeader() {
           Book A Demo
           <ArrowRight className="h-4 w-4" />
         </Link>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink-900/20 text-ink-900 lg:hidden"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
+
+      {mobileOpen && (
+        <div className="max-h-[calc(100vh-88px)] overflow-y-auto border-t border-ink-300/40 bg-[#fffdf6] px-6 py-4 lg:hidden">
+          <nav className="flex flex-col">
+            {NAV_ITEMS.map((item) => (
+              <div key={item.path} className="border-b border-ink-300/40 last:border-b-0">
+                <div className="flex items-center justify-between">
+                  <Link
+                    to={item.path}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex-1 py-3 text-[15px] font-medium text-ink-900"
+                  >
+                    {item.label}
+                  </Link>
+                  {item.children && (
+                    <button
+                      type="button"
+                      onClick={() => setOpenAccordion((cur) => (cur === item.path ? null : item.path))}
+                      aria-label={`Toggle ${item.label} submenu`}
+                      className="flex h-10 w-10 items-center justify-center text-ink-500"
+                    >
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${openAccordion === item.path ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                  )}
+                </div>
+                {item.children && openAccordion === item.path && (
+                  <ul className="flex flex-col gap-1 pb-3 pl-4">
+                    {item.children.map((child) => (
+                      <li key={child.path}>
+                        <Link
+                          to={child.path}
+                          onClick={() => setMobileOpen(false)}
+                          className="block py-1.5 text-sm text-ink-600 hover:text-primary"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </nav>
+          <Link
+            to="/contact"
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 flex items-center justify-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900"
+          >
+            Book A Demo
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      )}
     </header>
   )
 }
