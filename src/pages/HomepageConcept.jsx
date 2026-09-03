@@ -11,6 +11,7 @@ import logo from '../assets/logo-light.png'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
 import gateVisionImg from '../assets/gate vision ai.png'
+import videoAttendanceImg from '../assets/video based system.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
@@ -94,7 +95,7 @@ const PRODUCTS = [
     to: '/lp/forklift-vision-ai',
   },
   {
-    name: 'Tracking',
+    name: 'Asset Tracking',
     tag: 'RFID & GPS',
     img: assetTrackingImg,
     desc: 'RFID, GPS, BLE and LoRaWAN trackers feed one live dashboard, across the yard, warehouse and road.',
@@ -106,6 +107,13 @@ const PRODUCTS = [
     img: as400Img,
     desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
     to: '/lp/as400-development',
+  },
+  {
+    name: 'Video Attendance',
+    tag: 'Workforce',
+    img: videoAttendanceImg,
+    desc: 'Facial-recognition check-in replaces manual logs and buddy-punching with a live, auditable attendance record.',
+    to: '/products/software#video-attendance',
   },
 ]
 
