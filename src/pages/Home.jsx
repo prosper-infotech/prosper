@@ -1,138 +1,88 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-  ChevronDown,
-  ArrowRight,
-  Phone,
-  MapPin,
-  Menu,
-  X,
-  Warehouse,
-  Boxes,
-  Truck,
-  Radio,
-  Tag,
-  Cpu,
-  Eye,
-  Users,
-  Gauge,
-  ShieldCheck,
-  Lock,
-  Cloud,
-} from 'lucide-react'
+import { ChevronDown, ArrowRight, Phone, MapPin, Menu, X } from 'lucide-react'
 import Button from '../components/ui/Button'
-import SectionHeading from '../components/ui/SectionHeading'
-import ServiceCard from '../components/ui/ServiceCard'
-import StatCounter from '../components/ui/StatCounter'
-import ClientShowcase from '../components/ui/ClientShowcase'
+import Reveal from '../components/motion/Reveal'
 import WhatsAppButton from '../components/layout/WhatsAppButton'
 import FloatingCallButton from '../components/layout/FloatingCallButton'
-import { SHOW_CLIENTS } from '../data/clients'
-import CTABand from '../components/ui/CTABand'
-import Reveal from '../components/motion/Reveal'
 import { NAV } from '../data/navigation'
 import { SOCIAL_LINKS } from '../data/socialLinks'
 import { OFFICES } from '../data/offices'
-import { REGIONS, WHY_CHOOSE } from '../data/company'
-import { FLAG_COMPONENTS } from '../components/ui/RegionFlags'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import useAnalyticsPageView from '../hooks/useAnalyticsPageView'
 import useScrollToHash from '../hooks/useScrollToHash'
 import logo from '../assets/logo-light.png'
-import visionAISuiteImg from '../assets/new homepage image.png'
 import wmsImg from '../assets/prosper wms.png'
-import dockVisionImg from '../assets/dock vision.png'
-import gateVisionImg from '../assets/gate vision ai.png'
 import containerVisionImg from '../assets/container vision ai.png'
+import gateVisionImg from '../assets/gate vision ai.png'
+import videoAttendanceImg from '../assets/video based system.png'
+import dockVisionImg from '../assets/dock vision.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
-import videoAttendanceImg from '../assets/video based system.png'
+import visionAISuiteImg from '../assets/new homepage image.png'
+import ctaSuiteImg from '../assets/Ready to streamlime.png'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
 const PRODUCTS = [
   {
     name: 'WMS',
+    tag: 'Warehouse',
     img: wmsImg,
     desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
     to: '/lp/wms',
   },
   {
     name: 'DockVision',
+    tag: 'Dock & Loading',
     img: dockVisionImg,
     desc: 'AI cameras monitor every dock door, confirming safe loading and unloading without manual checks.',
     to: '/products/software#dockvision-ai',
   },
   {
     name: 'GateVision',
+    tag: 'Gate & OCR',
     img: gateVisionImg,
     desc: 'AI cameras and OCR automate gate check-in, container scanning and access control — no manual logging.',
     to: '/solutions/gate-yard-dock-vision-ai',
   },
   {
     name: 'ContainerVision',
+    tag: 'Container Terminals',
     img: containerVisionImg,
     desc: 'AI cameras, OCR and GPS/RTK automate gate, yard and reach-stacker workflows — gate to departure.',
     to: '/lp/ai-powered-cfs',
   },
   {
     name: 'Forklift',
+    tag: 'Pallet & Location',
     img: forkliftVisionImg,
     desc: '8MP cameras, 3D depth sensing and Edge AI mounted on your forklifts confirm every pallet and location.',
     to: '/lp/forklift-vision-ai',
   },
   {
     name: 'Asset Tracking',
+    tag: 'RFID & GPS',
     img: assetTrackingImg,
     desc: 'RFID, GPS, BLE and LoRaWAN trackers feed one live dashboard, across the yard, warehouse and road.',
     to: '/lp/asset-tracking',
   },
   {
     name: 'AS400',
+    tag: 'IBM i / AS400',
     img: as400Img,
     desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
     to: '/lp/as400-development',
   },
   {
     name: 'Video Attendance',
+    tag: 'Workforce',
     img: videoAttendanceImg,
     desc: 'Facial-recognition check-in replaces manual logs and buddy-punching with a live, auditable attendance record.',
     to: '/products/software#video-attendance',
   },
-]
-
-const TRUST_ITEMS = [
-  { icon: Eye, label: 'Real-Time Visibility' },
-  { icon: Gauge, label: 'Operational Efficiency' },
-  { icon: ShieldCheck, label: 'Safety & Compliance' },
-  { icon: Lock, label: 'Scalable & Secure' },
-  { icon: Cloud, label: 'Cloud & Edge Ready' },
-]
-
-const solutions = NAV.find((item) => item.label === 'Solutions').children
-const industries = NAV.find((item) => item.label === 'Industries').children
-
-const HOME_ICONS = {
-  'Warehouse Solutions': Warehouse,
-  'Yard Solutions': Boxes,
-  'Fleet Management': Truck,
-  'RFID & GPS Solutions': Radio,
-  'Asset Tracking': Tag,
-  'Industrial IoT': Cpu,
-  'AI & Computer Vision': Eye,
-  'Workforce Management': Users,
-}
-
-const featuredSolutions = solutions.filter((s) => HOME_ICONS[s.label])
-
-// Placeholder figures — replace with verified numbers before launch.
-const STATS = [
-  { value: '15+', label: 'Years of Engineering Experience' },
-  { value: '500+', label: 'Devices Deployed' },
-  { value: '50+', label: 'Enterprise Clients' },
-  { value: '24/7', label: 'Support Coverage' },
 ]
 
 const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/' && item.label !== 'Industries').map(
@@ -453,11 +403,12 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden">
+    <div className="min-h-screen flex flex-col overflow-x-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
       <HomeHeader />
 
       <main className="flex-1">
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc] pt-6 pb-10">
+        {/* Hero */}
+        <section className="relative overflow-hidden pt-6 pb-10">
           <motion.div
             className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl"
             animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
@@ -497,19 +448,12 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.16}>
                 <p className="mt-5 text-base text-ink-600 max-w-lg">
-                  We help transform warehouses, yards, fleets and container terminals by enhancing
-                  efficiency, capacity and real-time visibility across every operation.
+                  We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
                 </p>
               </Reveal>
               <Reveal delay={0.24}>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <Button
-                    href="https://calendly.com/prosperinfotech-sales/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="primary"
-                    className="hover:scale-105"
-                  >
+                  <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
                     Book a Demo
                   </Button>
                   <Button to="/solutions" variant="outline-dark" className="hover:scale-105">
@@ -529,34 +473,16 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-navy border-y border-white/5">
-          <div className="max-w-7xl mx-auto px-6 py-9 grid gap-y-4 grid-cols-2 md:grid-cols-5">
-            {TRUST_ITEMS.map(({ icon: Icon, label }, i) => (
-              <div
-                key={label}
-                className={`flex items-center justify-center gap-2 text-center md:justify-start md:px-4 ${
-                  i > 0 ? 'md:border-l md:border-white/10' : ''
-                }`}
-              >
-                <Icon className="h-4.5 w-4.5 shrink-0 text-gold" />
-                <span className="text-xs font-semibold text-white">{label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        {/* Product suite */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <Reveal className="mb-12">
               <span className="text-primary text-sm font-semibold uppercase tracking-widest border-b-2 border-gold-dark pb-2 inline-block">
                 Our Platform
               </span>
-              <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px] md:whitespace-nowrap">
-                One AI platform. Every operation, automated.
-              </h2>
+              <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px] md:whitespace-nowrap">One AI platform. Every operation, automated.</h2>
               <p className="mt-3 max-w-2xl text-ink-600 text-lg">
-                Purpose-built products, engineered on AI, computer vision and RFID/GPS — each
-                solving one part of your operation end to end.
+                Five purpose-built products, engineered on AI, computer vision and RFID/GPS &mdash; each solving one part of your operation end to end.
               </p>
             </Reveal>
 
@@ -592,8 +518,7 @@ export default function Home() {
                 <div className="flex h-full flex-col rounded-[22px] bg-gradient-to-br from-primary to-primary-dark p-6 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(20,52,109,0.5)]">
                   <h3 className="text-[22px] font-extrabold leading-tight">Not sure where to start?</h3>
                   <p className="mt-2 text-sm text-white/75">
-                    Tell us about your warehouse, yard or terminal and we&rsquo;ll map the right
-                    products to your operation — free consultation, no obligation.
+                    Tell us about your warehouse, yard or terminal and we&rsquo;ll map the right products to your operation &mdash; free consultation, no obligation.
                   </p>
                   <Button
                     href="https://calendly.com/prosperinfotech-sales/30min"
@@ -610,147 +535,48 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative bg-surface-alt overflow-hidden">
-          <div className="pointer-events-none absolute top-1/2 left-0 h-72 w-72 -translate-x-1/3 -translate-y-1/2 rounded-full bg-gold/10 blur-3xl" />
-          <div className="relative max-w-7xl mx-auto px-6 py-20">
-            <div className="grid gap-12 lg:grid-cols-2 items-center">
-              <Reveal>
-                <div className="relative">
-                  <div className="pointer-events-none absolute -inset-3 rounded-2xl border border-gold/20" />
-                  <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-                    <iframe
-                      className="w-full h-full"
-                      src="https://www.youtube.com/embed/aU3I6Tw6S5I?autoplay=1&mute=1&playsinline=1"
-                      title="About Prosper Infotech"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    />
-                  </div>
-                </div>
-              </Reveal>
-              <Reveal delay={0.15} className="flex flex-col gap-5">
-                <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-                  Who We Are
-                </span>
-                <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
-                  Engineering AI, IoT &amp; Logistics Solutions for Real-World Operations
-                </h2>
-                <p className="text-ink-600 text-lg">
-                  For more than a decade, Prosper Infotech has been designing, developing,
-                  integrating, and supporting technology solutions for logistics, warehousing,
-                  transportation, CFS/container terminals, manufacturing, and enterprise
-                  operations.
-                </p>
-                <p className="text-ink-600 text-lg">
-                  Our engineering teams across the USA, India, and Japan bring together deep
-                  expertise in Artificial Intelligence, Computer Vision, OCR, RFID, GPS/RTK,
-                  Industrial IoT, Edge Computing, cloud platforms, and enterprise software
-                  development.
-                </p>
-                <p className="text-ink-600 text-lg">
-                  From intelligent gates and yards to warehouses, docks, forklifts, containers,
-                  assets, and legacy enterprise systems, we help customers connect physical
-                  operations with real-time digital intelligence.
-                </p>
-                <Button to="/about" variant="primary-dark" className="self-start mt-2">
-                  Learn more about us
+        {/* Solutions gallery */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-[1fr_0.85fr] items-center">
+            <Reveal>
+              <span className="text-primary text-sm font-semibold uppercase tracking-widest border-b-2 border-gold-dark pb-2 inline-block">
+                Our Solutions
+              </span>
+              <h2 className="mt-6 text-3xl md:text-[42px] md:leading-[1.22] font-extrabold">
+                Our solutions are engineered to transform your operations into AI-smart workflows
+              </h2>
+              <p className="mt-6 text-lg text-ink-600 max-w-md">
+                Harness the power of our AI platform &mdash; built on <b className="text-ink-900 font-bold">computer vision, RFID and GPS</b> &mdash; for solutions that are comprehensive and tailored to your operation.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3.5">
+                <Button to="/solutions" variant="outline-dark">
+                  Discover Our Solutions
                 </Button>
-              </Reveal>
-            </div>
-          </div>
-        </section>
+                <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary">
+                  Book a Demo
+                </Button>
+              </div>
+            </Reveal>
 
-        <section className="bg-white">
-          <div className="max-w-6xl mx-auto px-6 pt-20 pb-16">
-            <SectionHeading title="Global Engineering. Local Accountability." className="mb-12" />
-            <div className="grid gap-6 sm:grid-cols-3">
-              {REGIONS.map(({ flagKey, country, description }, i) => {
-                const Flag = FLAG_COMPONENTS[flagKey]
-                return (
-                  <Reveal key={country} delay={i * 0.1}>
-                    <div className="h-full flex items-start gap-4 rounded-2xl border border-ink-300 bg-white p-6 shadow-sm hover:-translate-y-1.5 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                      <Flag />
-                      <div>
-                        <h3 className="font-heading font-bold text-lg text-primary">{country}</h3>
-                        <p className="mt-1.5 text-sm text-ink-600">{description}</p>
-                      </div>
-                    </div>
-                  </Reveal>
-                )
-              })}
-            </div>
-
-            <Reveal className="mt-12">
-              <div className="rounded-2xl bg-gradient-to-b from-primary-dark to-navy border border-white/10 shadow-xl overflow-hidden">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                  {WHY_CHOOSE.map((item, i) => {
-                    const Icon = item.icon
-                    return (
-                      <div
-                        key={item.title}
-                        className={`flex flex-col items-center text-center gap-3 px-6 py-10 ${
-                          i > 0 ? 'lg:border-l lg:border-white/10' : ''
-                        }`}
-                      >
-                        <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-gold/60 text-gold">
-                          <Icon className="h-7 w-7" />
-                        </span>
-                        <h3 className="font-heading font-bold text-lg text-white">{item.title}</h3>
-                        <p className="text-sm text-white/70">{item.description}</p>
-                      </div>
-                    )
-                  })}
+            <Reveal delay={0.15}>
+              <div className="relative mx-auto w-full max-w-[400px] aspect-[4/5]">
+                <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(8deg) translate(26px, -6px)' }} />
+                <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(4deg) translate(13px, -3px)' }} />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3.5 rounded-[26px] border-2 border-dashed border-primary/30 bg-gradient-to-br from-[#fffdf3] to-[#fff1c4] p-8 text-center shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-11 w-11 text-ink-500 opacity-45">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="M21 15l-5-5L5 21" />
+                  </svg>
+                  <span className="text-sm font-bold text-primary">Solutions gallery</span>
+                  <small className="text-xs text-ink-500">Real site &mdash; drop in operation photos here</small>
                 </div>
               </div>
             </Reveal>
           </div>
         </section>
 
-        <section className="bg-navy py-14 overflow-hidden">
-          <p className="text-center text-xs md:text-sm font-semibold uppercase tracking-widest text-ink-300 mb-8 px-6">
-            Industries We Work With
-          </p>
-          <div
-            className="relative overflow-hidden"
-            style={{
-              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-            }}
-          >
-            <div className="flex w-max animate-marquee items-center gap-12 md:gap-16">
-              {[...industries, ...industries].map((industry, i) => (
-                <span key={i} className="flex items-center gap-12 md:gap-16 whitespace-nowrap">
-                  <span className="text-lg md:text-xl font-heading font-semibold text-white/70">
-                    {industry.label}
-                  </span>
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold/50" />
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="max-w-7xl mx-auto px-6 py-20">
-          <SectionHeading eyebrow="What we do" title="Solutions built for your operation" />
-          <div className="mt-12 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredSolutions.map((s, i) => (
-              <Reveal key={s.path} delay={(i % 4) * 0.08}>
-                <ServiceCard
-                  icon={HOME_ICONS[s.label]}
-                  title={s.label}
-                  description={s.description}
-                  to={s.path}
-                />
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-10 text-center">
-            <Button to="/solutions" variant="primary-dark">
-              View all Solutions
-            </Button>
-          </Reveal>
-        </section>
-
+        {/* Stats */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <Reveal>
@@ -771,9 +597,15 @@ export default function Home() {
                   </h2>
 
                   <div className="grid grid-cols-2 gap-x-10 gap-y-10">
-                    {STATS.map((stat) => (
-                      <div key={stat.label}>
-                        <StatCounter value={stat.value} label={stat.label} />
+                    {[
+                      ['15+', 'Years of Engineering Experience'],
+                      ['500+', 'Devices Deployed'],
+                      ['50+', 'Enterprise Clients'],
+                      ['24/7', 'Support Coverage'],
+                    ].map(([value, label]) => (
+                      <div key={label}>
+                        <div className="text-4xl md:text-5xl font-extrabold text-white">{value}</div>
+                        <div className="mt-2 text-sm text-white/70">{label}</div>
                       </div>
                     ))}
                   </div>
@@ -783,19 +615,39 @@ export default function Home() {
           </div>
         </section>
 
-        {SHOW_CLIENTS && (
-          <section className="max-w-5xl mx-auto px-6 py-20">
-            <SectionHeading eyebrow="Trusted by" title="Clients who rely on us" />
-            <div className="mt-12">
-              <ClientShowcase />
-            </div>
-          </section>
-        )}
-
-        <CTABand
-          title="Ready to get accurate, real-time visibility?"
-          description="Talk to our team about RFID, GPS, and IoT solutions built for your operation."
-        />
+        {/* Closing CTA */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <Reveal>
+              <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#fffdf0] via-[#fff3c4] to-[#ffe58a] px-8 py-12 md:px-14 md:py-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
+                <div>
+                  <h2 className="text-3xl md:text-[40px] font-extrabold leading-tight text-primary">
+                    Ready to Streamline
+                    <br />
+                    Your Operations?
+                  </h2>
+                  <p className="mt-4 max-w-md text-lg text-ink-600">
+                    We&rsquo;re here to help transform your operations with a bespoke solution, engineered to address your unique warehouse, yard, fleet and terminal challenges.
+                  </p>
+                  <a
+                    href="https://calendly.com/prosperinfotech-sales/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-primary-dark"
+                  >
+                    Book A Demo
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+                <img
+                  src={ctaSuiteImg}
+                  alt="Prosper Vision AI suite connected across a warehouse, gate, yard, container terminal and AS400 modernization services"
+                  className="w-full"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </section>
       </main>
 
       <HomeFooter />
