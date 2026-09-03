@@ -94,6 +94,7 @@ export default function AIServiceDetailTemplate({ detail }) {
         parent="AI Software Development"
         parentPath="/services/ai-software-development"
         icon={Icon}
+        description={seoDescription}
       />
 
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-4 text-center">

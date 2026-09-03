@@ -17,7 +17,13 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
 
   return (
     <>
-      <Breadcrumb title={title} parent={parentLabel} parentPath={parentPath} icon={icons?.[path]} />
+      <Breadcrumb
+        title={title}
+        parent={parentLabel}
+        parentPath={parentPath}
+        icon={icons?.[path]}
+        description={detail.metaDescription}
+      />
 
       <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
         <div className="sticky top-[92px] z-30 border-b border-gold-dark/20 bg-[#fffdf6]/95 backdrop-blur-sm">
