@@ -340,8 +340,10 @@ export default function HomepageConcept() {
                 </span>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-5 text-3xl sm:text-4xl lg:text-[52px] font-extrabold leading-tight tracking-tight">
-                  Automate and Optimize Your
+                <h1 className="mt-5 text-2xl sm:text-3xl lg:text-[42px] font-extrabold leading-tight tracking-tight">
+                  Automate and
+                  <br />
+                  Optimize Your
                   <br />
                   <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
                     <AnimatePresence mode="wait">
@@ -357,11 +359,13 @@ export default function HomepageConcept() {
                       </motion.span>
                     </AnimatePresence>
                   </span>
-                  with our AI+EdgeBox Platform
+                  with our
+                  <br />
+                  AI+EdgeBox Platform
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
-                <p className="mt-5 text-lg text-ink-600 max-w-lg">
+                <p className="mt-5 text-base text-ink-600 max-w-lg">
                   We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
                 </p>
               </Reveal>
@@ -377,7 +381,7 @@ export default function HomepageConcept() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.2} className="lg:w-[380px] lg:shrink-0">
+            <Reveal delay={0.2} className="lg:w-[480px] lg:shrink-0">
               <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
