@@ -101,7 +101,9 @@ const PRODUCTS = [
   },
 ]
 
-const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/')
+const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/' && item.label !== 'Industries').map(
+  (item) => (item.label === 'Resources' ? { ...item, label: 'Company' } : item)
+)
 
 function NavDropdown({ item, align }) {
   const groups = item.children
@@ -170,7 +172,7 @@ function ConceptHeader() {
     <header className="sticky top-0 z-50 bg-[#fffdf6]/90 backdrop-blur-md border-b border-ink-300/40">
       <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between gap-6">
         <Link to="/" className="shrink-0">
-          <img src={logo} alt="Prosper Infotech" className="h-14 w-auto" />
+          <img src={logo} alt="Prosper Infotech" className="h-11 w-auto" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -385,7 +387,7 @@ export default function HomepageConcept() {
               <img
                 src={visionAISuiteImg}
                 alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
-                className="w-full drop-shadow-2xl"
+                className="w-full"
               />
             </Reveal>
           </div>
