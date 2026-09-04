@@ -180,12 +180,10 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
-            <motion.img
+            <img
               src={visionAISuiteImg}
               alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
               className="w-full"
-              animate={{ y: [0, -14, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             />
           </Reveal>
         </div>
