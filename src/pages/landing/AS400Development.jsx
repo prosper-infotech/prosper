@@ -275,10 +275,10 @@ export default function AS400Development() {
         <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/20 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1fr_0.95fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
-            <h1 className="text-primary text-4xl md:text-5xl leading-tight">
+            <h1 className="text-primary text-3xl md:text-4xl leading-tight">
               24x7x365 <span className="text-gold-dark">Dedicated Support</span>
             </h1>
-            <p className="text-2xl md:text-3xl font-heading font-bold leading-snug">
+            <p className="text-xl md:text-2xl font-heading font-bold leading-snug">
               <span className="text-primary">AS400 (IBM i) </span>
               <span className="text-gold-dark">Consulting</span>
               <span className="text-primary">, Development &amp; Support</span>

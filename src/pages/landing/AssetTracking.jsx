@@ -180,10 +180,10 @@ export default function AssetTracking() {
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
               RFID + GPS + AI Asset Visibility
             </span>
-            <h1 className="text-primary text-4xl md:text-5xl leading-tight">
+            <h1 className="text-primary text-3xl md:text-4xl leading-tight">
               Prosper <span className="text-gold-dark">Asset Tracking</span>
             </h1>
-            <p className="text-2xl md:text-3xl font-heading font-bold leading-snug text-primary">
+            <p className="text-xl md:text-2xl font-heading font-bold leading-snug text-primary">
               Real-Time Tracking, Alerts &amp; Control for Every Asset
             </p>
             <p className="text-ink-600 text-lg max-w-xl">

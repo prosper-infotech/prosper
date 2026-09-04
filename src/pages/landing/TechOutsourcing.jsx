@@ -448,10 +448,10 @@ export default function TechOutsourcing() {
               US-Coordinated Delivery &bull; Global Engineering &bull; Logistics-Focused
             </span>
 
-            <h1 className={`${HEADING_FONT} ${NAVY} text-4xl md:text-5xl font-bold leading-tight`}>
+            <h1 className={`${HEADING_FONT} ${NAVY} text-3xl md:text-4xl font-bold leading-tight`}>
               Build Logistics Technology Faster with <span className="text-gold-dark">AI, IoT &amp; Automation</span> Engineers
             </h1>
-            <p className={`${HEADING_FONT} ${NAVY} relative inline-block text-xl md:text-2xl font-bold leading-snug`}>
+            <p className={`${HEADING_FONT} ${NAVY} relative inline-block text-lg md:text-xl font-bold leading-snug`}>
               Technology Resource Outsourcing &amp; Product Engineering for Real-World Logistics Operations
               <span className="absolute -bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-gold-dark" />
             </p>
