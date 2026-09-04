@@ -271,28 +271,19 @@ export default function AS400Development() {
         ]}
       />
 
-      <section className="relative bg-gradient-to-b from-primary-dark to-navy overflow-hidden">
-        <motion.div
-          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
-          animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
-          animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
+      <section className="relative bg-gradient-to-b from-[#fffdf6] to-[#fff8dc] overflow-hidden">
+        <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/20 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
-            <h1 className="text-white text-4xl md:text-5xl leading-tight">
-              24x7x365 <span className="text-gold">Dedicated Support</span>
+            <h1 className="text-primary text-4xl md:text-5xl leading-tight">
+              24x7x365 <span className="text-gold-dark">Dedicated Support</span>
             </h1>
             <p className="text-2xl md:text-3xl font-heading font-bold leading-snug">
-              <span className="text-white">AS400 (IBM i) </span>
-              <span className="text-gold">Consulting</span>
-              <span className="text-white">, Development &amp; Support</span>
+              <span className="text-primary">AS400 (IBM i) </span>
+              <span className="text-gold-dark">Consulting</span>
+              <span className="text-primary">, Development &amp; Support</span>
             </p>
-            <p className="text-white/80 text-lg max-w-xl">
+            <p className="text-ink-600 text-lg max-w-xl">
               A specialized AS400 / IBM i consulting and development team already serving live
               enterprise environments — assessments, RPG/RPGLE builds, enhancements, and
               modernization delivered by a US-coordinated, offshore-backed team.
@@ -319,7 +310,7 @@ export default function AS400Development() {
               </div>
               <Button
                 href={`tel:${usaPhone.replace(/\s+/g, '')}`}
-                variant="outline"
+                variant="outline-dark"
                 icon={false}
                 onClick={() =>
                   window.gtag?.('event', 'click_to_call', { event_category: 'AS400 Landing Page' })
@@ -339,7 +330,7 @@ export default function AS400Development() {
                 onClick={() =>
                   window.gtag?.('event', 'click_whatsapp', { event_category: 'AS400 Landing Page (Hero)' })
                 }
-                className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/15 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#25D366]/25 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-[#128C4A] shadow-md transition-all duration-200 hover:bg-[#25D366]/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
               >
                 <svg viewBox="0 0 32 32" className="h-4 w-4 fill-[#25D366]" aria-hidden="true">
                   <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.702 4.607 1.912 6.472L4 29l7.72-1.876A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.83-.562-5.4-1.535l-.387-.23-4.583 1.114 1.13-4.47-.253-.398A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.94-8.144c-.325-.163-1.925-.95-2.223-1.058-.298-.109-.516-.163-.733.163-.217.325-.842 1.058-1.033 1.276-.19.217-.38.244-.706.081-.325-.163-1.374-.506-2.617-1.612-.968-.862-1.622-1.927-1.812-2.252-.19-.325-.02-.5.143-.663.147-.146.325-.38.488-.57.163-.19.217-.325.325-.543.109-.217.054-.407-.027-.57-.081-.163-.733-1.765-1.004-2.417-.264-.635-.532-.55-.733-.56l-.625-.011c-.217 0-.57.081-.868.407-.298.325-1.137 1.112-1.137 2.712 0 1.6 1.164 3.147 1.326 3.364.163.217 2.29 3.497 5.55 4.904.775.335 1.38.535 1.852.684.778.247 1.486.212 2.046.129.624-.093 1.925-.787 2.196-1.547.271-.76.271-1.412.19-1.548-.081-.135-.298-.216-.624-.38Z" />
@@ -352,7 +343,7 @@ export default function AS400Development() {
                   window.gtag?.('event', 'click_chat', { event_category: 'AS400 Landing Page (Hero)' })
                   window.Tawk_API?.maximize?.()
                 }}
-                className="inline-flex items-center gap-2 rounded-lg bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
               >
                 <MessageCircle className="h-4 w-4" />
                 Chat
@@ -365,9 +356,9 @@ export default function AS400Development() {
                 return (
                   <span
                     key={badge.label}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/5 border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 rounded-lg bg-white border border-gold-dark/25 px-4 py-2.5 text-sm font-semibold text-ink-700 shadow-sm transition-all duration-300 hover:border-gold-dark/50 hover:-translate-y-0.5"
                   >
-                    <Icon className="h-4 w-4 text-gold" />
+                    <Icon className="h-4 w-4 text-gold-dark" />
                     {badge.label}
                   </span>
                 )
@@ -386,7 +377,7 @@ export default function AS400Development() {
                 <img src={as400Hero} alt="Isometric render of Prosper AS400 / IBM i development and support" className="w-full" />
               </div>
               <motion.span
-                className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"
+                className="absolute -top-3 left-2 z-20 rounded-full bg-white backdrop-blur-sm border border-gold-dark/25 shadow-sm px-4 py-2 text-sm font-semibold text-primary"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
               >

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Mail, Phone } from 'lucide-react'
 import { Link, useOutlet } from 'react-router-dom'
-import logo from '../../assets/logo-dark.png'
+import logo from '../../assets/logo-light.png'
 import { OFFICES } from '../../data/offices'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import WhatsAppButton from './WhatsAppButton'
@@ -21,13 +21,13 @@ export default function LandingLayout() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-navy">
+      <header className="bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <img src={logo} alt="Prosper Infotech" className="h-11 w-auto" />
           <div className="flex items-center gap-4">
             <a
               href="mailto:sales@prosperinfotech.com"
-              className="hidden sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-white/80 hover:text-gold transition-colors"
+              className="hidden sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-ink-600 hover:text-primary transition-colors"
             >
               <Mail className="h-4 w-4" />
               sales@prosperinfotech.com

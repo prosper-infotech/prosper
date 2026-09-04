@@ -191,28 +191,26 @@ export default function WMS() {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-navy to-[#081a3d]">
-        <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/25 blur-[110px]" />
-        <div className="pointer-events-none absolute top-1/2 left-1/3 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
-        <div className="pointer-events-none absolute -bottom-28 -left-20 h-[380px] w-[380px] rounded-full bg-[#3a5a99]/40 blur-[110px]" />
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
+        <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/20 blur-3xl" />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
               <Reveal className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
                 <div className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl lg:flex-1 lg:items-start lg:text-left">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
+                <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-primary-dark">
                   Prosper WMS
                 </span>
-                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
+                <h1 className="text-primary text-3xl sm:text-4xl md:text-5xl leading-tight">
                   Prosper
                   <br />
-                  <span className="text-gold">Warehouse Management System</span>
+                  <span className="text-gold-dark">Warehouse Management System</span>
                 </h1>
-                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
+                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-primary">
                   Real-Time Inventory Control, Faster Fulfillment
                 </p>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg">
+                <p className="text-ink-600 text-sm sm:text-base md:text-lg">
                   Receiving, put-away, picking, packing and dispatch — one connected system with
                   live inventory visibility and full ERP/TMS integration.
                 </p>
@@ -226,16 +224,16 @@ export default function WMS() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-                        className="inline-flex items-center gap-2 rounded-lg bg-navy/40 backdrop-blur-[2px] border border-white/20 px-4 py-2.5 text-sm font-semibold text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.8)] transition-all duration-300 hover:bg-navy/55 hover:-translate-y-0.5"
+                        className="inline-flex items-center gap-2 rounded-lg bg-white border border-gold-dark/25 px-4 py-2.5 text-sm font-semibold text-ink-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold-dark/50"
                       >
-                        <Icon className="h-4 w-4 text-gold" />
+                        <Icon className="h-4 w-4 text-gold-dark" />
                         {badge.label}
                       </motion.span>
                     )
                   })}
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-3 mt-1 sm:mt-2">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-1 sm:mt-2">
                   <div className="relative">
                     <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
                     <Button
@@ -257,7 +255,7 @@ export default function WMS() {
                   <CallDropdown
                     eventCategory="WMS Landing Page"
                     align="left"
-                    triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                    triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
                   >
                     <PhoneCall className="h-4 w-4" />
                     Call Us
@@ -271,7 +269,7 @@ export default function WMS() {
                     onClick={() =>
                       window.gtag?.('event', 'click_whatsapp', { event_category: 'WMS Landing Page (Hero)' })
                     }
-                    className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/15 backdrop-blur-sm px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#25D366]/25 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-6 py-2.5 text-sm font-semibold text-[#128C4A] shadow-md transition-all duration-200 hover:bg-[#25D366]/20 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
                   >
                     <svg viewBox="0 0 32 32" className="h-4 w-4 fill-[#25D366]" aria-hidden="true">
                       <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.702 4.607 1.912 6.472L4 29l7.72-1.876A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.83-.562-5.4-1.535l-.387-.23-4.583 1.114 1.13-4.47-.253-.398A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.94-8.144c-.325-.163-1.925-.95-2.223-1.058-.298-.109-.516-.163-.733.163-.217.325-.842 1.058-1.033 1.276-.19.217-.38.244-.706.081-.325-.163-1.374-.506-2.617-1.612-.968-.862-1.622-1.927-1.812-2.252-.19-.325-.02-.5.143-.663.147-.146.325-.38.488-.57.163-.19.217-.325.325-.543.109-.217.054-.407-.027-.57-.081-.163-.733-1.765-1.004-2.417-.264-.635-.532-.55-.733-.56l-.625-.011c-.217 0-.57.081-.868.407-.298.325-1.137 1.112-1.137 2.712 0 1.6 1.164 3.147 1.326 3.364.163.217 2.29 3.497 5.55 4.904.775.335 1.38.535 1.852.684.778.247 1.486.212 2.046.129.624-.093 1.925-.787 2.196-1.547.271-.76.271-1.412.19-1.548-.081-.135-.298-.216-.624-.38Z" />
@@ -284,7 +282,7 @@ export default function WMS() {
                       window.gtag?.('event', 'click_chat', { event_category: 'WMS Landing Page (Hero)' })
                       window.Tawk_API?.maximize?.()
                     }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
                   >
                     <MessageCircle className="h-4 w-4" />
                     Chat
@@ -305,7 +303,7 @@ export default function WMS() {
 
           <Reveal delay={0.2} className="shrink-0 pt-3 sm:pt-4 lg:pt-5 pb-9 sm:pb-11 md:pb-12 lg:pb-14">
             <div className="max-w-6xl mx-auto px-6">
-              <p className="text-center text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold mb-2 sm:mb-3 [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
+              <p className="text-center text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-2 sm:mb-3">
                 RFID-Powered Warehouse Process
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
@@ -314,18 +312,18 @@ export default function WMS() {
                   return (
                     <div
                       key={step.title}
-                      className="flex flex-col gap-1 rounded-lg border border-white/15 bg-navy/40 backdrop-blur-[2px] p-2 sm:p-3"
+                      className="flex flex-col gap-1 rounded-lg border border-gold-dark/25 bg-white p-2 sm:p-3"
                     >
                       <div className="flex items-center gap-1.5">
                         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold text-primary text-[10px] font-bold shrink-0">
                           {i + 1}
                         </span>
-                        <Icon className="h-3.5 w-3.5 text-gold shrink-0" />
+                        <Icon className="h-3.5 w-3.5 text-gold-dark shrink-0" />
                       </div>
-                      <h4 className="text-white text-[11px] sm:text-xs font-bold leading-snug line-clamp-2">
+                      <h4 className="text-primary text-[11px] sm:text-xs font-bold leading-snug line-clamp-2">
                         {step.title}
                       </h4>
-                      <p className="hidden sm:block text-[11px] text-white/70 leading-snug line-clamp-2">
+                      <p className="hidden sm:block text-[11px] text-ink-600 leading-snug line-clamp-2">
                         {step.description}
                       </p>
                     </div>
