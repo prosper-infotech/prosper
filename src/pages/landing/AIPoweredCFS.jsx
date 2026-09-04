@@ -451,7 +451,7 @@ export default function AIPoweredCFS() {
             return (
               <Reveal key={group.title} delay={i * 0.06}>
                 <div className="group h-full overflow-hidden rounded-2xl bg-white border border-ink-300 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]">
-                  <div className="flex items-center gap-2.5 bg-gradient-to-b from-[#FFFBEA] to-white border-b border-ink-300 px-5 py-4">
+                  <div className="flex items-center gap-2.5 bg-gradient-to-b from-gold/10 to-white border-b border-ink-300 px-5 py-4">
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-inset ring-gold/25 shrink-0 transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-4 w-4 text-primary" />
                     </div>
