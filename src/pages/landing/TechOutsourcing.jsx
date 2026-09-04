@@ -35,12 +35,12 @@ import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import heroTeamImg from '../../assets/tech-outsourcing-hero-team.jpg'
-import dockVisionImg from '../../assets/hero-slide-dock-monitoring.jpg'
+import dockVisionImg from '../../assets/dock vision.png'
 import yardVisionImg from '../../assets/hero-slide-iot-yard.jpg'
-import assetTrackingProductImg from '../../assets/hero-slide-asset-tracking.jpg'
-import forkliftVisionImg from '../../assets/hero-slide-forklift.jpg'
-import containerVisionImg from '../../assets/hero-slide-cfs.jpg'
-import assetFleetImg from '../../assets/hero-slide-fleet-gps.jpg'
+import assetTrackingProductImg from '../../assets/asset tracking.png'
+import forkliftVisionImg from '../../assets/forklift vision ai.png'
+import containerVisionImg from '../../assets/container vision ai.png'
+import assetFleetImg from '../../assets/asset tracking.png'
 
 const usaPhone = OFFICES[0].phone
 
@@ -152,6 +152,7 @@ const SOLUTIONS = [
   },
   {
     image: yardVisionImg,
+    isPhoto: true,
     title: 'YardVision AI',
     subtitle: 'Real-Time Yard Intelligence',
     caption: 'RFID, GPS/RTK, OCR and AI for trailer inventory, spotter operations, yard location and movement visibility.',
@@ -682,26 +683,43 @@ export default function TechOutsourcing() {
             {SOLUTIONS.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.08}>
                 <div className={`group overflow-hidden rounded-2xl border ${BORDER} bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]`}>
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    <span
-                      className={`${MONO_FONT} absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold uppercase tracking-wide ${NAVY} shadow-sm`}
-                    >
-                      Prosper Product
-                    </span>
-                    <span className={`${HEADING_FONT} absolute bottom-3 left-3 text-base font-bold text-white drop-shadow`}>
-                      {item.title}
-                    </span>
-                  </div>
+                  {item.isPhoto ? (
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                      <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary shadow-sm">
+                        Prosper Product
+                      </span>
+                      <span className="font-heading absolute bottom-3 left-3 text-base font-bold text-white drop-shadow">
+                        {item.title}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#fffdf0] to-[#fff6d6] flex items-center justify-center p-6">
+                      <div className="pointer-events-none absolute bottom-[-10%] left-1/2 h-[160px] w-[160px] -translate-x-1/2 rounded-full bg-gold/35 blur-3xl" />
+                      <img
+                        src={item.image}
+                        alt={`Isometric render representing Prosper ${item.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="relative max-h-full max-w-full object-contain drop-shadow-[0_14px_18px_rgba(20,52,109,0.18)] transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary shadow-sm">
+                        Prosper Product
+                      </span>
+                    </div>
+                  )}
                   <div className="p-5">
-                    <p className={`text-xs font-semibold uppercase tracking-wide text-[#14346d]`}>
+                    {!item.isPhoto && (
+                      <h3 className="font-heading text-base font-bold text-primary">{item.title}</h3>
+                    )}
+                    <p className={`${item.isPhoto ? '' : 'mt-1'} text-xs font-semibold uppercase tracking-wide text-primary`}>
                       {item.subtitle}
                     </p>
                     <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{item.caption}</p>
