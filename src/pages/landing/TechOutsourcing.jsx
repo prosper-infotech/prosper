@@ -8,7 +8,6 @@ import {
   Link2,
   Container,
   Terminal,
-  Lock,
   UserCog,
   UsersRound,
   Briefcase,
@@ -45,16 +44,16 @@ import assetFleetImg from '../../assets/hero-slide-fleet-gps.jpg'
 
 const usaPhone = OFFICES[0].phone
 
-// "Lumina Tech Framework" — light-mode design system for this page only.
-const NAVY = 'text-[#0F172A]'
-const CHARCOAL = 'text-[#334155]'
-const BORDER = 'border-[#E2E8F0]'
-const SURFACE = 'bg-[#F8FAFC]'
-const TINT_GOLD = 'bg-gradient-to-b from-[#FFFBEA] via-[#FFFDF5] to-white'
-const TINT_NAVY = 'bg-gradient-to-b from-[#EFF4FC] via-[#F5F8FD] to-white'
-const HEADING_FONT = "font-['Plus_Jakarta_Sans']"
-const BODY_FONT = "font-['Inter']"
-const MONO_FONT = "font-['JetBrains_Mono']"
+// Site-wide cream/gold design system, matching /services/technology-outsourcing.
+const NAVY = 'text-primary'
+const CHARCOAL = 'text-ink-600'
+const BORDER = 'border-ink-300'
+const SURFACE = 'bg-surface-alt'
+const TINT_GOLD = 'bg-surface-alt'
+const TINT_NAVY = 'bg-surface-alt'
+const HEADING_FONT = 'font-heading'
+const BODY_FONT = 'font-body'
+const MONO_FONT = ''
 
 const SERVICE_OPTIONS = [
   'AI / ML',
@@ -316,7 +315,7 @@ const FAQS = [
 
 function Eyebrow({ children, className = '' }) {
   return (
-    <span className={`${MONO_FONT} text-xs font-semibold uppercase tracking-widest text-[#6b5f00] ${className}`}>
+    <span className={`${MONO_FONT} text-xs font-semibold uppercase tracking-widest text-primary ${className}`}>
       {children}
     </span>
   )
@@ -359,7 +358,7 @@ function FlowChips({ steps }) {
 function Timeline({ steps }) {
   return (
     <div className="relative">
-      <div className="hidden lg:block absolute top-6 left-0 right-0 h-0.5 bg-[#E2E8F0]">
+      <div className="hidden lg:block absolute top-6 left-0 right-0 h-0.5 bg-[#dddddd]">
         <motion.div
           className="h-full bg-gradient-to-r from-gold via-gold-dark to-gold origin-left"
           initial={{ scaleX: 0 }}
@@ -409,7 +408,7 @@ export default function TechOutsourcing() {
   }, [])
 
   return (
-    <div className={`${BODY_FONT} ${CHARCOAL}`}>
+    <div className={`${BODY_FONT} ${CHARCOAL} bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]`}>
       <LeadFormPopup
         campaign="Tech Resource Outsourcing Landing Page (Popup)"
         title="Tell us what you're building"
@@ -420,11 +419,11 @@ export default function TechOutsourcing() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.4]"
           style={{
-            backgroundImage: 'radial-gradient(circle, #0F172A14 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, #14346d14 1px, transparent 1px)',
             backgroundSize: '28px 28px',
             maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 90%)',
           }}
@@ -435,14 +434,14 @@ export default function TechOutsourcing() {
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#0F172A]/5 blur-3xl"
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#14346d]/5 blur-3xl"
           animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
         <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-24 flex flex-col items-center text-center gap-5">
           <Reveal className="flex flex-col items-center gap-5">
             <span
-              className={`${MONO_FONT} inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 to-gold/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#6b5f00] shadow-sm`}
+              className={`${MONO_FONT} inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 to-gold/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#14346d] shadow-sm`}
             >
               <Sparkles className="h-3.5 w-3.5" />
               US-Coordinated Delivery &bull; Global Engineering &bull; Logistics-Focused
@@ -572,7 +571,7 @@ export default function TechOutsourcing() {
                   fetchPriority="high"
                   className="w-full"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F172A]/30 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#14346d]/30 via-transparent to-transparent" />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent" />
                 <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset ring-white/10" />
               </div>
@@ -630,7 +629,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Core Engineering Expertise */}
-      <section id="expertise" className="relative overflow-hidden bg-white">
+      <section id="expertise" className="relative overflow-hidden">
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-12">
             <Eyebrow>Core Engineering Expertise</Eyebrow>
@@ -645,12 +644,12 @@ export default function TechOutsourcing() {
                 <Reveal key={item.title} delay={(i % 5) * 0.06}>
                   <div className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white p-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.4)]`}>
                     <span
-                      className={`${MONO_FONT} pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-[#0F172A]/[0.04] group-hover:text-gold/10 transition-colors`}
+                      className={`${MONO_FONT} pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-[#14346d]/[0.04] group-hover:text-gold/10 transition-colors`}
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                      <Icon className="h-5 w-5 text-[#6b5f00]" />
+                      <Icon className="h-5 w-5 text-[#14346d]" />
                     </div>
                     <h3 className={`${HEADING_FONT} ${NAVY} relative mt-4 text-sm font-bold`}>{item.title}</h3>
                     <p className={`relative mt-2 text-xs ${CHARCOAL} leading-relaxed`}>{item.description}</p>
@@ -702,7 +701,7 @@ export default function TechOutsourcing() {
                     </span>
                   </div>
                   <div className="p-5">
-                    <p className={`text-xs font-semibold uppercase tracking-wide text-[#6b5f00]`}>
+                    <p className={`text-xs font-semibold uppercase tracking-wide text-[#14346d]`}>
                       {item.subtitle}
                     </p>
                     <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{item.caption}</p>
@@ -715,43 +714,40 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Your Product. Your Platform. Your IP. */}
-      <section className="relative overflow-hidden bg-white">
-        <div className="relative max-w-5xl mx-auto px-6 py-16 lg:py-20">
-          <Reveal className="text-center mb-8">
-            <Eyebrow>Trust &amp; Ownership</Eyebrow>
-            <h2 className={`${HEADING_FONT} ${NAVY} mt-2 text-3xl font-bold`}>
-              Your Product. Your Platform. Your IP.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.05} className="max-w-2xl mx-auto text-center">
-            <p className={CHARCOAL}>
-              Prosper Infotech can work entirely within your architecture, source code, cloud
-              environment and product roadmap. Our existing AI, IoT and logistics experience is
-              used to accelerate onboarding and reduce discovery time — not to force a proprietary
-              product.
-            </p>
-          </Reveal>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
-            {IP_CHECKLIST.map((item, i) => (
-              <Reveal key={item} delay={i * 0.05}>
-                <div
-                  className={`group relative flex h-full items-center gap-4 overflow-hidden rounded-2xl border ${BORDER} bg-white px-5 py-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}
-                >
-                  <div className={`absolute inset-y-0 left-0 w-1 ${i % 2 === 0 ? 'bg-gold' : 'bg-[#0F172A]'} opacity-70`} />
-                  <div className="relative shrink-0">
-                    <div
-                      className={`flex h-11 w-11 items-center justify-center rounded-full ${i % 2 === 0 ? 'bg-gradient-to-br from-gold/30 to-gold/5 ring-1 ring-inset ring-gold/25' : 'bg-gradient-to-br from-[#0F172A]/15 to-[#0F172A]/5 ring-1 ring-inset ring-[#0F172A]/15'}`}
-                    >
-                      <Lock className={`h-5 w-5 ${i % 2 === 0 ? 'text-[#6b5f00]' : 'text-[#0F172A]'}`} />
-                    </div>
-                    <span className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white shadow ring-1 ring-inset ring-gold/40">
-                      <Check className="h-2.5 w-2.5 text-gold-dark" />
-                    </span>
-                  </div>
-                  <span className={`text-left text-sm font-semibold ${CHARCOAL}`}>{item}</span>
-                </div>
+      <section className="py-6">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] px-8 py-14 md:px-14 md:py-16">
+            <div className="pointer-events-none absolute -top-24 -right-16 h-[380px] w-[380px] rounded-full bg-gold/25 blur-[110px]" />
+            <div className="pointer-events-none absolute top-1/2 left-1/3 h-[280px] w-[280px] -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
+            <div className="pointer-events-none absolute -bottom-24 -left-16 h-[320px] w-[320px] rounded-full bg-[#3a5a99]/40 blur-[110px]" />
+
+            <div className="relative">
+              <Reveal className="text-center mb-4">
+                <span className="text-gold text-xs font-semibold uppercase tracking-widest">Trust &amp; Ownership</span>
+                <h2 className={`${HEADING_FONT} mt-2 text-3xl font-bold text-white`}>
+                  Your Product. Your Platform. Your IP.
+                </h2>
               </Reveal>
-            ))}
+              <Reveal delay={0.05} className="max-w-2xl mx-auto text-center mb-12">
+                <p className="text-white/70 text-sm">
+                  Prosper Infotech can work entirely within your architecture, source code, cloud
+                  environment and product roadmap. Our existing AI, IoT and logistics experience is
+                  used to accelerate onboarding and reduce discovery time — not to force a
+                  proprietary product.
+                </p>
+              </Reveal>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {IP_CHECKLIST.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] px-5 py-4"
+                  >
+                    <Check className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                    <span className="text-white/90 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -788,7 +784,7 @@ export default function TechOutsourcing() {
                         featured ? 'bg-gradient-to-br from-gold to-gold-dark shadow-md' : 'bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20'
                       }`}
                     >
-                      <Icon className={`h-6 w-6 ${featured ? 'text-primary' : 'text-[#6b5f00]'}`} />
+                      <Icon className={`h-6 w-6 ${featured ? 'text-primary' : 'text-[#14346d]'}`} />
                     </div>
                     <h3 className={`${HEADING_FONT} ${NAVY} mt-4 text-base font-bold`}>{model.title}</h3>
                     <p className={`mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{model.description}</p>
@@ -801,7 +797,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Technology Stack */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden">
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <Eyebrow>Technology Stack</Eyebrow>
@@ -817,7 +813,7 @@ export default function TechOutsourcing() {
                   <div className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.3)]`}>
                     <div className={`flex items-center gap-3 ${TINT_GOLD} px-6 py-4 border-b ${BORDER}`}>
                       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-inset ring-gold/25 shrink-0 transition-transform duration-300 group-hover:scale-110">
-                        <Icon className="h-[18px] w-[18px] text-[#6b5f00]" />
+                        <Icon className="h-[18px] w-[18px] text-[#14346d]" />
                       </div>
                       <h3 className={`${HEADING_FONT} ${NAVY} text-sm font-bold uppercase tracking-wide`}>{group.title}</h3>
                     </div>
@@ -860,7 +856,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Global Delivery */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
         <div className="relative max-w-5xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-14">
@@ -881,7 +877,7 @@ export default function TechOutsourcing() {
               />
             </div>
             {GLOBAL_HUBS.map((hub, i) => {
-              const accent = ['from-gold to-gold-dark', 'from-[#0F172A] to-[#1E293B]', 'from-[#6b5f00] to-gold-dark'][i]
+              const accent = ['from-gold to-gold-dark', 'from-[#14346d] to-[#0e2851]', 'from-[#14346d] to-gold-dark'][i]
               return (
                 <Reveal key={hub.country} delay={i * 0.1}>
                   <div className={`group relative z-10 h-full overflow-hidden rounded-2xl border ${BORDER} bg-white text-center shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
@@ -923,7 +919,7 @@ export default function TechOutsourcing() {
       </section>
 
       {/* Immediate Use Cases */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden">
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <Eyebrow>Immediate Use Cases</Eyebrow>
@@ -938,12 +934,12 @@ export default function TechOutsourcing() {
                 <Reveal key={useCase.title} delay={i * 0.06}>
                   <div className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}>
                     <span
-                      className={`${HEADING_FONT} pointer-events-none absolute -bottom-4 -right-2 text-7xl font-black text-[#0F172A]/[0.035] group-hover:text-gold/10 transition-colors`}
+                      className={`${HEADING_FONT} pointer-events-none absolute -bottom-4 -right-2 text-7xl font-black text-[#14346d]/[0.035] group-hover:text-gold/10 transition-colors`}
                     >
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 transition-transform duration-300 group-hover:scale-110">
-                      <Icon className="h-5 w-5 text-[#6b5f00]" />
+                      <Icon className="h-5 w-5 text-[#14346d]" />
                     </div>
                     <h3 className={`${HEADING_FONT} ${NAVY} relative mt-4 text-base font-bold`}>{useCase.title}</h3>
                     <p className={`relative mt-2 text-sm ${CHARCOAL} leading-relaxed`}>{useCase.description}</p>
@@ -972,11 +968,11 @@ export default function TechOutsourcing() {
                     className={`group relative h-full overflow-hidden rounded-2xl border ${BORDER} bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.35)]`}
                   >
                     <div
-                      className={`pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl transition-opacity duration-300 opacity-60 group-hover:opacity-100 ${gold ? 'bg-gold/15' : 'bg-[#0F172A]/10'}`}
+                      className={`pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full blur-2xl transition-opacity duration-300 opacity-60 group-hover:opacity-100 ${gold ? 'bg-gold/15' : 'bg-[#14346d]/10'}`}
                     />
                     <div
                       className={`relative flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 ${
-                        gold ? 'bg-gradient-to-br from-gold to-gold-dark' : 'bg-gradient-to-br from-[#0F172A] to-[#1E293B]'
+                        gold ? 'bg-gradient-to-br from-gold to-gold-dark' : 'bg-gradient-to-br from-[#14346d] to-[#0e2851]'
                       }`}
                     >
                       <Icon className={`h-6 w-6 ${gold ? 'text-primary' : 'text-white'}`} />
@@ -992,7 +988,7 @@ export default function TechOutsourcing() {
       </section>
 
       {SHOW_CLIENTS && (
-        <section className="relative overflow-hidden bg-white">
+        <section className="relative overflow-hidden">
           <div className="relative max-w-5xl mx-auto px-6 py-16">
             <Reveal className="text-center mb-10">
               <Eyebrow>Our Clients</Eyebrow>
@@ -1006,7 +1002,7 @@ export default function TechOutsourcing() {
       )}
 
       {/* FAQ */}
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-10">
             <Eyebrow>Common Questions</Eyebrow>
