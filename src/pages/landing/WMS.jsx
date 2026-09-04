@@ -199,7 +199,7 @@ export default function WMS() {
             <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
               <Reveal className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
                 <div className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl lg:flex-1 lg:items-start lg:text-left">
-                <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-primary-dark">
+                <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
                   Prosper WMS
                 </span>
                 <h1 className="text-primary text-3xl sm:text-4xl md:text-5xl leading-tight">
@@ -290,7 +290,7 @@ export default function WMS() {
                 </div>
                 </div>
 
-                <div className="hidden lg:block lg:w-[340px] lg:shrink-0">
+                <div className="hidden lg:block lg:w-[480px] lg:shrink-0">
                   <img
                     src={wmsHero}
                     alt="Isometric render of Prosper WMS warehouse management system"

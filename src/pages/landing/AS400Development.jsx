@@ -273,7 +273,7 @@ export default function AS400Development() {
 
       <section className="relative bg-gradient-to-b from-[#fffdf6] to-[#fff8dc] overflow-hidden">
         <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/20 blur-3xl" />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1fr_0.95fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
             <h1 className="text-primary text-4xl md:text-5xl leading-tight">
               24x7x365 <span className="text-gold-dark">Dedicated Support</span>
@@ -367,7 +367,7 @@ export default function AS400Development() {
           </Reveal>
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
-            <div className="relative flex items-center justify-center max-w-sm">
+            <div className="relative flex items-center justify-center max-w-md">
               <motion.div
                 className="absolute -inset-8 rounded-[2rem] bg-gold/10 blur-3xl"
                 animate={{ opacity: [0.6, 1, 0.6] }}

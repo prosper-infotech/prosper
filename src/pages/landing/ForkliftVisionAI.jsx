@@ -133,7 +133,7 @@ export default function ForkliftVisionAI() {
         <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/20 blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 flex flex-col gap-10 lg:flex-row lg:items-center">
           <Reveal className="flex flex-col gap-5 max-w-2xl lg:flex-1">
-            <span className="inline-flex self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-dark">
+            <span className="inline-flex self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
               AI-Powered Pallet &amp; Location Intelligence
             </span>
             <h1 className="text-primary text-4xl md:text-5xl leading-tight">
@@ -222,7 +222,7 @@ export default function ForkliftVisionAI() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.15} className="hidden lg:block lg:w-[380px] lg:shrink-0">
+          <Reveal delay={0.15} className="hidden lg:block lg:w-[480px] lg:shrink-0">
             <img
               src={forkliftHero}
               alt="Isometric render of Prosper ForkliftVision AI pallet and location intelligence system"

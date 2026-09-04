@@ -175,9 +175,9 @@ export default function AssetTracking() {
 
       <section className="relative bg-gradient-to-b from-[#fffdf6] to-[#fff8dc] overflow-hidden">
         <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/20 blur-3xl" />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 grid lg:grid-cols-[1fr_0.95fr] gap-12 items-center">
           <Reveal className="flex flex-col gap-5">
-            <span className="inline-flex self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-dark">
+            <span className="inline-flex self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
               RFID + GPS + AI Asset Visibility
             </span>
             <h1 className="text-primary text-4xl md:text-5xl leading-tight">
@@ -280,7 +280,7 @@ export default function AssetTracking() {
 
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
             <div
-              className="relative flex items-center justify-center max-w-md"
+              className="relative flex items-center justify-center max-w-lg"
               style={{ perspective: 800 }}
               onMouseMove={handleHeroTilt}
               onMouseLeave={resetHeroTilt}

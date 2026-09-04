@@ -22,12 +22,12 @@ export default function LandingLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <header className="bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-          <img src={logo} alt="Prosper Infotech" className="h-11 w-auto" />
+        <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between gap-6">
+          <img src={logo} alt="Prosper Infotech" className="h-11 w-auto shrink-0" />
           <div className="flex items-center gap-4">
             <a
               href="mailto:sales@prosperinfotech.com"
-              className="hidden sm:inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-ink-600 hover:text-primary transition-colors"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-ink-900 hover:text-primary transition-colors"
             >
               <Mail className="h-4 w-4" />
               sales@prosperinfotech.com
@@ -35,7 +35,7 @@ export default function LandingLayout() {
             <CallDropdown
               eventCategory="Landing Page"
               align="right"
-              triggerClassName="inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-xs sm:text-sm font-semibold text-primary shadow-sm hover:bg-gold-dark transition-colors"
+              triggerClassName="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-primary shadow-sm transition-all duration-200 hover:scale-105 hover:bg-gold-dark"
             >
               <Phone className="h-4 w-4" />
               Call Us

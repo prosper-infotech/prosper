@@ -182,7 +182,7 @@ export default function AIPoweredCFS() {
             <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20 md:py-24 lg:py-28 w-full">
               <Reveal className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
                 <div className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-2xl lg:flex-1 lg:items-start lg:text-left">
-                <span className="inline-flex self-center lg:self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-dark">
+                <span className="inline-flex self-center lg:self-start items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
                   AI-Powered CFS Automation
                 </span>
                 <h1 className="text-primary text-3xl sm:text-4xl md:text-5xl leading-tight">
@@ -272,7 +272,7 @@ export default function AIPoweredCFS() {
                 </div>
                 </div>
 
-                <div className="hidden lg:block lg:w-[380px] lg:shrink-0">
+                <div className="hidden lg:block lg:w-[480px] lg:shrink-0">
                   <img
                     src={cfsHero}
                     alt="Isometric render of Prosper ContainerVision AI for CFS and container terminal automation"
