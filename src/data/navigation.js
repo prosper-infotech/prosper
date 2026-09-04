@@ -141,6 +141,11 @@ export const NAV = [
           { label: 'Cloud Connectivity', path: '/services/industrial-iot-services#cloud' },
         ],
       },
+      {
+        label: 'Technology Resource Outsourcing',
+        path: '/services/technology-outsourcing',
+        description: 'Dedicated engineers, engineering pods, project delivery and managed support for AI, IoT and logistics software.',
+      },
     ],
   },
   {
