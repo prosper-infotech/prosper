@@ -37,7 +37,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import cfsHero from '../../assets/ai-powered-cfs-hero.jpg'
+import cfsHero from '../../assets/container vision ai.png'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
@@ -174,41 +174,32 @@ export default function AIPoweredCFS() {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-navy">
-        <img
-          src={cfsHero}
-          alt="AI-powered CFS and container terminal operations"
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-navy/15" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/55 via-navy/10 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 via-navy/15 to-transparent" />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 65% 75% at center, rgba(15,23,42,0.55), transparent 70%)' }}
-        />
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-navy to-[#081a3d]">
+        <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/25 blur-[110px]" />
+        <div className="pointer-events-none absolute top-1/2 left-1/3 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
+        <div className="pointer-events-none absolute -bottom-28 -left-20 h-[380px] w-[380px] rounded-full bg-[#3a5a99]/40 blur-[110px]" />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 py-16 sm:py-20 md:py-24 lg:py-28 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-2xl md:max-w-3xl mx-auto">
-                <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
+              <Reveal className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+                <div className="flex flex-col items-center text-center gap-3 sm:gap-4 max-w-2xl lg:flex-1 lg:items-start lg:text-left">
+                <span className="text-gold text-sm font-semibold uppercase tracking-widest">
                   AI-Powered CFS Automation
                 </span>
-                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]">
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
                   Prosper <span className="text-gold">ContainerVision AI</span>
                 </h1>
-                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]">
+                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
                   Real-Time Container Visibility, Gate to Departure
                 </p>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg [text-shadow:0_2px_14px_rgba(0,0,0,0.9)]">
+                <p className="text-white/90 text-sm sm:text-base md:text-lg">
                   AI cameras, OCR, GPS/RTK and industrial sensors automate container gate, yard,
                   reach stacker, inspection and departure workflows — powered by the Prosper AI
                   EdgeBox.
                 </p>
 
-                <div className="hidden md:flex flex-wrap justify-center gap-3 mt-1">
+                <div className="hidden md:flex flex-wrap justify-center lg:justify-start gap-3 mt-1">
                   {STAT_BADGES.map((badge, i) => {
                     const Icon = badge.icon
                     return (
@@ -226,7 +217,7 @@ export default function AIPoweredCFS() {
                   })}
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-3 mt-1 sm:mt-2">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-1 sm:mt-2">
                   <div className="relative">
                     <span className="absolute inset-0 rounded-lg bg-gold/50 blur-md animate-pulse" />
                     <Button
@@ -280,6 +271,15 @@ export default function AIPoweredCFS() {
                     <MessageCircle className="h-4 w-4" />
                     Chat
                   </button>
+                </div>
+                </div>
+
+                <div className="hidden lg:block lg:w-[380px] lg:shrink-0">
+                  <img
+                    src={cfsHero}
+                    alt="Isometric render of Prosper ContainerVision AI for CFS and container terminal automation"
+                    className="w-full"
+                  />
                 </div>
               </Reveal>
             </div>

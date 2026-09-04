@@ -30,7 +30,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import forkliftHero from '../../assets/forklift-vision-hero.jpg'
+import forkliftHero from '../../assets/forklift vision ai.png'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
@@ -129,28 +129,19 @@ export default function ForkliftVisionAI() {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-navy">
-        <img
-          src={forkliftHero}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-[20%_center] lg:object-center"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-navy/15" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/70 via-transparent to-transparent" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-navy to-[#081a3d]">
         <motion.div
-          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
+          className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/25 blur-[110px]"
           animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.15, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl"
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-[#3a5a99]/40 blur-[110px]"
           animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.2, 1] }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24">
-          <Reveal className="flex flex-col gap-5 max-w-2xl">
+        <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-24 flex flex-col gap-10 lg:flex-row lg:items-center">
+          <Reveal className="flex flex-col gap-5 max-w-2xl lg:flex-1">
             <span className="inline-flex self-start items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
               AI-Powered Pallet &amp; Location Intelligence
             </span>
@@ -238,6 +229,14 @@ export default function ForkliftVisionAI() {
                 Chat
               </button>
             </div>
+          </Reveal>
+
+          <Reveal delay={0.15} className="hidden lg:block lg:w-[380px] lg:shrink-0">
+            <img
+              src={forkliftHero}
+              alt="Isometric render of Prosper ForkliftVision AI pallet and location intelligence system"
+              className="w-full"
+            />
           </Reveal>
         </div>
       </section>

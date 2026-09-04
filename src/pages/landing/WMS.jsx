@@ -41,7 +41,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import wmsHero from '../../assets/wms-hero.jpg'
+import wmsHero from '../../assets/prosper wms.png'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const STAT_BADGES = [
@@ -191,42 +191,33 @@ export default function WMS() {
         ]}
       />
 
-      <section className="relative overflow-hidden bg-navy">
-        <img
-          src={wmsHero}
-          alt="Prosper WMS warehouse operations"
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-navy/15" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-navy/55 via-navy/10 to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 via-navy/15 to-transparent" />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 65% 75% at center, rgba(15,23,42,0.55), transparent 70%)' }}
-        />
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-navy to-[#081a3d]">
+        <div className="pointer-events-none absolute -top-24 -right-16 h-[420px] w-[420px] rounded-full bg-gold/25 blur-[110px]" />
+        <div className="pointer-events-none absolute top-1/2 left-1/3 h-[320px] w-[320px] -translate-y-1/2 rounded-full bg-gold-dark/15 blur-[100px]" />
+        <div className="pointer-events-none absolute -bottom-28 -left-20 h-[380px] w-[380px] rounded-full bg-[#3a5a99]/40 blur-[110px]" />
 
         <div className="relative flex flex-col">
           <div className="flex items-center">
             <div className="max-w-6xl mx-auto px-6 pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 w-full">
-              <Reveal className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl md:max-w-4xl mx-auto">
+              <Reveal className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+                <div className="flex flex-col items-center text-center gap-2 sm:gap-3 max-w-xl lg:flex-1 lg:items-start lg:text-left">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-3 py-1 sm:px-4 sm:py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-gold">
                   Prosper WMS
                 </span>
-                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
+                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl leading-tight">
                   Prosper
                   <br />
                   <span className="text-gold">Warehouse Management System</span>
                 </h1>
-                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.7)]">
+                <p className="text-xl sm:text-2xl md:text-3xl font-heading font-bold leading-snug text-white">
                   Real-Time Inventory Control, Faster Fulfillment
                 </p>
-                <p className="text-white/90 text-sm sm:text-base md:text-lg [text-shadow:0_2px_12px_rgba(0,0,0,0.8)]">
+                <p className="text-white/90 text-sm sm:text-base md:text-lg">
                   Receiving, put-away, picking, packing and dispatch — one connected system with
                   live inventory visibility and full ERP/TMS integration.
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-3 mt-1">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mt-1">
                   {STAT_BADGES.map((badge, i) => {
                     const Icon = badge.icon
                     return (
@@ -298,6 +289,15 @@ export default function WMS() {
                     <MessageCircle className="h-4 w-4" />
                     Chat
                   </button>
+                </div>
+                </div>
+
+                <div className="hidden lg:block lg:w-[340px] lg:shrink-0">
+                  <img
+                    src={wmsHero}
+                    alt="Isometric render of Prosper WMS warehouse management system"
+                    className="w-full"
+                  />
                 </div>
               </Reveal>
             </div>

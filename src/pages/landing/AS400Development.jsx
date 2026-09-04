@@ -34,7 +34,7 @@ import { SHOW_CLIENTS } from '../../data/clients'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import { OFFICES } from '../../data/offices'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
-import as400Hero from '../../assets/as400-hero.jpg'
+import as400Hero from '../../assets/as400.png'
 
 const usaPhone = OFFICES[0].phone
 
@@ -382,8 +382,8 @@ export default function AS400Development() {
                 animate={{ opacity: [0.6, 1, 0.6] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]">
-                <img src={as400Hero} alt="IBM i AS/400 server" className="w-full" />
+              <div className="relative z-10">
+                <img src={as400Hero} alt="Isometric render of Prosper AS400 / IBM i development and support" className="w-full" />
               </div>
               <motion.span
                 className="absolute -top-3 left-2 z-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 text-sm font-semibold text-white"

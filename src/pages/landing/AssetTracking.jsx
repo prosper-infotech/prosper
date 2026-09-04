@@ -32,7 +32,7 @@ import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
 import CallDropdown from '../../components/layout/CallDropdown'
 import { SHOW_CLIENTS } from '../../data/clients'
 import { OFFICES } from '../../data/offices'
-import assetTrackingHero from '../../assets/asset-tracking-hero.jpg'
+import assetTrackingHero from '../../assets/asset tracking.png'
 import galleryRfidScan from '../../assets/asset-tracking-gallery-rfid-scan.jpg'
 import galleryDashboard from '../../assets/asset-tracking-gallery-dashboard.jpg'
 import galleryYard from '../../assets/asset-tracking-gallery-yard.jpg'
@@ -282,8 +282,8 @@ export default function AssetTracking() {
           <Reveal delay={0.15} className="lg:hidden mt-2">
             <img
               src={assetTrackingHero}
-              alt="Prosper Asset Tracking hardware and dashboard"
-              className="w-full max-w-sm mx-auto rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
+              alt="Isometric render of Prosper Asset Tracking hardware and dashboard"
+              className="w-full max-w-sm mx-auto"
             />
           </Reveal>
 
@@ -300,12 +300,12 @@ export default function AssetTracking() {
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
               <motion.div
-                className="relative z-10 overflow-hidden rounded-2xl border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
+                className="relative z-10"
                 style={{ rotateX, rotateY }}
               >
                 <img
                   src={assetTrackingHero}
-                  alt="Prosper Asset Tracking hardware and dashboard"
+                  alt="Isometric render of Prosper Asset Tracking hardware and dashboard"
                   className="w-full"
                 />
               </motion.div>
