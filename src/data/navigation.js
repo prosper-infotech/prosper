@@ -73,13 +73,13 @@ export const NAV = [
         description:
           'Prosper WMS, Fleet, Asset Tracking, HRMS & Payroll, Gate-Yard-Dock Vision, Vision AI, CFS & Terminal Automation, Video Attendance',
         children: [
-          { label: 'Prosper DockVisionAI', path: '/products/software#dockvision-ai' },
-          { label: 'Prosper ContainerVisionAI', path: '/products/software#containervision-ai' },
-          { label: 'Prosper Asset Tracking', path: '/products/software#asset-tracking' },
-          { label: 'Prosper WMS', path: '/products/software#wms' },
-          { label: 'Prosper YardVision AI', path: '/products/software#yardvision-ai' },
-          { label: 'RFID + GPS Inventory Tracking', path: '/products/software#rfid-gps' },
-          { label: 'Video-Based Attendance System', path: '/products/software#video-attendance' },
+          { label: 'Prosper DockVisionAI', path: '/products/software/dockvision-ai' },
+          { label: 'Prosper ContainerVisionAI', path: '/products/software/containervision-ai' },
+          { label: 'Prosper Asset Tracking', path: '/products/software/asset-tracking' },
+          { label: 'Prosper WMS', path: '/products/software/wms' },
+          { label: 'Prosper YardVision AI', path: '/products/software/yardvision-ai' },
+          { label: 'RFID + GPS Inventory Tracking', path: '/products/software/rfid-gps' },
+          { label: 'Video-Based Attendance System', path: '/products/software/video-attendance' },
         ],
       },
       {

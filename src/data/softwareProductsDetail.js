@@ -1,0 +1,280 @@
+import {
+  Tag,
+  Warehouse,
+  Camera,
+  Satellite,
+  UserCheck,
+  DoorOpen,
+  Cpu,
+  Cable,
+  Router,
+  Radio,
+  Server,
+  CloudUpload,
+  Cloud,
+  LayoutDashboard,
+  LogIn,
+  Truck,
+  ScanSearch,
+  LogOut,
+  Boxes,
+} from 'lucide-react'
+
+const BASE = '/products/software'
+
+export const SOFTWARE_PRODUCTS = [
+  {
+    key: 'dockvision-ai',
+    path: `${BASE}/dockvision-ai`,
+    icon: DoorOpen,
+    name: 'Prosper DockVisionAI',
+    tagline: 'IoT Dock Door Monitoring — Proof of Concept Architecture',
+    description:
+      'Wide warehouse / distribution facility monitoring across ~50 to 60 dock doors — real-time door, trailer, and restraint status streamed from the edge to the cloud.',
+    seoTitle: 'Prosper DockVisionAI | IoT Dock Door Monitoring | Prosper Infotech',
+    seoDescription:
+      'Real-time dock door, trailer, and restraint status monitoring across every dock door, streamed from the edge to the cloud with LoRaWAN and automated alerts.',
+    badge: 'Proof of Concept · Architecture',
+    architecture: [
+      {
+        title: 'Per Dock Door (Typical)',
+        steps: [
+          { icon: DoorOpen, title: 'Dock Door Panel', description: 'Existing control panel at each dock door.' },
+          { icon: Cpu, title: 'Delta DVP-16SP PLC / Dock Controller', description: 'Reads door & dock sensors and status.' },
+          { icon: Cable, title: 'RS485 Modbus RTU', description: 'Local connection (2-wire RS485), A(+) B(-).' },
+          { icon: Router, title: 'Milesight UC100 LoRaWAN Converter', description: 'Reads Modbus registers from the PLC, encodes a small status payload, and sends at heartbeat interval or on status change.' },
+        ],
+      },
+      {
+        title: 'Site & Cloud Infrastructure',
+        steps: [
+          { icon: Radio, title: 'LoRaWAN Uplink From Many Doors', description: 'Milesight UC100 sends status payloads over LoRaWAN.' },
+          { icon: Server, title: 'Site Edge Device', description: 'Seeed reComputer + integrated LoRaWAN Gateway + 4G + Wi-Fi (one per facility) — receives LoRaWAN data from all dock doors, local buffering + logic (door status, alarms, faults), time sync & heartbeat monitoring, 4G/Wi-Fi backhaul for resilient connectivity.' },
+          { icon: CloudUpload, title: 'MQTT/TLS Uplink to Cloud', description: 'Secure, encrypted telemetry and events over port 8883.' },
+          { icon: Cloud, title: 'Cloud Platform Options', description: 'Microsoft Azure IoT Hub or AWS IoT Core.' },
+          { icon: LayoutDashboard, title: 'Applications & Integrations', description: 'Dashboards/web portal, alerts & notifications (email, SMS, Teams, webhooks), reports & analytics, database/time-series storage, and APIs into MES, WMS, CMMS, and BI tools.' },
+        ],
+      },
+    ],
+    dataPoints: [
+      'Door Open / Closed',
+      'Trailer Present / Not Present',
+      'Restraint Engaged / Not Engaged',
+      'Leveler Deployed / Stowed',
+      'Fault Code / Alarm Status',
+      'Heartbeat / Last Seen',
+    ],
+    highlights: ['Real-Time Door Status', 'Automated Fault & Alarm Alerts', 'Long-Range LoRaWAN Connectivity', 'Cloud-Native Integration'],
+  },
+  {
+    key: 'containervision-ai',
+    path: `${BASE}/containervision-ai`,
+    icon: Boxes,
+    name: 'Prosper ContainerVisionAI',
+    tagline: 'AI-Powered Container Freight Station (CFS) & Container Terminal Automation',
+    description: 'Real-time container visibility across Gate Arrival → Yard → Inspection → Departure workflows.',
+    seoTitle: 'Prosper ContainerVisionAI | CFS & Container Terminal Automation | Prosper Infotech',
+    seoDescription:
+      'AI cameras, OCR, and GPS/RTK automate gate, yard, and reach-stacker workflows for container freight stations and container terminals — gate arrival to departure.',
+    architecture: [
+      {
+        title: 'Gate → Yard → Inspection → Departure',
+        steps: [
+          {
+            icon: LogIn,
+            title: 'GateVision AI (Arrival)',
+            status: 'Container Arrival Logged',
+            items: ['Detect container number automatically', 'Log arrivals in real time', 'Identify damage / exceptions'],
+          },
+          {
+            icon: Truck,
+            title: 'ReachStackerVision AI',
+            status: 'Task Assigned · Move In Progress',
+            items: ['Assign tasks automatically', 'Track pickup / drop activity', 'Capture container movement events'],
+          },
+          {
+            icon: ScanSearch,
+            title: 'YardVision AI & Inspection',
+            status: 'Yard Location Updated',
+            items: ['Track exact yard location & tier', 'Support customs / inspection workflows', 'Maintain live inventory visibility'],
+          },
+          {
+            icon: LogOut,
+            title: 'GateVision AI (Departure)',
+            status: 'Departure Verified',
+            items: ['Validate departures automatically', 'Log gate-out in real time', 'Confirm release status'],
+          },
+        ],
+      },
+      {
+        title: 'Prosper AI EdgeBox — The Core Brain',
+        steps: [
+          { icon: Camera, title: 'Capture Platform', items: ['AI cameras', 'Edge gateways', 'GPS / RTK', 'Industrial sensors'] },
+          { icon: Cpu, title: 'AI / Decision Layer', items: ['OpenCV / GStreamer', 'YOLO object detection', 'OCR engine', 'Task & rules engine', 'NVIDIA TensorRT acceleration'] },
+          { icon: Router, title: 'Hardware & I/O', items: ['Cameras', 'Ethernet', 'Storage', 'Wi-Fi / 4G', 'GPS', 'Power'] },
+          { icon: LayoutDashboard, title: 'Integration Layer', items: ['Container inventory updates', 'Task & status APIs', 'ERP integration', 'Reports / alerts'] },
+        ],
+      },
+    ],
+    reachStackerPanel: {
+      title: 'Reach Stacker AI Automation',
+      subtitle: 'OCR Camera · Industrial Sensors · GPS/RTK Antenna · Prosper AI EdgeBox',
+      pickup: ['OCR confirms container ID', 'Sensors detect container contact', 'Lift action confirms pickup event'],
+      drop: ['RTK target confirmed', 'Height / tier verified', 'Release action detected', 'Inventory updated automatically'],
+    },
+    highlights: [
+      'Real-Time Container Visibility',
+      'Reduced Manual Dependency',
+      'AI + OCR + GPS Fusion',
+      'Fast ERP Integration',
+      'Pickup / Drop Validation',
+      'AI EdgeBox Powered',
+    ],
+  },
+  {
+    key: 'asset-tracking',
+    path: `${BASE}/asset-tracking`,
+    icon: Tag,
+    name: 'Prosper Asset Tracking',
+    tagline: 'Track every asset. Optimize every operation. Secure every moment.',
+    description:
+      'RFID-powered asset tracking with fixed and handheld reader setups, delivered as a zero-upfront SaaS platform with hardware included.',
+    seoTitle: 'Prosper Asset Tracking | RFID Asset Tracking Software | Prosper Infotech',
+    seoDescription:
+      'RFID-powered asset tracking with fixed and handheld reader setups, real-time visibility, automated check-in/out, and multi-site control — zero-upfront SaaS with hardware included.',
+    process: ['RFID Tags', 'Fixed / Handheld Readers', 'IoT Gateway', 'REST API', 'Dashboard'],
+    features: [
+      'Real-time visibility',
+      'Alerts & notifications',
+      'Automated check-in/out',
+      'Multi-site asset control',
+      'Powerful dashboards & reports',
+    ],
+    highlights: [
+      'Real-Time Asset Visibility',
+      'Automated Check-In & Out',
+      'Multi Yard Support',
+      'Seamless Integrations',
+      'Secure & Reliable',
+    ],
+    idealFor: [
+      'Warehouses',
+      'Medical / Hospitals',
+      'Construction Equipment',
+      'Tools & Machinery',
+      'IT Assets',
+      'Rental Equipment',
+      'Fleet Yards',
+      'Manufacturing',
+      'Schools / Campuses',
+    ],
+    badge: '$0 upfront · Free hardware · Pay monthly · First 2 months free',
+  },
+  {
+    key: 'wms',
+    path: `${BASE}/wms`,
+    icon: Warehouse,
+    name: 'Prosper WMS',
+    tagline: 'Warehouse Management System',
+    description:
+      'Real-time inventory control, put-away, picking, packing, dispatch, and full warehouse visibility.',
+    seoTitle: 'Prosper WMS | Warehouse Management System | Prosper Infotech',
+    seoDescription:
+      'Real-time inventory control, automated put-away, picking, packing, and dispatch, with barcode and RFID support across every warehouse.',
+    process: ['Receiving', 'Put-Away', 'Storage', 'Picking', 'Packing', 'Dispatch'],
+    features: [
+      'Inventory visibility',
+      'Inbound receiving & put-away management',
+      'Picking & packing workflows',
+      'Batch / lot / serial tracking',
+      'Barcode & RFID support',
+      'Cycle count & audits',
+      'Multi-warehouse support',
+      'API / ERP / TMS integration',
+    ],
+    highlights: [
+      'Real-Time Stock Visibility',
+      'Faster Order Fulfillment',
+      'Reduced Inventory Errors',
+      'Seamless Integrations',
+      'Multi-Site Operations',
+      'Actionable Insights',
+    ],
+    idealFor: ['Distribution Centers', 'Warehouses', 'Manufacturing', 'Retail Fulfillment', 'Cold Chain', '3PL / Logistics'],
+  },
+  {
+    key: 'yardvision-ai',
+    path: `${BASE}/yardvision-ai`,
+    icon: Camera,
+    name: 'Prosper YardVision AI',
+    tagline: 'Camera-Based Asset Tracking Using AI, OCR & Edge Intelligence',
+    description:
+      'Track trailers, containers, chassis, bobtails, and custom assets in real time across Gate → Yard → Dock → Departure workflows.',
+    seoTitle: 'Prosper YardVision AI | AI Yard & Trailer Tracking | Prosper Infotech',
+    seoDescription:
+      'AI camera-based tracking for trailers, containers, chassis, and bobtails across Gate, Yard, Dock, and Departure workflows, with OCR and edge intelligence.',
+    process: ['GateVision AI (Arrival)', 'YardVision AI', 'Dock DoorVision AI', 'GateVision AI (Departure)'],
+    features: [
+      'Automatic trailer & SCAC detection with damage/exception logging',
+      'Real-time trailer location tracking fusing camera, RFID, and GPS',
+      'Dock door activity and turnaround time monitoring',
+      'Automated departure detection and exception logging',
+      'YOLO-based object detection and OCR for text / license plates',
+      'NVIDIA / TensorRT-accelerated edge compute',
+      'Fast integration with YMS / WMS / TMS / ERP / SAP',
+    ],
+    highlights: [
+      'Real-Time Yard Visibility',
+      'Reduced Manual Spotter Truck Dependency',
+      'Vision + RFID + GPS Fusion',
+      'Fast Integration with YMS/WMS/TMS/ERP',
+      'AI EdgeBox Powered',
+    ],
+  },
+  {
+    key: 'rfid-gps',
+    path: `${BASE}/rfid-gps`,
+    icon: Satellite,
+    name: 'RFID + GPS Inventory Tracking',
+    tagline: 'Cost-optimized trailer and vessel inventory',
+    description:
+      'RFID and GPS-based real-time inventory tracking with REST API integration into your existing systems.',
+    seoTitle: 'RFID + GPS Inventory Tracking | Prosper Infotech',
+    seoDescription:
+      'Cost-optimized RFID and GPS-based real-time trailer and vessel inventory tracking, with REST API integration into your existing YMS, WMS, TMS, and ERP systems.',
+    process: ['RFID Antenna', 'Fixed Reader / Edge Device', 'GPS + 4G LTE', 'REST API', 'YMS / WMS / TMS / ERP'],
+    features: [
+      'AI-based locationing service',
+      'Processes tag reads, GPS position, speed, and time',
+      'Calculates nearest available location',
+      'Accurate real-time trailer positioning',
+      'Integrates with YMS, WMS, TMS, ERP, web, and mobile',
+    ],
+    highlights: ['Auto Start', 'Self Monitoring', 'GPS + 4G Connectivity', 'Lightweight & Efficient', 'Plug & Play', 'Low Cost'],
+  },
+  {
+    key: 'video-attendance',
+    path: `${BASE}/video-attendance`,
+    icon: UserCheck,
+    name: 'Video-Based Attendance System',
+    tagline: 'Powered by Prosper AI EdgeBox',
+    description:
+      'AI-powered attendance and productivity tracking with multi-camera intelligence — on-premise and privacy-first.',
+    seoTitle: 'Video-Based Attendance System | AI Face Recognition Attendance | Prosper Infotech',
+    seoDescription:
+      'AI face-recognition attendance and productivity tracking with multi-camera IN/OUT/AWAY intelligence, processed on-premise for privacy with real-time alerts and reports.',
+    process: ['Entry Camera', 'Away Camera', 'Exit Camera', 'Dashboard & Reports'],
+    features: [
+      'AI face recognition for accurate attendance',
+      'Multi-camera IN / OUT / AWAY tracking',
+      'Real productivity time & insights',
+      'On-premise processing for better privacy',
+      'Real-time alerts, dashboard & reports',
+      'Low-latency edge AI with Prosper AI EdgeBox',
+    ],
+    highlights: ['Track Attendance', 'Measure Productivity', 'Improve Performance'],
+    idealFor: ['Corporate Offices', 'Manufacturing Plants', 'Warehouses', 'Educational Institutions', 'Healthcare Facilities'],
+  },
+]
+
+export const SOFTWARE_PRODUCTS_DETAIL = Object.fromEntries(SOFTWARE_PRODUCTS.map((p) => [p.path, p]))

@@ -10,6 +10,7 @@ import { INDUSTRIES_DETAIL } from './data/industriesDetail'
 import { SOLUTION_ICONS } from './data/solutionIcons'
 import { INDUSTRY_ICONS } from './data/industryIcons'
 import { AI_SERVICES_DETAIL } from './data/aiServicesDetail'
+import { SOFTWARE_PRODUCTS_DETAIL } from './data/softwareProductsDetail'
 
 const About = lazy(() => import('./pages/About'))
 const SolutionsOverview = lazy(() => import('./pages/SolutionsOverview'))
@@ -43,6 +44,17 @@ const DetailPageTemplate = lazy(() => import('./components/templates/DetailPageT
 const SolutionDetailTemplate = lazy(() => import('./components/templates/SolutionDetailTemplate'))
 const TopicPageTemplate = lazy(() => import('./components/templates/TopicPageTemplate'))
 const AIServiceDetailTemplate = lazy(() => import('./components/templates/AIServiceDetailTemplate'))
+const SoftwareProductDetailTemplate = lazy(() => import('./components/templates/SoftwareProductDetailTemplate'))
+
+function grandchildElement(gc) {
+  if (AI_SERVICES_DETAIL[gc.path]) {
+    return <AIServiceDetailTemplate detail={AI_SERVICES_DETAIL[gc.path]} />
+  }
+  if (SOFTWARE_PRODUCTS_DETAIL[gc.path]) {
+    return <SoftwareProductDetailTemplate detail={SOFTWARE_PRODUCTS_DETAIL[gc.path]} />
+  }
+  return null
+}
 
 function childElement(item, child) {
   const siblings = item.children.filter((c) => c.path !== child.path)
@@ -178,7 +190,7 @@ function App() {
               />
               {item.children?.map((child) => {
                 const detailGrandchildren = (child.children ?? []).filter(
-                  (gc) => AI_SERVICES_DETAIL[gc.path]
+                  (gc) => AI_SERVICES_DETAIL[gc.path] || SOFTWARE_PRODUCTS_DETAIL[gc.path]
                 )
                 if (detailGrandchildren.length > 0) {
                   return (
@@ -188,7 +200,7 @@ function App() {
                         <Route
                           key={gc.path}
                           path={gc.path.slice(child.path.length + 1)}
-                          element={<AIServiceDetailTemplate detail={AI_SERVICES_DETAIL[gc.path]} />}
+                          element={grandchildElement(gc)}
                         />
                       ))}
                     </Route>

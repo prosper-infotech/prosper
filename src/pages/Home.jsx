@@ -24,14 +24,14 @@ const PRODUCTS = [
     tag: 'Warehouse',
     img: wmsImg,
     desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
-    to: '/products/software#wms',
+    to: '/products/software/wms',
   },
   {
     name: 'DockVision',
     tag: 'Dock & Loading',
     img: dockVisionImg,
     desc: 'AI cameras monitor every dock door, confirming safe loading and unloading without manual checks.',
-    to: '/products/software#dockvision-ai',
+    to: '/products/software/dockvision-ai',
   },
   {
     name: 'GateVision',
@@ -45,7 +45,7 @@ const PRODUCTS = [
     tag: 'Container Terminals',
     img: containerVisionImg,
     desc: 'AI cameras, OCR and GPS/RTK automate gate, yard and reach-stacker workflows — gate to departure.',
-    to: '/products/software#containervision-ai',
+    to: '/products/software/containervision-ai',
   },
   {
     name: 'Forklift',
@@ -59,7 +59,7 @@ const PRODUCTS = [
     tag: 'RFID & GPS',
     img: assetTrackingImg,
     desc: 'RFID, GPS, BLE and LoRaWAN trackers feed one live dashboard, across the yard, warehouse and road.',
-    to: '/products/software#asset-tracking',
+    to: '/products/software/asset-tracking',
   },
   {
     name: 'AS400',
@@ -73,7 +73,7 @@ const PRODUCTS = [
     tag: 'Workforce',
     img: videoAttendanceImg,
     desc: 'Facial-recognition check-in replaces manual logs and buddy-punching with a live, auditable attendance record.',
-    to: '/products/software#video-attendance',
+    to: '/products/software/video-attendance',
   },
 ]
 
