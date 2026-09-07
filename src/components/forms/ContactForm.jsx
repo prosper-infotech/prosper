@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
+import { submitToCrm } from './crm'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
 
@@ -42,6 +43,13 @@ export default function ContactForm() {
         phone: data.phone,
         message: [data.company && `Company: ${data.company}`, data.message].filter(Boolean).join(' | '),
         source: 'Website Contact Form',
+      })
+      submitToCrm({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        campaign: 'Website Contact Form',
       })
       setStatus('success')
       reset()

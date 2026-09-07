@@ -5,6 +5,7 @@ import LandingLeadForm from './LandingLeadForm'
 
 export default function LeadFormPopup({
   campaign,
+  product,
   title = "Let's get you started",
   description = "Tell us a bit about what you need — we'll follow up within one business day.",
   submitLabel,
@@ -75,6 +76,7 @@ export default function LeadFormPopup({
 
                 <LandingLeadForm
                   campaign={campaign}
+                  product={product}
                   submitLabel={submitLabel}
                   serviceLabel={serviceLabel}
                   serviceOptions={serviceOptions}

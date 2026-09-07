@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
+import { submitToCrm } from './crm'
 import { attributeSource, captureUtmParams } from '../../utils/attribution'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
@@ -36,6 +37,7 @@ const DEFAULT_SERVICE_OPTIONS = [
 
 export default function LandingLeadForm({
   campaign = 'AS400 Development Landing Page',
+  product,
   submitLabel = 'Get a free consultation',
   serviceLabel = 'What do you need help with?',
   serviceOptions = DEFAULT_SERVICE_OPTIONS,
@@ -71,6 +73,14 @@ export default function LandingLeadForm({
           .filter(Boolean)
           .join(' | '),
         source,
+      })
+      submitToCrm({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        product,
+        campaign,
       })
       window.gtag?.('event', 'generate_lead', {
         event_category: campaign,
