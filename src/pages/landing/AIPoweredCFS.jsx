@@ -162,7 +162,6 @@ export default function AIPoweredCFS() {
 
       <LeadFormPopup
         campaign="AI-Powered CFS Landing Page (Popup)"
-        product="CFS"
         title="Book your free CFS automation demo"
         description="See real-time gate, yard and container tracking dashboards — no cost, no obligation."
         submitLabel="Get a free demo"
@@ -582,7 +581,6 @@ export default function AIPoweredCFS() {
             </p>
             <LandingLeadForm
               campaign="AI-Powered CFS Landing Page"
-              product="CFS"
               submitLabel="Get a free demo"
               serviceLabel="What best describes your situation?"
               serviceOptions={[

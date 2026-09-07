@@ -117,7 +117,6 @@ export default function ForkliftVisionAI() {
 
       <LeadFormPopup
         campaign="Forklift Vision AI Landing Page (Popup)"
-        product="Forklift Vision"
         title="Book your free ForkliftVision AI demo"
         description="See real-time pallet detection and rack location dashboards — no cost, no obligation."
         submitLabel="Get a free demo"
@@ -407,7 +406,6 @@ export default function ForkliftVisionAI() {
             </p>
             <LandingLeadForm
               campaign="Forklift Vision AI Landing Page"
-              product="Forklift Vision"
               submitLabel="Get a free demo"
               serviceLabel="What best describes your situation?"
               serviceOptions={[

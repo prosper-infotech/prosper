@@ -161,7 +161,6 @@ export default function AssetTracking() {
 
       <LeadFormPopup
         campaign="Asset Tracking Landing Page (Popup)"
-        product="Asset Tracking"
         title="Book your free asset tracking demo"
         description="See real-time dashboards, RFID reads, and alerts — no cost, no obligation."
         submitLabel="Get a free demo"
@@ -514,7 +513,6 @@ export default function AssetTracking() {
             </p>
             <LandingLeadForm
               campaign="Asset Tracking Landing Page"
-              product="Asset Tracking"
               submitLabel="Get a free demo"
               serviceLabel="What best describes your situation?"
               serviceOptions={[

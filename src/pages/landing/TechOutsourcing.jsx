@@ -412,7 +412,6 @@ export default function TechOutsourcing() {
     <div className={`${BODY_FONT} ${CHARCOAL} bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]`}>
       <LeadFormPopup
         campaign="Tech Resource Outsourcing Landing Page (Popup)"
-        product="Resource Outsource"
         title="Tell us what you're building"
         description="We'll connect you directly with an engineering lead within one business day."
         submitLabel="Talk to an Engineering Lead"
@@ -1082,7 +1081,6 @@ export default function TechOutsourcing() {
             </p>
             <LandingLeadForm
               campaign="Tech Resource Outsourcing Landing Page"
-              product="Resource Outsource"
               submitLabel="Talk to an Engineering Lead"
               serviceLabel="What are you looking to build?"
               serviceOptions={SERVICE_OPTIONS}

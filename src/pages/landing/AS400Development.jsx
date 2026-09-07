@@ -259,7 +259,6 @@ export default function AS400Development() {
     <>
       <LeadFormPopup
         campaign="AS400 Development Landing Page (Popup)"
-        product="AS400"
         title="Get your free AS400 consultation"
         description="Tell us about your environment — we'll respond within one business day."
         serviceOptions={[
@@ -667,7 +666,6 @@ export default function AS400Development() {
               Tell us about your environment — we'll respond within one business day.
             </p>
             <LandingLeadForm
-              product="AS400"
               serviceOptions={[
                 'AS400 / IBM i Consulting',
                 'AS400 Development (RPG/RPGLE)',
