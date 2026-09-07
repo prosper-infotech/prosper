@@ -103,27 +103,6 @@ const HERO_SLIDES = [
 
 const PRODUCTS = [
   {
-    name: 'WMS',
-    tag: 'Warehouse',
-    img: wmsImg,
-    desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
-    to: '/products/software/wms',
-  },
-  {
-    name: 'DockVision',
-    tag: 'Dock & Loading',
-    img: dockVisionImg,
-    desc: 'AI cameras monitor every dock door, confirming safe loading and unloading without manual checks.',
-    to: '/products/software/dockvision-ai',
-  },
-  {
-    name: 'GateVision',
-    tag: 'Gate & OCR',
-    img: gateVisionImg,
-    desc: 'AI cameras and OCR automate gate check-in, container scanning and access control — no manual logging.',
-    to: '/solutions/gate-yard-dock-vision-ai',
-  },
-  {
     name: 'ContainerVision',
     tag: 'Container Terminals',
     img: containerVisionImg,
@@ -138,6 +117,13 @@ const PRODUCTS = [
     to: '/solutions/ai-computer-vision',
   },
   {
+    name: 'WMS',
+    tag: 'Warehouse',
+    img: wmsImg,
+    desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
+    to: '/products/software/wms',
+  },
+  {
     name: 'Asset Tracking',
     tag: 'RFID & GPS',
     img: assetTrackingImg,
@@ -145,11 +131,18 @@ const PRODUCTS = [
     to: '/products/software/asset-tracking',
   },
   {
-    name: 'AS400',
-    tag: 'IBM i / AS400',
-    img: as400Img,
-    desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
-    to: '/ibm-i-as400',
+    name: 'GateVision',
+    tag: 'Gate & OCR',
+    img: gateVisionImg,
+    desc: 'AI cameras and OCR automate gate check-in, container scanning and access control — no manual logging.',
+    to: '/solutions/gate-yard-dock-vision-ai',
+  },
+  {
+    name: 'DockVision',
+    tag: 'Dock & Loading',
+    img: dockVisionImg,
+    desc: 'AI cameras monitor every dock door, confirming safe loading and unloading without manual checks.',
+    to: '/products/software/dockvision-ai',
   },
   {
     name: 'Video Attendance',
@@ -157,6 +150,13 @@ const PRODUCTS = [
     img: videoAttendanceImg,
     desc: 'Facial-recognition check-in replaces manual logs and buddy-punching with a live, auditable attendance record.',
     to: '/products/software/video-attendance',
+  },
+  {
+    name: 'AS400',
+    tag: 'IBM i / AS400',
+    img: as400Img,
+    desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
+    to: '/ibm-i-as400',
   },
 ]
 
