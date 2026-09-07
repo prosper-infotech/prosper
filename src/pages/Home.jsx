@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
@@ -15,8 +15,91 @@ import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
 import visionAISuiteImg from '../assets/new homepage image.png'
 import ctaSuiteImg from '../assets/Ready to streamlime.png'
+import heroSlideAiVisionIot from '../assets/hero-slide-ai-vision-iot.jpg'
+import heroSlideRfidWarehouse from '../assets/hero-slide-rfid-driven-warehouse.jpg'
+import heroSlideDockMonitoring from '../assets/hero-slide-dock-monitoring.jpg'
+import heroSlideCfs from '../assets/hero-slide-cfs.jpg'
+import heroSlideForklift from '../assets/hero-slide-forklift.jpg'
+import heroSlideDockAi from '../assets/hero-slide-dock-ai.jpg'
+import heroSlideIotYard from '../assets/hero-slide-iot-yard.jpg'
+import heroSlideAssetTracking from '../assets/hero-slide-asset-tracking.jpg'
+import heroSlideDistributionCenter from '../assets/hero-slide-distribution-center.jpg'
+import heroSlideFleetGps from '../assets/hero-slide-fleet-gps.jpg'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
+
+const HERO_SLIDES = [
+  {
+    image: heroSlideAiVisionIot,
+    alt: 'AI-powered DockVision, YardVision, ForkliftVision, and ContainerVision system across a distribution center',
+    eyebrow: 'AI-Powered Visibility',
+    title: 'Transform Logistics With AI-Powered Visibility',
+    subtitle: 'GateVision, YardVision, DockVision, ForkliftVision and ContainerVision AI connected across your operation.',
+  },
+  {
+    image: heroSlideRfidWarehouse,
+    alt: 'RFID-powered warehouse inventory tracking with real-time rack location and pallet detection',
+    eyebrow: 'RFID Warehouse Intelligence',
+    title: 'RFID-Driven Warehouse Intelligence',
+    subtitle: 'Scan, track, and count every pallet automatically — no manual audits, no guesswork.',
+  },
+  {
+    image: heroSlideDockMonitoring,
+    alt: 'Smart dock door status monitoring inside a warehouse',
+    eyebrow: 'Dock Operations',
+    title: 'DockVision AI — AI-Powered Dock Door Monitoring',
+    subtitle: 'Live dock status, automated alerts, and real-time dashboards right on the floor.',
+  },
+  {
+    image: heroSlideCfs,
+    alt: 'AI-powered CFS and container terminal automation with OCR and GPS tracking',
+    eyebrow: 'Container Terminal Automation',
+    title: 'AI-Powered CFS & Container Terminal Automation',
+    subtitle: 'Smart container visibility from gate arrival to yard movement.',
+  },
+  {
+    image: heroSlideForklift,
+    alt: 'ForkliftVision AI sensor module automating pallet pickup in a warehouse',
+    eyebrow: 'AI-Powered Warehouse Automation',
+    title: 'ForkliftVision AI',
+    subtitle: 'Automate pallet pickup, putaway, staging, and trailer loading with OCR, 3D depth sensing, and Edge AI.',
+  },
+  {
+    image: heroSlideDockAi,
+    alt: 'AI and drone-powered dock and yard automation',
+    eyebrow: 'AI & Drone Visibility',
+    title: 'AI-Powered Yard & Dock Automation',
+    subtitle: 'Drones, sensors, and AI track every trailer, dock door, and asset across your yard in real time.',
+  },
+  {
+    image: heroSlideIotYard,
+    alt: 'IoT-connected yard and trailer tracking network',
+    eyebrow: 'Connected Yard',
+    title: 'End-to-End IoT Yard Tracking',
+    subtitle: 'WiFi and IoT sensors keep every trailer and asset visible the moment it enters your yard.',
+  },
+  {
+    image: heroSlideAssetTracking,
+    alt: 'RFID, GPS, BLE and LoRaWAN asset tracking system architecture with a live fleet dashboard',
+    eyebrow: 'Asset & Fleet Tracking',
+    title: 'Know Where Every Asset Is, Always',
+    subtitle: 'RFID, GPS, BLE, and LoRaWAN trackers feed one live dashboard — across the yard, the warehouse, and the road.',
+  },
+  {
+    image: heroSlideDistributionCenter,
+    alt: 'Automated distribution center with connected inventory, dock and workforce systems',
+    eyebrow: 'Distribution Center Automation',
+    title: 'One Platform for Your Entire Distribution Center',
+    subtitle: 'Inbound to outbound — inventory, dock, yard and workforce visibility in a single connected system.',
+  },
+  {
+    image: heroSlideFleetGps,
+    alt: 'GPS-tracked fleet of trucks and trailers on a live map dashboard',
+    eyebrow: 'Fleet & GPS Tracking',
+    title: 'Real-Time Fleet Visibility, Coast to Coast',
+    subtitle: 'GPS-tracked trucks and trailers, live ETAs, and geofenced alerts across your entire fleet.',
+  },
+]
 
 const PRODUCTS = [
   {
@@ -121,73 +204,170 @@ export default function Home() {
     return () => clearInterval(id)
   }, [])
 
+  const totalHeroSlides = HERO_SLIDES.length + 1
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [heroHover, setHeroHover] = useState(false)
+  useEffect(() => {
+    if (heroHover) return
+    const timer = setTimeout(() => setActiveSlide((i) => (i + 1) % totalHeroSlides), 6000)
+    return () => clearTimeout(timer)
+  }, [activeSlide, heroHover, totalHeroSlides])
+  const goPrevSlide = () => setActiveSlide((i) => (i - 1 + totalHeroSlides) % totalHeroSlides)
+  const goNextSlide = () => setActiveSlide((i) => (i + 1) % totalHeroSlides)
+
   return (
     <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-6 pb-10">
-        <motion.div
-          className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
-          <div className="md:flex-1">
-            <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
-                AI-Powered Logistics Platform
-              </span>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h1 className="mt-5 text-2xl sm:text-3xl md:text-[27px] lg:text-[42px] font-extrabold leading-tight tracking-tight">
-                Automate and
-                <br />
-                Optimize Your
-                <br />
-                <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={HERO_WORDS[wordIndex]}
-                      initial={{ y: '100%', opacity: 0 }}
-                      animate={{ y: '0%', opacity: 1 }}
-                      exit={{ y: '-100%', opacity: 0 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0 text-gold-dark"
-                    >
-                      {HERO_WORDS[wordIndex]} Operations
-                    </motion.span>
-                  </AnimatePresence>
-                </span>
-                with our
-                <br />
-                AI+EdgeBox Platform
-              </h1>
-            </Reveal>
-            <Reveal delay={0.16}>
-              <p className="mt-5 text-base text-ink-600 max-w-lg">
-                We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
-              </p>
-            </Reveal>
-            <Reveal delay={0.24}>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
-                  Book a Demo
-                </Button>
-                <Button to="/solutions" variant="outline-dark" className="hover:scale-105">
-                  Learn More
-                </Button>
-              </div>
-            </Reveal>
-          </div>
+      <div className="relative" onMouseEnter={() => setHeroHover(true)} onMouseLeave={() => setHeroHover(false)}>
+        <AnimatePresence mode="wait">
+          {activeSlide === 0 ? (
+            <motion.section
+              key="hero-slide-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative overflow-hidden pt-6 pb-10"
+            >
+              <motion.div
+                className="pointer-events-none absolute top-[-120px] right-[-80px] h-[480px] w-[480px] rounded-full bg-gold/20 blur-3xl"
+                animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
+                <div className="md:flex-1">
+                  <Reveal>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
+                      AI-Powered Logistics Platform
+                    </span>
+                  </Reveal>
+                  <Reveal delay={0.08}>
+                    <h1 className="mt-5 text-2xl sm:text-3xl md:text-[27px] lg:text-[42px] font-extrabold leading-tight tracking-tight">
+                      Automate and
+                      <br />
+                      Optimize Your
+                      <br />
+                      <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
+                        <AnimatePresence mode="wait">
+                          <motion.span
+                            key={HERO_WORDS[wordIndex]}
+                            initial={{ y: '100%', opacity: 0 }}
+                            animate={{ y: '0%', opacity: 1 }}
+                            exit={{ y: '-100%', opacity: 0 }}
+                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                            className="absolute inset-0 text-gold-dark"
+                          >
+                            {HERO_WORDS[wordIndex]} Operations
+                          </motion.span>
+                        </AnimatePresence>
+                      </span>
+                      with our
+                      <br />
+                      AI+EdgeBox Platform
+                    </h1>
+                  </Reveal>
+                  <Reveal delay={0.16}>
+                    <p className="mt-5 text-base text-ink-600 max-w-lg">
+                      We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
+                    </p>
+                  </Reveal>
+                  <Reveal delay={0.24}>
+                    <div className="mt-8 flex flex-wrap gap-4">
+                      <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
+                        Book a Demo
+                      </Button>
+                      <Button to="/solutions" variant="outline-dark" className="hover:scale-105">
+                        Learn More
+                      </Button>
+                    </div>
+                  </Reveal>
+                </div>
 
-          <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
-            <img
-              src={visionAISuiteImg}
-              alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
-              className="w-full"
-            />
-          </Reveal>
+                <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
+                  <img
+                    src={visionAISuiteImg}
+                    alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
+                    className="w-full"
+                  />
+                </Reveal>
+              </div>
+            </motion.section>
+          ) : (
+            <motion.section
+              key={`hero-slide-${activeSlide}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative h-[460px] sm:h-[520px] lg:h-[580px] overflow-hidden"
+            >
+              <img
+                src={HERO_SLIDES[activeSlide - 1].image}
+                alt={HERO_SLIDES[activeSlide - 1].alt}
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-black/25" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="relative z-10 flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
+                <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
+                  {HERO_SLIDES[activeSlide - 1].eyebrow}
+                </span>
+                <h2 className="max-w-3xl text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]">
+                  {HERO_SLIDES[activeSlide - 1].title}
+                </h2>
+                <p className="max-w-2xl text-white text-base lg:text-lg [text-shadow:0_2px_14px_rgba(0,0,0,0.9)]">
+                  {HERO_SLIDES[activeSlide - 1].subtitle}
+                </p>
+                <div className="mt-4 flex flex-wrap justify-center gap-4">
+                  <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary-dark">
+                    Book a Demo
+                  </Button>
+                  <Button to="/solutions" variant="outline">
+                    Learn More
+                  </Button>
+                </div>
+              </div>
+            </motion.section>
+          )}
+        </AnimatePresence>
+
+        <div className="relative max-w-7xl mx-auto px-6 flex items-center justify-center gap-4 py-4">
+          <button
+            type="button"
+            onClick={goPrevSlide}
+            aria-label="Previous slide"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <div className="flex items-center gap-2">
+            {Array.from({ length: totalHeroSlides }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setActiveSlide(i)}
+                aria-label={`Show slide ${i + 1}`}
+                className="p-1.5 -m-1.5"
+              >
+                <span
+                  className={`block h-1.5 rounded-full transition-all duration-300 ${
+                    i === activeSlide ? 'w-6 bg-gold-dark' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={goNextSlide}
+            aria-label="Next slide"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
-      </section>
+      </div>
 
       {/* Product suite */}
       <section className="py-20">
