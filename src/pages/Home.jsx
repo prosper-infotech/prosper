@@ -207,17 +207,6 @@ export default function Home() {
   const totalHeroSlides = HERO_SLIDES.length + 1
   const [activeSlide, setActiveSlide] = useState(0)
   const [heroHover, setHeroHover] = useState(false)
-  const heroSlideOneRef = useRef(null)
-  const [heroHeight, setHeroHeight] = useState(null)
-  useEffect(() => {
-    if (activeSlide !== 0 || !heroSlideOneRef.current) return
-    const el = heroSlideOneRef.current
-    const update = () => setHeroHeight(el.offsetHeight)
-    update()
-    const ro = new ResizeObserver(update)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [activeSlide])
   useEffect(() => {
     if (heroHover) return
     const timer = setTimeout(() => setActiveSlide((i) => (i + 1) % totalHeroSlides), 6000)
@@ -234,7 +223,6 @@ export default function Home() {
           {activeSlide === 0 ? (
             <motion.section
               key="hero-slide-0"
-              ref={heroSlideOneRef}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -311,18 +299,17 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              style={heroHeight ? { height: heroHeight } : undefined}
-              className="relative h-[460px] sm:h-[520px] lg:h-[580px] overflow-hidden"
+              className="relative overflow-hidden"
             >
               <img
                 src={HERO_SLIDES[activeSlide - 1].image}
                 alt={HERO_SLIDES[activeSlide - 1].alt}
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                className="block w-full h-auto"
               />
               <div className="pointer-events-none absolute inset-0 bg-black/25" />
               <div className="pointer-events-none absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="relative z-10 flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center">
                 <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
                   {HERO_SLIDES[activeSlide - 1].eyebrow}
                 </span>

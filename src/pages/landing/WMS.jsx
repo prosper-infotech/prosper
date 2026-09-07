@@ -179,6 +179,7 @@ export default function WMS() {
 
       <LeadFormPopup
         campaign="WMS Landing Page (Popup)"
+        product="WMS"
         title="Book your free WMS demo"
         description="See real-time inventory, picking and dispatch dashboards — no cost, no obligation."
         submitLabel="Get a free demo"
@@ -630,6 +631,7 @@ export default function WMS() {
             </p>
             <LandingLeadForm
               campaign="WMS Landing Page"
+              product="WMS"
               submitLabel="Get a free demo"
               serviceLabel="What best describes your situation?"
               serviceOptions={[
