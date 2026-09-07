@@ -207,6 +207,17 @@ export default function Home() {
   const totalHeroSlides = HERO_SLIDES.length + 1
   const [activeSlide, setActiveSlide] = useState(0)
   const [heroHover, setHeroHover] = useState(false)
+  const heroSlideOneRef = useRef(null)
+  const [heroHeight, setHeroHeight] = useState(null)
+  useEffect(() => {
+    if (activeSlide !== 0 || !heroSlideOneRef.current) return
+    const el = heroSlideOneRef.current
+    const update = () => setHeroHeight(el.offsetHeight)
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [activeSlide])
   useEffect(() => {
     if (heroHover) return
     const timer = setTimeout(() => setActiveSlide((i) => (i + 1) % totalHeroSlides), 6000)
@@ -223,6 +234,7 @@ export default function Home() {
           {activeSlide === 0 ? (
             <motion.section
               key="hero-slide-0"
+              ref={heroSlideOneRef}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -299,6 +311,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
+              style={heroHeight ? { height: heroHeight } : undefined}
               className="relative h-[460px] sm:h-[520px] lg:h-[580px] overflow-hidden"
             >
               <img
