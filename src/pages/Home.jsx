@@ -194,7 +194,7 @@ export default function Home() {
                 animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative max-w-[1440px] mx-auto px-3 flex flex-col md:flex-row md:items-center gap-10">
+              <div className="relative max-w-[1440px] mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
                 <div className="md:flex-1">
                   <Reveal>
                     <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
@@ -249,7 +249,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden"
             >
-              <div className="relative max-w-[1440px] mx-auto px-3 pt-6 md:pt-8">
+              <div className="relative max-w-[1440px] mx-auto px-6 pt-6 md:pt-8">
                 <div className="relative aspect-[1920/823] overflow-hidden rounded-2xl">
                   <img
                     src={HERO_SLIDES[activeSlide - 1].image}
@@ -259,7 +259,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative max-w-[1440px] mx-auto px-3 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
+              <div className="relative max-w-[1440px] mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
                 <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,4rem)] py-[clamp(1.25rem,3vw,2rem)] flex flex-col items-center gap-2.5 text-center">
                   <span className="text-gold text-[clamp(0.7rem,1vw,0.875rem)] font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
@@ -317,7 +317,7 @@ export default function Home() {
         </AnimatePresence>
 
         {activeSlide === 0 && (
-          <div className="relative max-w-[1440px] mx-auto px-3 flex items-center justify-center gap-4 py-4">
+          <div className="relative max-w-[1440px] mx-auto px-6 flex items-center justify-center gap-4 py-4">
             <button
               type="button"
               onClick={goPrevSlide}
@@ -357,7 +357,7 @@ export default function Home() {
 
       {/* Product suite */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-3">
+        <div className="max-w-7xl mx-auto px-6">
           <Reveal className="mb-12">
             <span className="text-primary text-sm font-semibold uppercase tracking-widest border-b-2 border-gold-dark pb-2 inline-block">
               Our Platform
@@ -419,7 +419,7 @@ export default function Home() {
 
       {/* Solutions gallery */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-3 grid gap-14 lg:grid-cols-[1fr_0.85fr] items-center">
+        <div className="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-[1fr_0.85fr] items-center">
           <Reveal>
             <span className="text-primary text-sm font-semibold uppercase tracking-widest border-b-2 border-gold-dark pb-2 inline-block">
               Our Solutions
@@ -460,7 +460,7 @@ export default function Home() {
 
       {/* Stats */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-3">
+        <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-primary-dark via-navy to-[#081a3d] px-8 py-14 md:px-16 md:py-16">
               <motion.div
@@ -504,7 +504,7 @@ export default function Home() {
 
       {/* Closing CTA */}
       <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-3">
+        <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#fffdf0] via-[#fff3c4] to-[#ffe58a] px-8 py-12 md:px-14 md:py-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
               <div>
