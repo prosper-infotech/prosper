@@ -1,8 +1,5 @@
 import {
-  Camera,
   Boxes,
-  ScanSearch,
-  Cpu,
   Layers3,
   ShieldAlert,
   Puzzle,
@@ -17,6 +14,15 @@ import {
   MapPinned,
   PackageSearch,
   MessageCircle,
+  ClipboardList,
+  ScanLine,
+  MoveVertical,
+  CheckCircle2,
+  Route,
+  Crosshair,
+  PackageCheck,
+  RefreshCw,
+  RotateCcw,
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
@@ -40,10 +46,18 @@ const STAT_BADGES = [
 ]
 
 const WORKFLOW = [
-  { icon: Camera, title: 'Capture', description: '8MP cameras and 3D depth sensors mounted on the forklift.' },
-  { icon: Cpu, title: 'Detect', description: 'Edge AI identifies pallets, racks, aisles and people in real time.' },
-  { icon: ScanSearch, title: 'Validate', description: 'OCR confirms pallet ID, rack location and putaway/pick accuracy.' },
-  { icon: Puzzle, title: 'Update', description: 'Inventory position and task status sync to your WMS/YMS automatically.' },
+  { icon: ClipboardList, title: 'WMS/ERP Creates Task', description: 'A putaway, pickup or retrieval task is sent to the forklift.' },
+  { icon: Truck, title: 'Forklift Approaches Pallet', description: 'Forklift navigates to the pallet location.' },
+  { icon: ScanLine, title: 'Pallet Camera Reads ID', description: 'Pallet QR/barcode captured (e.g. PAL-004832).' },
+  { icon: Layers3, title: 'Depth Sensor Confirms Engagement', description: '3D depth AI verifies the forks are properly engaged.' },
+  { icon: MoveVertical, title: 'Height Sensor Confirms Lift', description: 'Draw-wire sensor confirms the target lift height is reached.' },
+  { icon: CheckCircle2, title: 'Pickup Event Confirmed', description: 'Pallet ID pickup is confirmed and logged.' },
+  { icon: Route, title: 'Forklift Travels to Rack', description: 'Forklift navigates to the assigned rack destination.' },
+  { icon: MapPinned, title: 'Rack Camera Reads Marker', description: 'Rack location captured (e.g. A07-B024-L03-P01).' },
+  { icon: Crosshair, title: 'Depth + Height Verify Position', description: 'Sensors confirm correct level and drop position.' },
+  { icon: PackageCheck, title: 'Putaway Confirmed', description: 'Pallet released and successfully stored at location.' },
+  { icon: RefreshCw, title: 'Inventory Updated', description: 'Movement synced in real time to your ERP/WMS.' },
+  { icon: RotateCcw, title: 'Outbound Retrieval', description: 'The same logic runs in reverse for pallet retrieval.' },
 ]
 
 const FEATURES = [
@@ -239,18 +253,23 @@ export default function ForkliftVisionAI() {
         <div className="relative max-w-6xl mx-auto px-6 py-16 lg:py-20">
           <Reveal className="text-center mb-12">
             <span className="text-primary text-sm font-semibold uppercase tracking-widest">
-              How It Sees
+              End-to-End Rack Storage Workflow
             </span>
-            <h2 className="mt-2 text-3xl">From capture to your WMS/YMS</h2>
+            <h2 className="mt-2 text-3xl">Same logic in reverse for outbound retrieval</h2>
           </Reveal>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {WORKFLOW.map((step, i) => {
               const Icon = step.icon
               return (
-                <Reveal key={step.title} delay={i * 0.08}>
+                <Reveal key={step.title} delay={i * 0.05}>
                   <div className="h-full rounded-lg bg-white border border-ink-300 px-5 py-5 shadow-sm hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-300">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
-                      <Icon className="h-5 w-5" />
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold text-primary text-[11px] font-bold shrink-0">
+                        {i + 1}
+                      </span>
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/20 text-primary">
+                        <Icon className="h-5 w-5" />
+                      </div>
                     </div>
                     <h3 className="mt-4 text-ink-900 text-sm font-bold">{step.title}</h3>
                     <p className="mt-1.5 text-xs text-ink-600 leading-relaxed">{step.description}</p>
