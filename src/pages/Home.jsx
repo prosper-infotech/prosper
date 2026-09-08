@@ -277,7 +277,7 @@ export default function Home() {
               </div>
 
               <div className="relative max-w-[1440px] mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
-                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,4rem)] py-[clamp(1.25rem,3vw,2rem)] flex flex-col items-center gap-2.5 text-center">
+                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark/90 to-[#081a3d]/90 backdrop-blur-md shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,4rem)] py-[clamp(1.25rem,3vw,2rem)] flex flex-col items-center gap-2.5 text-center">
                   <span className="text-gold text-[clamp(0.7rem,1vw,0.875rem)] font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
                   </span>
