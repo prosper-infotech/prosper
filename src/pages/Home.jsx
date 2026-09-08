@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
-import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, PhoneCall, MessageCircle } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
+import CallDropdown from '../components/layout/CallDropdown'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -227,6 +228,41 @@ export default function Home() {
                       <Button to="/solutions" variant="outline-dark" className="hover:scale-105">
                         Learn More
                       </Button>
+                      <CallDropdown
+                        eventCategory="Homepage Hero"
+                        align="left"
+                        triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-sm hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-95"
+                      >
+                        <PhoneCall className="h-4 w-4" />
+                        Call Us
+                      </CallDropdown>
+                      <a
+                        href={`https://wa.me/19407583271?text=${encodeURIComponent(
+                          "Hi, I'd like to know more about Prosper Infotech's AI-powered logistics platform."
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() =>
+                          window.gtag?.('event', 'click_whatsapp', { event_category: 'Homepage Hero' })
+                        }
+                        className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-6 py-2.5 text-sm font-semibold text-[#128C4A] shadow-sm transition-all duration-200 hover:bg-[#25D366]/20 hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-95"
+                      >
+                        <svg viewBox="0 0 32 32" className="h-4 w-4 fill-[#25D366]" aria-hidden="true">
+                          <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.702 4.607 1.912 6.472L4 29l7.72-1.876A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.83-.562-5.4-1.535l-.387-.23-4.583 1.114 1.13-4.47-.253-.398A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.94-8.144c-.325-.163-1.925-.95-2.223-1.058-.298-.109-.516-.163-.733.163-.217.325-.842 1.058-1.033 1.276-.19.217-.38.244-.706.081-.325-.163-1.374-.506-2.617-1.612-.968-.862-1.622-1.927-1.812-2.252-.19-.325-.02-.5.143-.663.147-.146.325-.38.488-.57.163-.19.217-.325.325-.543.109-.217.054-.407-.027-.57-.081-.163-.733-1.765-1.004-2.417-.264-.635-.532-.55-.733-.56l-.625-.011c-.217 0-.57.081-.868.407-.298.325-1.137 1.112-1.137 2.712 0 1.6 1.164 3.147 1.326 3.364.163.217 2.29 3.497 5.55 4.904.775.335 1.38.535 1.852.684.778.247 1.486.212 2.046.129.624-.093 1.925-.787 2.196-1.547.271-.76.271-1.412.19-1.548-.081-.135-.298-.216-.624-.38Z" />
+                        </svg>
+                        WhatsApp
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          window.gtag?.('event', 'click_chat', { event_category: 'Homepage Hero' })
+                          window.Tawk_API?.maximize?.()
+                        }}
+                        className="inline-flex items-center gap-2 rounded-lg bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-sm px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-95"
+                      >
+                        <MessageCircle className="h-4 w-4" />
+                        Chat
+                      </button>
                     </div>
                   </Reveal>
                 </div>

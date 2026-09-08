@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, ArrowRight, Menu, X } from 'lucide-react'
+import { ChevronDown, ArrowRight, Menu, X, Phone } from 'lucide-react'
 import { NAV } from '../../data/navigation'
 import logo from '../../assets/logo-light.png'
+import CallDropdown from './CallDropdown'
+import WhatsAppLink from './WhatsAppLink'
 
 const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/' && item.label !== 'Industries').map(
   (item) => (item.label === 'Resources' ? { ...item, label: 'Company' } : item)
@@ -134,6 +136,21 @@ export default function Header() {
           Book A Demo
           <ArrowRight className="h-4 w-4" />
         </a>
+
+        <div className="hidden lg:flex shrink-0 items-center gap-2">
+          <CallDropdown
+            eventCategory="Header"
+            align="right"
+            triggerClassName="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink-900/20 text-ink-900 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+          >
+            <Phone className="h-4 w-4" />
+          </CallDropdown>
+          <WhatsAppLink
+            eventCategory="Header"
+            iconClassName="h-4 w-4"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#25D366] shadow-sm transition-transform hover:scale-105"
+          />
+        </div>
 
         <button
           type="button"
