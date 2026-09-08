@@ -58,7 +58,7 @@ function NavDropdown({ item, align }) {
                 className="rounded-lg px-2 py-2 text-sm font-semibold text-white/90 hover:bg-white/5 hover:text-gold"
               >
                 {child.label}
-                {child.description && (
+                {item.label !== 'Company' && child.description && (
                   <span className="mt-0.5 block text-xs font-normal text-white/40">{child.description}</span>
                 )}
               </Link>
