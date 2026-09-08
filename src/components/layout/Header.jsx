@@ -100,9 +100,9 @@ export default function Header() {
         solid ? 'bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-[#fffdf6]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-6 flex items-center gap-6">
+      <div className="max-w-7xl mx-auto px-6 py-3.5 flex items-center gap-6">
         <Link to="/" className="shrink-0" onClick={() => setMobileOpen(false)}>
-          <img src={logo} alt="Prosper Infotech" className="h-11 w-auto" />
+          <img src={logo} alt="Prosper Infotech" className="h-9 w-auto" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-auto">
@@ -110,7 +110,7 @@ export default function Header() {
             <div key={item.path} className="group relative">
               <Link
                 to={item.path}
-                className="relative flex items-center gap-1 whitespace-nowrap px-4 py-2 text-[15px] font-medium text-ink-900 transition-colors hover:text-primary"
+                className="relative flex items-center gap-1 whitespace-nowrap px-4 py-1.5 text-[15px] font-medium text-ink-900 transition-colors hover:text-primary"
               >
                 {item.label}
                 {item.children && (
@@ -127,7 +127,7 @@ export default function Header() {
 
         <Link
           to="/contact"
-          className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-all duration-200 hover:scale-105 hover:border-primary hover:bg-primary hover:text-white"
+          className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2 text-sm font-semibold text-ink-900 transition-all duration-200 hover:scale-105 hover:border-primary hover:bg-primary hover:text-white"
         >
           Book A Demo
           <ArrowRight className="h-4 w-4" />
@@ -138,7 +138,7 @@ export default function Header() {
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
-          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink-900/20 text-ink-900 lg:hidden"
+          className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink-900/20 text-ink-900 lg:hidden"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
