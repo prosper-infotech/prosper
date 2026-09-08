@@ -274,9 +274,8 @@ export default function Home() {
                 alt={HERO_SLIDES[activeSlide - 1].alt}
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
-              <div className="pointer-events-none absolute inset-0 bg-black/25" />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/50 to-transparent" />
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center">
                 <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
                   {HERO_SLIDES[activeSlide - 1].eyebrow}
