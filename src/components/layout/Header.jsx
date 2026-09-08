@@ -125,13 +125,15 @@ export default function Header() {
           ))}
         </nav>
 
-        <Link
-          to="/contact"
+        <a
+          href="https://calendly.com/prosperinfotech-sales/30min"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-all duration-200 hover:scale-105 hover:border-primary hover:bg-primary hover:text-white"
         >
           Book A Demo
           <ArrowRight className="h-4 w-4" />
-        </Link>
+        </a>
 
         <button
           type="button"
@@ -188,14 +190,16 @@ export default function Header() {
               </div>
             ))}
           </nav>
-          <Link
-            to="/contact"
+          <a
+            href="https://calendly.com/prosperinfotech-sales/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
             className="mt-4 flex items-center justify-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900"
           >
             Book A Demo
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </div>
       )}
     </header>
