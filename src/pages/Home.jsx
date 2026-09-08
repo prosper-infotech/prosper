@@ -247,69 +247,69 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden aspect-[1920/823]"
+              className="relative overflow-hidden"
             >
-              <img
-                src={HERO_SLIDES[activeSlide - 1].image}
-                alt={HERO_SLIDES[activeSlide - 1].alt}
-                className="absolute inset-0 h-full w-full object-cover object-center"
-              />
+              <div className="relative aspect-[1920/823]">
+                <img
+                  src={HERO_SLIDES[activeSlide - 1].image}
+                  alt={HERO_SLIDES[activeSlide - 1].alt}
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
+              </div>
 
-              <div className="absolute inset-x-0 bottom-0 z-10 bg-navy/85 backdrop-blur-sm">
-                <div className="relative max-w-4xl mx-auto px-14 sm:px-16 py-5 md:py-6 flex flex-col items-center gap-2.5 text-center">
-                  <span className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-widest">
-                    {HERO_SLIDES[activeSlide - 1].eyebrow}
-                  </span>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold leading-tight text-white">
-                    {HERO_SLIDES[activeSlide - 1].title}
-                  </h2>
-                  <p className="hidden sm:block max-w-2xl text-white/85 text-sm md:text-base">
-                    {HERO_SLIDES[activeSlide - 1].subtitle}
-                  </p>
-                  <div className="mt-1.5 flex flex-wrap justify-center gap-3">
-                    <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary-dark">
-                      Book a Demo
-                    </Button>
-                    <Button to="/solutions" variant="outline">
-                      Learn More
-                    </Button>
-                  </div>
-
-                  <div className="mt-1.5 flex items-center gap-2">
-                    {Array.from({ length: totalHeroSlides }).map((_, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => setActiveSlide(i)}
-                        aria-label={`Show slide ${i + 1}`}
-                        className="p-1.5 -m-1.5"
-                      >
-                        <span
-                          className={`block h-1.5 rounded-full transition-all duration-300 ${
-                            i === activeSlide ? 'w-6 bg-gold' : 'w-1.5 bg-white/30 hover:bg-white/60'
-                          }`}
-                        />
-                      </button>
-                    ))}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={goPrevSlide}
-                    aria-label="Previous slide"
-                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white hover:text-navy"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goNextSlide}
-                    aria-label="Next slide"
-                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white hover:text-navy"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
+              <div className="relative max-w-4xl mx-auto px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
+                <span className="text-primary text-xs sm:text-sm font-semibold uppercase tracking-widest">
+                  {HERO_SLIDES[activeSlide - 1].eyebrow}
+                </span>
+                <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold leading-tight text-primary">
+                  {HERO_SLIDES[activeSlide - 1].title}
+                </h2>
+                <p className="max-w-2xl text-ink-600 text-sm md:text-base">
+                  {HERO_SLIDES[activeSlide - 1].subtitle}
+                </p>
+                <div className="mt-1.5 flex flex-wrap justify-center gap-3">
+                  <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary">
+                    Book a Demo
+                  </Button>
+                  <Button to="/solutions" variant="outline-dark">
+                    Learn More
+                  </Button>
                 </div>
+
+                <div className="mt-1.5 flex items-center gap-2">
+                  {Array.from({ length: totalHeroSlides }).map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveSlide(i)}
+                      aria-label={`Show slide ${i + 1}`}
+                      className="p-1.5 -m-1.5"
+                    >
+                      <span
+                        className={`block h-1.5 rounded-full transition-all duration-300 ${
+                          i === activeSlide ? 'w-6 bg-gold-dark' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={goPrevSlide}
+                  aria-label="Previous slide"
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 text-primary transition-colors hover:bg-primary hover:text-white"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={goNextSlide}
+                  aria-label="Next slide"
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 text-primary transition-colors hover:bg-primary hover:text-white"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
               </div>
             </motion.section>
           )}
