@@ -249,7 +249,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden"
             >
-              <div className="relative max-w-5xl mx-auto px-6 pt-6 md:pt-8">
+              <div className="relative mx-6 md:mx-8 pt-6 md:pt-8">
                 <div className="relative aspect-[1920/823] overflow-hidden rounded-2xl">
                   <img
                     src={HERO_SLIDES[activeSlide - 1].image}
@@ -259,7 +259,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative max-w-5xl mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10">
+              <div className="relative mx-6 md:mx-8 -mt-8 md:-mt-10 pb-8 md:pb-10">
                 <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
                   <span className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
