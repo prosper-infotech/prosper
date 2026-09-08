@@ -259,8 +259,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative mx-6 md:mx-8 -mt-8 md:-mt-10 pb-8 md:pb-10">
-                <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
+              <div className="relative mx-6 md:mx-8 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
+                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
                   <span className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
                   </span>
@@ -272,10 +272,7 @@ export default function Home() {
                   </p>
                   <div className="mt-1.5 flex flex-wrap justify-center gap-3">
                     <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary-dark">
-                      Book a Demo
-                    </Button>
-                    <Button to="/solutions" variant="outline">
-                      Learn More
+                      Book a Demo Now
                     </Button>
                   </div>
 
