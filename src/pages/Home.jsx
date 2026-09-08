@@ -28,7 +28,7 @@ const HERO_SLIDES = [
     alt: 'AI-powered DockVision, YardVision, ForkliftVision, and ContainerVision system across a distribution center',
     eyebrow: 'AI-Powered Visibility',
     title: 'Transform Logistics With AI-Powered Visibility',
-    subtitle: 'GateVision, YardVision, DockVision, ForkliftVision and ContainerVision AI connected across your operation.',
+    subtitle: 'One AI platform connecting every gate, yard, dock and forklift in real time.',
   },
   {
     image: heroSlideRfidWarehouse,
@@ -56,14 +56,14 @@ const HERO_SLIDES = [
     alt: 'ForkliftVision AI sensor module automating pallet pickup in a warehouse',
     eyebrow: 'AI-Powered Warehouse Automation',
     title: 'ForkliftVision AI',
-    subtitle: 'Automate pallet pickup, putaway, staging, and trailer loading with OCR, 3D depth sensing, and Edge AI.',
+    subtitle: 'Automate pallet pickup, putaway and staging with OCR and Edge AI.',
   },
   {
     image: heroSlideAssetTracking,
     alt: 'RFID, GPS, BLE and LoRaWAN asset tracking system architecture with a live fleet dashboard',
     eyebrow: 'Asset & Fleet Tracking',
     title: 'Know Where Every Asset Is, Always',
-    subtitle: 'RFID, GPS, BLE, and LoRaWAN trackers feed one live dashboard — across the yard, the warehouse, and the road.',
+    subtitle: 'RFID, GPS and BLE trackers feed one live dashboard, everywhere.',
   },
 ]
 
