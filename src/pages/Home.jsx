@@ -249,7 +249,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden"
             >
-              <div className="relative mx-6 md:mx-8 pt-6 md:pt-8">
+              <div className="relative max-w-[1864px] mx-auto px-6 md:px-8 pt-6 md:pt-8">
                 <div className="relative aspect-[1920/823] overflow-hidden rounded-2xl">
                   <img
                     src={HERO_SLIDES[activeSlide - 1].image}
@@ -259,15 +259,15 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative mx-6 md:mx-8 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
-                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,4rem)] py-[clamp(1.25rem,3vw,2rem)] flex flex-col items-center gap-2.5 text-center">
-                  <span className="text-gold text-[clamp(0.7rem,1vw,0.875rem)] font-semibold uppercase tracking-widest">
+              <div className="relative max-w-[1864px] mx-auto px-6 md:px-8 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
+                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,5rem)] py-[clamp(1.25rem,3vw,2.5rem)] flex flex-col items-center gap-2.5 text-center">
+                  <span className="text-gold text-[clamp(0.7rem,1vw,1rem)] font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
                   </span>
-                  <h2 className="text-[clamp(1.125rem,2.2vw,1.5rem)] font-heading font-bold leading-tight text-white">
+                  <h2 className="text-[clamp(1.125rem,2.2vw,2rem)] font-heading font-bold leading-tight text-white">
                     {HERO_SLIDES[activeSlide - 1].title}
                   </h2>
-                  <p className="max-w-2xl text-white/80 text-[clamp(0.8rem,1.2vw,1rem)]">
+                  <p className="max-w-2xl text-white/80 text-[clamp(0.8rem,1.2vw,1.125rem)]">
                     {HERO_SLIDES[activeSlide - 1].subtitle}
                   </p>
                   <div className="mt-1.5 flex flex-wrap justify-center gap-3">
