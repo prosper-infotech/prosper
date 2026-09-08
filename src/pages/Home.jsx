@@ -257,59 +257,61 @@ export default function Home() {
                 />
               </div>
 
-              <div className="relative max-w-4xl mx-auto px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
-                <span className="text-primary text-xs sm:text-sm font-semibold uppercase tracking-widest">
-                  {HERO_SLIDES[activeSlide - 1].eyebrow}
-                </span>
-                <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold leading-tight text-primary">
-                  {HERO_SLIDES[activeSlide - 1].title}
-                </h2>
-                <p className="max-w-2xl text-ink-600 text-sm md:text-base">
-                  {HERO_SLIDES[activeSlide - 1].subtitle}
-                </p>
-                <div className="mt-1.5 flex flex-wrap justify-center gap-3">
-                  <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary">
-                    Book a Demo
-                  </Button>
-                  <Button to="/solutions" variant="outline-dark">
-                    Learn More
-                  </Button>
-                </div>
+              <div className="relative max-w-5xl mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10">
+                <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
+                  <span className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-widest">
+                    {HERO_SLIDES[activeSlide - 1].eyebrow}
+                  </span>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold leading-tight text-white">
+                    {HERO_SLIDES[activeSlide - 1].title}
+                  </h2>
+                  <p className="max-w-2xl text-white/80 text-sm md:text-base">
+                    {HERO_SLIDES[activeSlide - 1].subtitle}
+                  </p>
+                  <div className="mt-1.5 flex flex-wrap justify-center gap-3">
+                    <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary-dark">
+                      Book a Demo
+                    </Button>
+                    <Button to="/solutions" variant="outline">
+                      Learn More
+                    </Button>
+                  </div>
 
-                <div className="mt-1.5 flex items-center gap-2">
-                  {Array.from({ length: totalHeroSlides }).map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setActiveSlide(i)}
-                      aria-label={`Show slide ${i + 1}`}
-                      className="p-1.5 -m-1.5"
-                    >
-                      <span
-                        className={`block h-1.5 rounded-full transition-all duration-300 ${
-                          i === activeSlide ? 'w-6 bg-gold-dark' : 'w-1.5 bg-primary/20 hover:bg-primary/40'
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
+                  <div className="mt-1.5 flex items-center gap-2">
+                    {Array.from({ length: totalHeroSlides }).map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setActiveSlide(i)}
+                        aria-label={`Show slide ${i + 1}`}
+                        className="p-1.5 -m-1.5"
+                      >
+                        <span
+                          className={`block h-1.5 rounded-full transition-all duration-300 ${
+                            i === activeSlide ? 'w-6 bg-gold' : 'w-1.5 bg-white/25 hover:bg-white/50'
+                          }`}
+                        />
+                      </button>
+                    ))}
+                  </div>
 
-                <button
-                  type="button"
-                  onClick={goPrevSlide}
-                  aria-label="Previous slide"
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 text-primary transition-colors hover:bg-primary hover:text-white"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={goNextSlide}
-                  aria-label="Next slide"
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 text-primary transition-colors hover:bg-primary hover:text-white"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+                  <button
+                    type="button"
+                    onClick={goPrevSlide}
+                    aria-label="Previous slide"
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white hover:text-primary-dark"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goNextSlide}
+                    aria-label="Next slide"
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white hover:text-primary-dark"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
             </motion.section>
           )}
