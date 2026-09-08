@@ -254,25 +254,25 @@ export default function Home() {
                 alt={HERO_SLIDES[activeSlide - 1].alt}
                 className="absolute inset-0 h-full w-full object-cover object-center"
               />
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
-                <div className="flex flex-col items-center gap-4 rounded-2xl bg-black/55 backdrop-blur-[2px] px-6 py-8 md:px-12 md:py-10">
-                  <span className="text-gold text-sm font-semibold uppercase tracking-widest">
-                    {HERO_SLIDES[activeSlide - 1].eyebrow}
-                  </span>
-                  <h2 className="max-w-3xl text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white">
-                    {HERO_SLIDES[activeSlide - 1].title}
-                  </h2>
-                  <p className="max-w-2xl text-white text-base lg:text-lg">
-                    {HERO_SLIDES[activeSlide - 1].subtitle}
-                  </p>
-                  <div className="mt-4 flex flex-wrap justify-center gap-4">
-                    <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary-dark">
-                      Book a Demo
-                    </Button>
-                    <Button to="/solutions" variant="outline">
-                      Learn More
-                    </Button>
-                  </div>
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/40 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center">
+                <span className="text-gold text-sm font-semibold uppercase tracking-widest [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]">
+                  {HERO_SLIDES[activeSlide - 1].eyebrow}
+                </span>
+                <h2 className="max-w-3xl text-3xl md:text-4xl xl:text-5xl font-heading font-bold leading-tight text-white [text-shadow:0_4px_24px_rgba(0,0,0,0.9)]">
+                  {HERO_SLIDES[activeSlide - 1].title}
+                </h2>
+                <p className="max-w-2xl text-white text-base lg:text-lg [text-shadow:0_2px_14px_rgba(0,0,0,0.9)]">
+                  {HERO_SLIDES[activeSlide - 1].subtitle}
+                </p>
+                <div className="mt-4 flex flex-wrap justify-center gap-4">
+                  <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary-dark">
+                    Book a Demo
+                  </Button>
+                  <Button to="/solutions" variant="outline">
+                    Learn More
+                  </Button>
                 </div>
               </div>
             </motion.section>
