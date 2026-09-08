@@ -249,12 +249,14 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden"
             >
-              <div className="relative aspect-[1920/823]">
-                <img
-                  src={HERO_SLIDES[activeSlide - 1].image}
-                  alt={HERO_SLIDES[activeSlide - 1].alt}
-                  className="absolute inset-0 h-full w-full object-cover object-center"
-                />
+              <div className="relative max-w-5xl mx-auto px-6 pt-6 md:pt-8">
+                <div className="relative aspect-[1920/823] overflow-hidden rounded-2xl">
+                  <img
+                    src={HERO_SLIDES[activeSlide - 1].image}
+                    alt={HERO_SLIDES[activeSlide - 1].alt}
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                  />
+                </div>
               </div>
 
               <div className="relative max-w-5xl mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10">
