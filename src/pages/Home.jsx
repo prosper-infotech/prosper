@@ -20,11 +20,7 @@ import heroSlideRfidWarehouse from '../assets/hero-slide-rfid-driven-warehouse.j
 import heroSlideDockMonitoring from '../assets/hero-slide-dock-monitoring.jpg'
 import heroSlideCfs from '../assets/hero-slide-cfs.jpg'
 import heroSlideForklift from '../assets/hero-slide-forklift.jpg'
-import heroSlideDockAi from '../assets/hero-slide-dock-ai.jpg'
-import heroSlideIotYard from '../assets/hero-slide-iot-yard.jpg'
 import heroSlideAssetTracking from '../assets/hero-slide-asset-tracking.jpg'
-import heroSlideDistributionCenter from '../assets/hero-slide-distribution-center.jpg'
-import heroSlideFleetGps from '../assets/hero-slide-fleet-gps.jpg'
 
 const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
 
@@ -65,39 +61,11 @@ const HERO_SLIDES = [
     subtitle: 'Automate pallet pickup, putaway, staging, and trailer loading with OCR, 3D depth sensing, and Edge AI.',
   },
   {
-    image: heroSlideDockAi,
-    alt: 'AI and drone-powered dock and yard automation',
-    eyebrow: 'AI & Drone Visibility',
-    title: 'AI-Powered Yard & Dock Automation',
-    subtitle: 'Drones, sensors, and AI track every trailer, dock door, and asset across your yard in real time.',
-  },
-  {
-    image: heroSlideIotYard,
-    alt: 'IoT-connected yard and trailer tracking network',
-    eyebrow: 'Connected Yard',
-    title: 'End-to-End IoT Yard Tracking',
-    subtitle: 'WiFi and IoT sensors keep every trailer and asset visible the moment it enters your yard.',
-  },
-  {
     image: heroSlideAssetTracking,
     alt: 'RFID, GPS, BLE and LoRaWAN asset tracking system architecture with a live fleet dashboard',
     eyebrow: 'Asset & Fleet Tracking',
     title: 'Know Where Every Asset Is, Always',
     subtitle: 'RFID, GPS, BLE, and LoRaWAN trackers feed one live dashboard — across the yard, the warehouse, and the road.',
-  },
-  {
-    image: heroSlideDistributionCenter,
-    alt: 'Automated distribution center with connected inventory, dock and workforce systems',
-    eyebrow: 'Distribution Center Automation',
-    title: 'One Platform for Your Entire Distribution Center',
-    subtitle: 'Inbound to outbound — inventory, dock, yard and workforce visibility in a single connected system.',
-  },
-  {
-    image: heroSlideFleetGps,
-    alt: 'GPS-tracked fleet of trucks and trailers on a live map dashboard',
-    eyebrow: 'Fleet & GPS Tracking',
-    title: 'Real-Time Fleet Visibility, Coast to Coast',
-    subtitle: 'GPS-tracked trucks and trailers, live ETAs, and geofenced alerts across your entire fleet.',
   },
 ]
 
