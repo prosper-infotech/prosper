@@ -260,14 +260,14 @@ export default function Home() {
               </div>
 
               <div className="relative mx-6 md:mx-8 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
-                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-14 sm:px-16 py-6 md:py-8 flex flex-col items-center gap-2.5 text-center">
-                  <span className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-widest">
+                <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,4rem)] py-[clamp(1.25rem,3vw,2rem)] flex flex-col items-center gap-2.5 text-center">
+                  <span className="text-gold text-[clamp(0.7rem,1vw,0.875rem)] font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
                   </span>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-heading font-bold leading-tight text-white">
+                  <h2 className="text-[clamp(1.125rem,2.2vw,1.5rem)] font-heading font-bold leading-tight text-white">
                     {HERO_SLIDES[activeSlide - 1].title}
                   </h2>
-                  <p className="max-w-2xl text-white/80 text-sm md:text-base">
+                  <p className="max-w-2xl text-white/80 text-[clamp(0.8rem,1.2vw,1rem)]">
                     {HERO_SLIDES[activeSlide - 1].subtitle}
                   </p>
                   <div className="mt-1.5 flex flex-wrap justify-center gap-3">
