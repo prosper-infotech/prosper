@@ -225,9 +225,6 @@ export default function Home() {
                       <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
                         Book a Demo
                       </Button>
-                      <Button to="/solutions" variant="outline-dark" className="hover:scale-105">
-                        Learn More
-                      </Button>
                       <CallDropdown
                         eventCategory="Homepage Hero"
                         align="left"
