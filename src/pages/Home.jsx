@@ -194,7 +194,7 @@ export default function Home() {
                 animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
+              <div className="relative max-w-[1440px] mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
                 <div className="md:flex-1">
                   <Reveal>
                     <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
@@ -249,7 +249,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden"
             >
-              <div className="relative max-w-7xl mx-auto px-6 pt-6 md:pt-8">
+              <div className="relative max-w-[1440px] mx-auto px-6 pt-6 md:pt-8">
                 <div className="relative aspect-[1920/823] overflow-hidden rounded-2xl">
                   <img
                     src={HERO_SLIDES[activeSlide - 1].image}
@@ -259,7 +259,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative max-w-7xl mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
+              <div className="relative max-w-[1440px] mx-auto px-6 -mt-8 md:-mt-10 pb-8 md:pb-10 flex justify-center">
                 <div className="relative w-full md:w-[60%] rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)] px-[clamp(1.5rem,6vw,4rem)] py-[clamp(1.25rem,3vw,2rem)] flex flex-col items-center gap-2.5 text-center">
                   <span className="text-gold text-[clamp(0.7rem,1vw,0.875rem)] font-semibold uppercase tracking-widest">
                     {HERO_SLIDES[activeSlide - 1].eyebrow}
@@ -317,7 +317,7 @@ export default function Home() {
         </AnimatePresence>
 
         {activeSlide === 0 && (
-          <div className="relative max-w-7xl mx-auto px-6 flex items-center justify-center gap-4 py-4">
+          <div className="relative max-w-[1440px] mx-auto px-6 flex items-center justify-center gap-4 py-4">
             <button
               type="button"
               onClick={goPrevSlide}
