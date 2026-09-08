@@ -194,7 +194,7 @@ export default function Home() {
                 animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative max-w-[1440px] mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
+              <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
                 <div className="md:flex-1">
                   <Reveal>
                     <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
@@ -317,7 +317,7 @@ export default function Home() {
         </AnimatePresence>
 
         {activeSlide === 0 && (
-          <div className="relative max-w-[1440px] mx-auto px-6 flex items-center justify-center gap-4 py-4">
+          <div className="relative max-w-7xl mx-auto px-6 flex items-center justify-center gap-4 py-4">
             <button
               type="button"
               onClick={goPrevSlide}
