@@ -22,8 +22,6 @@ import heroSlideCfs from '../assets/hero-slide-cfs.jpg'
 import heroSlideForklift from '../assets/hero-slide-forklift.jpg'
 import heroSlideAssetTracking from '../assets/hero-slide-asset-tracking.jpg'
 
-const HERO_WORDS = ['Warehouse', 'Yard', 'Fleet', 'Container', 'Forklift']
-
 const HERO_SLIDES = [
   {
     image: heroSlideAiVisionIot,
@@ -166,12 +164,6 @@ export default function Home() {
     'IoT, RFID, GPS, and AI-powered visibility for warehouses, yards, and fleets — real-time tracking, asset visibility, and logistics automation from Prosper Infotech.'
   )
 
-  const [wordIndex, setWordIndex] = useState(0)
-  useEffect(() => {
-    const id = setInterval(() => setWordIndex((i) => (i + 1) % HERO_WORDS.length), 2400)
-    return () => clearInterval(id)
-  }, [])
-
   const totalHeroSlides = HERO_SLIDES.length + 1
   const [activeSlide, setActiveSlide] = useState(0)
   const [heroHover, setHeroHover] = useState(false)
@@ -215,20 +207,8 @@ export default function Home() {
                       <br />
                       Optimize Your
                       <br />
-                      <span className="relative block overflow-hidden" style={{ height: '1.15em' }}>
-                        <AnimatePresence mode="wait">
-                          <motion.span
-                            key={HERO_WORDS[wordIndex]}
-                            initial={{ y: '100%', opacity: 0 }}
-                            animate={{ y: '0%', opacity: 1 }}
-                            exit={{ y: '-100%', opacity: 0 }}
-                            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                            className="absolute inset-0 text-gold-dark"
-                          >
-                            {HERO_WORDS[wordIndex]} Operations
-                          </motion.span>
-                        </AnimatePresence>
-                      </span>
+                      <span className="text-gold-dark">Logistic Operations</span>
+                      <br />
                       with our
                       <br />
                       AI+EdgeBox Platform
