@@ -267,12 +267,12 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden"
+              className="relative overflow-hidden aspect-[1920/823]"
             >
               <img
                 src={HERO_SLIDES[activeSlide - 1].image}
                 alt={HERO_SLIDES[activeSlide - 1].alt}
-                className="block w-full h-auto"
+                className="absolute inset-0 h-full w-full object-cover object-center"
               />
               <div className="pointer-events-none absolute inset-0 bg-black/25" />
               <div className="pointer-events-none absolute inset-x-0 top-0 h-[35%] bg-gradient-to-b from-black/60 to-transparent" />
