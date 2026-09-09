@@ -3,49 +3,10 @@ import { Check, ArrowRight, CheckCircle2 } from 'lucide-react'
 import Breadcrumb from '../ui/Breadcrumb'
 import SectionHeading from '../ui/SectionHeading'
 import CTABand from '../ui/CTABand'
+import ConnectedSteps from '../ui/ConnectedSteps'
 import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { SOFTWARE_PRODUCTS } from '../../data/softwareProductsDetail'
-
-function ConnectedSteps({ steps }) {
-  return (
-    <div className="relative mt-5">
-      <div className="lg:hidden absolute left-5 top-5 bottom-5 w-px bg-ink-300" />
-      <div className="hidden lg:block absolute left-[12.5%] right-[12.5%] top-5 h-px bg-ink-300" />
-      <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-4">
-        {steps.map((step) => {
-          const Icon = step.icon
-          return (
-            <div key={step.title} className="relative flex gap-4 lg:flex-1 lg:flex-col lg:items-center lg:text-center">
-              <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-md">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div className="flex-1 lg:mt-1">
-                <h5 className="font-heading font-semibold text-sm text-primary">{step.title}</h5>
-                {step.status && (
-                  <span className="mt-1 inline-block rounded-full bg-gold/15 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
-                    {step.status}
-                  </span>
-                )}
-                {step.description && <p className="mt-1.5 text-xs text-ink-600">{step.description}</p>}
-                {step.items && (
-                  <ul className="mt-2 flex flex-col gap-1 lg:items-start text-left">
-                    {step.items.map((item) => (
-                      <li key={item} className="flex items-start gap-1.5 text-xs text-ink-600">
-                        <Check className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
 
 export default function SoftwareProductDetailTemplate({ detail }) {
   const { name, tagline, description, seoTitle, seoDescription, badge, process, features, highlights, idealFor, architecture, reachStackerPanel, dataPoints, path } = detail

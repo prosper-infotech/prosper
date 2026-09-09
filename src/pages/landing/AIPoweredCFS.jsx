@@ -31,6 +31,7 @@ import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
 import ProcessSteps from '../../components/ui/ProcessSteps'
+import ConnectedSteps from '../../components/ui/ConnectedSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import ScrollProgressBar from '../../components/ui/ScrollProgressBar'
 import ClientLogoStrip from '../../components/ui/ClientLogoStrip'
@@ -296,32 +297,9 @@ export default function AIPoweredCFS() {
             </span>
             <h2 className="mt-2 text-3xl">Container visibility at every step</h2>
           </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {WORKFLOW.map((stage, i) => {
-              const Icon = stage.icon
-              return (
-                <Reveal key={stage.title} delay={i * 0.08}>
-                  <div className="group relative h-full overflow-hidden rounded-2xl bg-white border border-ink-300 px-5 py-5 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_0_40px_-10px_rgba(247,221,0,0.4)]">
-                    <span className="pointer-events-none absolute -top-2 -right-1 text-4xl font-black text-primary/[0.04] group-hover:text-gold/10 transition-colors">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-gold/25 to-gold/5 ring-1 ring-inset ring-gold/20 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="relative mt-4 text-ink-900 text-sm font-bold">{stage.title}</h3>
-                    <ul className="relative mt-2 space-y-1">
-                      {stage.items.map((item) => (
-                        <li key={item} className="text-xs text-ink-600 leading-relaxed">
-                          &middot; {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-gold to-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
-                  </div>
-                </Reveal>
-              )
-            })}
-          </div>
+          <Reveal delay={0.1}>
+            <ConnectedSteps steps={WORKFLOW} />
+          </Reveal>
 
           <Reveal delay={0.1} className="relative mt-10 overflow-hidden rounded-2xl border border-ink-300 bg-white p-6 shadow-[0_2px_10px_-4px_rgba(15,23,42,0.08)] overflow-x-auto">
             <div className="pointer-events-none absolute -top-8 right-0 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
