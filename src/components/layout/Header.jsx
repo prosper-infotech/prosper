@@ -37,10 +37,13 @@ function NavDropdown({ item, align }) {
                   >
                     {group.label}
                   </Link>
-                  <ul className="flex flex-col gap-3">
+                  <ul className="flex flex-col gap-1">
                     {(group.children ?? []).map((child) => (
                       <li key={child.path}>
-                        <Link to={child.path} className="block text-sm font-medium text-ink-900 hover:text-primary">
+                        <Link
+                          to={child.path}
+                          className="block rounded-lg px-2 py-2 text-sm font-medium text-ink-900 hover:bg-primary/5 hover:text-primary"
+                        >
                           {child.label}
                         </Link>
                       </li>
