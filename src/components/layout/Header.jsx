@@ -17,7 +17,7 @@ function NavDropdown({ item, align }) {
   return (
     <div
       className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 ${
-        align === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'
+        align === 'right' ? 'right-0' : align === 'left' ? 'left-0' : 'left-1/2 -translate-x-1/2'
       }`}
     >
       <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] p-8 shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)]">
@@ -121,7 +121,10 @@ export default function Header() {
                 <span className="absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full bg-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
               {item.children && (
-                <NavDropdown item={item} align={i >= NAV_ITEMS.length - 2 ? 'right' : 'center'} />
+                <NavDropdown
+                  item={item}
+                  align={i === 0 ? 'left' : i >= NAV_ITEMS.length - 2 ? 'right' : 'center'}
+                />
               )}
             </div>
           ))}
