@@ -76,7 +76,7 @@ function NavDropdown({ item, align }) {
           <div
             className="grid gap-x-10 gap-y-1"
             style={{
-              gridTemplateColumns: `repeat(${groups.length > 8 ? 3 : groups.length > 4 ? 2 : 1}, minmax(200px, 1fr))`,
+              gridTemplateColumns: `repeat(${groups.length > 4 ? 2 : 1}, minmax(200px, 1fr))`,
             }}
           >
             {groups.map((child) => (
