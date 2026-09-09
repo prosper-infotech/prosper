@@ -344,24 +344,25 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={goPrevSlide}
-                    aria-label="Previous slide"
-                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white hover:text-primary-dark"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goNextSlide}
-                    aria-label="Next slide"
-                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white hover:text-primary-dark"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
                 </div>
               </div>
+
+              <button
+                type="button"
+                onClick={goPrevSlide}
+                aria-label="Previous slide"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white/80 text-primary backdrop-blur-sm transition-colors hover:bg-primary hover:text-white"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={goNextSlide}
+                aria-label="Next slide"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white/80 text-primary backdrop-blur-sm transition-colors hover:bg-primary hover:text-white"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </motion.section>
           )}
         </AnimatePresence>
