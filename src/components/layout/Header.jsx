@@ -20,7 +20,7 @@ function NavDropdown({ item, align }) {
         align === 'right' ? 'right-0' : align === 'left' ? 'left-0' : 'left-1/2 -translate-x-1/2'
       }`}
     >
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-primary-dark to-[#081a3d] p-8 shadow-[0_32px_64px_-16px_rgba(8,26,61,0.5)]">
+      <div className="rounded-2xl border border-ink-300/50 bg-white p-8 shadow-[0_32px_64px_-16px_rgba(20,52,109,0.2)]">
         {hasNestedGroups ? (
           <div
             className="grid gap-x-14 gap-y-1"
@@ -30,14 +30,14 @@ function NavDropdown({ item, align }) {
               <div key={group.path}>
                 <Link
                   to={group.path}
-                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-white/40 hover:text-gold"
+                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-ink-500 hover:text-primary"
                 >
                   {group.label}
                 </Link>
                 <ul className="flex flex-col gap-3">
                   {(group.children ?? []).map((child) => (
                     <li key={child.path}>
-                      <Link to={child.path} className="block text-sm font-medium text-white/90 hover:text-gold">
+                      <Link to={child.path} className="block text-sm font-medium text-ink-900 hover:text-primary">
                         {child.label}
                       </Link>
                     </li>
@@ -57,11 +57,11 @@ function NavDropdown({ item, align }) {
               <Link
                 key={child.path}
                 to={child.path}
-                className="rounded-lg px-2 py-2 text-sm font-semibold text-white/90 hover:bg-white/5 hover:text-gold"
+                className="rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-primary/5 hover:text-primary"
               >
                 {child.label}
                 {item.label !== 'Company' && child.description && (
-                  <span className="mt-0.5 block text-xs font-normal text-white/40">{child.description}</span>
+                  <span className="mt-0.5 block text-xs font-normal text-ink-500">{child.description}</span>
                 )}
               </Link>
             ))}
