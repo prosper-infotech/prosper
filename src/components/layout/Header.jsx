@@ -83,7 +83,7 @@ function NavDropdown({ item, align }) {
                 className="rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-primary/5 hover:text-primary"
               >
                 {child.label}
-                {item.label !== 'Company' && child.description && (
+                {!['Company', 'Solutions'].includes(item.label) && child.description && (
                   <span className="mt-0.5 block text-xs font-normal text-ink-500">{child.description}</span>
                 )}
               </Link>
