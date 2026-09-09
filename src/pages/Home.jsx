@@ -168,11 +168,22 @@ export default function Home() {
   const totalHeroSlides = HERO_SLIDES.length + 1
   const [activeSlide, setActiveSlide] = useState(0)
   const [heroHover, setHeroHover] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
-    if (heroHover) return
+    const mq = window.matchMedia('(max-width: 767px)')
+    const update = () => {
+      setIsMobile(mq.matches)
+      if (mq.matches) setActiveSlide(0)
+    }
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+  useEffect(() => {
+    if (heroHover || isMobile) return
     const timer = setTimeout(() => setActiveSlide((i) => (i + 1) % totalHeroSlides), 6000)
     return () => clearTimeout(timer)
-  }, [activeSlide, heroHover, totalHeroSlides])
+  }, [activeSlide, heroHover, totalHeroSlides, isMobile])
   const goPrevSlide = () => setActiveSlide((i) => (i - 1 + totalHeroSlides) % totalHeroSlides)
   const goNextSlide = () => setActiveSlide((i) => (i + 1) % totalHeroSlides)
 
@@ -277,7 +288,7 @@ export default function Home() {
                 type="button"
                 onClick={goPrevSlide}
                 aria-label="Previous slide"
-                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white/80 text-primary backdrop-blur-sm transition-colors hover:bg-primary hover:text-white"
+                className="hidden md:flex absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white/80 text-primary backdrop-blur-sm transition-colors hover:bg-primary hover:text-white"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -285,7 +296,7 @@ export default function Home() {
                 type="button"
                 onClick={goNextSlide}
                 aria-label="Next slide"
-                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white/80 text-primary backdrop-blur-sm transition-colors hover:bg-primary hover:text-white"
+                className="hidden md:flex absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white/80 text-primary backdrop-blur-sm transition-colors hover:bg-primary hover:text-white"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -368,7 +379,7 @@ export default function Home() {
         </AnimatePresence>
 
         {activeSlide === 0 && (
-          <div className="relative max-w-7xl mx-auto px-6 flex items-center justify-center gap-4 py-4">
+          <div className="relative max-w-7xl mx-auto px-6 hidden md:flex items-center justify-center gap-4 py-4">
             <div className="flex items-center gap-2">
               {Array.from({ length: totalHeroSlides }).map((_, i) => (
                 <button
