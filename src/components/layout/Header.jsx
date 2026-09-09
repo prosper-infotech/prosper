@@ -76,18 +76,20 @@ function NavDropdown({ item, align }) {
           <div
             className="grid gap-x-10 gap-y-1"
             style={{
-              gridTemplateColumns: `repeat(${groups.length > 4 ? 2 : 1}, minmax(200px, 1fr))`,
+              gridTemplateColumns: `repeat(${groups.length > 4 ? 2 : 1}, minmax(280px, 1fr))`,
             }}
           >
             {groups.map((child) => (
               <Link
                 key={child.path}
                 to={child.path}
-                className="rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-primary/5 hover:text-primary"
+                className="flex items-baseline gap-1.5 overflow-hidden rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-primary/5 hover:text-primary"
               >
-                {child.label}
-                {!['Company', 'Solutions'].includes(item.label) && child.description && (
-                  <span className="mt-0.5 block text-xs font-normal text-ink-500">{child.description}</span>
+                <span className="shrink-0">{child.label}</span>
+                {item.label !== 'Company' && child.description && (
+                  <span className="min-w-0 flex-1 truncate text-xs font-normal text-ink-500">
+                    — {child.description}
+                  </span>
                 )}
               </Link>
             ))}
