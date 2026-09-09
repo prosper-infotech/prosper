@@ -18,13 +18,14 @@ import {
   PhoneCall,
   Mail,
   MessageCircle,
+  Zap,
 } from 'lucide-react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
 import LandingLeadForm from '../../components/forms/LandingLeadForm'
 import LeadFormPopup from '../../components/forms/LeadFormPopup'
-import ProcessSteps from '../../components/ui/ProcessSteps'
+import ConnectedSteps from '../../components/ui/ConnectedSteps'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import VisualGallery from '../../components/ui/VisualGallery'
 import ScrollProgressBar from '../../components/ui/ScrollProgressBar'
@@ -91,18 +92,22 @@ const GALLERY = [
 
 const PROCESS_STEPS = [
   {
+    icon: PhoneCall,
     title: 'Free Consultation',
     description: 'We assess your assets, tagging needs, and site layout — no cost, no obligation.',
   },
   {
+    icon: Wrench,
     title: 'Tag & Deploy',
     description: 'RFID tags, fixed/handheld readers, and gateways installed with $0 upfront hardware.',
   },
   {
+    icon: Zap,
     title: 'Go Live',
     description: 'Your cloud dashboard and mobile app start tracking assets in real time.',
   },
   {
+    icon: ShieldCheck,
     title: 'Ongoing Support',
     description: 'Our team monitors, maintains, and scales the system with you as you grow.',
   },
@@ -330,7 +335,9 @@ export default function AssetTracking() {
             </span>
             <h2 className="mt-2 text-3xl">From consultation to live tracking</h2>
           </Reveal>
-          <ProcessSteps steps={PROCESS_STEPS} />
+          <Reveal delay={0.1}>
+            <ConnectedSteps steps={PROCESS_STEPS} />
+          </Reveal>
         </div>
       </section>
 
