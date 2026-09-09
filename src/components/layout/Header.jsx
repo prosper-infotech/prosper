@@ -13,6 +13,8 @@ const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/' &&
 function NavDropdown({ item, align }) {
   const groups = item.children
   const hasNestedGroups = groups.some((group) => group.children)
+  const columnGroups = hasNestedGroups ? groups.filter((group) => group.children) : []
+  const standaloneLinks = hasNestedGroups ? groups.filter((group) => !group.children) : []
 
   return (
     <div
@@ -22,30 +24,51 @@ function NavDropdown({ item, align }) {
     >
       <div className="rounded-2xl border border-ink-300/50 bg-white p-8 shadow-[0_32px_64px_-16px_rgba(20,52,109,0.2)]">
         {hasNestedGroups ? (
-          <div
-            className="grid gap-x-14 gap-y-1"
-            style={{ gridTemplateColumns: `repeat(${groups.length}, minmax(190px, 1fr))` }}
-          >
-            {groups.map((group) => (
-              <div key={group.path}>
-                <Link
-                  to={group.path}
-                  className="mb-4 block text-xs font-bold uppercase tracking-widest text-ink-500 hover:text-primary"
-                >
-                  {group.label}
-                </Link>
-                <ul className="flex flex-col gap-3">
-                  {(group.children ?? []).map((child) => (
-                    <li key={child.path}>
-                      <Link to={child.path} className="block text-sm font-medium text-ink-900 hover:text-primary">
-                        {child.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+          <>
+            <div
+              className="grid gap-x-14 gap-y-1"
+              style={{ gridTemplateColumns: `repeat(${columnGroups.length}, minmax(190px, 1fr))` }}
+            >
+              {columnGroups.map((group) => (
+                <div key={group.path}>
+                  <Link
+                    to={group.path}
+                    className="mb-4 block text-xs font-bold uppercase tracking-widest text-ink-500 hover:text-primary"
+                  >
+                    {group.label}
+                  </Link>
+                  <ul className="flex flex-col gap-3">
+                    {(group.children ?? []).map((child) => (
+                      <li key={child.path}>
+                        <Link to={child.path} className="block text-sm font-medium text-ink-900 hover:text-primary">
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            {standaloneLinks.length > 0 && (
+              <div className="mt-6 flex flex-col gap-2 border-t border-ink-300/50 pt-6">
+                {standaloneLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="group/link flex items-center justify-between gap-4 rounded-lg bg-primary/5 px-4 py-3 hover:bg-primary/10"
+                  >
+                    <span>
+                      <span className="block text-sm font-bold text-ink-900">{link.label}</span>
+                      {link.description && (
+                        <span className="mt-0.5 block text-xs text-ink-500">{link.description}</span>
+                      )}
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover/link:translate-x-1" />
+                  </Link>
+                ))}
               </div>
-            ))}
-          </div>
+            )}
+          </>
         ) : (
           <div
             className="grid gap-x-10 gap-y-1"
