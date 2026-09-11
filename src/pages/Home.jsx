@@ -228,7 +228,7 @@ export default function Home() {
                   </Reveal>
                   <Reveal delay={0.16}>
                     <p className="mt-5 text-base text-ink-600 max-w-lg">
-                      We help transform warehouses, yards, fleets and container terminals by enhancing efficiency, capacity and real-time visibility across every operation.
+                      Prosper Infotech builds AI, RFID and GPS-powered logistics technology that transforms warehouses, yards, fleets and container terminals — delivering real-time visibility, efficiency and capacity across every operation.
                     </p>
                   </Reveal>
                   <Reveal delay={0.24}>

@@ -16,7 +16,9 @@ export default function ThankYou() {
 
   useDocumentTitle(
     'Thank You | Prosper Infotech',
-    'Thanks for reaching out to Prosper Infotech — our team will be in touch shortly.'
+    'Thanks for reaching out to Prosper Infotech — our team will be in touch shortly.',
+    null,
+    { noindex: true, nofollow: true }
   )
 
   useEffect(() => {
@@ -25,14 +27,7 @@ export default function ThankYou() {
     // without counting direct visits/bookmarks as leads.
     if (!sessionStorage.getItem('lp_lead_submitted')) {
       navigate('/', { replace: true })
-      return
     }
-
-    const meta = document.createElement('meta')
-    meta.name = 'robots'
-    meta.content = 'noindex, nofollow'
-    document.head.appendChild(meta)
-    return () => document.head.removeChild(meta)
   }, [navigate])
 
   return (

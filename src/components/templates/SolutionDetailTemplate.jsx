@@ -13,7 +13,14 @@ const SECTION_LINKS = [
 ]
 
 export default function SolutionDetailTemplate({ title, parentLabel, parentPath, siblings, detail, path, icons }) {
-  useDocumentTitle(detail.seoTitle, detail.metaDescription)
+  useDocumentTitle(detail.seoTitle, detail.metaDescription, {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: title,
+    description: detail.metaDescription,
+    provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+    url: `https://www.prosperinfotech.com${path}`,
+  })
 
   return (
     <>

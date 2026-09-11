@@ -391,7 +391,17 @@ function Timeline({ steps }) {
 export default function TechOutsourcing() {
   useDocumentTitle(
     'AI, IoT & Logistics Software Development Outsourcing | Prosper Infotech',
-    'Extend your engineering team with logistics-focused AI/ML, Computer Vision, OCR, RFID, GPS/RTK, LoRaWAN, Edge AI, WMS/YMS and container automation engineers. US-coordinated global delivery from Prosper Infotech.'
+    'Extend your engineering team with logistics-focused AI/ML, Computer Vision, OCR, RFID, GPS/RTK, LoRaWAN, Edge AI, WMS/YMS and container automation engineers. US-coordinated global delivery from Prosper Infotech.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    { noindex: true }
   )
 
   const [showStickyBar, setShowStickyBar] = useState(false)

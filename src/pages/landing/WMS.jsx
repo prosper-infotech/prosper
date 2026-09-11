@@ -170,7 +170,17 @@ const FAQS = [
 export default function WMS() {
   useDocumentTitle(
     'Prosper WMS | Warehouse Management System',
-    'Real-time inventory control, put-away, picking, packing and dispatch. Prosper WMS integrates with your ERP/TMS for faster fulfillment and fewer errors. Book a free demo.'
+    'Real-time inventory control, put-away, picking, packing and dispatch. Prosper WMS integrates with your ERP/TMS for faster fulfillment and fewer errors. Book a free demo.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    { noindex: true }
   )
 
   return (

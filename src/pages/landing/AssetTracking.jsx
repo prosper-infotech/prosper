@@ -143,7 +143,17 @@ const FAQS = [
 export default function AssetTracking() {
   useDocumentTitle(
     'Prosper Asset Tracking | RFID + GPS Asset Visibility',
-    'Real-time RFID + GPS asset tracking with $0 upfront hardware, automated check-in/out, and multi-yard support. Book a free demo with Prosper Infotech.'
+    'Real-time RFID + GPS asset tracking with $0 upfront hardware, automated check-in/out, and multi-yard support. Book a free demo with Prosper Infotech.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    { noindex: true }
   )
 
   const tiltX = useMotionValue(0)

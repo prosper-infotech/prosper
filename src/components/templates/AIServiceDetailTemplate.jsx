@@ -85,7 +85,15 @@ export default function AIServiceDetailTemplate({ detail }) {
   const styles = STYLES
   const siblings = AI_SERVICES.filter((s) => s.path !== path)
 
-  useDocumentTitle(seoTitle, seoDescription)
+  useDocumentTitle(seoTitle, seoDescription, {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: label,
+    description: seoDescription,
+    provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+    url: `https://www.prosperinfotech.com${path}`,
+    serviceType: 'AI Software Development',
+  })
 
   return (
     <>

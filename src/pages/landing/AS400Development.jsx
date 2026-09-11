@@ -252,7 +252,17 @@ const FAQS = [
 export default function AS400Development() {
   useDocumentTitle(
     'AS400 (IBM i) Consulting, Development & 24x7 Support | Prosper Infotech',
-    'IBM i / AS400 consulting, development, support, and modernization — RPG/RPGLE builds, 24x7x365 coverage, and a dedicated calling line. Get a free consultation.'
+    'IBM i / AS400 consulting, development, support, and modernization — RPG/RPGLE builds, 24x7x365 coverage, and a dedicated calling line. Get a free consultation.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    { noindex: true }
   )
 
   return (

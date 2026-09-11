@@ -154,7 +154,17 @@ const FAQS = [
 export default function AIPoweredCFS() {
   useDocumentTitle(
     'Prosper ContainerVision AI | AI-Powered CFS & Container Terminal Automation',
-    'Real-time container visibility across gate arrival, yard, inspection and departure. AI cameras, OCR, GPS/RTK and the Prosper AI EdgeBox automate CFS and container terminal operations.'
+    'Real-time container visibility across gate arrival, yard, inspection and departure. AI cameras, OCR, GPS/RTK and the Prosper AI EdgeBox automate CFS and container terminal operations.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    { noindex: true }
   )
 
   return (

@@ -122,7 +122,17 @@ const FAQS = [
 export default function ForkliftVisionAI() {
   useDocumentTitle(
     'Prosper ForkliftVision AI | AI-Powered Pallet & Location Intelligence',
-    '8MP cameras, 3D depth sensing, OCR and Edge AI for pallet pickup, rack location, putaway, staging and inventory validation. Book a free demo with Prosper Infotech.'
+    '8MP cameras, 3D depth sensing, OCR and Edge AI for pallet pickup, rack location, putaway, staging and inventory validation. Book a free demo with Prosper Infotech.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    { noindex: true }
   )
 
   return (

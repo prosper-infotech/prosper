@@ -11,8 +11,9 @@ function setMeta(attr, key, content) {
   meta.content = content
 }
 
-export default function useDocumentTitle(title, description, jsonLd) {
+export default function useDocumentTitle(title, description, jsonLd, options = {}) {
   const { pathname } = useLocation()
+  const { noindex = false, nofollow = false } = options
 
   useEffect(() => {
     if (title) {
@@ -26,6 +27,15 @@ export default function useDocumentTitle(title, description, jsonLd) {
       setMeta('property', 'og:description', description)
       setMeta('name', 'twitter:description', description)
     }
+
+    // Every page explicitly declares its own robots directive (rather than
+    // leaving it unset) so a noindex page never leaks onto the next route
+    // navigated to in this client-side-routed SPA.
+    setMeta(
+      'name',
+      'robots',
+      `${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`
+    )
 
     const url = `https://www.prosperinfotech.com${pathname}`
 
@@ -54,5 +64,5 @@ export default function useDocumentTitle(title, description, jsonLd) {
     return () => {
       document.querySelector('script[data-page-schema]')?.remove()
     }
-  }, [title, description, jsonLd, pathname])
+  }, [title, description, jsonLd, pathname, noindex, nofollow])
 }
