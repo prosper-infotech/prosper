@@ -247,6 +247,14 @@ export default function ForkliftVisionAI() {
             </div>
           </Reveal>
 
+          <Reveal delay={0.15} className="lg:hidden mt-2">
+            <img
+              src={forkliftHero}
+              alt="Isometric render of Prosper ForkliftVision AI pallet and location intelligence system"
+              className="w-full max-w-sm mx-auto"
+            />
+          </Reveal>
+
           <Reveal delay={0.15} className="hidden lg:block lg:w-[480px] lg:shrink-0">
             <img
               src={forkliftHero}

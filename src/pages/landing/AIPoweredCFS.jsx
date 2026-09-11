@@ -284,6 +284,14 @@ export default function AIPoweredCFS() {
                 </div>
                 </div>
 
+                <Reveal delay={0.15} className="lg:hidden mt-2">
+                  <img
+                    src={cfsHero}
+                    alt="Isometric render of Prosper ContainerVision AI for CFS and container terminal automation"
+                    className="w-full max-w-sm mx-auto"
+                  />
+                </Reveal>
+
                 <div className="hidden lg:block lg:w-[480px] lg:shrink-0">
                   <img
                     src={cfsHero}

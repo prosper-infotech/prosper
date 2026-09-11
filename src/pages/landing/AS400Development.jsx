@@ -377,6 +377,14 @@ export default function AS400Development() {
             </div>
           </Reveal>
 
+          <Reveal delay={0.15} className="lg:hidden mt-2">
+            <img
+              src={as400Hero}
+              alt="Isometric render of Prosper AS400 / IBM i development and support"
+              className="w-full max-w-sm mx-auto"
+            />
+          </Reveal>
+
           <Reveal delay={0.1} className="hidden lg:flex items-center justify-center">
             <div className="relative flex items-center justify-center max-w-md">
               <motion.div

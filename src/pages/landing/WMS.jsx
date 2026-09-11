@@ -301,6 +301,14 @@ export default function WMS() {
                 </div>
                 </div>
 
+                <Reveal delay={0.15} className="lg:hidden mt-2">
+                  <img
+                    src={wmsHero}
+                    alt="Isometric render of Prosper WMS warehouse management system"
+                    className="w-full max-w-sm mx-auto"
+                  />
+                </Reveal>
+
                 <div className="hidden lg:block lg:w-[480px] lg:shrink-0">
                   <img
                     src={wmsHero}
