@@ -16,7 +16,11 @@ export default function useScrollToHash() {
     let frameId
 
     const tryScroll = () => {
-      const el = document.getElementById(id)
+      // Some pages render a breakpoint-specific duplicate of the same anchor
+      // (desktop/mobile layouts both in the DOM, toggled with CSS) — pick
+      // whichever copy is actually visible rather than the first in the DOM.
+      const matches = document.querySelectorAll(`[id="${id}"]`)
+      const el = Array.from(matches).find((candidate) => candidate.offsetParent !== null) || matches[0]
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' })
         return

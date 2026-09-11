@@ -435,6 +435,7 @@ export default function Home() {
                     <img
                       src={p.img}
                       alt={`Isometric render representing Prosper ${p.name}`}
+                      loading="lazy"
                       className="relative w-full max-w-[230px] drop-shadow-[0_14px_18px_rgba(20,52,109,0.18)] transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>

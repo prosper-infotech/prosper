@@ -41,6 +41,7 @@ function VideoCard({ video, delay }) {
               <img
                 src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
                 alt={video.title}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <span className="absolute inset-0 bg-navy/30 group-hover:bg-navy/40 transition-colors flex items-center justify-center">

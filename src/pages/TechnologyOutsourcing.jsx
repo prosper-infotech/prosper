@@ -246,7 +246,7 @@ export default function TechnologyOutsourcing() {
                   AI, IoT and logistics experience is used to accelerate onboarding and reduce
                   discovery time — not to force a proprietary product.
                 </p>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <Reveal className="grid gap-4 sm:grid-cols-2">
                   {TRUST_POINTS.map((point) => (
                     <div
                       key={point}
@@ -256,7 +256,7 @@ export default function TechnologyOutsourcing() {
                       <span className="text-white/90 text-sm">{point}</span>
                     </div>
                   ))}
-                </div>
+                </Reveal>
               </div>
             </div>
           </div>
@@ -265,7 +265,7 @@ export default function TechnologyOutsourcing() {
         {/* Technology stack */}
         <section className="max-w-6xl mx-auto px-6 py-14">
           <SectionHeading eyebrow="Technology Stack" title="Engineering across the complete technology stack" />
-          <div className="mt-12 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="mt-12 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {TECH_STACK.map((group) => (
               <div key={group.title}>
                 <h3 className="text-xs font-semibold uppercase tracking-wide text-primary mb-3">{group.title}</h3>
@@ -281,7 +281,7 @@ export default function TechnologyOutsourcing() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </section>
 
         {/* Global delivery */}
@@ -311,7 +311,7 @@ export default function TechnologyOutsourcing() {
         {/* Engagement process */}
         <section className="max-w-6xl mx-auto px-6 py-14">
           <SectionHeading eyebrow="Engagement Process" title="From requirement to productive engineering — fast" />
-          <div className="relative mt-12">
+          <Reveal className="relative mt-12">
             <div className="lg:hidden absolute left-5 top-5 bottom-5 w-px bg-ink-300" />
             <div className="hidden lg:block absolute left-[10%] right-[10%] top-5 h-px bg-ink-300" />
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-4">
@@ -327,7 +327,7 @@ export default function TechnologyOutsourcing() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </section>
 
         <CTABand

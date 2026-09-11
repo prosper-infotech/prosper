@@ -31,6 +31,7 @@ function ClientCard({ client, delay, fill }) {
           <img
             src={client.logo}
             alt={`${client.name} logo`}
+            loading="lazy"
             className={
               client.logoRound
                 ? 'h-20 w-20 rounded-full object-cover shadow-sm'

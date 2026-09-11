@@ -384,6 +384,7 @@ export default function AssetTracking() {
                     <img
                       src={item.image}
                       alt={item.label}
+                      loading="lazy"
                       className="h-full w-full object-cover"
                     />
                   </div>

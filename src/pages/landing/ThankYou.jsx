@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CheckCircle2, PhoneCall, Mail } from 'lucide-react'
 import Button from '../../components/ui/Button'
+import Reveal from '../../components/motion/Reveal'
 import { OFFICES } from '../../data/offices'
 import { SOCIAL_LINKS } from '../../data/socialLinks'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
@@ -36,7 +37,7 @@ export default function ThankYou() {
 
       <img src={logo} alt="Prosper Infotech" className="absolute top-6 left-6 h-9 w-auto" />
 
-      <div className="relative max-w-lg mx-auto text-center flex flex-col items-center gap-4">
+      <Reveal className="relative max-w-lg mx-auto text-center flex flex-col items-center gap-4">
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[0_0_60px_-8px_rgba(247,221,0,0.5)]">
           <CheckCircle2 className="h-7 w-7" />
         </div>
@@ -81,7 +82,7 @@ export default function ThankYou() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

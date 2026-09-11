@@ -276,7 +276,7 @@ export default function IBMiAS400() {
         <div className="pointer-events-none absolute -bottom-16 -left-10 h-64 w-64 rounded-full bg-[#3a5a99]/40 blur-[110px]" />
         <div className="relative max-w-6xl mx-auto px-6 py-16">
           <SectionHeading eyebrow="Why it matters" title="Key benefits" variant="dark" className="mb-12" />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <Reveal className="grid gap-4 sm:grid-cols-2">
             {KEY_BENEFITS.map((benefit) => (
               <div
                 key={benefit}
@@ -286,7 +286,7 @@ export default function IBMiAS400() {
                 <span className="text-white/90 text-sm">{benefit}</span>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

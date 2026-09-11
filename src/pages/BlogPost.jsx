@@ -107,7 +107,7 @@ export default function BlogPost() {
             <h3 className="text-center font-heading font-bold text-2xl text-primary mb-10">
               More articles
             </h3>
-            <div className="grid gap-6 sm:grid-cols-3">
+            <Reveal className="grid gap-6 sm:grid-cols-3">
               {otherPosts.map((p) => (
                 <Link
                   key={p.slug}
@@ -122,7 +122,7 @@ export default function BlogPost() {
                   </h4>
                 </Link>
               ))}
-            </div>
+            </Reveal>
           </div>
         </section>
       )}

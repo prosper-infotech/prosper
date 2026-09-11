@@ -10,6 +10,7 @@ export default function ClientLogoStrip() {
           src={client.logo}
           alt={client.name}
           title={client.name}
+          loading="lazy"
           className={
             client.logoRound
               ? 'h-14 w-14 rounded-full object-cover shadow-sm'

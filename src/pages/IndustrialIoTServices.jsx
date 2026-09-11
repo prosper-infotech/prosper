@@ -167,7 +167,7 @@ export default function IndustrialIoTServices() {
             const Icon = point.icon
             return (
               <Reveal key={point.key} delay={(i % 3) * 0.06}>
-                <div className="rounded-2xl border-l-4 border-gold bg-white shadow-xl p-6">
+                <div id={point.key} className="scroll-mt-28 rounded-2xl border-l-4 border-gold bg-white shadow-xl p-6">
                   <div className="flex items-center gap-4 mb-3">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/20 text-primary">
                       <Icon className="h-5 w-5" />
