@@ -14,8 +14,8 @@ import dockVisionImg from '../assets/dock vision.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
-import visionAISuiteImg from '../assets/New Hero Image.png'
-import ctaSuiteImg from '../assets/Ready to streamlime.png'
+import visionAISuiteImg from '../assets/new-hero-image.webp'
+import ctaSuiteImg from '../assets/ready-to-streamline.webp'
 import heroSlideAiVisionIot from '../assets/hero-slide-ai-vision-iot.jpg'
 import heroSlideRfidWarehouse from '../assets/hero-slide-rfid-driven-warehouse.jpg'
 import heroSlideDockMonitoring from '../assets/hero-slide-dock-monitoring.jpg'
@@ -280,6 +280,7 @@ export default function Home() {
                     src={visionAISuiteImg}
                     alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
                     className="w-full"
+                    fetchPriority="high"
                   />
                 </Reveal>
               </div>
