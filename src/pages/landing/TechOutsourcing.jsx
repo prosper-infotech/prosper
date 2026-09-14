@@ -21,7 +21,6 @@ import {
   Check,
   Globe,
   Mail,
-  MessageCircle,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -544,17 +543,6 @@ export default function TechOutsourcing() {
                 </svg>
                 WhatsApp
               </a>
-              <button
-                type="button"
-                onClick={() => {
-                  window.gtag?.('event', 'click_chat', { event_category: 'Tech Outsourcing Landing Page (Hero)' })
-                  window.Tawk_API?.maximize?.()
-                }}
-                className={`inline-flex items-center gap-2 rounded-lg border ${BORDER} bg-white px-4 py-2 text-sm font-semibold ${NAVY} shadow-sm transition-colors hover:border-gold`}
-              >
-                <MessageCircle className="h-4 w-4 text-gold-dark" />
-                Chat
-              </button>
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 pt-6 mt-2">

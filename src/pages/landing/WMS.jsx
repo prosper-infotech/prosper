@@ -27,7 +27,6 @@ import {
   Package,
   Wrench,
   UsersRound,
-  MessageCircle,
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Button from '../../components/ui/Button'
@@ -287,17 +286,6 @@ export default function WMS() {
                     </svg>
                     WhatsApp
                   </a>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.gtag?.('event', 'click_chat', { event_category: 'WMS Landing Page (Hero)' })
-                      window.Tawk_API?.maximize?.()
-                    }}
-                    className="inline-flex items-center gap-2 rounded-lg bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md px-6 py-2.5 text-sm font-semibold transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    Chat
-                  </button>
                 </div>
                 </div>
 
