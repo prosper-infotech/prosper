@@ -145,7 +145,17 @@ const PROOF = [
 export default function TechnologyOutsourcing() {
   useDocumentTitle(
     'Technology Resource Outsourcing | AI, IoT & Logistics Software Engineering | Prosper Infotech',
-    'Extend your engineering team with specialists in AI/ML, Computer Vision, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS/YMS and container automation — from a single specialist to a complete delivery team.'
+    'Extend your engineering team with specialists in AI/ML, Computer Vision, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS/YMS and container automation — from a single specialist to a complete delivery team.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Technology Resource Outsourcing',
+      description:
+        'Extend your engineering team with specialists in AI/ML, Computer Vision, RFID, GPS/RTK, LoRaWAN, Industrial IoT, Edge AI, WMS/YMS and container automation — from a single specialist to a complete delivery team.',
+      provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+      url: 'https://www.prosperinfotech.com/services/technology-outsourcing',
+      serviceType: 'Technology Resource Outsourcing',
+    }
   )
 
   return (

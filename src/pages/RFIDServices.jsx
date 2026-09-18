@@ -51,7 +51,17 @@ const POINTS = [
 export default function RFIDServices() {
   useDocumentTitle(
     'RFID Services | Prosper Infotech',
-    'End-to-end RFID deployment — consulting, implementation, system integration, and ongoing support — so your RFID investment works from day one.'
+    'End-to-end RFID deployment — consulting, implementation, system integration, and ongoing support — so your RFID investment works from day one.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'RFID Services',
+      description:
+        'End-to-end RFID deployment — consulting, implementation, system integration, and ongoing support — so your RFID investment works from day one.',
+      provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+      url: 'https://www.prosperinfotech.com/services/rfid-services',
+      serviceType: 'RFID Services',
+    }
   )
 
   const location = useLocation()

@@ -451,6 +451,19 @@ export default function Home() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal delay={0.3} className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+            <span className="text-ink-500">Also available:</span>
+            <Link to="/products/software/yardvision-ai" className="font-semibold text-primary hover:text-primary-dark">
+              YardVision AI
+            </Link>
+            <Link to="/products/software/rfid-gps" className="font-semibold text-primary hover:text-primary-dark">
+              RFID + GPS Inventory Tracking
+            </Link>
+            <Link to="/products/software" className="font-semibold text-primary hover:text-primary-dark">
+              View all software products &rarr;
+            </Link>
+          </Reveal>
         </div>
       </section>
 

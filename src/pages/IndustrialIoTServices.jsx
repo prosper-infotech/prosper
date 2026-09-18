@@ -59,7 +59,17 @@ const POINTS = [
 export default function IndustrialIoTServices() {
   useDocumentTitle(
     'Industrial IoT Services | Prosper Infotech',
-    'Custom IoT firmware, LoRaWAN networks, device and camera integration, edge AI, and cloud connectivity for connected industrial and factory operations.'
+    'Custom IoT firmware, LoRaWAN networks, device and camera integration, edge AI, and cloud connectivity for connected industrial and factory operations.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Industrial IoT Services',
+      description:
+        'Custom IoT firmware, LoRaWAN networks, device and camera integration, edge AI, and cloud connectivity for connected industrial and factory operations.',
+      provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+      url: 'https://www.prosperinfotech.com/services/industrial-iot-services',
+      serviceType: 'Industrial IoT Services',
+    }
   )
 
   const location = useLocation()

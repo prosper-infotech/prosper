@@ -191,7 +191,17 @@ const WHY_CHOOSE_US = [
 export default function IBMiAS400() {
   useDocumentTitle(
     'AS400 / IBM i Services | Prosper Infotech',
-    'End-to-end IBM i (AS400) consulting, development, modernization, migration, and 24/7 support — RPG/RPGLE, COBOL, system administration, and cloud integration.'
+    'End-to-end IBM i (AS400) consulting, development, modernization, migration, and 24/7 support — RPG/RPGLE, COBOL, system administration, and cloud integration.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'AS400 / IBM i Services',
+      description:
+        'End-to-end IBM i (AS400) consulting, development, modernization, migration, and 24/7 support — RPG/RPGLE, COBOL, system administration, and cloud integration.',
+      provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+      url: 'https://www.prosperinfotech.com/ibm-i-as400',
+      serviceType: 'IBM i / AS400 Services',
+    }
   )
 
   return (

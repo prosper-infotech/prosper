@@ -231,6 +231,21 @@ export default function Header() {
                         >
                           {child.label}
                         </Link>
+                        {child.children && (
+                          <ul className="flex flex-col gap-1 pb-1.5 pl-4">
+                            {child.children.map((grandchild) => (
+                              <li key={grandchild.path}>
+                                <Link
+                                  to={grandchild.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="block py-1 text-[13px] text-ink-500 hover:text-primary"
+                                >
+                                  {grandchild.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </li>
                     ))}
                   </ul>

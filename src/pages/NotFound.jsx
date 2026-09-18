@@ -14,7 +14,9 @@ const QUICK_LINKS = [
 export default function NotFound() {
   useDocumentTitle(
     'Page Not Found | Prosper Infotech',
-    "The page you're looking for doesn't exist or has moved. Return to Prosper Infotech's homepage or explore our solutions, products, and services."
+    "The page you're looking for doesn't exist or has moved. Return to Prosper Infotech's homepage or explore our solutions, products, and services.",
+    null,
+    { noindex: true }
   )
 
   return (

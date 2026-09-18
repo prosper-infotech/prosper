@@ -84,7 +84,25 @@ function ServiceCard({ service }) {
 export default function AIServicesHub() {
   useDocumentTitle(
     'AI Software Development | Prosper Infotech',
-    'AI, Machine Learning, Computer Vision, OCR, Automation, Analytics, and Edge AI software development, purpose-built for logistics and supply-chain operations.'
+    'AI, Machine Learning, Computer Vision, OCR, Automation, Analytics, and Edge AI software development, purpose-built for logistics and supply-chain operations.',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'AI Software Development',
+      description:
+        'AI, Machine Learning, Computer Vision, OCR, Automation, Analytics, and Edge AI software development, purpose-built for logistics and supply-chain operations.',
+      provider: { '@type': 'Organization', name: 'Prosper Infotech', url: 'https://www.prosperinfotech.com' },
+      url: 'https://www.prosperinfotech.com/services/ai-software-development',
+      serviceType: 'AI Software Development',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'AI Software Development Services',
+        itemListElement: AI_SERVICES.map((service) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: service.label, url: `https://www.prosperinfotech.com${service.path}` },
+        })),
+      },
+    }
   )
 
   return (
