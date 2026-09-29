@@ -203,13 +203,21 @@ export default function Home() {
 
   const [galleryIndex, setGalleryIndex] = useState(0)
   const [galleryHover, setGalleryHover] = useState(false)
+  const galleryTimerRef = useRef(null)
+  const goToNextGalleryImage = () => setGalleryIndex((i) => (i + 1) % SOLUTIONS_GALLERY.length)
+  const goToPrevGalleryImage = () =>
+    setGalleryIndex((i) => (i - 1 + SOLUTIONS_GALLERY.length) % SOLUTIONS_GALLERY.length)
+  // Cleared synchronously (not just via galleryHover in the effect below) so a
+  // drag that starts a moment before the timer would've fired can't still
+  // swap the image out from under the user's finger mid-gesture.
+  const pauseGalleryAutoplay = () => {
+    clearTimeout(galleryTimerRef.current)
+    setGalleryHover(true)
+  }
   useEffect(() => {
     if (galleryHover) return
-    const timer = setTimeout(
-      () => setGalleryIndex((i) => (i + 1) % SOLUTIONS_GALLERY.length),
-      2800
-    )
-    return () => clearTimeout(timer)
+    galleryTimerRef.current = setTimeout(goToNextGalleryImage, 2800)
+    return () => clearTimeout(galleryTimerRef.current)
   }, [galleryIndex, galleryHover])
 
   return (
@@ -516,41 +524,53 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div
-              className="relative mx-auto w-full max-w-[400px] aspect-[4/5]"
-              onMouseEnter={() => setGalleryHover(true)}
-              onMouseLeave={() => setGalleryHover(false)}
-            >
-              <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(8deg) translate(26px, -6px)' }} />
-              <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(4deg) translate(13px, -3px)' }} />
-              <div className="absolute inset-0" style={{ perspective: 1200 }}>
-                <AnimatePresence initial={false}>
-                  <motion.img
-                    key={galleryIndex}
-                    src={SOLUTIONS_GALLERY[galleryIndex].img}
-                    alt={SOLUTIONS_GALLERY[galleryIndex].alt}
-                    initial={{ opacity: 0, scale: 0.82, rotate: -14, y: 46, rotateY: -35 }}
-                    animate={{ opacity: 1, scale: 1, rotate: 0, y: 0, rotateY: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, rotate: 10, x: 70, rotateY: 25, transition: { duration: 0.45, ease: 'easeIn' } }}
-                    transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0 h-full w-full rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]"
-                    style={{ transformStyle: 'preserve-3d' }}
-                  />
-                </AnimatePresence>
-              </div>
+            <div className="px-4 sm:px-0">
+              <div
+                className="relative mx-auto w-full max-w-[400px] aspect-[4/5]"
+                onMouseEnter={() => pauseGalleryAutoplay()}
+                onMouseLeave={() => setGalleryHover(false)}
+              >
+                <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[8deg] translate-x-[14px] -translate-y-[4px] sm:translate-x-[26px] sm:-translate-y-[6px]" />
+                <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[4deg] translate-x-[7px] -translate-y-[2px] sm:translate-x-[13px] sm:-translate-y-[3px]" />
+                <div className="absolute inset-0" style={{ perspective: 1200 }}>
+                  <AnimatePresence initial={false}>
+                    <motion.img
+                      key={galleryIndex}
+                      src={SOLUTIONS_GALLERY[galleryIndex].img}
+                      alt={SOLUTIONS_GALLERY[galleryIndex].alt}
+                      initial={{ opacity: 0, scale: 0.82, rotate: -14, y: 46, rotateY: -35 }}
+                      animate={{ opacity: 1, scale: 1, rotate: 0, y: 0, rotateY: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, rotate: 10, x: 70, rotateY: 25, transition: { duration: 0.45, ease: 'easeIn' } }}
+                      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.18}
+                      onDragStart={() => pauseGalleryAutoplay()}
+                      onDragEnd={(_, info) => {
+                        if (info.offset.x <= -50) goToNextGalleryImage()
+                        else if (info.offset.x >= 50) goToPrevGalleryImage()
+                        setGalleryHover(false)
+                      }}
+                      whileTap={{ cursor: 'grabbing', scale: 0.97 }}
+                      className="absolute inset-0 h-full w-full cursor-grab rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] active:cursor-grabbing"
+                      style={{ transformStyle: 'preserve-3d', touchAction: 'pan-y' }}
+                    />
+                  </AnimatePresence>
+                </div>
 
-              <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-1.5">
-                {SOLUTIONS_GALLERY.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setGalleryIndex(i)}
-                    aria-label={`Show solution image ${i + 1}`}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === galleryIndex ? 'w-5 bg-primary' : 'w-1.5 bg-primary/25 hover:bg-primary/50'
-                    }`}
-                  />
-                ))}
+                <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-1.5">
+                  {SOLUTIONS_GALLERY.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setGalleryIndex(i)}
+                      aria-label={`Show solution image ${i + 1}`}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === galleryIndex ? 'w-5 bg-primary' : 'w-1.5 bg-primary/25 hover:bg-primary/50'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>
