@@ -486,16 +486,16 @@ export const BLOG_POSTS = [
 
   {
     slug: 'what-is-forkliftvision-ai',
-    title: 'What Is ForkliftVision AI? Pallet and Location Accuracy Without Manual Scanning',
+    title: 'What Is ForkliftVision AI? A Forklift Vision System for Pallet and Location Accuracy',
     category: 'AI & Computer Vision',
     excerpt:
-      "ForkliftVision AI mounts a camera and edge AI directly on the forklift to confirm pallet identity and location automatically — no operator stopping to scan a barcode at every pick and drop.",
+      "ForkliftVision AI is a forklift automation system that mounts a camera and edge AI directly on the forklift to confirm pallet identity and location automatically — no operator stopping to scan a barcode at every pick and drop.",
     date: '2026-07-08',
     readTime: '5 min read',
     relatedLinks: [{ label: 'AI & Computer Vision', path: '/solutions/ai-computer-vision' }],
     sections: [
       {
-        body: "ForkliftVision AI is Prosper Infotech's camera-and-edge-AI system that mounts directly on a forklift to confirm pallet identity and location automatically, in place of the manual barcode scan an operator would otherwise have to stop and perform at every pick and drop.",
+        body: "ForkliftVision AI is Prosper Infotech's forklift vision system — a camera-and-edge-AI forklift automation system that mounts directly on a forklift to confirm pallet identity and location automatically, in place of the manual barcode scan an operator would otherwise have to stop and perform at every pick and drop.",
       },
       {
         heading: 'How it actually works',

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 
-export default function Breadcrumb({ title, parent, parentPath, description }) {
+export default function Breadcrumb({ title, parent, parentPath, description, h1 }) {
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function Breadcrumb({ title, parent, parentPath, description }) {
         )}
 
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-primary">
-          {title}
+          {h1 || title}
         </h1>
 
         <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-gradient-to-r from-gold to-gold-dark" />

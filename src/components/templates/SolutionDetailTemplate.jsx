@@ -30,6 +30,7 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
         parentPath={parentPath}
         icon={icons?.[path]}
         description={detail.metaDescription}
+        h1={detail.h1}
       />
 
       <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">

@@ -2,9 +2,10 @@
 // Keyed by the route path used in src/data/navigation.js.
 export const INDUSTRIES_DETAIL = {
   '/industries/logistics': {
-    seoTitle: 'Logistics Technology Solutions | RFID, GPS & Yard Visibility | Prosper Infotech',
+    seoTitle: 'AI-Powered Logistics Solutions | RFID, GPS & Yard Visibility | Prosper Infotech',
     metaDescription:
-      'RFID, GPS, and AI-powered logistics technology for real-time warehouse, yard, and fleet visibility across your supply chain.',
+      'AI-powered logistics solutions using RFID and GPS for real-time warehouse, yard, and fleet visibility across your supply chain.',
+    h1: 'AI-Powered Logistics Solutions',
     intro: [
       'Logistics operations run on visibility — knowing where every shipment, trailer, and pallet is at any given moment. Prosper Infotech builds RFID, GPS, and AI-powered logistics solutions that replace manual tracking and spreadsheets with real-time data, connecting your warehouse, yard, and fleet into a single operational picture.',
       'From automated gate processing to live inventory counts and driver tracking, our logistics technology helps operators reduce delays, cut labor costs, and give customers accurate, real-time shipment status.',
@@ -119,9 +120,10 @@ export const INDUSTRIES_DETAIL = {
   },
 
   '/industries/cfs': {
-    seoTitle: 'CFS Automation Solutions | Container Freight Station Technology | Prosper Infotech',
+    seoTitle: 'CFS Management Software | Container Freight Station Automation | Prosper Infotech',
     metaDescription:
-      'RFID and AI-powered automation for container freight stations — automated container inventory, gate processing, and yard visibility.',
+      'CFS management software using RFID and AI-powered automation for container freight stations — automated container inventory, gate processing, and yard visibility.',
+    h1: 'CFS Management Software',
     intro: [
       'Container freight stations handle constant container movement between gate, yard, and consolidation areas, with accuracy and speed both critical to avoiding demurrage costs. Prosper Infotech\'s CFS automation solutions use RFID and AI-based computer vision to automate container inventory counts and gate processing.',
       'By replacing manual container checks with automated RFID and vision-based tracking, our platform gives CFS operators real-time inventory accuracy and faster container turnaround, with full integration into existing yard and terminal systems.',

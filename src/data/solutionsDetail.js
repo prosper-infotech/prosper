@@ -2,9 +2,10 @@
 // Keyed by the route path used in src/data/navigation.js.
 export const SOLUTIONS_DETAIL = {
   '/solutions/warehouse-solutions': {
-    seoTitle: 'Warehouse Management Solutions (WMS) | RFID & Barcode Inventory Control | Prosper Infotech',
+    seoTitle: 'Warehouse Automation Solutions (WMS) | RFID & Barcode Inventory Control | Prosper Infotech',
     metaDescription:
-      'Real-time warehouse management software with RFID and barcode inventory control, automated put-away, picking, packing, and multi-warehouse visibility.',
+      'Warehouse automation solutions with real-time RFID and barcode inventory control, automated put-away, picking, packing, and multi-warehouse visibility.',
+    h1: 'Warehouse Automation Solutions',
     intro: [
       "Prosper Infotech's warehouse management solutions give logistics and distribution teams real-time control over inventory, from receiving through dispatch. Built around our proprietary Prosper WMS platform, our warehouse management software combines barcode and RFID scanning with automated put-away, wave picking, and batch/lot/serial tracking to eliminate manual stock counts and reduce fulfillment errors.",
       "Whether you're running a single distribution center or coordinating inventory across multiple warehouses, our warehouse automation tools integrate directly with your ERP, TMS, and existing systems through open APIs — so your team gets accurate, real-time stock visibility without ripping out infrastructure you already rely on.",
@@ -29,9 +30,10 @@ export const SOLUTIONS_DETAIL = {
   },
 
   '/solutions/yard-solutions': {
-    seoTitle: 'Yard Management System (YMS) | Gate, Trailer & Appointment Automation | Prosper Infotech',
+    seoTitle: 'Container Yard Management System (YMS) | Gate, Trailer & Appointment Automation | Prosper Infotech',
     metaDescription:
-      'AI-powered yard management software for trailer tracking, gate automation, appointment scheduling, and real-time yard visibility across empty and full containers.',
+      'AI-powered container yard management system for trailer tracking, gate automation, appointment scheduling, and real-time yard visibility across empty and full containers.',
+    h1: 'Container Yard Management System',
     intro: [
       "Prosper Infotech's yard management solutions, powered by our Prosper YMS platform, bring real-time visibility to every trailer, container, and gate movement across your yard. From carrier appointment scheduling through gate arrival, RFID-based inventory, trailer moves, and departure, our yard management system replaces manual spotter checks and radio calls with automated, auditable workflows.",
       "Built for logistics operations handling high trailer volume, our yard automation software supports empty, loaded, dedicated, dirty, drop, and live arrivals, with reefer monitoring for temperature-sensitive freight. The result: faster gate turnaround, fewer detention charges, and a live, bird's-eye view of every asset in your yard.",
@@ -110,9 +112,10 @@ export const SOLUTIONS_DETAIL = {
   },
 
   '/solutions/asset-tracking': {
-    seoTitle: 'Asset Tracking Software | RFID Equipment & Inventory Tracking | Prosper Infotech',
+    seoTitle: 'RFID Asset Tracking Solution | Equipment & Inventory Tracking Software | Prosper Infotech',
     metaDescription:
-      'RFID-powered asset tracking software for equipment, medical, manufacturing, and logistics assets — delivered as a zero-upfront SaaS platform with hardware included.',
+      'RFID asset tracking solution for equipment, medical, manufacturing, and logistics assets — delivered as a zero-upfront SaaS platform with hardware included.',
+    h1: 'RFID Asset Tracking Solution',
     intro: [
       "Prosper Infotech's asset tracking solutions, built on our Prosper Asset Tracking platform, give organizations real-time visibility into equipment, tools, and high-value assets across every site. Using fixed and handheld RFID readers, our asset tracking software automatically logs check-ins, check-outs, and location changes — replacing manual asset registers and spreadsheets.",
       'Delivered as a SaaS platform with hardware included and no upfront cost, our asset tracking system is built for organizations that need multi-site control, automated alerts, and audit-ready reporting without a large capital investment in infrastructure.',
@@ -145,9 +148,10 @@ export const SOLUTIONS_DETAIL = {
   },
 
   '/solutions/container-terminal-automation': {
-    seoTitle: 'Container Terminal Automation | CFS & AI Container Tracking | Prosper Infotech',
+    seoTitle: 'Container Terminal Management System | CFS & AI Container Tracking | Prosper Infotech',
     metaDescription:
-      'AI-powered container terminal automation for CFS operations, real-time container inventory, and automated container tracking across ports and yards.',
+      'AI-powered CFS and container terminal management system for real-time container inventory and automated container tracking across ports and yards.',
+    h1: 'Container Terminal Management System',
     intro: [
       "Prosper Infotech's container terminal automation solutions bring RFID, GPS, and AI-based computer vision together to give container freight stations (CFS) and terminal operators real-time visibility over every container on-site. Our platform automates container inventory counts, tracks container movement between gate, yard, and vessel, and flags exceptions before they become costly delays.",
       'By combining RFID and GPS inventory tracking with AI-based container vision, our terminal automation software reduces the manual checks and paperwork traditionally required at container freight stations — improving throughput without adding headcount.',
@@ -226,14 +230,17 @@ export const SOLUTIONS_DETAIL = {
   },
 
   '/solutions/ai-computer-vision': {
-    seoTitle: 'AI & Computer Vision Solutions | OCR, Video Analytics & Object Detection | Prosper Infotech',
+    seoTitle: 'AI Computer Vision Solutions | Forklift Automation System & OCR | Prosper Infotech',
     metaDescription:
-      'AI-powered computer vision solutions for OCR, video analytics, object detection, and AI-based attendance and inspection.',
+      'AI-powered computer vision solutions including a forklift automation system with forklift vision system pallet detection, OCR, video analytics, and object detection.',
+    h1: 'AI Computer Vision & Forklift Automation System',
     intro: [
       'Prosper Infotech builds AI and computer vision solutions that turn camera feeds into structured, actionable data. Using object detection models, optical character recognition, and edge AI compute, our computer vision platform automates tasks that traditionally required manual observation — from reading container numbers to monitoring attendance and inspecting equipment for damage.',
+      'One example is our forklift automation system: a forklift vision system that mounts a camera and edge AI directly on the forklift to confirm pallet identity and location automatically, without an operator stopping to scan a barcode at every pick and drop.',
       'Running on NVIDIA-accelerated edge hardware, our AI vision solutions process video locally for privacy and low latency, delivering real-time alerts and dashboards without sending raw video to the cloud.',
     ],
     keyFeatures: [
+      { title: 'Forklift Vision System', description: 'Camera- and edge-AI-based forklift automation system that confirms pallet identity and location automatically.' },
       { title: 'Computer Vision Solutions', description: 'Custom object detection and tracking models tuned to your operation.' },
       { title: 'Optical Character Recognition (OCR)', description: 'Automatic reading of text, license plates, and container numbers.' },
       { title: 'Video Analytics', description: 'Real-time analysis of camera feeds for activity, safety, and exceptions.' },

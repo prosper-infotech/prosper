@@ -186,7 +186,7 @@ function AnimatedStat({ value, label }) {
 export default function Home() {
   useDocumentTitle(
     'Prosper Infotech | AI-Powered RFID, GPS & IoT Logistics Solutions',
-    'IoT, RFID, GPS, and AI-powered visibility for warehouses, yards, and fleets — real-time tracking, asset visibility, and logistics automation from Prosper Infotech.'
+    'IoT, RFID, GPS, and AI-powered logistics automation solutions for warehouses, yards, and fleets — real-time tracking and asset visibility from Prosper Infotech.'
   )
 
   const totalHeroSlides = HERO_SLIDES.length + 1

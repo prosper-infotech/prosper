@@ -13,10 +13,11 @@ export default function SolutionsOverview() {
       items={solutions}
       icons={SOLUTION_ICONS}
       images={SOLUTION_IMAGES}
+      h1="AI Logistics Solutions"
       ctaTitle="Have a question about Solutions?"
       ctaDescription="Talk to our team about the right fit for your operation."
-      seoTitle="RFID, GPS, IoT & AI Logistics Solutions | Prosper Infotech"
-      seoDescription="IoT, RFID, GPS, and AI solutions for warehouses, yards, fleets, and ports — explore Prosper Infotech's full solutions lineup."
+      seoTitle="AI Logistics Solutions | RFID, GPS & IoT | Prosper Infotech"
+      seoDescription="AI logistics solutions built on IoT, RFID, and GPS — explore Prosper Infotech's full lineup for warehouses, yards, fleets, and ports."
     />
   )
 }

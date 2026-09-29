@@ -18,6 +18,7 @@ export default function IconCardOverviewTemplate({
   ctaDescription,
   seoTitle,
   seoDescription,
+  h1,
 }) {
   useDocumentTitle(seoTitle || `${title} | Prosper Infotech`, seoDescription)
 
@@ -25,7 +26,7 @@ export default function IconCardOverviewTemplate({
 
   return (
     <>
-      <Breadcrumb title={title} />
+      <Breadcrumb title={title} h1={h1} />
 
       <section className="max-w-7xl mx-auto px-6 py-20">
         {heading && <SectionHeading eyebrow={eyebrow} title={heading} />}
