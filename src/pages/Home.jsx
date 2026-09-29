@@ -22,7 +22,20 @@ import heroSlideDockMonitoring from '../assets/hero-slide-dock-monitoring.jpg'
 import heroSlideCfs from '../assets/hero-slide-cfs.jpg'
 import heroSlideForklift from '../assets/hero-slide-forklift.jpg'
 import heroSlideAssetTracking from '../assets/hero-slide-asset-tracking.jpg'
-import solutionsGalleryImg from '../assets/solution-warehouse.webp'
+import { SOLUTION_IMAGES } from '../data/solutionImages'
+
+const SOLUTIONS_GALLERY = [
+  { img: SOLUTION_IMAGES['/solutions/warehouse-solutions'], alt: 'Warehouse worker using a handheld RFID scanner alongside an AI-guided forklift' },
+  { img: SOLUTION_IMAGES['/solutions/yard-solutions'], alt: 'Aerial view of a trailer yard at a distribution center at sunset' },
+  { img: SOLUTION_IMAGES['/solutions/fleet-management'], alt: 'Truck cab dashboard showing a live GPS fleet-tracking map' },
+  { img: SOLUTION_IMAGES['/solutions/rfid-gps-solutions'], alt: 'Close-up of a handheld RFID reader scanning a tagged pallet' },
+  { img: SOLUTION_IMAGES['/solutions/asset-tracking'], alt: 'Technician applying an RFID asset tag to a forklift' },
+  { img: SOLUTION_IMAGES['/solutions/container-terminal-automation'], alt: 'Reach stacker lifting a shipping container at a container terminal' },
+  { img: SOLUTION_IMAGES['/solutions/gate-yard-dock-vision-ai'], alt: 'Camera mounted at a gate post as a truck approaches' },
+  { img: SOLUTION_IMAGES['/solutions/industrial-iot'], alt: 'Wireless IoT sensor mounted on industrial factory equipment' },
+  { img: SOLUTION_IMAGES['/solutions/ai-computer-vision'], alt: 'Forklift with a mounted AI vision camera moving through a warehouse aisle' },
+  { img: SOLUTION_IMAGES['/solutions/workforce-management'], alt: 'Warehouse worker checking in at a facial-recognition kiosk' },
+]
 
 const HERO_SLIDES = [
   {
@@ -187,6 +200,17 @@ export default function Home() {
   }, [activeSlide, heroHover, totalHeroSlides, isMobile])
   const goPrevSlide = () => setActiveSlide((i) => (i - 1 + totalHeroSlides) % totalHeroSlides)
   const goNextSlide = () => setActiveSlide((i) => (i + 1) % totalHeroSlides)
+
+  const [galleryIndex, setGalleryIndex] = useState(0)
+  const [galleryHover, setGalleryHover] = useState(false)
+  useEffect(() => {
+    if (galleryHover) return
+    const timer = setTimeout(
+      () => setGalleryIndex((i) => (i + 1) % SOLUTIONS_GALLERY.length),
+      2800
+    )
+    return () => clearTimeout(timer)
+  }, [galleryIndex, galleryHover])
 
   return (
     <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
@@ -492,14 +516,42 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="relative mx-auto w-full max-w-[400px] aspect-[4/5]">
+            <div
+              className="relative mx-auto w-full max-w-[400px] aspect-[4/5]"
+              onMouseEnter={() => setGalleryHover(true)}
+              onMouseLeave={() => setGalleryHover(false)}
+            >
               <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(8deg) translate(26px, -6px)' }} />
               <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(4deg) translate(13px, -3px)' }} />
-              <img
-                src={solutionsGalleryImg}
-                alt="Warehouse worker using a handheld RFID scanner alongside an AI-guided forklift"
-                className="absolute inset-0 h-full w-full rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]"
-              />
+              <div className="absolute inset-0" style={{ perspective: 1200 }}>
+                <AnimatePresence initial={false}>
+                  <motion.img
+                    key={galleryIndex}
+                    src={SOLUTIONS_GALLERY[galleryIndex].img}
+                    alt={SOLUTIONS_GALLERY[galleryIndex].alt}
+                    initial={{ opacity: 0, scale: 0.82, rotate: -14, y: 46, rotateY: -35 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0, y: 0, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, rotate: 10, x: 70, rotateY: 25, transition: { duration: 0.45, ease: 'easeIn' } }}
+                    transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute inset-0 h-full w-full rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]"
+                    style={{ transformStyle: 'preserve-3d' }}
+                  />
+                </AnimatePresence>
+              </div>
+
+              <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-1.5">
+                {SOLUTIONS_GALLERY.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setGalleryIndex(i)}
+                    aria-label={`Show solution image ${i + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === galleryIndex ? 'w-5 bg-primary' : 'w-1.5 bg-primary/25 hover:bg-primary/50'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
