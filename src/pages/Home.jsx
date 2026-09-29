@@ -532,19 +532,31 @@ export default function Home() {
               >
                 <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[8deg] translate-x-[14px] -translate-y-[4px] sm:translate-x-[26px] sm:-translate-y-[6px]" />
                 <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[4deg] translate-x-[7px] -translate-y-[2px] sm:translate-x-[13px] sm:-translate-y-[3px]" />
-                <div className="absolute inset-0" style={{ perspective: 1200 }}>
+                <div className="absolute inset-0">
                   <AnimatePresence initial={false}>
                     <motion.img
                       key={galleryIndex}
                       src={SOLUTIONS_GALLERY[galleryIndex].img}
                       alt={SOLUTIONS_GALLERY[galleryIndex].alt}
-                      initial={{ opacity: 0, scale: 0.82, rotate: -14, y: 46, rotateY: -35 }}
-                      animate={{ opacity: 1, scale: 1, rotate: 0, y: 0, rotateY: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, rotate: 10, x: 70, rotateY: 25, transition: { duration: 0.45, ease: 'easeIn' } }}
-                      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                      initial={{ opacity: 0, scale: 0.94, rotate: -6, y: 24 }}
+                      animate={{
+                        opacity: 1,
+                        scale: 1,
+                        rotate: 0,
+                        y: 0,
+                        transition: { type: 'spring', stiffness: 240, damping: 28, mass: 0.9 },
+                      }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.96,
+                        rotate: 5,
+                        x: 40,
+                        transition: { type: 'spring', stiffness: 300, damping: 32, mass: 0.7 },
+                      }}
                       drag="x"
                       dragConstraints={{ left: 0, right: 0 }}
                       dragElastic={0.18}
+                      dragTransition={{ bounceStiffness: 400, bounceDamping: 32 }}
                       onDragStart={() => pauseGalleryAutoplay()}
                       onDragEnd={(_, info) => {
                         if (info.offset.x <= -50) goToNextGalleryImage()
@@ -553,7 +565,7 @@ export default function Home() {
                       }}
                       whileTap={{ cursor: 'grabbing', scale: 0.97 }}
                       className="absolute inset-0 h-full w-full cursor-grab rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] active:cursor-grabbing"
-                      style={{ transformStyle: 'preserve-3d', touchAction: 'pan-y' }}
+                      style={{ touchAction: 'pan-y' }}
                     />
                   </AnimatePresence>
                 </div>
