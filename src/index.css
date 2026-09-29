@@ -90,3 +90,10 @@
     animation: none !important;
   }
 }
+
+/* Prosper CRM chat widget (widget.js) renders its own 58px launcher bubble —
+   shrink it to match the 48px Call/WhatsApp floating buttons it stacks with. */
+#pcrm-bubble {
+  width: 48px !important;
+  height: 48px !important;
+}
