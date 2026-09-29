@@ -20,8 +20,8 @@
   --color-surface: #fffdf6;
   --color-surface-alt: #fff8dc;
 
-  --font-heading: "Sora", "Open Sans", sans-serif;
-  --font-body: "Inter", "Open Sans", sans-serif;
+  --font-heading: "Open Sans", sans-serif;
+  --font-body: "Open Sans", sans-serif;
 }
 
 @layer base {
