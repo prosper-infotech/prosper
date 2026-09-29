@@ -18,6 +18,7 @@ export default function SoftwareProductDetailTemplate({ detail }) {
     name,
     description: tagline ? `${tagline} — ${description}` : description,
     applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web-based',
     brand: { '@type': 'Brand', name: 'Prosper Infotech' },
     url: `https://www.prosperinfotech.com${path}`,
   })
