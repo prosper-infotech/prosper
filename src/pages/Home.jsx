@@ -202,11 +202,21 @@ export default function Home() {
   const goNextSlide = () => setActiveSlide((i) => (i + 1) % totalHeroSlides)
 
   const [galleryIndex, setGalleryIndex] = useState(0)
+  const [galleryDirection, setGalleryDirection] = useState(1)
   const [galleryHover, setGalleryHover] = useState(false)
   const galleryTimerRef = useRef(null)
-  const goToNextGalleryImage = () => setGalleryIndex((i) => (i + 1) % SOLUTIONS_GALLERY.length)
-  const goToPrevGalleryImage = () =>
+  const goToNextGalleryImage = () => {
+    setGalleryDirection(1)
+    setGalleryIndex((i) => (i + 1) % SOLUTIONS_GALLERY.length)
+  }
+  const goToPrevGalleryImage = () => {
+    setGalleryDirection(-1)
     setGalleryIndex((i) => (i - 1 + SOLUTIONS_GALLERY.length) % SOLUTIONS_GALLERY.length)
+  }
+  const goToGalleryIndex = (i) => {
+    setGalleryDirection(i > galleryIndex ? 1 : -1)
+    setGalleryIndex(i)
+  }
   // Cleared synchronously (not just via galleryHover in the effect below) so a
   // drag that starts a moment before the timer would've fired can't still
   // swap the image out from under the user's finger mid-gesture.
@@ -530,29 +540,42 @@ export default function Home() {
                 onMouseEnter={() => pauseGalleryAutoplay()}
                 onMouseLeave={() => setGalleryHover(false)}
               >
-                <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[8deg] translate-x-[14px] -translate-y-[4px] sm:translate-x-[26px] sm:-translate-y-[6px]" />
-                <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[4deg] translate-x-[7px] -translate-y-[2px] sm:translate-x-[13px] sm:-translate-y-[3px]" />
+                <img
+                  src={SOLUTIONS_GALLERY[(galleryIndex + 2) % SOLUTIONS_GALLERY.length].img}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 h-full w-full rounded-[26px] object-cover opacity-60 shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[8deg] translate-x-[14px] -translate-y-[4px] sm:translate-x-[26px] sm:-translate-y-[6px]"
+                />
+                <img
+                  src={SOLUTIONS_GALLERY[(galleryIndex + 1) % SOLUTIONS_GALLERY.length].img}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 h-full w-full rounded-[26px] object-cover opacity-80 shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[4deg] translate-x-[7px] -translate-y-[2px] sm:translate-x-[13px] sm:-translate-y-[3px]"
+                />
                 <div className="absolute inset-0">
-                  <AnimatePresence initial={false}>
+                  <AnimatePresence initial={false} custom={galleryDirection}>
                     <motion.img
                       key={galleryIndex}
                       src={SOLUTIONS_GALLERY[galleryIndex].img}
                       alt={SOLUTIONS_GALLERY[galleryIndex].alt}
-                      initial={{ opacity: 0, scale: 0.94, rotate: -6, y: 24 }}
+                      custom={galleryDirection}
+                      initial={(dir) => ({ opacity: 0, x: dir > 0 ? '38%' : '-38%' })}
                       animate={{
                         opacity: 1,
-                        scale: 1,
-                        rotate: 0,
-                        y: 0,
-                        transition: { type: 'spring', stiffness: 240, damping: 28, mass: 0.9 },
+                        x: 0,
+                        transition: {
+                          x: { type: 'spring', stiffness: 320, damping: 32 },
+                          opacity: { duration: 0.2 },
+                        },
                       }}
-                      exit={{
+                      exit={(dir) => ({
                         opacity: 0,
-                        scale: 0.96,
-                        rotate: 5,
-                        x: 40,
-                        transition: { type: 'spring', stiffness: 300, damping: 32, mass: 0.7 },
-                      }}
+                        x: dir > 0 ? '-38%' : '38%',
+                        transition: {
+                          x: { type: 'spring', stiffness: 320, damping: 32 },
+                          opacity: { duration: 0.2 },
+                        },
+                      })}
                       drag="x"
                       dragConstraints={{ left: 0, right: 0 }}
                       dragElastic={0.18}
@@ -575,7 +598,7 @@ export default function Home() {
                     <button
                       key={i}
                       type="button"
-                      onClick={() => setGalleryIndex(i)}
+                      onClick={() => goToGalleryIndex(i)}
                       aria-label={`Show solution image ${i + 1}`}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         i === galleryIndex ? 'w-5 bg-primary' : 'w-1.5 bg-primary/25 hover:bg-primary/50'
