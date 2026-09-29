@@ -12,7 +12,7 @@ const SECTION_LINKS = [
   { id: 'benefits', label: 'Benefits' },
 ]
 
-export default function SolutionDetailTemplate({ title, parentLabel, parentPath, siblings, detail, path, icons }) {
+export default function SolutionDetailTemplate({ title, parentLabel, parentPath, siblings, detail, path, icons, image }) {
   useDocumentTitle(detail.seoTitle, detail.metaDescription, {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -47,14 +47,26 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
           </nav>
         </div>
 
-        <section id="overview" className="max-w-4xl mx-auto px-6 pt-16 pb-4 scroll-mt-36">
-          <Reveal className="flex flex-col gap-4">
-            {detail.intro.map((para, i) => (
-              <p key={i} className="text-ink-600 text-lg">
-                {para}
-              </p>
-            ))}
-          </Reveal>
+        <section id="overview" className="max-w-6xl mx-auto px-6 pt-16 pb-4 scroll-mt-36">
+          <div className={image ? 'grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center' : 'max-w-4xl mx-auto'}>
+            <Reveal className="flex flex-col gap-4">
+              {detail.intro.map((para, i) => (
+                <p key={i} className="text-ink-600 text-lg">
+                  {para}
+                </p>
+              ))}
+            </Reveal>
+
+            {image && (
+              <Reveal delay={0.1}>
+                <img
+                  src={image}
+                  alt={`${title} in a real warehouse, yard, or facility operation`}
+                  className="w-full rounded-2xl border border-gold-dark/20 object-cover shadow-[0_24px_48px_-24px_rgba(20,52,109,0.35)] aspect-[4/3]"
+                />
+              </Reveal>
+            )}
+          </div>
         </section>
 
         <section id="features" className="max-w-6xl mx-auto px-6 py-14 scroll-mt-36">

@@ -8,6 +8,7 @@ import { NAV } from './data/navigation'
 import { SOLUTIONS_DETAIL } from './data/solutionsDetail'
 import { INDUSTRIES_DETAIL } from './data/industriesDetail'
 import { SOLUTION_ICONS } from './data/solutionIcons'
+import { SOLUTION_IMAGES } from './data/solutionImages'
 import { INDUSTRY_ICONS } from './data/industryIcons'
 import { AI_SERVICES_DETAIL } from './data/aiServicesDetail'
 import { SOFTWARE_PRODUCTS_DETAIL } from './data/softwareProductsDetail'
@@ -106,6 +107,7 @@ function childElement(item, child) {
         detail={SOLUTIONS_DETAIL[child.path]}
         path={child.path}
         icons={SOLUTION_ICONS}
+        image={SOLUTION_IMAGES[child.path]}
       />
     )
   }
