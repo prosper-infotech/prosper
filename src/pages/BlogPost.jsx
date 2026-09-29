@@ -27,7 +27,7 @@ export default function BlogPost() {
       headline: post.title,
       description: post.excerpt,
       datePublished: post.date,
-      image: 'https://www.prosperinfotech.com/og-image.jpg',
+      image: `https://www.prosperinfotech.com${post.image}`,
       author: { '@type': 'Organization', name: 'Prosper Infotech' },
       publisher: {
         '@type': 'Organization',
@@ -63,6 +63,12 @@ export default function BlogPost() {
               {post.readTime}
             </span>
           </div>
+
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full rounded-xl border border-ink-300 object-cover aspect-[16/9]"
+          />
 
           {post.sections.map((section, i) => (
             <div key={i}>

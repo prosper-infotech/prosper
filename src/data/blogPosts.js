@@ -1,9 +1,37 @@
 // Original blog content for the Resources > Blog section.
+import imgRfidWarehouse from '../assets/hero-slide-rfid-driven-warehouse.jpg'
+import imgRfidScan from '../assets/asset-tracking-gallery-rfid-scan.jpg'
+import imgCfs from '../assets/hero-slide-cfs.jpg'
+import imgIotYard from '../assets/hero-slide-iot-yard.jpg'
+import imgAs400 from '../assets/as400-hero.jpg'
+import imgDistributionCenter from '../assets/hero-slide-distribution-center.jpg'
+import imgFleetGps from '../assets/hero-slide-fleet-gps.jpg'
+import imgHomeBg from '../assets/home-hero-bg.jpg'
+import imgAiVisionIot from '../assets/hero-slide-ai-vision-iot.jpg'
+import imgAssetTrackingHero from '../assets/asset-tracking-hero.jpg'
+import imgGalleryInstall from '../assets/asset-tracking-gallery-install.jpg'
+import imgGalleryDashboard from '../assets/asset-tracking-gallery-dashboard.jpg'
+import imgCardDashboard from '../assets/asset-tracking-card-dashboard.jpg'
+import imgForkliftHero from '../assets/forklift-vision-hero.jpg'
+import imgDockAi from '../assets/hero-slide-dock-ai.jpg'
+import imgDockMonitoring from '../assets/hero-slide-dock-monitoring.jpg'
+import imgCardFixedReader from '../assets/asset-tracking-card-fixed-reader.jpg'
+import imgWmsHero from '../assets/wms-hero.jpg'
+import imgCardRuggedTag from '../assets/asset-tracking-card-rugged-tag.jpg'
+import imgCfsHero from '../assets/ai-powered-cfs-hero.jpg'
+import imgCardRfidTag from '../assets/asset-tracking-card-rfid-label-tag.jpg'
+import imgCardMobileApp from '../assets/asset-tracking-card-mobile-app.jpg'
+import imgGalleryYard from '../assets/asset-tracking-gallery-yard.jpg'
+import imgCardHandheldReader from '../assets/asset-tracking-card-handheld-reader.jpg'
+import imgTeam from '../assets/tech-outsourcing-hero-team.jpg'
+import imgHeroAssetTracking from '../assets/hero-slide-asset-tracking.jpg'
+
 export const BLOG_POSTS = [
   {
     slug: 'signs-your-warehouse-needs-rfid',
     title: '5 Signs Your Warehouse Needs RFID Inventory Tracking',
     category: 'Warehouse Management',
+    image: imgRfidWarehouse,
     excerpt:
       "If your team is still relying on manual cycle counts and spreadsheets, these are the warning signs that it's time to move to RFID.",
     date: '2026-01-15',
@@ -43,6 +71,7 @@ export const BLOG_POSTS = [
     slug: 'rfid-vs-barcode',
     title: 'RFID vs. Barcode: Which Is Right for Your Operation?',
     category: 'RFID Technology',
+    image: imgRfidScan,
     excerpt:
       "Barcode and RFID both track inventory, but they solve very different problems. Here's how to decide which one fits your operation.",
     date: '2026-01-22',
@@ -78,6 +107,7 @@ export const BLOG_POSTS = [
   {
     slug: 'ai-vision-container-terminals',
     title: 'How AI Vision Is Changing Container Terminal Operations',
+    image: imgCfs,
     category: 'AI & Computer Vision',
     excerpt:
       'Camera-based AI is replacing manual gate inspections and spotter trucks at ports and container terminals. Here\'s what that actually looks like in practice.',
@@ -117,6 +147,7 @@ export const BLOG_POSTS = [
   {
     slug: 'cost-of-yard-congestion',
     title: 'The True Cost of Yard Congestion (and How to Fix It)',
+    image: imgIotYard,
     category: 'Yard Management',
     excerpt:
       "Detention fees are only the visible cost of a congested yard. Here's what else it's costing you — and how yard management software fixes it.",
@@ -153,6 +184,7 @@ export const BLOG_POSTS = [
   {
     slug: 'ibm-i-modernization-options',
     title: "IBM i / AS400 Modernization: Why Rip-and-Replace Isn't Your Only Option",
+    image: imgAs400,
     category: 'IBM i / AS400',
     excerpt:
       "Replacing a working AS400 system is expensive and risky. Here are the modernization paths that let you keep what works and upgrade what doesn't.",
@@ -189,6 +221,7 @@ export const BLOG_POSTS = [
   {
     slug: 'cold-chain-reefer-monitoring',
     title: 'Cold Chain Compliance: What Reefer Monitoring Actually Prevents',
+    image: imgDistributionCenter,
     category: 'Cold Chain',
     excerpt:
       'A single undetected temperature excursion can mean a lost shipment and a compliance violation. Here\'s what real-time reefer monitoring catches before it becomes a loss.',
@@ -225,6 +258,7 @@ export const BLOG_POSTS = [
   {
     slug: 'gps-fleet-tracking-roi',
     title: 'GPS Fleet Tracking: What Real-Time Visibility Actually Fixes',
+    image: imgFleetGps,
     category: 'Fleet Management',
     excerpt:
       "GPS tracking gets sold as a dot on a map. The real return comes from what that data lets you stop doing manually — and what it catches before it becomes an incident.",
@@ -261,6 +295,7 @@ export const BLOG_POSTS = [
   {
     slug: 'video-attendance-vs-biometric',
     title: "Video-Based Attendance vs. Biometric Scanners: What's the Difference?",
+    image: imgHomeBg,
     category: 'Workforce Management',
     excerpt:
       "Fingerprint and face scanners aren't the only way to automate attendance anymore. Here's how camera-based attendance compares — and why it's winning out in some facilities.",
@@ -297,6 +332,7 @@ export const BLOG_POSTS = [
   {
     slug: 'edge-ai-vs-cloud-ai-inspection',
     title: 'Edge AI vs. Cloud AI: Where Should Your Inspection Models Actually Run?',
+    image: imgAiVisionIot,
     category: 'Edge AI & IoT',
     excerpt:
       "Running AI inference on-site instead of in the cloud isn't just a latency decision — it changes what you can monitor, how fast you find out, and what data leaves your facility.",
@@ -335,6 +371,7 @@ export const BLOG_POSTS = [
   {
     slug: 'rfid-asset-tracking-healthcare',
     title: 'RFID Asset Tracking in Healthcare: Beyond Just Finding Equipment',
+    image: imgAssetTrackingHero,
     category: 'Asset Tracking',
     excerpt:
       "Locating a missing infusion pump is the obvious use case. The bigger return from RFID asset tracking in healthcare comes from what it prevents, not just what it finds.",
@@ -374,6 +411,7 @@ export const BLOG_POSTS = [
   {
     slug: 'lorawan-industrial-iot-sensors',
     title: 'LoRaWAN for Industrial IoT: When Long-Range Sensors Actually Make Sense',
+    image: imgGalleryInstall,
     category: 'Industrial IoT',
     excerpt:
       "WiFi and cellular don't reach every corner of a large industrial site. Here's when a LoRaWAN sensor network is the right call — and when it isn't.",
@@ -413,6 +451,7 @@ export const BLOG_POSTS = [
   {
     slug: '3pl-multi-client-warehouse-technology',
     title: 'Managing Multiple Clients Without Multiplying Systems: Technology for 3PL Warehouses',
+    image: imgGalleryDashboard,
     category: '3PL',
     excerpt:
       "Every new client a 3PL takes on adds inventory, SLAs, and reporting requirements. Here's how the right warehouse technology keeps that growth from turning into operational chaos.",
@@ -449,6 +488,7 @@ export const BLOG_POSTS = [
   {
     slug: 'ai-analytics-logistics-decisions',
     title: 'AI Analytics for Logistics: Turning Sensor Data Into Decisions, Not Just Dashboards',
+    image: imgCardDashboard,
     category: 'AI Analytics',
     excerpt:
       "Most warehouses already collect more data than anyone looks at. The gap isn't data collection — it's turning that data into something that actually changes a decision.",
@@ -487,6 +527,7 @@ export const BLOG_POSTS = [
   {
     slug: 'what-is-forkliftvision-ai',
     title: 'What Is ForkliftVision AI? Pallet and Location Accuracy Without Manual Scanning',
+    image: imgForkliftHero,
     category: 'AI & Computer Vision',
     excerpt:
       "ForkliftVision AI mounts a camera and edge AI directly on the forklift to confirm pallet identity and location automatically — no operator stopping to scan a barcode at every pick and drop.",
@@ -519,6 +560,7 @@ export const BLOG_POSTS = [
   {
     slug: 'dockvision-ai-explained',
     title: 'Inside DockVision AI: How Camera-Based Dock Monitoring Cuts Loading Errors',
+    image: imgDockAi,
     category: 'AI & Computer Vision',
     excerpt:
       'A camera watching every dock door catches the loading and unloading mistakes a supervisor doing rounds every twenty minutes physically cannot.',
@@ -551,6 +593,7 @@ export const BLOG_POSTS = [
   {
     slug: 'gatevision-ai-explained',
     title: 'GateVision AI Explained: OCR-Based Gate Check-In for Trucks and Containers',
+    image: imgDockMonitoring,
     category: 'AI & Computer Vision',
     excerpt:
       "GateVision AI reads license plates, container numbers, and trailer IDs automatically at the gate, replacing manual guard check-in with a camera and OCR.",
@@ -583,6 +626,7 @@ export const BLOG_POSTS = [
   {
     slug: 'what-is-ai-edgebox',
     title: 'What Is an AI EdgeBox? Why Edge Compute Beats Cloud-Only Inspection at the Gate',
+    image: imgCardFixedReader,
     category: 'Edge AI & IoT',
     excerpt:
       'An AI EdgeBox runs inspection models on hardware at the gate or dock itself, so a decision happens in milliseconds instead of waiting on a round trip to the cloud.',
@@ -615,6 +659,7 @@ export const BLOG_POSTS = [
   {
     slug: 'wms-implementation-what-to-expect',
     title: 'WMS Implementation: What Actually Happens From Kickoff to Go-Live',
+    image: imgWmsHero,
     category: 'Warehouse Management',
     excerpt:
       "A WMS rollout that works is a sequence of specific steps, not a single cutover weekend. Here's what each phase actually involves.",
@@ -651,6 +696,7 @@ export const BLOG_POSTS = [
   {
     slug: 'rfid-tool-tracking-manufacturing',
     title: 'RFID Tool and Equipment Tracking on the Manufacturing Floor',
+    image: imgCardRuggedTag,
     category: 'Asset Tracking',
     excerpt:
       "Lost tools and fixtures don't just cost the replacement price — they cost the production downtime waiting for someone to find or reorder them.",
@@ -683,6 +729,7 @@ export const BLOG_POSTS = [
   {
     slug: 'reach-stacker-vision-automation',
     title: 'Reach Stacker Automation: Vision-Guided Container Handling at CFS Terminals',
+    image: imgCfsHero,
     category: 'AI & Computer Vision',
     excerpt:
       "A reach stacker operator lining up a container by eye is the slowest, most error-prone step in a CFS terminal's container handling process — vision guidance changes that directly.",
@@ -715,6 +762,7 @@ export const BLOG_POSTS = [
   {
     slug: 'pharma-rfid-serialization-compliance',
     title: 'Pharma Serialization and RFID: What Compliance Actually Requires',
+    image: imgCardRfidTag,
     category: 'Asset Tracking',
     excerpt:
       "Pharma track-and-trace regulations require unit-level serialization and chain-of-custody records — a requirement barcode-only systems struggle to meet at scale.",
@@ -747,6 +795,7 @@ export const BLOG_POSTS = [
   {
     slug: 'retail-rfid-inventory-accuracy',
     title: 'Why Retailers Are Moving to RFID for Inventory Accuracy (Not Just Loss Prevention)',
+    image: imgCardMobileApp,
     category: 'RFID Technology',
     excerpt:
       "RFID in retail started as a loss-prevention tool. The bigger return is now inventory accuracy — knowing what's actually on the shelf, not what the system thinks is there.",
@@ -779,6 +828,7 @@ export const BLOG_POSTS = [
   {
     slug: 'construction-site-asset-tracking',
     title: 'Asset Tracking on Construction Sites: Stopping Equipment Walk-Offs',
+    image: imgGalleryYard,
     category: 'Asset Tracking',
     excerpt:
       "Tools and equipment that disappear from a job site are one of the most common and least-tracked losses in construction — GPS and RFID tracking turns that into a solvable problem.",
@@ -811,6 +861,7 @@ export const BLOG_POSTS = [
   {
     slug: 'fixed-vs-handheld-rfid-readers',
     title: 'Fixed vs. Handheld RFID Readers: Which One Do You Actually Need?',
+    image: imgCardHandheldReader,
     category: 'RFID Technology',
     excerpt:
       "Fixed and handheld RFID readers solve different problems. Most real deployments need both, not one or the other.",
@@ -843,6 +894,7 @@ export const BLOG_POSTS = [
   {
     slug: 'in-house-vs-outsourced-ai-iot-team',
     title: 'In-House vs. Outsourced: Building an AI/IoT Engineering Team',
+    image: imgTeam,
     category: 'Technology Outsourcing',
     excerpt:
       "Hiring a full in-house AI/IoT team from scratch and outsourcing to specialists both work — the right call depends on how long you actually need the capability.",
@@ -875,6 +927,7 @@ export const BLOG_POSTS = [
   {
     slug: 'how-much-does-rfid-deployment-cost',
     title: 'How Much Does a Warehouse RFID Deployment Cost?',
+    image: imgHeroAssetTracking,
     category: 'RFID Technology',
     excerpt:
       "RFID deployment cost breaks down into three categories: tags, readers and infrastructure, and integration. Here's what actually drives the total in each.",
@@ -907,6 +960,7 @@ export const BLOG_POSTS = [
   {
     slug: 'yard-automation-roi-timeline',
     title: "What's the ROI Timeline for Yard Automation? (Real Numbers, Not Estimates)",
+    image: imgIotYard,
     category: 'Yard Management',
     excerpt:
       "Yard automation ROI comes from three specific, measurable sources — detention charges, spotter labor, and dwell time — and each pays back on a different timeline.",
@@ -939,6 +993,7 @@ export const BLOG_POSTS = [
   {
     slug: 'rfid-vs-gps-vs-ble-tracking',
     title: 'RFID, GPS, or BLE: Which Tracking Technology Fits Your Use Case?',
+    image: imgRfidScan,
     category: 'Asset Tracking',
     excerpt:
       "RFID, GPS, and BLE all track assets, but each is built for a different range, precision, and cost trade-off. Picking the wrong one means paying for precision you don't need, or not getting the coverage you do.",
