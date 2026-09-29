@@ -22,6 +22,7 @@ import heroSlideDockMonitoring from '../assets/hero-slide-dock-monitoring.jpg'
 import heroSlideCfs from '../assets/hero-slide-cfs.jpg'
 import heroSlideForklift from '../assets/hero-slide-forklift.jpg'
 import heroSlideAssetTracking from '../assets/hero-slide-asset-tracking.jpg'
+import solutionsGalleryImg from '../assets/solution-warehouse.webp'
 
 const HERO_SLIDES = [
   {
@@ -494,15 +495,11 @@ export default function Home() {
             <div className="relative mx-auto w-full max-w-[400px] aspect-[4/5]">
               <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-primary to-primary-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(8deg) translate(26px, -6px)' }} />
               <div className="absolute inset-0 rounded-[26px] bg-gradient-to-br from-[#ffe94d] to-gold-dark shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]" style={{ transform: 'rotate(4deg) translate(13px, -3px)' }} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3.5 rounded-[26px] border-2 border-dashed border-primary/30 bg-gradient-to-br from-[#fffdf3] to-[#fff1c4] p-8 text-center shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-11 w-11 text-ink-500 opacity-45">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <path d="M21 15l-5-5L5 21" />
-                </svg>
-                <span className="text-sm font-bold text-primary">Solutions gallery</span>
-                <small className="text-xs text-ink-500">Real site &mdash; drop in operation photos here</small>
-              </div>
+              <img
+                src={solutionsGalleryImg}
+                alt="Warehouse worker using a handheld RFID scanner alongside an AI-guided forklift"
+                className="absolute inset-0 h-full w-full rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)]"
+              />
             </div>
           </Reveal>
         </div>
