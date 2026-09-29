@@ -123,7 +123,7 @@ export default function ProductsHardware() {
 
   return (
     <>
-      <Breadcrumb title="Hardware" parent="Products" parentPath="/products" />
+      <Breadcrumb title="Hardware" parent="Products" parentPath="/products" h1="RFID Readers, GPS Devices & AI Edge Hardware" />
 
       <section className="max-w-3xl mx-auto px-6 pt-16 pb-8 text-center">
         <Reveal className="flex flex-col items-center gap-4">

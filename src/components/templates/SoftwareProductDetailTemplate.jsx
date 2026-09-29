@@ -9,7 +9,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { SOFTWARE_PRODUCTS } from '../../data/softwareProductsDetail'
 
 export default function SoftwareProductDetailTemplate({ detail }) {
-  const { name, tagline, description, seoTitle, seoDescription, badge, process, features, highlights, idealFor, architecture, reachStackerPanel, dataPoints, path } = detail
+  const { name, tagline, description, seoTitle, seoDescription, h1, badge, process, features, highlights, idealFor, architecture, reachStackerPanel, dataPoints, path } = detail
   const siblings = SOFTWARE_PRODUCTS.filter((p) => p.path !== path)
 
   useDocumentTitle(seoTitle, seoDescription, {
@@ -24,7 +24,7 @@ export default function SoftwareProductDetailTemplate({ detail }) {
 
   return (
     <>
-      <Breadcrumb title={name} parent="Software" parentPath="/products/software" description={description} />
+      <Breadcrumb title={name} parent="Software" parentPath="/products/software" description={description} h1={h1} />
 
       <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
         {/* Intro strip: tagline, badge, process flow */}

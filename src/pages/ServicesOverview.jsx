@@ -8,6 +8,7 @@ export default function ServicesOverview() {
   return (
     <IconCardOverviewTemplate
       title="Services"
+      h1="RFID, IoT & AI Software Development Services"
       heading="Development, implementation, and support across our full solution stack"
       items={services}
       icons={SERVICE_ICONS}

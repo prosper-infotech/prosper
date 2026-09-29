@@ -8,6 +8,7 @@ export default function ProductsOverview() {
   return (
     <IconCardOverviewTemplate
       title="Products"
+      h1="RFID Software Platforms & Hardware Products"
       heading="Software platforms and hardware built for RFID, GPS, and IoT deployments"
       items={products}
       icons={PRODUCT_ICONS}

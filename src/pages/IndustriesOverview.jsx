@@ -8,6 +8,7 @@ export default function IndustriesOverview() {
   return (
     <IconCardOverviewTemplate
       title="Industries"
+      h1="Industries We Serve"
       heading="Purpose-built solutions across the industries we serve"
       items={industries}
       icons={INDUSTRY_ICONS}

@@ -16,6 +16,7 @@ export default function ProductsSoftware() {
     <>
       <Breadcrumb
         title="Software"
+        h1="RFID & AI Vision Software Platforms"
         description="Proprietary software built for real-time operations across every yard, warehouse, and fleet."
       />
 

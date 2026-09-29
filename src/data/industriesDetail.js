@@ -36,6 +36,7 @@ export const INDUSTRIES_DETAIL = {
     seoTitle: 'Warehousing Technology | RFID Inventory & Warehouse Automation | Prosper Infotech',
     metaDescription:
       'RFID and barcode-based warehousing technology for real-time inventory accuracy, automated put-away, and multi-warehouse visibility.',
+    h1: 'Warehousing Technology',
     intro: [
       "Warehousing operations depend on knowing exactly what's in stock, where it is, and how fast it can move. Prosper Infotech's warehousing technology combines RFID and barcode scanning with automated workflows to give warehouse teams real-time inventory accuracy without relying on manual cycle counts.",
       'Whether you operate a single facility or a multi-warehouse network, our platform connects directly to your existing ERP and order management systems, so inventory data stays accurate from receiving through dispatch.',
@@ -65,6 +66,7 @@ export const INDUSTRIES_DETAIL = {
     seoTitle: 'Manufacturing IoT & Asset Tracking Solutions | Prosper Infotech',
     metaDescription:
       'Industrial IoT, RFID asset tracking, and workforce management solutions for manufacturing plants and production facilities.',
+    h1: 'Manufacturing IoT & Asset Tracking Solutions',
     intro: [
       'Manufacturing plants generate constant streams of operational data — machine status, material flow, tool location, and workforce attendance. Prosper Infotech\'s manufacturing solutions connect sensors, RFID tags, and cameras into a single platform, giving plant managers real-time visibility into equipment, inventory, and people.',
       'From industrial IoT sensor networks to RFID-tracked tools and AI-powered attendance systems, our technology helps manufacturers reduce downtime, tighten inventory control, and keep production data accurate without adding manual data entry.',
@@ -94,6 +96,7 @@ export const INDUSTRIES_DETAIL = {
     seoTitle: 'Port & Terminal Technology | Container Tracking & Vision AI | Prosper Infotech',
     metaDescription:
       'RFID, GPS, and AI vision solutions for ports and container terminals — automated gate processing, container tracking, and yard visibility.',
+    h1: 'Port & Terminal Technology',
     intro: [
       'Ports and container terminals move enormous volumes of containers through gate, yard, and vessel operations every day — and every delay has a cost. Prosper Infotech\'s port and terminal technology combines RFID, GPS, and AI-powered computer vision to automate container identification, gate processing, and yard inventory.',
       'Our camera-based vision AI reads container numbers and inspects for damage automatically, while RFID and GPS tracking gives terminal operators a live, accurate view of every container and trailer on-site — reducing reliance on manual spotter checks and radio communication.',
@@ -151,6 +154,7 @@ export const INDUSTRIES_DETAIL = {
   '/industries/supply-chain': {
     seoTitle: 'Supply Chain Visibility Solutions | RFID & GPS Tracking | Prosper Infotech',
     metaDescription: 'End-to-end supply chain visibility with RFID and GPS tracking across warehouses, yards, and fleets.',
+    h1: 'Supply Chain Visibility Solutions',
     intro: [
       'Supply chain visibility depends on connecting data across every node — warehouses, yards, fleets, and terminals — into one accurate picture. Prosper Infotech\'s supply chain solutions link RFID, GPS, and IoT data from across your operation into a single platform, replacing disconnected systems and manual status updates.',
       'From inbound receiving through final delivery, our technology gives supply chain teams real-time visibility into inventory, assets, and shipments — helping you spot bottlenecks before they cause delays and give customers accurate status updates.',
@@ -179,6 +183,7 @@ export const INDUSTRIES_DETAIL = {
   '/industries/3pl': {
     seoTitle: '3PL Warehouse & Yard Technology | Multi-Client Visibility | Prosper Infotech',
     metaDescription: 'RFID-powered warehouse and yard technology built for 3PL providers managing multiple clients and facilities.',
+    h1: '3PL Warehouse & Yard Technology',
     intro: [
       'Third-party logistics providers need to manage inventory, yard activity, and assets across multiple clients and facilities — often with different requirements for each. Prosper Infotech\'s 3PL solutions bring RFID-based warehouse and yard automation into a single platform that scales across clients and sites without adding operational complexity.',
       'Our multi-warehouse inventory tracking, automated yard management, and asset tracking tools give 3PL operators the accuracy and reporting their clients expect, while reducing the manual labor typically required to manage multi-tenant facilities.',
@@ -208,6 +213,7 @@ export const INDUSTRIES_DETAIL = {
     seoTitle: 'Cold Chain Monitoring Solutions | Reefer & Temperature Tracking | Prosper Infotech',
     metaDescription:
       'RFID and IoT-based cold chain monitoring for reefer container tracking, temperature compliance, and real-time yard visibility.',
+    h1: 'Cold Chain Monitoring Solutions',
     intro: [
       'Cold chain operations have zero tolerance for temperature excursions — a single undetected failure can mean lost product and compliance violations. Prosper Infotech\'s cold chain solutions combine RFID and GPS tracking with automated reefer monitoring to catch temperature, fuel, and defrost issues before they become losses.',
       "Our Reefer Guard capability inspects temperature-controlled containers on arrival and departure, with instant alerts for exceptions — giving cold chain operators an auditable, real-time record of every reefer unit's condition.",
@@ -235,6 +241,7 @@ export const INDUSTRIES_DETAIL = {
   '/industries/healthcare': {
     seoTitle: 'Healthcare Asset Tracking & Attendance Solutions | Prosper Infotech',
     metaDescription: 'RFID asset tracking and AI-powered attendance solutions for hospitals and healthcare facilities.',
+    h1: 'Healthcare Asset Tracking Solutions',
     intro: [
       'Hospitals and healthcare facilities rely on expensive, often mobile equipment — and losing track of it costs both time and money. Prosper Infotech\'s healthcare solutions use RFID asset tracking to give clinical and facilities teams real-time visibility into equipment location and status, without disrupting patient care workflows.',
       'Beyond equipment tracking, our AI-powered attendance and workforce management tools help healthcare facilities manage staff scheduling and compliance across departments and shifts, with privacy-first, on-premise processing.',
@@ -263,6 +270,7 @@ export const INDUSTRIES_DETAIL = {
     seoTitle: 'Pharmaceutical Tracking & Compliance Solutions | RFID & Cold Chain | Prosper Infotech',
     metaDescription:
       'RFID-based tracking and cold chain monitoring solutions for pharmaceutical manufacturing, storage, and distribution.',
+    h1: 'Pharmaceutical Tracking & Compliance Solutions',
     intro: [
       'Pharmaceutical operations demand precise, auditable tracking — from raw materials through cold chain distribution to compliance reporting. Prosper Infotech\'s pharma solutions use RFID and IoT tracking to give manufacturers and distributors serialized visibility into inventory and shipments at every stage.',
       'For temperature-sensitive products, our reefer monitoring and cold chain tracking capabilities provide continuous, auditable temperature records — helping pharma operators meet strict regulatory requirements without added manual documentation.',
@@ -291,6 +299,7 @@ export const INDUSTRIES_DETAIL = {
   '/industries/retail': {
     seoTitle: 'Retail Inventory & Fulfillment Technology | RFID Solutions | Prosper Infotech',
     metaDescription: 'RFID-based inventory and fulfillment technology for retail operations, improving stock accuracy and order fulfillment speed.',
+    h1: 'Retail Inventory & Fulfillment Technology',
     intro: [
       'Retail operations live or die on inventory accuracy — misplaced stock means lost sales and frustrated customers. Prosper Infotech\'s retail solutions use RFID and barcode technology to give retailers real-time inventory visibility across distribution centers and fulfillment operations.',
       'From automated receiving to faster picking and packing, our warehouse and inventory tools help retail and eCommerce operators fulfill orders faster and more accurately, with full integration into existing order management systems.',
@@ -319,6 +328,7 @@ export const INDUSTRIES_DETAIL = {
     seoTitle: 'Construction Equipment Tracking Solutions | RFID & GPS | Prosper Infotech',
     metaDescription:
       'RFID and GPS-based equipment tracking solutions for construction companies managing tools and machinery across job sites.',
+    h1: 'Construction Equipment Tracking Solutions',
     intro: [
       'Construction companies routinely lose time and money tracking down tools, machinery, and equipment across multiple job sites. Prosper Infotech\'s construction solutions use RFID and GPS tracking to give project managers real-time visibility into equipment location and utilization, whether it\'s on-site or in transit.',
       'Our zero-upfront asset tracking platform includes the RFID hardware needed to get started, so construction firms can deploy equipment tracking across job sites without a large upfront capital investment.',
@@ -346,6 +356,7 @@ export const INDUSTRIES_DETAIL = {
   '/industries/media-entertainment': {
     seoTitle: 'Media & Entertainment Asset Tracking Solutions | Prosper Infotech',
     metaDescription: 'RFID-based asset tracking solutions for media and entertainment production equipment and gear.',
+    h1: 'Media & Entertainment Asset Tracking Solutions',
     intro: [
       'Media and entertainment productions rely on large volumes of expensive, mobile equipment — cameras, rigging, and production gear — that moves between locations constantly. Prosper Infotech\'s asset tracking solutions give production and facilities teams real-time visibility into equipment location and status.',
       'With automated check-in and check-out, multi-site tracking, and audit-ready reporting, our platform helps media organizations reduce equipment loss and streamline gear management across productions and venues.',

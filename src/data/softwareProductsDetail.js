@@ -31,6 +31,7 @@ export const SOFTWARE_PRODUCTS = [
     tagline: 'IoT Dock Door Monitoring — Proof of Concept Architecture',
     description:
       'Wide warehouse / distribution facility monitoring across ~50 to 60 dock doors — real-time door, trailer, and restraint status streamed from the edge to the cloud.',
+    h1: 'IoT Dock Door Monitoring',
     seoTitle: 'Prosper DockVisionAI | IoT Dock Door Monitoring | Prosper Infotech',
     seoDescription:
       'Real-time dock door, trailer, and restraint status monitoring across every dock door, streamed from the edge to the cloud with LoRaWAN and automated alerts.',
@@ -73,6 +74,7 @@ export const SOFTWARE_PRODUCTS = [
     name: 'Prosper ContainerVisionAI',
     tagline: 'AI-Powered Container Freight Station (CFS) & Container Terminal Automation',
     description: 'Real-time container visibility across Gate Arrival → Yard → Inspection → Departure workflows.',
+    h1: 'CFS & Container Terminal Automation',
     seoTitle: 'Prosper ContainerVisionAI | CFS & Container Terminal Automation | Prosper Infotech',
     seoDescription:
       'AI cameras, OCR, and GPS/RTK automate gate, yard, and reach-stacker workflows for container freight stations and container terminals — gate arrival to departure.',
@@ -139,6 +141,7 @@ export const SOFTWARE_PRODUCTS = [
     tagline: 'Track every asset. Optimize every operation. Secure every moment.',
     description:
       'RFID-powered asset tracking with fixed and handheld reader setups, delivered as a zero-upfront SaaS platform with hardware included.',
+    h1: 'RFID Asset Tracking Software',
     seoTitle: 'Prosper Asset Tracking | RFID Asset Tracking Software | Prosper Infotech',
     seoDescription:
       'RFID-powered asset tracking with fixed and handheld reader setups, real-time visibility, automated check-in/out, and multi-site control — zero-upfront SaaS with hardware included.',
@@ -178,6 +181,7 @@ export const SOFTWARE_PRODUCTS = [
     tagline: 'Warehouse Management System',
     description:
       'Real-time inventory control, put-away, picking, packing, dispatch, and full warehouse visibility.',
+    h1: 'Warehouse Management System',
     seoTitle: 'Prosper WMS | Warehouse Management System | Prosper Infotech',
     seoDescription:
       'Real-time inventory control, automated put-away, picking, packing, and dispatch, with barcode and RFID support across every warehouse.',
@@ -210,6 +214,7 @@ export const SOFTWARE_PRODUCTS = [
     tagline: 'Camera-Based Asset Tracking Using AI, OCR & Edge Intelligence',
     description:
       'Track trailers, containers, chassis, bobtails, and custom assets in real time across Gate → Yard → Dock → Departure workflows.',
+    h1: 'AI Yard & Trailer Tracking',
     seoTitle: 'Prosper YardVision AI | AI Yard & Trailer Tracking | Prosper Infotech',
     seoDescription:
       'AI camera-based tracking for trailers, containers, chassis, and bobtails across Gate, Yard, Dock, and Departure workflows, with OCR and edge intelligence.',
