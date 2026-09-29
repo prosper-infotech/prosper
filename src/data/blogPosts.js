@@ -483,4 +483,488 @@ export const BLOG_POSTS = [
       },
     ],
   },
+
+  {
+    slug: 'what-is-forkliftvision-ai',
+    title: 'What Is ForkliftVision AI? Pallet and Location Accuracy Without Manual Scanning',
+    category: 'AI & Computer Vision',
+    excerpt:
+      "ForkliftVision AI mounts a camera and edge AI directly on the forklift to confirm pallet identity and location automatically — no operator stopping to scan a barcode at every pick and drop.",
+    date: '2026-07-08',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'AI & Computer Vision', path: '/solutions/ai-computer-vision' }],
+    sections: [
+      {
+        body: "ForkliftVision AI is Prosper Infotech's camera-and-edge-AI system that mounts directly on a forklift to confirm pallet identity and location automatically, in place of the manual barcode scan an operator would otherwise have to stop and perform at every pick and drop.",
+      },
+      {
+        heading: 'How it actually works',
+        body: 'An 8MP camera with 3D depth sensing is mounted on the mast or frame, feeding an onboard Edge AI box that reads pallet labels and RFID tags and calculates position in real time — without needing a network round trip to a cloud server to confirm what it just saw.',
+      },
+      {
+        heading: 'The problem it solves',
+        body: "Manual scanning slows every single pick down by a few seconds, and under pressure to hit a pick rate, those scans are the first step operators skip. A skipped scan means the system has no record of where that pallet actually went — which is exactly the gap that shows up three weeks later as a stock discrepancy nobody can explain.",
+      },
+      {
+        heading: 'Where it fits in the warehouse or yard',
+        body: "It works continuously as the forklift moves from dock to storage to staging, logging pallet movement in the background and feeding location data straight into your WMS or YMS. Nobody has to remember to scan anything, because there's nothing to remember.",
+      },
+      {
+        heading: "What it doesn't replace",
+        body: "ForkliftVision AI isn't a standalone system — it still relies on RFID tags or printed labels already on your pallets, and it integrates with the WMS or YMS you're already running rather than replacing it. It removes the manual scanning step, not the underlying inventory architecture.",
+      },
+    ],
+  },
+
+  {
+    slug: 'dockvision-ai-explained',
+    title: 'Inside DockVision AI: How Camera-Based Dock Monitoring Cuts Loading Errors',
+    category: 'AI & Computer Vision',
+    excerpt:
+      'A camera watching every dock door catches the loading and unloading mistakes a supervisor doing rounds every twenty minutes physically cannot.',
+    date: '2026-07-15',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Prosper DockVision AI', path: '/products/software/dockvision-ai' }],
+    sections: [
+      {
+        body: "DockVision AI puts a camera on every dock door and uses computer vision to confirm what's actually happening at that door — the right trailer, the right load, loaded or unloaded correctly — continuously, not on the schedule a supervisor's rounds allow.",
+      },
+      {
+        heading: 'What a supervisor walking the docks actually misses',
+        body: "A facility with 20 dock doors and one supervisor checking each door every 20 minutes is, on average, looking at any given door for a few seconds out of every 1,200. Damage, a wrong trailer backed into the wrong door, or a load that started before the trailer was properly secured all happen in the gaps.",
+      },
+      {
+        heading: 'What the cameras are actually watching for',
+        body: 'Trailer arrival and departure timestamps, door status (open, closed, occupied), whether loading activity matches the scheduled appointment, and visual damage to the trailer or dock equipment — all logged automatically, with an alert the moment something doesn\'t match what was expected.',
+      },
+      {
+        heading: 'Turning dock activity into a real number',
+        body: "Once arrival, start-loading, and departure are all timestamped automatically, dock turnaround time stops being a guess and becomes a real metric you can track per door, per shift, per carrier — which is usually the first time a facility can actually see which dock or which shift is the bottleneck.",
+      },
+      {
+        heading: 'Fitting into an existing yard operation',
+        body: "DockVision AI is designed to run alongside GateVision AI and YardVision AI as part of one connected Gate → Yard → Dock → Departure workflow, feeding the same YMS or WMS rather than becoming another disconnected system to check separately.",
+      },
+    ],
+  },
+
+  {
+    slug: 'gatevision-ai-explained',
+    title: 'GateVision AI Explained: OCR-Based Gate Check-In for Trucks and Containers',
+    category: 'AI & Computer Vision',
+    excerpt:
+      "GateVision AI reads license plates, container numbers, and trailer IDs automatically at the gate, replacing manual guard check-in with a camera and OCR.",
+    date: '2026-07-22',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Gate/Yard/Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' }],
+    sections: [
+      {
+        body: "GateVision AI uses cameras and OCR to automatically read license plates, container numbers, chassis IDs, and SCAC codes as a truck arrives at the gate, instead of a guard manually keying that information into a terminal operating system one truck at a time.",
+      },
+      {
+        heading: 'What manual gate check-in actually costs you',
+        body: "Every truck that has to stop, roll down a window, and wait for a guard to type in plate and container numbers by hand adds minutes to a queue that compounds during a morning rush. On a busy day, that queue is what turns into driver complaints and detention charges you're paying for.",
+      },
+      {
+        heading: 'How the read-and-match process works',
+        body: 'Cameras capture the plate, container, and chassis as the truck approaches, OCR converts that into text in real time, and the system automatically matches it against the scheduled appointment — flagging anything that doesn\'t match instead of waving it through on a guard\'s best guess.',
+      },
+      {
+        heading: 'Damage and exception logging at the gate, not after',
+        body: "Because the camera is already capturing the container on arrival, the same pass can flag visible damage and log it against that specific arrival timestamp — which matters when a damage dispute comes up later and nobody can remember which gate move it happened on.",
+      },
+      {
+        heading: 'Where it connects downstream',
+        body: 'A GateVision AI read at arrival becomes the starting record for YardVision AI tracking and DockVision AI monitoring, so the truck, trailer, or container is already identified and logged before it ever reaches a dock door — one continuous record instead of three separate manual check-ins.',
+      },
+    ],
+  },
+
+  {
+    slug: 'what-is-ai-edgebox',
+    title: 'What Is an AI EdgeBox? Why Edge Compute Beats Cloud-Only Inspection at the Gate',
+    category: 'Edge AI & IoT',
+    excerpt:
+      'An AI EdgeBox runs inspection models on hardware at the gate or dock itself, so a decision happens in milliseconds instead of waiting on a round trip to the cloud.',
+    date: '2026-07-29',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'AI Edge Box', path: '/products/hardware#ai-edge-box' }],
+    sections: [
+      {
+        body: "An AI EdgeBox is a ruggedized compute unit that runs AI inspection and detection models locally, at the gate, dock, or yard camera itself — instead of streaming raw video to a cloud server and waiting for a result to come back before a gate arm opens or an alert fires.",
+      },
+      {
+        heading: 'Why the round trip to the cloud is the actual problem',
+        body: "A cloud-only setup means every frame has to upload, get processed, and send a result back before anything happens — adding latency that's noticeable when a gate arm needs to lift for an approaching truck, and unworkable if the site's internet connection drops for even a few seconds.",
+      },
+      {
+        heading: 'What runs on the box itself',
+        body: 'Object detection, OCR for plates and container numbers, and damage inspection models all run directly on the EdgeBox\'s onboard GPU, using NVIDIA and TensorRT-accelerated inference — producing a result in the time it takes the truck to finish rolling through the gate, not seconds after.',
+      },
+      {
+        heading: 'What keeps working when the network goes down',
+        body: 'Because inspection and detection happen locally, gate reads, damage flags, and access decisions keep functioning during a connectivity outage — the EdgeBox queues and syncs the data once the connection is back, instead of the whole gate operation stalling.',
+      },
+      {
+        heading: 'Where it fits across a facility',
+        body: "The same EdgeBox architecture powers GateVision AI, DockVision AI, YardVision AI, and ForkliftVision AI — one hardware pattern doing inference locally at each point in the facility, feeding results back to a central YMS or WMS rather than routing every frame through a central server first.",
+      },
+    ],
+  },
+
+  {
+    slug: 'wms-implementation-what-to-expect',
+    title: 'WMS Implementation: What Actually Happens From Kickoff to Go-Live',
+    category: 'Warehouse Management',
+    excerpt:
+      "A WMS rollout that works is a sequence of specific steps, not a single cutover weekend. Here's what each phase actually involves.",
+    date: '2026-08-05',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Prosper WMS', path: '/products/software/wms' }],
+    sections: [
+      {
+        body: "A warehouse management system implementation that goes smoothly isn't a single cutover event — it's a sequence of distinct phases, each with its own risk if skipped or rushed. Here's what each one actually involves.",
+      },
+      {
+        heading: 'Phase 1: Process mapping, before any software is configured',
+        body: "Before a single screen is configured, the real receiving, put-away, picking, packing, and dispatch workflow has to be documented as it actually happens on the floor — not as the org chart says it should happen. Skipping this step is the single most common reason a WMS rollout stalls mid-implementation.",
+      },
+      {
+        heading: 'Phase 2: System configuration and ERP/TMS integration',
+        body: 'Zone and location structures, picking logic, and label formats get configured to match the mapped process, and the WMS gets connected to your existing ERP and TMS so inventory and order data flow automatically instead of requiring manual re-entry between systems.',
+      },
+      {
+        heading: 'Phase 3: A pilot zone, not the whole warehouse',
+        body: "Running the new system in one zone or one shift first — while the old process still covers the rest of the floor — surfaces configuration gaps and training gaps while the blast radius of a mistake is still small, instead of discovering them during a full-facility go-live.",
+      },
+      {
+        heading: 'Phase 4: Staff training on the actual devices',
+        body: "Training on the specific handheld scanners and screens staff will use day to day, not a generic overview, is what determines whether adoption sticks in week one or whether people quietly fall back to the old paper process the first time something looks unfamiliar.",
+      },
+      {
+        heading: 'Phase 5: Full go-live and a defined hypercare window',
+        body: "A full rollout with a dedicated support window — typically the first two to four weeks — where issues get resolved same-day instead of queued, is what determines whether the new system earns trust from the floor or gets blamed for problems that would have happened anyway.",
+      },
+    ],
+  },
+
+  {
+    slug: 'rfid-tool-tracking-manufacturing',
+    title: 'RFID Tool and Equipment Tracking on the Manufacturing Floor',
+    category: 'Asset Tracking',
+    excerpt:
+      "Lost tools and fixtures don't just cost the replacement price — they cost the production downtime waiting for someone to find or reorder them.",
+    date: '2026-08-12',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Manufacturing', path: '/industries/manufacturing' }],
+    sections: [
+      {
+        body: "On a manufacturing floor, a missing tool or fixture doesn't just cost its replacement price — it costs the production time lost while a line waits for someone to find it, borrow one, or place a rush order. RFID tool tracking exists to close that specific gap.",
+      },
+      {
+        heading: 'Why tools go missing in the first place',
+        body: "Tools and fixtures move between stations, get borrowed across shifts, and often aren't tied to any system that tracks where they currently are. A spreadsheet or a sign-out sheet only works if everyone updates it every time, and in practice, nobody does that consistently.",
+      },
+      {
+        heading: 'What RFID tagging actually changes',
+        body: "A tagged tool gets read automatically as it passes fixed readers at station boundaries or tool cribs, so its last known location is always current without anyone manually logging a checkout or return. No sign-out sheet to forget, no manual entry to skip under deadline pressure.",
+      },
+      {
+        heading: 'Beyond just finding things: utilization and calibration',
+        body: "The same tag reads that track location also build a usage history — which tools sit idle, which are in near-constant use, and when a precision tool is due for calibration based on actual usage rather than a fixed calendar reminder that doesn't reflect real wear.",
+      },
+      {
+        heading: 'Connecting to production planning',
+        body: "Once tool and fixture location and availability are tracked in real time, that data can feed directly into production scheduling — flagging a shortage before a line is scheduled to start, instead of after the shift is already stalled looking for a fixture that isn't where it's supposed to be.",
+      },
+    ],
+  },
+
+  {
+    slug: 'reach-stacker-vision-automation',
+    title: 'Reach Stacker Automation: Vision-Guided Container Handling at CFS Terminals',
+    category: 'AI & Computer Vision',
+    excerpt:
+      "A reach stacker operator lining up a container by eye is the slowest, most error-prone step in a CFS terminal's container handling process — vision guidance changes that directly.",
+    date: '2026-08-19',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Container Terminal Automation', path: '/solutions/container-terminal-automation' }],
+    sections: [
+      {
+        body: "A reach stacker operator judging container position and stack alignment by eye, through a cab window, is one of the slowest and most error-prone steps in a CFS or container terminal's handling process. Vision-guided automation targets that step directly.",
+      },
+      {
+        heading: 'What actually slows a reach stacker down',
+        body: "Precisely aligning a spreader over a container from a raised cab, especially in a tight stack or low visibility, takes real skill and still produces mis-picks and near-misses. Every mis-aligned pick means backing off and trying again, and that repeated attempt is pure lost cycle time.",
+      },
+      {
+        heading: 'How camera and sensor guidance helps',
+        body: 'Cameras and depth sensors mounted on the reach stacker give the operator a real-time overlay of spreader-to-container alignment, plus automatic container ID capture via OCR — confirming the operator is lifting the correct container, not just a container that happens to be in the right stack.',
+      },
+      {
+        heading: 'Reducing damage, not just saving time',
+        body: "Misaligned lifts are also where corner casting and container structural damage happen most often. Vision guidance that catches a bad alignment before the lift completes prevents damage claims that are far more expensive than the seconds saved by rushing the pick.",
+      },
+      {
+        heading: 'Feeding data back into yard inventory',
+        body: "Every reach stacker move, once vision-confirmed and OCR-logged, updates the yard's live container inventory automatically — so the terminal's system knows a container has moved the moment it happens, not after someone radios it in or logs it at end of shift.",
+      },
+    ],
+  },
+
+  {
+    slug: 'pharma-rfid-serialization-compliance',
+    title: 'Pharma Serialization and RFID: What Compliance Actually Requires',
+    category: 'Asset Tracking',
+    excerpt:
+      "Pharma track-and-trace regulations require unit-level serialization and chain-of-custody records — a requirement barcode-only systems struggle to meet at scale.",
+    date: '2026-08-26',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Pharma', path: '/industries/pharma' }],
+    sections: [
+      {
+        body: "Pharmaceutical track-and-trace regulations require unit-level serialization and a documented chain of custody from manufacturing through dispensing — a requirement that barcode-only systems, which depend on someone manually scanning every single unit at every handoff, struggle to meet reliably at real production volume.",
+      },
+      {
+        heading: 'What serialization actually requires in practice',
+        body: "Every saleable unit needs a unique identifier that's recorded at each change of ownership or location — manufacturer, distributor, pharmacy — with that record available for audit. Missing even one scan in that chain creates a gap that's a compliance finding waiting to happen.",
+      },
+      {
+        heading: 'Why RFID closes the gap barcode leaves open',
+        body: 'RFID tags can be read in bulk as a case or pallet passes a fixed reader, without a person manually aiming a scanner at every individual unit. That removes the specific human-error point — the skipped scan — that creates a broken chain-of-custody record.',
+      },
+      {
+        heading: 'Cold chain and serialization together',
+        body: "Many pharma products also require temperature-controlled handling, which means serialization and cold chain compliance are often the same monitoring problem: continuous, automatic capture of both identity and condition data, rather than two separate manual logs that have to be reconciled after the fact.",
+      },
+      {
+        heading: 'Audit readiness as the real deliverable',
+        body: "The actual business value of an RFID-based serialization system isn't the tags themselves — it's being able to produce a complete, gap-free chain-of-custody record on demand during an audit, instead of assembling one from scattered paper logs under a deadline.",
+      },
+    ],
+  },
+
+  {
+    slug: 'retail-rfid-inventory-accuracy',
+    title: 'Why Retailers Are Moving to RFID for Inventory Accuracy (Not Just Loss Prevention)',
+    category: 'RFID Technology',
+    excerpt:
+      "RFID in retail started as a loss-prevention tool. The bigger return is now inventory accuracy — knowing what's actually on the shelf, not what the system thinks is there.",
+    date: '2026-09-02',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Retail', path: '/industries/retail' }],
+    sections: [
+      {
+        body: "RFID entered most retail operations as an anti-theft tool at the exit door. The bigger return turned out to be somewhere else entirely: knowing what's actually on the shelf, versus what the point-of-sale system thinks is there.",
+      },
+      {
+        heading: 'The gap between system inventory and shelf reality',
+        body: "Retail inventory accuracy from barcode-and-POS systems alone typically runs well below what operators assume, because stock gets miscounted, misplaced, or lost between receiving and the shelf without any scan ever recording the discrepancy. The system says it's there; the shelf says otherwise.",
+      },
+      {
+        heading: 'What changes with RFID cycle counts',
+        body: 'A handheld or fixed RFID reader can count an entire section in minutes without anyone pulling items off shelves or scanning barcodes one at a time — making frequent, near-real-time inventory counts practical instead of a disruptive, occasional event.',
+      },
+      {
+        heading: 'Why accurate inventory data matters more than the theft angle',
+        body: "Inaccurate inventory drives lost sales from items that show as in-stock online but aren't actually on the shelf, and it drives over-ordering to compensate for stock nobody trusts the count on. Fixing the accuracy problem addresses both, while loss prevention only ever addressed shrinkage.",
+      },
+      {
+        heading: 'Omnichannel fulfillment depends on this being right',
+        body: "Buy-online-pickup-in-store and ship-from-store fulfillment models only work if the system's inventory count is actually correct in real time — an order routed to a store that doesn't have the item creates a cancellation and a bad customer experience that RFID-level accuracy is built to prevent.",
+      },
+    ],
+  },
+
+  {
+    slug: 'construction-site-asset-tracking',
+    title: 'Asset Tracking on Construction Sites: Stopping Equipment Walk-Offs',
+    category: 'Asset Tracking',
+    excerpt:
+      "Tools and equipment that disappear from a job site are one of the most common and least-tracked losses in construction — GPS and RFID tracking turns that into a solvable problem.",
+    date: '2026-09-09',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Construction', path: '/industries/construction' }],
+    sections: [
+      {
+        body: "Tools and equipment that quietly disappear from a job site — borrowed and never returned, left behind at a wrapped-up site, or taken outright — are one of the most common and least-tracked losses in construction, largely because there's rarely any system recording who had what, where, last.",
+      },
+      {
+        heading: 'Why construction sites lose more equipment than warehouses',
+        body: "A warehouse has fixed walls and controlled access. A job site doesn't — it's open, temporary, staffed by a rotating mix of crew and subcontractors, and equipment moves between multiple active sites. That combination is exactly why manual tracking methods fail here more than almost anywhere else.",
+      },
+      {
+        heading: 'What GPS tracking adds for larger equipment',
+        body: 'GPS trackers on larger machinery and vehicles provide location history and geofencing — an alert fires automatically if a piece of equipment leaves a defined site boundary outside of scheduled working hours, catching a walk-off as it happens instead of at the next audit.',
+      },
+      {
+        heading: 'What RFID adds for tools and smaller assets',
+        body: "RFID tags on hand tools and smaller equipment get read automatically at a site's entry point or a tool crib, building a log of what left the site and when, without requiring a foreman to manually sign equipment in and out on a clipboard that's easy to skip during a busy week.",
+      },
+      {
+        heading: 'Multi-site visibility for equipment managers',
+        body: "For a contractor running several active sites at once, combined GPS and RFID tracking answers a question that's otherwise a series of phone calls: which site currently has a specific piece of equipment, so it can be reallocated to where it's actually needed instead of sitting idle at the wrong location.",
+      },
+    ],
+  },
+
+  {
+    slug: 'fixed-vs-handheld-rfid-readers',
+    title: 'Fixed vs. Handheld RFID Readers: Which One Do You Actually Need?',
+    category: 'RFID Technology',
+    excerpt:
+      "Fixed and handheld RFID readers solve different problems. Most real deployments need both, not one or the other.",
+    date: '2026-09-14',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Hardware', path: '/products/hardware' }],
+    sections: [
+      {
+        body: "Fixed and handheld RFID readers get compared as if choosing one means ruling out the other, but in most real deployments they solve two different problems and end up working side by side, not as competing options.",
+      },
+      {
+        heading: 'What a fixed reader is actually good at',
+        body: "A fixed reader mounted at a dock door, gate, or conveyor point captures every tagged item that passes through automatically, with zero action from a person. It's built for high-volume, predictable choke points — anywhere inventory reliably moves through one physical location.",
+      },
+      {
+        heading: 'What a handheld reader is actually good at',
+        body: 'A handheld reader goes wherever a person walking the floor needs it — an ad-hoc cycle count in a specific aisle, locating a single missing asset, or auditing a zone that doesn\'t have a fixed reader installed. It trades automation for flexibility.',
+      },
+      {
+        heading: 'Where fixed readers fall short on their own',
+        body: "A fixed-reader-only deployment has blind spots everywhere a reader isn't physically installed, and installing fixed readers everywhere gets expensive fast. Anything that moves through undocumented paths — internal transfers, a temporary storage area — won't get captured.",
+      },
+      {
+        heading: 'The deployment pattern that actually works',
+        body: "Fixed readers at the predictable high-volume choke points — gates, dock doors, conveyor lines — combined with handheld readers for cycle counts, exception handling, and ad-hoc audits covers both the automatic, continuous capture and the flexible, on-demand lookup a real operation actually needs.",
+      },
+    ],
+  },
+
+  {
+    slug: 'in-house-vs-outsourced-ai-iot-team',
+    title: 'In-House vs. Outsourced: Building an AI/IoT Engineering Team',
+    category: 'Technology Outsourcing',
+    excerpt:
+      "Hiring a full in-house AI/IoT team from scratch and outsourcing to specialists both work — the right call depends on how long you actually need the capability.",
+    date: '2026-09-18',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Technology Resource Outsourcing', path: '/services/technology-outsourcing' }],
+    sections: [
+      {
+        body: "Building AI, computer vision, or IoT capability in-house from scratch and bringing in outsourced specialists both work as strategies — the right call usually comes down to how long you actually need that specific capability, not which approach is generically better.",
+      },
+      {
+        heading: 'The real cost of hiring in-house from zero',
+        body: "AI/ML, computer vision, and embedded IoT engineers are a narrow, competitive talent pool. Sourcing, interviewing, and onboarding a team with no existing bench in these disciplines routinely takes months before a single line of production code gets written — time a specific project timeline often doesn't have.",
+      },
+      {
+        heading: 'Where outsourcing actually wins',
+        body: 'A specialist team that has already built similar systems — RFID integration, edge inference pipelines, YMS/WMS connectors — starts from working patterns instead of a blank page, and can scale up or down with the project instead of carrying a fixed headcount between projects.',
+      },
+      {
+        heading: "Where in-house still makes sense",
+        body: "If the capability is core and permanent — an ongoing internal platform your company will keep building on for years — the long-term cost of continuously outsourcing it usually exceeds the cost of building and retaining an internal team, once you're past the initial ramp-up.",
+      },
+      {
+        heading: 'A hybrid model most operations actually land on',
+        body: "Many teams end up outsourcing the specialized, project-bound engineering (model development, sensor integration) while keeping the ongoing operations and internal-facing workflow in-house — extending the team's capability without carrying every specialist's full-time salary indefinitely.",
+      },
+    ],
+  },
+
+  {
+    slug: 'how-much-does-rfid-deployment-cost',
+    title: 'How Much Does a Warehouse RFID Deployment Cost?',
+    category: 'RFID Technology',
+    excerpt:
+      "RFID deployment cost breaks down into three categories: tags, readers and infrastructure, and integration. Here's what actually drives the total in each.",
+    date: '2026-09-22',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'RFID & GPS Solutions', path: '/solutions/rfid-gps-solutions' }],
+    sections: [
+      {
+        body: "A warehouse RFID deployment's cost breaks down into three categories — tags, readers and infrastructure, and integration — and the total varies more by facility layout and tag volume than by any single line item people usually ask about first.",
+      },
+      {
+        heading: 'Tags: the recurring cost that scales with volume',
+        body: "Passive RFID tags are inexpensive individually, but tag cost is the one line item that scales directly with how many items you're tracking — which is why tagging strategy (tagging every SKU vs. tagging cases, pallets, or reusable assets) is usually the first real cost decision to make.",
+      },
+      {
+        heading: 'Readers and infrastructure: the one-time hardware cost',
+        body: 'Fixed readers at dock doors and gates, handheld readers for cycle counts, and the antennas and cabling to support them are a one-time capital cost that scales with the number of choke points you need automatic capture at — not with your total inventory volume.',
+      },
+      {
+        heading: 'Integration: the cost that gets underestimated most often',
+        body: "Connecting RFID reads into your existing WMS, YMS, ERP, or TMS so the data actually changes what those systems show is real engineering work, and it's the cost most frequently underestimated in early RFID budgeting — a reader that captures data nobody's other system uses delivers no return.",
+      },
+      {
+        heading: 'What actually determines your total',
+        body: "Facility size and the number of choke points that need fixed readers, the number of items needing tags, and how many existing systems need integration are the three real cost drivers — which means the right way to estimate is scoping your specific operation, not applying an industry-wide number that ignores your layout.",
+      },
+    ],
+  },
+
+  {
+    slug: 'yard-automation-roi-timeline',
+    title: "What's the ROI Timeline for Yard Automation? (Real Numbers, Not Estimates)",
+    category: 'Yard Management',
+    excerpt:
+      "Yard automation ROI comes from three specific, measurable sources — detention charges, spotter labor, and dwell time — and each pays back on a different timeline.",
+    date: '2026-09-25',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Yard Solutions', path: '/solutions/yard-solutions' }],
+    sections: [
+      {
+        body: "Yard automation ROI doesn't come from one vague efficiency gain — it comes from three specific, measurable sources: detention charges, spotter truck labor, and trailer dwell time. Each one pays back on a different timeline, and knowing which is worth understanding before committing to a rollout.",
+      },
+      {
+        heading: 'Detention charges: the fastest payback',
+        body: "Detention and demurrage charges from trailers sitting past their free time are a direct, immediate cost that real-time yard visibility starts reducing from week one — because a dispatcher can actually see which trailers are approaching their window instead of finding out after the charge hits.",
+      },
+      {
+        heading: 'Spotter truck labor: the mid-term win',
+        body: 'Reducing manual spotter truck dependency by giving dispatch real-time trailer location data — instead of a driver radioing in a guess — typically shows up as a measurable labor reduction within the first one to two months of a yard automation rollout, once the team trusts the data enough to stop double-checking it manually.',
+      },
+      {
+        heading: 'Dwell time: the metric that compounds over a full quarter',
+        body: "Average trailer dwell time drops gradually as gate, yard, and dock visibility all connect into one system, and the compounding effect — faster turns meaning more trailer capacity without adding yard space — is usually clearest when measured over a full quarter rather than the first few weeks.",
+      },
+      {
+        heading: 'What determines your specific timeline',
+        body: "A yard already paying significant detention charges sees ROI fastest; a yard whose main pain point is spotter labor sees it on a slightly longer curve. The honest answer to 'how fast' depends on which of the three costs is actually your biggest problem today, not a single number that applies to every yard.",
+      },
+    ],
+  },
+
+  {
+    slug: 'rfid-vs-gps-vs-ble-tracking',
+    title: 'RFID, GPS, or BLE: Which Tracking Technology Fits Your Use Case?',
+    category: 'Asset Tracking',
+    excerpt:
+      "RFID, GPS, and BLE all track assets, but each is built for a different range, precision, and cost trade-off. Picking the wrong one means paying for precision you don't need, or not getting the coverage you do.",
+    date: '2026-09-29',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Prosper Asset Tracking', path: '/products/software/asset-tracking' }],
+    sections: [
+      {
+        body: "RFID, GPS, and BLE all get used to track assets, but they're built for different combinations of range, precision, and cost — and picking the wrong one for your use case usually means either paying for precision you don't actually need, or not getting the coverage you do.",
+      },
+      {
+        heading: 'RFID: short range, high precision, low cost per tag',
+        body: 'RFID reads at short range — inches to a few meters, depending on the tag and reader — which makes it ideal for confirming exact identity and location at a specific point, like a gate, dock door, or shelf. Tags are inexpensive, which is what makes tagging large volumes of inventory practical.',
+      },
+      {
+        heading: 'GPS: long range, continuous tracking, higher per-unit cost',
+        body: "GPS tracks location continuously over unlimited range — a trailer, container, or vehicle anywhere it travels — but GPS trackers cost significantly more per unit than RFID tags and draw battery power continuously, which is why GPS gets reserved for higher-value, mobile assets rather than every item in inventory.",
+      },
+      {
+        heading: 'BLE: mid-range, good for zone-level indoor tracking',
+        body: 'Bluetooth Low Energy sits between the two — a range of roughly 10 to 100 meters depending on the environment, good enough to tell which zone or room an asset is in without the precision of RFID or the unlimited range of GPS. It works well for indoor asset tracking where exact-point precision isn\'t required.',
+      },
+      {
+        heading: 'Why most real deployments fuse all three',
+        body: "A single technology rarely covers a full operation end to end. RFID confirms exact identity at gates and dock doors, GPS tracks trailers and vehicles across the road network, and BLE fills in zone-level indoor coverage where fixed RFID readers aren't installed — fused together into one location record rather than three separate systems to check.",
+      },
+    ],
+  },
 ]
