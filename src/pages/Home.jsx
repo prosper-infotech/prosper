@@ -37,6 +37,16 @@ const SOLUTIONS_GALLERY = [
   { img: SOLUTION_IMAGES['/solutions/workforce-management'], alt: 'Warehouse worker checking in at a facial-recognition kiosk' },
 ]
 
+// Target transform for each position in the 3-card stack (0 = front).
+// When the gallery advances, the card in slot 1 animates into slot 0,
+// slot 2 into slot 1, and a new card fades in at slot 2 — the "next"
+// card visibly becomes the front card rather than being swapped out.
+const STACK_SLOTS = [
+  { x: '0%', y: '0%', rotate: 0, scale: 1, opacity: 1, zIndex: 3 },
+  { x: '3.5%', y: '-1%', rotate: 4, scale: 0.98, opacity: 0.85, zIndex: 2 },
+  { x: '7%', y: '-2%', rotate: 8, scale: 0.96, opacity: 0.6, zIndex: 1 },
+]
+
 const HERO_SLIDES = [
   {
     image: heroSlideAiVisionIot,
@@ -540,58 +550,53 @@ export default function Home() {
                 onMouseEnter={() => pauseGalleryAutoplay()}
                 onMouseLeave={() => setGalleryHover(false)}
               >
-                <img
-                  src={SOLUTIONS_GALLERY[(galleryIndex + 2) % SOLUTIONS_GALLERY.length].img}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full rounded-[26px] object-cover opacity-60 shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[8deg] translate-x-[14px] -translate-y-[4px] sm:translate-x-[26px] sm:-translate-y-[6px]"
-                />
-                <img
-                  src={SOLUTIONS_GALLERY[(galleryIndex + 1) % SOLUTIONS_GALLERY.length].img}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full rounded-[26px] object-cover opacity-80 shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] rotate-[4deg] translate-x-[7px] -translate-y-[2px] sm:translate-x-[13px] sm:-translate-y-[3px]"
-                />
-                <div className="absolute inset-0">
-                  <AnimatePresence initial={false} custom={galleryDirection}>
-                    <motion.img
-                      key={galleryIndex}
-                      src={SOLUTIONS_GALLERY[galleryIndex].img}
-                      alt={SOLUTIONS_GALLERY[galleryIndex].alt}
-                      custom={galleryDirection}
-                      initial={(dir) => ({ opacity: 0, x: dir > 0 ? '38%' : '-38%' })}
-                      animate={{
-                        opacity: 1,
-                        x: 0,
-                        transition: {
-                          x: { type: 'spring', stiffness: 320, damping: 32 },
-                          opacity: { duration: 0.2 },
-                        },
-                      }}
-                      exit={(dir) => ({
-                        opacity: 0,
-                        x: dir > 0 ? '-38%' : '38%',
-                        transition: {
-                          x: { type: 'spring', stiffness: 320, damping: 32 },
-                          opacity: { duration: 0.2 },
-                        },
-                      })}
-                      drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
-                      dragElastic={0.18}
-                      dragTransition={{ bounceStiffness: 400, bounceDamping: 32 }}
-                      onDragStart={() => pauseGalleryAutoplay()}
-                      onDragEnd={(_, info) => {
-                        if (info.offset.x <= -50) goToNextGalleryImage()
-                        else if (info.offset.x >= 50) goToPrevGalleryImage()
-                        setGalleryHover(false)
-                      }}
-                      whileTap={{ cursor: 'grabbing', scale: 0.97 }}
-                      className="absolute inset-0 h-full w-full cursor-grab rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] active:cursor-grabbing"
-                      style={{ touchAction: 'pan-y' }}
-                    />
-                  </AnimatePresence>
-                </div>
+                <AnimatePresence initial={false}>
+                  {[0, 1, 2].map((slot) => {
+                    const len = SOLUTIONS_GALLERY.length
+                    const step = galleryDirection >= 0 ? 1 : -1
+                    const idx = ((galleryIndex + slot * step) % len + len) % len
+                    const isFront = slot === 0
+                    const target = STACK_SLOTS[slot]
+                    return (
+                      <motion.img
+                        key={idx}
+                        src={SOLUTIONS_GALLERY[idx].img}
+                        alt={isFront ? SOLUTIONS_GALLERY[idx].alt : ''}
+                        aria-hidden={!isFront}
+                        initial={{ ...STACK_SLOTS[2], opacity: 0 }}
+                        animate={{
+                          ...target,
+                          transition: { type: 'spring', stiffness: 260, damping: 30, mass: 0.9 },
+                        }}
+                        exit={{
+                          opacity: 0,
+                          x: galleryDirection >= 0 ? '-70%' : '70%',
+                          rotate: galleryDirection >= 0 ? -8 : 8,
+                          transition: { type: 'spring', stiffness: 300, damping: 32 },
+                        }}
+                        {...(isFront
+                          ? {
+                              drag: 'x',
+                              dragConstraints: { left: 0, right: 0 },
+                              dragElastic: 0.18,
+                              dragTransition: { bounceStiffness: 400, bounceDamping: 32 },
+                              onDragStart: () => pauseGalleryAutoplay(),
+                              onDragEnd: (_, info) => {
+                                if (info.offset.x <= -50) goToNextGalleryImage()
+                                else if (info.offset.x >= 50) goToPrevGalleryImage()
+                                setGalleryHover(false)
+                              },
+                              whileTap: { cursor: 'grabbing', scale: (target.scale ?? 1) * 0.97 },
+                            }
+                          : {})}
+                        className={`absolute inset-0 h-full w-full rounded-[26px] object-cover shadow-[0_30px_60px_-22px_rgba(20,52,109,0.3)] ${
+                          isFront ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'
+                        }`}
+                        style={isFront ? { touchAction: 'pan-y' } : undefined}
+                      />
+                    )
+                  })}
+                </AnimatePresence>
 
                 <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 gap-1.5">
                   {SOLUTIONS_GALLERY.map((_, i) => (
