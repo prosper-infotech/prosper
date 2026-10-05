@@ -98,10 +98,32 @@
   height: 48px !important;
 }
 
-@keyframes hsFlow {
-  to { stroke-dashoffset: -56; }
+
+/* Hero logistics flow (LogisticsFlow.jsx). Station timings share a 14s loop with the truck. */
+@keyframes lfStation { 0% { opacity: 0 } 3% { opacity: .6 } 16% { opacity: .6 } 22%, 100% { opacity: 0 } }
+@keyframes lfChip {
+  0%, 100% { background-color: #fff; transform: scale(1) }
+  3%, 16% { background-color: #f7dd00; transform: scale(1.08) }
+  22% { background-color: #fff; transform: scale(1) }
 }
-.hs-flow-line { animation: hsFlow 2.4s linear infinite; }
-@media (prefers-reduced-motion: reduce) {
-  .hs-flow-line { animation: none !important; }
-}
+@keyframes lfPing { 0% { transform: scale(.6); opacity: .9 } 100% { transform: scale(2.2); opacity: 0 } }
+@keyframes lfDash { to { stroke-dashoffset: -28 } }
+@keyframes lfRoad { to { stroke-dashoffset: -84 } }
+@keyframes lfBlink { 50% { opacity: .25 } }
+@keyframes lfBarrier { 0%, 6% { transform: rotate(0) } 9%, 22% { transform: rotate(-62deg) } 26%, 100% { transform: rotate(0) } }
+@keyframes lfSpreader { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(34px) } }
+@keyframes lfDoor { 0%, 40% { transform: scaleY(1) } 55%, 85% { transform: scaleY(.18) } 100% { transform: scaleY(1) } }
+@keyframes lfForklift { from { transform: translateX(-70px) } to { transform: translateX(44px) } }
+@keyframes lfBar { 0%, 100% { transform: scaleY(.25) } 50% { transform: scaleY(1) } }
+.lf-station { animation: lfStation 14s linear infinite both }
+.lf-chip { animation: lfChip 14s linear infinite both }
+.lf-off { opacity: 0 }
+.lf-ping, .lf-wave { transform-box: fill-box; transform-origin: center; animation: lfPing 2s ease-out infinite }
+.lf-dash { animation: lfDash 1.4s linear infinite }
+.lf-road-dash { animation: lfRoad 2s linear infinite }
+.lf-blink { animation: lfBlink 1.6s ease-in-out infinite }
+.lf-barrier { animation: lfBarrier 14s ease-in-out infinite }
+.lf-spreader { animation: lfSpreader 5s ease-in-out infinite }
+.lf-door { animation: lfDoor 6s ease-in-out infinite }
+.lf-forklift { animation: lfForklift 4s ease-in-out infinite alternate }
+.lf-bar { animation: lfBar 2.4s ease-in-out infinite }

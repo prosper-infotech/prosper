@@ -5,7 +5,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, PhoneCall, ScanEye,
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import CallDropdown from '../components/layout/CallDropdown'
-import HeroScene from '../components/sections/HeroScene'
+import LogisticsFlow from '../components/sections/LogisticsFlow'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -15,7 +15,6 @@ import dockVisionImg from '../assets/dock vision.png'
 import forkliftVisionImg from '../assets/forklift vision ai.png'
 import assetTrackingImg from '../assets/asset tracking.png'
 import as400Img from '../assets/as400.png'
-import visionAISuiteImg from '../assets/new-hero-image.webp'
 import ctaSuiteImg from '../assets/ready-to-streamline.webp'
 import heroSlideAiVisionIot from '../assets/hero-slide-ai-vision-iot.jpg'
 import heroSlideRfidWarehouse from '../assets/hero-slide-rfid-driven-warehouse.jpg'
@@ -260,79 +259,29 @@ export default function Home() {
                 animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
               />
-              <div className="relative max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
-                <div className="md:flex-1">
-                  <Reveal>
-                    <span className="inline-flex items-center gap-2 rounded-full bg-gold/25 border border-gold-dark/40 px-3.5 py-1.5 text-[12.5px] font-bold uppercase tracking-widest text-primary-dark">
-                      AI-Powered Logistics Platform
-                    </span>
-                  </Reveal>
-                  <Reveal delay={0.08}>
-                    <h1 className="mt-5 text-2xl sm:text-3xl md:text-[27px] lg:text-[42px] font-extrabold leading-tight tracking-tight">
-                      Automate and
-                      <br />
-                      Optimize Your
-                      <br />
-                      <span className="text-gold-dark">Logistic Operations</span>
-                      <br />
-                      with our
-                      <br />
-                      AI+EdgeBox Platform
-                    </h1>
-                  </Reveal>
-                  <Reveal delay={0.16}>
-                    <p className="mt-5 text-base text-ink-600 max-w-lg">
-                      See every asset, gate, dock and yard move — live.
-                    </p>
-                  </Reveal>
-                  <Reveal delay={0.2}>
-                    <div className="mt-5 flex flex-wrap gap-2.5">
-                      {[[ScanEye, 'AI Vision'], [Radio, 'RFID'], [MapPin, 'GPS']].map(([Icon, label]) => (
-                        <span key={label} className="inline-flex items-center gap-2 rounded-full border border-gold-dark/30 bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-primary">
-                          <Icon className="h-4 w-4 text-gold-dark" />
-                          {label}
-                        </span>
-                      ))}
-                    </div>
-                  </Reveal>
-                  <Reveal delay={0.24}>
-                    <div className="mt-8 flex flex-wrap gap-4">
-                      <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
-                        Book a Demo
-                      </Button>
-                      <CallDropdown
-                        eventCategory="Homepage Hero"
-                        align="left"
-                        triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-sm hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-95"
-                      >
-                        <PhoneCall className="h-4 w-4" />
-                        Call Us
-                      </CallDropdown>
-                      <a
-                        href={`https://wa.me/19407583271?text=${encodeURIComponent(
-                          "Hi, I'd like to know more about Prosper Infotech's AI-powered logistics platform."
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() =>
-                          window.gtag?.('event', 'click_whatsapp', { event_category: 'Homepage Hero' })
-                        }
-                        className="inline-flex items-center gap-2 rounded-lg border border-[#25D366]/40 bg-[#25D366]/10 px-6 py-2.5 text-sm font-semibold text-[#128C4A] shadow-sm transition-all duration-200 hover:bg-[#25D366]/20 hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-95"
-                      >
-                        <svg viewBox="0 0 32 32" className="h-4 w-4 fill-[#25D366]" aria-hidden="true">
-                          <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.386.702 4.607 1.912 6.472L4 29l7.72-1.876A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3Zm0 21.818c-1.98 0-3.83-.562-5.4-1.535l-.387-.23-4.583 1.114 1.13-4.47-.253-.398A9.77 9.77 0 0 1 5.182 15c0-5.964 4.858-10.818 10.822-10.818S26.818 9.036 26.818 15 21.968 24.818 16.004 24.818Zm5.94-8.144c-.325-.163-1.925-.95-2.223-1.058-.298-.109-.516-.163-.733.163-.217.325-.842 1.058-1.033 1.276-.19.217-.38.244-.706.081-.325-.163-1.374-.506-2.617-1.612-.968-.862-1.622-1.927-1.812-2.252-.19-.325-.02-.5.143-.663.147-.146.325-.38.488-.57.163-.19.217-.325.325-.543.109-.217.054-.407-.027-.57-.081-.163-.733-1.765-1.004-2.417-.264-.635-.532-.55-.733-.56l-.625-.011c-.217 0-.57.081-.868.407-.298.325-1.137 1.112-1.137 2.712 0 1.6 1.164 3.147 1.326 3.364.163.217 2.29 3.497 5.55 4.904.775.335 1.38.535 1.852.684.778.247 1.486.212 2.046.129.624-.093 1.925-.787 2.196-1.547.271-.76.271-1.412.19-1.548-.081-.135-.298-.216-.624-.38Z" />
-                        </svg>
-                        WhatsApp
-                      </a>
-                    </div>
-                  </Reveal>
-                </div>
-
-                <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
-                  <HeroScene
-                    src={visionAISuiteImg}
-                    alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
-                  />
+              <div className="relative max-w-5xl mx-auto px-6 flex flex-col items-center gap-6 text-center">
+                <Reveal delay={0.05}>
+                  <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold leading-tight tracking-tight">
+                    Automate every move in your <span className="text-gold-dark">logistics</span>
+                  </h1>
+                </Reveal>
+                <Reveal delay={0.15} className="w-full">
+                  <LogisticsFlow />
+                </Reveal>
+                <Reveal delay={0.25}>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary" className="hover:scale-105">
+                      Book a Demo
+                    </Button>
+                    <CallDropdown
+                      eventCategory="Homepage Hero"
+                      align="left"
+                      triggerClassName="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-sm hover:bg-primary hover:text-white hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-95"
+                    >
+                      <PhoneCall className="h-4 w-4" />
+                      Call Us
+                    </CallDropdown>
+                  </div>
                 </Reveal>
               </div>
 
