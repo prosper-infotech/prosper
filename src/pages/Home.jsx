@@ -5,6 +5,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, PhoneCall } from 'l
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import CallDropdown from '../components/layout/CallDropdown'
+import HeroScene from '../components/sections/HeroScene'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -318,11 +319,9 @@ export default function Home() {
                 </div>
 
                 <Reveal delay={0.2} className="md:w-[350px] md:shrink-0 lg:w-[660px]">
-                  <img
+                  <HeroScene
                     src={visionAISuiteImg}
                     alt="Prosper Vision AI suite: GateVision, YardVision, DockVision, ContainerVision and ForkliftVision AI connected across a warehouse, yard and container terminal"
-                    className="w-full"
-                    fetchPriority="high"
                   />
                 </Reveal>
               </div>
