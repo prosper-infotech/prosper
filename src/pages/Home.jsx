@@ -5,7 +5,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, PhoneCall, ScanEye,
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import CallDropdown from '../components/layout/CallDropdown'
-import LogisticsFlow from '../components/sections/LogisticsFlow'
+import HeroVisual from '../components/sections/HeroVisual'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -266,7 +266,7 @@ export default function Home() {
                   </h1>
                 </Reveal>
                 <Reveal delay={0.15} className="w-full">
-                  <LogisticsFlow />
+                  <HeroVisual />
                 </Reveal>
                 <Reveal delay={0.25}>
                   <div className="flex flex-wrap justify-center gap-3">
