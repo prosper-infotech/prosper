@@ -282,7 +282,7 @@ export default function Home() {
                   </Reveal>
                   <Reveal delay={0.16}>
                     <p className="mt-5 text-base text-ink-600 max-w-lg">
-                      Prosper Infotech builds AI, RFID and GPS-powered logistics technology that transforms warehouses, yards, fleets and container terminals — delivering real-time visibility, efficiency and capacity across every operation.
+                      Prosper Infotech builds AI, RFID and GPS technology for warehouses, yards, fleets and container terminals — so you always know where every asset is and what needs to happen next.
                     </p>
                   </Reveal>
                   <Reveal delay={0.24}>
@@ -527,14 +527,14 @@ export default function Home() {
               Our Solutions
             </span>
             <h2 className="mt-6 text-3xl md:text-[42px] md:leading-[1.22] font-extrabold">
-              Our solutions are engineered to transform your operations into AI-smart workflows
+              AI, RFID and GPS solutions shaped around how your yard, warehouse and fleet actually run
             </h2>
             <p className="mt-6 text-lg text-ink-600 max-w-md">
-              Harness the power of our AI platform &mdash; built on <b className="text-ink-900 font-bold">computer vision, RFID and GPS</b> &mdash; for solutions that are comprehensive and tailored to your operation.
+              <b className="text-ink-900 font-bold">Camera vision, RFID tags and GPS data</b> work together on one platform, so each solution fits your site instead of asking you to change how you operate.
             </p>
             <div className="mt-9 flex flex-wrap gap-3.5">
               <Button to="/solutions" variant="outline-dark">
-                Discover Our Solutions
+                Explore Solutions
               </Button>
               <Button href="https://calendly.com/prosperinfotech-sales/30min" target="_blank" rel="noopener noreferrer" variant="primary">
                 Book a Demo
@@ -635,13 +635,13 @@ export default function Home() {
 
               <div className="relative grid gap-12 lg:grid-cols-[1fr_1fr] items-center">
                 <h2 className="text-4xl md:text-[44px] font-extrabold leading-[1.15] text-white">
-                  Driving
+                  Results
                   <br />
-                  Real Efficiency &amp;
+                  You Can Measure,
                   <br />
-                  Building
+                  Systems
                   <br />
-                  Lasting Value
+                  Built To Last
                 </h2>
 
                 <div className="grid grid-cols-2 gap-x-10 gap-y-10">
@@ -667,12 +667,12 @@ export default function Home() {
             <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#fffdf0] via-[#fff3c4] to-[#ffe58a] px-8 py-12 md:px-14 md:py-14 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
               <div>
                 <h2 className="text-3xl md:text-[40px] font-extrabold leading-tight text-primary">
-                  Ready to Streamline
+                  Where Does Your
                   <br />
-                  Your Operations?
+                  Operation Slow Down?
                 </h2>
                 <p className="mt-4 max-w-md text-lg text-ink-600">
-                  We&rsquo;re here to help transform your operations with a bespoke solution, engineered to address your unique warehouse, yard, fleet and terminal challenges.
+                  Tell us where gates, yards, docks or inventory hold you back, and our engineers will map out a solution built for your site.
                 </p>
                 <a
                   href="https://calendly.com/prosperinfotech-sales/30min"
