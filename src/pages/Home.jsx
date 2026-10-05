@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
-import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, PhoneCall } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, PhoneCall, ScanEye, Radio, MapPin } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import CallDropdown from '../components/layout/CallDropdown'
@@ -98,56 +98,56 @@ const PRODUCTS = [
     name: 'ContainerVision',
     tag: 'Container Terminals',
     img: containerVisionImg,
-    desc: 'AI cameras, OCR and GPS/RTK automate gate, yard and reach-stacker workflows — gate to departure.',
+    desc: 'AI cameras run gate, yard and crane moves.',
     to: '/products/software/containervision-ai',
   },
   {
     name: 'Forklift',
     tag: 'Pallet & Location',
     img: forkliftVisionImg,
-    desc: '8MP cameras, 3D depth sensing and Edge AI mounted on your forklifts confirm every pallet and location.',
+    desc: 'Forklift cameras confirm every pallet and spot.',
     to: '/solutions/ai-computer-vision',
   },
   {
     name: 'WMS',
     tag: 'Warehouse',
     img: wmsImg,
-    desc: 'RFID-powered receiving, put-away, picking, packing and dispatch, with real-time inventory across every warehouse.',
+    desc: 'Live inventory, from receiving to dispatch.',
     to: '/products/software/wms',
   },
   {
     name: 'Asset Tracking',
     tag: 'RFID & GPS',
     img: assetTrackingImg,
-    desc: 'RFID, GPS, BLE and LoRaWAN trackers feed one live dashboard, across the yard, warehouse and road.',
+    desc: 'One live map of every tagged asset.',
     to: '/products/software/asset-tracking',
   },
   {
     name: 'GateVision',
     tag: 'Gate & OCR',
     img: gateVisionImg,
-    desc: 'AI cameras and OCR automate gate check-in, container scanning and access control — no manual logging.',
+    desc: 'Gate check-in with zero manual logging.',
     to: '/solutions/gate-yard-dock-vision-ai',
   },
   {
     name: 'DockVision',
     tag: 'Dock & Loading',
     img: dockVisionImg,
-    desc: 'AI cameras monitor every dock door, confirming safe loading and unloading without manual checks.',
+    desc: 'Every dock door, watched and verified.',
     to: '/products/software/dockvision-ai',
   },
   {
     name: 'Video Attendance',
     tag: 'Workforce',
     img: videoAttendanceImg,
-    desc: 'Facial-recognition check-in replaces manual logs and buddy-punching with a live, auditable attendance record.',
+    desc: 'Face check-in. No buddy-punching.',
     to: '/products/software/video-attendance',
   },
   {
     name: 'AS400',
     tag: 'IBM i / AS400',
     img: as400Img,
-    desc: 'RPG/RPGLE development, 24x7 support and modernization for the legacy systems your operation runs on.',
+    desc: 'Support and modernization for IBM i.',
     to: '/ibm-i-as400',
   },
 ]
@@ -282,8 +282,18 @@ export default function Home() {
                   </Reveal>
                   <Reveal delay={0.16}>
                     <p className="mt-5 text-base text-ink-600 max-w-lg">
-                      Prosper Infotech builds AI, RFID and GPS technology for warehouses, yards, fleets and container terminals — so you always know where every asset is and what needs to happen next.
+                      See every asset, gate, dock and yard move — live.
                     </p>
+                  </Reveal>
+                  <Reveal delay={0.2}>
+                    <div className="mt-5 flex flex-wrap gap-2.5">
+                      {[[ScanEye, 'AI Vision'], [Radio, 'RFID'], [MapPin, 'GPS']].map(([Icon, label]) => (
+                        <span key={label} className="inline-flex items-center gap-2 rounded-full border border-gold-dark/30 bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-primary">
+                          <Icon className="h-4 w-4 text-gold-dark" />
+                          {label}
+                        </span>
+                      ))}
+                    </div>
                   </Reveal>
                   <Reveal delay={0.24}>
                     <div className="mt-8 flex flex-wrap gap-4">
@@ -452,7 +462,7 @@ export default function Home() {
             </span>
             <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px] md:whitespace-nowrap">One AI platform. Every operation, automated.</h2>
             <p className="mt-3 max-w-2xl text-ink-600 text-lg">
-              Five purpose-built products, engineered on AI, computer vision and RFID/GPS &mdash; each solving one part of your operation end to end.
+              Five products. One connected platform.
             </p>
           </Reveal>
 
@@ -527,11 +537,18 @@ export default function Home() {
               Our Solutions
             </span>
             <h2 className="mt-6 text-3xl md:text-[42px] md:leading-[1.22] font-extrabold">
-              AI, RFID and GPS solutions shaped around how your yard, warehouse and fleet actually run
+              Solutions shaped around your site
             </h2>
-            <p className="mt-6 text-lg text-ink-600 max-w-md">
-              <b className="text-ink-900 font-bold">Camera vision, RFID tags and GPS data</b> work together on one platform, so each solution fits your site instead of asking you to change how you operate.
-            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {[[ScanEye, 'Vision'], [Radio, 'RFID'], [MapPin, 'GPS']].map(([Icon, label]) => (
+                <span key={label} className="inline-flex items-center gap-2.5 rounded-2xl border border-gold-dark/25 bg-white px-4 py-2.5 text-base font-bold text-primary shadow-sm">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  {label}
+                </span>
+              ))}
+            </div>
             <div className="mt-9 flex flex-wrap gap-3.5">
               <Button to="/solutions" variant="outline-dark">
                 Explore Solutions
@@ -646,10 +663,10 @@ export default function Home() {
 
                 <div className="grid grid-cols-2 gap-x-10 gap-y-10">
                   {[
-                    ['15+', 'Years of Engineering Experience'],
+                    ['15+', 'Years Experience'],
                     ['500+', 'Devices Deployed'],
                     ['50+', 'Enterprise Clients'],
-                    ['24/7', 'Support Coverage'],
+                    ['24/7', 'Support'],
                   ].map(([value, label]) => (
                     <AnimatedStat key={label} value={value} label={label} />
                   ))}
@@ -672,7 +689,7 @@ export default function Home() {
                   Operation Slow Down?
                 </h2>
                 <p className="mt-4 max-w-md text-lg text-ink-600">
-                  Tell us where gates, yards, docks or inventory hold you back, and our engineers will map out a solution built for your site.
+                  Tell us. We'll map the fix.
                 </p>
                 <a
                   href="https://calendly.com/prosperinfotech-sales/30min"
