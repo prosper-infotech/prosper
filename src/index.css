@@ -127,3 +127,9 @@
 .lf-door { animation: lfDoor 6s ease-in-out infinite }
 .lf-forklift { animation: lfForklift 4s ease-in-out infinite alternate }
 .lf-bar { animation: lfBar 2.4s ease-in-out infinite }
+
+/* Vision hero tab progress (VisionHero.jsx). Its animationend advances to the next tab,
+   so pausing the animation also pauses autoplay. Reduced motion disables autoplay. */
+@keyframes vhProgress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+.vh-progress { transform-origin: left; animation-name: vhProgress; animation-timing-function: linear; animation-fill-mode: forwards }
+@media (prefers-reduced-motion: reduce) { .vh-progress { animation: none; transform: scaleX(1) } }

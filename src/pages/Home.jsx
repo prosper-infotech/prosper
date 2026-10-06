@@ -6,6 +6,7 @@ import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import CallDropdown from '../components/layout/CallDropdown'
 import HeroVisual from '../components/sections/HeroVisual'
+import VisionHero from '../components/sections/VisionHero'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -183,10 +184,12 @@ function AnimatedStat({ value, label }) {
   )
 }
 
-export default function Home() {
+export default function Home({ sample = false }) {
   useDocumentTitle(
     'Prosper Infotech | AI-Powered RFID, GPS & IoT Logistics Solutions',
-    'IoT, RFID, GPS, and AI-powered logistics automation solutions for warehouses, yards, and fleets — real-time tracking and asset visibility from Prosper Infotech.'
+    'IoT, RFID, GPS, and AI-powered logistics automation solutions for warehouses, yards, and fleets — real-time tracking and asset visibility from Prosper Infotech.',
+    undefined,
+    { noindex: sample }
   )
 
   const totalHeroSlides = HERO_SLIDES.length + 1
@@ -243,6 +246,9 @@ export default function Home() {
   return (
     <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
       {/* Hero */}
+      {sample ? (
+        <VisionHero />
+      ) : (
       <div className="relative" onMouseEnter={() => setHeroHover(true)} onMouseLeave={() => setHeroHover(false)}>
         <AnimatePresence mode="wait">
           {activeSlide === 0 ? (
@@ -401,6 +407,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      )}
 
       {/* Product suite */}
       <section className="py-20">

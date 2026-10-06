@@ -163,6 +163,7 @@ function App() {
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/home-sample" element={<Home sample />} />
           {NAV.filter((item) => item.path !== '/').map((item) => (
             <Route key={item.path} path={item.path}>
               <Route
