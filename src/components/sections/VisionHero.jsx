@@ -105,10 +105,6 @@ export default function VisionHero() {
   return (
     <section
       className="relative overflow-hidden pt-8 pb-14 md:pt-12"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
     >
       <motion.div
         className="pointer-events-none absolute -top-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-gold/25 blur-3xl"
@@ -182,6 +178,10 @@ export default function VisionHero() {
             role="tabpanel"
             id="vh-panel"
             aria-labelledby={`vh-tab-${current.key}`}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocus={() => setPaused(true)}
+            onBlur={() => setPaused(false)}
             className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-dark p-6 text-white shadow-2xl shadow-primary/30 md:p-8 lg:col-start-1 lg:row-start-2 lg:self-end"
           >
             <motion.span
