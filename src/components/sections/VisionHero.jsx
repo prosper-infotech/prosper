@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import Button from '../ui/Button'
 import gateImg from '../../assets/vision/gate.webp'
 import containerImg from '../../assets/vision/container.webp'
-import dockImg from '../../assets/vision/dock.webp'
+import assetImg from '../../assets/vision/asset-tracking.webp'
 import forkliftImg from '../../assets/vision/forklift.webp'
 import attendanceImg from '../../assets/vision/attendance.webp'
 
@@ -51,20 +51,6 @@ const VISIONS = [
     to: '/products/software/containervision-ai',
   },
   {
-    key: 'dock',
-    title: ['Prosper ', 'DockVision', ' AI'],
-    img: dockImg,
-    alt: 'DockVision AI monitoring a trailer at a warehouse dock door',
-    name: 'DockVision AI',
-    tagline: 'Every dock door, watched and verified.',
-    points: [
-      'Door, trailer and restraint status in real time',
-      'Turnaround time tracking for every dock',
-      'Instant alerts by email, SMS and Teams',
-    ],
-    to: '/products/software/dockvision-ai',
-  },
-  {
     key: 'forklift',
     title: ['Prosper ', 'ForkliftVision', ' AI'],
     img: forkliftImg,
@@ -79,14 +65,28 @@ const VISIONS = [
     to: '/solutions/ai-computer-vision',
   },
   {
+    key: 'asset',
+    title: ['Prosper ', 'Asset Tracking', ''],
+    img: assetImg,
+    alt: 'Asset tracking location pin over a container truck at a warehouse yard',
+    name: 'Asset Tracking',
+    tagline: 'One live map of every tagged asset.',
+    points: [
+      'RFID and GPS tracking for assets and containers',
+      'Automatic check-in and check-out, no sign-out sheets',
+      'Instant alerts when assets move or go missing',
+    ],
+    to: '/products/software/asset-tracking',
+  },
+  {
     key: 'attendance',
-    title: ['Prosper ', 'Video', ' Attendance'],
+    title: ['', 'Video Attendance', ' / Visitor Management'],
     img: attendanceImg,
     alt: 'Video attendance camera and face recognition turnstile at an entrance',
-    name: 'Video Attendance',
+    name: 'Video Attendance / Visitor Management',
     tagline: 'Face check-in. No buddy-punching.',
     points: [
-      'AI face recognition for accurate attendance',
+      'AI face recognition for staff and visitor check-in',
       'Multi-camera IN / OUT / AWAY tracking',
       'On-premise processing for privacy',
     ],
@@ -216,7 +216,7 @@ export default function VisionHero() {
                     to={current.to}
                     className="group inline-flex items-center gap-2 rounded-full bg-gold px-6 py-2.5 text-sm font-bold text-primary shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl"
                   >
-                    Explore {current.name}
+                    Explore {current.title[1]}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </motion.div>
