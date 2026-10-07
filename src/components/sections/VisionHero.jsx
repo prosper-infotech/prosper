@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Button from '../ui/Button'
 import gateFirst from '../../assets/vision/gate-first.webp'
-import containerFrame from '../../assets/vision/frame-container.webp'
+import containerFirst from '../../assets/vision/container-first.webp'
 import forkliftFrame from '../../assets/vision/frame-forklift.webp'
 import assetFrame from '../../assets/vision/frame-asset.webp'
 import attendanceFrame from '../../assets/vision/frame-attendance.webp'
@@ -48,8 +48,11 @@ const VISIONS = [
   {
     key: 'container',
     title: ['Prosper ', 'ContainerVision', ' AI'],
-    img: containerFrame,
-    alt: 'ContainerVision AI reach stacker moving containers in a terminal yard',
+    img: containerFirst,
+    ratio: 'square',
+    video: '/videos/vision/container.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Truck to yard, tracked automatically: a task is assigned, the camera reads the container ID, the reach stacker lifts and places it on the right tier, and the location is saved to ERP',
     name: 'ContainerVision AI',
     tagline: 'AI cameras run gate, yard and crane moves.',
     points: [
