@@ -5,9 +5,10 @@ import { ArrowRight } from 'lucide-react'
 import Button from '../ui/Button'
 import gateFirst from '../../assets/vision/gate-first.webp'
 import containerFirst from '../../assets/vision/container-first.webp'
-import forkliftFrame from '../../assets/vision/frame-forklift.webp'
-import assetFrame from '../../assets/vision/frame-asset.webp'
-import attendanceFrame from '../../assets/vision/frame-attendance.webp'
+import dockFirst from '../../assets/vision/dock-first.webp'
+import forkliftFirst from '../../assets/vision/forklift-first.webp'
+import assetFirst from '../../assets/vision/asset-first.webp'
+import attendanceFirst from '../../assets/vision/attendance-first.webp'
 
 // A product with a `video` plays it in place of its still image (files live in public/videos/vision).
 const SLIDE_SECONDS = 8
@@ -65,8 +66,11 @@ const VISIONS = [
   {
     key: 'forklift',
     title: ['Prosper ', 'ForkliftVision', ' AI'],
-    img: forkliftFrame,
-    alt: 'ForkliftVision AI cameras mounted on a forklift carrying a pallet',
+    img: forkliftFirst,
+    ratio: 'square',
+    video: '/videos/vision/forklift.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Putaway, verified at every step: a task is sent to the forklift, the camera reads the pallet ID, the pallet is lifted and the rack position verified, and the putaway is saved to the WMS',
     name: 'ForkliftVision AI',
     tagline: 'Forklift cameras confirm every pallet and spot.',
     points: [
@@ -77,30 +81,53 @@ const VISIONS = [
     to: '/solutions/ai-computer-vision',
   },
   {
+    key: 'dock',
+    title: ['Prosper ', 'DockVision', ' AI'],
+    img: dockFirst,
+    ratio: 'square',
+    video: '/videos/vision/dock.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Dock door status, live: sensors read the door, status goes to the site edge box and the cloud, and the dashboard and alerts update',
+    name: 'DockVision AI',
+    tagline: 'Every dock door, watched and verified.',
+    points: [
+      'Door, trailer and restraint status in real time',
+      'Edge buffering with alarm and fault rules',
+      'Instant alerts by email, SMS and Teams',
+    ],
+    to: '/products/software/dockvision-ai',
+  },
+  {
     key: 'asset',
     title: ['Prosper ', 'Asset Tracking', ''],
-    img: assetFrame,
-    alt: 'Asset tracking location pin over a container truck at a warehouse yard',
+    img: assetFirst,
+    ratio: 'square',
+    video: '/videos/vision/asset.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Every asset, always located: any asset gets an RFID tag, readers scan every tag, check-in and check-out are logged, and all assets appear on one dashboard',
     name: 'Asset Tracking',
     tagline: 'One live map of every tagged asset.',
     points: [
-      'RFID and GPS tracking for assets and containers',
-      'Automatic check-in and check-out, no sign-out sheets',
-      'Instant alerts when assets move or go missing',
+      'Tracks any asset with an RFID tag',
+      'Automatic check-in and check-out',
+      'One live dashboard with alerts across all sites',
     ],
     to: '/products/software/asset-tracking',
   },
   {
     key: 'attendance',
     title: ['', 'Video Attendance', ' / Visitor Management'],
-    img: attendanceFrame,
-    alt: 'Video attendance camera and face recognition turnstile at an entrance',
+    img: attendanceFirst,
+    ratio: 'square',
+    video: '/videos/vision/attendance.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Attendance, logged hands-free: a person arrives, face or QR is checked, IN is logged and a visitor badge issued, exit is tracked and the dashboard updates',
     name: 'Video Attendance / Visitor Management',
     tagline: 'Face check-in. No buddy-punching.',
     points: [
-      'AI face recognition for staff and visitor check-in',
-      'Multi-camera IN / OUT / AWAY tracking',
-      'On-premise processing for privacy',
+      'Face or QR check-in for staff and visitors',
+      'Visitor badge issued and host notified',
+      'On-premise processing, images stay on-site',
     ],
     to: '/products/software/video-attendance',
   },
@@ -278,7 +305,7 @@ export default function VisionHero() {
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.35, delay: reduce ? 0 : 0.15 + i * 0.06 }}
-                className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-4 pb-5 pt-4 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] md:px-5 lg:basis-[calc(20%-13px)] ${
+                className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-4 pb-5 pt-4 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] md:px-5 lg:basis-[calc(33.333%-11px)] xl:basis-[calc(16.666%-14px)] ${
                   isActive
                     ? 'border-primary shadow-xl shadow-primary/30'
                     : 'border-primary/15 bg-white hover:border-gold-dark hover:shadow-lg'
