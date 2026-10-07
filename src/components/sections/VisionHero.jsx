@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Button from '../ui/Button'
-import gateImg from '../../assets/vision/gate.webp'
-import containerImg from '../../assets/vision/container.webp'
-import assetImg from '../../assets/vision/asset-tracking.webp'
-import forkliftImg from '../../assets/vision/forklift.webp'
-import attendanceImg from '../../assets/vision/attendance.webp'
+import gateFirst from '../../assets/vision/gate-first.webp'
+import containerFrame from '../../assets/vision/frame-container.webp'
+import forkliftFrame from '../../assets/vision/frame-forklift.webp'
+import assetFrame from '../../assets/vision/frame-asset.webp'
+import attendanceFrame from '../../assets/vision/frame-attendance.webp'
 
-const SLIDE_SECONDS = 5
+// A product with a `video` plays it in place of its still image (files live in public/videos/vision).
+const SLIDE_SECONDS = 8
+
+// Edge fades so the media melts into the page instead of reading as a card.
+const FADE_RADIAL = '[mask-image:radial-gradient(ellipse_at_center,black_62%,transparent_98%)]'
+const FADE_EDGES =
+  '[mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent),linear-gradient(to_bottom,transparent,black_4%,black_96%,transparent)] [mask-composite:intersect] [-webkit-mask-composite:source-in]'
 
 const CONTENT = {
   hidden: { opacity: 0 },
@@ -25,8 +31,11 @@ const VISIONS = [
   {
     key: 'gate',
     title: ['Prosper ', 'GateVision', ' AI'],
-    img: gateImg,
-    alt: 'GateVision AI camera gantry reading a container truck at the gate',
+    img: gateFirst,
+    ratio: 'square',
+    video: '/videos/vision/gate.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Automatic truck check-in: cameras scan the truck, AI reads the numbers, details are saved to ERP and the gate opens',
     name: 'GateVision AI',
     tagline: 'Gate check-in with zero manual logging.',
     points: [
@@ -39,7 +48,7 @@ const VISIONS = [
   {
     key: 'container',
     title: ['Prosper ', 'ContainerVision', ' AI'],
-    img: containerImg,
+    img: containerFrame,
     alt: 'ContainerVision AI reach stacker moving containers in a terminal yard',
     name: 'ContainerVision AI',
     tagline: 'AI cameras run gate, yard and crane moves.',
@@ -53,7 +62,7 @@ const VISIONS = [
   {
     key: 'forklift',
     title: ['Prosper ', 'ForkliftVision', ' AI'],
-    img: forkliftImg,
+    img: forkliftFrame,
     alt: 'ForkliftVision AI cameras mounted on a forklift carrying a pallet',
     name: 'ForkliftVision AI',
     tagline: 'Forklift cameras confirm every pallet and spot.',
@@ -67,7 +76,7 @@ const VISIONS = [
   {
     key: 'asset',
     title: ['Prosper ', 'Asset Tracking', ''],
-    img: assetImg,
+    img: assetFrame,
     alt: 'Asset tracking location pin over a container truck at a warehouse yard',
     name: 'Asset Tracking',
     tagline: 'One live map of every tagged asset.',
@@ -81,7 +90,7 @@ const VISIONS = [
   {
     key: 'attendance',
     title: ['', 'Video Attendance', ' / Visitor Management'],
-    img: attendanceImg,
+    img: attendanceFrame,
     alt: 'Video attendance camera and face recognition turnstile at an entrance',
     name: 'Video Attendance / Visitor Management',
     tagline: 'Face check-in. No buddy-punching.',
@@ -93,6 +102,42 @@ const VISIONS = [
     to: '/products/software/video-attendance',
   },
 ]
+
+function VisionMedia({ vision, reduce }) {
+  const [ready, setReady] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const [ending, setEnding] = useState(false)
+  const saveData = typeof navigator !== 'undefined' && navigator.connection?.saveData
+  const showVideo = Boolean(vision.video) && !reduce && !failed && !saveData
+  const square = vision.ratio === 'square'
+  return (
+    <div className={`relative w-full ${square ? `aspect-square ${FADE_EDGES}` : `aspect-video ${FADE_RADIAL}`}`}>
+      <img
+        src={vision.img}
+        alt={vision.alt}
+        width={square ? 1080 : 1280}
+        height={square ? 1080 : 720}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      {showVideo && (
+        <video
+          src={vision.video}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${ready && !ending ? 'opacity-100' : 'opacity-0'}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onCanPlay={() => setReady(true)}
+          onError={() => setFailed(true)}
+          // Fade out just before the loop point so the restart cross-fades through the still first frame.
+          onTimeUpdate={(e) => setEnding(e.currentTarget.duration - e.currentTarget.currentTime < 0.45)}
+        />
+      )}
+    </div>
+  )
+}
 
 export default function VisionHero() {
   const [active, setActive] = useState(0)
@@ -145,32 +190,19 @@ export default function VisionHero() {
             </div>
           </motion.div>
 
-          <div className="relative flex min-h-[260px] items-center justify-center sm:min-h-[340px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:min-h-[460px]">
-            <motion.div
-              className="pointer-events-none absolute bottom-4 left-1/2 h-10 w-3/4 -translate-x-1/2 rounded-[50%] bg-primary/20 blur-xl"
-              animate={reduce ? undefined : { scaleX: [1, 0.85, 1], opacity: [0.9, 0.55, 0.9] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.div
-              className="relative w-full max-w-[620px]"
-              animate={reduce ? undefined : { y: [0, -12, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={current.key}
-                  src={current.img}
-                  alt={current.alt}
-                  width={1100}
-                  height={733}
-                  initial={{ opacity: 0, x: 50, scale: 0.94, rotate: 1.5 }}
-                  animate={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
-                  exit={{ opacity: 0, x: -50, scale: 0.94, rotate: -1.5 }}
-                  transition={{ duration: 0.5, ease: 'easeOut' }}
-                  className="mx-auto max-h-[460px] w-full object-contain"
-                />
-              </AnimatePresence>
-            </motion.div>
+          <div className="relative flex items-center lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.key}
+                className="w-full mix-blend-multiply"
+                initial={{ opacity: 0, x: 50, scale: 0.96 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -50, scale: 0.96 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                <VisionMedia vision={current} reduce={reduce} />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Info card */}
@@ -273,7 +305,7 @@ export default function VisionHero() {
                     <span
                       key={`${v.key}-bar`}
                       className="vh-progress block h-full w-full rounded-full bg-gold"
-                      style={{ animationDuration: `${SLIDE_SECONDS}s`, animationPlayState: paused ? 'paused' : 'running' }}
+                      style={{ animationDuration: `${v.seconds ?? SLIDE_SECONDS}s`, animationPlayState: paused ? 'paused' : 'running' }}
                       onAnimationEnd={next}
                     />
                   </span>
