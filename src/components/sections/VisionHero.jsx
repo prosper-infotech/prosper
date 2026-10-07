@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Boxes, DoorOpen, Forklift, ScanFace, ScanLine, Tag } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Button from '../ui/Button'
 import gateFirst from '../../assets/vision/gate-first.webp'
 import containerFirst from '../../assets/vision/container-first.webp'
@@ -32,7 +32,7 @@ const ITEM = {
 const VISIONS = [
   {
     key: 'gate',
-    icon: ScanLine,
+    tab: 'GateVision AI',
     title: ['Prosper ', 'GateVision', ' AI'],
     img: gateFirst,
     ratio: 'square',
@@ -50,7 +50,7 @@ const VISIONS = [
   },
   {
     key: 'container',
-    icon: Boxes,
+    tab: 'ContainerVision AI',
     title: ['Prosper ', 'ContainerVision', ' AI'],
     img: containerFirst,
     ratio: 'square',
@@ -68,7 +68,7 @@ const VISIONS = [
   },
   {
     key: 'forklift',
-    icon: Forklift,
+    tab: 'ForkliftVision AI',
     title: ['Prosper ', 'ForkliftVision', ' AI'],
     img: forkliftFirst,
     ratio: 'square',
@@ -86,7 +86,7 @@ const VISIONS = [
   },
   {
     key: 'dock',
-    icon: DoorOpen,
+    tab: 'DockVision AI',
     title: ['Prosper ', 'DockVision', ' AI'],
     img: dockFirst,
     ratio: 'square',
@@ -104,7 +104,7 @@ const VISIONS = [
   },
   {
     key: 'asset',
-    icon: Tag,
+    tab: 'Asset Tracking',
     title: ['Prosper ', 'Asset Tracking', ''],
     img: assetFirst,
     ratio: 'square',
@@ -122,7 +122,7 @@ const VISIONS = [
   },
   {
     key: 'attendance',
-    icon: ScanFace,
+    tab: 'Attendance & Visitors',
     title: ['', 'Video Attendance', ' / Visitor Management'],
     img: attendanceFirst,
     ratio: 'square',
@@ -199,7 +199,6 @@ export default function VisionHero() {
   const [videoMode, setVideoMode] = useState(true)
   const reduce = useReducedMotion()
   const current = VISIONS[active]
-  const Icon = current.icon
   const pad = (n) => String(n).padStart(2, '0')
 
   const go = (i) => {
@@ -217,7 +216,7 @@ export default function VisionHero() {
   }, [videoMode, reduce, active, nonce]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section className="relative overflow-hidden pt-8 pb-14 md:pt-12">
+    <section className="relative overflow-hidden pt-5 pb-6 lg:pt-6">
       <motion.div
         className="pointer-events-none absolute -top-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-gold/25 blur-3xl"
         animate={reduce ? undefined : { scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
@@ -226,32 +225,32 @@ export default function VisionHero() {
       <div className="pointer-events-none absolute bottom-[-160px] left-[-120px] h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2">
+        <div className="grid gap-x-8 gap-y-5 lg:grid-cols-2">
           <motion.div
             className="lg:col-start-1 lg:row-start-1"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[56px]">
+            <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[clamp(32px,5.6svh,46px)]">
               End-to-End
               <span className="block text-gold-dark">Logistics Visibility</span>
               with AI
             </h1>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-600">
+            <p className="mt-3 max-w-md text-base leading-relaxed text-ink-600 lg:mt-4 [@media(min-width:1024px)_and_(max-height:700px)]:hidden">
               Smarter operations for gates, yards, containers, docks and material movement — all on one intelligent platform.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3">
               <Button
                 href="https://calendly.com/prosperinfotech-sales/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="primary"
-                className="!rounded-full !px-5 sm:!px-7 !py-3 !text-base hover:scale-105"
+                className="!rounded-full !px-5 sm:!px-6 !py-2.5 !text-sm hover:scale-105"
               >
                 Get a Demo
               </Button>
-              <Button to="/solutions" variant="outline-dark" className="!rounded-full !px-5 sm:!px-7 !py-3 !text-base hover:scale-105">
+              <Button to="/solutions" variant="outline-dark" className="!rounded-full !px-5 sm:!px-6 !py-2.5 !text-sm hover:scale-105">
                 Learn More
               </Button>
             </div>
@@ -261,7 +260,7 @@ export default function VisionHero() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${current.key}-${nonce}`}
-                className="w-full mix-blend-multiply"
+                className="mx-auto w-full mix-blend-multiply lg:max-w-[min(100%,calc(100svh-215px))]"
                 initial={{ opacity: 0, x: 50, scale: 0.96 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: -50, scale: 0.96 }}
@@ -284,70 +283,51 @@ export default function VisionHero() {
             role="tabpanel"
             id="vh-panel"
             aria-labelledby={`vh-tab-${current.key}`}
-            className="relative overflow-hidden rounded-[28px] p-[2px] shadow-2xl shadow-primary/30 lg:col-start-1 lg:row-start-2 lg:self-end"
+            className="relative overflow-hidden rounded-3xl border border-white/70 bg-[#cfe2ff]/45 p-5 shadow-xl shadow-primary/10 ring-1 ring-primary/10 backdrop-blur-md lg:col-start-1 lg:row-start-2 lg:self-end"
           >
-            {/* slowly circling gold glint along the card edge */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-1/2 h-[240%] w-[240%] -translate-x-1/2 -translate-y-1/2 animate-[spin_8s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_240deg,rgba(247,221,0,0.95)_320deg,transparent_360deg)] motion-reduce:animate-none"
+            <motion.span
+              className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-gold/30 blur-3xl"
+              animate={reduce ? undefined : { scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-dark p-6 text-white md:p-8">
-              <motion.span
-                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold/25 blur-3xl"
-                animate={reduce ? undefined : { scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <span
-                className="pointer-events-none absolute inset-0 opacity-[0.07]"
-                style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '18px 18px' }}
-              />
-              <AnimatePresence mode="wait">
-                <motion.div key={`${current.key}-${nonce}`} variants={CONTENT} initial="hidden" animate="show" exit="exit" className="relative">
-                  <motion.div variants={ITEM} className="flex items-center gap-3">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold text-primary shadow-lg shadow-black/25">
-                      <Icon className="h-6 w-6" strokeWidth={2.2} />
-                    </span>
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/90">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75 motion-reduce:animate-none" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
-                      </span>
-                      See how it works
-                    </span>
-                  </motion.div>
-                  <motion.h2 variants={ITEM} className="mt-4 text-2xl font-bold text-white md:text-[34px] md:leading-tight">
-                    {current.title[0]}
-                    <span className="text-gold">{current.title[1]}</span>
-                    {current.title[2]}
-                  </motion.h2>
-                  <motion.p variants={ITEM} className="mt-1.5 text-base text-white/70 md:text-lg">
-                    {current.tagline}
-                  </motion.p>
-                  <ul className="mt-5 space-y-3">
-                    {current.points.map((p) => (
-                      <motion.li key={p} variants={ITEM} className="flex items-start gap-3 text-[15px] text-white/90 md:text-base">
-                        <span className="mt-[8px] h-2.5 w-2.5 shrink-0 rotate-45 rounded-[3px] bg-gold shadow-[0_0_10px_rgba(247,221,0,0.7)]" />
-                        {p}
-                      </motion.li>
-                    ))}
-                  </ul>
-                  <motion.div variants={ITEM} className="mt-6">
-                    <Link
-                      to={current.to}
-                      className="group inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-bold text-primary shadow-lg shadow-black/25 transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl"
+            <AnimatePresence mode="wait">
+              <motion.div key={`${current.key}-${nonce}`} variants={CONTENT} initial="hidden" animate="show" exit="exit" className="relative">
+                <motion.h2 variants={ITEM} className="text-2xl font-extrabold leading-tight text-primary md:text-[28px]">
+                  {current.title[0]}
+                  <span className="bg-[linear-gradient(transparent_62%,#f7dd00_62%)]">{current.title[1]}</span>
+                  {current.title[2]}
+                </motion.h2>
+                <motion.p variants={ITEM} className="mt-1 text-sm text-ink-600 md:text-base">
+                  {current.tagline}
+                </motion.p>
+                <ul className="mt-3 space-y-1.5">
+                  {current.points.map((p, pi) => (
+                    <motion.li
+                      key={p}
+                      variants={ITEM}
+                      className={`flex items-start gap-3 text-sm text-primary/90 md:text-[15px] ${pi === 2 ? '[@media(min-width:1024px)_and_(max-height:700px)]:hidden' : ''}`}
                     >
-                      Explore {current.title[1]}
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </motion.div>
+                      <span className="mt-[7px] h-2.5 w-2.5 shrink-0 rotate-45 rounded-[3px] bg-gold shadow-[0_0_0_1.5px_rgba(20,52,109,0.35)]" />
+                      {p}
+                    </motion.li>
+                  ))}
+                </ul>
+                <motion.div variants={ITEM} className="mt-4">
+                  <Link
+                    to={current.to}
+                    className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-xl"
+                  >
+                    Explore {current.title[1]}
+                    <ArrowRight className="h-4 w-4 text-gold transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </motion.div>
-              </AnimatePresence>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
         {/* Tab cards */}
-        <div role="tablist" aria-label="Vision AI products" className="mt-8 flex flex-wrap justify-center gap-3 lg:gap-4">
+        <div role="tablist" aria-label="Vision AI products" className="mt-5 flex flex-wrap justify-center gap-3 lg:gap-4">
           {VISIONS.map((v, i) => {
             const isActive = i === active
             return (
@@ -364,10 +344,10 @@ export default function VisionHero() {
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.35, delay: reduce ? 0 : 0.15 + i * 0.06 }}
-                className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-4 pb-5 pt-4 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] md:px-5 lg:basis-[calc(33.333%-11px)] xl:basis-[calc(16.666%-14px)] ${
+                className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-3.5 pb-4 pt-3 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] lg:basis-[calc(33.333%-11px)] xl:basis-[calc(16.666%-14px)] ${
                   isActive
                     ? 'border-primary shadow-xl shadow-primary/30'
-                    : 'border-primary/15 bg-white hover:border-gold-dark hover:shadow-lg'
+                    : 'border-white/70 bg-[#cfe2ff]/45 backdrop-blur-sm hover:border-gold-dark hover:bg-white/70 hover:shadow-lg'
                 }`}
               >
                 {isActive && (
@@ -385,12 +365,12 @@ export default function VisionHero() {
                   >
                     {pad(i + 1)}
                   </span>
-                  <span className={`text-sm font-semibold leading-tight transition-colors duration-300 md:text-base ${isActive ? 'text-white' : 'text-primary'}`}>
-                    {v.name}
+                  <span className={`text-[13px] font-semibold leading-tight transition-colors duration-300 xl:text-sm ${isActive ? 'text-white' : 'text-primary'}`}>
+                    {v.tab}
                   </span>
                 </span>
                 {isActive && (
-                  <span className="absolute inset-x-4 bottom-2 h-1 overflow-hidden rounded-full bg-white/15">
+                  <span className="absolute inset-x-3.5 bottom-1.5 h-1 overflow-hidden rounded-full bg-white/15">
                     {/* Fills in step with the video; stays empty until it actually plays. */}
                     <span
                       key={`${v.key}-${nonce}`}
