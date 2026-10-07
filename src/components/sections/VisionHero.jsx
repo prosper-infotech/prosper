@@ -216,7 +216,7 @@ export default function VisionHero() {
   }, [videoMode, reduce, active, nonce]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section className="relative overflow-hidden pt-5 pb-6 lg:pt-6">
+    <section className="relative overflow-hidden pt-5 pb-8 lg:pt-6 lg:pb-9">
       <motion.div
         className="pointer-events-none absolute -top-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-gold/25 blur-3xl"
         animate={reduce ? undefined : { scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
@@ -225,9 +225,9 @@ export default function VisionHero() {
       <div className="pointer-events-none absolute bottom-[-160px] left-[-120px] h-[420px] w-[420px] rounded-full bg-primary/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid gap-x-8 gap-y-5 lg:grid-cols-2">
+        <div className="grid gap-x-8 gap-y-5 lg:grid-cols-2 lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-y-0">
           <motion.div
-            className="lg:col-start-1 lg:row-start-1"
+            className="lg:col-start-1 lg:row-start-2"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -237,7 +237,7 @@ export default function VisionHero() {
               <span className="block text-gold-dark">Logistics Visibility</span>
               with AI
             </h1>
-            <p className="mt-3 max-w-md text-base leading-relaxed text-ink-600 lg:mt-4 [@media(min-width:1024px)_and_(max-height:700px)]:hidden">
+            <p className="mt-3 max-w-md text-base leading-relaxed text-ink-600 lg:mt-4 [@media(min-width:1024px)_and_(max-height:760px)]:hidden">
               Smarter operations for gates, yards, containers, docks and material movement — all on one intelligent platform.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
@@ -256,11 +256,11 @@ export default function VisionHero() {
             </div>
           </motion.div>
 
-          <div className="relative flex items-center lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="relative flex items-center lg:col-start-2 lg:row-span-4 lg:row-start-1">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${current.key}-${nonce}`}
-                className="mx-auto w-full mix-blend-multiply lg:max-w-[min(100%,calc(100svh-215px))]"
+                className="mx-auto w-full mix-blend-multiply lg:max-w-[min(100%,calc(100svh-240px))]"
                 initial={{ opacity: 0, x: 50, scale: 0.96 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: -50, scale: 0.96 }}
@@ -283,18 +283,13 @@ export default function VisionHero() {
             role="tabpanel"
             id="vh-panel"
             aria-labelledby={`vh-tab-${current.key}`}
-            className="relative overflow-hidden rounded-3xl border border-white/70 bg-[#cfe2ff]/45 p-5 shadow-xl shadow-primary/10 ring-1 ring-primary/10 backdrop-blur-md lg:col-start-1 lg:row-start-2 lg:self-end"
+            className="relative overflow-hidden rounded-3xl border-2 border-primary bg-transparent p-5 lg:col-start-1 lg:row-start-3 lg:mt-5 lg:self-start"
           >
-            <motion.span
-              className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-gold/30 blur-3xl"
-              animate={reduce ? undefined : { scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            />
             <AnimatePresence mode="wait">
               <motion.div key={`${current.key}-${nonce}`} variants={CONTENT} initial="hidden" animate="show" exit="exit" className="relative">
                 <motion.h2 variants={ITEM} className="text-2xl font-extrabold leading-tight text-primary md:text-[28px]">
                   {current.title[0]}
-                  <span className="bg-[linear-gradient(transparent_62%,#f7dd00_62%)]">{current.title[1]}</span>
+                  {current.title[1]}
                   {current.title[2]}
                 </motion.h2>
                 <motion.p variants={ITEM} className="mt-1 text-sm text-ink-600 md:text-base">
@@ -305,7 +300,7 @@ export default function VisionHero() {
                     <motion.li
                       key={p}
                       variants={ITEM}
-                      className={`flex items-start gap-3 text-sm text-primary/90 md:text-[15px] ${pi === 2 ? '[@media(min-width:1024px)_and_(max-height:700px)]:hidden' : ''}`}
+                      className={`flex items-start gap-3 text-sm text-primary/90 md:text-[15px] ${pi === 2 ? '[@media(min-width:1024px)_and_(max-height:760px)]:hidden' : ''}`}
                     >
                       <span className="mt-[7px] h-2.5 w-2.5 shrink-0 rotate-45 rounded-[3px] bg-gold shadow-[0_0_0_1.5px_rgba(20,52,109,0.35)]" />
                       {p}
@@ -346,26 +341,26 @@ export default function VisionHero() {
                 transition={{ duration: 0.35, delay: reduce ? 0 : 0.15 + i * 0.06 }}
                 className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-3.5 pb-4 pt-3 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] lg:basis-[calc(33.333%-11px)] xl:basis-[calc(16.666%-14px)] ${
                   isActive
-                    ? 'border-primary shadow-xl shadow-primary/30'
-                    : 'border-white/70 bg-[#cfe2ff]/45 backdrop-blur-sm hover:border-gold-dark hover:bg-white/70 hover:shadow-lg'
+                    ? 'border-gold bg-primary shadow-xl shadow-primary/30'
+                    : 'border-primary bg-primary hover:border-gold hover:shadow-lg'
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="vh-active-tab"
-                    className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-primary-dark"
+                    className="absolute inset-0 rounded-2xl bg-primary-dark"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
                 <span className="relative flex items-center gap-2.5">
                   <span
                     className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold transition-colors duration-300 ${
-                      isActive ? 'bg-gold text-primary' : 'bg-primary/10 text-primary'
+                      isActive ? 'bg-gold text-primary' : 'bg-white/15 text-white'
                     }`}
                   >
                     {pad(i + 1)}
                   </span>
-                  <span className={`text-[13px] font-semibold leading-tight transition-colors duration-300 xl:text-sm ${isActive ? 'text-white' : 'text-primary'}`}>
+                  <span className={`text-[13px] font-semibold leading-tight transition-colors duration-300 xl:text-sm text-white`}>
                     {v.tab}
                   </span>
                 </span>
