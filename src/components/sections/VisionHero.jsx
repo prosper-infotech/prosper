@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Boxes, DoorOpen, Forklift, ScanFace, ScanLine, Tag } from 'lucide-react'
 import Button from '../ui/Button'
 import gateFirst from '../../assets/vision/gate-first.webp'
 import containerFirst from '../../assets/vision/container-first.webp'
@@ -11,7 +11,8 @@ import assetFirst from '../../assets/vision/asset-first.webp'
 import attendanceFirst from '../../assets/vision/attendance-first.webp'
 
 // A product with a `video` plays it in place of its still image (files live in public/videos/vision).
-const SLIDE_SECONDS = 8
+// Slides advance when the video ends; SLIDE_SECONDS is only the fallback when a video can't play.
+const SLIDE_SECONDS = 6
 
 // Edge fades so the media melts into the page instead of reading as a card.
 const FADE_RADIAL = '[mask-image:radial-gradient(ellipse_at_center,black_62%,transparent_98%)]'
@@ -31,6 +32,7 @@ const ITEM = {
 const VISIONS = [
   {
     key: 'gate',
+    icon: ScanLine,
     title: ['Prosper ', 'GateVision', ' AI'],
     img: gateFirst,
     ratio: 'square',
@@ -48,6 +50,7 @@ const VISIONS = [
   },
   {
     key: 'container',
+    icon: Boxes,
     title: ['Prosper ', 'ContainerVision', ' AI'],
     img: containerFirst,
     ratio: 'square',
@@ -65,6 +68,7 @@ const VISIONS = [
   },
   {
     key: 'forklift',
+    icon: Forklift,
     title: ['Prosper ', 'ForkliftVision', ' AI'],
     img: forkliftFirst,
     ratio: 'square',
@@ -82,6 +86,7 @@ const VISIONS = [
   },
   {
     key: 'dock',
+    icon: DoorOpen,
     title: ['Prosper ', 'DockVision', ' AI'],
     img: dockFirst,
     ratio: 'square',
@@ -99,6 +104,7 @@ const VISIONS = [
   },
   {
     key: 'asset',
+    icon: Tag,
     title: ['Prosper ', 'Asset Tracking', ''],
     img: assetFirst,
     ratio: 'square',
@@ -116,6 +122,7 @@ const VISIONS = [
   },
   {
     key: 'attendance',
+    icon: ScanFace,
     title: ['', 'Video Attendance', ' / Visitor Management'],
     img: attendanceFirst,
     ratio: 'square',
@@ -133,13 +140,26 @@ const VISIONS = [
   },
 ]
 
-function VisionMedia({ vision, reduce }) {
+function VisionMedia({ vision, reduce, onPlaying, onWaiting, onEnded, onMode }) {
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState(false)
-  const [ending, setEnding] = useState(false)
+  const [started, setStarted] = useState(false)
   const saveData = typeof navigator !== 'undefined' && navigator.connection?.saveData
   const showVideo = Boolean(vision.video) && !reduce && !failed && !saveData
   const square = vision.ratio === 'square'
+
+  // Tell the parent whether a video will drive the slide timing (otherwise it falls back to a timer).
+  useEffect(() => {
+    onMode(showVideo)
+  }, [showVideo]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // If autoplay never starts (blocked or stalled), give up so the slide still advances.
+  useEffect(() => {
+    if (!showVideo || started) return
+    const t = setTimeout(() => setFailed(true), 6000)
+    return () => clearTimeout(t)
+  }, [showVideo, started])
+
   return (
     <div className={`relative w-full ${square ? `aspect-square ${FADE_EDGES}` : `aspect-video ${FADE_RADIAL}`}`}>
       <img
@@ -152,17 +172,20 @@ function VisionMedia({ vision, reduce }) {
       {showVideo && (
         <video
           src={vision.video}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${ready && !ending ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${ready ? 'opacity-100' : 'opacity-0'}`}
           autoPlay
           muted
-          loop
           playsInline
           preload="auto"
           aria-hidden="true"
           onCanPlay={() => setReady(true)}
+          onPlaying={() => {
+            setStarted(true)
+            onPlaying()
+          }}
+          onWaiting={onWaiting}
+          onEnded={onEnded}
           onError={() => setFailed(true)}
-          // Fade out just before the loop point so the restart cross-fades through the still first frame.
-          onTimeUpdate={(e) => setEnding(e.currentTarget.duration - e.currentTarget.currentTime < 0.45)}
         />
       )}
     </div>
@@ -171,16 +194,30 @@ function VisionMedia({ vision, reduce }) {
 
 export default function VisionHero() {
   const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const [nonce, setNonce] = useState(0) // bumps on every change or click so the clip restarts from the beginning
+  const [playing, setPlaying] = useState(false)
+  const [videoMode, setVideoMode] = useState(true)
   const reduce = useReducedMotion()
   const current = VISIONS[active]
-  const next = () => setActive((i) => (i + 1) % VISIONS.length)
+  const Icon = current.icon
   const pad = (n) => String(n).padStart(2, '0')
 
+  const go = (i) => {
+    setActive(i)
+    setNonce((n) => n + 1)
+    setPlaying(false)
+  }
+  const next = () => go((active + 1) % VISIONS.length)
+
+  // Fallback only: when no video can play, advance on a timer. Never advances for reduced-motion visitors.
+  useEffect(() => {
+    if (videoMode || reduce) return
+    const t = setTimeout(next, (current.seconds ?? SLIDE_SECONDS) * 1000)
+    return () => clearTimeout(t)
+  }, [videoMode, reduce, active, nonce]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <section
-      className="relative overflow-hidden pt-8 pb-14 md:pt-12"
-    >
+    <section className="relative overflow-hidden pt-8 pb-14 md:pt-12">
       <motion.div
         className="pointer-events-none absolute -top-32 right-[-120px] h-[520px] w-[520px] rounded-full bg-gold/25 blur-3xl"
         animate={reduce ? undefined : { scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
@@ -223,14 +260,21 @@ export default function VisionHero() {
           <div className="relative flex items-center lg:col-start-2 lg:row-span-2 lg:row-start-1">
             <AnimatePresence mode="wait">
               <motion.div
-                key={current.key}
+                key={`${current.key}-${nonce}`}
                 className="w-full mix-blend-multiply"
                 initial={{ opacity: 0, x: 50, scale: 0.96 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: -50, scale: 0.96 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
-                <VisionMedia vision={current} reduce={reduce} />
+                <VisionMedia
+                  vision={current}
+                  reduce={reduce}
+                  onPlaying={() => setPlaying(true)}
+                  onWaiting={() => setPlaying(false)}
+                  onEnded={next}
+                  onMode={setVideoMode}
+                />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -240,50 +284,65 @@ export default function VisionHero() {
             role="tabpanel"
             id="vh-panel"
             aria-labelledby={`vh-tab-${current.key}`}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            onFocus={() => setPaused(true)}
-            onBlur={() => setPaused(false)}
-            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-dark p-6 text-white shadow-2xl shadow-primary/30 md:p-8 lg:col-start-1 lg:row-start-2 lg:self-end"
+            className="relative overflow-hidden rounded-[28px] p-[2px] shadow-2xl shadow-primary/30 lg:col-start-1 lg:row-start-2 lg:self-end"
           >
-            <motion.span
-              className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold/25 blur-3xl"
-              animate={reduce ? undefined : { scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-            />
+            {/* slowly circling gold glint along the card edge */}
             <span
-              className="pointer-events-none absolute inset-0 opacity-[0.07]"
-              style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '18px 18px' }}
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 h-[240%] w-[240%] -translate-x-1/2 -translate-y-1/2 animate-[spin_8s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_240deg,rgba(247,221,0,0.95)_320deg,transparent_360deg)] motion-reduce:animate-none"
             />
-            <AnimatePresence mode="wait">
-              <motion.div key={current.key} variants={CONTENT} initial="hidden" animate="show" exit="exit" className="relative">
-                <motion.h2 variants={ITEM} className="text-2xl font-bold text-white md:text-[30px]">
-                  {current.title[0]}
-                  <span className="text-gold">{current.title[1]}</span>
-                  {current.title[2]}
-                </motion.h2>
-                <motion.p variants={ITEM} className="mt-1.5 text-base text-white/70">
-                  {current.tagline}
-                </motion.p>
-                <ul className="mt-5 space-y-3">
-                  {current.points.map((p) => (
-                    <motion.li key={p} variants={ITEM} className="flex items-start gap-3 text-[15px] text-white/90">
-                      <span className="mt-[7px] h-2.5 w-2.5 shrink-0 rotate-45 rounded-[3px] bg-gold shadow-[0_0_10px_rgba(247,221,0,0.7)]" />
-                      {p}
-                    </motion.li>
-                  ))}
-                </ul>
-                <motion.div variants={ITEM} className="mt-6">
-                  <Link
-                    to={current.to}
-                    className="group inline-flex items-center gap-2 rounded-full bg-gold px-6 py-2.5 text-sm font-bold text-primary shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl"
-                  >
-                    Explore {current.title[1]}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-primary-dark p-6 text-white md:p-8">
+              <motion.span
+                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold/25 blur-3xl"
+                animate={reduce ? undefined : { scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span
+                className="pointer-events-none absolute inset-0 opacity-[0.07]"
+                style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '18px 18px' }}
+              />
+              <AnimatePresence mode="wait">
+                <motion.div key={`${current.key}-${nonce}`} variants={CONTENT} initial="hidden" animate="show" exit="exit" className="relative">
+                  <motion.div variants={ITEM} className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold text-primary shadow-lg shadow-black/25">
+                      <Icon className="h-6 w-6" strokeWidth={2.2} />
+                    </span>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white/90">
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75 motion-reduce:animate-none" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
+                      </span>
+                      See how it works
+                    </span>
+                  </motion.div>
+                  <motion.h2 variants={ITEM} className="mt-4 text-2xl font-bold text-white md:text-[34px] md:leading-tight">
+                    {current.title[0]}
+                    <span className="text-gold">{current.title[1]}</span>
+                    {current.title[2]}
+                  </motion.h2>
+                  <motion.p variants={ITEM} className="mt-1.5 text-base text-white/70 md:text-lg">
+                    {current.tagline}
+                  </motion.p>
+                  <ul className="mt-5 space-y-3">
+                    {current.points.map((p) => (
+                      <motion.li key={p} variants={ITEM} className="flex items-start gap-3 text-[15px] text-white/90 md:text-base">
+                        <span className="mt-[8px] h-2.5 w-2.5 shrink-0 rotate-45 rounded-[3px] bg-gold shadow-[0_0_10px_rgba(247,221,0,0.7)]" />
+                        {p}
+                      </motion.li>
+                    ))}
+                  </ul>
+                  <motion.div variants={ITEM} className="mt-6">
+                    <Link
+                      to={current.to}
+                      className="group inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-bold text-primary shadow-lg shadow-black/25 transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl"
+                    >
+                      Explore {current.title[1]}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </AnimatePresence>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 
@@ -299,7 +358,7 @@ export default function VisionHero() {
                 id={`vh-tab-${v.key}`}
                 aria-selected={isActive}
                 aria-controls="vh-panel"
-                onClick={() => setActive(i)}
+                onClick={() => go(i)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0, scale: isActive ? 1.04 : 1 }}
                 whileHover={{ y: -3 }}
@@ -332,11 +391,14 @@ export default function VisionHero() {
                 </span>
                 {isActive && (
                   <span className="absolute inset-x-4 bottom-2 h-1 overflow-hidden rounded-full bg-white/15">
+                    {/* Fills in step with the video; stays empty until it actually plays. */}
                     <span
-                      key={`${v.key}-bar`}
+                      key={`${v.key}-${nonce}`}
                       className="vh-progress block h-full w-full rounded-full bg-gold"
-                      style={{ animationDuration: `${v.seconds ?? SLIDE_SECONDS}s`, animationPlayState: paused ? 'paused' : 'running' }}
-                      onAnimationEnd={next}
+                      style={{
+                        animationDuration: `${v.seconds ?? SLIDE_SECONDS}s`,
+                        animationPlayState: !videoMode || playing ? 'running' : 'paused',
+                      }}
                     />
                   </span>
                 )}
