@@ -67,24 +67,6 @@ const VISIONS = [
     to: '/products/software/containervision-ai',
   },
   {
-    key: 'forklift',
-    tab: 'ForkliftVision AI',
-    title: ['Prosper ', 'ForkliftVision', ' AI'],
-    img: forkliftFirst,
-    ratio: 'square',
-    video: '/videos/vision/forklift.mp4',
-    seconds: 6, // one full play of the clip
-    alt: 'Putaway, verified at every step: a task is sent to the forklift, the camera reads the pallet ID, the pallet is lifted and the rack position verified, and the putaway is saved to the WMS',
-    name: 'ForkliftVision AI',
-    tagline: 'Forklift cameras confirm every pallet and spot.',
-    points: [
-      'Validates every pallet pickup and putaway',
-      'Reads rack location down to aisle, bay and tier',
-      'Syncs movements to your WMS or ERP live',
-    ],
-    to: '/solutions/ai-computer-vision',
-  },
-  {
     key: 'dock',
     tab: 'DockVision AI',
     title: ['Prosper ', 'DockVision', ' AI'],
@@ -101,6 +83,24 @@ const VISIONS = [
       'Instant alerts by email, SMS and Teams',
     ],
     to: '/products/software/dockvision-ai',
+  },
+  {
+    key: 'forklift',
+    tab: 'ForkliftVision AI',
+    title: ['Prosper ', 'ForkliftVision', ' AI'],
+    img: forkliftFirst,
+    ratio: 'square',
+    video: '/videos/vision/forklift.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Putaway, verified at every step: a task is sent to the forklift, the camera reads the pallet ID, the pallet is lifted and the rack position verified, and the putaway is saved to the WMS',
+    name: 'ForkliftVision AI',
+    tagline: 'Forklift cameras confirm every pallet and spot.',
+    points: [
+      'Validates every pallet pickup and putaway',
+      'Reads rack location down to aisle, bay and tier',
+      'Syncs movements to your WMS or ERP live',
+    ],
+    to: '/solutions/ai-computer-vision',
   },
   {
     key: 'asset',
