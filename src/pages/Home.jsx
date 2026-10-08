@@ -185,12 +185,13 @@ function AnimatedStat({ value, label }) {
   )
 }
 
-export default function Home({ sample = false }) {
+// `legacy` renders the previous slider hero (kept at /home-backup); the default is the Vision AI hero.
+export default function Home({ legacy = false }) {
   useDocumentTitle(
     'Prosper Infotech | AI-Powered RFID, GPS & IoT Logistics Solutions',
     'IoT, RFID, GPS, and AI-powered logistics automation solutions for warehouses, yards, and fleets — real-time tracking and asset visibility from Prosper Infotech.',
     undefined,
-    { noindex: sample }
+    { noindex: legacy }
   )
 
   const totalHeroSlides = HERO_SLIDES.length + 1
@@ -208,7 +209,7 @@ export default function Home({ sample = false }) {
     return () => mq.removeEventListener('change', update)
   }, [])
   useEffect(() => {
-    if (heroHover || isMobile) return
+    if (!legacy || heroHover || isMobile) return
     const timer = setTimeout(() => setActiveSlide((i) => (i + 1) % totalHeroSlides), 6000)
     return () => clearTimeout(timer)
   }, [activeSlide, heroHover, totalHeroSlides, isMobile])
@@ -247,7 +248,7 @@ export default function Home({ sample = false }) {
   return (
     <div className="bg-gradient-to-b from-[#fffdf6] to-[#fff8dc]">
       {/* Hero */}
-      {sample ? (
+      {!legacy ? (
         <VisionHero />
       ) : (
       <div className="relative" onMouseEnter={() => setHeroHover(true)} onMouseLeave={() => setHeroHover(false)}>
