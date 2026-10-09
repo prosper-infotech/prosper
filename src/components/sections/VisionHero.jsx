@@ -12,7 +12,7 @@ import attendanceFirst from '../../assets/vision/attendance-first.webp'
 
 // A product with a `video` plays it in place of its still image (files live in public/videos/vision).
 // Slides advance when the video ends; SLIDE_SECONDS is only the fallback when a video can't play.
-const SLIDE_SECONDS = 6
+const SLIDE_SECONDS = 10
 
 // Edge fades so the media melts into the page instead of reading as a card.
 const FADE_RADIAL = '[mask-image:radial-gradient(ellipse_at_center,black_62%,transparent_98%)]'
@@ -37,7 +37,7 @@ const VISIONS = [
     img: gateFirst,
     ratio: 'square',
     video: '/videos/vision/gate.mp4',
-    seconds: 6, // one full play of the clip
+    seconds: 10, // one full play of the clip
     alt: 'Automatic truck check-in: cameras scan the truck, AI reads the numbers, details are saved to ERP and the gate opens',
     name: 'GateVision AI',
     tagline: 'Gate check-in with zero manual logging.',
@@ -55,7 +55,7 @@ const VISIONS = [
     img: containerFirst,
     ratio: 'square',
     video: '/videos/vision/container.mp4',
-    seconds: 6, // one full play of the clip
+    seconds: 10, // one full play of the clip
     alt: 'Truck to yard, tracked automatically: a task is assigned, the camera reads the container ID, the reach stacker lifts and places it on the right tier, and the location is saved to ERP',
     name: 'ContainerVision AI',
     tagline: 'AI cameras run gate, yard and crane moves.',
@@ -73,7 +73,7 @@ const VISIONS = [
     img: dockFirst,
     ratio: 'square',
     video: '/videos/vision/dock.mp4',
-    seconds: 6, // one full play of the clip
+    seconds: 10, // one full play of the clip
     alt: 'Dock door status, live: sensors read the door, status goes to the site edge box and the cloud, and the dashboard and alerts update',
     name: 'DockVision AI',
     tagline: 'Every dock door, watched and verified.',
@@ -91,7 +91,7 @@ const VISIONS = [
     img: forkliftFirst,
     ratio: 'square',
     video: '/videos/vision/forklift.mp4',
-    seconds: 6, // one full play of the clip
+    seconds: 10, // one full play of the clip
     alt: 'Putaway, verified at every step: a task is sent to the forklift, the camera reads the pallet ID, the pallet is lifted and the rack position verified, and the putaway is saved to the WMS',
     name: 'ForkliftVision AI',
     tagline: 'Forklift cameras confirm every pallet and spot.',
@@ -109,7 +109,7 @@ const VISIONS = [
     img: assetFirst,
     ratio: 'square',
     video: '/videos/vision/asset.mp4',
-    seconds: 6, // one full play of the clip
+    seconds: 10, // one full play of the clip
     alt: 'Every asset, always located: any asset gets an RFID tag, readers scan every tag, check-in and check-out are logged, and all assets appear on one dashboard',
     name: 'Asset Tracking',
     tagline: 'One live map of every tagged asset.',
@@ -127,7 +127,7 @@ const VISIONS = [
     img: attendanceFirst,
     ratio: 'square',
     video: '/videos/vision/attendance.mp4',
-    seconds: 6, // one full play of the clip
+    seconds: 10, // one full play of the clip
     alt: 'Attendance, logged hands-free: a person arrives, face or QR is checked, IN is logged and a visitor badge issued, exit is tracked and the dashboard updates',
     name: 'Video Attendance / Visitor Management',
     tagline: 'Face check-in. No buddy-punching.',
