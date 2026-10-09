@@ -7,7 +7,17 @@ import CallDropdown from './CallDropdown'
 import WhatsAppLink from './WhatsAppLink'
 
 const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/' && item.label !== 'Industries').map(
-  (item) => (item.label === 'Resources' ? { ...item, label: 'Company' } : item)
+  (item) =>
+    item.label === 'Resources'
+      ? {
+          ...item,
+          label: 'Company',
+          children: [
+            { label: 'About Us', path: '/about', description: 'Our mission, vision, values and global team.' },
+            ...item.children,
+          ],
+        }
+      : item
 )
 
 function NavDropdown({ item, align }) {

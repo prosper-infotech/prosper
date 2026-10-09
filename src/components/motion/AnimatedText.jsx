@@ -34,6 +34,8 @@ export default function AnimatedText({
           style={{ display: 'inline-block', marginRight: '0.28em' }}
         >
           {w}
+          {/* real space so crawlers and screen readers see separate words (trailing space in an inline-block collapses, so layout is unchanged) */}
+          {i < words.length - 1 ? ' ' : ''}
         </motion.span>
       ))}
     </MotionTag>
