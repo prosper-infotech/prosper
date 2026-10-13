@@ -47,10 +47,14 @@ const SolutionDetailTemplate = lazy(() => import('./components/templates/Solutio
 const TopicPageTemplate = lazy(() => import('./components/templates/TopicPageTemplate'))
 const AIServiceDetailTemplate = lazy(() => import('./components/templates/AIServiceDetailTemplate'))
 const SoftwareProductDetailTemplate = lazy(() => import('./components/templates/SoftwareProductDetailTemplate'))
+const ContainerVisionAI = lazy(() => import('./pages/ContainerVisionAI'))
 
 function grandchildElement(gc) {
   if (AI_SERVICES_DETAIL[gc.path]) {
     return <AIServiceDetailTemplate detail={AI_SERVICES_DETAIL[gc.path]} />
+  }
+  if (gc.path === '/products/software/containervision-ai') {
+    return <ContainerVisionAI />
   }
   if (SOFTWARE_PRODUCTS_DETAIL[gc.path]) {
     return <SoftwareProductDetailTemplate detail={SOFTWARE_PRODUCTS_DETAIL[gc.path]} />
