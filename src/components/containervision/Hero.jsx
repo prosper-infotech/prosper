@@ -48,7 +48,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-4 text-4xl sm:text-5xl lg:text-[3.25rem] font-heading font-bold tracking-tight leading-[1.08]"
+            className="mt-4 text-4xl sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] font-heading font-bold tracking-tight leading-[1.08]"
           >
             Prosper <span className="block text-gold-dark">ContainerVision AI</span>
           </motion.h1>
@@ -57,7 +57,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
-            className="mt-4 font-heading font-semibold text-lg sm:text-xl text-ink-900"
+            className="mt-4 lg:mt-3 font-heading font-semibold text-lg sm:text-xl lg:text-lg xl:text-xl text-ink-900"
           >
             Real-Time Container Visibility, Gate to Departure
           </motion.p>
@@ -66,7 +66,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.24 }}
-            className="mt-4 text-ink-600 text-base sm:text-lg max-w-xl"
+            className="mt-4 lg:mt-3 text-ink-600 text-base sm:text-lg lg:text-[15px] lg:leading-6 xl:text-lg xl:leading-normal max-w-xl"
           >
             AI cameras, OCR, GPS/RTK and industrial sensors automate container gate, yard, reach stacker, inspection and
             departure workflows — powered by the Prosper AI EdgeBox.
@@ -76,14 +76,14 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-6 hidden sm:grid grid-cols-3 gap-3 lg:w-[660px] xl:w-[700px]"
+            className="mt-5 lg:mt-4 hidden sm:flex flex-col gap-2.5 lg:gap-2 xl:gap-2.5 sm:w-[300px]"
           >
             {STATS.map(({ icon: Icon, label }) => (
               <div
                 key={label}
-                className="flex items-center gap-2.5 rounded-2xl bg-white/90 backdrop-blur-sm px-3 py-2.5 shadow-md ring-1 ring-primary/5 text-left"
+                className="flex items-center gap-2.5 rounded-2xl bg-white/90 backdrop-blur-sm px-3 py-2 shadow-md ring-1 ring-primary/5 text-left"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/20 text-primary">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/20 text-primary">
                   <Icon className="h-5 w-5" />
                 </span>
                 <span className="text-[13px] font-bold leading-snug text-ink-900">{label}</span>
