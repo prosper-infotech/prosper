@@ -9,6 +9,7 @@ import dockFirst from '../../assets/vision/dock-first.webp'
 import forkliftFirst from '../../assets/vision/forklift-first.webp'
 import assetFirst from '../../assets/vision/asset-first.webp'
 import attendanceFirst from '../../assets/vision/attendance-first.webp'
+import wheelPoster from '../../assets/vision/wheel-poster.webp'
 
 // A product with a `video` plays it in place of its still image (files live in public/videos/vision).
 // Slides advance when the video ends; SLIDE_SECONDS is only the fallback when a video can't play.
@@ -137,6 +138,25 @@ const VISIONS = [
       'On-premise processing, images stay on-site',
     ],
     to: '/products/software/video-attendance',
+  },
+  {
+    key: 'wheel',
+    tab: 'End to End Solutions',
+    title: ['', 'End to End Solutions', ''],
+    cta: 'all solutions',
+    img: wheelPoster, // the clip builds up from a blank frame, so the still is its completed final frame
+    ratio: 'square',
+    video: '/videos/vision/wheel.mp4',
+    seconds: 6, // one full play of the clip
+    alt: 'Prosper AI platform: an AI core with computer vision, edge compute and a data lake, surrounded by gate, container, yard, dock, warehouse, forklift and appointment AI',
+    name: 'End to End Solutions',
+    tagline: 'One AI platform. Every operation, automated.',
+    points: [
+      'Gate, yard, dock, container and forklift AI on one platform',
+      'Computer vision and edge computing on a real-time digital model',
+      'Integrates with your ERP, WMS, TMS and YMS',
+    ],
+    to: '/solutions',
   },
 ]
 
@@ -312,7 +332,7 @@ export default function VisionHero() {
                     to={current.to}
                     className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-xl"
                   >
-                    Explore {current.title[1]}
+                    Explore {current.cta ?? current.title[1]}
                     <ArrowRight className="h-4 w-4 text-gold transition-transform group-hover:translate-x-1" />
                   </Link>
                 </motion.div>
@@ -339,7 +359,7 @@ export default function VisionHero() {
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.35, delay: reduce ? 0 : 0.15 + i * 0.06 }}
-                className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-3.5 pb-4 pt-3 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] lg:basis-[calc(33.333%-11px)] xl:basis-[calc(16.666%-14px)] ${
+                className={`relative basis-[calc(50%-6px)] overflow-hidden rounded-2xl border px-3.5 pb-4 pt-3 text-left transition-[border-color,box-shadow] duration-300 md:basis-[calc(33.333%-8px)] lg:basis-[calc(25%-12px)] xl:basis-[calc(14.285%-14px)] ${
                   isActive
                     ? 'border-gold bg-primary shadow-xl shadow-primary/30'
                     : 'border-primary bg-primary hover:border-gold hover:shadow-lg'
@@ -352,15 +372,15 @@ export default function VisionHero() {
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
-                <span className="relative flex items-center gap-2.5">
+                <span className="relative flex items-center gap-2.5 xl:gap-2">
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold transition-colors duration-300 ${
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold xl:h-6 xl:w-6 xl:text-[10px] transition-colors duration-300 ${
                       isActive ? 'bg-gold text-primary' : 'bg-white/15 text-white'
                     }`}
                   >
                     {pad(i + 1)}
                   </span>
-                  <span className={`text-[13px] font-semibold leading-tight transition-colors duration-300 xl:text-sm text-white`}>
+                  <span className={`text-[13px] font-semibold leading-tight transition-colors duration-300 xl:text-[12.5px] text-white`}>
                     {v.tab}
                   </span>
                 </span>
