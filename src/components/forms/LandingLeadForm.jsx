@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
 import { submitToCrm } from './crm'
+import { submitToZoho } from './zoho'
 import { attributeSource, captureUtmParams } from '../../utils/attribution'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
@@ -81,6 +82,16 @@ export default function LandingLeadForm({
         company: data.company,
         product,
         campaign,
+      })
+      submitToZoho({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        product,
+        campaign: source,
+        service: data.service,
+        message: data.message,
       })
       window.gtag?.('event', 'generate_lead', {
         event_category: campaign,

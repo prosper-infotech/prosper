@@ -14,7 +14,7 @@ const AD_SOURCE_MAP = {
 // Click IDs are the most reliable signal (present whenever the platform's own
 // tracking is on the link, even without UTM params); utm_source is the
 // fallback for anything else.
-function detectCrmSource() {
+export function detectCrmSource() {
   const params = new URLSearchParams(window.location.search)
   if (params.get('gclid')) return 'Google'
   if (params.get('fbclid')) return 'Facebook'

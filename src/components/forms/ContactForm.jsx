@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
 import { submitToCrm } from './crm'
+import { submitToZoho } from './zoho'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
 
@@ -49,6 +50,14 @@ export default function ContactForm() {
         email: data.email,
         phone: data.phone,
         company: data.company,
+        campaign: 'Website Contact Form',
+      })
+      submitToZoho({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        company: data.company,
+        message: data.message,
         campaign: 'Website Contact Form',
       })
       setStatus('success')
