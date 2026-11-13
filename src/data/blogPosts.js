@@ -83,6 +83,7 @@ const POSTS = [
       'Camera-based AI is replacing manual gate inspections and spotter trucks at ports and container terminals. Here\'s what that actually looks like in practice.',
     date: '2026-02-03',
     readTime: '6 min read',
+    related: ['ai-powered-cfs-what-it-means', 'container-yard-management-system-guide'],
     relatedLinks: [
       { label: 'Gate/Yard/Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' },
       { label: 'Ports & Terminals', path: '/industries/ports-terminals' },
@@ -230,6 +231,7 @@ const POSTS = [
       "GPS tracking gets sold as a dot on a map. The real return comes from what that data lets you stop doing manually — and what it catches before it becomes an incident.",
     date: '2026-03-18',
     readTime: '5 min read',
+    related: ['what-is-a-vehicle-management-system-vms', 'live-truck-tracking-port-to-cfs'],
     relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
@@ -492,6 +494,7 @@ const POSTS = [
       "ForkliftVision AI is a forklift automation system that mounts a camera and edge AI directly on the forklift to confirm pallet identity and location automatically — no operator stopping to scan a barcode at every pick and drop.",
     date: '2026-07-08',
     readTime: '5 min read',
+    related: ['forklift-automation-system-without-new-forklifts'],
     relatedLinks: [{ label: 'AI & Computer Vision', path: '/solutions/ai-computer-vision' }],
     sections: [
       {
@@ -524,6 +527,7 @@ const POSTS = [
       'A camera watching every dock door catches the loading and unloading mistakes a supervisor doing rounds every twenty minutes physically cannot.',
     date: '2026-07-15',
     readTime: '5 min read',
+    related: ['warehouse-automation-solutions-where-to-start'],
     relatedLinks: [{ label: 'Prosper DockVision AI', path: '/products/software/dockvision-ai' }],
     sections: [
       {
@@ -556,6 +560,7 @@ const POSTS = [
       "GateVision AI reads license plates, container numbers, and trailer IDs automatically at the gate, replacing manual guard check-in with a camera and OCR.",
     date: '2026-07-22',
     readTime: '5 min read',
+    related: ['logistics-automation-solutions-what-to-automate-first', 'ai-powered-logistics-solutions-real-vs-hype'],
     relatedLinks: [{ label: 'Gate/Yard/Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' }],
     sections: [
       {
@@ -588,6 +593,7 @@ const POSTS = [
       'An AI EdgeBox runs inspection models on hardware at the gate or dock itself, so a decision happens in milliseconds instead of waiting on a round trip to the cloud.',
     date: '2026-07-29',
     readTime: '6 min read',
+    related: ['ai-powered-cfs-what-it-means'],
     relatedLinks: [{ label: 'AI Edge Box', path: '/products/hardware#ai-edge-box' }],
     sections: [
       {
@@ -620,6 +626,7 @@ const POSTS = [
       "A WMS rollout that works is a sequence of specific steps, not a single cutover weekend. Here's what each phase actually involves.",
     date: '2026-08-05',
     readTime: '6 min read',
+    related: ['warehouse-automation-solutions-where-to-start'],
     relatedLinks: [{ label: 'Prosper WMS', path: '/products/software/wms' }],
     sections: [
       {
@@ -688,6 +695,7 @@ const POSTS = [
       "A reach stacker operator lining up a container by eye is the slowest, most error-prone step in a CFS terminal's container handling process — vision guidance changes that directly.",
     date: '2026-08-19',
     readTime: '6 min read',
+    related: ['container-yard-management-system-guide', 'cfs-management-software-features'],
     relatedLinks: [{ label: 'Container Terminal Automation', path: '/solutions/container-terminal-automation' }],
     sections: [
       {
@@ -816,6 +824,7 @@ const POSTS = [
       "Fixed and handheld RFID readers solve different problems. Most real deployments need both, not one or the other.",
     date: '2026-09-14',
     readTime: '5 min read',
+    related: ['rfid-asset-tracking-how-it-works'],
     relatedLinks: [{ label: 'Hardware', path: '/products/hardware' }],
     sections: [
       {
@@ -880,6 +889,7 @@ const POSTS = [
       "RFID deployment cost breaks down into three categories: tags, readers and infrastructure, and integration. Here's what actually drives the total in each.",
     date: '2026-09-22',
     readTime: '5 min read',
+    related: ['rfid-asset-tracking-how-it-works'],
     relatedLinks: [{ label: 'RFID & GPS Solutions', path: '/solutions/rfid-gps-solutions' }],
     sections: [
       {
@@ -944,6 +954,7 @@ const POSTS = [
       "RFID, GPS, and BLE all track assets, but each is built for a different range, precision, and cost trade-off. Picking the wrong one means paying for precision you don't need, or not getting the coverage you do.",
     date: '2026-09-29',
     readTime: '6 min read',
+    related: ['rfid-asset-tracking-how-it-works'],
     relatedLinks: [{ label: 'Prosper Asset Tracking', path: '/products/software/asset-tracking' }],
     sections: [
       {
@@ -976,6 +987,7 @@ const POSTS = [
       'A vehicle management system puts truck location, delays, delivery proof and billing in one place. Here is what it does, who needs it and what to look for.',
     date: '2026-10-02',
     readTime: '5 min read',
+    related: ['live-truck-tracking-port-to-cfs', 'epod-driver-app-offline-mode', 'customer-transporter-portals-and-billing-in-vms'],
     relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
@@ -1002,7 +1014,7 @@ const POSTS = [
         body: 'If your coordinators spend the morning calling drivers, if customers ask for updates you have to chase, or if billing waits days for delivery proof, a VMS will pay for itself in time saved before it does anything else.',
       },
       {
-        body: 'Prosper VMS puts live truck tracking from port to CFS, delay alerts, a driver app with e-POD, customer and transporter portals, and billing from invoice to payment on one screen. If that sounds like your day, book a free demo and we will walk you through it.',
+        body: 'Prosper VMS puts [live truck tracking from port to CFS](/resources/blog/live-truck-tracking-port-to-cfs), delay alerts, [a driver app with e-POD](/resources/blog/epod-driver-app-offline-mode), [customer and transporter portals](/resources/blog/customer-transporter-portals-and-billing-in-vms), and billing from invoice to payment on one screen. If that sounds like your day, book a free demo and we will walk you through it.',
       },
     ],
   },
@@ -1015,6 +1027,7 @@ const POSTS = [
       'A container yard management system tracks every container from gate-in to gate-out. Here is what it covers, where manual records fail and where AI helps.',
     date: '2026-10-06',
     readTime: '6 min read',
+    related: ['cfs-management-software-features', 'ai-powered-cfs-what-it-means', 'reach-stacker-vision-automation'],
     relatedLinks: [{ label: 'Prosper ContainerVision AI', path: '/products/software/containervision-ai' }, { label: 'Yard Solutions', path: '/solutions/yard-solutions' }],
     sections: [
       {
@@ -1022,7 +1035,7 @@ const POSTS = [
       },
       {
         heading: 'What is a container yard management system?',
-        body: 'A container yard management system tracks every container and where it sits, from gate-in to gate-out. It records each move, hands out jobs to equipment like reach stackers, and keeps the yard map up to date so anyone can find a container without walking the rows.',
+        body: 'A container yard management system tracks every container and where it sits, from gate-in to gate-out. It records each move, hands out jobs to equipment like [reach stackers](/resources/blog/reach-stacker-vision-automation), and keeps the yard map up to date so anyone can find a container without walking the rows.',
       },
       {
         heading: 'What it should cover',
@@ -1034,7 +1047,7 @@ const POSTS = [
       },
       {
         heading: 'Where AI and cameras help',
-        body: 'Cameras with OCR can read the container number at the gate and on the equipment, so records fill themselves in. Sensors and GPS can confirm a pickup, a drop and the tier. The yard system then matches the real yard instead of lagging behind it. Prosper ContainerVision AI works this way, using AI cameras, OCR and GPS/RTK from gate arrival to departure.',
+        body: '[Cameras with OCR](/resources/blog/ai-vision-container-terminals) can read the container number at the gate and on the equipment, so records fill themselves in. Sensors and GPS can confirm a pickup, a drop and the tier. The yard system then matches the real yard instead of lagging behind it. [Prosper ContainerVision AI](/products/software/containervision-ai) works this way, using AI cameras, OCR and GPS/RTK from gate arrival to departure.',
       },
       {
         heading: 'Questions to ask before you choose one',
@@ -1051,6 +1064,7 @@ const POSTS = [
       'The trip from port to CFS is where most delays and phone calls happen. Here is what live tracking and instant delay alerts change for your team.',
     date: '2026-10-09',
     readTime: '5 min read',
+    related: ['what-is-a-vehicle-management-system-vms', 'epod-driver-app-offline-mode', 'gps-fleet-tracking-roi'],
     relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
@@ -1066,7 +1080,7 @@ const POSTS = [
       },
       {
         heading: 'Delay alerts: hear it early, not late',
-        body: 'A late truck is a problem. A late truck you only learn about an hour after the slot is a bigger one. A delay alert tells you the moment a truck falls behind, so the yard team can move the slot, warn the customer or send help. Prosper VMS sends delay alerts straight away, not in an end of day report.',
+        body: 'A late truck is a problem. A late truck you only learn about an hour after the slot is a bigger one. A delay alert tells you the moment a truck falls behind, so the yard team can move the slot, warn the customer or send help. [Prosper VMS](/solutions/fleet-management) sends delay alerts straight away, not in an end of day report.',
       },
       {
         heading: 'What it changes for the yard',
@@ -1074,7 +1088,7 @@ const POSTS = [
       },
       {
         heading: 'Tracking works best when it is tied to the job',
-        body: 'A dot on a map helps. A dot connected to the order, the customer and the delivery status helps far more. That is the difference between tracking and a vehicle management system.',
+        body: 'A dot on a map helps. A dot connected to the order, the customer and the delivery status helps far more. That is the difference between tracking and a [vehicle management system](/resources/blog/what-is-a-vehicle-management-system-vms).',
       },
       {
         body: 'Prosper VMS gives live truck tracking from port to CFS with instant delay alerts. If your day still starts with a round of "where is the truck" calls, it is worth a look.',
@@ -1090,6 +1104,7 @@ const POSTS = [
       'Choosing CFS management software? These eight features decide whether it saves your team time or just adds another screen to check.',
     date: '2026-10-13',
     readTime: '6 min read',
+    related: ['container-yard-management-system-guide', 'ai-powered-cfs-what-it-means', 'ai-vision-container-terminals'],
     relatedLinks: [{ label: 'Prosper ContainerVision AI', path: '/products/software/containervision-ai' }],
     sections: [
       {
@@ -1105,7 +1120,7 @@ const POSTS = [
       },
       {
         heading: '3. Automatic task assignment',
-        body: 'Moves for reach stackers and yard equipment should be assigned by the system, not by radio calls. Operators then follow a clear list.',
+        body: 'Moves for [reach stackers](/resources/blog/reach-stacker-vision-automation) and yard equipment should be assigned by the system, not by radio calls. Operators then follow a clear list.',
       },
       {
         heading: '4. Pickup and drop tracking',
@@ -1125,7 +1140,7 @@ const POSTS = [
       },
       {
         heading: '8. Connection to your TOS or ERP',
-        body: 'The software should plug into the systems you already use through APIs, so inventory updates flow through without double entry. Prosper ContainerVision AI covers all eight points, from gate arrival to departure.',
+        body: 'The software should plug into the systems you already use through APIs, so inventory updates flow through without double entry. [Prosper ContainerVision AI](/products/software/containervision-ai) covers all eight points, from gate arrival to departure.',
       },
     ],
   },
@@ -1138,6 +1153,7 @@ const POSTS = [
       'A driver app that needs constant network is a driver app that stops being used. Here is how e-POD works and why offline mode decides adoption.',
     date: '2026-10-16',
     readTime: '5 min read',
+    related: ['what-is-a-vehicle-management-system-vms', 'customer-transporter-portals-and-billing-in-vms', 'live-truck-tracking-port-to-cfs'],
     relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
@@ -1153,11 +1169,11 @@ const POSTS = [
       },
       {
         heading: 'What offline mode does',
-        body: 'With offline mode, the app saves the delivery details on the phone and sends them when the network returns. The driver does the job once, wherever they are. The office gets the proof as soon as the phone reconnects. The Prosper VMS driver app has e-POD and offline mode for this reason.',
+        body: 'With offline mode, the app saves the delivery details on the phone and sends them when the network returns. The driver does the job once, wherever they are. The office gets the proof as soon as the phone reconnects. The [Prosper VMS](/solutions/fleet-management) driver app has e-POD and offline mode for this reason.',
       },
       {
         heading: 'Why this matters for billing',
-        body: 'Many invoices wait for proof of delivery. When the proof arrives the same day, billing can start the same day. Faster proof means faster invoices and, usually, faster payment.',
+        body: 'Many invoices wait for proof of delivery. When the proof arrives the same day, billing can start the same day. Faster proof means [faster invoices](/resources/blog/customer-transporter-portals-and-billing-in-vms) and, usually, faster payment.',
       },
       {
         heading: 'What to check before you pick a driver app',
@@ -1174,6 +1190,7 @@ const POSTS = [
       'You do not need driverless forklifts to automate forklift work. Cameras and sensors on your current fleet can confirm every pallet pickup and putaway.',
     date: '2026-10-20',
     readTime: '6 min read',
+    related: ['what-is-forkliftvision-ai', 'warehouse-automation-solutions-where-to-start', 'wms-implementation-what-to-expect'],
     relatedLinks: [{ label: 'Prosper ForkliftVision AI', path: '/solutions/ai-computer-vision' }, { label: 'Warehouse Solutions', path: '/solutions/warehouse-solutions' }],
     sections: [
       {
@@ -1185,7 +1202,7 @@ const POSTS = [
       },
       {
         heading: 'What a vision system checks',
-        body: 'A forklift vision system reads the pallet label, confirms the forks are properly under the pallet, confirms the lift, then reads the rack location marker at the other end and checks the level and position. When the pallet is set down correctly, the system records the putaway.',
+        body: 'A [forklift vision system](/resources/blog/what-is-forkliftvision-ai) reads the pallet label, confirms the forks are properly under the pallet, confirms the lift, then reads the rack location marker at the other end and checks the level and position. When the pallet is set down correctly, the system records the putaway.',
       },
       {
         heading: 'Why this is worth doing',
@@ -1193,11 +1210,11 @@ const POSTS = [
       },
       {
         heading: 'What you need to start',
-        body: 'Not much. Pallets with a barcode or QR label, a location marker on each rack, and a warehouse system that sends tasks and receives updates. The cameras and depth sensors are mounted on the forklift and calibrated once.',
+        body: 'Not much. Pallets with a barcode or QR label, a location marker on each rack, and a [warehouse system](/resources/blog/wms-implementation-what-to-expect) that sends tasks and receives updates. The cameras and depth sensors are mounted on the forklift and calibrated once.',
       },
       {
-        heading: 'How it fits with your WMS',
-        body: 'The vision system does not replace your WMS. The WMS creates the task, the forklift does it, and the system sends the result back so inventory updates in real time. Prosper ForkliftVision AI works this way, for racked and open-space warehouses.',
+        heading: 'How it fits with your [WMS](/products/software/wms)',
+        body: 'The vision system does not replace your WMS. The WMS creates the task, the forklift does it, and the system sends the result back so inventory updates in real time. [Prosper ForkliftVision AI](/solutions/ai-computer-vision) works this way, for racked and open-space warehouses.',
       },
     ],
   },
@@ -1210,6 +1227,7 @@ const POSTS = [
       '"AI-powered CFS" is a big phrase. Here is what it really means on the ground, what it does not do and what to expect when you start.',
     date: '2026-10-23',
     readTime: '5 min read',
+    related: ['cfs-management-software-features', 'container-yard-management-system-guide', 'what-is-ai-edgebox'],
     relatedLinks: [{ label: 'Prosper ContainerVision AI', path: '/products/software/containervision-ai' }],
     sections: [
       {
@@ -1217,7 +1235,7 @@ const POSTS = [
       },
       {
         heading: 'What does AI-powered CFS mean?',
-        body: 'It means AI cameras read container numbers and spot damage at the gate. Sensors and GPS confirm when a container is picked up and put down, and where. All of that goes into your records on its own. People still run the station. They just stop being the data entry clerks.',
+        body: 'It means [AI cameras](/resources/blog/ai-vision-container-terminals) read container numbers and spot damage at the gate. Sensors and GPS confirm when a container is picked up and put down, and where. All of that goes into your records on its own. People still run the station. They just stop being the data entry clerks.',
       },
       {
         heading: 'What it does not do',
@@ -1225,11 +1243,11 @@ const POSTS = [
       },
       {
         heading: 'Where it helps most',
-        body: 'Three places. At the gate, where numbers are read automatically on arrival and departure. On reach stackers, where pickup and drop are confirmed. And in the yard, where location and tier stay current. Together these give you a live picture of every container.',
+        body: 'Three places. At the gate, where numbers are read automatically on arrival and departure. On [reach stackers](/resources/blog/reach-stacker-vision-automation), where pickup and drop are confirmed. And in the yard, where location and tier stay current. Together these give you a live picture of every container.',
       },
       {
         heading: 'What if the network is unreliable?',
-        body: 'A good setup does the thinking on site. The Prosper AI EdgeBox processes detection locally and syncs to the cloud when a connection is available, so gate and yard work does not stop when the network does.',
+        body: 'A good setup does the thinking on site. The [Prosper AI EdgeBox](/resources/blog/what-is-ai-edgebox) processes detection locally and syncs to the cloud when a connection is available, so gate and yard work does not stop when the network does.',
       },
       {
         heading: 'How long does it take?',
@@ -1246,6 +1264,7 @@ const POSTS = [
       'Automation does not have to mean robots and a huge budget. Start with the one leak that costs you most, fix it, measure it, then move on.',
     date: '2026-10-27',
     readTime: '6 min read',
+    related: ['forklift-automation-system-without-new-forklifts', 'dockvision-ai-explained', 'wms-implementation-what-to-expect'],
     relatedLinks: [{ label: 'Warehouse Solutions', path: '/solutions/warehouse-solutions' }, { label: 'Prosper WMS', path: '/products/software/wms' }],
     sections: [
       {
@@ -1261,7 +1280,7 @@ const POSTS = [
       },
       {
         heading: 'Options that do not need a rebuild',
-        body: 'Cameras and sensors on your existing forklifts can confirm pickups and putaways. Camera-based dock monitoring can show what is loading and when. RFID or barcode labels can make counts quick. A WMS ties it together. None of these needs the warehouse to be redesigned.',
+        body: '[Cameras and sensors on your existing forklifts](/resources/blog/forklift-automation-system-without-new-forklifts) can confirm pickups and putaways. [Camera-based dock monitoring](/resources/blog/dockvision-ai-explained) can show what is loading and when. RFID or barcode labels can make counts quick. [A WMS](/products/software/wms) ties it together. None of these needs the warehouse to be redesigned.',
       },
       {
         heading: 'Pilot one area',
@@ -1282,10 +1301,11 @@ const POSTS = [
       'Portals let customers and transporters check status themselves, and billing from invoice to payment keeps money moving. Here is how it works in a VMS.',
     date: '2026-10-30',
     readTime: '5 min read',
+    related: ['what-is-a-vehicle-management-system-vms', 'epod-driver-app-offline-mode', 'live-truck-tracking-port-to-cfs'],
     relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
-        body: "Two questions fill a logistics office's phone lines: where is my truck, and where is my payment. A good vehicle management system answers both without a call.",
+        body: "Two questions fill a logistics office's phone lines: [where is my truck](/resources/blog/live-truck-tracking-port-to-cfs), and where is my payment. A good [vehicle management system](/resources/blog/what-is-a-vehicle-management-system-vms) answers both without a call.",
       },
       {
         heading: 'What is a customer portal?',
@@ -1297,11 +1317,11 @@ const POSTS = [
       },
       {
         heading: 'Billing from invoice to payment',
-        body: 'When billing lives in the same system as the delivery, an invoice can be raised as soon as the proof of delivery comes in. You can see which invoices are sent, which are due and which are paid. Prosper VMS covers billing from invoice to payment, so finance does not have to rebuild the story from emails.',
+        body: 'When billing lives in the same system as the delivery, an invoice can be raised as soon as the proof of delivery comes in. You can see which invoices are sent, which are due and which are paid. [Prosper VMS](/solutions/fleet-management) covers billing from invoice to payment, so finance does not have to rebuild the story from emails.',
       },
       {
         heading: 'Fewer disputes',
-        body: 'Many payment arguments start with "we do not agree the truck arrived." With location history and e-POD in one place, the answer is on the screen for both sides.',
+        body: 'Many payment arguments start with "we do not agree the truck arrived." With location history and [e-POD](/resources/blog/epod-driver-app-offline-mode) in one place, the answer is on the screen for both sides.',
       },
       {
         heading: 'Who gains',
@@ -1318,6 +1338,7 @@ const POSTS = [
       'Not every task is worth automating. Start with the work that is repetitive, error prone and slows down many people at once.',
     date: '2026-11-03',
     readTime: '5 min read',
+    related: ['gatevision-ai-explained', 'what-is-a-vehicle-management-system-vms', 'warehouse-automation-solutions-where-to-start'],
     relatedLinks: [{ label: 'Gate, Yard & Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' }, { label: 'Fleet Management', path: '/solutions/fleet-management' }],
     sections: [
       {
@@ -1325,15 +1346,15 @@ const POSTS = [
       },
       {
         heading: 'Data entry at the gate',
-        body: 'Typing container numbers and truck details at the gate is slow and mistakes spread downstream. Cameras with OCR can read the numbers on arrival and departure and log them for you.',
+        body: 'Typing container numbers and truck details at the gate is slow and mistakes spread downstream. [Cameras with OCR](/resources/blog/gatevision-ai-explained) can read the numbers on arrival and departure and log them for you.',
       },
       {
         heading: 'Location tracking',
-        body: 'Asking "where is it" by phone costs more time than people admit. Live tracking of trucks, containers or pallets removes most of those calls.',
+        body: 'Asking "where is it" by phone costs more time than people admit. [Live tracking of trucks](/resources/blog/live-truck-tracking-port-to-cfs), containers or pallets removes most of those calls.',
       },
       {
         heading: 'Proof of delivery',
-        body: 'Paper proof travels slowly. An e-POD from a driver app means the proof is in the system the same day, which also speeds up billing.',
+        body: 'Paper proof travels slowly. An [e-POD](/resources/blog/epod-driver-app-offline-mode) from a driver app means the proof is in the system the same day, which also speeds up billing.',
       },
       {
         heading: 'The billing handoff',
@@ -1358,6 +1379,7 @@ const POSTS = [
       'RFID asset tracking sounds technical, but the idea is simple: a tag, a reader and a screen. Here is how the pieces fit and what you can track.',
     date: '2026-11-06',
     readTime: '5 min read',
+    related: ['rfid-vs-gps-vs-ble-tracking', 'fixed-vs-handheld-rfid-readers', 'how-much-does-rfid-deployment-cost'],
     relatedLinks: [{ label: 'Prosper Asset Tracking', path: '/products/software/asset-tracking' }, { label: 'Asset Tracking Solution', path: '/solutions/asset-tracking' }],
     sections: [
       {
@@ -1365,11 +1387,11 @@ const POSTS = [
       },
       {
         heading: 'The tag',
-        body: 'An RFID tag is a small label with a chip inside. Each one carries a unique number. You stick it on a container, a tool, a laptop, a crate or any other asset. It needs no battery for most uses and it can be read without a line of sight, unlike a barcode.',
+        body: 'An RFID tag is a small label with a chip inside. Each one carries a unique number. You stick it on a container, a tool, a laptop, a crate or any other asset. It needs no battery for most uses and it can be read without a line of sight, [unlike a barcode](/resources/blog/rfid-vs-barcode).',
       },
       {
         heading: 'The reader',
-        body: "A reader picks up the tag's number by radio. Fixed readers sit at gates, doors or checkpoints and read tags as assets pass. Handheld readers are carried around to count or find things. Either way, nobody has to scan items one by one.",
+        body: "A reader picks up the tag's number by radio. [Fixed readers](/resources/blog/fixed-vs-handheld-rfid-readers) sit at gates, doors or checkpoints and read tags as assets pass. Handheld readers are carried around to count or find things. Either way, nobody has to scan items one by one.",
       },
       {
         heading: 'The gateway and the software',
@@ -1381,7 +1403,7 @@ const POSTS = [
       },
       {
         heading: 'What can you track?',
-        body: 'Almost anything of value: containers, forklifts, laptops, medical carts, toolboxes, pallets. Prosper Asset Tracking is offered as a monthly service with the tags and readers included, so you do not pay for hardware upfront.',
+        body: 'Almost anything of value: containers, forklifts, laptops, medical carts, toolboxes, pallets. [Prosper Asset Tracking](/products/software/asset-tracking) is offered as a monthly service with the tags and readers included, so you do not pay for hardware upfront.',
       },
     ],
   },
@@ -1394,6 +1416,7 @@ const POSTS = [
       'Every logistics vendor says AI now. Here is a plain guide to what AI actually does well today and five questions to ask before you buy.',
     date: '2026-11-10',
     readTime: '6 min read',
+    related: ['gatevision-ai-explained', 'what-is-ai-edgebox', 'ai-vision-container-terminals'],
     relatedLinks: [{ label: 'Gate, Yard & Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' }, { label: 'AI & Computer Vision', path: '/solutions/ai-computer-vision' }],
     sections: [
       {
@@ -1401,7 +1424,7 @@ const POSTS = [
       },
       {
         heading: 'What AI does well in logistics today',
-        body: 'Three things stand out. Reading text from images, such as container numbers and truck plates. Recognising objects, like a pallet, a forklift or a damaged corner on a container. And running these checks on a device at the gate or on a forklift, without waiting for the cloud. These are practical, and they remove manual typing and checking.',
+        body: 'Three things stand out. [Reading text from images](/resources/blog/gatevision-ai-explained), such as container numbers and truck plates. Recognising objects, like a pallet, a forklift or a damaged corner on a container. And running these checks [on a device at the gate or on a forklift](/resources/blog/what-is-ai-edgebox), without waiting for the cloud. These are practical, and they remove manual typing and checking.',
       },
       {
         heading: 'What is usually hype',

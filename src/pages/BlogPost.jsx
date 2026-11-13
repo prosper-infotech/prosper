@@ -14,6 +14,38 @@ function formatDate(dateStr) {
   })
 }
 
+// Post text can hold internal links written as [anchor text](/path). Anything else stays plain text.
+const LINK_PATTERN = /\[([^\]]+)\]\((\/[^)\s]*)\)/g
+
+function renderBody(body) {
+  const parts = []
+  let last = 0
+  for (const match of body.matchAll(LINK_PATTERN)) {
+    if (match.index > last) parts.push(body.slice(last, match.index))
+    parts.push(
+      <Link
+        key={match.index}
+        to={match[2]}
+        className="font-semibold text-primary underline decoration-gold-dark decoration-2 underline-offset-4 transition-colors hover:text-primary-dark"
+      >
+        {match[1]}
+      </Link>
+    )
+    last = match.index + match[0].length
+  }
+  if (last < body.length) parts.push(body.slice(last))
+  return parts
+}
+
+// Related articles: the ones the post names itself, then others on the same topic, then the newest.
+function pickRelated(post, all) {
+  const named = (post.related ?? []).map((slug) => all.find((p) => p.slug === slug)).filter(Boolean)
+  const rest = all.filter((p) => p.slug !== post.slug && !named.includes(p))
+  const sameTopic = rest.filter((p) => p.category === post.category)
+  const others = rest.filter((p) => p.category !== post.category)
+  return [...named, ...sameTopic, ...others].slice(0, 3)
+}
+
 export default function BlogPost() {
   const { slug } = useParams()
   const post = BLOG_POSTS.find((p) => p.slug === slug)
@@ -42,7 +74,7 @@ export default function BlogPost() {
     return <Navigate to="/resources/blog" replace />
   }
 
-  const otherPosts = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3)
+  const otherPosts = pickRelated(post, BLOG_POSTS)
 
   return (
     <>
@@ -71,7 +103,7 @@ export default function BlogPost() {
                   {section.heading}
                 </h2>
               )}
-              <p className="text-ink-600 text-lg leading-relaxed">{section.body}</p>
+              <p className="text-ink-600 text-lg leading-relaxed">{renderBody(section.body)}</p>
             </div>
           ))}
 
@@ -105,7 +137,7 @@ export default function BlogPost() {
         <section className="bg-surface-alt">
           <div className="max-w-6xl mx-auto px-6 py-16">
             <h3 className="text-center font-heading font-bold text-2xl text-primary mb-10">
-              More articles
+              Related articles
             </h3>
             <Reveal className="grid gap-6 sm:grid-cols-3">
               {otherPosts.map((p) => (
