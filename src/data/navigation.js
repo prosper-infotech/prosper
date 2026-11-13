@@ -185,7 +185,7 @@ export const NAV = [
       {
         label: 'Videos',
         path: '/resources/videos',
-        description: 'See our RFID, GPS, and geofencing solutions demonstrated on real deployments.',
+        description: 'Watch product demos and quick explainers on AI container yard automation, forklift tracking and gate automation.',
       },
       {
         label: 'FAQs',
