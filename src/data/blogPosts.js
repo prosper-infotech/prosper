@@ -1,5 +1,5 @@
 // Original blog content for the Resources > Blog section.
-export const BLOG_POSTS = [
+const POSTS = [
   {
     slug: 'signs-your-warehouse-needs-rfid',
     title: '5 Signs Your Warehouse Needs RFID Inventory Tracking',
@@ -968,3 +968,7 @@ export const BLOG_POSTS = [
     ],
   },
 ]
+
+// Newest first, so the blog page and each article's "more posts" list always lead with the latest.
+// New posts can be added anywhere in the list above; the order comes from their `date`.
+export const BLOG_POSTS = [...POSTS].sort((a, b) => new Date(b.date) - new Date(a.date))
