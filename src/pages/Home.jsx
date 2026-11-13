@@ -6,7 +6,9 @@ import Button from '../components/ui/Button'
 import Reveal from '../components/motion/Reveal'
 import CallDropdown from '../components/layout/CallDropdown'
 import HeroScene from '../components/sections/HeroScene'
+import VideoCard from '../components/ui/VideoCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import { DEMOS, videoSchema } from '../data/videos'
 import VisionHero from '../components/sections/VisionHero'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -153,6 +155,10 @@ const PRODUCTS = [
   },
 ]
 
+// The two demo videos shown on the homepage, in this order.
+const HOME_VIDEOS = ['wLIENZDi5-w', 'i7Oq3cniwa4'].map((id) => DEMOS.find((v) => v.id === id))
+const HOME_VIDEOS_SCHEMA = videoSchema(HOME_VIDEOS, 'Prosper Infotech product demo videos')
+
 function AnimatedStat({ value, label }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
@@ -190,7 +196,7 @@ export default function Home({ legacy = false }) {
   useDocumentTitle(
     'Prosper Infotech | AI-Powered RFID, GPS & IoT Logistics Solutions',
     'IoT, RFID, GPS, and AI-powered logistics automation solutions for warehouses, yards, and fleets — real-time tracking and asset visibility from Prosper Infotech.',
-    undefined,
+    HOME_VIDEOS_SCHEMA,
     { noindex: legacy }
   )
 
@@ -532,6 +538,37 @@ export default function Home({ legacy = false }) {
             </Link>
             <Link to="/products/software" className="font-semibold text-primary hover:text-primary-dark">
               View all software products &rarr;
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Demo videos */}
+      <section className="pb-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <Reveal className="mb-10 text-center">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest border-b-2 border-gold-dark pb-2 inline-block">
+              Watch Demos
+            </span>
+            <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px]">See it in action</h2>
+            <p className="mt-3 mx-auto max-w-2xl text-ink-600 text-lg">
+              Real demos of our AI container yard and forklift tracking products.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+            {HOME_VIDEOS.map((video, i) => (
+              <VideoCard key={video.id} video={video} delay={i * 0.08} />
+            ))}
+          </div>
+
+          <Reveal className="mt-8 text-center">
+            <Link
+              to="/resources/videos"
+              className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
+            >
+              View all videos
+              <ArrowRight className="h-4 w-4 text-gold-dark transition-transform group-hover:translate-x-1" />
             </Link>
           </Reveal>
         </div>
