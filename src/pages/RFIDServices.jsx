@@ -5,6 +5,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const HIGHLIGHTS = [
   'Strategic technology consulting before you invest in hardware',
@@ -189,6 +190,7 @@ export default function RFIDServices() {
         </div>
       </section>
 
+      <RelatedContent path="/services/rfid-services" />
       <CTABand
         title="Ready to talk about RFID Services?"
         description="We'll walk through your requirements and recommend the right approach."

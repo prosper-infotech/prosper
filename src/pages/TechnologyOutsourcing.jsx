@@ -30,6 +30,7 @@ import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import { REGIONS } from '../data/company'
 import { FLAG_COMPONENTS } from '../components/ui/RegionFlags'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const EXPERTISE = [
   {
@@ -340,6 +341,7 @@ export default function TechnologyOutsourcing() {
           </Reveal>
         </section>
 
+        <RelatedContent path="/services/technology-outsourcing" />
         <CTABand
           title="Tell us what you're building"
           description="Whether you need one specialist or a complete AI, IoT and logistics engineering team, talk to an engineering lead about your project."

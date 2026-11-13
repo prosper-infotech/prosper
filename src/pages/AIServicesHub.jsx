@@ -7,6 +7,7 @@ import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import { AI_SERVICES } from '../data/aiServicesDetail'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const INDUSTRY_FOCUS = ['Logistics', 'Supply Chain', 'Warehousing', 'Transportation', 'CFS / Container Terminals', 'Manufacturing']
 
@@ -145,6 +146,7 @@ export default function AIServicesHub() {
         </div>
       </section>
 
+      <RelatedContent path="/services/ai-software-development" />
       <CTABand
         title="Ready to build your AI-powered logistics platform?"
         description="Talk to our team about the right AI, ML, or Edge AI approach for your operation."

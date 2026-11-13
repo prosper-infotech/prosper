@@ -6,6 +6,7 @@ import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { AI_SERVICES } from '../../data/aiServicesDetail'
+import RelatedContent from '../../components/ui/RelatedContent'
 
 // Single navy/gold style set, used for every AI service category
 // regardless of its `accent` field, to keep the theme consistent.
@@ -204,6 +205,7 @@ export default function AIServiceDetailTemplate({ detail }) {
         </div>
       </section>
 
+      <RelatedContent path={path} />
       <CTABand title={cta} description="Talk to our team about the right AI approach for your operation." />
     </>
   )

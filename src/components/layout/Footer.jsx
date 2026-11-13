@@ -6,6 +6,12 @@ import { OFFICES } from '../../data/offices'
 import logo from '../../assets/logo-light.png'
 
 const FOOTER_COLUMNS = NAV.filter((item) => item.children).slice(0, 3)
+const INDUSTRY_LINKS = NAV.find((item) => item.label === 'Industries')?.children ?? []
+const RESOURCE_LINKS = [
+  { label: 'Blog', path: '/resources/blog' },
+  { label: 'Videos', path: '/resources/videos' },
+  { label: 'FAQs', path: '/resources/faqs' },
+]
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -90,6 +96,35 @@ export default function Footer() {
                     <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-dark" />
                     <span>{office.address}</span>
                   </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-ink-300/60">
+        <div className="max-w-7xl mx-auto grid gap-6 px-6 py-6 text-sm lg:grid-cols-[1.6fr_1fr]">
+          <div>
+            <h3 className="mb-2 font-heading text-sm font-semibold text-primary">Industries</h3>
+            <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+              {INDUSTRY_LINKS.map((item) => (
+                <li key={item.path}>
+                  <Link to={item.path} className="text-ink-600 hover:text-primary">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="mb-2 font-heading text-sm font-semibold text-primary">Resources</h3>
+            <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
+              {RESOURCE_LINKS.map((item) => (
+                <li key={item.path}>
+                  <Link to={item.path} className="text-ink-600 hover:text-primary">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>

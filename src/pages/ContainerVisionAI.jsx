@@ -8,6 +8,7 @@ import IndustriesSection from '../components/containervision/IndustriesSection'
 import FAQSection, { FAQS } from '../components/containervision/FAQSection'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import { SOFTWARE_PRODUCTS_DETAIL } from '../data/softwareProductsDetail'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const PATH = '/products/software/containervision-ai'
 const detail = SOFTWARE_PRODUCTS_DETAIL[PATH]
@@ -60,6 +61,7 @@ export default function ContainerVisionAI() {
       <TechStackSection />
       <IndustriesSection />
       <FAQSection />
+      <RelatedContent path={PATH} />
     </>
   )
 }

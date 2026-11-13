@@ -7,6 +7,7 @@ import ConnectedSteps from '../ui/ConnectedSteps'
 import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { SOFTWARE_PRODUCTS } from '../../data/softwareProductsDetail'
+import RelatedContent from '../../components/ui/RelatedContent'
 
 export default function SoftwareProductDetailTemplate({ detail }) {
   const { name, tagline, description, seoTitle, seoDescription, h1, badge, process, features, highlights, idealFor, architecture, reachStackerPanel, dataPoints, path } = detail
@@ -219,6 +220,7 @@ export default function SoftwareProductDetailTemplate({ detail }) {
           </div>
         </section>
 
+        <RelatedContent path={path} />
         <CTABand
           title={`Ready to see ${name} in action?`}
           description="Talk to our team about which platform fits your operation — we'll walk you through a live demo."

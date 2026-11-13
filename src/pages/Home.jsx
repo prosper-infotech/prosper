@@ -9,6 +9,7 @@ import HeroScene from '../components/sections/HeroScene'
 import VideoCard from '../components/ui/VideoCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import { DEMOS, videoSchema } from '../data/videos'
+import { BLOG_POSTS } from '../data/blogPosts'
 import VisionHero from '../components/sections/VisionHero'
 import wmsImg from '../assets/prosper wms.png'
 import containerVisionImg from '../assets/container vision ai.png'
@@ -154,6 +155,8 @@ const PRODUCTS = [
     to: '/ibm-i-as400',
   },
 ]
+
+const LATEST_POSTS = BLOG_POSTS.slice(0, 3)
 
 // The two demo videos shown on the homepage, in this order.
 const HOME_VIDEOS = ['wLIENZDi5-w', 'i7Oq3cniwa4'].map((id) => DEMOS.find((v) => v.id === id))
@@ -718,6 +721,47 @@ export default function Home({ legacy = false }) {
                 </div>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Latest from the blog */}
+      <section className="pb-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <Reveal className="mb-10 text-center">
+            <span className="text-primary text-sm font-semibold uppercase tracking-widest border-b-2 border-gold-dark pb-2 inline-block">
+              From the Blog
+            </span>
+            <h2 className="mt-3 text-3xl md:text-[38px] md:leading-[44px]">Latest from our team</h2>
+            <p className="mt-3 mx-auto max-w-2xl text-ink-600 text-lg">
+              Plain-language guides on AI, RFID, GPS and logistics automation.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
+            {LATEST_POSTS.map((post, i) => (
+              <Reveal key={post.slug} delay={i * 0.08}>
+                <Link
+                  to={`/resources/blog/${post.slug}`}
+                  className="group flex h-full flex-col rounded-lg border border-ink-300 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_50px_-8px_rgba(247,221,0,0.35),0_25px_50px_-12px_rgba(0,0,0,0.25)]"
+                >
+                  <span className="self-start rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-primary">{post.category}</span>
+                  <h3 className="mt-4 font-heading text-lg font-semibold text-primary transition-colors group-hover:text-primary-dark">{post.title}</h3>
+                  <p className="mt-2 flex-1 text-sm text-ink-600 line-clamp-3">{post.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    Read article
+                    <ArrowRight className="h-4 w-4 text-gold-dark transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-8 text-center">
+            <Link to="/resources/blog" className="group inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark">
+              View all articles
+              <ArrowRight className="h-4 w-4 text-gold-dark transition-transform group-hover:translate-x-1" />
+            </Link>
           </Reveal>
         </div>
       </section>

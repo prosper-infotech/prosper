@@ -19,6 +19,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const SERVICE_CATEGORIES = [
   {
@@ -339,6 +340,7 @@ export default function IBMiAS400() {
         </div>
       </section>
 
+      <RelatedContent path="/ibm-i-as400" />
       <CTABand
         title="Ready to Modernize Your IBM i Environment?"
         description="Whether you need AS400 development, modernization, migration, integration, or managed support, Prosper Infotech delivers secure, scalable, and future-ready IBM i solutions tailored to your business needs."

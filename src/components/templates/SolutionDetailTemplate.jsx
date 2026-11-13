@@ -5,6 +5,7 @@ import SectionHeading from '../ui/SectionHeading'
 import CTABand from '../ui/CTABand'
 import Reveal from '../motion/Reveal'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
+import RelatedContent from '../../components/ui/RelatedContent'
 
 const SECTION_LINKS = [
   { id: 'overview', label: 'Overview' },
@@ -172,6 +173,7 @@ export default function SolutionDetailTemplate({ title, parentLabel, parentPath,
           </section>
         )}
 
+        <RelatedContent path={path} />
         <CTABand
           title={`Ready to talk about ${title}?`}
           description="We'll walk through your requirements and recommend the right approach."

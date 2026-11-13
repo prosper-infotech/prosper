@@ -3,6 +3,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const PRODUCTS = [
   {
@@ -209,6 +210,7 @@ export default function ProductsHardware() {
         </div>
       </section>
 
+      <RelatedContent path="/products/hardware" />
       <CTABand
         title="Need hardware for your deployment?"
         description="Talk to our team about the right readers, gateways, and edge devices for your environment."

@@ -5,6 +5,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import RelatedContent from '../components/ui/RelatedContent'
 
 const HIGHLIGHTS = [
   'Custom IoT firmware and software development',
@@ -197,6 +198,7 @@ export default function IndustrialIoTServices() {
         </div>
       </section>
 
+      <RelatedContent path="/services/industrial-iot-services" />
       <CTABand
         title="Ready to talk about Industrial IoT Services?"
         description="We'll walk through your requirements and recommend the right approach."
