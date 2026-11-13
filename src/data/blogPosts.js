@@ -967,6 +967,460 @@ const POSTS = [
       },
     ],
   },
+
+  {
+    slug: 'what-is-a-vehicle-management-system-vms',
+    title: 'What Is a Vehicle Management System (VMS)? A Simple Guide for Indian Logistics',
+    category: 'Fleet Management',
+    excerpt:
+      'A vehicle management system puts truck location, delays, delivery proof and billing in one place. Here is what it does, who needs it and what to look for.',
+    date: '2026-10-02',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
+    sections: [
+      {
+        body: 'Ask any transport or CFS team how many times a day they hear "truck kahan hai?" and most will say too many. A vehicle management system, or VMS, exists so that question gets answered without a phone call.',
+      },
+      {
+        heading: 'What is a vehicle management system?',
+        body: 'A VMS is software that keeps track of your trucks and the work around them. It shows where each vehicle is, whether it is running late, whether the delivery is done, and whether the bill has been raised and paid. Instead of five WhatsApp groups, a few spreadsheets and a lot of calls, your team looks at one screen.',
+      },
+      {
+        heading: 'Who uses a VMS?',
+        body: 'Transporters use it to watch their fleet and their drivers. CFS and logistics teams use it to know which trucks are coming and when. Customers use it to check their own cargo without calling anyone. Prosper VMS is built for exactly these groups in Indian logistics: transporters, CFS operators and logistics teams.',
+      },
+      {
+        heading: 'What should a good VMS do?',
+        body: 'Five things matter most. Show live truck location. Warn you early when a truck is late. Let drivers confirm delivery from a phone app. Give customers and transporters their own view so they stop calling you. And connect to billing so the invoice does not wait on paperwork. If a system only does the first one, it is a map, not a management system.',
+      },
+      {
+        heading: 'Why a plain GPS map is not enough',
+        body: "A map tells you the truck is near the highway. It does not tell you the delivery slot is at risk, the driver has no proof of delivery yet, or the invoice is stuck. A VMS ties the location to the job: which order, which customer, which bill. That connection is what saves your team's time.",
+      },
+      {
+        heading: 'How to know it is time for one',
+        body: 'If your coordinators spend the morning calling drivers, if customers ask for updates you have to chase, or if billing waits days for delivery proof, a VMS will pay for itself in time saved before it does anything else.',
+      },
+      {
+        body: 'Prosper VMS puts live truck tracking from port to CFS, delay alerts, a driver app with e-POD, customer and transporter portals, and billing from invoice to payment on one screen. If that sounds like your day, book a free demo and we will walk you through it.',
+      },
+    ],
+  },
+
+  {
+    slug: 'container-yard-management-system-guide',
+    title: 'What Is a Container Yard Management System? What It Should Actually Do',
+    category: 'Yard Management',
+    excerpt:
+      'A container yard management system tracks every container from gate-in to gate-out. Here is what it covers, where manual records fail and where AI helps.',
+    date: '2026-10-06',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Prosper ContainerVision AI', path: '/products/software/containervision-ai' }, { label: 'Yard Solutions', path: '/solutions/yard-solutions' }],
+    sections: [
+      {
+        body: 'A container yard is a big puzzle that changes every hour. Containers arrive, move, wait, get inspected and leave. If nobody knows exactly where each one is, the whole yard slows down.',
+      },
+      {
+        heading: 'What is a container yard management system?',
+        body: 'A container yard management system tracks every container and where it sits, from gate-in to gate-out. It records each move, hands out jobs to equipment like reach stackers, and keeps the yard map up to date so anyone can find a container without walking the rows.',
+      },
+      {
+        heading: 'What it should cover',
+        body: 'At a minimum: a record of every container that comes in and goes out, its exact location (block, row and tier), the jobs given to equipment, the inspection or hold status, and simple reports on dwell time and movement. If any of these is missing, people fill the gap with phone calls.',
+      },
+      {
+        heading: 'Where manual yard records break down',
+        body: 'Written logs and spreadsheets are always a little behind the real yard. A container gets moved and nobody updates the sheet. The next person looks in the wrong place. Do that a few hundred times a week and you lose hours every day, plus you pay for the extra moves.',
+      },
+      {
+        heading: 'Where AI and cameras help',
+        body: 'Cameras with OCR can read the container number at the gate and on the equipment, so records fill themselves in. Sensors and GPS can confirm a pickup, a drop and the tier. The yard system then matches the real yard instead of lagging behind it. Prosper ContainerVision AI works this way, using AI cameras, OCR and GPS/RTK from gate arrival to departure.',
+      },
+      {
+        heading: 'Questions to ask before you choose one',
+        body: 'Does it update itself, or does someone have to type? Can it show the tier, not just the block? Does it connect to your existing TOS or ERP? Does it still work when the network drops? The answers tell you how much manual work you will really save.',
+      },
+    ],
+  },
+
+  {
+    slug: 'live-truck-tracking-port-to-cfs',
+    title: 'Live Truck Tracking from Port to CFS: What You Can Finally See',
+    category: 'Fleet Management',
+    excerpt:
+      'The trip from port to CFS is where most delays and phone calls happen. Here is what live tracking and instant delay alerts change for your team.',
+    date: '2026-10-09',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
+    sections: [
+      {
+        body: 'The stretch from the port gate to the CFS is short on a map and long on surprises. Queues, paperwork, traffic and waiting all hide inside one phone call: "truck kahan hai?"',
+      },
+      {
+        heading: 'Why this trip causes so many calls',
+        body: 'Many people are waiting on the same truck. The CFS planner wants to schedule the yard. The customer wants to know when the cargo will arrive. The transporter wants to know the truck is not stuck. When nobody can see the truck, everybody calls the driver, and the driver is busy driving.',
+      },
+      {
+        heading: 'What live tracking shows',
+        body: 'Where the truck is right now, which job it is on and how far it is from the CFS. That is all, and it removes most of the calls. Your team opens one screen instead of picking up the phone.',
+      },
+      {
+        heading: 'Delay alerts: hear it early, not late',
+        body: 'A late truck is a problem. A late truck you only learn about an hour after the slot is a bigger one. A delay alert tells you the moment a truck falls behind, so the yard team can move the slot, warn the customer or send help. Prosper VMS sends delay alerts straight away, not in an end of day report.',
+      },
+      {
+        heading: 'What it changes for the yard',
+        body: 'Planners stop guessing arrival times. Gate teams know what is coming. Fewer trucks wait outside with nowhere to go. Each small improvement is minor on its own, but a busy CFS handles a lot of trucks, and the saved minutes add up.',
+      },
+      {
+        heading: 'Tracking works best when it is tied to the job',
+        body: 'A dot on a map helps. A dot connected to the order, the customer and the delivery status helps far more. That is the difference between tracking and a vehicle management system.',
+      },
+      {
+        body: 'Prosper VMS gives live truck tracking from port to CFS with instant delay alerts. If your day still starts with a round of "where is the truck" calls, it is worth a look.',
+      },
+    ],
+  },
+
+  {
+    slug: 'cfs-management-software-features',
+    title: 'CFS Management Software: 8 Features to Look For',
+    category: 'CFS & Terminals',
+    excerpt:
+      'Choosing CFS management software? These eight features decide whether it saves your team time or just adds another screen to check.',
+    date: '2026-10-13',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Prosper ContainerVision AI', path: '/products/software/containervision-ai' }],
+    sections: [
+      {
+        body: 'A container freight station runs on small facts: which container, where it is, who touched it and when. CFS management software is only useful if it gets those facts right without people typing them in all day. Here are eight features worth checking.',
+      },
+      {
+        heading: '1. Container number capture at the gate',
+        body: 'The container number should be read automatically when the truck arrives, and the arrival logged in real time. Manual entry at the gate is where most errors begin.',
+      },
+      {
+        heading: '2. Damage and exception flags',
+        body: 'The system should flag visible damage or odd cases at the gate, with a photo, so you have a record before the container goes anywhere.',
+      },
+      {
+        heading: '3. Automatic task assignment',
+        body: 'Moves for reach stackers and yard equipment should be assigned by the system, not by radio calls. Operators then follow a clear list.',
+      },
+      {
+        heading: '4. Pickup and drop tracking',
+        body: 'Every lift and every drop should be recorded as it happens. That is how you know a container is really where the system says it is.',
+      },
+      {
+        heading: '5. Exact yard location and tier',
+        body: 'Block and row are not enough. Tier matters, because the wrong tier means extra moves to reach a container.',
+      },
+      {
+        heading: '6. Inspection and customs workflow support',
+        body: 'CFS work includes inspections and holds. The software should show which containers are on hold, which are cleared, and which are waiting for a check.',
+      },
+      {
+        heading: '7. Gate-out and release checks',
+        body: 'Departures should be validated automatically, with the release status confirmed before the truck leaves. This stops the wrong container going out.',
+      },
+      {
+        heading: '8. Connection to your TOS or ERP',
+        body: 'The software should plug into the systems you already use through APIs, so inventory updates flow through without double entry. Prosper ContainerVision AI covers all eight points, from gate arrival to departure.',
+      },
+    ],
+  },
+
+  {
+    slug: 'epod-driver-app-offline-mode',
+    title: 'e-POD and Driver Apps: Why Offline Mode Matters',
+    category: 'Fleet Management',
+    excerpt:
+      'A driver app that needs constant network is a driver app that stops being used. Here is how e-POD works and why offline mode decides adoption.',
+    date: '2026-10-16',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
+    sections: [
+      {
+        body: "Paper proof of delivery gets lost, smudged and delayed. e-POD fixes that by moving the proof onto the driver's phone. But there is a catch: roads do not always have network.",
+      },
+      {
+        heading: 'What is e-POD?',
+        body: 'e-POD means electronic proof of delivery. The driver confirms the delivery in an app, often with a signature, a photo or a note, and the office sees it straight away. No paper to carry back. No waiting days to raise the bill.',
+      },
+      {
+        heading: 'Why drivers drop apps that need signal',
+        body: 'Drivers pass through ports, yards, highways and warehouses where the network is weak or missing. If the app cannot save anything without a connection, it fails at the worst moment and the driver goes back to paper. Once that happens, the app is as good as dead.',
+      },
+      {
+        heading: 'What offline mode does',
+        body: 'With offline mode, the app saves the delivery details on the phone and sends them when the network returns. The driver does the job once, wherever they are. The office gets the proof as soon as the phone reconnects. The Prosper VMS driver app has e-POD and offline mode for this reason.',
+      },
+      {
+        heading: 'Why this matters for billing',
+        body: 'Many invoices wait for proof of delivery. When the proof arrives the same day, billing can start the same day. Faster proof means faster invoices and, usually, faster payment.',
+      },
+      {
+        heading: 'What to check before you pick a driver app',
+        body: 'Does it work without network? Is it simple enough for a driver to use in under a minute? Does the proof go straight to the job and the invoice? If any answer is no, expect drivers to stop using it within weeks.',
+      },
+    ],
+  },
+
+  {
+    slug: 'forklift-automation-system-without-new-forklifts',
+    title: 'Forklift Automation System: How to Start Without Buying New Forklifts',
+    category: 'Warehouse Management',
+    excerpt:
+      'You do not need driverless forklifts to automate forklift work. Cameras and sensors on your current fleet can confirm every pallet pickup and putaway.',
+    date: '2026-10-20',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Prosper ForkliftVision AI', path: '/solutions/ai-computer-vision' }, { label: 'Warehouse Solutions', path: '/solutions/warehouse-solutions' }],
+    sections: [
+      {
+        body: 'When people hear "forklift automation system" they picture driverless machines and a very large budget. That is one meaning. There is a smaller, cheaper one that helps much sooner: making the forklifts you already have report what they do.',
+      },
+      {
+        heading: 'Two kinds of forklift automation',
+        body: 'The first kind replaces the driver with an autonomous machine. The second kind keeps the driver and adds cameras and sensors to the forklift so every pickup and putaway is checked and recorded automatically. The second kind can often be fitted to your current fleet.',
+      },
+      {
+        heading: 'What a vision system checks',
+        body: 'A forklift vision system reads the pallet label, confirms the forks are properly under the pallet, confirms the lift, then reads the rack location marker at the other end and checks the level and position. When the pallet is set down correctly, the system records the putaway.',
+      },
+      {
+        heading: 'Why this is worth doing',
+        body: 'Most warehouse errors are small. A pallet goes to the wrong rack. A putaway is not recorded. A location is typed wrongly. Each one means someone searching later. When the forklift confirms its own work, those errors drop and the inventory record stays true.',
+      },
+      {
+        heading: 'What you need to start',
+        body: 'Not much. Pallets with a barcode or QR label, a location marker on each rack, and a warehouse system that sends tasks and receives updates. The cameras and depth sensors are mounted on the forklift and calibrated once.',
+      },
+      {
+        heading: 'How it fits with your WMS',
+        body: 'The vision system does not replace your WMS. The WMS creates the task, the forklift does it, and the system sends the result back so inventory updates in real time. Prosper ForkliftVision AI works this way, for racked and open-space warehouses.',
+      },
+    ],
+  },
+
+  {
+    slug: 'ai-powered-cfs-what-it-means',
+    title: 'AI-Powered CFS: What It Means and What It Does Not',
+    category: 'AI & Computer Vision',
+    excerpt:
+      '"AI-powered CFS" is a big phrase. Here is what it really means on the ground, what it does not do and what to expect when you start.',
+    date: '2026-10-23',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Prosper ContainerVision AI', path: '/products/software/containervision-ai' }],
+    sections: [
+      {
+        body: '"AI-powered CFS" sounds like a lot. On the ground it is simpler: cameras, sensors and software that read and record what happens at the station, so people stop typing it in.',
+      },
+      {
+        heading: 'What does AI-powered CFS mean?',
+        body: 'It means AI cameras read container numbers and spot damage at the gate. Sensors and GPS confirm when a container is picked up and put down, and where. All of that goes into your records on its own. People still run the station. They just stop being the data entry clerks.',
+      },
+      {
+        heading: 'What it does not do',
+        body: 'It does not replace your terminal operating system or ERP. It feeds them. It does not remove your staff, it frees them from logging. And it does not work without good camera coverage, which is why the first step is a look at your gate, yard and equipment.',
+      },
+      {
+        heading: 'Where it helps most',
+        body: 'Three places. At the gate, where numbers are read automatically on arrival and departure. On reach stackers, where pickup and drop are confirmed. And in the yard, where location and tier stay current. Together these give you a live picture of every container.',
+      },
+      {
+        heading: 'What if the network is unreliable?',
+        body: 'A good setup does the thinking on site. The Prosper AI EdgeBox processes detection locally and syncs to the cloud when a connection is available, so gate and yard work does not stop when the network does.',
+      },
+      {
+        heading: 'How long does it take?',
+        body: 'Most single-facility deployments go live within a few weeks of the first consultation, depending on the size of the gate and yard and how much camera coverage is needed.',
+      },
+    ],
+  },
+
+  {
+    slug: 'warehouse-automation-solutions-where-to-start',
+    title: 'Warehouse Automation Solutions: Where to Start When the Budget Is Tight',
+    category: 'Warehouse Management',
+    excerpt:
+      'Automation does not have to mean robots and a huge budget. Start with the one leak that costs you most, fix it, measure it, then move on.',
+    date: '2026-10-27',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Warehouse Solutions', path: '/solutions/warehouse-solutions' }, { label: 'Prosper WMS', path: '/products/software/wms' }],
+    sections: [
+      {
+        body: 'Warehouse automation has a reputation for big machines and bigger budgets. In practice, the best first step is usually small, and it starts with knowing where your problems are.',
+      },
+      {
+        heading: 'Find the biggest leak first',
+        body: 'Where does your warehouse lose the most time or money? Wrong putaways. Pick errors. Trucks waiting at the dock. Stock counts that take days. Write the list, then pick the one that costs you most. Automating the loudest problem is better than automating the easiest one.',
+      },
+      {
+        heading: 'Visibility before movement',
+        body: 'Before you move things with machines, make sure you can see them. Knowing where every pallet is, which dock door is busy and what is on the forklift gives you the data that makes every later step cheaper. This is why tracking, vision and a good WMS usually come first.',
+      },
+      {
+        heading: 'Options that do not need a rebuild',
+        body: 'Cameras and sensors on your existing forklifts can confirm pickups and putaways. Camera-based dock monitoring can show what is loading and when. RFID or barcode labels can make counts quick. A WMS ties it together. None of these needs the warehouse to be redesigned.',
+      },
+      {
+        heading: 'Pilot one area',
+        body: 'Pick one aisle, one dock or one team. Run the new process for a few weeks. Compare errors and time before and after. If the numbers move, expand. If they do not, you spent a little and learned a lot.',
+      },
+      {
+        heading: 'Make sure it connects',
+        body: 'Automation that sits on its own island creates more work. Check that anything you add can send and receive data from your WMS or ERP. Prosper offers WMS, ForkliftVision AI and DockVision AI that are designed to work together.',
+      },
+    ],
+  },
+
+  {
+    slug: 'customer-transporter-portals-and-billing-in-vms',
+    title: 'How Customer and Transporter Portals Cut Calls and Speed Up Payment',
+    category: 'Fleet Management',
+    excerpt:
+      'Portals let customers and transporters check status themselves, and billing from invoice to payment keeps money moving. Here is how it works in a VMS.',
+    date: '2026-10-30',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Fleet Management', path: '/solutions/fleet-management' }],
+    sections: [
+      {
+        body: "Two questions fill a logistics office's phone lines: where is my truck, and where is my payment. A good vehicle management system answers both without a call.",
+      },
+      {
+        heading: 'What is a customer portal?',
+        body: 'A page where your customer logs in and sees their own shipments: where the truck is, whether it has delivered and what is ready. They get answers in seconds. Your team does not have to dial anyone.',
+      },
+      {
+        heading: 'What is a transporter portal?',
+        body: 'The same idea for the transporters who run trucks for you. They see the jobs assigned to them, update status and check what is billed and what is paid. Nobody chases anybody.',
+      },
+      {
+        heading: 'Billing from invoice to payment',
+        body: 'When billing lives in the same system as the delivery, an invoice can be raised as soon as the proof of delivery comes in. You can see which invoices are sent, which are due and which are paid. Prosper VMS covers billing from invoice to payment, so finance does not have to rebuild the story from emails.',
+      },
+      {
+        heading: 'Fewer disputes',
+        body: 'Many payment arguments start with "we do not agree the truck arrived." With location history and e-POD in one place, the answer is on the screen for both sides.',
+      },
+      {
+        heading: 'Who gains',
+        body: 'Customers get answers faster. Transporters get paid with less chasing. Your team gets its day back. And finance gets a clean trail from the first dispatch to the final payment.',
+      },
+    ],
+  },
+
+  {
+    slug: 'logistics-automation-solutions-what-to-automate-first',
+    title: 'Logistics Automation Solutions: What to Automate First',
+    category: 'Logistics Automation',
+    excerpt:
+      'Not every task is worth automating. Start with the work that is repetitive, error prone and slows down many people at once.',
+    date: '2026-11-03',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Gate, Yard & Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' }, { label: 'Fleet Management', path: '/solutions/fleet-management' }],
+    sections: [
+      {
+        body: 'Every logistics team has a long list of things they would like to automate. The trick is picking the few that make a real difference. A simple rule helps: automate work that is repetitive, easy to get wrong and slows down many people at once.',
+      },
+      {
+        heading: 'Data entry at the gate',
+        body: 'Typing container numbers and truck details at the gate is slow and mistakes spread downstream. Cameras with OCR can read the numbers on arrival and departure and log them for you.',
+      },
+      {
+        heading: 'Location tracking',
+        body: 'Asking "where is it" by phone costs more time than people admit. Live tracking of trucks, containers or pallets removes most of those calls.',
+      },
+      {
+        heading: 'Proof of delivery',
+        body: 'Paper proof travels slowly. An e-POD from a driver app means the proof is in the system the same day, which also speeds up billing.',
+      },
+      {
+        heading: 'The billing handoff',
+        body: 'Invoices often wait for someone to collect papers and key them in. When delivery data flows into billing, the invoice can follow straight away.',
+      },
+      {
+        heading: 'Alerts instead of chasing',
+        body: 'A delay, a missing scan or an exception should reach the right person as it happens. Chasing a status at the end of the day is too late to fix anything.',
+      },
+      {
+        heading: 'Keep the order simple',
+        body: 'Start with one of these, prove it works, then add the next. Small wins build trust in the system, and your team will help you pick what comes after.',
+      },
+    ],
+  },
+
+  {
+    slug: 'rfid-asset-tracking-how-it-works',
+    title: 'RFID Asset Tracking: How It Works, in Plain English',
+    category: 'Asset Tracking',
+    excerpt:
+      'RFID asset tracking sounds technical, but the idea is simple: a tag, a reader and a screen. Here is how the pieces fit and what you can track.',
+    date: '2026-11-06',
+    readTime: '5 min read',
+    relatedLinks: [{ label: 'Prosper Asset Tracking', path: '/products/software/asset-tracking' }, { label: 'Asset Tracking Solution', path: '/solutions/asset-tracking' }],
+    sections: [
+      {
+        body: 'RFID asset tracking sounds technical. The idea is not. Put a small tag on the thing you want to track, read the tag with a reader, and see the result on a screen. Here is how each part works.',
+      },
+      {
+        heading: 'The tag',
+        body: 'An RFID tag is a small label with a chip inside. Each one carries a unique number. You stick it on a container, a tool, a laptop, a crate or any other asset. It needs no battery for most uses and it can be read without a line of sight, unlike a barcode.',
+      },
+      {
+        heading: 'The reader',
+        body: "A reader picks up the tag's number by radio. Fixed readers sit at gates, doors or checkpoints and read tags as assets pass. Handheld readers are carried around to count or find things. Either way, nobody has to scan items one by one.",
+      },
+      {
+        heading: 'The gateway and the software',
+        body: 'The reader passes what it sees to an IoT gateway, which sends it to the software over an API. The software turns raw reads into useful facts: this asset went out at 10:42, this one came back, this one has not moved in a week.',
+      },
+      {
+        heading: 'The dashboard and alerts',
+        body: 'You see every asset, where it was last seen and how it has moved. You can get an alert when an asset leaves an area, goes missing or needs maintenance. Check-in and check-out happen automatically at the reader.',
+      },
+      {
+        heading: 'What can you track?',
+        body: 'Almost anything of value: containers, forklifts, laptops, medical carts, toolboxes, pallets. Prosper Asset Tracking is offered as a monthly service with the tags and readers included, so you do not pay for hardware upfront.',
+      },
+    ],
+  },
+
+  {
+    slug: 'ai-powered-logistics-solutions-real-vs-hype',
+    title: 'AI-Powered Logistics Solutions: What Is Real and What Is Hype',
+    category: 'AI & Computer Vision',
+    excerpt:
+      'Every logistics vendor says AI now. Here is a plain guide to what AI actually does well today and five questions to ask before you buy.',
+    date: '2026-11-10',
+    readTime: '6 min read',
+    relatedLinks: [{ label: 'Gate, Yard & Dock Vision AI', path: '/solutions/gate-yard-dock-vision-ai' }, { label: 'AI & Computer Vision', path: '/solutions/ai-computer-vision' }],
+    sections: [
+      {
+        body: 'Open any logistics brochure and you will find the word AI. Some of it is real and useful. Some of it is a normal report with a new name. Here is how to tell them apart.',
+      },
+      {
+        heading: 'What AI does well in logistics today',
+        body: 'Three things stand out. Reading text from images, such as container numbers and truck plates. Recognising objects, like a pallet, a forklift or a damaged corner on a container. And running these checks on a device at the gate or on a forklift, without waiting for the cloud. These are practical, and they remove manual typing and checking.',
+      },
+      {
+        heading: 'What is usually hype',
+        body: 'Claims that AI will run your whole operation on its own. A dashboard with a chart and an AI label. Predictions with no explanation of what data they use. If a vendor cannot show what the AI reads, sees or decides, be careful.',
+      },
+      {
+        heading: 'Five questions to ask a vendor',
+        body: 'What exactly does the AI read or detect? Where does it run, on site or in the cloud? What happens when the network drops? How does it connect to our WMS, TOS or ERP? Can you show it working on a site like ours? Clear, specific answers are a good sign.',
+      },
+      {
+        heading: 'Start where AI is strongest',
+        body: 'Gate check-in, container and pallet tracking, dock monitoring and yard inventory are good places to begin. They give you measurable results quickly, and they create the clean data that everything else depends on.',
+      },
+      {
+        heading: 'Keep people in the loop',
+        body: 'Good AI systems make staff faster and surer. They do not need to remove anyone. The best setups let people check and correct what the system sees, and the system gets better from it.',
+      },
+    ],
+  },
 ]
 
 // Newest first, so the blog page and each article's "more posts" list always lead with the latest.
