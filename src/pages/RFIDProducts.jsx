@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Check, MessageCircle, Printer, Radio, ScanBarcode, ScanLine, Tag, Tags, Wifi } from 'lucide-react'
-import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import FAQAccordion from '../components/ui/FAQAccordion'
 import QuoteModal from '../components/ui/QuoteModal'
@@ -27,6 +26,14 @@ const GUIDE_STEPS = [
 const SCHEMA = {
   '@context': 'https://schema.org',
   '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.prosperinfotech.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://www.prosperinfotech.com/products' },
+        { '@type': 'ListItem', position: 3, name: 'RFID & Barcode Products', item: `https://www.prosperinfotech.com${PATH}` },
+      ],
+    },
     ...RFID_PRODUCTS.map((p) => ({
       '@type': 'Product',
       name: p.name,
@@ -117,21 +124,14 @@ export default function RFIDProducts() {
 
   return (
     <>
-      <Breadcrumb
-        title="RFID & Barcode Products"
-        parent="Products"
-        parentPath="/products"
-        h1="RFID & Barcode Products for Asset Tracking"
-      />
-
-      <section className="max-w-3xl mx-auto px-6 pt-16 pb-8 text-center">
+      <section className="max-w-3xl mx-auto px-6 pt-14 md:pt-20 pb-8 text-center">
         <Reveal className="flex flex-col items-center gap-4">
           <span className="text-primary text-sm font-semibold uppercase tracking-widest">RFID Products</span>
-          <h2 className="text-3xl md:text-[38px] md:leading-[44px]">
-            Everything you need to tag, scan and track your assets
-          </h2>
+          <h1 className="text-3xl md:text-[38px] md:leading-[44px] font-heading font-extrabold text-primary">
+            RFID & Barcode Products for Asset Tracking
+          </h1>
           <p className="text-ink-600 text-lg">
-            Choose your RFID tags, readers, barcode scanners and printers, then ask for a price. We reply within one business
+            Everything you need to tag, scan and track your assets. Choose your RFID tags, readers, barcode scanners and printers, then ask for a price. We reply within one business
             day, and we can install and connect everything to our asset tracking software.
           </p>
           <div className="mt-2 flex flex-wrap justify-center gap-3">
