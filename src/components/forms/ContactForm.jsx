@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import PhoneField from './PhoneField'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
 import { submitToCrm } from './crm'
@@ -29,11 +30,14 @@ const inputClasses =
 export default function ContactForm() {
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
   } = useForm()
   const [status, setStatus] = useState(null)
+  // Remounting the phone field is how it clears its own country/number state after reset().
+  const [phoneKey, setPhoneKey] = useState(0)
 
   const onSubmit = async (data) => {
     try {
@@ -62,6 +66,7 @@ export default function ContactForm() {
       })
       setStatus('success')
       reset()
+      setPhoneKey((k) => k + 1)
     } catch {
       setStatus('error')
     }
@@ -120,13 +125,7 @@ export default function ContactForm() {
           <label htmlFor="phone" className="block text-sm font-semibold text-ink-900 mb-1.5">
             Phone <span className="text-ink-500 font-normal">(optional)</span>
           </label>
-          <input
-            id="phone"
-            type="tel"
-            className={inputClasses}
-            placeholder="+1 234 567 8900"
-            {...register('phone')}
-          />
+          <PhoneField key={phoneKey} control={control} id="phone" inputClasses={inputClasses} />
         </div>
       </div>
 

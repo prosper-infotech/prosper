@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import PhoneField from './PhoneField'
 import { useNavigate } from 'react-router-dom'
 import Button from '../ui/Button'
 import { submitToPrivyr } from './privyr'
@@ -45,6 +46,7 @@ export default function LandingLeadForm({
 }) {
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm()
@@ -139,7 +141,7 @@ export default function LandingLeadForm({
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="flex flex-col gap-4">
         <div>
           <label htmlFor="lp-company" className="block text-sm font-semibold text-ink-900 mb-1.5">
             Company <span className="text-ink-500 font-normal">(optional)</span>
@@ -157,13 +159,7 @@ export default function LandingLeadForm({
           <label htmlFor="lp-phone" className="block text-sm font-semibold text-ink-900 mb-1.5">
             Phone <span className="text-ink-500 font-normal">(optional)</span>
           </label>
-          <input
-            id="lp-phone"
-            type="tel"
-            className={inputClasses}
-            placeholder="+1 234 567 8900"
-            {...register('phone')}
-          />
+          <PhoneField control={control} id="lp-phone" inputClasses={inputClasses} />
         </div>
       </div>
 
