@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, MessageCircle, Printer, Radio, ScanLine, Tag, Tags, Wifi } from 'lucide-react'
+import { ArrowRight, Check, MessageCircle, Printer, Radio, ScanBarcode, ScanLine, Tag, Tags, Wifi } from 'lucide-react'
 import Breadcrumb from '../components/ui/Breadcrumb'
 import CTABand from '../components/ui/CTABand'
 import FAQAccordion from '../components/ui/FAQAccordion'
@@ -16,7 +16,7 @@ const WHATSAPP_URL = `https://wa.me/19407583271?text=${encodeURIComponent(
   "Hi, I'd like a quote for RFID tags, readers or printers."
 )}`
 const PRODUCT_OPTIONS = RFID_PRODUCTS.map((p) => p.name)
-const CATEGORY_ICONS = { tags: Tag, readers: Radio, printers: Printer }
+const CATEGORY_ICONS = { tags: Tag, readers: Radio, scanners: ScanBarcode, printers: Printer }
 
 const GUIDE_STEPS = [
   { icon: Tags, title: 'What are you tracking?', text: 'Boxes, tools, machines, containers or something else. This decides the tag.' },
@@ -110,18 +110,18 @@ export default function RFIDProducts() {
   const [quoteFor, setQuoteFor] = useState(null)
 
   useDocumentTitle(
-    'RFID Tags, Readers & Printers | Buy RFID Asset Tracking Products',
-    'Buy UHF RFID tags and labels, handheld and fixed RFID readers, antennas and RFID printers for asset tracking. Request a quote from Prosper Infotech.',
+    'RFID & Barcode Products | Tags, Readers, Scanners & Printers',
+    'Buy UHF RFID tags and labels, RFID readers and antennas, barcode and QR scanners, and RFID and barcode label printers for asset tracking. Request a quote from Prosper Infotech.',
     SCHEMA
   )
 
   return (
     <>
       <Breadcrumb
-        title="RFID Tags, Readers & Printers"
+        title="RFID & Barcode Products"
         parent="Products"
         parentPath="/products"
-        h1="RFID Tags, Readers & Printers for Asset Tracking"
+        h1="RFID & Barcode Products for Asset Tracking"
       />
 
       <section className="max-w-3xl mx-auto px-6 pt-16 pb-8 text-center">
@@ -131,7 +131,7 @@ export default function RFIDProducts() {
             Everything you need to tag, scan and track your assets
           </h2>
           <p className="text-ink-600 text-lg">
-            Choose your RFID tags, readers and printers, then ask for a price. We reply within one business
+            Choose your RFID tags, readers, barcode scanners and printers, then ask for a price. We reply within one business
             day, and we can install and connect everything to our asset tracking software.
           </p>
           <div className="mt-2 flex flex-wrap justify-center gap-3">

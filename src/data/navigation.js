@@ -95,12 +95,13 @@ export const NAV = [
         ],
       },
       {
-        label: 'RFID Tags, Readers & Printers',
+        label: 'RFID & Barcode Products',
         path: '/products/rfid-assets',
-        description: 'UHF RFID Tags & Labels, Handheld & Fixed Readers, Antennas, RFID Printers & Encoders',
+        description: 'UHF RFID Tags & Labels, Readers & Antennas, Barcode & QR Scanners, RFID & Label Printers',
         children: [
           { label: 'RFID Tags & Labels', path: '/products/rfid-assets#tags' },
           { label: 'RFID Readers & Antennas', path: '/products/rfid-assets#readers' },
+          { label: 'Barcode & QR Scanners', path: '/products/rfid-assets#scanners' },
           { label: 'RFID Printers & Encoders', path: '/products/rfid-assets#printers' },
         ],
       },

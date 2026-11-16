@@ -25,6 +25,13 @@ export const CATEGORIES = [
       'Handheld readers for counting and finding items, fixed readers and antennas for gates, dock doors and conveyors.',
   },
   {
+    key: 'scanners',
+    label: 'Barcode Scanners',
+    heading: 'Barcode and QR scanners',
+    intro:
+      'Not every item needs an RFID tag. Barcode and QR scanners are a low-cost way to track stock, parcels and documents, and they work with our software too.',
+  },
+  {
     key: 'printers',
     label: 'Printers & Encoders',
     heading: 'RFID printers and encoders',
@@ -126,6 +133,71 @@ export const RFID_PRODUCTS = [
     ],
   },
   {
+    key: 'handheld-barcode-scanner',
+    category: 'scanners',
+    name: 'Handheld Barcode Scanner (1D / 2D)',
+    useCase: 'Billing counters, stores, stock rooms and dispatch desks.',
+    image: null,
+    specs: [
+      { label: 'Reads', value: '1D barcodes, 2D codes and QR' },
+      { label: 'Connection', value: 'USB wired' },
+      { label: 'Use', value: 'Plug and play, works like a keyboard' },
+      { label: 'Build', value: 'Drop resistant housing' },
+    ],
+  },
+  {
+    key: 'wireless-barcode-scanner',
+    category: 'scanners',
+    name: 'Wireless Barcode Scanner',
+    useCase: 'Warehouses, shop floors and large counters where a cable gets in the way.',
+    image: null,
+    specs: [
+      { label: 'Reads', value: '1D barcodes, 2D codes and QR' },
+      { label: 'Connection', value: 'Bluetooth or 2.4 GHz wireless' },
+      { label: 'Battery', value: 'Rechargeable, full-shift use' },
+      { label: 'Range', value: 'Long range with charging cradle' },
+    ],
+  },
+  {
+    key: 'mobile-barcode-computer',
+    category: 'scanners',
+    name: 'Mobile Computer with Barcode Scanner',
+    useCase: 'Stock counts, picking, proof of delivery and field audits.',
+    image: null,
+    specs: [
+      { label: 'Platform', value: 'Android handheld with touch screen' },
+      { label: 'Scanner', value: 'Built-in 1D / 2D imager and camera' },
+      { label: 'Connectivity', value: 'Wi-Fi, Bluetooth, 4G, NFC' },
+      { label: 'Build', value: 'Rugged, drop and dust resistant' },
+    ],
+  },
+  {
+    key: 'fixed-mount-scanner',
+    category: 'scanners',
+    name: 'Fixed-Mount Barcode Scanner',
+    useCase: 'Conveyors, sorting lines, kiosks and gates that scan without anyone holding it.',
+    image: null,
+    specs: [
+      { label: 'Reads', value: '1D barcodes, 2D codes and QR' },
+      { label: 'Mounting', value: 'Bracket or tunnel mount' },
+      { label: 'Connection', value: 'USB, RS-232 or Ethernet' },
+      { label: 'Use', value: 'Hands-free, continuous scanning' },
+    ],
+  },
+  {
+    key: 'tabletop-barcode-scanner',
+    category: 'scanners',
+    name: 'Tabletop Barcode Scanner',
+    useCase: 'Retail counters, pharmacies and self-service desks.',
+    image: null,
+    specs: [
+      { label: 'Reads', value: '1D barcodes, 2D codes and QR, including phone screens' },
+      { label: 'Mode', value: 'Hands-free, with stand' },
+      { label: 'Connection', value: 'USB' },
+      { label: 'Use', value: 'Fast scanning at the counter' },
+    ],
+  },
+  {
     key: 'desktop-rfid-printer',
     category: 'printers',
     name: 'Desktop RFID Printer / Encoder',
@@ -152,6 +224,19 @@ export const RFID_PRODUCTS = [
     ],
   },
   {
+    key: 'barcode-label-printer',
+    category: 'printers',
+    name: 'Barcode Label Printer',
+    useCase: 'Asset labels, shipping labels and shelf labels with barcodes and QR codes.',
+    image: null,
+    specs: [
+      { label: 'Printing', value: 'Thermal transfer or direct thermal' },
+      { label: 'Codes', value: 'Barcodes, QR codes, text and logos' },
+      { label: 'Volume', value: 'Desktop to industrial models' },
+      { label: 'Connectivity', value: 'USB and Ethernet' },
+    ],
+  },
+  {
     key: 'labels-and-ribbons',
     category: 'printers',
     name: 'Blank RFID Labels and Ribbons',
@@ -171,6 +256,11 @@ export const RFID_FAQS = [
     question: 'Do you sell RFID tags and readers in small quantities?',
     answer:
       'Yes. You can order a few tags and one reader to test in your own site, then scale up once it works. Tell us the quantity in your enquiry and we will quote for it.',
+  },
+  {
+    question: 'Should I use RFID or barcodes?',
+    answer:
+      'Barcodes are cheap and work well when you can scan each item one at a time. RFID reads many items at once without a clear line of sight, so it suits gates, dock doors and fast stock counts. Many sites use both. Tell us how you work and we will suggest the right mix.',
   },
   {
     question: 'How do I know which RFID tag is right for my asset?',
