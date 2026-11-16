@@ -27,6 +27,7 @@ const IBMiAS400 = lazy(() => import('./pages/IBMiAS400'))
 const TechnologyOutsourcing = lazy(() => import('./pages/TechnologyOutsourcing'))
 const ProductsSoftware = lazy(() => import('./pages/ProductsSoftware'))
 const ProductsHardware = lazy(() => import('./pages/ProductsHardware'))
+const RFIDProducts = lazy(() => import('./pages/RFIDProducts'))
 const Videos = lazy(() => import('./pages/Videos'))
 const FAQ = lazy(() => import('./pages/FAQ'))
 const Blog = lazy(() => import('./pages/Blog'))
@@ -87,6 +88,10 @@ function childElement(item, child) {
 
   if (child.path === '/products/hardware') {
     return <ProductsHardware />
+  }
+
+  if (child.path === '/products/rfid-assets') {
+    return <RFIDProducts />
   }
 
   if (child.path === '/resources/videos') {

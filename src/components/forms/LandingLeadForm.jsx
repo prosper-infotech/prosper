@@ -43,6 +43,7 @@ export default function LandingLeadForm({
   submitLabel = 'Get a free consultation',
   serviceLabel = 'What do you need help with?',
   serviceOptions = DEFAULT_SERVICE_OPTIONS,
+  defaultService = '',
 }) {
   const {
     register,
@@ -170,7 +171,7 @@ export default function LandingLeadForm({
         <select
           id="lp-service"
           className={inputClasses}
-          defaultValue=""
+          defaultValue={defaultService}
           {...register('service', { required: 'Please select an option' })}
         >
           <option value="" disabled>

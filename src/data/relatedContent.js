@@ -20,15 +20,16 @@ export const RELATED_PAGES = {
   // Software products
   '/products/software/dockvision-ai': ['/solutions/gate-yard-dock-vision-ai', '/solutions/warehouse-solutions', '/products/software/yardvision-ai', '/industries/warehousing'],
   '/products/software/containervision-ai': ['/solutions/container-terminal-automation', '/industries/cfs', '/industries/ports-terminals', '/products/software/yardvision-ai'],
-  '/products/software/asset-tracking': ['/solutions/asset-tracking', '/solutions/rfid-gps-solutions', '/products/hardware', '/services/rfid-services'],
+  '/products/software/asset-tracking': ['/solutions/asset-tracking', '/solutions/rfid-gps-solutions', '/products/rfid-assets', '/services/rfid-services'],
   '/products/software/wms': ['/solutions/warehouse-solutions', '/industries/warehousing', '/industries/3pl', '/products/software/dockvision-ai'],
   '/products/software/yardvision-ai': ['/solutions/yard-solutions', '/solutions/gate-yard-dock-vision-ai', '/products/software/containervision-ai', '/industries/logistics'],
   '/products/software/rfid-gps': ['/solutions/rfid-gps-solutions', '/solutions/fleet-management', '/products/hardware', '/services/rfid-services'],
   '/products/software/video-attendance': ['/solutions/workforce-management', '/solutions/ai-computer-vision', '/industries/manufacturing', '/products/hardware'],
-  '/products/hardware': ['/solutions/rfid-gps-solutions', '/solutions/industrial-iot', '/products/software/asset-tracking'],
+  '/products/hardware': ['/solutions/rfid-gps-solutions', '/solutions/industrial-iot', '/products/software/asset-tracking', '/products/rfid-assets'],
+  '/products/rfid-assets': ['/products/software/asset-tracking', '/products/hardware', '/services/rfid-services', '/solutions/asset-tracking'],
 
   // Services
-  '/services/rfid-services': ['/solutions/rfid-gps-solutions', '/products/software/asset-tracking', '/products/hardware', '/industries/retail'],
+  '/services/rfid-services': ['/solutions/rfid-gps-solutions', '/products/software/asset-tracking', '/products/rfid-assets', '/industries/retail'],
   '/services/industrial-iot-services': ['/solutions/industrial-iot', '/products/hardware', '/services/ai-software-development/edge-ai-iot-software-development', '/industries/manufacturing'],
   '/services/technology-outsourcing': ['/services/ai-software-development', '/services/industrial-iot-services', '/ibm-i-as400', '/about'],
   '/services/ai-software-development': ['/solutions/ai-computer-vision', '/services/industrial-iot-services', '/services/technology-outsourcing'],
@@ -77,6 +78,7 @@ const PAGE_TOPICS = {
   '/products/software/rfid-gps': ['rfid', 'gps'],
   '/products/software/video-attendance': ['workforce', 'vision'],
   '/products/hardware': ['rfid', 'edge', 'iot'],
+  '/products/rfid-assets': ['rfid', 'asset'],
   '/services/rfid-services': ['rfid'],
   '/services/industrial-iot-services': ['iot', 'edge'],
   '/services/technology-outsourcing': ['outsourcing'],

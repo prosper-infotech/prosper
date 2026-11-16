@@ -94,6 +94,16 @@ export const NAV = [
           { label: 'IoT Gateway', path: '/products/hardware#iot-gateway' },
         ],
       },
+      {
+        label: 'RFID Tags, Readers & Printers',
+        path: '/products/rfid-assets',
+        description: 'UHF RFID Tags & Labels, Handheld & Fixed Readers, Antennas, RFID Printers & Encoders',
+        children: [
+          { label: 'RFID Tags & Labels', path: '/products/rfid-assets#tags' },
+          { label: 'RFID Readers & Antennas', path: '/products/rfid-assets#readers' },
+          { label: 'RFID Printers & Encoders', path: '/products/rfid-assets#printers' },
+        ],
+      },
     ],
   },
   {
