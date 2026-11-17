@@ -8,6 +8,7 @@ import { Crumbs, EmptyState, PageLoading } from '../../shop/components/ui'
 import { btn, inputClass } from '../../shop/format'
 import { track } from '../../shop/track'
 import { SITE_URL } from '../../shop/site'
+import { categoryMeta } from '../../../shared/seo.js'
 import { hasPrice, isOrderable } from '../../../shared/pricing.js'
 
 const PAGE = 16
@@ -87,9 +88,10 @@ export default function ShopListing() {
     [title, slug]
   )
   const missing = ready && !isAll && !category
+  const seo = categoryMeta(slug, category)
   useDocumentTitle(
-    `${title} | Prosper Infotech Shop`,
-    category?.description || 'Browse RFID tags, readers, antennas, barcode scanners and label printers. Prices include GST, delivery across India.',
+    seo.title,
+    seo.description,
     missing ? null : schema,
     { noindex: missing || Boolean(q) }
   )
@@ -254,6 +256,7 @@ export default function ShopListing() {
         <div className="min-w-0">
           {results.length === 0 ? (
             <EmptyState
+              as="h2"
               icon={PackageSearch}
               title="No products match"
               text="Try a different word or clear the filters. If you cannot find what you need, we can source it for you."

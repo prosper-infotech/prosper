@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -78,14 +80,34 @@ function shopApi() {
     },
     configurePreviewServer(server) {
       applyEnv(server.config.mode)
+      server.middlewares.use((req, _res, next) => {
+        const [pathname, search = ''] = req.url.split('?')
+        if (req.method === 'GET' && !pathname.startsWith('/api') && !/\.[a-z0-9]+$/i.test(pathname)) {
+          req.url = `/api/__html?p=${encodeURIComponent(pathname.replace(/^\/+/, ''))}${search ? `&${search}` : ''}`
+        } else if (pathname === '/sitemap.xml') req.url = '/api/sitemap.xml'
+        next()
+      })
       server.middlewares.use(middleware(() => import(/* @vite-ignore */ new URL('./server/router.js', import.meta.url).href)))
+    },
+  }
+}
+
+// After the build, rename index.html to _app.html. The server uses it as the
+// template for every page (see server/routes/html.js), so "/" must not be a file.
+function pageTemplate() {
+  return {
+    name: 'page-template',
+    apply: 'build',
+    closeBundle() {
+      const out = path.resolve('dist')
+      if (fs.existsSync(path.join(out, 'index.html'))) fs.renameSync(path.join(out, 'index.html'), path.join(out, '_app.html'))
     },
   }
 }
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), preloadHeroImage(), shopApi()],
+  plugins: [react(), tailwindcss(), preloadHeroImage(), shopApi(), pageTemplate()],
   // The local test store writes files here; they must not reload the page.
   server: { watch: { ignored: ['**/.shop-dev/**'] } },
   build: {

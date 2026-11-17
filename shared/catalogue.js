@@ -1,10 +1,12 @@
 // Launch catalogue for the online shop (PLACEHOLDER CONTENT, plan section 5).
 // Pure data: used to seed the database, by the local development store, and as
 // the browser's fallback when the shop API cannot be reached.
+import { PRODUCT_SEO, CATEGORY_SEO } from './seo.js'
+
 // Every product is seeded with no price, so it shows "Request price" until a
 // price and stock are added in the admin screen.
 
-export const SEED_CATEGORIES = [
+const RAW_CATEGORIES = [
   {
     slug: 'tags-labels',
     name: 'Tags & Labels',
@@ -45,6 +47,8 @@ export const SEED_CATEGORIES = [
   },
 ]
 
+export const SEED_CATEGORIES = RAW_CATEGORIES.map((c) => ({ ...c, description: CATEGORY_SEO[c.slug]?.intro || c.description }))
+
 const p = (sku, slug, category, name, short_description, specs, extra = {}) => ({
   sku,
   slug,
@@ -69,7 +73,7 @@ const p = (sku, slug, category, name, short_description, specs, extra = {}) => (
   ...extra,
 })
 
-export const SEED_PRODUCTS = [
+const RAW_PRODUCTS = [
   p('PI-TAG-001', 'uhf-rfid-paper-labels', 'tags-labels', 'UHF RFID Paper Labels',
     'Cartons, files, boxes, documents and retail stock.',
     [['Frequency', 'UHF 860-960 MHz'], ['Standard', 'EPC Gen2 / ISO 18000-6C'], ['Format', 'Self-adhesive label, roll or sheet'], ['Surface', 'Paper, cardboard, plastic']],
@@ -151,6 +155,9 @@ export const SEED_PRODUCTS = [
     [['Platform', 'Raspberry Pi CM4 / CM5'], ['Connectivity', 'Ethernet, Wi-Fi, 4G, RS-485'], ['Use', 'Sensors, PLCs and RFID readers'], ['Sold as', 'Part of a project, by quote']],
     { quote_only: true }),
 ]
+
+// Names, search titles and descriptions come from shared/seo.js.
+export const SEED_PRODUCTS = RAW_PRODUCTS.map((p) => ({ ...p, ...(PRODUCT_SEO[p.sku] || {}) }))
 
 // Default shop settings. Editable in the admin screen. Amounts are in paise.
 export const DEFAULT_SETTINGS = {

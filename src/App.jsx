@@ -3,11 +3,11 @@ import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import PageLoader from './components/ui/PageLoader'
 import ShopHome from './pages/shop/ShopHome'
+import ShopListing from './pages/shop/ShopListing'
+import ProductPage from './pages/shop/ProductPage'
 
 // The whole site is the online hardware shop (docs/commercial-website-plan.md).
-// Each page is its own chunk so the home page stays light.
-const ShopListing = lazy(() => import('./pages/shop/ShopListing'))
-const ProductPage = lazy(() => import('./pages/shop/ProductPage'))
+// Home, category and product pages load with the app (no loading flash); the rest load on demand.
 const CartPage = lazy(() => import('./pages/shop/CartPage'))
 const Checkout = lazy(() => import('./pages/shop/Checkout'))
 const OrderStatus = lazy(() => import('./pages/shop/OrderStatus'))

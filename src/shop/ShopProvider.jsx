@@ -49,7 +49,14 @@ function readCart() {
 }
 
 export default function ShopProvider({ children }) {
-  const [catalogue, setCatalogue] = useState({ status: 'idle', products: [], categories: [], config: EMPTY_CONFIG, offline: false })
+  // The server embeds the catalogue in each page (window.__SHOP__), so the first
+  // page shows products immediately instead of a loading spinner.
+  const [catalogue, setCatalogue] = useState(() => {
+    const embedded = typeof window !== 'undefined' ? window.__SHOP__ : null
+    return embedded?.products
+      ? { status: 'ready', products: embedded.products, categories: embedded.categories, config: { ...EMPTY_CONFIG, ...embedded.config }, offline: false }
+      : { status: 'idle', products: [], categories: [], config: EMPTY_CONFIG, offline: false }
+  })
   const [lines, setLines] = useState(readCart)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [recent, setRecent] = useState(() => readList(RECENT_KEY))
@@ -61,7 +68,7 @@ export default function ShopProvider({ children }) {
     }
   })
   const [quoteFor, setQuoteFor] = useState(null)
-  const loading = useRef(null)
+  const loading = useRef(typeof window !== 'undefined' && window.__SHOP__?.products ? Promise.resolve() : null)
 
   const loadCatalogue = useCallback(async () => {
     try {

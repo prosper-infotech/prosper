@@ -111,8 +111,8 @@ export default function ShopHome() {
     []
   )
   useDocumentTitle(
-    'Buy RFID Tags, Readers, Barcode Scanners & Printers Online | Prosper Infotech Shop',
-    'Order UHF RFID tags and labels, RFID readers and antennas, barcode scanners and label printers online. Prices include GST, GST invoice, delivery across India.',
+    'Buy RFID Tags, Readers & Barcode Scanners | Prosper Shop',
+    'Order UHF RFID tags and labels, RFID readers and antennas, barcode scanners and label printers online. Prices include GST, delivery across India.',
     schema
   )
 

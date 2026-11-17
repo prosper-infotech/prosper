@@ -10,9 +10,9 @@ import { track } from '../../shop/track'
 import { COMPANY_URL, SITE_URL } from '../../shop/site'
 import { formatINR, hasPrice, isOrderable } from '../../../shared/pricing.js'
 import { deliveryEstimate, PINCODE_RE } from '../../../shared/india.js'
+import { breadcrumbLd, productLd, productMeta } from '../../../shared/seo.js'
 
 const SITE = SITE_URL
-const abs = (u) => (u?.startsWith('http') ? u : `${SITE}${u}`)
 
 function DeliveryCheck() {
   const { config, pincode, setPincode } = useShop()
@@ -124,47 +124,15 @@ export default function ProductPage() {
 
   const schema = useMemo(() => {
     if (!product) return null
-    const url = `${SITE}/p/${product.slug}`
-    return {
-      '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
-            ...(category ? [{ '@type': 'ListItem', position: 2, name: category.name, item: `${SITE}/c/${category.slug}` }] : []),
-            { '@type': 'ListItem', position: category ? 3 : 2, name: product.name, item: url },
-          ],
-        },
-        {
-          '@type': 'Product',
-          name: product.name,
-          sku: product.sku,
-          description: product.seo_description || product.short_description,
-          brand: { '@type': 'Brand', name: product.brand || 'Prosper Infotech' },
-          category: category?.name,
-          ...(product.images?.length ? { image: product.images.map(abs) } : {}),
-          ...(hasPrice(product)
-            ? {
-                offers: {
-                  '@type': 'Offer',
-                  url,
-                  priceCurrency: 'INR',
-                  price: (product.price_paise / 100).toFixed(2),
-                  availability: orderable ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-                  itemCondition: 'https://schema.org/NewCondition',
-                  seller: { '@type': 'Organization', name: 'Prosper Infotech' },
-                },
-              }
-            : {}),
-        },
-      ],
-    }
-  }, [product, category, orderable])
+    const trail = [{ label: 'Home', href: '/' }, ...(category ? [{ label: category.name, href: `/c/${category.slug}` }] : []), { label: product.name, href: `/p/${product.slug}` }]
+    const ld = productLd(product, category, config, SITE)
+    return { '@context': 'https://schema.org', '@graph': [breadcrumbLd(trail, SITE), ...(ld ? [ld] : [])] }
+  }, [product, category, config])
+  const meta = product ? productMeta(product) : null
 
   useDocumentTitle(
-    product ? product.seo_title || `${product.name} | Prosper Infotech Shop` : 'Product | Prosper Infotech Shop',
-    product ? product.seo_description || `${product.name}: ${product.short_description} Price includes GST. Delivery across India.` : undefined,
+    meta ? meta.title : 'Product | Prosper Infotech Shop',
+    meta ? meta.description : undefined,
     schema,
     { noindex: ready && !product }
   )

@@ -442,3 +442,55 @@ test('photo upload: staff only, real images only, saved and served back', async 
   assert.equal((await admin('PUT', `/api/admin/products/${p.id}`, { images: [ok.data.url] })).status, 200)
   assert.deepEqual((await product('handheld-barcode-scanner')).images, [ok.data.url])
 })
+
+/* ------------------------------- SEO page HTML ------------------------------- */
+
+test('page HTML: product, category, home, private and unknown pages', async () => {
+  const fs = await import('node:fs')
+  fs.mkdirSync('dist', { recursive: true })
+  const made = !fs.existsSync('dist/_app.html')
+  if (made) fs.writeFileSync('dist/_app.html', fs.readFileSync('index.html', 'utf8'))
+  try {
+    const page = async (p) => {
+      const res = await handle(new Request(`http://localhost/api/__html?p=${encodeURIComponent(p)}`))
+      return { status: res.status, html: await res.text(), robots: res.headers.get('x-robots-tag') }
+    }
+    const prod = await page('p/handheld-uhf-rfid-reader')
+    assert.equal(prod.status, 200)
+    assert.match(prod.html, /<title>Handheld UHF RFID Reader – Android \| Prosper Infotech<\/title>/)
+    assert.match(prod.html, /<link rel="canonical" href="http:\/\/localhost:5173\/p\/handheld-uhf-rfid-reader" \/>/)
+    assert.match(prod.html, /<meta name="description" content="Android handheld UHF RFID reader/)
+    assert.match(prod.html, /"@type":"Product"/) // priced earlier in these tests and has a photo
+    assert.match(prod.html, /"priceCurrency":"INR"/)
+    assert.match(prod.html, /window\.__SHOP__=/)
+    assert.match(prod.html, /<h1[^>]*>Handheld UHF RFID Reader/)
+    assert.equal((prod.html.match(/<title>/g) || []).length, 1)
+
+    const quoteOnly = await page('p/ai-edge-box')
+    assert.doesNotMatch(quoteOnly.html, /"@type":"Product"/) // no price: no Product markup, so no Search Console errors
+    assert.match(quoteOnly.html, /"@type":"BreadcrumbList"/)
+
+    const cat = await page('c/tags-labels')
+    assert.match(cat.html, /<title>RFID Tags &amp; Labels – Buy Online in India \| Prosper<\/title>/)
+    assert.match(cat.html, /"@type":"ItemList"/)
+
+    const home = await page('')
+    assert.match(home.html, /<title>Buy RFID Tags, Readers &amp; Barcode Scanners \| Prosper Shop<\/title>/)
+
+    const cart = await page('cart')
+    assert.match(cart.html, /noindex/)
+    assert.doesNotMatch(cart.html, /window\.__SHOP__/)
+
+    const missing = await page('p/does-not-exist')
+    assert.equal(missing.status, 404)
+    assert.equal(missing.robots, 'noindex, nofollow')
+    assert.equal((await page('nothing-here')).status, 404)
+
+    const sitemap = await api('GET', '/api/sitemap.xml')
+    assert.match(sitemap.data, /<loc>http:\/\/localhost:5173\/p\/handheld-uhf-rfid-reader<\/loc>/)
+    assert.match(sitemap.data, /<image:loc>/)
+    assert.match(sitemap.data, /\/shipping-policy</)
+  } finally {
+    if (made) fs.rmSync('dist/_app.html')
+  }
+})

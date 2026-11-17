@@ -19,7 +19,7 @@ const LEGAL = [
 export default function Footer() {
   const { categories, config } = useCart()
   const year = new Date().getFullYear()
-  const link = 'text-sm text-[#696e79] hover:text-ink-900'
+  const link = 'inline-block py-1 text-sm text-[#696e79] hover:text-ink-900'
   return (
     <footer className="border-t border-[#eaeaec] bg-[#fafbfc]">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">

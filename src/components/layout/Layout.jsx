@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { useLocation, useOutlet } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Header from './Header'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
@@ -30,17 +30,9 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col bg-white pb-[58px] lg:pb-0">
       <Header />
       <main className="flex-1">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
-          >
-            {element}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div key={location.pathname} initial={{ opacity: 0.6 }} animate={{ opacity: 1 }} transition={{ duration: 0.18, ease: 'easeOut' }}>
+          {element}
+        </motion.div>
       </main>
       <Footer />
       <WhatsAppButton />

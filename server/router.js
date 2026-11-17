@@ -6,6 +6,7 @@ import { requireStaff } from './lib/auth.js'
 import * as pub from './routes/public.js'
 import * as admin from './routes/admin.js'
 import * as activity from './routes/activity.js'
+import { renderPage } from './routes/html.js'
 
 const routes = []
 const add = (method, pattern, handler, staffOnly = false) => {
@@ -14,6 +15,8 @@ const add = (method, pattern, handler, staffOnly = false) => {
   routes.push({ method, regex, names, handler, staffOnly })
 }
 
+// Every page's HTML (title, description, structured data, content). See vercel.json.
+add('GET', '/__html', renderPage)
 add('GET', '/shop/catalogue', pub.catalogue)
 add('POST', '/checkout', pub.checkout)
 add('GET', '/orders/:token', pub.getOrder)
@@ -33,6 +36,7 @@ add('DELETE', '/account/addresses/:id', pub.deleteAddress)
 add('DELETE', '/account', pub.deleteAccount)
 add('GET', '/feeds/merchant.xml', pub.merchantFeed)
 add('GET', '/sitemap-shop.xml', pub.shopSitemap)
+add('GET', '/sitemap.xml', pub.shopSitemap)
 add('GET', '/uploads/:month/:file', admin.localUpload)
 
 // Used by the admin screen to ask "am I signed in?" without a 401 when the answer is no.

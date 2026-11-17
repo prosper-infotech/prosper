@@ -69,17 +69,21 @@ async function loadCatalogue() {
   return { categories, products, settings }
 }
 
-export async function catalogue() {
+// The catalogue as the browser sees it (also embedded in each page's HTML).
+export async function catalogueData() {
   const { categories, products, settings } = await loadCatalogue()
-  return json(
-    {
-      categories: categories.map(({ id: _id, ...c }) => c),
-      products: products.map((p) => publicProduct(p, categories)),
-      config: publicConfig(settings),
-    },
-    200,
-    { 'Cache-Control': 'public, max-age=0, s-maxage=30, stale-while-revalidate=120', 'X-Robots-Tag': 'noindex' }
-  )
+  return {
+    categories: categories.map(({ id: _id, ...c }) => c),
+    products: products.map((p) => publicProduct(p, categories)),
+    config: publicConfig(settings),
+  }
+}
+
+export async function catalogue() {
+  return json(await catalogueData(), 200, {
+    'Cache-Control': 'public, max-age=0, s-maxage=30, stale-while-revalidate=120',
+    'X-Robots-Tag': 'noindex',
+  })
 }
 
 /* --------------------------------- Checkout --------------------------------- */
@@ -512,7 +516,23 @@ export async function merchantFeed() {
 
 export async function shopSitemap() {
   const { categories, products } = await loadCatalogue()
-  const url = (loc, lastmod) => `<url><loc>${SITE}${loc}</loc>${lastmod ? `<lastmod>${String(lastmod).slice(0, 10)}</lastmod>` : ''}</url>`
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${url('/')}${categories.map((c) => url(`/c/${c.slug}`)).join('')}${products.map((p) => url(`/p/${p.slug}`, p.updated_at)).join('')}</urlset>`
-  return text(xml, 'application/xml; charset=utf-8', 200, { 'Cache-Control': 'public, max-age=0, s-maxage=3600' })
+  const live = categories.filter((c) => products.some((p) => p.category_id === c.id))
+  const latest = products.map((p) => p.updated_at).filter(Boolean).sort().pop()
+  const day = (d) => (d ? `<lastmod>${String(d).slice(0, 10)}</lastmod>` : '')
+  const abs = (u) => (/^https?:\/\//.test(u) ? u : `${SITE}${u}`)
+  const url = (loc, { lastmod, priority, images = [] } = {}) =>
+    `<url><loc>${SITE}${loc}</loc>${day(lastmod)}${priority ? `<priority>${priority}</priority>` : ''}${images
+      .map((i) => `<image:image><image:loc>${esc(abs(i))}</image:loc></image:image>`)
+      .join('')}</url>`
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
+    url('/', { lastmod: latest, priority: '1.0' }),
+    url('/c/all', { lastmod: latest, priority: '0.8' }),
+    ...live.map((c) => url(`/c/${c.slug}`, { lastmod: latest, priority: '0.8' })),
+    ...products.map((p) => url(`/p/${p.slug}`, { lastmod: p.updated_at, priority: '0.7', images: (p.images || []).slice(0, 5) })),
+    ...['contact', 'shipping-policy', 'returns-refunds', 'warranty', 'terms-of-sale', 'privacy-policy'].map((s) => url(`/${s}`, { priority: '0.3' })),
+    '</urlset>',
+  ].join('\n')
+  return text(xml, 'application/xml; charset=utf-8', 200, { 'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400' })
 }

@@ -100,13 +100,14 @@ export function PageLoading({ label = 'Loading' }) {
   )
 }
 
-export function EmptyState({ icon: Icon, title, text, action }) {
+// `as="h1"` when the empty state is the whole page (one main heading per page).
+export function EmptyState({ icon: Icon, title, text, action, as: Heading = 'h1' }) {
   return (
     <div className="mx-auto flex max-w-md flex-col items-center px-6 py-16 text-center">
       {Icon && (
         <Icon className="h-14 w-14 stroke-[1.25] text-primary" aria-hidden="true" />
       )}
-      <h2 className="mt-5 text-2xl">{title}</h2>
+      <Heading className="mt-5 text-2xl">{title}</Heading>
       {text && <p className="mt-2 text-ink-600">{text}</p>}
       {action && <div className="mt-6">{action}</div>}
     </div>
