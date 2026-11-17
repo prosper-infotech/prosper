@@ -1,8 +1,8 @@
 // Shared class names, labels and formatters for shop and admin pages.
 export const btn = {
-  gold: 'inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-5 py-3 text-sm font-bold text-primary shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-gold-dark hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-60',
-  navy: 'inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-dark disabled:pointer-events-none disabled:opacity-60',
-  ghost: 'inline-flex items-center justify-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-3 text-sm font-bold text-primary transition-all duration-200 hover:border-primary hover:bg-primary/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-60',
+  gold: 'inline-flex items-center justify-center gap-2 rounded-md bg-gold px-5 py-3 text-[13px] font-bold uppercase tracking-wider text-primary transition-colors hover:bg-gold-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-60',
+  navy: 'inline-flex items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-[13px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-dark disabled:pointer-events-none disabled:opacity-60',
+  ghost: 'inline-flex items-center justify-center gap-2 rounded-md border border-[#d4d5d9] bg-white px-5 py-3 text-[13px] font-bold uppercase tracking-wider text-ink-900 transition-colors hover:border-ink-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-60',
 }
 
 export const STATUS_LABEL = {
@@ -23,4 +23,4 @@ export const formatDate = (iso, withTime = false) =>
     : ''
 
 export const inputClass =
-  'w-full rounded-lg border border-ink-300 bg-white px-3.5 py-2.5 text-[15px] text-ink-900 placeholder:text-ink-500/70 transition-shadow focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gold aria-[invalid=true]:border-red-500'
+  'w-full rounded-md border border-[#d4d5d9] bg-white px-3.5 py-2.5 text-[15px] text-ink-900 placeholder:text-ink-500/70 transition-shadow focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gold aria-[invalid=true]:border-red-500'

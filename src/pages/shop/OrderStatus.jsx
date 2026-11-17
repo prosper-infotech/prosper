@@ -195,7 +195,7 @@ export default function OrderStatus() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-8 sm:px-6">
-      <header className="rounded-3xl bg-gradient-to-br from-primary-dark via-primary to-[#1c4a99] px-6 py-8 text-white md:px-10">
+      <header className="rounded-md bg-primary px-6 py-8 text-white md:px-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="flex items-center gap-2 text-sm font-semibold text-gold">
@@ -218,13 +218,13 @@ export default function OrderStatus() {
       )}
 
       {!closed && (
-        <section className="mt-6 rounded-2xl border border-ink-300/70 bg-white px-4 py-6 md:px-8" aria-label="Order progress">
+        <section className="mt-6 rounded-md border border-[#eaeaec] bg-white px-4 py-6 md:px-8" aria-label="Order progress">
           <Timeline order={order} />
         </section>
       )}
 
       {closed && (
-        <p className="mt-6 rounded-2xl border border-ink-300/70 bg-white px-5 py-4 text-sm text-ink-900">
+        <p className="mt-6 rounded-md border border-[#eaeaec] bg-white px-5 py-4 text-sm text-ink-900">
           This order was {order.status}
           {order.closed_at ? ` on ${formatDate(order.closed_at)}` : ''}. {order.status === 'refunded' ? 'Refunds usually reach your account in 5 to 7 working days.' : 'If you paid for it, the refund is processed separately.'}
         </p>
@@ -232,7 +232,7 @@ export default function OrderStatus() {
 
       {/* Payment */}
       {pending && waiting && (
-        <section className="mt-6 flex items-center gap-4 rounded-2xl border border-gold-dark/50 bg-surface-alt px-5 py-5" role="status">
+        <section className="mt-6 flex items-center gap-4 rounded-md border border-gold-dark/50 bg-surface-alt px-5 py-5" role="status">
           <Spinner className="h-6 w-6 shrink-0 text-primary" />
           <div>
             <p className="font-heading font-bold text-primary">Confirming your payment</p>
@@ -242,7 +242,7 @@ export default function OrderStatus() {
       )}
 
       {pending && !waiting && !manual && (
-        <section className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 p-5 md:p-7">
+        <section className="mt-6 rounded-md border border-amber-300 bg-amber-50 p-5 md:p-7">
           <h2 className="flex items-center gap-2 text-xl">
             <AlertTriangle className="h-5 w-5 text-amber-700" />
             {pay === 'cancelled' ? 'Payment not completed' : pay === 'error' ? 'We could not start the payment' : 'Payment pending'}
@@ -274,7 +274,7 @@ export default function OrderStatus() {
       )}
 
       {pending && manual && info && (
-        <section className="mt-6 rounded-2xl border border-gold-dark/50 bg-surface-alt p-5 md:p-7">
+        <section className="mt-6 rounded-md border border-gold-dark/50 bg-surface-alt p-5 md:p-7">
           <h2 className="text-xl">Pay {formatINR(order.total_paise)} to confirm your order</h2>
           <p className="mt-1 text-sm text-ink-600">
             Pay the exact amount and add the order number in the remarks. We confirm by email as soon as the payment arrives, then pack and ship.
@@ -307,7 +307,7 @@ export default function OrderStatus() {
             )}
           </div>
 
-          <form onSubmit={submitUtr} className="mt-6 border-t border-ink-300/60 pt-5">
+          <form onSubmit={submitUtr} className="mt-6 border-t border-[#eaeaec] pt-5">
             <label htmlFor="utr" className="block text-sm font-bold text-primary">
               Already paid? Tell us the UTR or transaction ID
             </label>
@@ -330,7 +330,7 @@ export default function OrderStatus() {
       )}
 
       {order.shipment && (
-        <section className="mt-6 rounded-2xl border border-ink-300/70 bg-white p-5 md:p-7">
+        <section className="mt-6 rounded-md border border-[#eaeaec] bg-white p-5 md:p-7">
           <h2 className="flex items-center gap-2 text-xl">
             <Truck className="h-5 w-5" />
             Shipping
@@ -350,12 +350,12 @@ export default function OrderStatus() {
       )}
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <section className="rounded-2xl border border-ink-300/70 bg-white p-5 md:p-7">
+        <section className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-7">
           <h2 className="mb-5 text-xl">Items</h2>
           <ul className="flex flex-col gap-4">
             {order.items.map((item) => (
               <li key={item.sku} className="flex items-center gap-4">
-                <div className="w-16 shrink-0 overflow-hidden rounded-lg border border-ink-300/60">
+                <div className="w-16 shrink-0 overflow-hidden rounded-lg border border-[#eaeaec]">
                   <ProductImage product={{ name: item.name, images: item.image ? [item.image] : [] }} ratio="aspect-square" iconSize="h-8 w-8" />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -374,7 +374,7 @@ export default function OrderStatus() {
               </li>
             ))}
           </ul>
-          <dl className="mt-5 flex flex-col gap-2 border-t border-ink-300/70 pt-4 text-sm">
+          <dl className="mt-5 flex flex-col gap-2 border-t border-[#eaeaec] pt-4 text-sm">
             <div className="flex justify-between">
               <dt className="text-ink-600">Subtotal (incl. GST)</dt>
               <dd className="font-semibold">{formatINR(order.subtotal_paise)}</dd>
@@ -383,7 +383,7 @@ export default function OrderStatus() {
               <dt className="text-ink-600">Shipping</dt>
               <dd className="font-semibold">{order.shipping_paise ? formatINR(order.shipping_paise) : 'Free'}</dd>
             </div>
-            <div className="flex items-baseline justify-between border-t border-ink-300/70 pt-3">
+            <div className="flex items-baseline justify-between border-t border-[#eaeaec] pt-3">
               <dt className="font-heading text-base font-bold text-primary">Total</dt>
               <dd className="font-heading text-2xl font-extrabold text-primary">{formatINR(order.total_paise)}</dd>
             </div>
@@ -398,7 +398,7 @@ export default function OrderStatus() {
         </section>
 
         <div className="flex flex-col gap-6">
-          <section className="rounded-2xl border border-ink-300/70 bg-white p-5 md:p-6">
+          <section className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-6">
             <h2 className="mb-3 text-lg">Delivery address</h2>
             <address className="text-sm not-italic leading-relaxed text-ink-900">
               <strong>{a.name}</strong>
@@ -417,7 +417,7 @@ export default function OrderStatus() {
             </p>
           </section>
 
-          <section className="rounded-2xl border border-ink-300/70 bg-white p-5 md:p-6">
+          <section className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-6">
             <h2 className="mb-3 text-lg">Need help with this order?</h2>
             <ul className="flex flex-col gap-2.5 text-sm">
               {order.support.phone && (

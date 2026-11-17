@@ -5,17 +5,17 @@ import { ArrowRight } from 'lucide-react'
 // dark and light sections. Both keys share one style; kept separate so
 // call sites don't need to change if a light/dark split is needed later.
 const PRIMARY_STYLE =
-  'bg-gold text-primary shadow-md hover:bg-gold-dark hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95'
+  'bg-gold text-primary shadow-md hover:bg-gold-dark hover:shadow-lg active:translate-y-0 active:scale-95'
 
 const VARIANTS = {
   primary: PRIMARY_STYLE,
   'primary-dark': PRIMARY_STYLE,
   // Secondary ghost — subtle, for dark backgrounds
   outline:
-    'bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+    'bg-white/10 backdrop-blur-sm text-white border border-white/40 shadow-md hover:bg-white hover:text-primary-dark active:translate-y-0 active:scale-95',
   // Secondary ghost — subtle, for light/gold backgrounds
   'outline-dark':
-    'bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md hover:bg-primary hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-95',
+    'bg-primary/5 backdrop-blur-sm text-primary border border-primary/30 shadow-md hover:bg-primary hover:text-white active:translate-y-0 active:scale-95',
 }
 
 export default function Button({
@@ -27,7 +27,7 @@ export default function Button({
   icon = true,
   ...rest
 }) {
-  const classes = `group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200 ${VARIANTS[variant]} ${className}`
+  const classes = `group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-md px-6 py-3 text-[13px] font-bold transition-all duration-200 ${VARIANTS[variant]} ${className}`
 
   const content = (
     <>

@@ -72,9 +72,9 @@ export default function CartDrawer() {
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
             onClick={(e) => e.stopPropagation()}
-            className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-surface shadow-2xl"
+            className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-white shadow-[-8px_0_24px_rgba(0,0,0,0.12)]"
           >
-            <header className="flex items-center justify-between border-b border-ink-300/60 bg-white px-5 py-4">
+            <header className="flex items-center justify-between border-b border-[#eaeaec] bg-white px-5 py-4">
               <h2 className="flex items-center gap-2 text-lg">
                 <ShoppingCart className="h-5 w-5" />
                 Your cart {count > 0 && <span className="text-sm font-semibold text-ink-500">({count})</span>}
@@ -86,7 +86,7 @@ export default function CartDrawer() {
 
             {!lines.length ? (
               <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-md">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f5f5f6] text-primary">
                   <ShoppingCart className="h-7 w-7" />
                 </div>
                 <p className="font-heading text-xl font-bold text-primary">Your cart is empty</p>
@@ -110,7 +110,7 @@ export default function CartDrawer() {
                     ))}
                   </ul>
                 </div>
-                <footer className="border-t border-ink-300/60 bg-white px-5 pb-5 pt-4">
+                <footer className="border-t border-[#eaeaec] bg-white px-5 pb-5 pt-4">
                   <Totals priced={priced} />
                   {priced.items.length > 0 && (
                     <Link to="/checkout" onClick={closeDrawer} className={`${btn.gold} mt-4 w-full !py-3.5 !text-base`}>

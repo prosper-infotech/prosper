@@ -33,12 +33,11 @@ export default function ThankYou() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-primary-dark to-navy flex flex-col items-center justify-center px-6">
-      <div className="pointer-events-none absolute top-1/3 right-0 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
 
       <img src={logo} alt="Prosper Infotech" className="absolute top-6 left-6 h-9 w-auto" />
 
       <Reveal className="relative max-w-lg mx-auto text-center flex flex-col items-center gap-4">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[0_0_60px_-8px_rgba(247,221,0,0.5)]">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#f5f5f6] text-primary">
           <CheckCircle2 className="h-7 w-7" />
         </div>
         <h1 className="text-white text-2xl sm:text-3xl md:text-4xl">You're all set!</h1>

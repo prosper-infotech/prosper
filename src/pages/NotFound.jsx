@@ -21,19 +21,9 @@ export default function NotFound() {
 
   return (
     <section className="relative overflow-hidden bg-white">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(20,52,109,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(20,52,109,0.9) 1px, transparent 1px)',
-          backgroundSize: '44px 44px',
-        }}
-      />
-      <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-gold/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
 
       <Reveal className="relative z-10 flex max-w-2xl flex-col items-center gap-6 px-6 py-28 mx-auto text-center md:py-36">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.2)]">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f5f5f6] text-primary">
           <Compass className="h-8 w-8" />
         </div>
         <span className="text-7xl md:text-8xl font-heading font-bold text-primary drop-shadow-sm">

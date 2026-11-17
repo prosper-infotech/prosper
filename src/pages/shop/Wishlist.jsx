@@ -28,7 +28,7 @@ export default function Wishlist() {
   }
   return (
     <div className="mx-auto max-w-[1400px] px-2 pb-10 pt-3 sm:px-4 sm:pt-4">
-      <div className="rounded-2xl bg-white p-4 shadow-[0_1px_3px_rgba(20,52,109,0.08)] sm:p-6">
+      <div className="rounded-md bg-white p-4 sm:p-6">
         <h1 className="text-2xl font-extrabold md:text-3xl">
           Your wishlist <span className="text-base font-semibold text-ink-500">({saved.length})</span>
         </h1>

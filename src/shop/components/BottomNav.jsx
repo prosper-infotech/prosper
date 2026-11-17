@@ -27,7 +27,7 @@ export default function BottomNav() {
     { to: '/cart', label: 'Cart', icon: ShoppingCart, badge: count },
   ]
   return (
-    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-300/70 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_18px_-10px_rgba(20,52,109,0.35)] lg:hidden">
+    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 border-t border-[#eaeaec] bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_18px_-10px_rgba(20,52,109,0.35)] lg:hidden">
       <ul className="grid grid-cols-5">
         {items.map((item) => (
           <li key={item.to}>

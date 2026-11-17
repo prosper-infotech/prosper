@@ -1,11 +1,12 @@
 import { useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, MessageCircle } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import FAQAccordion from '../../components/ui/FAQAccordion'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { useShop } from '../../shop/shopContext'
 import HeroCarousel from '../../shop/components/HeroCarousel'
 import ProductRow from '../../shop/components/ProductRow'
+import SectionTitle from '../../shop/components/SectionTitle'
 import TrustStrip from '../../shop/components/TrustStrip'
 import { CategoryIcon, PageLoading } from '../../shop/components/ui'
 import { btn } from '../../shop/format'
@@ -41,12 +42,8 @@ const FAQS = [
   },
 ]
 
-const TILE_THEMES = [
-  'from-primary-dark to-[#1c4a99] text-white',
-  'from-[#fff3c4] to-gold text-primary',
-  'from-[#e8f0fc] to-[#c9dbf6] text-primary',
-  'from-[#14346d] to-[#0b1d3f] text-white',
-]
+// Flat pastel tiles for the category grid.
+const TILE_COLORS = ['bg-[#eef2f8]', 'bg-[#fff7d1]', 'bg-[#eaf6ee]', 'bg-[#fbeef0]', 'bg-[#f1eefb]', 'bg-[#e9f5f8]']
 
 export default function ShopHome() {
   const { ready, products, categories, config, requestQuote, recent } = useShop()
@@ -125,114 +122,99 @@ export default function ShopHome() {
 
   if (!ready) return <PageLoading label="Loading the shop" />
   const whatsapp = `https://wa.me/${config.whatsapp_number}?text=${encodeURIComponent("Hi, I'd like help choosing RFID or barcode products from your shop.")}`
+  const wrap = 'mx-auto max-w-[1400px] px-4 lg:px-8'
 
   return (
-    <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-2 pb-10 pt-3 sm:gap-5 sm:px-4 sm:pt-4">
+    <div className="pb-14">
       <h1 className="sr-only">Prosper Infotech Shop: RFID tags, readers, barcode scanners and printers</h1>
       <HeroCarousel slides={slides} />
 
-      <section aria-label="Shop by category" className="rounded-2xl bg-white p-4 shadow-[0_1px_3px_rgba(20,52,109,0.08)] sm:p-5">
-        <ul className="flex gap-2 overflow-x-auto [scrollbar-width:none] sm:justify-around [&::-webkit-scrollbar]:hidden">
-          {live.map((cat) => (
-            <li key={cat.slug} className="shrink-0">
-              <Link to={`/c/${cat.slug}`} className="group flex w-[92px] flex-col items-center gap-2 rounded-xl p-2 text-center sm:w-32">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#fff3c4] to-gold text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.7),0_6px_14px_-8px_rgba(20,52,109,0.6)] transition-transform duration-200 group-hover:-translate-y-1 group-hover:scale-105 sm:h-20 sm:w-20">
-                  <CategoryIcon category={cat} className="h-7 w-7 sm:h-9 sm:w-9" />
-                </span>
-                <span className="text-xs font-bold leading-tight text-ink-900 group-hover:text-primary sm:text-sm">{cat.name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className={`${wrap} mt-12 flex flex-col gap-14`}>
+        <section aria-label="Shop by category">
+          <SectionTitle title="Shop by category" />
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+            {live.map((cat, i) => {
+              const items = products.filter((p) => p.category === cat.slug)
+              const photo = items.find((p) => p.images?.[0])?.images[0]
+              const from = items.filter(hasPrice).map((p) => p.price_paise)
+              return (
+                <li key={cat.slug}>
+                  <Link to={`/c/${cat.slug}`} className={`group flex h-full flex-col items-center px-4 pb-5 pt-6 text-center ${TILE_COLORS[i % TILE_COLORS.length]}`}>
+                    <span className="flex aspect-square w-full max-w-[150px] items-center justify-center overflow-hidden rounded-full bg-white">
+                      {photo ? (
+                        <img src={photo} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                      ) : (
+                        <CategoryIcon category={cat} className="h-14 w-14 stroke-[1.25] text-primary" />
+                      )}
+                    </span>
+                    <span className="mt-4 text-sm font-extrabold uppercase tracking-wider text-ink-900">{cat.name}</span>
+                    <span className="mt-1 text-xs text-[#696e79]">{from.length ? `From ${formatINR(Math.min(...from))}` : `${items.length} products`}</span>
+                    <span className="mt-2 text-xs font-bold uppercase tracking-wider text-primary group-hover:underline">Shop now</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
 
-      <ProductRow title="Top deals" subtitle="Priced below MRP while stock lasts" products={deals} viewAllTo="/c/all?stock=1&sort=price-asc" />
-      <ProductRow title="Ready to ship" subtitle="In stock and dispatched after payment" products={inStock} viewAllTo="/c/all?stock=1" />
+        <ProductRow title="Deals of the day" subtitle="Priced below MRP while stock lasts" products={deals} minimum={3} viewAllTo="/c/all?stock=1&sort=price-asc" />
+        <ProductRow title="Ready to ship" subtitle="In stock and dispatched after payment" products={inStock} minimum={2} viewAllTo="/c/all?stock=1" />
 
-      <section aria-label="Categories" className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-        {live.slice(0, 4).map((cat, i) => {
-          const items = products.filter((p) => p.category === cat.slug)
-          const photo = items.find((p) => p.images?.[0])?.images[0]
-          const from = items.filter(hasPrice).map((p) => p.price_paise)
-          return (
-            <Link
-              key={cat.slug}
-              to={`/c/${cat.slug}`}
-              className={`group relative flex min-h-[190px] flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br p-5 shadow-[0_1px_3px_rgba(20,52,109,0.08)] transition-transform duration-200 hover:-translate-y-1 ${TILE_THEMES[i % TILE_THEMES.length]}`}
-            >
-              <div className="relative z-10 max-w-[62%]">
-                <p className="font-heading text-xl font-extrabold leading-tight">{cat.name}</p>
-                <p className="mt-1 text-sm opacity-85">{from.length ? `From ${formatINR(Math.min(...from))}` : `${items.length} products`}</p>
-              </div>
-              <span className="relative z-10 inline-flex items-center gap-1.5 text-sm font-bold">
-                Shop now
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
-              {photo ? (
-                <img src={photo} alt="" loading="lazy" className="absolute -bottom-4 -right-4 h-36 w-36 rotate-6 rounded-2xl border-4 border-white/80 object-cover shadow-xl transition-transform duration-300 group-hover:rotate-3 group-hover:scale-105" />
-              ) : (
-                <span className="absolute -bottom-6 -right-6 flex h-36 w-36 items-center justify-center rounded-full bg-white/25">
-                  <CategoryIcon category={cat} className="h-16 w-16 opacity-90" />
-                </span>
-              )}
-            </Link>
-          )
-        })}
-      </section>
-
-      <ProductRow title="Featured products" subtitle="Popular with warehouses, stores and asset teams" products={featured} viewAllTo="/c/all" />
-
-      {live.slice(0, 3).map((cat) => (
-        <ProductRow key={cat.slug} title={cat.name} subtitle={cat.description} products={products.filter((p) => p.category === cat.slug)} viewAllTo={`/c/${cat.slug}`} />
-      ))}
-
-      <ProductRow title="Recently viewed" products={recentlyViewed} />
-
-      <TrustStrip />
-
-      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-dark via-primary to-[#1c4a99] px-6 py-9 text-center md:px-12 md:text-left">
-        <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-gold/25 blur-3xl" />
-        <div className="relative flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div>
-            <h2 className="text-2xl font-extrabold !text-white md:text-3xl">Not sure what fits? Ask the people who install it</h2>
-            <p className="mt-2 max-w-xl text-white/85">Send a photo or description of what you track. We suggest the right tags and readers.</p>
-          </div>
-          <div className="flex shrink-0 flex-wrap justify-center gap-3">
-            <button type="button" onClick={() => requestQuote('Not sure, need guidance')} className={btn.gold}>
-              Get free advice
-              <ArrowRight className="h-4 w-4" />
+        <section className="grid gap-4 md:grid-cols-2">
+          <div className="flex flex-col justify-center bg-primary px-8 py-10 text-white">
+            <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-gold">Bulk &amp; business orders</p>
+            <h2 className="mt-3 text-2xl font-extrabold !text-white md:text-3xl">Buying in quantity?</h2>
+            <p className="mt-2 max-w-sm text-white/80">Tell us the product and how many. We reply with a quantity price within one business day.</p>
+            <button type="button" onClick={() => requestQuote('Bulk order')} className={`${btn.gold} mt-6 self-start`}>
+              Request bulk quote
             </button>
-            <a
-              href={whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => window.gtag?.('event', 'click_whatsapp', { event_category: 'Online Shop' })}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-primary"
-            >
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp us
-            </a>
           </div>
-        </div>
-      </section>
+          <div className="flex flex-col justify-center bg-gold px-8 py-10 text-primary">
+            <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-primary/70">Free expert advice</p>
+            <h2 className="mt-3 text-2xl font-extrabold md:text-3xl">Not sure what fits?</h2>
+            <p className="mt-2 max-w-sm text-primary/80">Send a photo of what you track. The team that installs RFID will suggest the right tags and readers.</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button type="button" onClick={() => requestQuote('Not sure, need guidance')} className={btn.navy}>
+                Get advice
+              </button>
+              <a
+                href={whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => window.gtag?.('event', 'click_whatsapp', { event_category: 'Online Shop' })}
+                className="inline-flex items-center gap-2 rounded-md border border-primary px-5 py-3 text-[13px] font-bold uppercase tracking-wider text-primary transition-colors hover:bg-primary hover:text-white"
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
 
-      <section className="rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(20,52,109,0.08)] md:p-8">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-6 text-center text-2xl md:text-3xl">Common questions</h2>
+        <ProductRow title="Featured products" products={featured} viewAllTo="/c/all" />
+        {live.slice(0, 3).map((cat) => (
+          <ProductRow key={cat.slug} title={cat.name} products={products.filter((p) => p.category === cat.slug)} viewAllTo={`/c/${cat.slug}`} />
+        ))}
+        <ProductRow title="Recently viewed" products={recentlyViewed} />
+
+        <TrustStrip />
+
+        <section className="mx-auto w-full max-w-3xl">
+          <SectionTitle title="Common questions" />
           <FAQAccordion items={FAQS} />
-          <p className="mt-6 text-center text-sm text-ink-600">
+          <p className="mt-6 text-sm text-[#696e79]">
             Need the hardware installed or connected to software? See{' '}
-            <a href={`${COMPANY_URL}/products/software/asset-tracking`} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline decoration-gold-dark decoration-2 underline-offset-4">
+            <a href={`${COMPANY_URL}/products/software/asset-tracking`} target="_blank" rel="noopener noreferrer" className="font-bold text-primary hover:underline">
               Prosper Asset Tracking
             </a>{' '}
             and our{' '}
-            <a href={`${COMPANY_URL}/services/rfid-services`} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline decoration-gold-dark decoration-2 underline-offset-4">
+            <a href={`${COMPANY_URL}/services/rfid-services`} target="_blank" rel="noopener noreferrer" className="font-bold text-primary hover:underline">
               RFID services
             </a>
             .
           </p>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   )
 }

@@ -12,21 +12,15 @@ export function CategoryIcon({ category, className }) {
 }
 
 // Fixed aspect ratio so the page never jumps while images load.
-export function ProductImage({ product, src, className = '', ratio = 'aspect-[4/3]', iconSize = 'h-16 w-16', eager = false }) {
+export function ProductImage({ product, src, className = '', ratio = 'aspect-[4/3]', iconSize = 'h-14 w-14', eager = false }) {
   const image = src ?? product.images?.[0]
   return (
     <div className={`${ratio} w-full overflow-hidden bg-surface-alt ${className}`}>
       {image ? (
         <img src={image} alt={product.name} loading={eager ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover" />
       ) : (
-        <div
-          className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_20%,#fffdf0,#fff3c4_60%,#ffe58a)]"
-          role="img"
-          aria-label={`${product.name} (photo coming soon)`}
-        >
-          <div className={`flex ${iconSize} items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-[inset_0_2px_3px_rgba(255,255,255,0.6),inset_0_-2px_3px_rgba(0,0,0,0.15),0_8px_20px_-6px_rgba(20,52,109,0.35)]`}>
-            <CategoryIcon category={product.category} className="h-[45%] w-[45%]" />
-          </div>
+        <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#f5f5f6] text-primary" role="img" aria-label={`${product.name} (photo coming soon)`}>
+          <CategoryIcon category={product.category} className={`${iconSize} stroke-[1.25]`} />
         </div>
       )}
     </div>
@@ -110,9 +104,7 @@ export function EmptyState({ icon: Icon, title, text, action }) {
   return (
     <div className="mx-auto flex max-w-md flex-col items-center px-6 py-16 text-center">
       {Icon && (
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary shadow-md">
-          <Icon className="h-7 w-7" />
-        </div>
+        <Icon className="h-14 w-14 stroke-[1.25] text-primary" aria-hidden="true" />
       )}
       <h2 className="mt-5 text-2xl">{title}</h2>
       {text && <p className="mt-2 text-ink-600">{text}</p>}

@@ -24,9 +24,9 @@ export default function Contact() {
               <a
                 href={card.href}
                 {...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                className="flex h-full flex-col items-start rounded-2xl border border-ink-300/70 bg-white p-6 shadow-[0_2px_10px_-4px_rgba(20,52,109,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-gold-dark/60 hover:shadow-[0_24px_40px_-18px_rgba(20,52,109,0.35)]"
+                className="flex h-full flex-col items-start rounded-md border border-[#eaeaec] bg-white p-6 transition-all duration-300 hover:border-gold-dark/60 hover:shadow-[0_24px_40px_-18px_rgba(20,52,109,0.35)]"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f5f5f6] text-primary">
                   <card.icon className="h-5 w-5" />
                 </span>
                 <span className="mt-4 font-heading text-lg font-bold text-primary">{card.title}</span>
@@ -36,7 +36,7 @@ export default function Contact() {
           ))}
         </div>
 
-        <Reveal className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl bg-surface-alt p-6 md:flex-row md:items-center md:p-8">
+        <Reveal className="mt-8 flex flex-col items-start justify-between gap-5 rounded-md bg-surface-alt p-6 md:flex-row md:items-center md:p-8">
           <div>
             <h2 className="text-xl">Need a price for a large quantity?</h2>
             <p className="mt-1 text-sm text-ink-600">Tell us the product and how many. We send a quote with the delivery time.</p>

@@ -38,7 +38,7 @@ function readDraft() {
 
 function Section({ step, title, children }) {
   return (
-    <section className="rounded-2xl border border-ink-300/70 bg-white p-5 md:p-7">
+    <section className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-7">
       <h2 className="mb-5 flex items-center gap-3 text-xl">
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">{step}</span>
         {title}
@@ -55,7 +55,7 @@ function Summary({ priced }) {
         {priced.items.map((item) => (
           <li key={item.product_id} className="flex items-center gap-3">
             <div className="relative w-14 shrink-0">
-              <div className="overflow-hidden rounded-lg border border-ink-300/60">
+              <div className="overflow-hidden rounded-lg border border-[#eaeaec]">
                 <ProductImage product={{ name: item.name, images: item.image ? [item.image] : [] }} ratio="aspect-square" iconSize="h-8 w-8" />
               </div>
               <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[11px] font-bold text-white">{item.qty}</span>
@@ -65,7 +65,7 @@ function Summary({ priced }) {
           </li>
         ))}
       </ul>
-      <Totals priced={priced} className="mt-5 border-t border-ink-300/70 pt-4" />
+      <Totals priced={priced} className="mt-5 border-t border-[#eaeaec] pt-4" />
     </>
   )
 }
@@ -278,7 +278,7 @@ export default function Checkout() {
       </div>
 
       {/* Order summary, folded away on phones */}
-      <div className="mt-5 rounded-2xl border border-ink-300/70 bg-white lg:hidden">
+      <div className="mt-5 rounded-md border border-[#eaeaec] bg-white lg:hidden">
         <button type="button" onClick={() => setSummaryOpen((v) => !v)} aria-expanded={summaryOpen} className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left">
           <span className="flex items-center gap-2 text-sm font-bold text-primary">
             <ShoppingCart className="h-4 w-4" />
@@ -288,7 +288,7 @@ export default function Checkout() {
           <span className="font-heading text-lg font-extrabold text-primary">{formatINR(priced.total_paise)}</span>
         </button>
         {summaryOpen && (
-          <div className="border-t border-ink-300/70 p-5">
+          <div className="border-t border-[#eaeaec] p-5">
             <Summary priced={priced} />
           </div>
         )}
@@ -329,7 +329,7 @@ export default function Checkout() {
               Billing address is the same as delivery
             </label>
             {!billingSame && (
-              <div className="mt-5 border-t border-ink-300/60 pt-5">
+              <div className="mt-5 border-t border-[#eaeaec] pt-5">
                 <h3 className="mb-4 text-base">Billing address</h3>
                 <AddressFields register={register} errors={errors.billing} prefix="billing" withContact />
               </div>
@@ -355,7 +355,7 @@ export default function Checkout() {
                   {methods.map((m) => (
                     <label
                       key={m.value}
-                      className={`flex cursor-pointer items-start gap-4 rounded-xl border-2 p-4 transition-colors ${method === m.value ? 'border-gold-dark bg-surface-alt/60' : 'border-ink-300/70 hover:border-primary/40'}`}
+                      className={`flex cursor-pointer items-start gap-4 rounded-xl border-2 p-4 transition-colors ${method === m.value ? 'border-gold-dark bg-surface-alt/60' : 'border-[#eaeaec] hover:border-primary/40'}`}
                     >
                       <input type="radio" value={m.value} className="mt-1 h-5 w-5 accent-primary" {...register('payment_method')} />
                       <span className="flex-1">
@@ -381,7 +381,7 @@ export default function Checkout() {
             <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
           </div>
 
-          <div className="rounded-2xl border border-ink-300/70 bg-white p-5 md:p-7">
+          <div className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-7">
             <label className="flex cursor-pointer items-start gap-3 text-sm text-ink-900">
               <input type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 rounded accent-primary" aria-invalid={errors.accept_terms ? 'true' : undefined} {...register('accept_terms')} />
               <span>
@@ -405,7 +405,7 @@ export default function Checkout() {
         </div>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-28 rounded-2xl border border-ink-300/70 bg-white p-6 shadow-[0_24px_50px_-30px_rgba(20,52,109,0.45)]">
+          <div className="sticky top-28 rounded-md border border-[#eaeaec] bg-white p-6">
             <h2 className="mb-5 text-lg">Order summary</h2>
             <Summary priced={priced} />
             <p className="mt-5 flex items-start gap-2 rounded-xl bg-surface-alt px-3.5 py-3 text-xs leading-snug text-ink-900">

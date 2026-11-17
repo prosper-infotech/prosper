@@ -43,16 +43,7 @@ export default function Breadcrumb({ title, parent, parentPath, description, h1 
   }, [title, parent, parentPath, pathname])
 
   return (
-    <section className="relative overflow-hidden bg-white px-6 py-16 text-center md:py-20">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(20,52,109,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(20,52,109,0.9) 1px, transparent 1px)',
-          backgroundSize: '44px 44px',
-        }}
-      />
-      <div className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
+    <section className="relative border-b border-[#eaeaec] bg-[#fafbfc] px-6 py-12 text-center md:py-14">
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -84,11 +75,11 @@ export default function Breadcrumb({ title, parent, parentPath, description, h1 
           <p className="mb-3 text-xs font-bold uppercase tracking-widest text-gold-dark">{parent}</p>
         )}
 
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-primary">
+        <h1 className="text-2xl md:text-3xl font-heading font-extrabold uppercase tracking-[0.1em] !text-ink-900">
           {h1 || title}
         </h1>
 
-        <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-gradient-to-r from-gold to-gold-dark" />
+        <span className="mx-auto mt-4 block h-1 w-12 bg-gold" />
 
         {description && <p className="mt-5 text-lg text-ink-600">{description}</p>}
       </motion.div>

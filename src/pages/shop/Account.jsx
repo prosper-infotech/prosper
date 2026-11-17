@@ -33,7 +33,7 @@ function Orders({ orders }) {
 
   if (!orders.length) {
     return (
-      <div className="rounded-2xl border border-ink-300/70 bg-white p-8 text-center">
+      <div className="rounded-md border border-[#eaeaec] bg-white p-8 text-center">
         <p className="font-heading text-lg font-bold text-primary">No orders yet</p>
         <p className="mt-1 text-sm text-ink-600">Orders placed with this email address appear here, including ones placed without signing in.</p>
         <Link to="/" className={`${btn.gold} mt-5`}>
@@ -47,7 +47,7 @@ function Orders({ orders }) {
       {message && <p role="status" className="mb-4 rounded-xl bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">{message}</p>}
       <ul className="flex flex-col gap-4">
         {orders.map((order) => (
-          <li key={order.token} className="rounded-2xl border border-ink-300/70 bg-white p-5">
+          <li key={order.token} className="rounded-md border border-[#eaeaec] bg-white p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <Link to={`/order/${order.token}`} className="font-heading text-lg font-bold text-primary hover:underline">
@@ -107,7 +107,7 @@ function AddressForm({ address, onSaved, onCancel }) {
     }
   }
   return (
-    <form onSubmit={handleSubmit(save)} noValidate className="rounded-2xl border border-gold-dark/50 bg-white p-5">
+    <form onSubmit={handleSubmit(save)} noValidate className="rounded-md border border-gold-dark/50 bg-white p-5">
       <h3 className="mb-4 text-lg">{address ? 'Edit address' : 'New address'}</h3>
       <AddressFields register={register} errors={errors.address} prefix="address" withContact />
       <label className="mt-4 flex cursor-pointer items-center gap-3 text-sm font-semibold text-ink-900">
@@ -139,7 +139,7 @@ function Addresses({ addresses, reload }) {
     <>
       <ul className="grid gap-4 sm:grid-cols-2">
         {addresses.map((a) => (
-          <li key={a.id} className="rounded-2xl border border-ink-300/70 bg-white p-5">
+          <li key={a.id} className="rounded-md border border-[#eaeaec] bg-white p-5">
             {a.is_default && <span className="mb-2 inline-block rounded-full bg-gold/40 px-2.5 py-0.5 text-xs font-bold text-primary">Default</span>}
             <address className="text-sm not-italic leading-relaxed text-ink-900">
               <strong>{a.name}</strong>
@@ -164,7 +164,7 @@ function Addresses({ addresses, reload }) {
           </li>
         ))}
       </ul>
-      {!addresses.length && <p className="rounded-2xl border border-ink-300/70 bg-white p-6 text-sm text-ink-600">No saved addresses yet. Save one to fill in checkout faster.</p>}
+      {!addresses.length && <p className="rounded-md border border-[#eaeaec] bg-white p-6 text-sm text-ink-600">No saved addresses yet. Save one to fill in checkout faster.</p>}
       <button type="button" onClick={() => setEditing('new')} className={`${btn.gold} mt-5`}>
         <Plus className="h-4 w-4" />
         Add an address
@@ -197,7 +197,7 @@ function Profile({ customer, reload, onDeleted }) {
   const input = (name, extra = {}) => ({ id: `profile-${name}`, className: inputClass, 'aria-invalid': errors[name] ? 'true' : undefined, ...register(name), ...extra })
   return (
     <>
-      <form onSubmit={handleSubmit(save)} noValidate className="rounded-2xl border border-ink-300/70 bg-white p-5 md:p-7">
+      <form onSubmit={handleSubmit(save)} noValidate className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-7">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field id="profile-email" label="Email" hint="Your sign-in email. Contact us to change it.">
             <input id="profile-email" value={customer.email} disabled className={`${inputClass} bg-surface text-ink-500`} />
@@ -223,7 +223,7 @@ function Profile({ customer, reload, onDeleted }) {
         </button>
       </form>
 
-      <div className="mt-6 rounded-2xl border border-red-200 bg-white p-5 md:p-7">
+      <div className="mt-6 rounded-md border border-red-200 bg-white p-5 md:p-7">
         <h3 className="text-lg !text-red-800">Delete my account</h3>
         <p className="mt-1 text-sm text-ink-600">
           This removes your profile and saved addresses. Records of past orders and invoices are kept, as tax law requires.
@@ -293,7 +293,7 @@ export default function Account() {
         </button>
       </div>
 
-      <div role="tablist" aria-label="Account sections" className="mt-6 flex gap-2 overflow-x-auto border-b border-ink-300/70">
+      <div role="tablist" aria-label="Account sections" className="mt-6 flex gap-2 overflow-x-auto border-b border-[#eaeaec]">
         {TABS.map((t) => (
           <button
             key={t.key}

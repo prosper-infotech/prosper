@@ -116,71 +116,10 @@ export default function ShopListing() {
     )
   }
 
-  const active = Boolean(q || brands.length || inStock || min || max)
-  const filters = (
-    <div className="flex flex-col gap-7">
-      <div>
-        <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-ink-500">Category</h3>
-        <ul className="flex flex-col gap-1">
-          {[{ slug: 'all', name: 'All products' }, ...categories.filter((c) => products.some((p) => p.category === c.slug))].map((c) => (
-            <li key={c.slug}>
-              <Link
-                to={`/c/${c.slug}${q ? `?q=${encodeURIComponent(q)}` : ''}`}
-                onClick={() => setShown(PAGE)}
-                aria-current={c.slug === slug ? 'page' : undefined}
-                className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${c.slug === slug ? 'bg-primary font-bold text-white' : 'text-ink-900 hover:bg-primary/5 hover:text-primary'}`}
-              >
-                {c.name}
-                <span className={`text-xs ${c.slug === slug ? 'text-white/80' : 'text-ink-500'}`}>
-                  {c.slug === 'all' ? products.length : products.filter((p) => p.category === c.slug).length}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {allBrands.length > 1 && (
-        <fieldset>
-          <legend className="mb-3 text-sm font-bold uppercase tracking-wider text-ink-500">Brand</legend>
-          <div className="flex flex-col gap-2">
-            {allBrands.map((b) => (
-              <label key={b} className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-900">
-                <input
-                  type="checkbox"
-                  checked={brands.includes(b)}
-                  onChange={(e) => set('brand', (e.target.checked ? [...brands, b] : brands.filter((x) => x !== b)).join(','))}
-                  className="h-4 w-4 rounded accent-primary"
-                />
-                {b}
-              </label>
-            ))}
-          </div>
-        </fieldset>
-      )}
-
-      <fieldset>
-        <legend className="mb-3 text-sm font-bold uppercase tracking-wider text-ink-500">Price (₹, incl. GST)</legend>
-        <div className="flex items-center gap-2">
-          <input type="number" inputMode="numeric" min="0" value={min} onChange={(e) => set('min', e.target.value)} placeholder="Min" aria-label="Minimum price" className={`${inputClass} !py-2 !text-sm`} />
-          <span className="text-ink-500">to</span>
-          <input type="number" inputMode="numeric" min="0" value={max} onChange={(e) => set('max', e.target.value)} placeholder="Max" aria-label="Maximum price" className={`${inputClass} !py-2 !text-sm`} />
-        </div>
-      </fieldset>
-
-      <label className="flex cursor-pointer items-center gap-2.5 text-sm font-semibold text-ink-900">
-        <input type="checkbox" checked={inStock} onChange={(e) => set('stock', e.target.checked ? '1' : '')} className="h-4 w-4 rounded accent-primary" />
-        In stock, ready to order
-      </label>
-
-      {active && (
-        <button type="button" onClick={() => { setParams({}, { replace: true }); setShown(PAGE) }} className="self-start text-sm font-bold text-primary underline decoration-gold-dark decoration-2 underline-offset-4">
-          Clear all filters
-        </button>
-      )}
-    </div>
-  )
-
+  const clearAll = () => {
+    setParams({}, { replace: true })
+    setShown(PAGE)
+  }
   const chips = [
     q && { label: `"${q}"`, clear: () => set('q', '') },
     ...brands.map((b) => ({ label: b, clear: () => set('brand', brands.filter((x) => x !== b).join(',')) })),
@@ -195,100 +134,124 @@ export default function ShopListing() {
       },
     },
   ].filter(Boolean)
-  const panel = 'rounded-2xl bg-white shadow-[0_1px_3px_rgba(20,52,109,0.08)]'
+  const heading = 'mb-3 text-xs font-extrabold uppercase tracking-[0.15em] text-ink-900'
+  const liveCats = categories.filter((c) => products.some((p) => p.category === c.slug))
+
+  const filters = (
+    <div className="divide-y divide-[#eaeaec]">
+      <div className="pb-5">
+        <h3 className={heading}>Categories</h3>
+        <ul className="flex flex-col gap-2.5">
+          {[{ slug: 'all', name: 'All products' }, ...liveCats].map((c) => {
+            const on = c.slug === slug
+            return (
+              <li key={c.slug}>
+                <Link
+                  to={`/c/${c.slug}${q ? `?q=${encodeURIComponent(q)}` : ''}`}
+                  onClick={() => setShown(PAGE)}
+                  aria-current={on ? 'page' : undefined}
+                  className="flex items-center gap-2.5 text-sm text-ink-900 hover:text-primary"
+                >
+                  <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${on ? 'border-primary' : 'border-[#c3c4c9]'}`}>
+                    {on && <span className="h-2 w-2 rounded-full bg-primary" />}
+                  </span>
+                  <span className={on ? 'font-bold' : ''}>{c.name}</span>
+                  <span className="text-xs text-[#94969f]">({c.slug === 'all' ? products.length : products.filter((p) => p.category === c.slug).length})</span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+
+      {allBrands.length > 1 && (
+        <fieldset className="py-5">
+          <legend className={`${heading} float-left w-full`}>Brand</legend>
+          <div className="clear-both flex flex-col gap-2.5">
+            {allBrands.map((b) => (
+              <label key={b} className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-900">
+                <input
+                  type="checkbox"
+                  checked={brands.includes(b)}
+                  onChange={(e) => set('brand', (e.target.checked ? [...brands, b] : brands.filter((x) => x !== b)).join(','))}
+                  className="h-4 w-4 rounded-sm accent-primary"
+                />
+                {b}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
+
+      <fieldset className="py-5">
+        <legend className={`${heading} float-left w-full`}>Price (₹)</legend>
+        <div className="clear-both flex items-center gap-2">
+          <input type="number" inputMode="numeric" min="0" value={min} onChange={(e) => set('min', e.target.value)} placeholder="Min" aria-label="Minimum price" className={`${inputClass} !py-2 !text-sm`} />
+          <span className="text-[#94969f]">–</span>
+          <input type="number" inputMode="numeric" min="0" value={max} onChange={(e) => set('max', e.target.value)} placeholder="Max" aria-label="Maximum price" className={`${inputClass} !py-2 !text-sm`} />
+        </div>
+      </fieldset>
+
+      <div className="pt-5">
+        <h3 className={heading}>Availability</h3>
+        <label className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-900">
+          <input type="checkbox" checked={inStock} onChange={(e) => set('stock', e.target.checked ? '1' : '')} className="h-4 w-4 rounded-sm accent-primary" />
+          In stock, ready to ship
+        </label>
+      </div>
+    </div>
+  )
 
   return (
-    <div className="mx-auto max-w-[1400px] px-2 pb-10 pt-3 sm:px-4 sm:pt-4">
-      <header className={`${panel} px-4 py-4 sm:px-6`}>
-        <Crumbs items={[{ label: 'Home', to: '/' }, { label: title }]} />
-        <div className="mt-2 flex flex-wrap items-baseline gap-x-3">
-          <h1 className="text-2xl font-extrabold md:text-3xl">{title}</h1>
-          <p className="text-sm text-ink-500" role="status">
-            {results.length} product{results.length === 1 ? '' : 's'}
-            {q ? ` for "${q}"` : ''}
-          </p>
-        </div>
-        <p className="mt-1 max-w-3xl text-sm text-ink-600">
-          {category?.description || 'Every product in the shop. Prices include GST. Products without a price are quoted within one business day.'}
-        </p>
-      </header>
+    <div className="mx-auto max-w-[1400px] px-4 pb-14 pt-5 lg:px-8">
+      <Crumbs items={[{ label: 'Home', to: '/' }, { label: title }]} />
+      <h1 className="mt-3 text-base font-bold !text-ink-900">
+        {title} <span className="font-normal text-[#94969f]">- {results.length} item{results.length === 1 ? '' : 's'}{q ? ` for "${q}"` : ''}</span>
+      </h1>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[260px_1fr]">
-        <aside className="hidden lg:block">
-          <div className={`${panel} sticky top-32 p-5`}>
-            <h2 className="mb-4 border-b border-ink-300/60 pb-3 text-lg">Filters</h2>
-            {filters}
-          </div>
-        </aside>
-
-        <div className={`${panel} min-w-0 p-3 sm:p-4`}>
-          <div className="flex flex-wrap items-center gap-x-1 gap-y-2 border-b border-ink-300/60 pb-3">
-            <span className="mr-2 hidden text-sm font-bold text-ink-900 md:inline">Sort by</span>
-            <div className="hidden flex-wrap gap-1 md:flex" role="group" aria-label="Sort products">
-              {SORTS.map((s) => (
-                <button
-                  key={s.value}
-                  type="button"
-                  onClick={() => set('sort', s.value === 'featured' ? '' : s.value)}
-                  aria-pressed={sort === s.value}
-                  className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${sort === s.value ? 'bg-primary text-white' : 'text-ink-600 hover:bg-primary/5 hover:text-primary'}`}
-                >
-                  {s.label}
-                </button>
-              ))}
-            </div>
-            <div className="flex w-full gap-2 md:hidden">
-              <button type="button" onClick={() => setFiltersOpen((v) => !v)} aria-expanded={filtersOpen} className={`${btn.ghost} flex-1 !py-2.5 lg:hidden`}>
-                <SlidersHorizontal className="h-4 w-4" />
-                Filters{chips.length ? ` (${chips.length})` : ''}
-              </button>
-              <label htmlFor="listing-sort" className="sr-only">
-                Sort products
-              </label>
-              <select id="listing-sort" value={sort} onChange={(e) => set('sort', e.target.value === 'featured' ? '' : e.target.value)} className={`${inputClass} flex-1 !py-2.5`}>
-                {SORTS.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button type="button" onClick={() => setFiltersOpen((v) => !v)} aria-expanded={filtersOpen} className={`${btn.ghost} ml-auto hidden !py-2 md:inline-flex lg:hidden`}>
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-            </button>
-          </div>
-
+      <div className="mt-5 flex items-center justify-between gap-3 border-b border-[#eaeaec] pb-3">
+        <div className="flex items-center gap-4">
+          <span className="hidden w-[244px] text-sm font-extrabold uppercase tracking-[0.15em] text-ink-900 lg:block">Filters</span>
+          <button type="button" onClick={() => setFiltersOpen(true)} className={`${btn.ghost} !px-4 !py-2 lg:hidden`}>
+            <SlidersHorizontal className="h-4 w-4" />
+            Filters{chips.length ? ` (${chips.length})` : ''}
+          </button>
           {chips.length > 0 && (
-            <ul className="mt-3 flex flex-wrap items-center gap-2" aria-label="Active filters">
+            <ul className="hidden flex-wrap items-center gap-2 md:flex" aria-label="Active filters">
               {chips.map((chip) => (
                 <li key={chip.label}>
-                  <button type="button" onClick={chip.clear} aria-label={`Remove filter ${chip.label}`} className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary hover:bg-primary/20">
+                  <button type="button" onClick={chip.clear} aria-label={`Remove filter ${chip.label}`} className="inline-flex items-center gap-1.5 rounded-full border border-[#d4d5d9] px-3 py-1 text-xs text-ink-900 hover:border-ink-900">
                     {chip.label}
                     <X className="h-3.5 w-3.5" />
                   </button>
                 </li>
               ))}
               <li>
-                <button type="button" onClick={() => { setParams({}, { replace: true }); setShown(PAGE) }} className="text-xs font-bold text-primary underline">
+                <button type="button" onClick={clearAll} className="text-xs font-bold uppercase tracking-wider text-primary">
                   Clear all
                 </button>
               </li>
             </ul>
           )}
+        </div>
+        <label className="flex items-center gap-2 whitespace-nowrap rounded-md border border-[#d4d5d9] px-3 py-2 text-sm">
+          <span className="hidden text-[#696e79] sm:inline">Sort by:</span>
+          <select value={sort} onChange={(e) => set('sort', e.target.value === 'featured' ? '' : e.target.value)} className="cursor-pointer bg-transparent font-bold text-ink-900 focus:outline-none">
+            {SORTS.map((s) => (
+              <option key={s.value} value={s.value}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
 
-          {filtersOpen && (
-            <div className="mt-3 rounded-2xl border border-ink-300/70 bg-white p-5 lg:hidden">
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-lg">Filters</h2>
-                <button type="button" onClick={() => setFiltersOpen(false)} aria-label="Close filters" className="flex h-9 w-9 items-center justify-center rounded-full text-ink-600 hover:bg-surface-alt">
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              {filters}
-            </div>
-          )}
+      <div className="mt-5 grid gap-8 lg:grid-cols-[228px_1fr]">
+        <aside className="hidden lg:block">
+          <div className="sticky top-28">{filters}</div>
+        </aside>
 
+        <div className="min-w-0">
           {results.length === 0 ? (
             <EmptyState
               icon={PackageSearch}
@@ -296,10 +259,10 @@ export default function ShopListing() {
               text="Try a different word or clear the filters. If you cannot find what you need, we can source it for you."
               action={
                 <div className="flex flex-wrap justify-center gap-3">
-                  <button type="button" onClick={() => { setParams({}, { replace: true }); setShown(PAGE) }} className={btn.ghost}>
+                  <button type="button" onClick={clearAll} className={btn.ghost}>
                     Clear filters
                   </button>
-                  <button type="button" onClick={() => requestQuote(q ? `Looking for: ${q}` : 'Not sure, need guidance')} className={btn.gold}>
+                  <button type="button" onClick={() => requestQuote(q ? `Looking for: ${q}` : 'Not sure, need guidance')} className={btn.navy}>
                     Ask us for it
                   </button>
                 </div>
@@ -307,15 +270,15 @@ export default function ShopListing() {
             />
           ) : (
             <>
-              <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
+              <div className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-4 xl:grid-cols-4">
                 {results.slice(0, shown).map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
               {results.length > shown && (
                 <div className="mt-10 text-center">
-                  <button type="button" onClick={() => setShown((n) => n + PAGE)} className={btn.navy}>
-                    Load more ({results.length - shown} left)
+                  <button type="button" onClick={() => setShown((n) => n + PAGE)} className={btn.ghost}>
+                    Show more ({results.length - shown})
                   </button>
                 </div>
               )}
@@ -323,6 +286,26 @@ export default function ShopListing() {
           )}
         </div>
       </div>
+
+      {filtersOpen && (
+        <div className="fixed inset-0 z-[60] flex flex-col bg-white lg:hidden" role="dialog" aria-modal="true" aria-label="Filters">
+          <div className="flex items-center justify-between border-b border-[#eaeaec] px-4 py-3">
+            <h2 className="text-sm font-extrabold uppercase tracking-[0.15em] !text-ink-900">Filters</h2>
+            <button type="button" onClick={clearAll} className="text-xs font-bold uppercase tracking-wider text-primary">
+              Clear all
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto px-4 py-5">{filters}</div>
+          <div className="grid grid-cols-2 border-t border-[#eaeaec]">
+            <button type="button" onClick={() => setFiltersOpen(false)} className="py-4 text-sm font-bold uppercase tracking-wider text-[#535766]">
+              Close
+            </button>
+            <button type="button" onClick={() => setFiltersOpen(false)} className="border-l border-[#eaeaec] py-4 text-sm font-bold uppercase tracking-wider text-primary">
+              Show {results.length} items
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

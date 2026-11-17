@@ -27,7 +27,7 @@ export default function Layout() {
   }, [drawerOpen])
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#f1f3f8] pb-[58px] lg:pb-0">
+    <div className="flex min-h-screen flex-col bg-white pb-[58px] lg:pb-0">
       <Header />
       <main className="flex-1">
         <AnimatePresence mode="wait">

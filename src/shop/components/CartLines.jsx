@@ -16,7 +16,7 @@ export function FreeShippingBar() {
         {priced.free_shipping ? 'You get free shipping on this order.' : `Add ${formatINR(priced.free_shipping_remaining_paise)} more for free shipping.`}
       </p>
       <div className="mt-2 h-2 overflow-hidden rounded-full bg-white" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Progress to free shipping">
-        <div className="h-full rounded-full bg-gradient-to-r from-gold to-gold-dark transition-all duration-500" style={{ width: `${pct}%` }} />
+        <div className="h-full rounded-full bg-gold transition-all duration-500" style={{ width: `${pct}%` }} />
       </div>
     </div>
   )
@@ -38,7 +38,7 @@ export function CartLine({ line, compact = false, onNavigate }) {
   const min = Math.max(1, product.min_order_qty || 1)
   return (
     <li className="flex gap-3 sm:gap-4">
-      <Link to={`/p/${product.slug}`} onClick={onNavigate} className={`${compact ? 'w-20' : 'w-20 sm:w-28'} shrink-0 self-start overflow-hidden rounded-xl border border-ink-300/60`}>
+      <Link to={`/p/${product.slug}`} onClick={onNavigate} className={`${compact ? 'w-20' : 'w-20 sm:w-28'} shrink-0 self-start overflow-hidden rounded-xl border border-[#eaeaec]`}>
         <ProductImage product={product} ratio="aspect-square" iconSize="h-10 w-10" />
       </Link>
       <div className="flex min-w-0 flex-1 flex-col gap-2">
@@ -77,7 +77,7 @@ export function Totals({ priced, className = '' }) {
         <dt className="text-ink-600">Shipping</dt>
         <dd className="font-semibold text-ink-900">{priced.shipping_paise ? formatINR(priced.shipping_paise) : <span className="text-[#3f7a0c]">Free</span>}</dd>
       </div>
-      <div className="mt-1 flex items-baseline justify-between border-t border-ink-300/70 pt-3">
+      <div className="mt-1 flex items-baseline justify-between border-t border-[#eaeaec] pt-3">
         <dt className="font-heading text-base font-bold text-primary">Total</dt>
         <dd className="font-heading text-2xl font-extrabold text-primary">{formatINR(priced.total_paise)}</dd>
       </div>

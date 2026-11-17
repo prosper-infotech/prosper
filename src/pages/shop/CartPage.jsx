@@ -38,7 +38,7 @@ export default function CartPage() {
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_380px]">
         <div>
           <FreeShippingBar />
-          <ul className="mt-6 flex flex-col gap-6 rounded-2xl border border-ink-300/70 bg-white p-5 md:p-6">
+          <ul className="mt-6 flex flex-col gap-6 rounded-md border border-[#eaeaec] bg-white p-5 md:p-6">
             {lines.map((line) => (
               <CartLine key={line.id} line={line} />
             ))}
@@ -49,7 +49,7 @@ export default function CartPage() {
         </div>
 
         <aside>
-          <div className="sticky top-28 rounded-2xl border border-ink-300/70 bg-white p-5 shadow-[0_24px_50px_-30px_rgba(20,52,109,0.45)] md:p-6">
+          <div className="sticky top-28 rounded-md border border-[#eaeaec] bg-white p-5 md:p-6">
             <h2 className="mb-4 text-lg">Order summary</h2>
             <Totals priced={priced} />
             {priced.items.length > 0 ? (

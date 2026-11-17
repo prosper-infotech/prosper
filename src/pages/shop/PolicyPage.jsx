@@ -214,7 +214,7 @@ export default function PolicyPage({ slug }) {
             </Reveal>
           ))}
         </div>
-        <nav aria-label="Shop policies" className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink-300/60 pt-6 text-sm">
+        <nav aria-label="Shop policies" className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-[#eaeaec] pt-6 text-sm">
           {Object.entries(POLICIES)
             .filter(([key]) => key !== slug)
             .map(([key, p]) => (

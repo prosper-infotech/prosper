@@ -41,8 +41,8 @@ export default function SignIn({ purpose = 'customer', title, text, onDone }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-3xl border border-ink-300/70 bg-white p-6 shadow-[0_24px_50px_-30px_rgba(20,52,109,0.45)] sm:p-8">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold to-gold-dark text-primary">
+    <div className="mx-auto w-full max-w-md rounded-md border border-[#eaeaec] bg-white p-6 sm:p-8">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f5f5f6] text-primary">
         {step === 'email' ? <Mail className="h-6 w-6" /> : <KeyRound className="h-6 w-6" />}
       </div>
       <h1 className="mt-4 text-2xl font-extrabold">{step === 'email' ? title : 'Enter your code'}</h1>

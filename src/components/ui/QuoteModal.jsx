@@ -33,9 +33,9 @@ export default function QuoteModal({ product, options, campaign, onClose }) {
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 260, damping: 24 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg rounded-2xl bg-white shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)] ring-2 ring-gold/50 max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-lg rounded-md bg-white ring-2 ring-gold/50 max-h-[90vh] overflow-y-auto"
           >
-            <div className="h-2 rounded-t-2xl bg-gradient-to-r from-gold via-gold-dark to-gold" />
+            <div className="h-2 rounded-t-2xl bg-gold" />
             <div className="p-6 sm:p-8">
               <button
                 type="button"
