@@ -5,6 +5,7 @@ import { NotConfiguredError } from './lib/db.js'
 import { requireStaff } from './lib/auth.js'
 import * as pub from './routes/public.js'
 import * as admin from './routes/admin.js'
+import * as activity from './routes/activity.js'
 
 const routes = []
 const add = (method, pattern, handler, staffOnly = false) => {
@@ -44,6 +45,9 @@ add('GET', '/admin/session', async (request) => {
 })
 add('GET', '/admin/me', admin.me, true)
 add('GET', '/admin/dashboard', admin.dashboard, true)
+add('GET', '/admin/activity', activity.activity, true)
+add('GET', '/admin/customers', activity.listCustomers, true)
+add('GET', '/admin/customers/:id', activity.getCustomer, true)
 add('GET', '/admin/orders', admin.listOrders, true)
 add('GET', '/admin/orders-export.csv', admin.exportOrders, true)
 add('GET', '/admin/orders/:id', admin.getOrder, true)

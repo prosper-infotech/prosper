@@ -105,6 +105,7 @@ create table if not exists orders (
 create index if not exists orders_customer_idx on orders(customer_id);
 create index if not exists orders_status_idx on orders(status, created_at desc);
 create index if not exists orders_created_idx on orders(created_at desc);
+create index if not exists customers_account_idx on customers(account_created_at desc) where account_created_at is not null;
 
 create table if not exists order_items (
   id uuid primary key default gen_random_uuid(),
@@ -161,6 +162,7 @@ create table if not exists order_events (
   created_at timestamptz not null default now()
 );
 create index if not exists order_events_order_idx on order_events(order_id, created_at);
+create index if not exists order_events_created_idx on order_events(created_at desc);
 
 create table if not exists settings (
   key text primary key,
@@ -188,6 +190,9 @@ create table if not exists login_codes (
   created_at timestamptz not null default now()
 );
 create index if not exists login_codes_email_idx on login_codes(email, purpose, created_at desc);
+alter table login_codes add column if not exists device text;   -- e.g. "Chrome on Android", shown on the admin Activity page
+create index if not exists login_codes_created_idx on login_codes(created_at desc);
+create index if not exists login_codes_used_idx on login_codes(used_at desc) where used_at is not null;
 
 create table if not exists counters (
   name text primary key,

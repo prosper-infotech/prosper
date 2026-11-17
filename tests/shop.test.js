@@ -370,3 +370,49 @@ test('settings: validation and save; feeds list only orderable products', async 
   assert.equal(dash.status, 200)
   assert.ok(dash.data.to_ship >= 1)
 })
+
+/* ------------------------------ Activity & customers ------------------------------ */
+
+test('activity: shows sign-ins (with browser), failed sign-ins, accounts, orders, payments, shipping and emails', async () => {
+  // a failed customer sign-in for a new email
+  await api('POST', '/api/auth/request-code', { email: 'ravi@example.com' })
+  await api('POST', '/api/auth/verify-code', { email: 'ravi@example.com', code: '999999' === lastMail('signInCode').subject.slice(0, 6) ? '888888' : '999999' })
+  // a successful one from an Android phone
+  await api('POST', '/api/auth/request-code', { email: 'ravi@example.com' })
+  const code = lastMail('signInCode').subject.slice(0, 6)
+  const ok = await api('POST', '/api/auth/verify-code', { email: 'ravi@example.com', code }, { 'User-Agent': 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/131.0 Mobile Safari/537.36' })
+  assert.equal(ok.status, 200)
+
+  const all = (await admin('GET', '/api/admin/activity?days=7')).data
+  const kinds = new Set(all.items.map((i) => i.kind))
+  for (const k of ['signin', 'signin_failed', 'account', 'order', 'payment', 'shipping', 'email']) assert.ok(kinds.has(k), `missing ${k}`)
+  const signin = all.items.find((i) => i.kind === 'signin' && i.who === 'ravi@example.com')
+  assert.equal(signin.detail, 'From Chrome on Android')
+  assert.ok(all.items.every((a, i, arr) => i === 0 || arr[i - 1].at >= a.at), 'newest first')
+
+  const signins = (await admin('GET', '/api/admin/activity?type=signins')).data
+  assert.ok(signins.items.length > 0 && signins.items.every((i) => i.kind.startsWith('signin')))
+  const search = (await admin('GET', `/api/admin/activity?q=${manualOrder.order_number}`)).data
+  assert.ok(search.items.length > 0 && search.items.every((i) => i.order?.number === manualOrder.order_number))
+  assert.equal((await api('GET', '/api/admin/activity')).status, 401)
+})
+
+test('customers: list with orders, spend and last sign-in; detail with orders and activity', async () => {
+  const list = (await admin('GET', '/api/admin/customers')).data
+  const asha = list.customers.find((c) => c.email === 'asha@example.com')
+  assert.ok(asha.orders >= 3)
+  assert.equal(asha.has_account, true)
+  assert.ok(asha.last_sign_in_at)
+  assert.ok(asha.spent_paise > 0)
+  assert.ok(list.totals.customers >= 2)
+  assert.ok((await admin('GET', '/api/admin/customers?filter=guests')).data.customers.every((c) => !c.has_account))
+  assert.equal((await admin('GET', '/api/admin/customers?q=nobody-matches-this')).data.total, 0)
+
+  const detail = (await admin('GET', `/api/admin/customers/${asha.id}`)).data
+  assert.equal(detail.customer.email, 'asha@example.com')
+  assert.equal(detail.orders.length, asha.orders)
+  assert.ok(detail.activity.some((i) => i.kind === 'signin'))
+  assert.ok(detail.activity.every((i) => !i.who || i.who === 'asha@example.com' || i.order))
+  assert.equal((await admin('GET', '/api/admin/customers/not-a-real-id')).status, 404)
+  assert.equal((await api('GET', '/api/admin/customers')).status, 401)
+})

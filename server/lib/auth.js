@@ -98,7 +98,15 @@ export async function createLoginCode(email, purpose) {
   return code
 }
 
-export async function checkLoginCode(email, purpose, code) {
+// "Chrome on Android" style summary of the browser. Nothing else about the device is kept.
+export function describeDevice(userAgent = '') {
+  const ua = String(userAgent)
+  const browser = /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera' : /SamsungBrowser/.test(ua) ? 'Samsung Internet' : /Firefox\//.test(ua) ? 'Firefox' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : ''
+  const os = /Android/.test(ua) ? 'Android' : /iPhone|iPad|iPod/.test(ua) ? 'iPhone/iPad' : /Windows/.test(ua) ? 'Windows' : /Mac OS X|Macintosh/.test(ua) ? 'Mac' : /Linux/.test(ua) ? 'Linux' : ''
+  return [browser, os].filter(Boolean).join(' on ') || ''
+}
+
+export async function checkLoginCode(email, purpose, code, device = '') {
   const rows = await db().select('login_codes', {
     where: { email, purpose, used_at: null, expires_at: { gte: new Date().toISOString() } },
     order: 'created_at.desc',
@@ -112,7 +120,7 @@ export async function checkLoginCode(email, purpose, code) {
     throw fail
   }
   // Conditional update so the same code cannot be used twice, even by two requests at once.
-  const used = await db().update('login_codes', { id: row.id, used_at: null }, { used_at: new Date().toISOString() })
+  const used = await db().update('login_codes', { id: row.id, used_at: null }, { used_at: new Date().toISOString(), device: device || null })
   if (!used.length) throw fail
   return true
 }

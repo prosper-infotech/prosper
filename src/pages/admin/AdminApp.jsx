@@ -1,6 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { Link, NavLink, Route, Routes } from 'react-router-dom'
-import { Boxes, ExternalLink, LayoutDashboard, LogOut, Package, Settings, ShoppingBag, TriangleAlert } from 'lucide-react'
+import { Boxes, ExternalLink, History, LayoutDashboard, LogOut, Package, Settings, ShoppingBag, TriangleAlert, Users } from 'lucide-react'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { api } from '../../shop/api'
 import SignIn from '../../shop/components/SignIn'
@@ -13,11 +13,16 @@ const OrderDetail = lazy(() => import('./AdminOrderDetail'))
 const Products = lazy(() => import('./AdminProducts'))
 const ProductEdit = lazy(() => import('./AdminProductEdit'))
 const Stock = lazy(() => import('./AdminStock'))
+const Activity = lazy(() => import('./AdminActivity'))
+const Customers = lazy(() => import('./AdminCustomers'))
+const CustomerDetail = lazy(() => import('./AdminCustomerDetail'))
 const SettingsPage = lazy(() => import('./AdminSettings'))
 
 const NAV = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+  { to: '/admin/activity', label: 'Activity', icon: History },
   { to: '/admin/orders', label: 'Orders', icon: ShoppingBag },
+  { to: '/admin/customers', label: 'Customers', icon: Users },
   { to: '/admin/products', label: 'Products', icon: Package },
   { to: '/admin/stock', label: 'Stock', icon: Boxes },
   { to: '/admin/settings', label: 'Settings', icon: Settings },
@@ -124,6 +129,9 @@ export default function AdminApp() {
         <Suspense fallback={<PageLoading />}>
           <Routes>
             <Route index element={<Dashboard />} />
+            <Route path="activity" element={<Activity />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="customers/:id" element={<CustomerDetail />} />
             <Route path="orders" element={<Orders />} />
             <Route path="orders/:id" element={<OrderDetail />} />
             <Route path="products" element={<Products />} />

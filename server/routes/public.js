@@ -8,7 +8,7 @@ import { PAYMENT_METHODS, nextOrderNumber, newPublicToken, publicOrder, markPaid
 import { razorpayConfigured, razorpayKeyId, createRazorpayOrder, verifyCheckoutSignature, verifyWebhookSignature } from '../lib/razorpay.js'
 import { forwardOrderLead } from '../lib/crm.js'
 import { sendEmail, templates } from '../lib/email.js'
-import { createLoginCode, checkLoginCode, createSessionToken, sessionCookie, sessionFrom, requireCustomer, findStaff } from '../lib/auth.js'
+import { createLoginCode, checkLoginCode, describeDevice, createSessionToken, sessionCookie, sessionFrom, requireCustomer, findStaff } from '../lib/auth.js'
 
 const publicProduct = (p, categories) => ({
   id: p.id,
@@ -395,7 +395,7 @@ export async function verifyCode(request) {
   const email = str(body.email, 150).toLowerCase()
   const purpose = purposeOf(body.purpose)
   if (!EMAIL_RE.test(email)) throw new HttpError(422, 'Enter a valid email address.')
-  await checkLoginCode(email, purpose, str(body.code, 6))
+  await checkLoginCode(email, purpose, str(body.code, 6), describeDevice(request.headers.get('user-agent')))
   if (purpose === 'staff') {
     const staff = await findStaff(email)
     if (!staff) throw new HttpError(403, 'This account does not have staff access.')

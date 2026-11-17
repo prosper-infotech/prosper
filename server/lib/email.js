@@ -10,6 +10,22 @@ import { formatINR } from '../../shared/pricing.js'
 const FROM = () => process.env.EMAIL_FROM || 'Prosper Infotech Shop <orders@prosperinfotech.com>'
 const SALES = () => (process.env.SALES_NOTIFY_EMAIL || '').split(',').map((e) => e.trim()).filter(Boolean)
 
+// Plain names for the order history and the admin Activity page.
+const EMAIL_NAMES = {
+  orderReceived: 'Order confirmation',
+  paymentReceived: 'Payment received',
+  paymentFailed: 'Payment failed',
+  shipped: 'Shipped',
+  delivered: 'Delivered',
+  cancelled: 'Order cancelled',
+  refunded: 'Refund',
+  salesNewOrder: 'New order alert (sales team)',
+  salesPaid: 'Ready to pack alert (sales team)',
+  lowStock: 'Low stock alert',
+  signInCode: 'Sign-in code',
+  accountCreated: 'Welcome',
+}
+
 export async function sendEmail({ to, subject, html, text, replyTo, orderId, type = 'email' }) {
   const recipients = [].concat(to).filter(Boolean)
   if (!recipients.length) return { ok: false, skipped: true }
@@ -39,7 +55,7 @@ export async function sendEmail({ to, subject, html, text, replyTo, orderId, typ
   }
   if (!result.ok) console.error(`[shop] email "${subject}" failed: ${result.error}`)
   if (orderId) {
-    await addEvent(orderId, result.ok ? 'email_sent' : 'email_failed', `${type} to ${recipients.join(', ')}${result.ok ? '' : `: ${result.error}`}`)
+    await addEvent(orderId, result.ok ? 'email_sent' : 'email_failed', `${EMAIL_NAMES[type] || type} email to ${recipients.join(', ')}${result.ok ? '' : `: ${result.error}`}`)
   }
   return result
 }
