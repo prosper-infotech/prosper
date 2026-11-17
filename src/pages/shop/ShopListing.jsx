@@ -210,6 +210,7 @@ export default function ShopListing() {
       <h1 className="mt-3 text-base font-bold !text-ink-900">
         {title} <span className="font-normal text-[#94969f]">- {results.length} item{results.length === 1 ? '' : 's'}{q ? ` for "${q}"` : ''}</span>
       </h1>
+      {seo.intro && !q && <p className="mt-1 max-w-3xl text-sm text-[#696e79]">{seo.intro}</p>}
 
       <div className="mt-5 flex items-center justify-between gap-3 border-b border-[#eaeaec] pb-3">
         <div className="flex items-center gap-4">
