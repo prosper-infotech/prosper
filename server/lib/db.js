@@ -61,7 +61,9 @@ function supabaseDriver(url, key) {
       method,
       headers: {
         apikey: key,
-        Authorization: `Bearer ${key}`,
+        // Older service_role keys are JWTs and also go in Authorization. The newer
+        // sb_secret_ keys are not JWTs and must only be sent as apikey.
+        ...(key.startsWith('eyJ') ? { Authorization: `Bearer ${key}` } : {}),
         'Content-Type': 'application/json',
         ...(prefer ? { Prefer: prefer } : {}),
       },
