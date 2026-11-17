@@ -24,3 +24,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local shop data used when developing without Supabase
+.shop-dev

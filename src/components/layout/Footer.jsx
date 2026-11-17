@@ -1,147 +1,107 @@
 import { Link } from 'react-router-dom'
-import { Phone, MapPin } from 'lucide-react'
-import { NAV } from '../../data/navigation'
-import { SOCIAL_LINKS } from '../../data/socialLinks'
-import { OFFICES } from '../../data/offices'
-import logo from '../../assets/logo-light.png'
+import { Mail, MapPin, Phone } from 'lucide-react'
+import logo from '../../assets/logo-dark.png'
+import { useCart } from '../../shop/shopContext'
+import { COMPANY_URL } from '../../shop/site'
 
-const FOOTER_COLUMNS = NAV.filter((item) => item.children).slice(0, 3)
-const INDUSTRY_LINKS = NAV.find((item) => item.label === 'Industries')?.children ?? []
-const RESOURCE_LINKS = [
-  { label: 'Blog', path: '/resources/blog' },
-  { label: 'Videos', path: '/resources/videos' },
-  { label: 'FAQs', path: '/resources/faqs' },
+const HELP = [
+  { label: 'My account and orders', path: '/account' },
+  { label: 'Contact us', path: '/contact' },
+  { label: 'Shipping', path: '/shipping-policy' },
+  { label: 'Returns & Refunds', path: '/returns-refunds' },
+  { label: 'Warranty', path: '/warranty' },
+]
+const LEGAL = [
+  { label: 'Terms of Sale', path: '/terms-of-sale' },
+  { label: 'Privacy Policy', path: '/privacy-policy' },
 ]
 
 export default function Footer() {
+  const { categories, config } = useCart()
   const year = new Date().getFullYear()
+  const link = 'text-sm text-white/75 hover:text-gold'
   return (
-    <footer className="border-t border-ink-300/60 bg-[#fff8dc]">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-12 lg:grid-cols-[1.1fr_2fr]">
+    <footer className="bg-primary-dark">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div>
           <Link to="/" className="inline-flex items-center">
-            <img src={logo} alt="Prosper Infotech" className="h-14 w-auto" />
+            <img src={logo} alt="Prosper Infotech" className="h-12 w-auto" />
           </Link>
-          <p className="mt-4 text-sm font-semibold text-ink-900">
-            Automating global logistics operations using AI.
+          <p className="mt-4 max-w-xs text-sm text-white/75">
+            RFID tags, readers, barcode scanners and printers, sold by the team that installs them. Prices include GST. Delivery across India.
           </p>
-          <p className="mt-3 max-w-sm text-sm text-ink-500">
-            Prosper Infotech engineers AI, computer vision, RFID, GPS and IoT platforms that bring real-time
-            visibility and automation to warehouses, yards, fleets and container terminals.
-          </p>
-          <div className="mt-6 flex items-center gap-3">
-            {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-300 text-ink-600 transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 hover:border-primary hover:text-primary"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
+          <a href={COMPANY_URL} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-sm font-semibold text-gold underline decoration-gold-dark decoration-2 underline-offset-4">
+            Prosper Infotech company website
+          </a>
+        </div>
+
+        <div>
+          <h3 className="mb-4 font-heading font-semibold !text-gold">Shop</h3>
+          <ul className="flex flex-col gap-2.5">
+            <li>
+              <Link to="/c/all" className={link}>
+                All products
+              </Link>
+            </li>
+            {categories.map((c) => (
+              <li key={c.slug}>
+                <Link to={`/c/${c.slug}`} className={link}>
+                  {c.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-          {FOOTER_COLUMNS.slice(0, 2).map((column, i) => (
-            <div key={column.path} className={i === 1 ? 'flex flex-col gap-8' : undefined}>
-              <div>
-                <h3 className="mb-4 font-heading font-semibold text-primary">{column.label}</h3>
-                <ul className="flex flex-col gap-2.5">
-                  {column.children.slice(0, 7).map((child) => (
-                    <li key={child.path}>
-                      <Link to={child.path} className="text-sm text-ink-600 hover:text-primary">
-                        {child.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {i === 1 && FOOTER_COLUMNS[2] && (
-                <div>
-                  <h3 className="mb-4 font-heading font-semibold text-primary">{FOOTER_COLUMNS[2].label}</h3>
-                  <ul className="flex flex-col gap-2.5">
-                    {FOOTER_COLUMNS[2].children.slice(0, 7).map((child) => (
-                      <li key={child.path}>
-                        <Link to={child.path} className="text-sm text-ink-600 hover:text-primary">
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
+        <div>
+          <h3 className="mb-4 font-heading font-semibold !text-gold">Help</h3>
+          <ul className="flex flex-col gap-2.5">
+            {HELP.map((item) => (
+              <li key={item.path}>
+                <Link to={item.path} className={link}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          <div>
-            <h3 className="mb-4 font-heading font-semibold text-primary">Contact</h3>
-            <ul className="flex flex-col gap-4">
-              {OFFICES.map((office) => (
-                <li key={office.country} className="text-sm text-ink-600">
-                  <div className="font-semibold text-ink-900">{office.country}</div>
-                  <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="mt-1 flex items-center gap-2 hover:text-primary">
-                    <Phone className="h-3.5 w-3.5 shrink-0 text-gold-dark" />
-                    <span>{office.phone}</span>
-                  </a>
-                  <a
-                    href={office.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 flex items-start gap-2 hover:text-primary"
-                  >
-                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-dark" />
-                    <span>{office.address}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div>
+          <h3 className="mb-4 font-heading font-semibold !text-gold">Contact</h3>
+          <ul className="flex flex-col gap-3 text-sm text-white/75">
+            {config.support_phone && (
+              <li>
+                <a href={`tel:${config.support_phone.replace(/\s+/g, '')}`} className="flex items-center gap-2 hover:text-gold">
+                  <Phone className="h-4 w-4 shrink-0 text-gold-dark" />
+                  {config.support_phone}
+                </a>
+              </li>
+            )}
+            {config.support_email && (
+              <li>
+                <a href={`mailto:${config.support_email}`} className="flex items-center gap-2 hover:text-gold">
+                  <Mail className="h-4 w-4 shrink-0 text-gold-dark" />
+                  {config.support_email}
+                </a>
+              </li>
+            )}
+            <li className="flex items-start gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" />
+              Ganesham A Commercial, Office No. 17-18, 3rd Floor, Pimple Saudagar, Pune 411027
+            </li>
+          </ul>
         </div>
       </div>
 
-      <div className="border-t border-ink-300/60">
-        <div className="max-w-7xl mx-auto grid gap-6 px-6 py-6 text-sm lg:grid-cols-[1.6fr_1fr]">
-          <div>
-            <h3 className="mb-2 font-heading text-sm font-semibold text-primary">Industries</h3>
-            <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
-              {INDUSTRY_LINKS.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path} className="text-ink-600 hover:text-primary">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="mb-2 font-heading text-sm font-semibold text-primary">Resources</h3>
-            <ul className="flex flex-wrap gap-x-5 gap-y-1.5">
-              {RESOURCE_LINKS.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path} className="text-ink-600 hover:text-primary">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div className="border-t border-ink-300/60">
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-between gap-3 px-6 py-5 text-xs text-ink-500 sm:flex-row">
+      <div className="border-t border-white/15">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-5 text-xs text-white/60 sm:flex-row">
           <span>&copy; {year} Prosper Infotech. All rights reserved.</span>
           <div className="flex items-center gap-6">
-            <Link to="/about" className="transition-colors hover:text-primary">
-              About Us
-            </Link>
-            <Link to="/privacy-policy" className="transition-colors hover:text-primary">
-              Privacy Policy
-            </Link>
+            {LEGAL.map((item) => (
+              <Link key={item.path} to={item.path} className="transition-colors hover:text-gold">
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

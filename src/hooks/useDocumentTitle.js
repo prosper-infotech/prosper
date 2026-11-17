@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { SITE_URL } from '../shop/site'
 
 function setMeta(attr, key, content) {
   let meta = document.querySelector(`meta[${attr}="${key}"]`)
@@ -37,7 +38,7 @@ export default function useDocumentTitle(title, description, jsonLd, options = {
       `${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`
     )
 
-    const url = `https://www.prosperinfotech.com${pathname}`
+    const url = `${SITE_URL}${pathname}`
 
     let canonical = document.querySelector('link[rel="canonical"]')
     if (!canonical) {

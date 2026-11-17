@@ -1,280 +1,258 @@
-import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, ArrowRight, Menu, X, Phone } from 'lucide-react'
-import { NAV } from '../../data/navigation'
-import logo from '../../assets/logo-light.png'
-import CallDropdown from './CallDropdown'
-import WhatsAppLink from './WhatsAppLink'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Heart, LayoutGrid, MapPin, Search, User } from 'lucide-react'
+import logo from '../../assets/logo-dark.png'
+import CartButton from '../../shop/components/CartButton'
+import { CategoryIcon, ProductImage } from '../../shop/components/ui'
+import { useShop } from '../../shop/shopContext'
+import { formatINR, hasPrice } from '../../../shared/pricing.js'
+import { deliveryEstimate, PINCODE_RE } from '../../../shared/india.js'
 
-const NAV_ITEMS = NAV.filter((item) => !item.hideFromNav && item.path !== '/' && item.label !== 'Industries').map(
-  (item) =>
-    item.label === 'Resources'
-      ? {
-          ...item,
-          label: 'Company',
-          children: [
-            { label: 'About Us', path: '/about', description: 'Our mission, vision, values and global team.' },
-            ...item.children,
-          ],
-        }
-      : item
-)
+function SearchBar({ id, className = '' }) {
+  const { products } = useShop()
+  const navigate = useNavigate()
+  const { pathname, search } = useLocation()
+  const [q, setQ] = useState('')
+  const [open, setOpen] = useState(false)
+  const [active, setActive] = useState(-1)
+  const box = useRef(null)
 
-function NavDropdown({ item, align }) {
-  const groups = item.children
-  const hasNestedGroups = groups.some((group) => group.children)
-  const columnGroups = hasNestedGroups ? groups.filter((group) => group.children) : []
-  const standaloneLinks = hasNestedGroups ? groups.filter((group) => !group.children) : []
+  useEffect(() => {
+    setOpen(false)
+    setActive(-1)
+  }, [pathname, search])
+
+  useEffect(() => {
+    const away = (e) => !box.current?.contains(e.target) && setOpen(false)
+    document.addEventListener('mousedown', away)
+    return () => document.removeEventListener('mousedown', away)
+  }, [])
+
+  const matches = useMemo(() => {
+    const words = q.toLowerCase().split(/\s+/).filter(Boolean)
+    if (!words.length) return []
+    return products.filter((p) => words.every((w) => `${p.name} ${p.sku} ${p.brand || ''}`.toLowerCase().includes(w))).slice(0, 6)
+  }, [q, products])
+
+  const submit = (e) => {
+    e.preventDefault()
+    if (active >= 0 && matches[active]) navigate(`/p/${matches[active].slug}`)
+    else navigate(q.trim() ? `/c/all?q=${encodeURIComponent(q.trim())}` : '/c/all')
+    setOpen(false)
+  }
+  const onKey = (e) => {
+    if (e.key === 'Escape') setOpen(false)
+    if (!matches.length) return
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setOpen(true)
+      setActive((a) => (a + 1) % matches.length)
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActive((a) => (a <= 0 ? matches.length - 1 : a - 1))
+    }
+  }
+  const listId = `${id}-list`
+  const showList = open && q.trim().length > 0
 
   return (
-    <div
-      className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 ${
-        align === 'right' ? 'right-0' : align === 'left' ? 'left-0' : 'left-1/2 -translate-x-1/2'
-      }`}
-    >
-      <div className="rounded-2xl border border-ink-300/50 bg-white p-8 shadow-[0_32px_64px_-16px_rgba(20,52,109,0.2)]">
-        {hasNestedGroups ? (
-          <>
-            <div
-              className="grid gap-x-14 gap-y-1"
-              style={{ gridTemplateColumns: `repeat(${columnGroups.length}, minmax(190px, 1fr))` }}
-            >
-              {columnGroups.map((group) => (
-                <div key={group.path}>
-                  <Link
-                    to={group.path}
-                    className="mb-4 block text-xs font-bold uppercase tracking-widest text-ink-500 hover:text-primary"
-                  >
-                    {group.label}
-                  </Link>
-                  <ul className="flex flex-col gap-1">
-                    {(group.children ?? []).map((child) => (
-                      <li key={child.path}>
-                        <Link
-                          to={child.path}
-                          className="block rounded-lg px-2 py-2 text-sm font-medium text-ink-900 hover:bg-primary/5 hover:text-primary"
-                        >
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            {standaloneLinks.length > 0 && (
-              <div className="mt-6 flex flex-col gap-2 border-t border-ink-300/50 pt-6">
-                {standaloneLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className="group/link flex items-center justify-between gap-4 rounded-lg bg-primary/5 px-4 py-3 hover:bg-primary/10"
-                  >
-                    <span>
-                      <span className="block text-sm font-bold text-ink-900">{link.label}</span>
-                      {link.description && (
-                        <span className="mt-0.5 block text-xs text-ink-500">{link.description}</span>
-                      )}
-                    </span>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover/link:translate-x-1" />
-                  </Link>
-                ))}
-              </div>
-            )}
-          </>
-        ) : (
-          <div
-            className="grid gap-x-10 gap-y-1"
-            style={{
-              gridTemplateColumns: `repeat(${groups.length > 4 ? 2 : 1}, minmax(280px, 1fr))`,
-            }}
-          >
-            {groups.map((child) => (
-              <Link
-                key={child.path}
-                to={child.path}
-                className="flex items-baseline gap-1.5 overflow-hidden rounded-lg px-2 py-2 text-sm font-semibold text-ink-900 hover:bg-primary/5 hover:text-primary"
-              >
-                <span className="shrink-0">{child.label}</span>
-                {item.label !== 'Company' && child.description && (
-                  <span className="min-w-0 flex-1 truncate text-xs font-normal text-ink-500">
-                    — {child.description}
+    <div ref={box} className={`relative ${className}`}>
+      <form onSubmit={submit} role="search" className="flex overflow-hidden rounded-lg bg-white shadow-sm focus-within:ring-2 focus-within:ring-gold">
+        <label htmlFor={id} className="sr-only">
+          Search products
+        </label>
+        <input
+          id={id}
+          type="search"
+          role="combobox"
+          aria-expanded={showList}
+          aria-controls={listId}
+          aria-autocomplete="list"
+          autoComplete="off"
+          value={q}
+          onChange={(e) => {
+            setQ(e.target.value)
+            setOpen(true)
+            setActive(-1)
+          }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={onKey}
+          placeholder="Search RFID tags, readers, scanners, printers..."
+          className="h-11 min-w-0 flex-1 bg-transparent px-4 text-[15px] text-ink-900 placeholder:text-ink-500 focus:outline-none"
+        />
+        <button type="submit" aria-label="Search" className="flex h-11 w-14 shrink-0 items-center justify-center bg-gold text-primary transition-colors hover:bg-gold-dark">
+          <Search className="h-5 w-5" />
+        </button>
+      </form>
+
+      {showList && (
+        <div id={listId} role="listbox" className="absolute inset-x-0 top-full z-50 mt-1.5 overflow-hidden rounded-xl border border-ink-300/70 bg-white shadow-2xl">
+          {matches.length ? (
+            <>
+              {matches.map((p, i) => (
+                <Link
+                  key={p.id}
+                  to={`/p/${p.slug}`}
+                  role="option"
+                  aria-selected={i === active}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center gap-3 px-3 py-2 ${i === active ? 'bg-surface-alt' : 'hover:bg-surface'}`}
+                >
+                  <span className="w-10 shrink-0 overflow-hidden rounded-md border border-ink-300/60">
+                    <ProductImage product={p} ratio="aspect-square" iconSize="h-6 w-6" />
                   </span>
-                )}
-              </Link>
-            ))}
+                  <span className="min-w-0 flex-1 truncate text-sm font-semibold text-ink-900">{p.name}</span>
+                  <span className="shrink-0 text-sm font-bold text-primary">{hasPrice(p) ? formatINR(p.price_paise) : 'On quote'}</span>
+                </Link>
+              ))}
+              <button type="button" onClick={submit} className="block w-full border-t border-ink-300/60 bg-surface px-3 py-2.5 text-left text-sm font-bold text-primary hover:bg-surface-alt">
+                See all results for "{q.trim()}"
+              </button>
+            </>
+          ) : (
+            <p className="px-4 py-3 text-sm text-ink-600">No products match "{q.trim()}". Press Enter to search everything.</p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function DeliverTo() {
+  const { pincode, setPincode, config } = useShop()
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState(pincode)
+  const [error, setError] = useState('')
+  const box = useRef(null)
+  const estimate = deliveryEstimate(pincode, config)
+
+  useEffect(() => {
+    if (!open) return
+    const away = (e) => !box.current?.contains(e.target) && setOpen(false)
+    const esc = (e) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('mousedown', away)
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('mousedown', away)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [open])
+
+  const save = (e) => {
+    e.preventDefault()
+    if (!PINCODE_RE.test(value)) return setError('Enter a 6-digit PIN code.')
+    setError('')
+    setPincode(value)
+    setOpen(false)
+  }
+
+  return (
+    <div ref={box} className="relative hidden shrink-0 lg:block">
+      <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} className="flex h-11 items-center gap-2 rounded-lg px-2.5 text-left text-white transition-colors hover:bg-white/10">
+        <MapPin className="h-5 w-5 text-gold" />
+        <span className="leading-tight">
+          <span className="block text-[11px] text-white/70">Deliver to</span>
+          <span className="block text-sm font-bold">{pincode || 'Enter PIN code'}</span>
+        </span>
+      </button>
+      {open && (
+        <form onSubmit={save} className="absolute left-0 top-full z-50 mt-2 w-72 rounded-xl border border-ink-300/70 bg-white p-4 shadow-2xl">
+          <label htmlFor="deliver-pin" className="block text-sm font-bold text-primary">
+            Where should we deliver?
+          </label>
+          <div className="mt-2 flex gap-2">
+            <input
+              id="deliver-pin"
+              inputMode="numeric"
+              maxLength={6}
+              autoFocus
+              value={value}
+              onChange={(e) => setValue(e.target.value.replace(/\D/g, ''))}
+              placeholder="PIN code"
+              className="h-10 min-w-0 flex-1 rounded-lg border border-ink-300 px-3 text-sm text-ink-900 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-gold"
+            />
+            <button type="submit" className="h-10 rounded-lg bg-primary px-4 text-sm font-bold text-white hover:bg-primary-dark">
+              Save
+            </button>
           </div>
-        )}
-      </div>
+          {error && <p role="alert" className="mt-2 text-xs text-red-600">{error}</p>}
+          {estimate && !error && (
+            <p className="mt-2 text-xs text-ink-600">
+              Delivery to {pincode}: usually {estimate.min} to {estimate.max} working days after dispatch.
+            </p>
+          )}
+        </form>
+      )}
     </div>
   )
 }
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [openAccordion, setOpenAccordion] = useState(null)
-  const location = useLocation()
-  const isHome = location.pathname === '/'
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    if (!mobileOpen) return
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [mobileOpen])
-
-  const solid = !isHome || scrolled || mobileOpen
+  const { categories, products, wishlist } = useShop()
+  const links = categories.filter((c) => products.some((p) => p.category === c.slug))
+  const action = 'relative flex h-11 shrink-0 items-center gap-2 rounded-lg px-2.5 text-white transition-colors hover:bg-white/10'
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        solid ? 'bg-[#fff8dc]/90 backdrop-blur-md shadow-[0_1px_0_rgba(20,52,109,0.06)]' : 'bg-[#fffdf6]'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-[18px] flex items-center gap-6">
-        <Link to="/" className="shrink-0" onClick={() => setMobileOpen(false)}>
-          <img src={logo} alt="Prosper Infotech" className="h-10 w-auto" />
-        </Link>
+    <header className="sticky top-0 z-50 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.35)]">
+      <div className="bg-primary-dark">
+        <div className="mx-auto flex max-w-[1400px] items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-5">
+          <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="Prosper Infotech Shop home">
+            <img src={logo} alt="Prosper Infotech" className="h-9 w-auto sm:h-10" />
+            <span className="hidden rounded bg-gold px-2 py-0.5 text-[11px] font-extrabold uppercase tracking-widest text-primary sm:inline">Shop</span>
+          </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 ml-auto">
-          {NAV_ITEMS.map((item, i) => (
-            <div key={item.path} className="group relative">
-              <Link
-                to={item.path}
-                className="relative flex items-center gap-1 whitespace-nowrap px-4 py-2 text-[15px] font-medium text-ink-900 transition-colors hover:text-primary"
-              >
-                {item.label}
-                {item.children && (
-                  <ChevronDown className="h-4 w-4 text-ink-500 transition-transform group-hover:rotate-180" />
+          <DeliverTo />
+          <SearchBar id="header-search" className="mx-1 hidden min-w-0 flex-1 md:block" />
+
+          <div className="ml-auto flex items-center md:ml-0">
+            <Link to="/account" className={action} aria-label="My account and orders">
+              <User className="h-6 w-6" />
+              <span className="hidden leading-tight xl:block">
+                <span className="block text-[11px] text-white/70">Hello, sign in</span>
+                <span className="block text-sm font-bold">Account &amp; orders</span>
+              </span>
+            </Link>
+            <Link to="/wishlist" className={`${action} hidden sm:flex`} aria-label={`Wishlist, ${wishlist.length} item${wishlist.length === 1 ? '' : 's'}`}>
+              <span className="relative">
+                <Heart className="h-6 w-6" />
+                {wishlist.length > 0 && (
+                  <span className="absolute -right-2.5 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-gold px-1 text-[11px] font-extrabold text-primary">{wishlist.length}</span>
                 )}
-                <span className="absolute bottom-1 left-4 right-4 h-0.5 origin-left scale-x-0 rounded-full bg-gold-dark transition-transform duration-300 group-hover:scale-x-100" />
-              </Link>
-              {item.children && (
-                <NavDropdown
-                  item={item}
-                  align={i === 0 ? 'left' : i >= NAV_ITEMS.length - 2 ? 'right' : 'center'}
-                />
-              )}
-            </div>
-          ))}
-        </nav>
-
-        <a
-          href="https://calendly.com/prosperinfotech-sales/30min"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden lg:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900 transition-all duration-200 hover:scale-105 hover:border-primary hover:bg-primary hover:text-white"
-        >
-          Book A Demo
-          <ArrowRight className="h-4 w-4" />
-        </a>
-
-        <div className="hidden lg:flex shrink-0 items-center gap-2">
-          <CallDropdown
-            eventCategory="Header"
-            align="right"
-            triggerClassName="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink-900/20 text-ink-900 transition-colors hover:border-primary hover:bg-primary hover:text-white"
-          >
-            <Phone className="h-4 w-4" />
-          </CallDropdown>
-          <WhatsAppLink
-            eventCategory="Header"
-            iconClassName="h-4 w-4"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#25D366] shadow-sm transition-transform hover:scale-105"
-          />
+              </span>
+              <span className="hidden text-sm font-bold xl:inline">Wishlist</span>
+            </Link>
+            <CartButton />
+          </div>
         </div>
-
-        <button
-          type="button"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={mobileOpen}
-          className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink-900/20 text-ink-900 lg:hidden"
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="px-3 pb-2.5 md:hidden">
+          <SearchBar id="header-search-mobile" />
+        </div>
       </div>
 
-      {mobileOpen && (
-        <div className="max-h-[calc(100vh-88px)] overflow-y-auto border-t border-ink-300/40 bg-[#fffdf6] px-6 py-4 lg:hidden">
-          <nav className="flex flex-col">
-            {NAV_ITEMS.map((item) => (
-              <div key={item.path} className="border-b border-ink-300/40 last:border-b-0">
-                <div className="flex items-center justify-between">
-                  <Link
-                    to={item.path}
-                    onClick={() => setMobileOpen(false)}
-                    className="flex-1 py-3 text-[15px] font-medium text-ink-900"
-                  >
-                    {item.label}
-                  </Link>
-                  {item.children && (
-                    <button
-                      type="button"
-                      onClick={() => setOpenAccordion((cur) => (cur === item.path ? null : item.path))}
-                      aria-label={`Toggle ${item.label} submenu`}
-                      className="flex h-10 w-10 items-center justify-center text-ink-500"
-                    >
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform ${openAccordion === item.path ? 'rotate-180' : ''}`}
-                      />
-                    </button>
-                  )}
-                </div>
-                {item.children && openAccordion === item.path && (
-                  <ul className="flex flex-col gap-1 pb-3 pl-4">
-                    {item.children.map((child) => (
-                      <li key={child.path}>
-                        <Link
-                          to={child.path}
-                          onClick={() => setMobileOpen(false)}
-                          className="block py-1.5 text-sm text-ink-600 hover:text-primary"
-                        >
-                          {child.label}
-                        </Link>
-                        {child.children && (
-                          <ul className="flex flex-col gap-1 pb-1.5 pl-4">
-                            {child.children.map((grandchild) => (
-                              <li key={grandchild.path}>
-                                <Link
-                                  to={grandchild.path}
-                                  onClick={() => setMobileOpen(false)}
-                                  className="block py-1 text-[13px] text-ink-500 hover:text-primary"
-                                >
-                                  {grandchild.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </nav>
-          <a
-            href="https://calendly.com/prosperinfotech-sales/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMobileOpen(false)}
-            className="mt-4 flex items-center justify-center gap-1.5 rounded-full border border-ink-900/70 px-5 py-2.5 text-sm font-semibold text-ink-900"
-          >
-            Book A Demo
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      )}
+      <nav aria-label="Product categories" className="bg-primary">
+        <ul className="mx-auto flex max-w-[1400px] items-center gap-1 overflow-x-auto px-2 [scrollbar-width:none] sm:px-4 [&::-webkit-scrollbar]:hidden">
+          <li className="shrink-0">
+            <NavLink to="/c/all" className={({ isActive }) => `flex items-center gap-1.5 whitespace-nowrap px-3 py-2 text-[13px] font-bold ${isActive ? 'text-gold' : 'text-white hover:text-gold'}`}>
+              <LayoutGrid className="h-4 w-4" />
+              All products
+            </NavLink>
+          </li>
+          {links.map((c) => (
+            <li key={c.slug} className="shrink-0">
+              <NavLink to={`/c/${c.slug}`} className={({ isActive }) => `flex items-center gap-1.5 whitespace-nowrap px-3 py-2 text-[13px] font-semibold ${isActive ? 'text-gold' : 'text-white/90 hover:text-gold'}`}>
+                <CategoryIcon category={c} className="h-4 w-4" />
+                {c.name}
+              </NavLink>
+            </li>
+          ))}
+          <li className="ml-auto hidden shrink-0 lg:block">
+            <Link to="/contact" className="block whitespace-nowrap px-3 py-2 text-[13px] font-semibold text-white/90 hover:text-gold">
+              Bulk orders &amp; support
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   )
 }

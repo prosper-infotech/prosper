@@ -1,11 +1,12 @@
 import { useLocation } from 'react-router-dom'
+import { SITE_URL } from '../../shop/site'
 
 const WHATSAPP_NUMBER = '19407583271'
 
 function buildMessage(pathname) {
   const pageTitle = document.title.split('|')[0].trim()
-  const pageUrl = `https://www.prosperinfotech.com${pathname}`
-  return `Hi, I'd like to know more about Prosper Infotech's solutions. I'm messaging from the "${pageTitle}" page (${pageUrl}).`
+  const pageUrl = `${SITE_URL}${pathname}`
+  return `Hi, I have a question about the Prosper Infotech shop. I'm messaging from the "${pageTitle}" page (${pageUrl}).`
 }
 
 export default function WhatsAppLink({ className, iconClassName = 'h-8 w-8', eventCategory = 'Chat Support' }) {

@@ -5,16 +5,16 @@ import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const QUICK_LINKS = [
-  { label: 'Solutions', to: '/solutions' },
-  { label: 'Products', to: '/products' },
-  { label: 'Services', to: '/services' },
+  { label: 'All products', to: '/c/all' },
+  { label: 'Tags & Labels', to: '/c/tags-labels' },
+  { label: 'Readers & Antennas', to: '/c/readers-antennas' },
   { label: 'Contact', to: '/contact' },
 ]
 
 export default function NotFound() {
   useDocumentTitle(
     'Page Not Found | Prosper Infotech',
-    "The page you're looking for doesn't exist or has moved. Return to Prosper Infotech's homepage or explore our solutions, products, and services.",
+    "The page you're looking for doesn't exist or has moved. Go back to the Prosper Infotech shop.",
     null,
     { noindex: true }
   )
@@ -46,7 +46,7 @@ export default function NotFound() {
           The page you're looking for doesn't exist or has moved. Let's get you back on route.
         </p>
         <Button to="/" variant="primary">
-          Back to home
+          Back to the shop
         </Button>
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
           {QUICK_LINKS.map((link) => (

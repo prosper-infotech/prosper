@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order/
+Disallow: /account
+Disallow: /wishlist
 
-Sitemap: https://www.prosperinfotech.com/sitemap.xml
+Sitemap: https://shop.prosperinfotech.com/sitemap.xml

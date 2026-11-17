@@ -9,7 +9,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import logo from '../../assets/logo-dark.png'
 
-const usaPhone = OFFICES[0].phone
+const usaPhone = OFFICES.find((o) => o.country === 'India')?.phone || OFFICES[0].phone
 
 export default function ThankYou() {
   const navigate = useNavigate()
@@ -60,7 +60,7 @@ export default function ThankYou() {
           </a>
         </div>
         <Button to="/" variant="primary-dark" className="mt-2">
-          Back to homepage
+          Back to the shop
         </Button>
 
         <div className="flex flex-col items-center gap-2.5 mt-3 pt-3 border-t border-white/10 w-full max-w-xs">

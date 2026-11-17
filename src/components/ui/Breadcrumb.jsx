@@ -2,13 +2,14 @@ import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
+import { SITE_URL } from '../../shop/site'
 
 export default function Breadcrumb({ title, parent, parentPath, description, h1 }) {
   const { pathname } = useLocation()
 
   useEffect(() => {
     const itemListElement = [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.prosperinfotech.com/' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
     ]
     // Every non-final ListItem requires an `item` URL, so only add the parent
     // crumb when we actually have a path for it — otherwise skip straight to
@@ -18,14 +19,14 @@ export default function Breadcrumb({ title, parent, parentPath, description, h1 
         '@type': 'ListItem',
         position: itemListElement.length + 1,
         name: parent,
-        item: `https://www.prosperinfotech.com${parentPath}`,
+        item: `${SITE_URL}${parentPath}`,
       })
     }
     itemListElement.push({
       '@type': 'ListItem',
       position: itemListElement.length + 1,
       name: title,
-      item: `https://www.prosperinfotech.com${pathname}`,
+      item: `${SITE_URL}${pathname}`,
     })
 
     const schemaTag = document.createElement('script')

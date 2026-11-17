@@ -2,7 +2,7 @@ import Breadcrumb from '../components/ui/Breadcrumb'
 import Reveal from '../components/motion/Reveal'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
-const EFFECTIVE_DATE = 'August 10, 2026'
+const EFFECTIVE_DATE = 'November 16, 2026'
 
 const SECTIONS = [
   {
@@ -19,6 +19,7 @@ const SECTIONS = [
     ],
     list: [
       'Information you provide directly — such as your name, email address, phone number, company name, and message when you submit a contact form, request a demo, or book a consultation.',
+      'Information for orders in our online shop — your name, email, phone number, delivery and billing address, company name and GSTIN (if you give one), the products you order, and your order and payment status. If you sign in to an account, we also keep your saved addresses.',
       'Information collected automatically — such as your IP address, browser type, device type, pages visited, referring URL, and approximate location, gathered through Google Analytics and similar tools.',
     ],
   },
@@ -36,6 +37,8 @@ const SECTIONS = [
       'To provide, maintain, and improve our website and services',
       'To measure and improve the performance of our marketing and advertising campaigns',
       'To communicate with you about our products, services, or updates you have requested',
+      'To process, deliver and support orders placed in our online shop, issue GST invoices, and send order emails such as confirmations, payment receipts and tracking links',
+      'To keep order and invoice records for as long as tax and accounting law requires',
     ],
   },
   {
@@ -46,6 +49,11 @@ const SECTIONS = [
     list: [
       'Formspree — processes and delivers contact and lead form submissions to our team',
       'Google Analytics & Google Ads — provide website analytics and advertising performance measurement',
+      'Razorpay — processes online payments for shop orders. Card details are entered on Razorpay’s page; we never see or store them',
+      'Supabase — stores shop orders, customer details and account data on our behalf',
+      'Resend — delivers order and sign-in emails',
+      'Courier partners (such as Shiprocket and the courier it assigns) — receive your name, address and phone number to deliver your order',
+      'Prosper CRM and Zoho CRM — keep a record of enquiries and orders for our sales team',
       'YouTube — embedded video content on our Videos page, subject to Google’s privacy policy',
     ],
     footer:
@@ -61,6 +69,7 @@ const SECTIONS = [
     title: 'Your Choices',
     body: [
       'Depending on your location, you may have the right to request access to, correction of, or deletion of your personal information. To make such a request, contact us at sales@prosperinfotech.com.',
+      'If you have a shop account, you can delete it yourself from the Profile tab of My Account. This removes your profile and saved addresses. Records of past orders and invoices are kept because tax law requires them.',
     ],
   },
   {
