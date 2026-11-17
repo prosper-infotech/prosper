@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { SITE_URL } from '../../shop/site'
-
-const WHATSAPP_NUMBER = '19407583271'
+import { useCart } from '../../shop/shopContext'
 
 function buildMessage(pathname) {
   const pageTitle = document.title.split('|')[0].trim()
@@ -11,6 +10,8 @@ function buildMessage(pathname) {
 
 export default function WhatsAppLink({ className, iconClassName = 'h-8 w-8', eventCategory = 'Chat Support' }) {
   const { pathname } = useLocation()
+  const { config } = useCart()
+  const WHATSAPP_NUMBER = config.whatsapp_number
 
   const handleClick = (e) => {
     e.preventDefault()

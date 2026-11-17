@@ -148,8 +148,8 @@ export default function PrivacyPolicy() {
                   </li>
                   <li>
                     Phone:{' '}
-                    <a href="tel:+19407583271" className="text-primary hover:text-gold transition-colors">
-                      +1 940 758 3271
+                    <a href="tel:+919226891830" className="text-primary hover:text-gold transition-colors">
+                      +91 92268 91830
                     </a>
                   </li>
                   <li>Address: 4245 N Central Expy, #490, Dallas, TX 75205</li>

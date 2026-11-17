@@ -161,8 +161,8 @@ export const DEFAULT_SETTINGS = {
   delivery_days_max: 7,
   low_stock_threshold: 5,
   support_email: 'sales@prosperinfotech.com',
-  support_phone: '+91 801 081 2735',
-  whatsapp_number: '19407583271',
+  support_phone: '+91 92268 91830',
+  whatsapp_number: '919226891830',
   invoice_prefix: 'PI/',
   seller: {
     legal_name: 'Prosper Infotech',

@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { CheckCircle2, PhoneCall, Mail } from 'lucide-react'
 import Button from '../../components/ui/Button'
 import Reveal from '../../components/motion/Reveal'
-import { OFFICES } from '../../data/offices'
+import { useCart } from '../../shop/shopContext'
 import { SOCIAL_LINKS } from '../../data/socialLinks'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import useAnalyticsPageView from '../../hooks/useAnalyticsPageView'
 import logo from '../../assets/logo-dark.png'
 
-const usaPhone = OFFICES.find((o) => o.country === 'India')?.phone || OFFICES[0].phone
 
 export default function ThankYou() {
+  const usaPhone = useCart().config.support_phone
   const navigate = useNavigate()
   useAnalyticsPageView()
 
