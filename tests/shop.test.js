@@ -416,3 +416,29 @@ test('customers: list with orders, spend and last sign-in; detail with orders an
   assert.equal((await admin('GET', '/api/admin/customers/not-a-real-id')).status, 404)
   assert.equal((await api('GET', '/api/admin/customers')).status, 401)
 })
+
+/* ---------------------------------- Photos ---------------------------------- */
+
+test('photo upload: staff only, real images only, saved and served back', async () => {
+  // 1x1 PNG
+  const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=='
+  assert.equal((await api('POST', '/api/admin/uploads', { name: 'x.png', data: png })).status, 401)
+
+  const ok = await admin('POST', '/api/admin/uploads', { name: 'Handheld Reader Front.PNG', data: `data:image/png;base64,${png}` })
+  assert.equal(ok.status, 201)
+  assert.match(ok.data.url, /^\/api\/uploads\/\d{4}-\d{2}\/handheld-reader-front-[a-f0-9]{12}\.png$/)
+  const served = await api('GET', ok.data.url)
+  assert.equal(served.status, 200)
+  assert.equal(served.headers.get('content-type'), 'image/png')
+
+  // An SVG or a text file renamed to .jpg is refused.
+  const svg = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>').toString('base64')
+  assert.equal((await admin('POST', '/api/admin/uploads', { name: 'evil.jpg', data: svg })).status, 415)
+  assert.equal((await admin('POST', '/api/admin/uploads', { name: 'empty.jpg', data: '' })).status, 422)
+  assert.equal((await api('GET', '/api/uploads/2026-11/../../db.json')).status, 404)
+
+  // The uploaded photo can be saved on a product and shows on the shop.
+  const p = (await admin('GET', '/api/admin/products')).data.products.find((x) => x.sku === 'PI-SCN-001')
+  assert.equal((await admin('PUT', `/api/admin/products/${p.id}`, { images: [ok.data.url] })).status, 200)
+  assert.deepEqual((await product('handheld-barcode-scanner')).images, [ok.data.url])
+})

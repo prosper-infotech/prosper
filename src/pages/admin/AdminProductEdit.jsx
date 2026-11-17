@@ -5,6 +5,7 @@ import { api } from '../../shop/api'
 import { Field, PageLoading, Spinner } from '../../shop/components/ui'
 import { btn, inputClass } from '../../shop/format'
 import { Alert, Card } from './adminUi'
+import PhotoManager from './PhotoManager'
 import { useLoad } from './useLoad'
 
 const BLANK = {
@@ -162,11 +163,16 @@ export default function AdminProductEdit() {
             </ul>
           </Card>
 
-          <Card title="Photos and datasheet">
-            <Field id="images" label="Photo links" optional error={errors.images} hint="One link per line. The first photo is the main one. Use square or 4:3 photos, at least 1000 px wide.">
-              <textarea rows={4} placeholder="https://..." {...text('images')} />
-            </Field>
-            <Field id="datasheet_url" label="Datasheet PDF link" optional error={errors.datasheet_url} className="mt-4">
+          <Card title="Photos">
+            <PhotoManager
+              images={form.images.split('\n').map((x) => x.trim()).filter(Boolean)}
+              onChange={(list) => setForm((f) => ({ ...f, images: list.join('\n') }))}
+              error={errors.images}
+            />
+          </Card>
+
+          <Card title="Datasheet">
+            <Field id="datasheet_url" label="Datasheet PDF link" optional error={errors.datasheet_url}>
               <input type="url" placeholder="https://..." {...text('datasheet_url')} />
             </Field>
           </Card>

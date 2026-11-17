@@ -9,6 +9,7 @@ import { DEFAULT_SETTINGS } from '../../shared/catalogue.js'
 import { shiprocketConfigured, createShiprocketOrder } from '../lib/shiprocket.js'
 import { razorpayConfigured } from '../lib/razorpay.js'
 import { leadForwardingOn } from '../lib/crm.js'
+import { saveProductImage, readLocalUpload } from '../lib/storage.js'
 
 export async function me(request, _params, staff) {
   return json({
@@ -450,4 +451,21 @@ export async function removeStaff(request, { id }, staff) {
   if (row.email === staff.email) throw new HttpError(409, 'You cannot remove your own access.')
   await db().update('staff', { id }, { is_active: false })
   return json({ ok: true })
+}
+
+/* ---------------------------------- Photos ---------------------------------- */
+
+// The admin screen shrinks photos in the browser first, then sends them here as base64.
+export async function uploadImage(request) {
+  const body = await readJson(request, 6_000_000)
+  const data = String(body.data || '').replace(/^data:[^,]*,/, '')
+  if (!data || !/^[A-Za-z0-9+/=\s]+$/.test(data)) throw new HttpError(422, 'No photo was received. Please try again.')
+  const url = await saveProductImage(Buffer.from(data, 'base64'), str(body.name, 120))
+  return json({ url }, 201)
+}
+
+export async function localUpload(request, { month, file }) {
+  const found = readLocalUpload(`${month}/${file}`)
+  if (!found) throw new HttpError(404, 'Not found.')
+  return new Response(found.buf, { headers: { 'Content-Type': found.type, 'Cache-Control': 'public, max-age=86400', 'X-Content-Type-Options': 'nosniff' } })
 }

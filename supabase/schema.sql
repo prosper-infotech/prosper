@@ -242,3 +242,10 @@ drop policy if exists "public read categories" on categories;
 create policy "public read categories" on categories for select to anon, authenticated using (true);
 drop policy if exists "public read active products" on products;
 create policy "public read active products" on products for select to anon, authenticated using (is_active);
+
+-- Product photos uploaded from the admin screen. Public so the shop can show them;
+-- only the server (service key) can add or remove files. The shop also creates this
+-- bucket by itself on the first upload, so running this part is optional.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('product-images', 'product-images', true, 3145728, array['image/jpeg', 'image/png', 'image/webp'])
+on conflict (id) do nothing;

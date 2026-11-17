@@ -33,6 +33,7 @@ add('DELETE', '/account/addresses/:id', pub.deleteAddress)
 add('DELETE', '/account', pub.deleteAccount)
 add('GET', '/feeds/merchant.xml', pub.merchantFeed)
 add('GET', '/sitemap-shop.xml', pub.shopSitemap)
+add('GET', '/uploads/:month/:file', admin.localUpload)
 
 // Used by the admin screen to ask "am I signed in?" without a 401 when the answer is no.
 add('GET', '/admin/session', async (request) => {
@@ -60,6 +61,7 @@ add('POST', '/admin/products', admin.saveProduct, true)
 add('PUT', '/admin/products/:id', admin.saveProduct, true)
 add('GET', '/admin/products-export.csv', admin.exportProducts, true)
 add('POST', '/admin/products/import', admin.importProducts, true)
+add('POST', '/admin/uploads', admin.uploadImage, true)
 add('POST', '/admin/stock', admin.updateStock, true)
 add('GET', '/admin/settings', admin.readSettings, true)
 add('PUT', '/admin/settings', admin.writeSettings, true)
