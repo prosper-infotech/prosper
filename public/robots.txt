@@ -6,6 +6,5 @@ Disallow: /cart
 Disallow: /checkout
 Disallow: /order/
 Disallow: /account
-Disallow: /wishlist
 
 Sitemap: https://shop.prosperinfotech.com/sitemap.xml

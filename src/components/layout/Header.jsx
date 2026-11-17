@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { Heart, Search, User } from 'lucide-react'
+import { Search, User } from 'lucide-react'
 import logo from '../../assets/logo-light.png'
 import CartButton from '../../shop/components/CartButton'
 import { ProductImage } from '../../shop/components/ui'
@@ -139,7 +139,7 @@ function NavIcon({ to, label, icon: Icon, badge, className = '' }) {
 }
 
 export default function Header() {
-  const { categories, products, wishlist } = useShop()
+  const { categories, products } = useShop()
   const links = categories.filter((c) => products.some((p) => p.category === c.slug))
   const link = ({ isActive }) =>
     `flex h-full items-center whitespace-nowrap border-b-4 px-3 pt-1 text-[13px] font-bold uppercase tracking-wide transition-colors ${isActive ? 'border-gold text-primary' : 'border-transparent text-ink-900 hover:border-gold'}`
@@ -173,7 +173,6 @@ export default function Header() {
 
         <div className="ml-auto flex items-center gap-1 md:ml-2 md:gap-2">
           <NavIcon to="/account" label="Profile" icon={User} className="hidden sm:flex" />
-          <NavIcon to="/wishlist" label="Wishlist" icon={Heart} badge={wishlist.length} className="hidden sm:flex" />
           <CartButton />
         </div>
       </div>

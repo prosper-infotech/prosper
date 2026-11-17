@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Download, FileText, Heart, MessageCircle, PackageSearch, RotateCcw, ShieldCheck, ShoppingBag, Truck } from 'lucide-react'
+import { Download, FileText, MessageCircle, PackageSearch, RotateCcw, ShieldCheck, ShoppingBag, Truck } from 'lucide-react'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { useShop } from '../../shop/shopContext'
 import ProductRow from '../../shop/components/ProductRow'
@@ -87,7 +87,7 @@ function Gallery({ product }) {
 
 export default function ProductPage() {
   const { slug } = useParams()
-  const { ready, products, categories, config, add, requestQuote, wishlist, toggleWish, recent, addRecent } = useShop()
+  const { ready, products, categories, config, add, requestQuote, recent, addRecent } = useShop()
   const navigate = useNavigate()
   const product = products.find((p) => p.slug === slug) || null
   const category = categories.find((c) => c.slug === product?.category) || null
@@ -192,7 +192,6 @@ export default function ProductPage() {
 
   const priced = hasPrice(product)
   const saving = priced && product.mrp_paise > product.price_paise ? Math.round((1 - product.price_paise / product.mrp_paise) * 100) : 0
-  const wished = wishlist.includes(product.id)
   const viewed = recent.filter((id) => id !== product.id).map((id) => products.find((p) => p.id === id)).filter(Boolean)
   const promises = [
     { icon: FileText, text: 'GST invoice with every order' },
@@ -248,25 +247,21 @@ export default function ProductPage() {
 
           <div className="mt-6 flex gap-3">
             {orderable ? (
-              <button type="button" onClick={() => add(product, qty)} className={`${btn.navy} flex-[2] !py-4 !text-sm`}>
-                <ShoppingBag className="h-5 w-5" />
-                Add to cart
-              </button>
+              <>
+                <button type="button" onClick={() => add(product, qty)} className={`${btn.navy} flex-1 !py-4 !text-sm`}>
+                  <ShoppingBag className="h-5 w-5" />
+                  Add to cart
+                </button>
+                <button type="button" onClick={buyNow} className={`${btn.gold} flex-1 !py-4 !text-sm`}>
+                  Buy now
+                </button>
+              </>
             ) : (
-              <button type="button" onClick={() => requestQuote(product.name)} className={`${btn.navy} flex-[2] !py-4 !text-sm`}>
-                {priced ? 'Notify me' : 'Request price'}
+              <button type="button" onClick={() => requestQuote(product.name)} className={`${btn.navy} w-full !py-4 !text-sm sm:w-auto sm:min-w-[280px]`}>
+                {priced ? 'Notify me when back' : 'Request price'}
               </button>
             )}
-            <button type="button" onClick={() => toggleWish(product.id)} aria-pressed={wished} className={`${btn.ghost} flex-1 !py-4 !text-sm`}>
-              <Heart className={`h-5 w-5 ${wished ? 'fill-[#ff3f6c] text-[#ff3f6c]' : ''}`} />
-              {wished ? 'Wishlisted' : 'Wishlist'}
-            </button>
           </div>
-          {orderable && (
-            <button type="button" onClick={buyNow} className="mt-3 w-full rounded-md border border-gold bg-gold/15 py-3 text-[13px] font-bold uppercase tracking-wider text-primary transition-colors hover:bg-gold">
-              Buy now
-            </button>
-          )}
 
           <div className="mt-8 border-t border-[#eaeaec] pt-6">
             <DeliveryCheck />
@@ -362,19 +357,20 @@ export default function ProductPage() {
       </div>
 
       {/* Fixed buy bar on phones */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.6fr] border-t border-[#eaeaec] bg-white lg:hidden">
-        <button type="button" onClick={() => toggleWish(product.id)} aria-pressed={wished} className="flex items-center justify-center gap-2 py-4 text-[13px] font-bold uppercase tracking-wider text-ink-900">
-          <Heart className={`h-5 w-5 ${wished ? 'fill-[#ff3f6c] text-[#ff3f6c]' : ''}`} />
-          Wishlist
-        </button>
+      <div className="fixed inset-x-0 bottom-0 z-40 flex border-t border-[#eaeaec] bg-white lg:hidden">
         {orderable ? (
-          <button type="button" onClick={() => add(product, qty)} className="flex items-center justify-center gap-2 bg-primary py-4 text-[13px] font-bold uppercase tracking-wider text-white">
-            <ShoppingBag className="h-5 w-5" />
-            Add to cart
-          </button>
+          <>
+            <button type="button" onClick={buyNow} className="flex-1 py-4 text-[13px] font-bold uppercase tracking-wider text-ink-900">
+              Buy now
+            </button>
+            <button type="button" onClick={() => add(product, qty)} className="flex flex-1 items-center justify-center gap-2 bg-primary py-4 text-[13px] font-bold uppercase tracking-wider text-white">
+              <ShoppingBag className="h-5 w-5" />
+              Add to cart
+            </button>
+          </>
         ) : (
-          <button type="button" onClick={() => requestQuote(product.name)} className="bg-primary py-4 text-[13px] font-bold uppercase tracking-wider text-white">
-            {priced ? 'Notify me' : 'Request price'}
+          <button type="button" onClick={() => requestQuote(product.name)} className="flex-1 bg-primary py-4 text-[13px] font-bold uppercase tracking-wider text-white">
+            {priced ? 'Notify me when back' : 'Request price'}
           </button>
         )}
       </div>

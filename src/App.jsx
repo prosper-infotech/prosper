@@ -15,7 +15,6 @@ const Invoice = lazy(() => import('./pages/shop/Invoice'))
 const Account = lazy(() => import('./pages/shop/Account'))
 const PolicyPage = lazy(() => import('./pages/shop/PolicyPage'))
 const Contact = lazy(() => import('./pages/shop/Contact'))
-const Wishlist = lazy(() => import('./pages/shop/Wishlist'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const ThankYou = lazy(() => import('./pages/landing/ThankYou'))
 const NotFound = lazy(() => import('./pages/NotFound'))
@@ -42,7 +41,7 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order/:token" element={<OrderStatus />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/wishlist" element={<Navigate to="/" replace />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/shipping-policy" element={<PolicyPage slug="shipping-policy" />} />
           <Route path="/returns-refunds" element={<PolicyPage slug="returns-refunds" />} />

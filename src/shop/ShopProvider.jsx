@@ -7,7 +7,6 @@ import { priceCart, isOrderable, clampQty } from '../../shared/pricing.js'
 const QuoteModal = lazy(() => import('../components/ui/QuoteModal'))
 
 const CART_KEY = 'pi_cart_v1'
-const WISH_KEY = 'pi_wishlist_v1'
 const RECENT_KEY = 'pi_recent_v1'
 const PIN_KEY = 'pi_pincode'
 
@@ -53,7 +52,6 @@ export default function ShopProvider({ children }) {
   const [catalogue, setCatalogue] = useState({ status: 'idle', products: [], categories: [], config: EMPTY_CONFIG, offline: false })
   const [lines, setLines] = useState(readCart)
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [wishlist, setWishlist] = useState(() => readList(WISH_KEY))
   const [recent, setRecent] = useState(() => readList(RECENT_KEY))
   const [pincode, setPincodeState] = useState(() => {
     try {
@@ -134,13 +132,6 @@ export default function ShopProvider({ children }) {
   const remove = useCallback((id) => setLines((prev) => prev.filter((l) => l.id !== id)), [])
   const clear = useCallback(() => setLines([]), [])
 
-  const toggleWish = useCallback((id) => {
-    setWishlist((prev) => {
-      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [id, ...prev]
-      save(WISH_KEY, next)
-      return next
-    })
-  }, [])
   const addRecent = useCallback((id) => {
     setRecent((prev) => {
       if (prev[0] === id) return prev
@@ -181,14 +172,12 @@ export default function ShopProvider({ children }) {
       openDrawer: () => setDrawerOpen(true),
       closeDrawer: () => setDrawerOpen(false),
       requestQuote,
-      wishlist,
-      toggleWish,
       recent,
       addRecent,
       pincode,
       setPincode,
     }
-  }, [catalogue, lines, drawerOpen, ensureCatalogue, refreshCatalogue, add, setQty, remove, clear, requestQuote, wishlist, toggleWish, recent, addRecent, pincode, setPincode])
+  }, [catalogue, lines, drawerOpen, ensureCatalogue, refreshCatalogue, add, setQty, remove, clear, requestQuote, recent, addRecent, pincode, setPincode])
 
   const quoteOptions = useMemo(
     () => [...new Set([quoteFor, ...catalogue.products.map((p) => p.name), 'Bulk order', 'Not sure, need guidance'].filter(Boolean))],

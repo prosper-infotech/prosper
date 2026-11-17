@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { Heart, Home, LayoutGrid, ShoppingCart, User } from 'lucide-react'
+import { Home, LayoutGrid, ShoppingCart, User } from 'lucide-react'
 import { useCart } from '../shopContext'
 
 // App-style navigation along the bottom of the screen on phones.
 export default function BottomNav() {
-  const { count, wishlist } = useCart()
+  const { count } = useCart()
   const { pathname } = useLocation()
   // Product pages show their own buy bar, and checkout should have no distractions.
   const hidden = pathname.startsWith('/p/') || pathname === '/checkout'
@@ -22,13 +22,12 @@ export default function BottomNav() {
   const items = [
     { to: '/', label: 'Home', icon: Home, end: true },
     { to: '/c/all', label: 'Categories', icon: LayoutGrid },
-    { to: '/wishlist', label: 'Wishlist', icon: Heart, badge: wishlist.length },
     { to: '/account', label: 'Account', icon: User },
     { to: '/cart', label: 'Cart', icon: ShoppingCart, badge: count },
   ]
   return (
     <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 border-t border-[#eaeaec] bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_18px_-10px_rgba(20,52,109,0.35)] lg:hidden">
-      <ul className="grid grid-cols-5">
+      <ul className="grid grid-cols-4">
         {items.map((item) => (
           <li key={item.to}>
             <NavLink
