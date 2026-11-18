@@ -1,49 +1,30 @@
 import { Link } from 'react-router-dom'
 import {
-  Banknote, Briefcase, Cable, CreditCard, Cpu, DoorOpen, Fingerprint, Layers, Loader2, LockKeyhole, Minus, Monitor, MonitorSmartphone, Nfc, Plus, Printer,
-  Radio, Receipt, ScanBarcode, ScrollText, ShieldCheck, Shredder, Smartphone, Tag, Tablet, Wifi,
+  Briefcase, CreditCard, Cpu, Layers, Loader2, Minus, Monitor, Plus, Printer, Radio, ScanBarcode, ShieldCheck, Smartphone, Tag,
 } from 'lucide-react'
 import { formatINR, hasPrice, isOrderable } from '../../../shared/pricing.js'
 import { STATUS_LABEL } from '../format'
+import Illustration from './Illustration'
 
 const ICONS = { tag: Tag, radio: Radio, scan: ScanBarcode, printer: Printer, cpu: Cpu, card: CreditCard, smartphone: Smartphone, layers: Layers, monitor: Monitor, shield: ShieldCheck, briefcase: Briefcase }
 const BY_SLUG = {
   'tags-labels': Tag, 'smart-cards-nfc': CreditCard, 'readers-antennas': Radio, 'barcode-scanners': ScanBarcode, 'mobile-computers': Smartphone,
   'printers-encoders': Printer, 'consumables-spares': Layers, 'pos-kiosks': Monitor, 'security-access': ShieldCheck, 'office-equipment': Briefcase, 'edge-iot': Cpu,
 }
-// A closer picture for products that have no photo yet, picked from the product name.
-const BY_NAME = [
-  [/shredder/i, Shredder], [/note count|counting machine/i, Banknote], [/locker|safe/i, LockKeyhole], [/fingerprint|finger scanner|biometric|face/i, Fingerprint],
-  [/barrier|turnstile|door|exit|lock/i, DoorOpen], [/ribbon|roll|label sticker|labels? per/i, ScrollText], [/print ?head|cable|bracket/i, Cable],
-  [/receipt/i, Receipt], [/kiosk|windows pos|pos system|display/i, Monitor], [/pos\b|mobile terminal/i, MonitorSmartphone], [/tablet/i, Tablet],
-  [/mobile computer|touch computer|android|data collector/i, Smartphone], [/antenna/i, Wifi], [/nfc/i, Nfc], [/card(?!.*printer)/i, CreditCard],
-]
-function productIcon(product) {
-  const name = product?.name || ''
-  return BY_NAME.find(([rx]) => rx.test(name))?.[1] || null
-}
-
 export function CategoryIcon({ category, className }) {
   const Icon = ICONS[category?.icon] || BY_SLUG[category?.slug || category] || Tag
   return <Icon className={className} aria-hidden="true" />
 }
 
-function FallbackIcon({ product, className }) {
-  const Icon = productIcon(product)
-  return Icon ? <Icon className={className} aria-hidden="true" /> : <CategoryIcon category={product.category} className={className} />
-}
-
 // Fixed aspect ratio so the page never jumps while images load.
-export function ProductImage({ product, src, className = '', ratio = 'aspect-[4/3]', iconSize = 'h-14 w-14', eager = false }) {
+export function ProductImage({ product, src, className = '', ratio = 'aspect-[4/3]', eager = false }) {
   const image = src ?? product.images?.[0]
   return (
     <div className={`${ratio} w-full overflow-hidden bg-surface-alt ${className}`}>
       {image ? (
         <img src={image} alt={product.name} loading={eager ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover" />
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#f5f5f6] text-primary" role="img" aria-label={`${product.name} (photo coming soon)`}>
-          <FallbackIcon product={product} className={`${iconSize} stroke-[1.25]`} />
-        </div>
+        <Illustration product={product} />
       )}
     </div>
   )
