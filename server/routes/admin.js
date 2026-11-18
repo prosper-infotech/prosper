@@ -10,6 +10,7 @@ import { shiprocketConfigured, createShiprocketOrder } from '../lib/shiprocket.j
 import { razorpayConfigured } from '../lib/razorpay.js'
 import { leadForwardingOn } from '../lib/crm.js'
 import { saveProductImage, readLocalUpload } from '../lib/storage.js'
+import { RANGE_PHOTOS } from '../../shared/range-photos.js'
 
 export async function me(request, _params, staff) {
   return json({
@@ -304,7 +305,49 @@ function missingFromCatalogue(categories, products) {
     categories: SEED_CATEGORIES.filter((c) => !categories.some((x) => x.slug === c.slug)).length,
     products: SEED_PRODUCTS.filter((p) => !skus.has(p.sku) && !slugs.has(p.slug)).length,
     unpriced: unpricedFromCatalogue(products).length,
+    photos: needPhotos(products).length,
   }
+}
+
+// Catalogue products with no photo yet that have photos on our second store.
+function needPhotos(products) {
+  return products.filter((p) => !(p.images || []).length && RANGE_PHOTOS[p.sku])
+}
+
+const PHOTO_HOST = 'https://cdn.shopify.com/'
+
+// Copies photos from our second store into our own photo storage, a few products
+// at a time so each call finishes well inside the server time limit. Call it
+// again until "left" is 0. Products that already have a photo are not touched.
+export async function copyCataloguePhotos(request, _params, staff) {
+  const body = await readJson(request).catch(() => ({}))
+  const limit = Math.min(Math.max(Number(body.limit) || 12, 1), 40)
+  const started = Date.now()
+  const todo = needPhotos(await db().select('products'))
+  let done = 0
+  const failed = []
+  for (let i = 0; i < todo.length && done < limit && Date.now() - started < 40_000; i += 4) {
+    await Promise.all(
+      todo.slice(i, Math.min(i + 4, i + limit - done)).map(async (p) => {
+        const urls = []
+        for (const src of RANGE_PHOTOS[p.sku].slice(0, 6)) {
+          if (!src.startsWith(PHOTO_HOST)) continue
+          try {
+            const res = await fetch(`${src}?width=1200`, { signal: AbortSignal.timeout(15_000) })
+            if (!res.ok) throw new Error(`HTTP ${res.status}`)
+            urls.push(await saveProductImage(Buffer.from(await res.arrayBuffer()), p.slug))
+          } catch (err) {
+            failed.push(`${p.sku}: ${err.message}`)
+          }
+        }
+        if (urls.length) await db().update('products', { id: p.id }, { images: urls, updated_at: new Date().toISOString() })
+        done += 1
+      })
+    )
+  }
+  const left = needPhotos(await db().select('products')).length
+  console.log(`[shop] ${staff?.email || 'staff'} copied photos for ${done} products, ${left} left${failed.length ? `, ${failed.length} failed` : ''}`)
+  return json({ done, left, failed: failed.slice(0, 20) })
 }
 
 // Products still without a price whose launch-catalogue entry now has one.

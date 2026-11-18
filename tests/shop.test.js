@@ -89,7 +89,8 @@ test('launch catalogue: staff can add what is missing, existing products are unt
   const gone = SEED_PRODUCTS.at(-1)
   await db().remove('products', { sku: gone.sku })
   const list = await admin('GET', '/api/admin/products')
-  assert.deepEqual(list.data.catalogue_missing, { categories: 0, products: 1, unpriced: 0 })
+  assert.equal(list.data.catalogue_missing.products, 1)
+  assert.equal(list.data.catalogue_missing.unpriced, 0)
   const done = await admin('POST', '/api/admin/catalogue/load', {})
   assert.deepEqual(done.data, { categories: 0, products: 1, priced: 0 })
   assert.equal((await admin('GET', '/api/admin/products')).data.catalogue_missing.products, 0)
@@ -104,6 +105,45 @@ test('launch catalogue: staff can add what is missing, existing products are unt
   assert.equal(after.find((p) => p.sku === range[0].sku).price_paise, range[0].price_paise)
   assert.equal(after.find((p) => p.sku === range[1].sku).price_paise, 4200)
   await db().update('products', { sku: range[1].sku }, { price_paise: range[1].price_paise })
+})
+
+test('catalogue photos: copied from the second store into our storage, staff only, photos you added are kept', async () => {
+  assert.equal((await api('POST', '/api/admin/catalogue/photos', {})).status, 401)
+  const { db } = await import('../server/lib/db.js')
+  const { RANGE_PHOTOS } = await import('../shared/range-photos.js')
+  const all = (await admin('GET', '/api/admin/products')).data
+  const want = all.products.filter((p) => !p.images.length && RANGE_PHOTOS[p.sku])
+  assert.equal(all.catalogue_missing.photos, want.length)
+  // Leave just three products needing photos, one of them with a photo of its own.
+  const keep = want.slice(0, 3)
+  for (const p of want.slice(3)) await db().update('products', { id: p.id }, { images: ['/x.jpg'] })
+  await db().update('products', { id: keep[2].id }, { images: ['/mine.jpg'] })
+  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==', 'base64')
+  const realFetch = globalThis.fetch
+  const asked = []
+  globalThis.fetch = async (url, opts) => {
+    if (String(url).startsWith('https://cdn.shopify.com/')) {
+      asked.push(String(url))
+      return new Response(png, { headers: { 'Content-Type': 'image/png' } })
+    }
+    return realFetch(url, opts)
+  }
+  try {
+    const res = await admin('POST', '/api/admin/catalogue/photos', { limit: 40 })
+    assert.equal(res.status, 200)
+    assert.deepEqual([res.data.done, res.data.left], [2, 0])
+  } finally {
+    globalThis.fetch = realFetch
+  }
+  assert.ok(asked.every((u) => u.endsWith('?width=1200')))
+  const after = (await admin('GET', '/api/admin/products')).data.products
+  for (const p of keep.slice(0, 2)) {
+    const got = after.find((x) => x.id === p.id).images
+    assert.equal(got.length, Math.min(RANGE_PHOTOS[p.sku].length, 6))
+    assert.match(got[0], /^\/api\/uploads\//)
+  }
+  assert.deepEqual(after.find((x) => x.id === keep[2].id).images, ['/mine.jpg'])
+  for (const p of want) await db().update('products', { id: p.id }, { images: [] })
   products = (await api('GET', '/api/shop/catalogue')).data.products
 })
 

@@ -44,6 +44,32 @@ export default function AdminProducts() {
     }
   }
 
+  const [photoProgress, setPhotoProgress] = useState('')
+  const copyPhotos = async () => {
+    if (!window.confirm(`Copy photos from the SRK store for ${missing.photos} product(s)? Products that already have a photo are not changed. This can take a few minutes; keep this page open.`)) return
+    setBusy(true)
+    setMessage({ kind: 'error', text: '' })
+    let total = 0
+    let left = missing.photos
+    try {
+      for (;;) {
+        const step = await api('/admin/catalogue/photos', { method: 'POST', body: { limit: 12 } })
+        const progressed = step.left < left
+        total += left - step.left
+        left = step.left
+        setPhotoProgress(`Copied photos for ${total} product(s), ${left} to go…`)
+        if (!left || !progressed) break
+      }
+      setMessage({ kind: 'ok', text: left ? `Copied photos for ${total} product(s). ${left} could not be copied; try again later.` : `Copied photos for ${total} product(s).` })
+      await reload()
+    } catch (err) {
+      setMessage({ kind: 'error', text: `${err.message} (${total} product(s) done before this; press the button again to continue.)` })
+    } finally {
+      setPhotoProgress('')
+      setBusy(false)
+    }
+  }
+
   const importCsv = async (e) => {
     const picked = e.target.files?.[0]
     e.target.value = ''
@@ -97,6 +123,23 @@ export default function AdminProducts() {
             <button type="button" onClick={loadCatalogue} disabled={busy} className={`${btn.navy} shrink-0 !py-2`}>
               {busy ? <Spinner /> : <Plus className="h-4 w-4" />}
               Update shop
+            </button>
+          </div>
+        </Card>
+      )}
+      {missing?.photos > 0 && (
+        <Card className="mb-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-ink-900">
+              {photoProgress || (
+                <>
+                  <strong>{missing.photos} product(s)</strong> have no photo yet, but photos are available on the SRK store. Copy them into the shop; illustrations stay as the backup for anything without a photo.
+                </>
+              )}
+            </p>
+            <button type="button" onClick={copyPhotos} disabled={busy} className={`${btn.navy} shrink-0 !py-2`}>
+              {busy ? <Spinner /> : <Download className="h-4 w-4" />}
+              Copy photos
             </button>
           </div>
         </Card>
