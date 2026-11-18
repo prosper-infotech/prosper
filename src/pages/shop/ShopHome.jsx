@@ -9,147 +9,143 @@ import ProductRow from '../../shop/components/ProductRow'
 import SectionTitle from '../../shop/components/SectionTitle'
 import TrustStrip from '../../shop/components/TrustStrip'
 import { CategoryIcon, PageLoading } from '../../shop/components/ui'
+import { HOME_DESCRIPTION, HOME_TITLE } from '../../../shared/seo.js'
+import { ALL_FAQS, faqLd } from '../../../shared/faq.js'
 import { btn } from '../../shop/format'
 import { track } from '../../shop/track'
 import { COMPANY_URL, SITE_URL } from '../../shop/site'
 import { formatINR, hasPrice, isOrderable } from '../../../shared/pricing.js'
 
-const FAQS = [
-  {
-    question: 'How do I order?',
-    answer:
-      'Add products that show a price to your cart and check out. You do not need an account. Products marked "Request price" are quoted by our team within one business day.',
-  },
-  {
-    question: 'Do prices include GST?',
-    answer: 'Yes. Every price on the shop includes GST. You can add your company name and GSTIN at checkout so they appear on your GST invoice.',
-  },
-  {
-    question: 'How can I pay?',
-    answer: 'You can pay online by card, UPI or net banking, or choose bank transfer or UPI and pay from your own bank app. We confirm your order by email as soon as the payment arrives.',
-  },
-  {
-    question: 'Where do you deliver?',
-    answer: 'We deliver across India by tracked courier. You get an email with the tracking link when your order ships.',
-  },
-  {
-    question: 'Can I get a price for a large quantity?',
-    answer: 'Yes. Use "Request bulk quote" on any product page and tell us the quantity. We reply with a price and delivery time within one business day.',
-  },
-  {
-    question: 'Will these products work with Prosper Asset Tracking?',
-    answer: 'Yes. Our tags, readers, scanners and printers are chosen to work together with Prosper Asset Tracking and our RFID software.',
-  },
-]
+// A few common questions; the full list is on the FAQ page.
+const FAQS = ['How do I order?', 'Do prices include GST?', 'How can I pay?', 'Where do you deliver?', 'Can I get a price for a large quantity?', 'Do you sell genuine branded products?']
+  .map((q) => ALL_FAQS.find((f) => f.question === q))
+  .filter(Boolean)
 
-// Flat pastel tiles for the category grid.
-const TILE_COLORS = ['bg-[#eef2f8]', 'bg-[#fff7d1]', 'bg-[#eaf6ee]', 'bg-[#fbeef0]', 'bg-[#f1eefb]', 'bg-[#e9f5f8]']
+// Pastel circles for the category grid.
+const CIRCLES = ['bg-[#e8eef8]', 'bg-[#fff6c7]', 'bg-[#e4f4ea]', 'bg-[#fbe9ec]', 'bg-[#eeeafb]', 'bg-[#e3f3f7]', 'bg-[#fdeedd]']
 
 export default function ShopHome() {
   const { ready, products, categories, config, requestQuote, recent } = useShop()
 
   const live = useMemo(() => categories.filter((c) => products.some((p) => p.category === c.slug)), [categories, products])
-  const inStock = useMemo(() => products.filter(isOrderable), [products])
+  const byCategory = useMemo(() => {
+    const map = new Map()
+    for (const p of products) {
+      if (!map.has(p.category)) map.set(p.category, [])
+      map.get(p.category).push(p)
+    }
+    // Featured first, then priced, then products with a photo.
+    const score = (p) => (p.is_featured ? 4 : 0) + (hasPrice(p) ? 2 : 0) + (p.images?.length ? 1 : 0)
+    for (const list of map.values()) list.sort((a, b) => score(b) - score(a))
+    return map
+  }, [products])
   const deals = useMemo(
     () => products.filter((p) => isOrderable(p) && p.mrp_paise > p.price_paise).sort((a, b) => b.mrp_paise / b.price_paise - a.mrp_paise / a.price_paise),
     [products]
   )
-  const featured = useMemo(() => {
-    const list = products.filter((p) => p.is_featured)
-    return list.length >= 4 ? list : products.slice(0, 10)
-  }, [products])
+  const inStock = useMemo(() => products.filter(isOrderable), [products])
   const recentlyViewed = useMemo(() => recent.map((id) => products.find((p) => p.id === id)).filter(Boolean), [recent, products])
-  const photos = useMemo(() => products.filter((p) => p.images?.[0]).map((p) => p.images[0]), [products])
+  const brands = useMemo(() => {
+    const count = new Map()
+    for (const p of products) if (p.brand && p.brand !== 'Prosper Infotech') count.set(p.brand, (count.get(p.brand) || 0) + 1)
+    return [...count.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14).map(([name]) => name)
+  }, [products])
   const lowest = useMemo(() => {
     const prices = products.filter(hasPrice).map((p) => p.price_paise)
     return prices.length ? Math.min(...prices) : null
   }, [products])
 
   const slides = useMemo(() => {
-    const tags = live.find((c) => c.slug === 'tags-labels') || live[0]
+    const pick = (...slugs) => slugs.map((s) => live.find((c) => c.slug === s)).filter(Boolean)
     return [
       {
         theme: 'navy',
         eyebrow: 'Prosper Infotech Shop',
-        title: 'RFID and barcode hardware, ready to order',
-        text: `Tags, readers, scanners and printers with GST invoice and tracked delivery across India.${lowest ? ` From ${formatINR(lowest)}.` : ''}`,
+        title: 'RFID, barcode and POS hardware in one place',
+        text: `${products.length}+ products from Zebra, Honeywell, TSC, Newland and more, with GST invoice and delivery across India.${lowest ? ` From ${formatINR(lowest)}.` : ''}`,
         cta: 'Shop all products',
         to: '/c/all',
-        images: photos.slice(0, 3),
-        icon: 'radio',
+        categories: pick('readers-antennas', 'barcode-scanners', 'printers-encoders'),
       },
-      tags && {
+      {
         theme: 'gold',
-        eyebrow: tags.name,
-        title: 'A tag for every surface',
-        text: 'Paper labels, on-metal tags, rugged outdoor tags and hang tags. Order a few to test, then scale up.',
-        cta: `Shop ${tags.name.toLowerCase()}`,
-        to: `/c/${tags.slug}`,
-        images: products.filter((p) => p.category === tags.slug && p.images?.[0]).map((p) => p.images[0]),
-        icon: tags.icon,
+        eyebrow: 'Retail & restaurants',
+        title: 'Billing made simple',
+        text: 'Touch POS terminals, handheld POS with printer, receipt printers, cash drawers and self-order kiosks.',
+        cta: 'Shop POS & kiosks',
+        to: '/c/pos-kiosks',
+        categories: pick('pos-kiosks', 'consumables-spares', 'barcode-scanners'),
       },
       {
         theme: 'light',
-        eyebrow: 'Bulk and business orders',
-        title: 'Buying in quantity? Get a better price',
-        text: 'Tell us the product and how many. We reply with a quantity price and delivery time within one business day.',
-        cta: 'Request bulk quote',
-        onClick: () => requestQuote('Bulk order'),
-        icon: 'printer',
+        eyebrow: 'Security & access',
+        title: 'Know who comes in, and what goes out',
+        text: 'Attendance terminals, door access control, EAS anti-theft systems, boom barriers and turnstiles.',
+        cta: 'Shop security',
+        to: '/c/security-access',
+        categories: pick('security-access', 'smart-cards-nfc', 'tags-labels'),
       },
-    ].filter(Boolean)
-  }, [live, photos, products, lowest, requestQuote])
+      {
+        theme: 'navy',
+        eyebrow: 'Bulk & corporate orders',
+        title: 'Buying in quantity? Get a better price',
+        text: 'Tell us the products and quantities. We reply with a price and delivery time within one business day.',
+        cta: 'Request a bulk quote',
+        to: '/bulk-order',
+        categories: pick('tags-labels', 'smart-cards-nfc', 'consumables-spares'),
+      },
+    ]
+  }, [live, products.length, lowest])
 
   const schema = useMemo(
     () => ({
       '@context': 'https://schema.org',
       '@graph': [
         { '@type': 'WebSite', name: 'Prosper Infotech Shop', url: `${SITE_URL}/` },
-        { '@type': 'FAQPage', mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })) },
+        faqLd(FAQS),
       ],
     }),
     []
   )
-  useDocumentTitle(
-    'Buy RFID Tags, Readers & Barcode Scanners | Prosper Shop',
-    'Order UHF RFID tags and labels, RFID readers and antennas, barcode scanners and label printers online. Prices include GST, delivery across India.',
-    schema
-  )
+  useDocumentTitle(HOME_TITLE, HOME_DESCRIPTION, schema)
 
   useEffect(() => {
+    const featured = products.filter((p) => p.is_featured)
     if (featured.length) track.viewItemList('Shop home: featured', featured)
-  }, [featured])
+  }, [products])
 
   if (!ready) return <PageLoading label="Loading the shop" />
-  const whatsapp = `https://wa.me/${config.whatsapp_number}?text=${encodeURIComponent("Hi, I'd like help choosing RFID or barcode products from your shop.")}`
+  const whatsapp = `https://wa.me/${config.whatsapp_number}?text=${encodeURIComponent("Hi, I'd like help choosing products from your shop.")}`
   const wrap = 'mx-auto max-w-[1400px] px-4 lg:px-8'
 
   return (
-    <div className="pb-14">
-      <h1 className="sr-only">Prosper Infotech Shop: RFID tags, readers, barcode scanners and printers</h1>
+    <div className="bg-[#f7f8fa] pb-14">
+      <h1 className="sr-only">Prosper Infotech Shop: RFID, barcode, POS and security hardware online</h1>
       <HeroCarousel slides={slides} />
 
-      <div className={`${wrap} mt-12 flex flex-col gap-14`}>
+      <div className={`${wrap} flex flex-col gap-12`}>
+        <TrustStrip className="relative z-10 -mt-6 shadow-[0_6px_24px_rgba(20,52,109,0.08)] md:-mt-8" />
+
         <section aria-label="Shop by category">
-          <SectionTitle title="Shop by category" />
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+          <SectionTitle title="Shop by category" action={<Link to="/c/all">All products</Link>} />
+          <ul className="grid grid-cols-3 gap-x-3 gap-y-6 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11">
             {live.map((cat, i) => {
-              const items = products.filter((p) => p.category === cat.slug)
+              const items = byCategory.get(cat.slug) || []
               const photo = items.find((p) => p.images?.[0])?.images[0]
-              const from = items.filter(hasPrice).map((p) => p.price_paise)
               return (
                 <li key={cat.slug}>
-                  <Link to={`/c/${cat.slug}`} className={`group flex h-full flex-col items-center px-4 pb-5 pt-6 text-center ${TILE_COLORS[i % TILE_COLORS.length]}`}>
-                    <span className="flex aspect-square w-full max-w-[150px] items-center justify-center overflow-hidden rounded-full bg-white">
+                  <Link to={`/c/${cat.slug}`} className="group flex flex-col items-center text-center">
+                    <span
+                      className={`flex aspect-square w-full max-w-[104px] items-center justify-center overflow-hidden rounded-full border-2 border-transparent transition-colors group-hover:border-gold ${CIRCLES[i % CIRCLES.length]}`}
+                    >
                       {photo ? (
-                        <img src={photo} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                        <img src={photo} alt="" loading="lazy" className="h-full w-full object-cover" />
                       ) : (
-                        <CategoryIcon category={cat} className="h-14 w-14 stroke-[1.25] text-primary" />
+                        <CategoryIcon category={cat} className="h-10 w-10 stroke-[1.4] text-primary transition-transform duration-200 group-hover:scale-110" />
                       )}
                     </span>
-                    <span className="mt-4 text-sm font-extrabold uppercase tracking-wider text-ink-900">{cat.name}</span>
-                    <span className="mt-1 text-xs text-[#696e79]">{from.length ? `From ${formatINR(Math.min(...from))}` : `${items.length} products`}</span>
-                    <span className="mt-2 text-xs font-bold uppercase tracking-wider text-primary group-hover:underline">Shop now</span>
+                    <span className="mt-2.5 text-[13px] font-bold leading-tight text-ink-900 group-hover:text-primary">{cat.name}</span>
+                    <span className="mt-0.5 text-[11px] text-[#7e818c]">{items.length} products</span>
                   </Link>
                 </li>
               )
@@ -158,21 +154,25 @@ export default function ShopHome() {
         </section>
 
         <ProductRow title="Deals of the day" subtitle="Priced below MRP while stock lasts" products={deals} minimum={3} viewAllTo="/c/all?stock=1&sort=price-asc" />
-        <ProductRow title="Ready to ship" subtitle="In stock and dispatched after payment" products={inStock} minimum={2} viewAllTo="/c/all?stock=1" />
+        <ProductRow title="Ready to ship" subtitle="In stock and dispatched after payment" products={inStock} minimum={5} viewAllTo="/c/all?stock=1" />
+
+        {live.slice(0, 4).map((cat) => (
+          <ProductRow key={cat.slug} title={cat.name} products={byCategory.get(cat.slug) || []} viewAllTo={`/c/${cat.slug}`} />
+        ))}
 
         <section className="grid gap-4 md:grid-cols-2">
-          <div className="flex flex-col justify-center bg-primary px-8 py-10 text-white">
-            <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-gold">Bulk &amp; business orders</p>
+          <div className="flex flex-col justify-center rounded-lg bg-primary px-8 py-10 text-white">
+            <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-gold">Bulk &amp; corporate orders</p>
             <h2 className="mt-3 text-2xl font-extrabold !text-white md:text-3xl">Buying in quantity?</h2>
-            <p className="mt-2 max-w-sm text-white/80">Tell us the product and how many. We reply with a quantity price within one business day.</p>
-            <button type="button" onClick={() => requestQuote('Bulk order')} className={`${btn.gold} mt-6 self-start`}>
+            <p className="mt-2 max-w-sm text-white/80">Send your list of products and quantities. We reply with a price and delivery time within one business day.</p>
+            <Link to="/bulk-order" className={`${btn.gold} mt-6 self-start`}>
               Request bulk quote
-            </button>
+            </Link>
           </div>
-          <div className="flex flex-col justify-center bg-gold px-8 py-10 text-primary">
+          <div className="flex flex-col justify-center rounded-lg bg-gold px-8 py-10 text-primary">
             <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-primary/70">Free expert advice</p>
             <h2 className="mt-3 text-2xl font-extrabold md:text-3xl">Not sure what fits?</h2>
-            <p className="mt-2 max-w-sm text-primary/80">Send a photo of what you track. The team that installs RFID will suggest the right tags and readers.</p>
+            <p className="mt-2 max-w-sm text-primary/80">Tell us what you want to track, bill or secure. Our engineers suggest the right hardware.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <button type="button" onClick={() => requestQuote('Not sure, need guidance')} className={btn.navy}>
                 Get advice
@@ -191,16 +191,32 @@ export default function ShopHome() {
           </div>
         </section>
 
-        <ProductRow title="Featured products" products={featured} viewAllTo="/c/all" />
-        {live.slice(0, 3).map((cat) => (
-          <ProductRow key={cat.slug} title={cat.name} products={products.filter((p) => p.category === cat.slug)} viewAllTo={`/c/${cat.slug}`} />
+        {live.slice(4).map((cat) => (
+          <ProductRow key={cat.slug} title={cat.name} products={byCategory.get(cat.slug) || []} viewAllTo={`/c/${cat.slug}`} />
         ))}
+
+        {brands.length > 0 && (
+          <section aria-label="Shop by brand">
+            <SectionTitle title="Shop by brand" action={<Link to="/brands">All brands</Link>} />
+            <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-7">
+              {brands.map((b) => (
+                <li key={b}>
+                  <Link
+                    to={`/c/all?brand=${encodeURIComponent(b)}`}
+                    className="flex h-16 items-center justify-center rounded-lg border border-[#eaeaec] bg-white px-3 text-center text-sm font-extrabold uppercase tracking-wide text-primary transition-colors hover:border-primary"
+                  >
+                    {b}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <ProductRow title="Recently viewed" products={recentlyViewed} />
 
-        <TrustStrip />
-
         <section className="mx-auto w-full max-w-3xl">
-          <SectionTitle title="Common questions" />
+          <SectionTitle title="Common questions" action={<Link to="/faq">All FAQs</Link>} />
           <FAQAccordion items={FAQS} />
           <p className="mt-6 text-sm text-[#696e79]">
             Need the hardware installed or connected to software? See{' '}

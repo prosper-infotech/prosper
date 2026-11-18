@@ -7,6 +7,9 @@ import { hasPrice, isOrderable } from './pricing.js'
 // and as fallbacks in the browser. Keyed by product SKU and category slug.
 
 export const SHOP_NAME = 'Prosper Infotech Shop'
+export const HOME_TITLE = 'RFID, Barcode, POS & Security Hardware Online | Prosper'
+export const HOME_DESCRIPTION =
+  'Buy RFID tags and readers, smart cards, barcode scanners, label printers, ribbons, POS machines and access control online. GST invoice, India delivery.'
 
 export const CATEGORY_SEO = {
   'tags-labels': {
@@ -26,15 +29,15 @@ export const CATEGORY_SEO = {
   'barcode-scanners': {
     title: 'Barcode Scanners – 1D, 2D & QR, Buy Online | Prosper',
     description:
-      'Wired, wireless, tabletop and fixed-mount barcode scanners plus Android mobile computers. Reads 1D, 2D and QR codes. Delivery across India.',
+      'Zebra, Honeywell, Newland, Datalogic and Retsol wired, wireless, tabletop and fixed-mount barcode scanners for 1D, 2D and QR codes. India delivery.',
     intro:
       'Barcode and QR scanners are a low-cost way to track stock, parcels and documents. Pick by where you scan: at a desk, on the move or on a conveyor.',
   },
   'printers-encoders': {
-    title: 'RFID & Barcode Label Printers – Buy Online | Prosper',
+    title: 'Barcode, Receipt, RFID & ID Card Printers | Prosper',
     description:
-      'Desktop and industrial RFID printer-encoders, thermal barcode label printers, blank RFID labels and ribbons. GST invoice, delivery across India.',
-    intro: 'Print and encode your own RFID and barcode labels in-house, from a few labels a day to thousands, with the matching labels and ribbons.',
+      'Zebra, TSC, TVS and Honeywell barcode label printers, industrial and RFID printers, receipt, mobile and ID card printers. GST invoice, India delivery.',
+    intro: 'Print barcode labels, receipts and ID cards in-house, from a few a day to thousands, on desktop, industrial, mobile and RFID printers.',
   },
   'edge-iot': {
     title: 'AI Edge Box & Industrial IoT Gateway | Prosper Infotech',
@@ -42,10 +45,51 @@ export const CATEGORY_SEO = {
       'AI edge computers and industrial IoT gateways for vision, RFID and sensor projects. Sold with set-up support. Request a price from Prosper Infotech.',
     intro: 'Edge AI boxes and industrial gateways for projects that need computing on site. Sold by quote with set-up support from our engineers.',
   },
-  all: {
-    title: 'All RFID & Barcode Products – Shop Online | Prosper',
+  'smart-cards-nfc': {
+    title: 'RFID Smart Cards, NFC Tags & Card Readers | Prosper',
     description:
-      'Shop every RFID tag, RFID reader, antenna, barcode scanner and label printer from Prosper Infotech. Prices include GST, delivery across India.',
+      'Buy MIFARE, proximity and NFC cards, NFC stickers and tags, NFC business cards and smart card readers online. Bulk prices, GST invoice, India delivery.',
+    intro:
+      'Contactless cards and NFC tags for access control, ID, attendance and digital business cards, plus the desktop readers that read and write them.',
+  },
+  'mobile-computers': {
+    title: 'Android Mobile Computers & Data Collectors | Prosper',
+    description:
+      'Zebra, Honeywell and Newland Android mobile computers, pocket data collectors and rugged tablets with built-in barcode scanners. Delivery across India.',
+    intro:
+      'Handheld computers with a built-in scanner for stock counts, picking, deliveries and field audits, plus pocket data collectors and rugged tablets.',
+  },
+  'consumables-spares': {
+    title: 'Barcode Ribbons, Labels, Paper Rolls & Print Heads | Prosper',
+    description:
+      'Wax, wax-resin and resin ribbons, barcode label rolls, thermal paper rolls, ID card ribbons and replacement print heads. Bulk prices, GST invoice.',
+    intro:
+      'Everything your printers use up: thermal transfer ribbons, label and paper rolls, card printer ribbons and replacement print heads for popular models.',
+  },
+  'pos-kiosks': {
+    title: 'POS Machines, Billing Systems & Self-Order Kiosks | Prosper',
+    description:
+      'Windows and Android POS terminals, handheld POS, customer displays, cash drawers and self-service kiosks for retail and restaurants. India delivery.',
+    intro:
+      'Billing hardware for shops and restaurants: touch POS terminals, handheld POS with printer, customer displays, cash drawers and self-order kiosks.',
+  },
+  'security-access': {
+    title: 'Access Control, Attendance, EAS & Boom Barriers | Prosper',
+    description:
+      'Biometric attendance machines, door access controllers, EM locks, EAS anti-theft tags and gates, boom barriers, turnstiles and Aadhaar fingerprint scanners.',
+    intro:
+      'Control who comes in and what goes out: attendance and access control terminals, door hardware, retail EAS anti-theft systems, boom barriers and turnstiles.',
+  },
+  'office-equipment': {
+    title: 'Paper Shredders, Note Counters, Laminators & Safes | Prosper',
+    description:
+      'GBC and Gobbler paper shredders, note counting machines with fake note detection, laminators and Godrej electronic lockers. Buy online, GST invoice.',
+    intro: 'Office machines that protect documents and cash: shredders, note counting machines, laminators and electronic safe lockers.',
+  },
+  all: {
+    title: 'All Products – RFID, Barcode, POS & Security | Prosper',
+    description:
+      'Shop RFID tags and readers, smart cards, barcode scanners, printers, ribbons, POS machines, access control and office equipment. GST invoice, India delivery.',
     intro: 'Every product in the shop. Prices include GST. Products without a price are quoted within one business day.',
   },
 }

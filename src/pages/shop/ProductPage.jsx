@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Download, FileText, MessageCircle, PackageSearch, RotateCcw, ShieldCheck, ShoppingBag, Truck } from 'lucide-react'
+import { BadgeCheck, Boxes, Clock, CreditCard, Download, FileText, MessageCircle, PackageSearch, RotateCcw, ShieldCheck, ShoppingBag, Truck } from 'lucide-react'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { useShop } from '../../shop/shopContext'
 import ProductRow from '../../shop/components/ProductRow'
@@ -8,7 +8,8 @@ import { Crumbs, EmptyState, PageLoading, ProductImage, QtyStepper } from '../..
 import { btn } from '../../shop/format'
 import { track } from '../../shop/track'
 import { COMPANY_URL, SITE_URL } from '../../shop/site'
-import { formatINR, hasPrice, isOrderable } from '../../../shared/pricing.js'
+import { formatINR, gstIncluded, hasPrice, isOrderable } from '../../../shared/pricing.js'
+import { api } from '../../shop/api'
 import { deliveryEstimate, PINCODE_RE } from '../../../shared/india.js'
 import { breadcrumbLd, productLd, productMeta } from '../../../shared/seo.js'
 
@@ -64,32 +65,67 @@ function DeliveryCheck() {
   )
 }
 
-// Photos: a two-column grid when there are several (like Myntra), one large photo otherwise.
+// Photos: thumbnails down the side and one large photo, like a store product page.
 function Gallery({ product }) {
   const images = product.images || []
-  if (images.length > 1) {
+  const [active, setActive] = useState(0)
+  if (images.length < 2) {
     return (
-      <div className="grid grid-cols-2 gap-2">
-        {images.map((src) => (
-          <div key={src} className="overflow-hidden">
-            <img src={src} alt={product.name} loading="lazy" className="aspect-[4/5] w-full object-cover transition-transform duration-500 hover:scale-105" />
-          </div>
-        ))}
+      <div className="overflow-hidden rounded-lg border border-[#eaeaec] bg-white p-4">
+        <ProductImage product={product} ratio="aspect-square" iconSize="h-28 w-28" eager />
       </div>
     )
   }
   return (
-    <div className="overflow-hidden">
-      <ProductImage product={product} ratio="aspect-[4/5] sm:aspect-square" iconSize="h-24 w-24" eager />
+    <div className="flex flex-col-reverse gap-3 sm:flex-row">
+      <ul className="flex gap-2 overflow-x-auto sm:w-20 sm:flex-col sm:overflow-visible">
+        {images.map((src, i) => (
+          <li key={src} className="shrink-0">
+            <button
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`Show photo ${i + 1}`}
+              aria-current={i === active ? 'true' : undefined}
+              className={`block w-16 overflow-hidden rounded-md border-2 bg-white sm:w-20 ${i === active ? 'border-primary' : 'border-[#eaeaec] hover:border-[#c5c7cf]'}`}
+            >
+              <img src={src} alt="" loading="lazy" className="aspect-square w-full object-cover" />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div className="flex-1 overflow-hidden rounded-lg border border-[#eaeaec] bg-white p-4">
+        <ProductImage product={product} src={images[active]} ratio="aspect-square" eager />
+      </div>
     </div>
   )
 }
+
+const PRESETS = [1, 5, 50, 100]
+const RFID_FAMILY = ['tags-labels', 'readers-antennas', 'smart-cards-nfc', 'barcode-scanners', 'mobile-computers', 'printers-encoders']
+const BADGES = [
+  { icon: BadgeCheck, text: 'Genuine products' },
+  { icon: FileText, text: 'GST invoice' },
+  { icon: CreditCard, text: 'Secure payment' },
+  { icon: ShieldCheck, text: 'Warranty support' },
+]
 
 export default function ProductPage() {
   const { slug } = useParams()
   const { ready, products, categories, config, add, requestQuote, recent, addRecent } = useShop()
   const navigate = useNavigate()
-  const product = products.find((p) => p.slug === slug) || null
+  const listed = products.find((p) => p.slug === slug) || null
+  const [detail, setDetail] = useState(null)
+  useEffect(() => {
+    if (!listed || listed.long_description !== undefined) return undefined
+    let live = true
+    api(`/shop/product/${encodeURIComponent(listed.slug)}`)
+      .then((full) => live && setDetail(full))
+      .catch(() => {})
+    return () => {
+      live = false
+    }
+  }, [listed])
+  const product = useMemo(() => (listed && detail?.slug === listed.slug ? { ...listed, ...detail } : listed), [listed, detail])
   const category = categories.find((c) => c.slug === product?.category) || null
   const orderable = isOrderable(product)
   const min = Math.max(1, product?.min_order_qty || 1)
@@ -168,28 +204,44 @@ export default function ProductPage() {
     { icon: ShieldCheck, text: 'Covered by manufacturer warranty', to: '/warranty' },
   ]
   const heading = 'text-sm font-extrabold uppercase tracking-[0.15em] !text-ink-900'
+  const quoteName = qty > 1 ? `${product.name} (quantity ${qty})` : product.name
 
   return (
     <div className="mx-auto max-w-[1400px] px-4 pb-28 pt-5 lg:px-8 lg:pb-14">
       <Crumbs items={[{ label: 'Home', to: '/' }, ...(category ? [{ label: category.name, to: `/c/${category.slug}` }] : []), { label: product.name }]} />
 
       <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-12">
-        <Gallery key={product.id} product={product} />
+        <div className="self-start lg:sticky lg:top-[140px]">
+          <Gallery key={product.id} product={product} />
+        </div>
 
         <div>
-          <p className="text-xl font-bold text-ink-900 md:text-2xl">{product.brand || 'Prosper Infotech'}</p>
-          <h1 className="mt-1 text-lg font-normal !text-[#535766] md:text-xl">{product.name}</h1>
-          <p className="mt-1 text-xs text-[#94969f]">SKU {product.sku}</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-gold-dark">{product.brand || 'Prosper Infotech'}</p>
+          <h1 className="mt-1.5 text-xl font-extrabold leading-snug !text-primary md:text-[26px]">{product.name}</h1>
+          <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#7e818c]">
+            <span>SKU: {product.sku}</span>
+            {category && (
+              <span>
+                Category:{' '}
+                <Link to={`/c/${category.slug}`} className="font-semibold text-primary hover:underline">
+                  {category.name}
+                </Link>
+              </span>
+            )}
+          </p>
 
           <div className="mt-4 border-t border-[#eaeaec] pt-4">
             {priced ? (
               <>
                 <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="text-2xl font-bold text-ink-900">{formatINR(product.price_paise)}</span>
-                  {saving > 0 && <span className="text-lg text-[#535766]">MRP <span className="line-through">{formatINR(product.mrp_paise)}</span></span>}
-                  {saving > 0 && <span className="text-lg font-bold text-[#ff905a]">({saving}% OFF)</span>}
+                  <span className="text-3xl font-extrabold text-primary">{formatINR(product.price_paise)}</span>
+                  <span className="text-sm font-semibold text-[#535766]">incl. GST</span>
+                  {saving > 0 && <span className="text-base text-[#7e818c]">MRP <span className="line-through">{formatINR(product.mrp_paise)}</span></span>}
+                  {saving > 0 && <span className="rounded bg-[#d6262f] px-2 py-0.5 text-xs font-bold text-white">{saving}% off</span>}
                 </p>
-                <p className="mt-1 text-sm font-bold text-[#03a685]">Inclusive of all taxes</p>
+                <p className="mt-1 text-sm text-[#535766]">
+                  {formatINR(product.price_paise - gstIncluded(product.price_paise, product.gst_percent))} + GST ({Number(product.gst_percent) || 0}%) · GST invoice included
+                </p>
               </>
             ) : (
               <>
@@ -197,21 +249,37 @@ export default function ProductPage() {
                 <p className="mt-1 text-sm text-[#535766]">Sold by quote. We reply with price and delivery time within one business day.</p>
               </>
             )}
-            <p className={`mt-2 text-sm font-bold ${orderable ? (product.stock_qty <= 5 ? 'text-[#ff905a]' : 'text-[#03a685]') : 'text-[#535766]'}`}>
-              {orderable ? (product.stock_qty <= 5 ? `Only ${product.stock_qty} left` : 'In stock') : priced ? 'Out of stock' : 'Available on quote'}
-            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+              <span className={`font-bold ${orderable ? (product.stock_qty <= 5 ? 'text-[#d9480f]' : 'text-[#0f8a5f]') : 'text-[#535766]'}`}>
+                {orderable ? (product.stock_qty <= 5 ? `Only ${product.stock_qty} left` : 'In stock') : priced ? 'Out of stock' : 'Available on quote'}
+              </span>
+              <span className="flex items-center gap-1.5 text-[#535766]">
+                <Clock className="h-4 w-4 text-primary" aria-hidden="true" />
+                {orderable ? 'Dispatched in 1 to 2 working days' : 'Dispatch time confirmed with your quote'}
+              </span>
+            </div>
           </div>
 
-          {orderable && (
-            <div className="mt-6">
-              <p className={heading}>
-                Quantity {min > 1 && <span className="ml-1 text-xs font-normal normal-case tracking-normal text-[#94969f]">(minimum {min})</span>}
-              </p>
-              <div className="mt-3">
-                <QtyStepper value={qty} min={min} max={product.stock_qty} onChange={setQty} />
-              </div>
+          <div className="mt-6">
+            <p className={heading}>
+              Quantity {min > 1 && <span className="ml-1 text-xs font-normal normal-case tracking-normal text-[#94969f]">(minimum {min})</span>}
+            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {PRESETS.filter((n) => n >= min && (!orderable || n <= product.stock_qty)).map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setQty(n)}
+                  aria-pressed={qty === n}
+                  className={`h-11 min-w-12 rounded-md border px-3 text-sm font-bold transition-colors ${qty === n ? 'border-primary bg-primary text-white' : 'border-[#d4d5d9] bg-white text-ink-900 hover:border-primary'}`}
+                >
+                  {n}
+                </button>
+              ))}
+              <QtyStepper value={qty} min={min} max={orderable ? product.stock_qty : 99999} onChange={setQty} />
             </div>
-          )}
+            {priced && qty > 1 && <p className="mt-2 text-sm text-[#535766]">Total for {qty}: <strong className="text-primary">{formatINR(product.price_paise * qty)}</strong> incl. GST</p>}
+          </div>
 
           <div className="mt-6 flex gap-3">
             {orderable ? (
@@ -225,10 +293,30 @@ export default function ProductPage() {
                 </button>
               </>
             ) : (
-              <button type="button" onClick={() => requestQuote(product.name)} className={`${btn.navy} w-full !py-4 !text-sm sm:w-auto sm:min-w-[280px]`}>
+              <button type="button" onClick={() => requestQuote(quoteName)} className={`${btn.navy} w-full !py-4 !text-sm sm:w-auto sm:min-w-[280px]`}>
                 {priced ? 'Notify me when back' : 'Request price'}
               </button>
             )}
+          </div>
+
+          <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {BADGES.map(({ icon: Icon, text }) => (
+              <li key={text} className="flex flex-col items-center gap-1.5 rounded-lg border border-[#eaeaec] bg-white px-2 py-3 text-center text-xs font-semibold text-ink-900">
+                <Icon className="h-6 w-6 stroke-[1.5] text-primary" aria-hidden="true" />
+                {text}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 flex flex-col gap-3 rounded-lg border border-gold bg-surface-alt p-4 sm:flex-row sm:items-center">
+            <Boxes className="h-9 w-9 shrink-0 text-primary" aria-hidden="true" />
+            <div className="flex-1">
+              <p className="font-bold text-primary">Need a larger quantity?</p>
+              <p className="text-sm text-[#535766]">Get a bulk price for 50 units or more, with delivery to one or many sites.</p>
+            </div>
+            <Link to={`/bulk-order?product=${encodeURIComponent(product.slug)}&qty=${Math.max(qty, 50)}`} className={`${btn.navy} shrink-0`}>
+              Bulk quote
+            </Link>
           </div>
 
           <div className="mt-8 border-t border-[#eaeaec] pt-6">
@@ -252,7 +340,7 @@ export default function ProductPage() {
           <div className="mt-8 border-t border-[#eaeaec] pt-6">
             <h2 className={heading}>Product details</h2>
             <div className="mt-3 flex flex-col gap-3 text-[15px] leading-relaxed text-ink-900">
-              {(product.long_description || product.short_description).split(/\n{2,}/).map((para) => (
+              {(product.long_description || product.short_description || '').split(/\n{2,}/).map((para) => (
                 <p key={para} className="whitespace-pre-line">
                   {para}
                 </p>
@@ -262,21 +350,13 @@ export default function ProductPage() {
             {product.specs?.length > 0 && (
               <>
                 <h3 className="mt-6 text-sm font-bold text-ink-900">Specifications</h3>
-                <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-4">
-                  {product.specs.map((spec) => (
-                    <div key={spec.label} className="border-b border-[#eaeaec] pb-2">
-                      <dt className="text-xs text-[#7e818c]">{spec.label}</dt>
-                      <dd className="mt-0.5 text-sm text-ink-900">{spec.value}</dd>
+                <dl className="mt-3 overflow-hidden rounded-lg border border-[#eaeaec] text-sm">
+                  {[...product.specs, ...(product.hsn_code ? [{ label: 'HSN code', value: `${product.hsn_code} (GST ${product.gst_percent}%)` }] : [])].map((spec, i) => (
+                    <div key={spec.label} className={`grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] ${i ? 'border-t border-[#eaeaec]' : ''}`}>
+                      <dt className="bg-[#f7f8fa] px-3 py-2.5 font-semibold text-[#535766]">{spec.label}</dt>
+                      <dd className="px-3 py-2.5 text-ink-900">{spec.value}</dd>
                     </div>
                   ))}
-                  {product.hsn_code && (
-                    <div className="border-b border-[#eaeaec] pb-2">
-                      <dt className="text-xs text-[#7e818c]">HSN code</dt>
-                      <dd className="mt-0.5 text-sm text-ink-900">
-                        {product.hsn_code} (GST {product.gst_percent}%)
-                      </dd>
-                    </div>
-                  )}
                 </dl>
               </>
             )}
@@ -290,10 +370,6 @@ export default function ProductPage() {
           </div>
 
           <div className="mt-8 flex flex-col gap-3 border-t border-[#eaeaec] pt-6 text-sm">
-            <button type="button" onClick={() => requestQuote(`${product.name} (bulk order)`)} className="inline-flex items-center gap-2 self-start font-bold text-primary hover:underline">
-              <FileText className="h-4 w-4" />
-              Buying in bulk? Request a quantity price
-            </button>
             <a
               href={whatsapp}
               target="_blank"
@@ -304,6 +380,7 @@ export default function ProductPage() {
               <MessageCircle className="h-4 w-4" />
               Ask a question on WhatsApp
             </a>
+            {RFID_FAMILY.includes(product.category) && (
             <p className="text-[#696e79]">
               Works with{' '}
               <a href={`${COMPANY_URL}/products/software/asset-tracking`} target="_blank" rel="noopener noreferrer" className="font-bold text-primary hover:underline">
@@ -315,6 +392,7 @@ export default function ProductPage() {
               </a>{' '}
               can help.
             </p>
+            )}
           </div>
         </div>
       </div>
@@ -337,7 +415,7 @@ export default function ProductPage() {
             </button>
           </>
         ) : (
-          <button type="button" onClick={() => requestQuote(product.name)} className="flex-1 bg-primary py-4 text-[13px] font-bold uppercase tracking-wider text-white">
+          <button type="button" onClick={() => requestQuote(quoteName)} className="flex-1 bg-primary py-4 text-[13px] font-bold uppercase tracking-wider text-white">
             {priced ? 'Notify me when back' : 'Request price'}
           </button>
         )}

@@ -34,6 +34,8 @@ const { handle } = await import('../server/router.js')
 const { createSessionToken } = await import('../server/lib/auth.js')
 const { parseCsv, toCsv } = await import('../shared/csv.js')
 const { priceCart, gstIncluded } = await import('../shared/pricing.js')
+const { SEED_PRODUCTS } = await import('../shared/catalogue.js')
+const SEEDED = SEED_PRODUCTS.length
 
 const staffCookie = `pi_staff=${createSessionToken('owner@example.com', 'staff')}`
 async function api(method, url, body, headers = {}) {
@@ -67,9 +69,37 @@ before(async () => {
   products = (await api('GET', '/api/shop/catalogue')).data.products
 })
 
-test('catalogue: 19 placeholder products, none with a price', () => {
-  assert.equal(products.length, 19)
+test('catalogue: every seeded product, none with a price; lists carry no long text', async () => {
+  assert.equal(products.length, SEEDED)
+  assert.ok(SEEDED > 500)
   assert.ok(products.every((p) => p.price_paise === null))
+  assert.ok(products.every((p) => p.long_description === undefined && p.seo_description === undefined))
+  assert.equal(new Set(products.map((p) => p.slug)).size, SEEDED)
+  const full = await api('GET', '/api/shop/product/handheld-uhf-rfid-reader')
+  assert.equal(full.status, 200)
+  assert.match(full.data.long_description, /handheld UHF RFID reader/i)
+  assert.equal((await api('GET', '/api/shop/product/nope')).status, 404)
+})
+
+test('enquiry: emailed to sales, checked, and bots are ignored quietly', async () => {
+  const ok = await api('POST', '/api/shop/enquiry', {
+    name: 'Ravi Shah',
+    email: 'ravi@example.com',
+    phone: '98200 00000',
+    company: 'Shah Retail',
+    items: [{ product: 'Zebra ZD421 Direct Thermal & Thermal Transfer Desktop Printer', qty: 12 }],
+    message: 'Delivery to Mumbai and Pune.',
+  })
+  assert.equal(ok.status, 200)
+  const mail = lastMail('enquiry')
+  assert.deepEqual(mail.to, ['sales@example.com'])
+  assert.match(mail.subject, /Bulk enquiry: Zebra ZD421/)
+  assert.match(mail.text, /x 12/)
+  assert.equal((await api('POST', '/api/shop/enquiry', { name: 'X', email: 'not-an-email', product: 'A' })).status, 400)
+  assert.equal((await api('POST', '/api/shop/enquiry', { name: 'X', email: 'x@example.com' })).status, 400)
+  const before = outbox().length
+  assert.equal((await api('POST', '/api/shop/enquiry', { name: 'Bot', email: 'bot@example.com', product: 'A', website: 'http://spam' })).status, 200)
+  assert.equal(outbox().length, before)
 })
 
 test('a payment method is refused until it is set up', async () => {
@@ -340,12 +370,12 @@ test('CSV: quotes, commas and new lines survive a round trip', () => {
 test('product CSV: export, edit, dry run and import; bad rows block the whole file', async () => {
   const csv = (await admin('GET', '/api/admin/products-export.csv')).data
   const rows = parseCsv(csv)
-  assert.equal(rows.length, 19)
+  assert.equal(rows.length, SEEDED)
   const edited = rows.map((r) => (r.sku === 'PI-TAG-002' ? { ...r, price: '250.50', stock_qty: '40' } : r))
   edited.push({ ...rows[0], sku: 'PI-NEW-001', slug: 'new-test-product', name: 'New Test Product', price: '99', stock_qty: '5' })
   const out = toCsv(Object.keys(rows[0]), edited)
   const dry = await admin('POST', '/api/admin/products/import', { csv: out, dry_run: true })
-  assert.deepEqual([dry.data.created, dry.data.updated], [1, 19])
+  assert.deepEqual([dry.data.created, dry.data.updated], [1, SEEDED])
   assert.equal((await product('on-metal-rfid-tags')).price_paise, null)
   assert.equal((await admin('POST', '/api/admin/products/import', { csv: out })).status, 200)
   assert.equal((await product('on-metal-rfid-tags')).price_paise, 25050)
@@ -475,7 +505,16 @@ test('page HTML: product, category, home, private and unknown pages', async () =
     assert.match(cat.html, /"@type":"ItemList"/)
 
     const home = await page('')
-    assert.match(home.html, /<title>Buy RFID Tags, Readers &amp; Barcode Scanners \| Prosper Shop<\/title>/)
+    assert.match(home.html, /<title>RFID, Barcode, POS &amp; Security Hardware Online \| Prosper<\/title>/)
+    assert.doesNotMatch(home.html, /"long_description"/)
+    assert.match(prod.html, /"long_description"/) // the product the page is about keeps its full text
+
+    const faq = await page('faq')
+    assert.equal(faq.status, 200)
+    assert.match(faq.html, /"@type":"FAQPage"/)
+    for (const p of ['about', 'brands', 'bulk-order']) assert.equal((await page(p)).status, 200)
+    const newCat = await page('c/pos-kiosks')
+    assert.match(newCat.html, /<title>POS Machines, Billing Systems &amp; Self-Order Kiosks \| Prosper<\/title>/)
 
     const cart = await page('cart')
     assert.match(cart.html, /noindex/)
@@ -490,6 +529,8 @@ test('page HTML: product, category, home, private and unknown pages', async () =
     assert.match(sitemap.data, /<loc>http:\/\/localhost:5173\/p\/handheld-uhf-rfid-reader<\/loc>/)
     assert.match(sitemap.data, /<image:loc>/)
     assert.match(sitemap.data, /\/shipping-policy</)
+    assert.match(sitemap.data, /\/bulk-order</)
+    assert.match(sitemap.data, /\/c\/security-access</)
   } finally {
     if (made) fs.rmSync('dist/_app.html')
   }

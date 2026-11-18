@@ -2,6 +2,7 @@
 // Pure data: used to seed the database, by the local development store, and as
 // the browser's fallback when the shop API cannot be reached.
 import { PRODUCT_SEO, CATEGORY_SEO } from './seo.js'
+import { RANGE_CATEGORIES, RANGE_PRODUCTS } from './range.js'
 
 // Every product is seeded with no price, so it shows "Request price" until a
 // price and stock are added in the admin screen.
@@ -20,7 +21,7 @@ const RAW_CATEGORIES = [
     name: 'Readers & Antennas',
     description:
       'Handheld readers for counting and finding items, fixed readers and antennas for gates, dock doors and conveyors.',
-    sort_order: 2,
+    sort_order: 3,
     icon: 'radio',
   },
   {
@@ -28,26 +29,28 @@ const RAW_CATEGORIES = [
     name: 'Barcode Scanners',
     description:
       'A low-cost way to track stock, parcels and documents with barcodes and QR codes. They work with our software too.',
-    sort_order: 3,
+    sort_order: 4,
     icon: 'scan',
   },
   {
     slug: 'printers-encoders',
     name: 'Printers & Encoders',
     description: 'Print and encode your own labels in-house, from a few labels a day to thousands.',
-    sort_order: 4,
+    sort_order: 6,
     icon: 'printer',
   },
   {
     slug: 'edge-iot',
     name: 'Edge & IoT Devices',
     description: 'Edge AI boxes and industrial gateways for projects that need on-site computing. Sold by quote.',
-    sort_order: 5,
+    sort_order: 11,
     icon: 'cpu',
   },
 ]
 
-export const SEED_CATEGORIES = RAW_CATEGORIES.map((c) => ({ ...c, description: CATEGORY_SEO[c.slug]?.intro || c.description }))
+export const SEED_CATEGORIES = [...RAW_CATEGORIES, ...RANGE_CATEGORIES]
+  .map((c) => ({ ...c, description: CATEGORY_SEO[c.slug]?.intro || c.description || '' }))
+  .sort((a, b) => a.sort_order - b.sort_order)
 
 const p = (sku, slug, category, name, short_description, specs, extra = {}) => ({
   sku,
@@ -157,7 +160,11 @@ const RAW_PRODUCTS = [
 ]
 
 // Names, search titles and descriptions come from shared/seo.js.
-export const SEED_PRODUCTS = RAW_PRODUCTS.map((p) => ({ ...p, ...(PRODUCT_SEO[p.sku] || {}) }))
+// The wider range (shared/range.js) has its names and search text built in.
+export const SEED_PRODUCTS = [
+  ...RAW_PRODUCTS.map((p) => ({ ...p, ...(PRODUCT_SEO[p.sku] || {}) })),
+  ...RANGE_PRODUCTS.map((r) => ({ ...p(r.sku, r.slug, r.category, r.name, r.short_description, []), ...r })),
+]
 
 // Default shop settings. Editable in the admin screen. Amounts are in paise.
 export const DEFAULT_SETTINGS = {

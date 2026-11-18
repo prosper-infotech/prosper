@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "node --test"
+    "test": "node --test",
+    "seed:sql": "node scripts/build-seed-sql.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.43.0",

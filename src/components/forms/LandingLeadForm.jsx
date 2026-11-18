@@ -10,19 +10,30 @@ import { attributeSource, captureUtmParams } from '../../utils/attribution'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID
 
+// The shop server emails every enquiry to the sales team. Formspree is an
+// optional extra copy when VITE_FORMSPREE_ID is set.
 async function submitLead(data) {
-  if (!FORMSPREE_ID) {
-    throw new Error('Formspree is not configured — set VITE_FORMSPREE_ID in .env')
-  }
-
-  const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+  const res = await fetch('/api/shop/enquiry', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+      product: data.service,
+      message: data.message,
+      website: data.website,
+      page: typeof window !== 'undefined' ? window.location.pathname : '',
+    }),
   })
-
-  if (!response.ok) {
-    throw new Error('Formspree submission failed')
+  if (!res.ok) throw new Error('Enquiry could not be sent')
+  if (FORMSPREE_ID) {
+    fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data),
+    }).catch(() => {})
   }
 }
 
@@ -199,6 +210,11 @@ export default function LandingLeadForm({
         />
       </div>
 
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="lp-website">Leave this empty</label>
+        <input id="lp-website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
+      </div>
+
       <Button
         type="submit"
         variant="primary-dark"
@@ -209,7 +225,7 @@ export default function LandingLeadForm({
       </Button>
 
       {status === 'error' && (
-        <p className="text-sm text-red-600 font-semibold">Something went wrong. Please try again.</p>
+        <p className="text-sm text-red-600 font-semibold">We could not send this. Please try again, or call or WhatsApp us on +91 92268 91830.</p>
       )}
     </form>
   )

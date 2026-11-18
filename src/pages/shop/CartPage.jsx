@@ -49,7 +49,7 @@ export default function CartPage() {
         </div>
 
         <aside>
-          <div className="sticky top-28 rounded-md border border-[#eaeaec] bg-white p-5 md:p-6">
+          <div className="sticky top-[140px] rounded-md border border-[#eaeaec] bg-white p-5 md:p-6">
             <h2 className="mb-4 text-lg">Order summary</h2>
             <Totals priced={priced} />
             {priced.items.length > 0 ? (

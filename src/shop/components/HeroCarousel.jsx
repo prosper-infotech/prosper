@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { CategoryIcon } from './ui'
 
 // Flat full-width banners: solid colour, bold type, one product photo, no shadows or tilt.
 const THEMES = {
@@ -43,7 +44,7 @@ export default function HeroCarousel({ slides }) {
         aria-roledescription="slide"
         aria-label={`${index + 1} of ${count}`}
       >
-        <div className="px-6 py-10 sm:px-12 lg:px-20">
+        <div className="px-6 pb-20 pt-10 sm:px-12 md:py-10 lg:px-20">
           <p className={`text-xs font-extrabold uppercase tracking-[0.25em] ${t.eyebrow}`}>{slide.eyebrow}</p>
           <h2 className={`mt-3 max-w-xl text-3xl font-extrabold leading-[1.1] md:text-5xl ${t.title}`}>{slide.title}</h2>
           <p className={`mt-4 max-w-md text-base ${t.text}`}>{slide.text}</p>
@@ -59,11 +60,22 @@ export default function HeroCarousel({ slides }) {
             )}
           </div>
         </div>
-        {slide.images?.[0] && (
+        {slide.images?.[0] ? (
           <div className="hidden h-full items-center justify-center p-10 md:flex">
             <img src={slide.images[0]} alt="" className={`aspect-square w-full max-w-[300px] rounded-full object-cover ${t.photo}`} />
           </div>
-        )}
+        ) : slide.categories?.length ? (
+          <div className="hidden h-full items-center justify-center gap-4 p-10 md:flex" aria-hidden="true">
+            {slide.categories.slice(0, 3).map((c, i) => (
+              <span key={c.slug} className={`flex flex-col items-center gap-3 rounded-2xl bg-white px-5 py-6 text-center shadow-sm ${i === 1 ? '-translate-y-6' : ''}`}>
+                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-surface-alt lg:h-24 lg:w-24">
+                  <CategoryIcon category={c} className="h-10 w-10 stroke-[1.4] text-primary lg:h-12 lg:w-12" />
+                </span>
+                <span className="max-w-[7.5rem] text-xs font-bold leading-tight text-primary">{c.name}</span>
+              </span>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       {count > 1 && (
@@ -74,7 +86,7 @@ export default function HeroCarousel({ slides }) {
           <button type="button" onClick={() => go(index + 1)} aria-label="Next banner" className={`${arrow} right-4`}>
             <ChevronRight className="h-5 w-5" />
           </button>
-          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+          <div className="absolute bottom-10 left-1/2 z-10 flex md:bottom-12 -translate-x-1/2 gap-1.5">
             {slides.map((s, i) => (
               <button
                 key={s.title}

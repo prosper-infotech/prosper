@@ -5,15 +5,14 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { esc } from '../lib/http.js'
-import { catalogueData } from './public.js'
-import { productMeta, categoryMeta, breadcrumbLd as sharedBreadcrumb, productLd as sharedProductLd, SHOP_NAME } from '../../shared/seo.js'
+import { catalogueData, liteCatalogue } from './public.js'
+import { HOME_TITLE, HOME_DESCRIPTION, productMeta, categoryMeta, breadcrumbLd as sharedBreadcrumb, productLd as sharedProductLd, SHOP_NAME } from '../../shared/seo.js'
 import { formatINR, hasPrice } from '../../shared/pricing.js'
+import { STATIC_PAGE_META } from '../../shared/pages.js'
+import { ALL_FAQS, faqLd } from '../../shared/faq.js'
 
 const SITE = () => (process.env.SITE_URL || 'https://shop.prosperinfotech.com').replace(/\/+$/, '')
 const DEFAULT_IMAGE = 'https://www.prosperinfotech.com/og-image.jpg'
-const HOME_TITLE = 'Buy RFID Tags, Readers & Barcode Scanners | Prosper Shop'
-const HOME_DESCRIPTION =
-  'Order UHF RFID tags and labels, RFID readers and antennas, barcode scanners and label printers online. Prices include GST, delivery across India.'
 
 const STATIC_PAGES = {
   contact: { title: `Contact Us | ${SHOP_NAME}`, description: 'Call, email or WhatsApp the Prosper Infotech shop team for help with RFID and barcode products, orders, bulk quotes and delivery.', h1: 'Contact us' },
@@ -23,6 +22,7 @@ const STATIC_PAGES = {
   'terms-of-sale': { title: `Terms of Sale | ${SHOP_NAME}`, description: 'The terms that apply when you buy from the Prosper Infotech online shop: orders, prices, GST, payment, delivery and liability.', h1: 'Terms of Sale' },
   'privacy-policy': { title: 'Privacy Policy | Prosper Infotech', description: 'How Prosper Infotech collects, uses and protects your information across the online shop, contact forms and orders.', h1: 'Privacy Policy' },
 }
+for (const [key, meta] of Object.entries(STATIC_PAGE_META)) STATIC_PAGES[key] = meta
 const PRIVATE = /^(cart|checkout|account|order|admin|lp)(\/|$)/
 
 const breadcrumbLd = (items) => sharedBreadcrumb(items, SITE())
@@ -110,7 +110,7 @@ function pageFor(rawPath, query, data) {
       canonical,
       jsonLd: { '@context': 'https://schema.org', '@type': 'WebSite', name: SHOP_NAME, url: `${SITE()}/` },
       body: wrap(
-        `<h1 class="text-2xl font-extrabold">RFID tags, readers, barcode scanners and printers</h1><p>${esc(HOME_DESCRIPTION)}</p>` +
+        `<h1 class="text-2xl font-extrabold">RFID, barcode, POS and security hardware online</h1><p>${esc(HOME_DESCRIPTION)}</p>` +
           (live.length ? `<h2>Shop by category</h2><ul>${live.map((c) => `<li><a href="/c/${esc(c.slug)}">${esc(c.name)}</a></li>`).join('')}</ul>` : '') +
           (featured.length ? `<h2>Featured products</h2><ul>${featured.map(productLink).join('')}</ul>` : '')
       ),
@@ -169,7 +169,18 @@ function pageFor(rawPath, query, data) {
   }
 
   const page = STATIC_PAGES[parts.join('/')]
-  if (page) return { title: page.title, description: page.description, canonical, body: wrap(`<h1 class="text-2xl font-extrabold">${esc(page.h1)}</h1><p>${esc(page.description)}</p>`) }
+  if (page) {
+    const key = parts.join('/')
+    const faq = key === 'faq'
+    const extra = faq ? ALL_FAQS.map((f) => `<h2>${esc(f.question)}</h2><p>${esc(f.answer)}</p>`).join('') : ''
+    return {
+      title: page.title,
+      description: page.description,
+      canonical,
+      jsonLd: faq ? { '@context': 'https://schema.org', '@graph': [faqLd()] } : null,
+      body: wrap(`<h1 class="text-2xl font-extrabold">${esc(page.h1)}</h1><p>${esc(page.description)}</p>${extra}`),
+    }
+  }
 
   if (PRIVATE.test(parts.join('/'))) return { title: SHOP_NAME, description: HOME_DESCRIPTION, canonical, noindex: true, private: true }
   return null
@@ -195,7 +206,8 @@ export async function renderPage(request) {
     noindex: true,
     notFound: true,
   }
-  const html = fill(await template(request), { ...page, data: page.private ? null : data })
+  const keep = rawPath.startsWith('/p/') ? decodeURIComponent(rawPath.slice(3)) : null
+  const html = fill(await template(request), { ...page, data: page.private || !data ? null : liteCatalogue(data, keep) })
   return new Response(html, {
     status: page.notFound ? 404 : 200,
     headers: {

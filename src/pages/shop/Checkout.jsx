@@ -405,7 +405,7 @@ export default function Checkout() {
         </div>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-28 rounded-md border border-[#eaeaec] bg-white p-6">
+          <div className="sticky top-[140px] rounded-md border border-[#eaeaec] bg-white p-6">
             <h2 className="mb-5 text-lg">Order summary</h2>
             <Summary priced={priced} />
             <p className="mt-5 flex items-start gap-2 rounded-xl bg-surface-alt px-3.5 py-3 text-xs leading-snug text-ink-900">

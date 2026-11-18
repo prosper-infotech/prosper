@@ -18,7 +18,9 @@ const add = (method, pattern, handler, staffOnly = false) => {
 // Every page's HTML (title, description, structured data, content). See vercel.json.
 add('GET', '/__html', renderPage)
 add('GET', '/shop/catalogue', pub.catalogue)
+add('GET', '/shop/product/:slug', pub.productDetail)
 add('POST', '/checkout', pub.checkout)
+add('POST', '/shop/enquiry', pub.enquiry)
 add('GET', '/orders/:token', pub.getOrder)
 add('POST', '/orders/:token/utr', pub.saveUtr)
 add('POST', '/orders/:token/pay', pub.payOrder)

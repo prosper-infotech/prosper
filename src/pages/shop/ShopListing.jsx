@@ -1,3 +1,4 @@
+import { matches, searchWords } from '../../../shared/search.js'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { PackageSearch, SlidersHorizontal, X } from 'lucide-react'
@@ -11,7 +12,7 @@ import { SITE_URL } from '../../shop/site'
 import { categoryMeta } from '../../../shared/seo.js'
 import { hasPrice, isOrderable } from '../../../shared/pricing.js'
 
-const PAGE = 16
+const PAGE = 20
 const SORTS = [
   { value: 'featured', label: 'Featured' },
   { value: 'price-asc', label: 'Price: low to high' },
@@ -49,14 +50,11 @@ export default function ShopListing() {
   const allBrands = useMemo(() => [...new Set(inCategory.map((p) => p.brand).filter(Boolean))].sort(), [inCategory])
 
   const results = useMemo(() => {
-    const words = q.toLowerCase().split(/\s+/).filter(Boolean)
+    const words = searchWords(q)
     const minP = min ? Number(min) * 100 : null
     const maxP = max ? Number(max) * 100 : null
     const list = inCategory.filter((p) => {
-      if (words.length) {
-        const hay = `${p.name} ${p.sku} ${p.brand || ''} ${p.short_description || ''} ${(p.specs || []).map((s) => s.value).join(' ')}`.toLowerCase()
-        if (!words.every((w) => hay.includes(w))) return false
-      }
+      if (!matches(p, words)) return false
       if (brands.length && !brands.includes(p.brand)) return false
       if (inStock && !isOrderable(p)) return false
       if ((minP !== null || maxP !== null) && !hasPrice(p)) return false
@@ -169,7 +167,7 @@ export default function ShopListing() {
       {allBrands.length > 1 && (
         <fieldset className="py-5">
           <legend className={`${heading} float-left w-full`}>Brand</legend>
-          <div className="clear-both flex flex-col gap-2.5">
+          <div className="clear-both flex max-h-72 flex-col gap-2.5 overflow-y-auto pr-1">
             {allBrands.map((b) => (
               <label key={b} className="flex cursor-pointer items-center gap-2.5 text-sm text-ink-900">
                 <input
@@ -251,7 +249,7 @@ export default function ShopListing() {
 
       <div className="mt-5 grid gap-8 lg:grid-cols-[228px_1fr]">
         <aside className="hidden lg:block">
-          <div className="sticky top-28">{filters}</div>
+          <div className="sticky top-[140px]">{filters}</div>
         </aside>
 
         <div className="min-w-0">

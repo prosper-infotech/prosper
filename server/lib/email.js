@@ -291,3 +291,33 @@ export const templates = {
 }
 
 export const salesRecipients = SALES
+
+// Price request or bulk enquiry from the shop, sent to the sales team.
+export function enquiryEmail(e, settings) {
+  const rows = [
+    ['Name', e.name],
+    ['Email', e.email],
+    ['Phone', e.phone],
+    ['Company', e.company],
+    ['GSTIN', e.gstin],
+    ['City', e.city],
+    ['Interested in', e.product],
+    ['Needed by', e.needed_by],
+    ['Page', e.page],
+  ].filter(([, v]) => v)
+  const items = (e.items || []).filter((i) => i.product)
+  const table = (list) =>
+    `<table role="presentation" width="100%" cellspacing="0" cellpadding="0">${list
+      .map(([k, v]) => `<tr><td style="padding:5px 12px 5px 0;font-size:13px;color:#777;vertical-align:top;white-space:nowrap">${esc(k)}</td><td style="padding:5px 0;font-size:14px">${esc(v)}</td></tr>`)
+      .join('')}</table>`
+  const body =
+    table(rows) +
+    (items.length ? `<h2 style="margin:20px 0 6px;font-size:16px;color:${NAVY}">Products and quantities</h2>${table(items.map((i) => [`Qty ${i.qty || '?'}`, i.product]))}` : '') +
+    (e.message ? `<h2 style="margin:20px 0 6px;font-size:16px;color:${NAVY}">Message</h2><p style="margin:0;font-size:14px;line-height:1.6;white-space:pre-line">${esc(e.message)}</p>` : '')
+  const kind = items.length ? 'Bulk enquiry' : 'Price request'
+  return {
+    subject: `${kind}: ${e.product || items[0]?.product || 'shop enquiry'} (${e.name})`,
+    html: layout({ title: kind, intro: 'A customer sent this from the online shop. Reply to this email to answer them directly.', body, settings }),
+    text: [...rows.map(([k, v]) => `${k}: ${v}`), ...items.map((i) => `- ${i.product} x ${i.qty || '?'}`), e.message ? `\n${e.message}` : ''].join('\n'),
+  }
+}

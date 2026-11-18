@@ -15,6 +15,10 @@ const Invoice = lazy(() => import('./pages/shop/Invoice'))
 const Account = lazy(() => import('./pages/shop/Account'))
 const PolicyPage = lazy(() => import('./pages/shop/PolicyPage'))
 const Contact = lazy(() => import('./pages/shop/Contact'))
+const AboutPage = lazy(() => import('./pages/shop/AboutPage'))
+const FaqPage = lazy(() => import('./pages/shop/FaqPage'))
+const BrandsPage = lazy(() => import('./pages/shop/BrandsPage'))
+const BulkOrderPage = lazy(() => import('./pages/shop/BulkOrderPage'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const ThankYou = lazy(() => import('./pages/landing/ThankYou'))
 const NotFound = lazy(() => import('./pages/NotFound'))
@@ -43,6 +47,10 @@ export default function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/wishlist" element={<Navigate to="/" replace />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/brands" element={<BrandsPage />} />
+          <Route path="/bulk-order" element={<BulkOrderPage />} />
           <Route path="/shipping-policy" element={<PolicyPage slug="shipping-policy" />} />
           <Route path="/returns-refunds" element={<PolicyPage slug="returns-refunds" />} />
           <Route path="/warranty" element={<PolicyPage slug="warranty" />} />

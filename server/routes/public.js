@@ -7,7 +7,7 @@ import { validateAddress, validateContact, EMAIL_RE } from '../../shared/india.j
 import { PAYMENT_METHODS, nextOrderNumber, newPublicToken, publicOrder, markPaid, changeStatus, notify, orderItems, shipOrder } from '../lib/orders.js'
 import { razorpayConfigured, razorpayKeyId, createRazorpayOrder, verifyCheckoutSignature, verifyWebhookSignature } from '../lib/razorpay.js'
 import { forwardOrderLead } from '../lib/crm.js'
-import { sendEmail, templates } from '../lib/email.js'
+import { sendEmail, templates, enquiryEmail, salesRecipients } from '../lib/email.js'
 import { createLoginCode, checkLoginCode, describeDevice, createSessionToken, sessionCookie, sessionFrom, requireCustomer, findStaff } from '../lib/auth.js'
 
 const publicProduct = (p, categories) => ({
@@ -79,9 +79,33 @@ export async function catalogueData() {
   }
 }
 
+// Lists carry no long text, so the catalogue stays small with hundreds of products.
+// `keepSlug` keeps the full text of the product the page is about.
+export function liteCatalogue(data, keepSlug = null) {
+  return {
+    ...data,
+    products: data.products.map((p) => {
+      if (p.slug === keepSlug) return p
+      const { long_description: _l, short_description: _s, seo_title: _st, seo_description: _d, hsn_code: _h, datasheet_url: _u, updated_at: _t, ...rest } = p
+      return rest
+    }),
+  }
+}
+
 export async function catalogue() {
-  return json(await catalogueData(), 200, {
+  return json(liteCatalogue(await catalogueData()), 200, {
     'Cache-Control': 'public, max-age=0, s-maxage=30, stale-while-revalidate=120',
+    'X-Robots-Tag': 'noindex',
+  })
+}
+
+// One product with its full description (the product page loads this when the list has only the summary).
+export async function productDetail(_request, { slug }) {
+  const { categories, products } = await loadCatalogue()
+  const p = products.find((x) => x.slug === slug)
+  if (!p) throw new HttpError(404, 'Product not found')
+  return json(publicProduct(p, categories), 200, {
+    'Cache-Control': 'public, max-age=0, s-maxage=60, stale-while-revalidate=600',
     'X-Robots-Tag': 'noindex',
   })
 }
@@ -531,8 +555,41 @@ export async function shopSitemap() {
     url('/c/all', { lastmod: latest, priority: '0.8' }),
     ...live.map((c) => url(`/c/${c.slug}`, { lastmod: latest, priority: '0.8' })),
     ...products.map((p) => url(`/p/${p.slug}`, { lastmod: p.updated_at, priority: '0.7', images: (p.images || []).slice(0, 5) })),
+    ...['about', 'faq', 'brands', 'bulk-order'].map((s) => url(`/${s}`, { priority: '0.5' })),
     ...['contact', 'shipping-policy', 'returns-refunds', 'warranty', 'terms-of-sale', 'privacy-policy'].map((s) => url(`/${s}`, { priority: '0.3' })),
     '</urlset>',
   ].join('\n')
   return text(xml, 'application/xml; charset=utf-8', 200, { 'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400' })
+}
+
+/* --------------------------------- Enquiries -------------------------------- */
+
+// "Request price" and bulk / corporate enquiries. Emailed to the sales team.
+export async function enquiry(request) {
+  rateLimit(request, 'enquiry', 8, 10 * 60 * 1000)
+  const body = await readJson(request, 40_000)
+  // Bots fill every field, including this hidden one. Pretend it worked.
+  if (str(body.website)) return json({ ok: true })
+  const e = {
+    name: str(body.name, 120),
+    email: str(body.email, 160).toLowerCase(),
+    phone: str(body.phone, 30),
+    company: str(body.company, 160),
+    gstin: str(body.gstin, 20).toUpperCase(),
+    city: str(body.city, 80),
+    product: str(body.product, 300),
+    needed_by: str(body.needed_by, 40),
+    message: str(body.message, 3000),
+    page: str(body.page, 300),
+    items: (Array.isArray(body.items) ? body.items : []).slice(0, 30).map((i) => ({ product: str(i?.product, 300), qty: Math.max(0, Math.min(10_000_000, Math.floor(Number(i?.qty) || 0))) })),
+  }
+  if (!e.name) throw new HttpError(400, 'Please enter your name.')
+  if (!EMAIL_RE.test(e.email)) throw new HttpError(400, 'Please enter a valid email address.')
+  if (!e.product && !e.items.some((i) => i.product) && !e.message) throw new HttpError(400, 'Tell us which products you need.')
+  const settings = await getSettings()
+  const to = salesRecipients().length ? salesRecipients() : [settings.support_email].filter(Boolean)
+  const mail = enquiryEmail(e, settings)
+  const sent = await sendEmail({ to, ...mail, replyTo: e.email, type: 'enquiry' })
+  if (!sent.ok) throw new HttpError(502, `We could not send your enquiry. Please call or WhatsApp us on ${settings.support_phone || 'our number'}.`)
+  return json({ ok: true })
 }
