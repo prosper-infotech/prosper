@@ -81,6 +81,20 @@ test('catalogue: every seeded product, none with a price; lists carry no long te
   assert.equal((await api('GET', '/api/shop/product/nope')).status, 404)
 })
 
+test('launch catalogue: staff can add what is missing, existing products are untouched', async () => {
+  assert.equal((await api('POST', '/api/admin/catalogue/load', {})).status, 401)
+  const { db } = await import('../server/lib/db.js')
+  const gone = SEED_PRODUCTS.at(-1)
+  await db().remove('products', { sku: gone.sku })
+  const list = await admin('GET', '/api/admin/products')
+  assert.deepEqual(list.data.catalogue_missing, { categories: 0, products: 1 })
+  const done = await admin('POST', '/api/admin/catalogue/load', {})
+  assert.deepEqual(done.data, { categories: 0, products: 1 })
+  assert.equal((await admin('GET', '/api/admin/products')).data.catalogue_missing.products, 0)
+  assert.equal((await admin('POST', '/api/admin/catalogue/load', {})).data.products, 0)
+  products = (await api('GET', '/api/shop/catalogue')).data.products
+})
+
 test('enquiry: emailed to sales, checked, and bots are ignored quietly', async () => {
   const ok = await api('POST', '/api/shop/enquiry', {
     name: 'Ravi Shah',

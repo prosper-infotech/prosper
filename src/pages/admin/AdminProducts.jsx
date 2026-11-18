@@ -28,6 +28,22 @@ export default function AdminProducts() {
     return (data?.products || []).filter((p) => words.every((w) => `${p.name} ${p.sku}`.toLowerCase().includes(w)))
   }, [data, q])
 
+  const missing = data?.catalogue_missing
+  const loadCatalogue = async () => {
+    if (!window.confirm(`Add ${missing.products} product(s) and ${missing.categories} categor${missing.categories === 1 ? 'y' : 'ies'} from the launch catalogue? Products already in the shop are not changed.`)) return
+    setBusy(true)
+    setMessage({ kind: 'error', text: '' })
+    try {
+      const done = await api('/admin/catalogue/load', { method: 'POST', body: {} })
+      setMessage({ kind: 'ok', text: `Added ${done.products} product(s) and ${done.categories} categor${done.categories === 1 ? 'y' : 'ies'}. They show "Request price" until you add a price and stock.` })
+      await reload()
+    } catch (err) {
+      setMessage({ kind: 'error', text: err.message })
+    } finally {
+      setBusy(false)
+    }
+  }
+
   const importCsv = async (e) => {
     const picked = e.target.files?.[0]
     e.target.value = ''
@@ -69,6 +85,21 @@ export default function AdminProducts() {
       </PageTitle>
 
       <Alert kind={message.kind}>{message.text}</Alert>
+      {missing && (missing.products > 0 || missing.categories > 0) && (
+        <Card className="mb-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-ink-900">
+              <strong>{missing.products} product(s)</strong>
+              {missing.categories > 0 && <> and <strong>{missing.categories} categor{missing.categories === 1 ? 'y' : 'ies'}</strong></>} from the launch catalogue are not in the
+              shop yet. They are added without prices, as "Request price".
+            </p>
+            <button type="button" onClick={loadCatalogue} disabled={busy} className={`${btn.navy} shrink-0 !py-2`}>
+              {busy ? <Spinner /> : <Plus className="h-4 w-4" />}
+              Add them
+            </button>
+          </div>
+        </Card>
+      )}
       <Alert>{error}</Alert>
       {problems.length > 0 && (
         <Card title="Rows to fix" className="mb-5">

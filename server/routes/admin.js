@@ -5,7 +5,7 @@ import { HttpError, json, text, readJson, str } from '../lib/http.js'
 import { STATUSES, allowedNext, changeStatus, shipOrder, orderItems } from '../lib/orders.js'
 import { parseCsv, toCsv } from '../../shared/csv.js'
 import { EMAIL_RE, GSTIN_RE } from '../../shared/india.js'
-import { DEFAULT_SETTINGS } from '../../shared/catalogue.js'
+import { DEFAULT_SETTINGS, SEED_CATEGORIES, SEED_PRODUCTS } from '../../shared/catalogue.js'
 import { shiprocketConfigured, createShiprocketOrder } from '../lib/shiprocket.js'
 import { razorpayConfigured } from '../lib/razorpay.js'
 import { leadForwardingOn } from '../lib/crm.js'
@@ -292,7 +292,60 @@ function cleanProduct(input, categories, existing) {
 
 export async function listProducts() {
   const [products, categories] = await Promise.all([db().select('products', { order: 'name.asc' }), db().select('categories', { order: 'sort_order.asc' })])
-  return json({ products, categories })
+  return json({ products, categories, catalogue_missing: missingFromCatalogue(categories, products) })
+}
+
+// Launch catalogue rows (shared/catalogue.js) that are not in the database yet.
+// Matched by category slug and product SKU or slug, so nothing already there is touched.
+function missingFromCatalogue(categories, products) {
+  const skus = new Set(products.map((p) => p.sku))
+  const slugs = new Set(products.map((p) => p.slug))
+  return {
+    categories: SEED_CATEGORIES.filter((c) => !categories.some((x) => x.slug === c.slug)).length,
+    products: SEED_PRODUCTS.filter((p) => !skus.has(p.sku) && !slugs.has(p.slug)).length,
+  }
+}
+
+// Adds missing categories and products from the launch catalogue (no prices,
+// "Request price"), and puts the categories in the catalogue's menu order.
+export async function loadCatalogue(_request, _params, staff) {
+  let categories = await db().select('categories')
+  const newCats = SEED_CATEGORIES.filter((c) => !categories.some((x) => x.slug === c.slug))
+  if (newCats.length) {
+    await db().insert('categories', newCats.map((c) => ({ slug: c.slug, name: c.name, description: c.description || '', sort_order: c.sort_order, icon: c.icon || null })))
+  }
+  for (const c of SEED_CATEGORIES) {
+    const have = categories.find((x) => x.slug === c.slug)
+    if (have && have.sort_order !== c.sort_order) await db().update('categories', { id: have.id }, { sort_order: c.sort_order })
+  }
+  categories = await db().select('categories')
+  const products = await db().select('products')
+  const skus = new Set(products.map((p) => p.sku))
+  const slugs = new Set(products.map((p) => p.slug))
+  const rows = SEED_PRODUCTS.filter((p) => !skus.has(p.sku) && !slugs.has(p.slug)).map((p) => ({
+    sku: p.sku,
+    slug: p.slug,
+    name: p.name,
+    brand: p.brand || null,
+    category_id: categories.find((c) => c.slug === p.category).id,
+    short_description: p.short_description || '',
+    long_description: p.long_description || '',
+    specs: p.specs || [],
+    images: p.images || [],
+    price_paise: null,
+    gst_percent: p.gst_percent ?? 18,
+    hsn_code: p.hsn_code || '',
+    stock_qty: 0,
+    min_order_qty: p.min_order_qty || 1,
+    is_active: true,
+    is_featured: Boolean(p.is_featured),
+    quote_only: Boolean(p.quote_only),
+    seo_title: p.seo_title || null,
+    seo_description: p.seo_description || null,
+  }))
+  for (let i = 0; i < rows.length; i += 100) await db().insert('products', rows.slice(i, i + 100))
+  console.log(`[shop] ${staff?.email || 'staff'} loaded the launch catalogue: ${newCats.length} categories, ${rows.length} products`)
+  return json({ categories: newCats.length, products: rows.length })
 }
 
 export async function saveProduct(request, { id }) {
