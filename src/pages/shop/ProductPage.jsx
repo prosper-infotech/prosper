@@ -109,6 +109,81 @@ const BADGES = [
   { icon: ShieldCheck, text: 'Warranty support' },
 ]
 
+// Description, specifications and delivery in tabs under the photo and buy box.
+function DetailTabs({ product, config }) {
+  const [tab, setTab] = useState('description')
+  const specs = [...(product.specs || []), ...(product.brand ? [{ label: 'Brand', value: product.brand }] : []), { label: 'SKU', value: product.sku }, ...(product.hsn_code ? [{ label: 'HSN code', value: `${product.hsn_code} (GST ${product.gst_percent}%)` }] : [{ label: 'GST', value: `${Number(product.gst_percent) || 18}% (included in price)` }])]
+  const tabs = [
+    { id: 'description', label: 'Description' },
+    { id: 'specs', label: 'Specifications' },
+    { id: 'shipping', label: 'Shipping & returns' },
+  ]
+  const text = product.long_description ?? product.short_description ?? ''
+  return (
+    <section className="mt-12 rounded-lg border border-[#eaeaec] bg-white" aria-label="Product information">
+      <div role="tablist" aria-label="Product information" className="flex overflow-x-auto border-b border-[#eaeaec]">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            id={`tab-${t.id}`}
+            type="button"
+            role="tab"
+            aria-selected={tab === t.id}
+            aria-controls={`panel-${t.id}`}
+            onClick={() => setTab(t.id)}
+            className={`shrink-0 border-b-2 px-5 py-4 text-sm font-bold transition-colors md:px-8 ${tab === t.id ? 'border-primary text-primary' : 'border-transparent text-[#535766] hover:text-primary'}`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      <div id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`} className="p-5 md:p-8">
+        {tab === 'description' && (
+          <div className="flex max-w-3xl flex-col gap-3 text-[15px] leading-relaxed text-ink-900">
+            {text ? text.split(/\n{2,}/).map((para) => (
+              <p key={para} className="whitespace-pre-line">
+                {para}
+              </p>
+            )) : <p className="text-[#535766]">Loading details…</p>}
+            {product.datasheet_url && (
+              <a href={product.datasheet_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 self-start text-sm font-bold text-primary hover:underline">
+                <Download className="h-4 w-4" />
+                Download datasheet
+              </a>
+            )}
+          </div>
+        )}
+        {tab === 'specs' && (
+          <>
+            <dl className="max-w-3xl overflow-hidden rounded-lg border border-[#eaeaec] text-sm">
+              {specs.map((spec, i) => (
+                <div key={spec.label} className={`grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] ${i ? 'border-t border-[#eaeaec]' : ''}`}>
+                  <dt className="bg-[#f7f8fa] px-3 py-2.5 font-semibold text-[#535766]">{spec.label}</dt>
+                  <dd className="px-3 py-2.5 text-ink-900">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-4 text-xs text-[#94969f]">Specifications shown are typical. We confirm the exact model before dispatch.</p>
+          </>
+        )}
+        {tab === 'shipping' && (
+          <ul className="flex max-w-3xl list-disc flex-col gap-2 pl-5 text-[15px] leading-relaxed text-ink-900">
+            <li>In-stock items are dispatched in 1 to 2 working days by tracked courier, across India.</li>
+            <li>{config.free_shipping_threshold_paise ? `Free delivery on orders above ${formatINR(config.free_shipping_threshold_paise)}; a small flat charge below that, shown in the cart.` : 'Delivery charges are shown in the cart before you pay.'}</li>
+            <li>If an item arrives damaged or wrong, tell us within 48 hours with photos and we replace or refund it.</li>
+            <li>
+              Full details:{' '}
+              <Link to="/shipping-policy" className="font-bold text-primary hover:underline">Shipping policy</Link>,{' '}
+              <Link to="/returns-refunds" className="font-bold text-primary hover:underline">Returns & refunds</Link> and{' '}
+              <Link to="/warranty" className="font-bold text-primary hover:underline">Warranty</Link>.
+            </li>
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}
+
 export default function ProductPage() {
   const { slug } = useParams()
   const { ready, products, categories, config, add, requestQuote, recent, addRecent } = useShop()
@@ -203,6 +278,7 @@ export default function ProductPage() {
     { icon: RotateCcw, text: 'Replacement if it arrives damaged or wrong', to: '/returns-refunds' },
     { icon: ShieldCheck, text: 'Covered by manufacturer warranty', to: '/warranty' },
   ]
+  const highlights = (product.specs || []).filter((x) => x.label !== 'Other options').slice(0, 5)
   const heading = 'text-sm font-extrabold uppercase tracking-[0.15em] !text-ink-900'
   const quoteName = qty > 1 ? `${product.name} (quantity ${qty})` : product.name
 
@@ -230,6 +306,19 @@ export default function ProductPage() {
             )}
           </p>
 
+          {highlights.length > 0 && (
+            <ul className="mt-4 flex flex-col gap-1.5 text-sm text-ink-900">
+              {highlights.map((spec) => (
+                <li key={spec.label} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-dark" aria-hidden="true" />
+                  <span>
+                    <span className="font-semibold">{spec.label}:</span> {spec.value}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
           <div className="mt-4 border-t border-[#eaeaec] pt-4">
             {priced ? (
               <>
@@ -239,6 +328,7 @@ export default function ProductPage() {
                   {saving > 0 && <span className="text-base text-[#7e818c]">MRP <span className="line-through">{formatINR(product.mrp_paise)}</span></span>}
                   {saving > 0 && <span className="rounded bg-[#d6262f] px-2 py-0.5 text-xs font-bold text-white">{saving}% off</span>}
                 </p>
+                {saving > 0 && <p className="mt-1 text-sm font-bold text-[#0f8a5f]">You save {formatINR(product.mrp_paise - product.price_paise)}</p>}
                 <p className="mt-1 text-sm text-[#535766]">
                   {formatINR(product.price_paise - gstIncluded(product.price_paise, product.gst_percent))} + GST ({Number(product.gst_percent) || 0}%) · GST invoice included
                 </p>
@@ -337,38 +427,6 @@ export default function ProductPage() {
             </ul>
           </div>
 
-          <div className="mt-8 border-t border-[#eaeaec] pt-6">
-            <h2 className={heading}>Product details</h2>
-            <div className="mt-3 flex flex-col gap-3 text-[15px] leading-relaxed text-ink-900">
-              {(product.long_description || product.short_description || '').split(/\n{2,}/).map((para) => (
-                <p key={para} className="whitespace-pre-line">
-                  {para}
-                </p>
-              ))}
-            </div>
-
-            {product.specs?.length > 0 && (
-              <>
-                <h3 className="mt-6 text-sm font-bold text-ink-900">Specifications</h3>
-                <dl className="mt-3 overflow-hidden rounded-lg border border-[#eaeaec] text-sm">
-                  {[...product.specs, ...(product.hsn_code ? [{ label: 'HSN code', value: `${product.hsn_code} (GST ${product.gst_percent}%)` }] : [])].map((spec, i) => (
-                    <div key={spec.label} className={`grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] ${i ? 'border-t border-[#eaeaec]' : ''}`}>
-                      <dt className="bg-[#f7f8fa] px-3 py-2.5 font-semibold text-[#535766]">{spec.label}</dt>
-                      <dd className="px-3 py-2.5 text-ink-900">{spec.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </>
-            )}
-            <p className="mt-4 text-xs text-[#94969f]">Specifications shown are typical. We confirm the exact model before dispatch.</p>
-            {product.datasheet_url && (
-              <a href={product.datasheet_url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
-                <Download className="h-4 w-4" />
-                Download datasheet
-              </a>
-            )}
-          </div>
-
           <div className="mt-8 flex flex-col gap-3 border-t border-[#eaeaec] pt-6 text-sm">
             <a
               href={whatsapp}
@@ -396,6 +454,8 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
+
+      <DetailTabs product={product} config={config} />
 
       <div className="mt-16 flex flex-col gap-14">
         <ProductRow title="Similar products" products={related} viewAllTo={category ? `/c/${category.slug}` : '/c/all'} />

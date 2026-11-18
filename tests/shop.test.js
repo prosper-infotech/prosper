@@ -72,7 +72,9 @@ before(async () => {
 test('catalogue: every seeded product, none with a price; lists carry no long text', async () => {
   assert.equal(products.length, SEEDED)
   assert.ok(SEEDED > 500)
-  assert.ok(products.every((p) => p.price_paise === null))
+  // Our own launch products wait for a price; the wider range comes priced.
+  assert.ok(products.filter((p) => p.sku.startsWith('PI-TAG-0')).every((p) => p.price_paise === null))
+  assert.ok(products.filter((p) => p.price_paise > 0).length > 500)
   assert.ok(products.every((p) => p.long_description === undefined && p.seo_description === undefined))
   assert.equal(new Set(products.map((p) => p.slug)).size, SEEDED)
   const full = await api('GET', '/api/shop/product/handheld-uhf-rfid-reader')
@@ -87,11 +89,21 @@ test('launch catalogue: staff can add what is missing, existing products are unt
   const gone = SEED_PRODUCTS.at(-1)
   await db().remove('products', { sku: gone.sku })
   const list = await admin('GET', '/api/admin/products')
-  assert.deepEqual(list.data.catalogue_missing, { categories: 0, products: 1 })
+  assert.deepEqual(list.data.catalogue_missing, { categories: 0, products: 1, unpriced: 0 })
   const done = await admin('POST', '/api/admin/catalogue/load', {})
-  assert.deepEqual(done.data, { categories: 0, products: 1 })
+  assert.deepEqual(done.data, { categories: 0, products: 1, priced: 0 })
   assert.equal((await admin('GET', '/api/admin/products')).data.catalogue_missing.products, 0)
   assert.equal((await admin('POST', '/api/admin/catalogue/load', {})).data.products, 0)
+  // A range product still without a price gets the catalogue price; one you priced is kept.
+  const range = SEED_PRODUCTS.filter((p) => p.price_paise > 0)
+  await db().update('products', { sku: range[0].sku }, { price_paise: null, stock_qty: 0 })
+  await db().update('products', { sku: range[1].sku }, { price_paise: 4200 })
+  assert.equal((await admin('GET', '/api/admin/products')).data.catalogue_missing.unpriced, 1)
+  assert.equal((await admin('POST', '/api/admin/catalogue/load', {})).data.priced, 1)
+  const after = (await admin('GET', '/api/admin/products')).data.products
+  assert.equal(after.find((p) => p.sku === range[0].sku).price_paise, range[0].price_paise)
+  assert.equal(after.find((p) => p.sku === range[1].sku).price_paise, 4200)
+  await db().update('products', { sku: range[1].sku }, { price_paise: range[1].price_paise })
   products = (await api('GET', '/api/shop/catalogue')).data.products
 })
 
@@ -127,7 +139,7 @@ test('a payment method is refused until it is set up', async () => {
 })
 
 test('checkout refuses products that have no price', async () => {
-  const res = await api('POST', '/api/checkout', order([{ id: products[0].id, qty: 1 }]))
+  const res = await api('POST', '/api/checkout', order([{ id: products.find((p) => p.price_paise === null).id, qty: 1 }]))
   assert.equal(res.status, 409)
   assert.equal(res.data.code, 'cart_changed')
 })

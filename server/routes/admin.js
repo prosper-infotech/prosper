@@ -303,11 +303,20 @@ function missingFromCatalogue(categories, products) {
   return {
     categories: SEED_CATEGORIES.filter((c) => !categories.some((x) => x.slug === c.slug)).length,
     products: SEED_PRODUCTS.filter((p) => !skus.has(p.sku) && !slugs.has(p.slug)).length,
+    unpriced: unpricedFromCatalogue(products).length,
   }
 }
 
-// Adds missing categories and products from the launch catalogue (no prices,
-// "Request price"), and puts the categories in the catalogue's menu order.
+// Products still without a price whose launch-catalogue entry now has one.
+// Anything you have priced yourself is never touched.
+function unpricedFromCatalogue(products) {
+  const bySku = new Map(SEED_PRODUCTS.filter((p) => Number.isInteger(p.price_paise)).map((p) => [p.sku, p]))
+  return products.filter((p) => p.price_paise === null && bySku.has(p.sku)).map((p) => [p, bySku.get(p.sku)])
+}
+
+// Adds missing categories and products from the launch catalogue, fills in prices,
+// stock and details for catalogue products that still have no price, and puts the
+// categories in the catalogue's menu order.
 export async function loadCatalogue(_request, _params, staff) {
   let categories = await db().select('categories')
   const newCats = SEED_CATEGORIES.filter((c) => !categories.some((x) => x.slug === c.slug))
@@ -332,10 +341,11 @@ export async function loadCatalogue(_request, _params, staff) {
     long_description: p.long_description || '',
     specs: p.specs || [],
     images: p.images || [],
-    price_paise: null,
+    price_paise: p.price_paise ?? null,
+    mrp_paise: p.mrp_paise ?? null,
     gst_percent: p.gst_percent ?? 18,
     hsn_code: p.hsn_code || '',
-    stock_qty: 0,
+    stock_qty: p.stock_qty ?? 0,
     min_order_qty: p.min_order_qty || 1,
     is_active: true,
     is_featured: Boolean(p.is_featured),
@@ -344,8 +354,23 @@ export async function loadCatalogue(_request, _params, staff) {
     seo_description: p.seo_description || null,
   }))
   for (let i = 0; i < rows.length; i += 100) await db().insert('products', rows.slice(i, i + 100))
-  console.log(`[shop] ${staff?.email || 'staff'} loaded the launch catalogue: ${newCats.length} categories, ${rows.length} products`)
-  return json({ categories: newCats.length, products: rows.length })
+
+  const now = new Date().toISOString()
+  const unpriced = unpricedFromCatalogue(products)
+  for (const [have, seed] of unpriced) {
+    await db().update('products', { id: have.id }, {
+      name: seed.name,
+      price_paise: seed.price_paise,
+      mrp_paise: seed.mrp_paise ?? null,
+      stock_qty: have.stock_qty > 0 ? have.stock_qty : (seed.stock_qty ?? 0),
+      min_order_qty: seed.min_order_qty || 1,
+      specs: seed.specs || [],
+      long_description: seed.long_description || have.long_description || '',
+      updated_at: now,
+    })
+  }
+  console.log(`[shop] ${staff?.email || 'staff'} loaded the launch catalogue: ${newCats.length} categories, ${rows.length} products, ${unpriced.length} priced`)
+  return json({ categories: newCats.length, products: rows.length, priced: unpriced.length })
 }
 
 export async function saveProduct(request, { id }) {
