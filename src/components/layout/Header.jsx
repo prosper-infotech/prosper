@@ -136,15 +136,24 @@ function OfferBar() {
     'Prices include GST · GST invoice with every order',
     'Bulk quantity? Get a quote within one business day',
   ]
+  // Scrolls right to left on a loop, like a news ticker. The track is two identical
+  // halves (each wide enough for big screens) so the loop has no gap. It pauses on
+  // hover and stays still for people who ask for reduced motion.
+  const half = (hidden) => (
+    <span className="flex" aria-hidden={hidden || undefined}>
+      {[...items, ...items].map((t, i) => (
+        <span key={i} className="whitespace-nowrap px-8">
+          <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-gold align-middle" aria-hidden="true" />
+          {t}
+        </span>
+      ))}
+    </span>
+  )
   return (
-    <div className="bg-primary-dark text-white">
-      <div className="mx-auto flex h-9 max-w-[1400px] items-center justify-center gap-10 overflow-hidden px-4 text-xs font-semibold lg:justify-between lg:px-8">
-        {items.map((t, i) => (
-          <span key={t} className={`whitespace-nowrap ${i === 0 ? '' : 'hidden lg:inline'}`}>
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-gold align-middle" aria-hidden="true" />
-            {t}
-          </span>
-        ))}
+    <div className="group overflow-hidden bg-primary-dark text-white">
+      <div className="flex h-9 w-max items-center text-xs font-semibold animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+        {half(false)}
+        {half(true)}
       </div>
     </div>
   )

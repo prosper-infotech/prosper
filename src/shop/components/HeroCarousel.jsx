@@ -1,13 +1,63 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { CategoryIcon } from './ui'
+import { formatINR } from '../../../shared/pricing.js'
 
-// Flat full-width banners: solid colour, bold type, one product photo, no shadows or tilt.
+// Full-width banners that slide sideways every few seconds, each showing a few real
+// products with their photo and current price (no discounts). Prices come from the
+// shop, so the banners change when a price changes.
 const THEMES = {
-  navy: { wrap: 'bg-primary text-white', eyebrow: 'text-gold', title: '!text-white', text: 'text-white/80', cta: 'bg-gold text-primary hover:bg-gold-dark', photo: 'bg-white' },
-  gold: { wrap: 'bg-gold text-primary', eyebrow: 'text-primary/70', title: '', text: 'text-primary/80', cta: 'bg-primary text-white hover:bg-primary-dark', photo: 'bg-white' },
-  light: { wrap: 'bg-[#eef2f8] text-primary', eyebrow: 'text-gold-dark', title: '', text: 'text-[#535766]', cta: 'bg-primary text-white hover:bg-primary-dark', photo: 'bg-white' },
+  light: {
+    wrap: 'bg-gradient-to-r from-[#eef2f8] via-white to-[#eef2f8]',
+    eyebrow: 'text-gold-dark',
+    title: '!text-primary',
+    accent: 'text-[#d6262f]',
+    text: 'text-[#535766]',
+    cta: 'bg-primary text-white hover:bg-primary-dark',
+    price: 'bg-primary text-white',
+  },
+  navy: {
+    wrap: 'bg-gradient-to-r from-primary-dark via-primary to-primary-dark',
+    eyebrow: 'text-gold',
+    title: '!text-white',
+    accent: 'text-gold',
+    text: 'text-white/80',
+    cta: 'bg-gold text-primary hover:bg-gold-dark',
+    price: 'bg-gold text-primary',
+  },
+}
+
+function Slide({ slide, active }) {
+  const t = THEMES[slide.theme] || THEMES.light
+  return (
+    <div className={`w-full shrink-0 ${t.wrap}`} aria-roledescription="slide" aria-hidden={!active} inert={!active ? '' : undefined}>
+      <div className="mx-auto grid min-h-[300px] max-w-[1400px] items-center gap-6 px-6 pb-16 pt-8 sm:px-12 md:min-h-[400px] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] md:pb-14 lg:px-20">
+        <div>
+          <p className={`text-xs font-extrabold uppercase tracking-[0.25em] ${t.eyebrow}`}>{slide.eyebrow}</p>
+          <h2 className={`mt-3 text-3xl font-extrabold uppercase leading-[1.05] md:text-[44px] ${t.title}`}>
+            {slide.title} {slide.accent && <span className={`block ${t.accent}`}>{slide.accent}</span>}
+          </h2>
+          <p className={`mt-3 max-w-md text-sm md:text-base ${t.text}`}>{slide.text}</p>
+          <Link to={slide.to} className={`mt-6 inline-flex items-center rounded-md px-7 py-3 text-[13px] font-bold uppercase tracking-wider transition-colors ${t.cta}`}>
+            {slide.cta}
+          </Link>
+        </div>
+        <ul className="grid grid-cols-3 items-end gap-3 md:gap-5">
+          {slide.products.map((p, i) => (
+            <li key={p.id} className={i === 1 ? 'md:-translate-y-4' : ''}>
+              <Link to={`/p/${p.slug}`} className="group flex flex-col items-center text-center" tabIndex={active ? undefined : -1}>
+                <span className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-2 shadow-[0_8px_24px_rgba(20,52,109,0.12)] md:p-4">
+                  <img src={p.images[0]} alt={p.name} loading={slide.eager ? 'eager' : 'lazy'} className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105" />
+                </span>
+                <span className={`mt-2 line-clamp-2 hidden text-xs font-bold leading-tight md:block ${slide.theme === 'navy' ? 'text-white' : 'text-primary'}`}>{p.brand && p.brand !== 'Prosper Infotech' ? `${p.brand} ` : ''}{p.short}</span>
+                <span className={`mt-1.5 rounded-md px-2.5 py-1 text-xs font-extrabold md:text-base ${t.price}`}>{formatINR(p.price_paise)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
 }
 
 export default function HeroCarousel({ slides }) {
@@ -19,14 +69,13 @@ export default function HeroCarousel({ slides }) {
   useEffect(() => {
     if (paused || count < 2) return
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
-    const timer = setTimeout(() => setIndex((i) => (i + 1) % count), 6000)
+    const timer = setTimeout(() => setIndex((i) => (i + 1) % count), 5000)
     return () => clearTimeout(timer)
   }, [index, paused, count])
 
-  const slide = slides[index % count]
-  const t = THEMES[slide.theme] || THEMES.navy
-  const cta = `inline-flex items-center rounded-md px-7 py-3 text-[13px] font-bold uppercase tracking-wider transition-colors ${t.cta}`
-  const arrow = 'absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink-900 transition-colors hover:bg-white md:flex'
+  if (!count) return null
+  const current = index % count
+  const arrow = 'absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink-900 shadow transition-colors hover:bg-white md:flex'
 
   return (
     <section
@@ -38,63 +87,29 @@ export default function HeroCarousel({ slides }) {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div
-        key={index}
-        className={`grid min-h-[260px] animate-[fadeIn_.4s_ease-out] items-center md:min-h-[380px] md:grid-cols-[1.2fr_1fr] ${t.wrap}`}
-        aria-roledescription="slide"
-        aria-label={`${index + 1} of ${count}`}
-      >
-        <div className="px-6 pb-20 pt-10 sm:px-12 md:py-10 lg:px-20">
-          <p className={`text-xs font-extrabold uppercase tracking-[0.25em] ${t.eyebrow}`}>{slide.eyebrow}</p>
-          <h2 className={`mt-3 max-w-xl text-3xl font-extrabold leading-[1.1] md:text-5xl ${t.title}`}>{slide.title}</h2>
-          <p className={`mt-4 max-w-md text-base ${t.text}`}>{slide.text}</p>
-          <div className="mt-7">
-            {slide.to ? (
-              <Link to={slide.to} className={cta}>
-                {slide.cta}
-              </Link>
-            ) : (
-              <button type="button" onClick={slide.onClick} className={cta}>
-                {slide.cta}
-              </button>
-            )}
-          </div>
-        </div>
-        {slide.images?.[0] ? (
-          <div className="hidden h-full items-center justify-center p-10 md:flex">
-            <img src={slide.images[0]} alt="" className={`aspect-square w-full max-w-[300px] rounded-full object-cover ${t.photo}`} />
-          </div>
-        ) : slide.categories?.length ? (
-          <div className="hidden h-full items-center justify-center gap-4 p-10 md:flex" aria-hidden="true">
-            {slide.categories.slice(0, 3).map((c, i) => (
-              <span key={c.slug} className={`flex flex-col items-center gap-3 rounded-2xl bg-white px-5 py-6 text-center shadow-sm ${i === 1 ? '-translate-y-6' : ''}`}>
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-surface-alt lg:h-24 lg:w-24">
-                  <CategoryIcon category={c} className="h-10 w-10 stroke-[1.4] text-primary lg:h-12 lg:w-12" />
-                </span>
-                <span className="max-w-[7.5rem] text-xs font-bold leading-tight text-primary">{c.name}</span>
-              </span>
-            ))}
-          </div>
-        ) : null}
+      <div className="flex transition-transform duration-700 ease-in-out motion-reduce:transition-none" style={{ transform: `translateX(-${current * 100}%)` }}>
+        {slides.map((s, i) => (
+          <Slide key={s.to + s.title} slide={{ ...s, eager: i === 0 }} active={i === current} />
+        ))}
       </div>
 
       {count > 1 && (
         <>
-          <button type="button" onClick={() => go(index - 1)} aria-label="Previous banner" className={`${arrow} left-4`}>
+          <button type="button" onClick={() => go(current - 1)} aria-label="Previous banner" className={`${arrow} left-3`}>
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <button type="button" onClick={() => go(index + 1)} aria-label="Next banner" className={`${arrow} right-4`}>
+          <button type="button" onClick={() => go(current + 1)} aria-label="Next banner" className={`${arrow} right-3`}>
             <ChevronRight className="h-5 w-5" />
           </button>
-          <div className="absolute bottom-10 left-1/2 z-10 flex md:bottom-12 -translate-x-1/2 gap-1.5">
+          <div className="absolute bottom-9 left-1/2 z-10 flex -translate-x-1/2 gap-1.5 md:bottom-11">
             {slides.map((s, i) => (
               <button
-                key={s.title}
+                key={s.to + s.title}
                 type="button"
                 onClick={() => go(i)}
-                aria-label={`Show banner ${i + 1}`}
-                aria-current={i === index ? 'true' : undefined}
-                className={`h-1.5 rounded-full transition-all ${i === index ? 'w-6 bg-ink-900' : 'w-1.5 bg-ink-900/30 hover:bg-ink-900/50'}`}
+                aria-label={`Show banner ${i + 1}: ${s.title}`}
+                aria-current={i === current ? 'true' : undefined}
+                className={`h-2 rounded-full transition-all ${i === current ? 'w-6 bg-gold-dark' : 'w-2 bg-[#9aa7c0] hover:bg-[#6f7fa0]'}`}
               />
             ))}
           </div>

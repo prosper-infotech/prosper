@@ -14,7 +14,7 @@ import { ALL_FAQS, faqLd } from '../../../shared/faq.js'
 import { btn } from '../../shop/format'
 import { track } from '../../shop/track'
 import { COMPANY_URL, SITE_URL } from '../../shop/site'
-import { formatINR, hasPrice, isOrderable } from '../../../shared/pricing.js'
+import { hasPrice, isOrderable } from '../../../shared/pricing.js'
 
 // A few common questions; the full list is on the FAQ page.
 const FAQS = ['How do I order?', 'Do prices include GST?', 'How can I pay?', 'Where do you deliver?', 'Can I get a price for a large quantity?', 'Do you sell genuine branded products?']
@@ -50,52 +50,28 @@ export default function ShopHome() {
     for (const p of products) if (p.brand && p.brand !== 'Prosper Infotech') count.set(p.brand, (count.get(p.brand) || 0) + 1)
     return [...count.entries()].sort((a, b) => b[1] - a[1]).slice(0, 14).map(([name]) => name)
   }, [products])
-  const lowest = useMemo(() => {
-    const prices = products.filter(hasPrice).map((p) => p.price_paise)
-    return prices.length ? Math.min(...prices) : null
-  }, [products])
 
+  // Banner slides: three real products each (photo + current price), branded first.
   const slides = useMemo(() => {
-    const pick = (...slugs) => slugs.map((s) => live.find((c) => c.slug === s)).filter(Boolean)
-    return [
-      {
-        theme: 'navy',
-        eyebrow: 'Prosper Infotech Shop',
-        title: 'RFID, barcode and POS hardware in one place',
-        text: `${products.length}+ products from Zebra, Honeywell, TSC, Newland and more, with GST invoice and delivery across India.${lowest ? ` From ${formatINR(lowest)}.` : ''}`,
-        cta: 'Shop all products',
-        to: '/c/all',
-        categories: pick('readers-antennas', 'barcode-scanners', 'printers-encoders'),
-      },
-      {
-        theme: 'gold',
-        eyebrow: 'Retail & restaurants',
-        title: 'Billing made simple',
-        text: 'Touch POS terminals, handheld POS with printer, receipt printers, cash drawers and self-order kiosks.',
-        cta: 'Shop POS & kiosks',
-        to: '/c/pos-kiosks',
-        categories: pick('pos-kiosks', 'consumables-spares', 'barcode-scanners'),
-      },
-      {
-        theme: 'light',
-        eyebrow: 'Security & access',
-        title: 'Know who comes in, and what goes out',
-        text: 'Attendance terminals, door access control, EAS anti-theft systems, boom barriers and turnstiles.',
-        cta: 'Shop security',
-        to: '/c/security-access',
-        categories: pick('security-access', 'smart-cards-nfc', 'tags-labels'),
-      },
-      {
-        theme: 'navy',
-        eyebrow: 'Bulk & corporate orders',
-        title: 'Buying in quantity? Get a better price',
-        text: 'Tell us the products and quantities. We reply with a price and delivery time within one business day.',
-        cta: 'Request a bulk quote',
-        to: '/bulk-order',
-        categories: pick('tags-labels', 'smart-cards-nfc', 'consumables-spares'),
-      },
+    const short = (p) => p.name.split(/\s[–|-]\s|,|\(/)[0].replace(new RegExp(`^${p.brand}[\\s-]+`, 'i'), '').trim()
+    const pick = (category, match) => {
+      // Mid-range products read best on a banner: skip very cheap and very expensive ones.
+      const pool = (byCategory.get(category) || []).filter((p) => p.images?.length && isOrderable(p) && p.price_paise >= 100000 && p.price_paise <= 15000000 && (!match || match.test(p.name)))
+      pool.sort((a, b) => (a.brand === 'Prosper Infotech') - (b.brand === 'Prosper Infotech') || b.price_paise - a.price_paise)
+      const out = []
+      for (const p of pool) if (!out.some((o) => o.brand === p.brand)) out.push(p)
+      for (const p of pool) if (out.length < 3 && !out.includes(p)) out.push(p)
+      return out.slice(0, 3).map((p) => ({ ...p, short: short(p) }))
+    }
+    const all = [
+      { theme: 'light', eyebrow: 'Barcode scanners', title: 'Scan faster,', accent: 'bill faster', text: 'Handheld, wireless and tabletop scanners from Zebra, Honeywell, Newland and more.', cta: 'Shop scanners', to: '/c/barcode-scanners', products: pick('barcode-scanners') },
+      { theme: 'navy', eyebrow: 'RFID readers', title: 'Track every item', accent: 'without a scan', text: 'Handheld, fixed and integrated UHF RFID readers for stock, assets and gates.', cta: 'Shop RFID readers', to: '/c/readers-antennas', products: pick('readers-antennas', /reader/i) },
+      { theme: 'light', eyebrow: 'Label printers', title: 'Print sharp labels', accent: 'all day long', text: 'Desktop and industrial barcode and RFID printers, with ribbons and labels to match.', cta: 'Shop printers', to: '/c/printers-encoders', products: pick('printers-encoders') },
+      { theme: 'navy', eyebrow: 'POS & kiosks', title: 'Smart billing,', accent: 'smooth checkout', text: 'Windows and Android POS, handheld POS with printer and self-order kiosks.', cta: 'Shop POS & kiosks', to: '/c/pos-kiosks', products: pick('pos-kiosks') },
+      { theme: 'light', eyebrow: 'Office equipment', title: 'Protect every', accent: 'document', text: 'Paper shredders, note counting machines, laminators and electronic lockers.', cta: 'Shop office equipment', to: '/c/office-equipment', products: pick('office-equipment', /shred/i) },
     ]
-  }, [live, products.length, lowest])
+    return all.filter((s) => s.products.length === 3)
+  }, [byCategory])
 
   const schema = useMemo(
     () => ({
