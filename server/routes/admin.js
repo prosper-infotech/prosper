@@ -11,6 +11,7 @@ import { razorpayConfigured } from '../lib/razorpay.js'
 import { leadForwardingOn } from '../lib/crm.js'
 import { saveProductImage, readLocalUpload } from '../lib/storage.js'
 import { RANGE_PHOTOS } from '../../shared/range-photos.js'
+import { listSubscribers, removeSubscriber } from '../lib/subscribers.js'
 
 export async function me(request, _params, staff) {
   return json({
@@ -589,4 +590,21 @@ export async function localUpload(request, { month, file }) {
   const found = readLocalUpload(`${month}/${file}`)
   if (!found) throw new HttpError(404, 'Not found.')
   return new Response(found.buf, { headers: { 'Content-Type': found.type, 'Cache-Control': 'public, max-age=86400', 'X-Content-Type-Options': 'nosniff' } })
+}
+
+// Pop-up sign-ups ("Stay updated").
+export async function subscribers() {
+  return json({ subscribers: await listSubscribers() })
+}
+
+export async function exportSubscribers() {
+  const rows = (await listSubscribers()).map((s) => ({ signed_up: s.created_at.slice(0, 10), mobile: s.phone, email: s.email, page: s.page }))
+  return text(toCsv(['signed_up', 'mobile', 'email', 'page'], rows), 'text/csv; charset=utf-8', 200, { 'Content-Disposition': 'attachment; filename="subscribers.csv"', 'Cache-Control': 'no-store' })
+}
+
+export async function deleteSubscriber(request, _params, staff) {
+  const body = await readJson(request)
+  const removed = await removeSubscriber({ phone: str(body.phone, 30), email: str(body.email, 160).toLowerCase() })
+  console.log(`[shop] ${staff?.email || 'staff'} removed ${removed} subscriber(s)`)
+  return json({ removed })
 }

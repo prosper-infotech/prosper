@@ -156,6 +156,18 @@ test('pop-up sign-up: phone or email is enough, emailed to sales as a new subscr
   assert.match(mail.subject, /^New subscriber: \+91 98765 43210/)
   assert.ok(!mail.replyTo)
   assert.equal((await api('POST', '/api/shop/enquiry', { kind: 'subscribe', email: 'asha@example.com' })).status, 200)
+  // Saved for staff: newest first, a repeat updates the same entry, and nobody else can see it.
+  assert.equal((await api('GET', '/api/admin/subscribers')).status, 401)
+  assert.equal((await api('POST', '/api/shop/enquiry', { kind: 'subscribe', phone: '9876543210', email: 'ravi@example.com' })).status, 200)
+  let list = (await admin('GET', '/api/admin/subscribers')).data.subscribers
+  assert.deepEqual(list.map((s) => s.email || s.phone), ['ravi@example.com', 'asha@example.com'])
+  assert.equal(list[0].phone, '9876543210')
+  const csv = (await admin('GET', '/api/admin/subscribers.csv')).data
+  assert.match(csv, /^signed_up,mobile,email,page/)
+  assert.match(csv, /ravi@example\.com/)
+  assert.equal((await admin('POST', '/api/admin/subscribers/remove', { email: 'asha@example.com' })).data.removed, 1)
+  list = (await admin('GET', '/api/admin/subscribers')).data.subscribers
+  assert.equal(list.length, 1)
 })
 
 test('enquiry: emailed to sales, checked, and bots are ignored quietly', async () => {

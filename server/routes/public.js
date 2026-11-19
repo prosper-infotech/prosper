@@ -8,6 +8,7 @@ import { PAYMENT_METHODS, nextOrderNumber, newPublicToken, publicOrder, markPaid
 import { razorpayConfigured, razorpayKeyId, createRazorpayOrder, verifyCheckoutSignature, verifyWebhookSignature } from '../lib/razorpay.js'
 import { forwardOrderLead } from '../lib/crm.js'
 import { sendEmail, templates, enquiryEmail, salesRecipients } from '../lib/email.js'
+import { addSubscriber } from '../lib/subscribers.js'
 import { createLoginCode, checkLoginCode, describeDevice, createSessionToken, sessionCookie, sessionFrom, requireCustomer, findStaff } from '../lib/auth.js'
 
 const publicProduct = (p, categories) => ({
@@ -599,6 +600,12 @@ export async function enquiry(request) {
   const settings = await getSettings()
   const to = salesRecipients().length ? salesRecipients() : [settings.support_email].filter(Boolean)
   const mail = enquiryEmail(e, settings)
+  if (e.kind === 'subscribe') {
+    // Saved for the admin Subscribers list first, so a mail hiccup loses nothing.
+    const { repeat } = await addSubscriber({ phone: e.phone, email: e.email, page: e.page })
+    if (!repeat) await sendEmail({ to, ...mail, ...(e.email ? { replyTo: e.email } : {}), type: 'enquiry' })
+    return json({ ok: true })
+  }
   const sent = await sendEmail({ to, ...mail, ...(e.email ? { replyTo: e.email } : {}), type: 'enquiry' })
   if (!sent.ok) throw new HttpError(502, `We could not send your enquiry. Please call or WhatsApp us on ${settings.support_phone || 'our number'}.`)
   return json({ ok: true })
