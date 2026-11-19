@@ -10,6 +10,7 @@ import useScrollToHash from '../../hooks/useScrollToHash'
 import useScrollToTop from '../../hooks/useScrollToTop'
 import { useCart } from '../../shop/shopContext'
 import BottomNav from '../../shop/components/BottomNav'
+import WelcomePopup from '../../shop/components/WelcomePopup'
 
 // Loaded the first time the cart is opened, so other pages stay light.
 const CartDrawer = lazy(() => import('../../shop/components/CartDrawer'))
@@ -38,6 +39,7 @@ export default function Layout() {
       <WhatsAppButton />
       <FloatingCallButton />
       <BottomNav />
+      <WelcomePopup />
       {drawerUsed && (
         <Suspense fallback={null}>
           <CartDrawer />

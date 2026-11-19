@@ -5,7 +5,16 @@ import LandingLeadForm from '../forms/LandingLeadForm'
 
 // Quote request popup. `product` is the product name to quote for, or null
 // when closed. The product is passed to the lead form so it reaches the CRM.
-export default function QuoteModal({ product, options, campaign, onClose }) {
+export default function QuoteModal({
+  product,
+  options,
+  campaign,
+  onClose,
+  title = 'Request a quote',
+  intro = 'Tell us what you need and how many. We will reply with price and delivery time within one business day.',
+  submitLabel = 'Request price',
+  label,
+}) {
   useEffect(() => {
     if (!product) return
     const onKey = (e) => e.key === 'Escape' && onClose()
@@ -25,7 +34,7 @@ export default function QuoteModal({ product, options, campaign, onClose }) {
           onClick={onClose}
           role="dialog"
           aria-modal="true"
-          aria-label={`Request a quote for ${product}`}
+          aria-label={label || `Request a quote for ${product}`}
         >
           <motion.div
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
@@ -46,11 +55,8 @@ export default function QuoteModal({ product, options, campaign, onClose }) {
                 <X className="h-5 w-5" />
               </button>
 
-              <h3 className="pr-8 font-heading font-bold text-primary text-2xl">Request a quote</h3>
-              <p className="text-sm text-ink-600 mt-1 mb-5">
-                Tell us what you need and how many. We will reply with price and delivery time within one
-                business day.
-              </p>
+              <h3 className="pr-8 font-heading font-bold text-primary text-2xl">{title}</h3>
+              <p className="text-sm text-ink-600 mt-1 mb-5">{intro}</p>
 
               <LandingLeadForm
                 campaign={campaign}
@@ -58,7 +64,7 @@ export default function QuoteModal({ product, options, campaign, onClose }) {
                 defaultService={product}
                 serviceLabel="Product"
                 serviceOptions={options}
-                submitLabel="Request price"
+                submitLabel={submitLabel}
               />
             </div>
           </motion.div>
