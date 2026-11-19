@@ -30,7 +30,7 @@ const THEMES = {
 function Slide({ slide, active }) {
   const t = THEMES[slide.theme] || THEMES.light
   return (
-    <div className={`w-full shrink-0 ${t.wrap}`} aria-roledescription="slide" aria-hidden={!active} inert={!active ? '' : undefined}>
+    <div className={`w-full shrink-0 ${t.wrap}`} aria-roledescription="slide" aria-hidden={!active} inert={!active}>
       <div className="mx-auto grid min-h-[300px] max-w-[1400px] items-center gap-6 px-6 pb-16 pt-8 sm:px-12 md:min-h-[400px] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] md:pb-14 lg:px-20">
         <div>
           <p className={`text-xs font-extrabold uppercase tracking-[0.25em] ${t.eyebrow}`}>{slide.eyebrow}</p>

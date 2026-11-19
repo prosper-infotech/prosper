@@ -110,7 +110,7 @@ const BADGES = [
 ]
 
 // Description, specifications and delivery in tabs under the photo and buy box.
-function DetailTabs({ product, config }) {
+function DetailTabs({ product, config, loading }) {
   const [tab, setTab] = useState('description')
   const specs = [...(product.specs || []), ...(product.brand ? [{ label: 'Brand', value: product.brand }] : []), { label: 'SKU', value: product.sku }, ...(product.hsn_code ? [{ label: 'HSN code', value: `${product.hsn_code} (GST ${product.gst_percent}%)` }] : [{ label: 'GST', value: `${Number(product.gst_percent) || 18}% (included in price)` }])]
   const tabs = [
@@ -118,7 +118,8 @@ function DetailTabs({ product, config }) {
     { id: 'specs', label: 'Specifications' },
     { id: 'shipping', label: 'Shipping & returns' },
   ]
-  const text = product.long_description ?? product.short_description ?? ''
+  // Our own launch products have only a short description; some have neither.
+  const text = product.long_description || product.short_description || ''
   return (
     <section className="mt-12 rounded-lg border border-[#eaeaec] bg-white" aria-label="Product information">
       <div role="tablist" aria-label="Product information" className="flex overflow-x-auto border-b border-[#eaeaec]">
@@ -144,7 +145,7 @@ function DetailTabs({ product, config }) {
               <p key={para} className="whitespace-pre-line">
                 {para}
               </p>
-            )) : <p className="text-[#535766]">Loading details…</p>}
+            )) : <p className="text-[#535766]">{loading ? 'Loading details…' : 'Full details for this product are coming soon. See the Specifications tab, or ask us on WhatsApp.'}</p>}
             {product.datasheet_url && (
               <a href={product.datasheet_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 self-start text-sm font-bold text-primary hover:underline">
                 <Download className="h-4 w-4" />
@@ -190,12 +191,13 @@ export default function ProductPage() {
   const navigate = useNavigate()
   const listed = products.find((p) => p.slug === slug) || null
   const [detail, setDetail] = useState(null)
+  const [detailFailed, setDetailFailed] = useState('')
   useEffect(() => {
     if (!listed || listed.long_description !== undefined) return undefined
     let live = true
     api(`/shop/product/${encodeURIComponent(listed.slug)}`)
       .then((full) => live && setDetail(full))
-      .catch(() => {})
+      .catch(() => live && setDetailFailed(listed.slug))
     return () => {
       live = false
     }
@@ -455,7 +457,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-      <DetailTabs product={product} config={config} />
+      <DetailTabs product={product} config={config} loading={product.long_description === undefined && detailFailed !== product.slug} />
 
       <div className="mt-16 flex flex-col gap-14">
         <ProductRow title="Similar products" products={related} viewAllTo={category ? `/c/${category.slug}` : '/c/all'} />

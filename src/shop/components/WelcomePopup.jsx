@@ -20,11 +20,19 @@ const PERKS = [
   { icon: BadgeCheck, text: 'Buying tips from our RFID & barcode experts' },
 ]
 
-const store = (name) => {
+// Browser storage can be missing or full (private mode); never let that break the page.
+const get = (area, key) => {
   try {
-    return window[name]
+    return window[area].getItem(key)
   } catch {
     return null
+  }
+}
+const put = (key, value) => {
+  try {
+    window.localStorage.setItem(key, value)
+  } catch {
+    // ignore: it may simply show again next visit
   }
 }
 
@@ -44,20 +52,26 @@ export default function WelcomePopup() {
 
   const allowed = useMemo(() => {
     if (SKIP.test(pathname)) return false
-    const ls = store('localStorage')
-    if (ls?.getItem(DONE_KEY) || store('sessionStorage')?.getItem('lp_lead_submitted')) return false
-    return Date.now() - (Number(ls?.getItem(SEEN_KEY)) || 0) > QUIET_DAYS * 86_400_000
+    if (get('localStorage', DONE_KEY) || get('sessionStorage', 'lp_lead_submitted')) return false
+    return Date.now() - (Number(get('localStorage', SEEN_KEY)) || 0) > QUIET_DAYS * 86_400_000
   }, [pathname])
 
   useEffect(() => {
     if (!allowed || shown || drawerOpen) return undefined
     const started = Date.now()
+    let timer
     const show = () => {
+      // Another window is open (e.g. "Request price"): try again a little later.
+      if (document.querySelector('[role="dialog"][aria-modal="true"]')) {
+        clearTimeout(timer)
+        timer = setTimeout(show, 10_000)
+        return
+      }
       setShown(true)
       setOpen(true)
-      store('localStorage')?.setItem(SEEN_KEY, String(Date.now()))
+      put(SEEN_KEY, String(Date.now()))
     }
-    const timer = setTimeout(show, WAIT_MS)
+    timer = setTimeout(show, WAIT_MS)
     const onLeave = (e) => {
       if (!e.relatedTarget && e.clientY <= 0 && Date.now() - started > EXIT_AFTER_MS) show()
     }
@@ -70,13 +84,17 @@ export default function WelcomePopup() {
 
   useEffect(() => {
     if (!open) return undefined
-    first.current?.focus()
+    // Focus the first box on computers only: on phones it would pop the keyboard up at once.
+    if (window.matchMedia?.('(pointer: fine)').matches) first.current?.focus()
     document.body.dataset.popup = 'open' // hides the chat bubble while the pop-up is up (index.css)
+    const overflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden' // the page behind stays still
     const onKey = (e) => e.key === 'Escape' && setOpen(false)
     document.addEventListener('keydown', onKey)
     return () => {
       document.removeEventListener('keydown', onKey)
       delete document.body.dataset.popup
+      document.body.style.overflow = overflow
     }
   }, [open])
 
@@ -103,7 +121,7 @@ export default function WelcomePopup() {
     try {
       await api('/shop/enquiry', { method: 'POST', body: { kind: 'subscribe', phone: digits ? `+91 ${digits}` : '', email: email.trim(), website, page: pathname } })
       window.gtag?.('event', 'sign_up', { method: 'Shop pop-up' })
-      store('localStorage')?.setItem(DONE_KEY, '1')
+      put(DONE_KEY, '1')
       setStatus('done')
     } catch (err) {
       setError(err.message)
