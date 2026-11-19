@@ -31,7 +31,7 @@ function Slide({ slide, active }) {
   const t = THEMES[slide.theme] || THEMES.light
   return (
     <div className={`w-full shrink-0 ${t.wrap}`} aria-roledescription="slide" aria-hidden={!active} inert={!active}>
-      <div className="mx-auto grid min-h-[300px] max-w-[1400px] items-center gap-6 px-6 pb-16 pt-8 sm:px-12 md:min-h-[400px] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] md:pb-14 lg:px-20">
+      <div className="mx-auto grid min-h-[300px] max-w-[1400px] items-center gap-6 px-4 pb-20 pt-8 md:min-h-[400px] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] md:pb-20 lg:px-8">
         <div>
           <p className={`text-xs font-extrabold uppercase tracking-[0.25em] ${t.eyebrow}`}>{slide.eyebrow}</p>
           <h2 className={`mt-3 text-3xl font-extrabold uppercase leading-[1.05] md:text-[44px] ${t.title}`}>
@@ -75,7 +75,9 @@ export default function HeroCarousel({ slides }) {
 
   if (!count) return null
   const current = index % count
-  const arrow = 'absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink-900 shadow transition-colors hover:bg-white md:flex'
+  // Arrows sit beside the dots under the banner, so they never cover the text and
+  // the banner lines up with the page edges like everything else.
+  const arrow = 'hidden h-8 w-8 items-center justify-center rounded-full bg-white text-ink-900 shadow ring-1 ring-black/5 transition-colors hover:bg-gold md:flex'
 
   return (
     <section
@@ -95,23 +97,25 @@ export default function HeroCarousel({ slides }) {
 
       {count > 1 && (
         <>
-          <button type="button" onClick={() => go(current - 1)} aria-label="Previous banner" className={`${arrow} left-3`}>
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button type="button" onClick={() => go(current + 1)} aria-label="Next banner" className={`${arrow} right-3`}>
-            <ChevronRight className="h-5 w-5" />
-          </button>
-          <div className="absolute bottom-9 left-1/2 z-10 flex -translate-x-1/2 gap-1.5 md:bottom-11">
-            {slides.map((s, i) => (
-              <button
-                key={s.to + s.title}
-                type="button"
-                onClick={() => go(i)}
-                aria-label={`Show banner ${i + 1}: ${s.title}`}
-                aria-current={i === current ? 'true' : undefined}
-                className={`h-2 rounded-full transition-all ${i === current ? 'w-6 bg-gold-dark' : 'w-2 bg-[#9aa7c0] hover:bg-[#6f7fa0]'}`}
-              />
-            ))}
+          <div className="absolute bottom-9 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 md:bottom-11">
+            <button type="button" onClick={() => go(current - 1)} aria-label="Previous banner" className={arrow}>
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <div className="flex items-center gap-1.5">
+              {slides.map((s, i) => (
+                <button
+                  key={s.to + s.title}
+                  type="button"
+                  onClick={() => go(i)}
+                  aria-label={`Show banner ${i + 1}: ${s.title}`}
+                  aria-current={i === current ? 'true' : undefined}
+                  className={`h-2 rounded-full transition-all ${i === current ? 'w-6 bg-gold-dark' : 'w-2 bg-[#9aa7c0] hover:bg-[#6f7fa0]'}`}
+                />
+              ))}
+            </div>
+            <button type="button" onClick={() => go(current + 1)} aria-label="Next banner" className={arrow}>
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </>
       )}
