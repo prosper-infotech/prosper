@@ -140,6 +140,16 @@ body[data-cart-open] #pcrm-bubble {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .animate-\[fadeIn_\.4s_ease-out\] { animation: none; }
+}
+
+/* The sign-up pop-up covers the page: hide the chat bubble while it is open. */
+body[data-popup='open'] #pcrm-bubble,
+body[data-popup='open'] .pcrm-bubble {
+  display: none !important;
 }
