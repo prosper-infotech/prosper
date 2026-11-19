@@ -583,13 +583,23 @@ export async function enquiry(request) {
     page: str(body.page, 300),
     items: (Array.isArray(body.items) ? body.items : []).slice(0, 30).map((i) => ({ product: str(i?.product, 300), qty: Math.max(0, Math.min(10_000_000, Math.floor(Number(i?.qty) || 0))) })),
   }
-  if (!e.name) throw new HttpError(400, 'Please enter your name.')
-  if (!EMAIL_RE.test(e.email)) throw new HttpError(400, 'Please enter a valid email address.')
-  if (!e.product && !e.items.some((i) => i.product) && !e.message) throw new HttpError(400, 'Tell us which products you need.')
+  // "Stay updated" sign-ups from the pop-up: an email or a phone number is enough.
+  e.kind = body.kind === 'subscribe' ? 'subscribe' : 'enquiry'
+  if (e.kind === 'subscribe') {
+    const digits = e.phone.replace(/\D/g, '')
+    if (e.phone && (digits.length < 10 || digits.length > 13)) throw new HttpError(400, 'Please enter a valid mobile number.')
+    if (e.email && !EMAIL_RE.test(e.email)) throw new HttpError(400, 'Please enter a valid email address.')
+    if (!e.email && !e.phone) throw new HttpError(400, 'Please enter your mobile number or email.')
+    e.product = 'Stay updated (new products and offers)'
+  } else {
+    if (!e.name) throw new HttpError(400, 'Please enter your name.')
+    if (!EMAIL_RE.test(e.email)) throw new HttpError(400, 'Please enter a valid email address.')
+    if (!e.product && !e.items.some((i) => i.product) && !e.message) throw new HttpError(400, 'Tell us which products you need.')
+  }
   const settings = await getSettings()
   const to = salesRecipients().length ? salesRecipients() : [settings.support_email].filter(Boolean)
   const mail = enquiryEmail(e, settings)
-  const sent = await sendEmail({ to, ...mail, replyTo: e.email, type: 'enquiry' })
+  const sent = await sendEmail({ to, ...mail, ...(e.email ? { replyTo: e.email } : {}), type: 'enquiry' })
   if (!sent.ok) throw new HttpError(502, `We could not send your enquiry. Please call or WhatsApp us on ${settings.support_phone || 'our number'}.`)
   return json({ ok: true })
 }

@@ -314,6 +314,13 @@ export function enquiryEmail(e, settings) {
     table(rows) +
     (items.length ? `<h2 style="margin:20px 0 6px;font-size:16px;color:${NAVY}">Products and quantities</h2>${table(items.map((i) => [`Qty ${i.qty || '?'}`, i.product]))}` : '') +
     (e.message ? `<h2 style="margin:20px 0 6px;font-size:16px;color:${NAVY}">Message</h2><p style="margin:0;font-size:14px;line-height:1.6;white-space:pre-line">${esc(e.message)}</p>` : '')
+  if (e.kind === 'subscribe') {
+    return {
+      subject: `New subscriber: ${e.email || e.phone}`,
+      html: layout({ title: 'New subscriber', intro: 'Someone signed up from the shop pop-up to hear about new products and offers.', body, settings }),
+      text: rows.map(([k, v]) => `${k}: ${v}`).join('\n'),
+    }
+  }
   const kind = items.length ? 'Bulk enquiry' : 'Price request'
   return {
     subject: `${kind}: ${e.product || items[0]?.product || 'shop enquiry'} (${e.name})`,

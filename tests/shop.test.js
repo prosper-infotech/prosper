@@ -147,6 +147,17 @@ test('catalogue photos: copied from the second store into our storage, staff onl
   products = (await api('GET', '/api/shop/catalogue')).data.products
 })
 
+test('pop-up sign-up: phone or email is enough, emailed to sales as a new subscriber', async () => {
+  assert.equal((await api('POST', '/api/shop/enquiry', { kind: 'subscribe' })).status, 400)
+  assert.equal((await api('POST', '/api/shop/enquiry', { kind: 'subscribe', phone: '123' })).status, 400)
+  const res = await api('POST', '/api/shop/enquiry', { kind: 'subscribe', phone: '+91 98765 43210', page: '/' })
+  assert.equal(res.status, 200)
+  const mail = lastMail('enquiry')
+  assert.match(mail.subject, /^New subscriber: \+91 98765 43210/)
+  assert.ok(!mail.replyTo)
+  assert.equal((await api('POST', '/api/shop/enquiry', { kind: 'subscribe', email: 'asha@example.com' })).status, 200)
+})
+
 test('enquiry: emailed to sales, checked, and bots are ignored quietly', async () => {
   const ok = await api('POST', '/api/shop/enquiry', {
     name: 'Ravi Shah',
