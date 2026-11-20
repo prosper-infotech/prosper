@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { metaLead } from '../../shop/track'
 import { useForm } from 'react-hook-form'
 import PhoneField from './PhoneField'
 import { useNavigate } from 'react-router-dom'
@@ -111,6 +112,7 @@ export default function LandingLeadForm({
         event_category: campaign,
         event_label: data.service,
       })
+      metaLead(campaign, { content_category: data.service })
       sessionStorage.setItem('lp_lead_submitted', campaign)
       navigate(`/lp/thank-you?campaign=${encodeURIComponent(campaign)}`)
     } catch {

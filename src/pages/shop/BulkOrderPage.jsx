@@ -5,6 +5,7 @@ import Breadcrumb from '../../components/ui/Breadcrumb'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { useShop } from '../../shop/shopContext'
 import { api } from '../../shop/api'
+import { metaLead } from '../../shop/track'
 import { btn } from '../../shop/format'
 import { Spinner } from '../../shop/components/ui'
 import { EMAIL_RE } from '../../../shared/india.js'
@@ -58,6 +59,7 @@ export default function BulkOrderPage() {
     try {
       await api('/shop/enquiry', { method: 'POST', body: { ...form, items: list, product: list.length ? `${list[0].product}${list.length > 1 ? ` + ${list.length - 1} more` : ''}` : 'Bulk order', page: '/bulk-order' } })
       window.gtag?.('event', 'generate_lead', { event_category: 'Bulk order', event_label: list.map((r) => r.product).join(', ') })
+      metaLead('Bulk order')
       setStatus('sent')
     } catch (err) {
       setServerError(err.message)

@@ -8,6 +8,12 @@ export default function useAnalyticsPageView() {
   const location = useLocation()
 
   useEffect(() => {
+    // Meta Pixel: one PageView per route (the snippet in index.html does not send one).
+    try {
+      window.fbq?.('track', 'PageView')
+    } catch {
+      // ad blockers: ignore
+    }
     if (typeof window.gtag !== 'function') return
 
     window.gtag('event', 'page_view', {

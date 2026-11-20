@@ -4,6 +4,7 @@ import { ArrowRight, BadgeCheck, BellRing, CheckCircle2, Lock, Mail, Sparkles, T
 import logo from '../../assets/logo-light.png'
 import { useShop } from '../shopContext'
 import { api } from '../api'
+import { metaLead } from '../track'
 import { Spinner } from './ui'
 import { EMAIL_RE } from '../../../shared/india.js'
 
@@ -121,6 +122,7 @@ export default function WelcomePopup() {
     try {
       await api('/shop/enquiry', { method: 'POST', body: { kind: 'subscribe', phone: digits ? `+91 ${digits}` : '', email: email.trim(), website, page: pathname } })
       window.gtag?.('event', 'sign_up', { method: 'Shop pop-up' })
+      metaLead('Shop pop-up sign-up')
       put(DONE_KEY, '1')
       setStatus('done')
     } catch (err) {

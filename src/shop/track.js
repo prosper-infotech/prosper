@@ -8,11 +8,38 @@ const item = (p, qty = 1) => ({
   quantity: qty,
 })
 
+// The same shop events for Meta (Facebook / Instagram ads), under Meta's standard names.
+const META = { view_item: 'ViewContent', add_to_cart: 'AddToCart', begin_checkout: 'InitiateCheckout', purchase: 'Purchase' }
+function meta(name, params) {
+  const event = META[name]
+  if (!event) return
+  const items = params.items || []
+  window.fbq?.('track', event, {
+    currency: 'INR',
+    value: params.value ?? 0,
+    content_type: 'product',
+    content_ids: items.map((i) => i.item_id),
+    contents: items.map((i) => ({ id: i.item_id, quantity: i.quantity, item_price: i.price })),
+    num_items: items.reduce((n, i) => n + (i.quantity || 1), 0),
+    ...(items[0] && items.length === 1 ? { content_name: items[0].item_name } : {}),
+  }, params.transaction_id ? { eventID: params.transaction_id } : undefined)
+}
+
 function send(name, params) {
   try {
     window.gtag?.('event', name, params)
+    meta(name, params)
   } catch {
     // analytics must never break the shop
+  }
+}
+
+// Meta "Lead": enquiry, bulk quote or pop-up sign-up sent.
+export function metaLead(source, extra = {}) {
+  try {
+    window.fbq?.('track', 'Lead', { content_name: source, ...extra })
+  } catch {
+    // ignore
   }
 }
 
