@@ -97,6 +97,30 @@ test('direct orders: sign-in required, no payment, success message, sales email 
   assert.match(lead, /x 2 @/)
   assert.match(lead, /Delivery address: .*Pune/)
   assert.match(lead, /Mobile: \+919876543210/)
+  // Orders go to the CRM's Orders endpoint with the shared secret, and not to its leads webhook.
+  const { forwardOrderLead } = await import('../server/lib/crm.js')
+  const realFetch = globalThis.fetch
+  const calls = []
+  globalThis.fetch = async (url, opts) => {
+    calls.push({ url: String(url), headers: opts?.headers || {}, body: opts?.body })
+    return new Response('{"ok":true}', { status: 200 })
+  }
+  Object.assign(process.env, { SHOP_FORWARD_LEADS: 'true', CRM_ORDERS_URL: 'https://crm.example/api/orders/ingest', SHOP_ORDERS_SECRET: 'test-secret', CRM_WEBHOOK_URL: 'https://crm.example/leads' })
+  try {
+    const sent = await forwardOrderLead(full.order, full.items, 'https://shop.example')
+    assert.equal(sent.failed, 0)
+  } finally {
+    globalThis.fetch = realFetch
+    for (const k of ['SHOP_FORWARD_LEADS', 'CRM_ORDERS_URL', 'SHOP_ORDERS_SECRET', 'CRM_WEBHOOK_URL']) delete process.env[k]
+  }
+  const toOrders = calls.find((c) => c.url === 'https://crm.example/api/orders/ingest')
+  assert.ok(toOrders)
+  assert.equal(toOrders.headers['x-shop-secret'], 'test-secret')
+  const payload = JSON.parse(toOrders.body)
+  assert.equal(payload.order_number, res.data.order_number)
+  assert.equal(payload.items[0].qty, 2)
+  assert.equal(payload.city, 'Pune')
+  assert.ok(!calls.some((c) => c.url === 'https://crm.example/leads'))
   // Switch to the payment flow for the tests below.
   const current = (await admin('GET', '/api/admin/settings')).data.settings
   assert.equal((await admin('PUT', '/api/admin/settings', { ...current, direct_orders: false })).status, 200)

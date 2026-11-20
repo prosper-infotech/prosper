@@ -45,6 +45,56 @@ export function orderLeadDetails(order, items, base = '') {
     .join('\n')
 }
 
+// The order as the CRM's Orders tab receives it (kept apart from leads there).
+export function orderPayload(order, items, base = '') {
+  const c = order.contact
+  const a = order.shipping_address || {}
+  return {
+    order_number: order.order_number,
+    placed_at: order.created_at,
+    status: 'placed',
+    name: c.name,
+    email: c.email,
+    phone: `+91${c.phone}`,
+    company: c.company || '',
+    gstin: order.gstin || '',
+    items: items.map((i) => ({ sku: i.sku, name: i.name, qty: i.qty, unit_price: formatINR(i.unit_price_paise), line_total: formatINR(i.line_total_paise) })),
+    subtotal: formatINR(order.subtotal_paise),
+    shipping: order.shipping_paise ? formatINR(order.shipping_paise) : 'Free',
+    gst: formatINR(order.gst_paise),
+    total: formatINR(order.total_paise),
+    total_paise: order.total_paise,
+    address: addressText(a),
+    city: a.city || '',
+    state: a.state || '',
+    pincode: a.pincode || '',
+    notes: order.notes || '',
+    order_page: base ? `${base}/order/${order.public_token}` : '',
+    message: orderLeadDetails(order, items, base),
+  }
+}
+
+// Orders tab endpoint in Prosper CRM (separate from its leads). Needs both the
+// address and the shared secret; the secret is never logged.
+const ordersEndpoint = () => {
+  const url = process.env.CRM_ORDERS_URL
+  const secret = process.env.SHOP_ORDERS_SECRET
+  return url && secret ? { url, secret, header: process.env.CRM_ORDERS_HEADER || 'x-shop-secret' } : null
+}
+
+export async function sendOrderToCrm(order, items, base = '') {
+  const ep = ordersEndpoint()
+  if (!ep) return { skipped: true }
+  const res = await fetch(ep.url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', [ep.header]: ep.secret },
+    body: JSON.stringify(orderPayload(order, items, base)),
+    signal: AbortSignal.timeout(6000),
+  })
+  if (!res.ok) throw new Error(`CRM orders endpoint answered ${res.status}`)
+  return { ok: true }
+}
+
 export async function forwardOrderLead(order, items, base = '') {
   if (!leadForwardingOn()) return { skipped: true }
   const c = order.contact
@@ -53,7 +103,9 @@ export async function forwardOrderLead(order, items, base = '') {
   const details = orderLeadDetails(order, items, base)
   const jobs = []
 
-  const crmUrl = process.env.CRM_WEBHOOK_URL || process.env.VITE_CRM_WEBHOOK_URL
+  // With the Orders endpoint set up, orders go there and never to the CRM's leads.
+  if (ordersEndpoint()) jobs.push(sendOrderToCrm(order, items, base))
+  const crmUrl = ordersEndpoint() ? null : process.env.CRM_WEBHOOK_URL || process.env.VITE_CRM_WEBHOOK_URL
   if (crmUrl) {
     jobs.push(
       fetch(crmUrl, {
