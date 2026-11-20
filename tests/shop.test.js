@@ -38,7 +38,10 @@ const { SEED_PRODUCTS } = await import('../shared/catalogue.js')
 const SEEDED = SEED_PRODUCTS.length
 
 const staffCookie = `pi_staff=${createSessionToken('owner@example.com', 'staff')}`
+const customerCookie = (email = 'asha@example.com') => `pi_session=${createSessionToken(email, 'customer')}`
 async function api(method, url, body, headers = {}) {
+  // Placing an order needs an account: checkout calls are signed in as the order's email unless a test says otherwise.
+  if (url === '/api/checkout' && !('Cookie' in headers) && body && typeof body === 'object') headers = { ...headers, Cookie: customerCookie(body.contact?.email) }
   const res = await handle(
     new Request(`http://localhost${url}`, {
       method,
@@ -67,6 +70,36 @@ const product = async (slug) => (await api('GET', '/api/shop/catalogue')).data.p
 
 before(async () => {
   products = (await api('GET', '/api/shop/catalogue')).data.products
+})
+
+test('direct orders: sign-in required, no payment, success message, sales email and order saved', async () => {
+  const item = products.find((p) => p.price_paise > 0 && p.stock_qty > 0)
+  const guest = await api('POST', '/api/checkout', order([{ id: item.id, qty: 1 }]), { Cookie: '' })
+  assert.equal(guest.status, 401)
+  assert.equal(guest.data.code, 'sign_in')
+  assert.equal((await api('GET', '/api/shop/catalogue')).data.config.direct_orders, true)
+  // The email always comes from the account, whatever the form says.
+  const res = await api('POST', '/api/checkout', order([{ id: item.id, qty: 2 }], { payment_method: undefined, contact: { ...contact, email: 'someone@else.com' } }), { Cookie: customerCookie('ravi@example.com') })
+  assert.equal(res.status, 201)
+  assert.equal(res.data.razorpay, null)
+  const view = (await api('GET', `/api/orders/${res.data.token}`)).data.order
+  assert.equal(view.direct, true)
+  assert.equal(view.contact.email, 'ravi@example.com')
+  assert.equal(view.payment_instructions, null)
+  assert.equal(view.can_pay_online, false)
+  assert.match(lastMail('orderReceived').subject, /placed$/)
+  assert.match(lastMail('orderReceived').text, /sales team will contact you shortly/i)
+  assert.ok(lastMail('salesNewOrder'))
+  const { orderLeadDetails } = await import('../server/lib/crm.js')
+  const raw = (await admin('GET', '/api/admin/orders')).data.orders.find((o) => o.order_number === res.data.order_number)
+  const full = (await admin('GET', `/api/admin/orders/${raw.id}`)).data
+  const lead = orderLeadDetails(full.order, full.items, 'https://shop.example')
+  assert.match(lead, /x 2 @/)
+  assert.match(lead, /Delivery address: .*Pune/)
+  assert.match(lead, /Mobile: \+919876543210/)
+  // Switch to the payment flow for the tests below.
+  const current = (await admin('GET', '/api/admin/settings')).data.settings
+  assert.equal((await admin('PUT', '/api/admin/settings', { ...current, direct_orders: false })).status, 200)
 })
 
 test('catalogue: every seeded product, none with a price; lists carry no long text', async () => {
@@ -274,7 +307,7 @@ test('price tampering: the server charges its own total', async () => {
   assert.equal(view.data.order.total_paise, 251000)
   assert.equal(view.data.order.items[0].unit_price_paise, 118000)
   assert.ok(view.data.order.payment_instructions)
-  assert.match(manualOrder.order_number, /^PI-\d{4}-000001$/)
+  assert.match(manualOrder.order_number, /^PI-\d{4}-000002$/) // 000001 is the direct order test
   assert.ok(lastMail('orderReceived').to.includes('asha@example.com'))
   assert.ok(lastMail('salesNewOrder').to.includes('sales@example.com'))
 })

@@ -59,6 +59,7 @@ const publicConfig = (s) => ({
   online_payment: razorpayConfigured(),
   bank_payment: bankReady(s),
   upi_payment: Boolean(s.upi_id),
+  direct_orders: s.direct_orders !== false,
 })
 
 async function loadCatalogue() {
@@ -154,10 +155,17 @@ export async function checkout(request) {
   if (str(body.website)) throw new HttpError(400, 'Your order could not be placed. Please call us.')
   if (body.accept_terms !== true) throw new HttpError(400, 'Please accept the terms of sale.', { fields: { accept_terms: 'Please accept the terms of sale' } })
 
-  const method = str(body.payment_method, 30)
-  assertMethodAvailable(method, await getSettings())
+  // An account is needed to order: the order is saved under the signed-in email.
+  const session = sessionFrom(request, 'customer')
+  if (!session) throw new HttpError(401, 'Please sign in or create an account to place your order.', { code: 'sign_in' })
 
-  const contact = validateContact(body.contact)
+  const shopSettings = await getSettings()
+  const direct = shopSettings.direct_orders !== false
+  // Direct orders: no payment step. Stored as bank transfer, the way sales usually collects payment.
+  const method = direct ? 'bank_transfer' : str(body.payment_method, 30)
+  if (!direct) assertMethodAvailable(method, shopSettings)
+
+  const contact = validateContact({ ...(body.contact || {}), email: session.email })
   const shipping = validateAddress({ ...body.shipping, name: body.shipping?.name || body.contact?.name, phone: body.shipping?.phone || body.contact?.phone })
   const billing = body.billing_same === false ? validateAddress(body.billing) : shipping
   const fields = {}
@@ -229,11 +237,11 @@ export async function checkout(request) {
     await db().remove('orders', { id: order.id })
     throw err
   }
-  await addEvent(order.id, 'placed', `Order placed (${method}).`, 'customer')
+  await addEvent(order.id, 'placed', direct ? 'Order placed. Sales team to call the customer about payment and delivery.' : `Order placed (${method}).`, 'customer')
 
   let razorpay = null
   let paymentError = null
-  if (method === 'razorpay') {
+  if (!direct && method === 'razorpay') {
     try {
       razorpay = await startRazorpay(order)
     } catch (err) {
@@ -246,7 +254,7 @@ export async function checkout(request) {
   await Promise.allSettled([
     notify(order, 'orderReceived'),
     notify(order, 'salesNewOrder', { toSales: true }),
-    forwardOrderLead(order, items).then((r) => (r.skipped ? null : addEvent(order.id, 'crm', `Lead copy sent (${r.sent} ok, ${r.failed} failed).`))),
+    forwardOrderLead(order, items, siteUrl(request)).then((r) => (r.skipped ? null : addEvent(order.id, 'crm', `Lead copy sent (${r.sent} ok, ${r.failed} failed).`))),
   ])
 
   return json({ token: order.public_token, order_number: order.order_number, total_paise: order.total_paise, razorpay, payment_error: paymentError }, 201)

@@ -18,7 +18,7 @@ const TABS = [
 ]
 
 function Orders({ orders }) {
-  const { products, add, openDrawer } = useShop()
+  const { products, add, openDrawer, config } = useShop()
   const [message, setMessage] = useState('')
 
   const reorder = (order) => {
@@ -57,7 +57,7 @@ function Orders({ orders }) {
                   {formatDate(order.created_at)} · {formatINR(order.total_paise)}
                 </p>
               </div>
-              <StatusBadge status={order.status} />
+              <StatusBadge status={order.status} label={order.status === 'pending_payment' && config.direct_orders !== false ? 'Placed · sales will call' : undefined} />
             </div>
             <ul className="mt-4 flex flex-wrap gap-3">
               {order.items.map((item) => (

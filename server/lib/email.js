@@ -133,6 +133,20 @@ const orderUrl = (base, order) => `${base}/order/${order.public_token}`
 export const templates = {
   orderReceived(order, items, settings, base) {
     const manual = order.payment_method !== 'razorpay'
+    if (manual && settings.direct_orders !== false) {
+      return {
+        subject: `Order ${order.order_number} placed`,
+        html: layout({
+          title: `Thank you, ${order.contact.name.split(' ')[0]}. Your order has been placed.`,
+          intro: `Your order <strong>${esc(order.order_number)}</strong> has been placed successfully. Our sales team will contact you shortly to confirm payment and delivery.`,
+          body: `${itemsTable(order, items)}${addressBlock(order)}`,
+          button: { url: orderUrl(base, order), label: 'View your order' },
+          footnote: settings.support_phone ? `Questions? Call or WhatsApp us on ${esc(settings.support_phone)}.` : '',
+          settings,
+        }),
+        text: `Thank you. Your order ${order.order_number} has been placed successfully. Our sales team will contact you shortly to confirm payment and delivery.\n\n${itemsText(order, items)}\n\nView your order: ${orderUrl(base, order)}`,
+      }
+    }
     const bank = manual ? bankBlock(order, settings) : null
     return {
       subject: `Order ${order.order_number} received`,
@@ -230,16 +244,18 @@ export const templates = {
   },
   salesNewOrder(order, items, settings, base) {
     const c = order.contact
+    const direct = settings.direct_orders !== false && order.payment_method !== 'razorpay'
+    const how = direct ? 'call the customer' : order.payment_method
     return {
-      subject: `New shop order ${order.order_number}: ${formatINR(order.total_paise)} (${order.payment_method})`,
+      subject: `New shop order ${order.order_number}: ${formatINR(order.total_paise)} (${how})`,
       html: layout({
         title: `New order ${order.order_number}`,
-        intro: `${esc(c.name)}${c.company ? ` (${esc(c.company)})` : ''} &middot; ${esc(c.email)} &middot; ${esc(c.phone)}${order.gstin ? ` &middot; GSTIN ${esc(order.gstin)}` : ''}<br>Payment method: <strong>${esc(order.payment_method)}</strong> &middot; Status: <strong>${esc(order.status)}</strong>${order.notes ? `<br>Customer note: ${esc(order.notes)}` : ''}`,
+        intro: `${esc(c.name)}${c.company ? ` (${esc(c.company)})` : ''} &middot; ${esc(c.email)} &middot; ${esc(c.phone)}${order.gstin ? ` &middot; GSTIN ${esc(order.gstin)}` : ''}<br>${direct ? '<strong>Please call the customer to confirm payment and delivery.</strong>' : `Payment method: <strong>${esc(order.payment_method)}</strong> &middot; Status: <strong>${esc(order.status)}</strong>`}${order.notes ? `<br>Customer note: ${esc(order.notes)}` : ''}`,
         body: `${itemsTable(order, items)}${addressBlock(order)}`,
         button: { url: `${base}/admin/orders/${order.id}`, label: 'Open in admin' },
         settings,
       }),
-      text: `New order ${order.order_number} from ${c.name} (${c.email}, ${c.phone}). ${formatINR(order.total_paise)}, ${order.payment_method}.\n\n${itemsText(order, items)}\n\nAdmin: ${base}/admin/orders/${order.id}`,
+      text: `New order ${order.order_number} from ${c.name} (${c.email}, ${c.phone}). ${formatINR(order.total_paise)}, ${how}.\n\n${itemsText(order, items)}\n\nAdmin: ${base}/admin/orders/${order.id}`,
     }
   },
   salesPaid(order, items, settings, base) {

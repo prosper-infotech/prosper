@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
-import { AlertTriangle, Check, CheckCircle2, Copy, CreditCard, ExternalLink, FileText, Mail, PackageSearch, Phone, Smartphone, Truck, XCircle } from 'lucide-react'
+import { AlertTriangle, Check, CheckCircle2, Copy, CreditCard, ExternalLink, FileText, Headset, Mail, MessageCircle, PackageSearch, Phone, Smartphone, Truck, XCircle } from 'lucide-react'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { api } from '../../shop/api'
 import { payWithRazorpay } from '../../shop/razorpay'
@@ -200,16 +200,47 @@ export default function OrderStatus() {
           <div>
             <p className="flex items-center gap-2 text-sm font-semibold text-gold">
               {closed ? <XCircle className="h-5 w-5" /> : <CheckCircle2 className="h-5 w-5" />}
-              {closed ? `Order ${order.status}` : pending ? 'Order received' : 'Thank you for your order'}
+              {closed ? `Order ${order.status}` : order.direct ? 'Order placed successfully' : pending ? 'Order received' : 'Thank you for your order'}
             </p>
             <h1 className="mt-2 text-3xl font-extrabold !text-white md:text-4xl">{order.order_number}</h1>
             <p className="mt-2 text-sm text-white/80">
               Placed on {formatDate(order.created_at, true)} · Confirmation sent to {order.contact.email}
             </p>
           </div>
-          <StatusBadge status={order.status} />
+          <StatusBadge status={order.status} label={order.direct ? 'Order placed' : undefined} />
         </div>
       </header>
+
+      {order.direct && (
+        <section className="mt-6 flex flex-col gap-4 rounded-md border border-[#bfe5cf] bg-[#effaf3] p-5 sm:flex-row sm:items-center md:p-7" role="status">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+            <CheckCircle2 className="h-8 w-8 text-[#0f8a5f]" aria-hidden="true" />
+          </span>
+          <div className="flex-1">
+            <h2 className="text-xl !text-[#0b5e41]">Your order has been placed successfully</h2>
+            <p className="mt-1 flex items-start gap-2 text-sm text-ink-900">
+              <Headset className="mt-0.5 h-4 w-4 shrink-0 text-[#0f8a5f]" aria-hidden="true" />
+              Our sales team will contact you shortly on {order.contact.phone ? `+91 ${order.contact.phone}` : 'your phone'} to confirm payment and delivery.
+            </p>
+          </div>
+          {(order.support?.phone || order.support?.whatsapp) && (
+            <div className="flex shrink-0 flex-wrap gap-2">
+              {order.support.phone && (
+                <a href={`tel:${order.support.phone.replace(/\s+/g, '')}`} className={`${btn.ghost} !py-2`}>
+                  <Phone className="h-4 w-4" />
+                  Call us
+                </a>
+              )}
+              {order.support.whatsapp && (
+                <a href={`https://wa.me/${order.support.whatsapp}?text=${encodeURIComponent(`Hi, about my order ${order.order_number}`)}`} target="_blank" rel="noopener noreferrer" className={`${btn.ghost} !py-2`}>
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </a>
+              )}
+            </div>
+          )}
+        </section>
+      )}
 
       {notice && (
         <p role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800">
@@ -412,7 +443,7 @@ export default function OrderStatus() {
               Phone: {a.phone}
             </address>
             <p className="mt-3 text-sm text-ink-600">
-              Payment: {PAYMENT_LABEL[order.payment_method]}
+              Payment: {order.direct ? "Our sales team will confirm with you" : PAYMENT_LABEL[order.payment_method]}
               {order.gstin ? ` · GSTIN ${order.gstin}` : ''}
             </p>
           </section>

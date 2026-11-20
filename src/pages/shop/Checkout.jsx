@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { ArrowLeft, Banknote, ChevronDown, CreditCard, Lock, ShieldCheck, ShoppingCart, Smartphone } from 'lucide-react'
+import { ArrowLeft, Banknote, ChevronDown, CreditCard, Headset, Lock, ShieldCheck, ShoppingCart, Smartphone, UserRound } from 'lucide-react'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { useShop } from '../../shop/shopContext'
 import { api, ApiError } from '../../shop/api'
 import { payWithRazorpay } from '../../shop/razorpay'
 import { track } from '../../shop/track'
 import AddressFields from '../../shop/components/AddressFields'
+import SignIn from '../../shop/components/SignIn'
 import { Totals } from '../../shop/components/CartLines'
 import { EmptyState, Field, PageLoading, ProductImage, Spinner } from '../../shop/components/ui'
 import { btn, inputClass } from '../../shop/format'
@@ -78,7 +79,7 @@ export default function Checkout() {
   const [summaryOpen, setSummaryOpen] = useState(false)
   const errorRef = useRef(null)
   const tracked = useRef(false)
-  const prefilled = useRef(false)
+  const [account, setAccount] = useState(undefined) // undefined = checking, null = signed out
 
   useDocumentTitle('Checkout | Prosper Infotech Shop', 'Enter your delivery details and place your order.', null, { noindex: true })
 
@@ -95,8 +96,10 @@ export default function Checkout() {
 
   const billingSame = watch('billing_same')
   const method = watch('payment_method')
+  // Direct orders (the default): no payment step, the sales team calls the customer.
+  const direct = config.direct_orders !== false
 
-  const methods = [
+  const methods = direct ? [] : [
     config.online_payment && { value: 'razorpay', icon: CreditCard, title: 'Pay online', text: 'Card, UPI, net banking or wallet. Confirmed in seconds.' },
     config.upi_payment && { value: 'upi_manual', icon: Smartphone, title: 'UPI transfer', text: 'Pay to our UPI ID from any UPI app. We confirm once it arrives.' },
     config.bank_payment && { value: 'bank_transfer', icon: Banknote, title: 'Bank transfer', text: 'NEFT, RTGS or IMPS. Good for company payments and purchase orders.' },
@@ -104,7 +107,7 @@ export default function Checkout() {
   const firstMethod = methods[0]?.value
 
   useEffect(() => {
-    if (firstMethod && !methods.some((m) => m.value === getValues('payment_method'))) setValue('payment_method', firstMethod)
+    if (!direct && firstMethod && !methods.some((m) => m.value === getValues('payment_method'))) setValue('payment_method', firstMethod)
   }, [firstMethod]) // eslint-disable-line
 
   // Keep what the customer typed if the page is refreshed.
@@ -119,22 +122,33 @@ export default function Checkout() {
     return () => sub.unsubscribe()
   }, [watch])
 
-  // Signed-in customers get their saved details filled in (only into an empty form).
-  useEffect(() => {
-    if (prefilled.current) return
-    prefilled.current = true
+  // An account is needed to place an order. Signed-in customers get their saved
+  // details filled in; the email is always the account email.
+  const loadAccount = useCallback(() => {
     api('/account')
       .then((acct) => {
-        if (!acct.signed_in || getValues('contact.email')) return
+        if (!acct.signed_in) return setAccount(null)
+        setAccount(acct)
         const address = acct.addresses.find((a) => a.is_default) || acct.addresses[0]
+        const current = getValues()
         reset({
-          ...getValues(),
-          contact: { ...acct.customer, email: acct.customer.email },
-          shipping: address ? { line1: address.line1, line2: address.line2 || '', city: address.city, state: address.state, pincode: address.pincode } : getValues('shipping'),
+          ...current,
+          contact: {
+            ...current.contact,
+            name: current.contact.name || acct.customer.name || '',
+            phone: current.contact.phone || acct.customer.phone || '',
+            company: current.contact.company || acct.customer.company || '',
+            gstin: current.contact.gstin || acct.customer.gstin || '',
+            email: acct.customer.email,
+          },
+          shipping: !current.shipping.line1 && address ? { line1: address.line1, line2: address.line2 || '', city: address.city, state: address.state, pincode: address.pincode } : current.shipping,
         })
       })
-      .catch(() => {})
+      .catch(() => setAccount(null))
   }, [getValues, reset])
+  useEffect(() => {
+    loadAccount()
+  }, [loadAccount])
 
   const hasItems = priced.items.length > 0
   useEffect(() => {
@@ -176,12 +190,12 @@ export default function Checkout() {
       bad = true
       setError('accept_terms', { message: 'Please accept the terms to place your order' })
     }
-    if (!values.payment_method) return fail('Choose how you want to pay.')
+    if (!direct && !values.payment_method) return fail('Choose how you want to pay.')
     if (bad) return fail('Please check the highlighted fields.')
 
     setPlacing(true)
     try {
-      track.addPaymentInfo(priced, values.payment_method)
+      if (!direct) track.addPaymentInfo(priced, values.payment_method)
       const res = await api('/checkout', {
         method: 'POST',
         body: {
@@ -191,7 +205,7 @@ export default function Checkout() {
           billing_same: values.billing_same,
           billing: values.billing_same ? undefined : values.billing,
           notes: values.notes,
-          payment_method: values.payment_method,
+          payment_method: direct ? undefined : values.payment_method,
           accept_terms: true,
           website: values.website,
           expected_total_paise: priced.total_paise,
@@ -217,6 +231,10 @@ export default function Checkout() {
       setPlacing(false)
       if (err instanceof ApiError && err.data.fields) {
         for (const [name, message] of Object.entries(err.data.fields)) setError(name, { message })
+        return fail(err.message)
+      }
+      if (err instanceof ApiError && err.status === 401) {
+        setAccount(null)
         return fail(err.message)
       }
       if (err instanceof ApiError && err.status === 409) {
@@ -254,6 +272,41 @@ export default function Checkout() {
           </Link>
         }
       />
+    )
+  }
+
+  if (account === undefined) return <PageLoading label="Loading checkout" />
+  if (account === null) {
+    return (
+      <div className="mx-auto max-w-6xl px-4 pb-24 pt-6 sm:px-6 md:pt-8">
+        <Link to="/cart" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
+          <ArrowLeft className="h-4 w-4" />
+          Back to cart
+        </Link>
+        <h1 className="mt-3 text-3xl font-extrabold md:text-4xl">Checkout</h1>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_380px]">
+          <div className="rounded-md border border-[#eaeaec] bg-white p-5 md:p-8">
+            <p className="mb-5 flex items-start gap-3 rounded-xl bg-surface-alt px-4 py-3 text-sm text-ink-900">
+              <UserRound className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+              <span>
+                <strong>Sign in or create your account to place this order.</strong> New here? Enter your email and we will create your account with a one-time code. No password needed. You can then see this order and all future orders in My Account.
+              </span>
+            </p>
+            {formError && (
+              <p role="alert" className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800">
+                {formError}
+              </p>
+            )}
+            <SignIn purpose="customer" title="Your account" text="Enter your email to sign in or create an account. We send you a 6-digit code." onDone={() => { setFormError(''); loadAccount() }} />
+          </div>
+          <aside className="hidden lg:block">
+            <div className="rounded-md border border-[#eaeaec] bg-white p-6">
+              <h2 className="mb-5 text-lg">Order summary</h2>
+              <Summary priced={priced} />
+            </div>
+          </aside>
+        </div>
+      </div>
     )
   }
 
@@ -307,8 +360,8 @@ export default function Checkout() {
               <Field id="contact-name" label="Full name" error={errors.contact?.name?.message} className="sm:col-span-2">
                 <input type="text" autoComplete="name" {...input('contact.name')} />
               </Field>
-              <Field id="contact-email" label="Email" hint="Your order confirmation and tracking link go here." error={errors.contact?.email?.message}>
-                <input type="email" inputMode="email" autoComplete="email" {...input('contact.email')} />
+              <Field id="contact-email" label="Email (your account)" hint="Your order confirmation goes here." error={errors.contact?.email?.message}>
+                <input type="email" inputMode="email" autoComplete="email" readOnly {...input('contact.email', { className: `${inputClass} bg-[#f5f6f8] text-ink-600` })} />
               </Field>
               <Field id="contact-phone" label="Mobile number" hint="For delivery updates." error={errors.contact?.phone?.message}>
                 <input type="tel" inputMode="tel" autoComplete="tel" placeholder="10-digit mobile" {...input('contact.phone')} />
@@ -339,6 +392,7 @@ export default function Checkout() {
             </Field>
           </Section>
 
+          {!direct && (
           <Section step={3} title="Payment">
             {methods.length === 0 ? (
               <p className="rounded-xl bg-surface-alt px-4 py-3 text-sm text-ink-900">
@@ -374,6 +428,16 @@ export default function Checkout() {
               </fieldset>
             )}
           </Section>
+          )}
+
+          {direct && (
+            <p className="flex items-start gap-3 rounded-md border border-gold/60 bg-surface-alt px-5 py-4 text-sm text-ink-900">
+              <Headset className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+              <span>
+                <strong>No payment needed now.</strong> Place your order and our sales team will call you shortly to confirm the order, payment and delivery.
+              </span>
+            </p>
+          )}
 
           {/* Bot trap: hidden from people, tempting to bots. */}
           <div className="hidden" aria-hidden="true">
@@ -396,11 +460,13 @@ export default function Checkout() {
                 {errors.accept_terms.message}
               </p>
             )}
-            <button type="submit" disabled={placing || methods.length === 0} className={`${btn.gold} mt-5 w-full !py-4 !text-base`}>
+            <button type="submit" disabled={placing || (!direct && methods.length === 0)} className={`${btn.gold} mt-5 w-full !py-4 !text-base`}>
               {placing ? <Spinner className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
               {placing ? 'Placing your order...' : method === 'razorpay' ? `Pay ${formatINR(priced.total_paise)}` : `Place order · ${formatINR(priced.total_paise)}`}
             </button>
-            <p className="mt-3 text-center text-xs text-ink-500">Prices include GST. A GST invoice is issued once payment is received.</p>
+            <p className="mt-3 text-center text-xs text-ink-500">
+              {direct ? 'Prices include GST. Our sales team confirms payment and delivery with you; a GST invoice follows.' : 'Prices include GST. A GST invoice is issued once payment is received.'}
+            </p>
           </div>
         </div>
 
@@ -410,7 +476,7 @@ export default function Checkout() {
             <Summary priced={priced} />
             <p className="mt-5 flex items-start gap-2 rounded-xl bg-surface-alt px-3.5 py-3 text-xs leading-snug text-ink-900">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#3f7a0c]" />
-              {config.online_payment
+              {!direct && config.online_payment
                 ? "Card details are entered on Razorpay's secure page. We never see or store them."
                 : 'Your details are sent over a secure connection and used only for this order.'}
             </p>

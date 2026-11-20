@@ -186,4 +186,7 @@ export const DEFAULT_SETTINGS = {
   },
   bank: { account_name: '', account_number: '', ifsc: '', bank_name: '', branch: '' },
   upi_id: '',
+  // Orders are placed without paying online: the sales team calls the customer to
+  // confirm payment and delivery. Set to false to bring back the payment step.
+  direct_orders: true,
 }

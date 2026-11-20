@@ -148,10 +148,10 @@ const STATUS_STYLE = {
   cancelled: 'bg-red-50 text-red-700 ring-red-200',
   refunded: 'bg-ink-300/40 text-ink-900 ring-ink-300',
 }
-export function StatusBadge({ status }) {
+export function StatusBadge({ status, label }) {
   return (
     <span className={`inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-bold ring-1 ring-inset ${STATUS_STYLE[status] || STATUS_STYLE.refunded}`}>
-      {STATUS_LABEL[status] || status}
+      {label || STATUS_LABEL[status] || status}
     </span>
   )
 }

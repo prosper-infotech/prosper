@@ -525,6 +525,7 @@ export async function writeSettings(request) {
     whatsapp_number: str(body.whatsapp_number, 20).replace(/\D/g, ''),
     invoice_prefix: str(body.invoice_prefix, 12),
     upi_id: str(body.upi_id, 80),
+    direct_orders: body.direct_orders === undefined ? current.direct_orders !== false : body.direct_orders !== false,
     seller: {
       legal_name: str(body.seller?.legal_name, 150),
       gstin: str(body.seller?.gstin, 15).toUpperCase(),

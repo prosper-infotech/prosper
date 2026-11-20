@@ -134,6 +134,14 @@ export default function AdminSettings({ integrations }) {
         <Alert kind={message.kind}>{message.text}</Alert>
 
         <div className="grid gap-6 xl:grid-cols-2">
+          <Card title="How orders are placed" className="xl:col-span-2">
+            <label className="flex cursor-pointer items-start gap-3 text-sm text-ink-900">
+              <input type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-primary" checked={form.direct_orders !== false} onChange={(e) => setForm({ ...form, direct_orders: e.target.checked })} />
+              <span>
+                <strong>Place orders without payment; the sales team calls the customer.</strong> Customers sign in, place the order and see &ldquo;Your order has been placed successfully&rdquo;. Each order is emailed to sales and sent to the CRM. Untick to ask for payment (online, UPI or bank transfer) at checkout instead.
+              </span>
+            </label>
+          </Card>
           <Card title="Shipping">
             <div className="grid gap-4 sm:grid-cols-2">
               <Field id="shipping_flat" label="Shipping charge (₹, incl. GST)" error={errors.shipping_flat_paise}>

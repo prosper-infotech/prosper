@@ -148,6 +148,7 @@ export async function publicOrder(order) {
   const when = Object.fromEntries(events.map((e) => [e.type, e.created_at]))
   const closed = ['cancelled', 'refunded'].includes(order.status)
   const manual = order.payment_method !== 'razorpay'
+  const direct = settings.direct_orders !== false && order.payment_method !== 'razorpay'
   return {
     order_number: order.order_number,
     token: order.public_token,
@@ -175,12 +176,14 @@ export async function publicOrder(order) {
       at: step === 'placed' ? order.created_at : when[step] || null,
     })),
     closed_at: closed ? when[order.status] || order.updated_at : null,
+    // Direct orders: the sales team calls about payment, so no payment details are shown.
+    direct: direct && order.status === 'pending_payment',
     payment_instructions:
-      order.status === 'pending_payment' && manual ? { bank: settings.bank, upi_id: settings.upi_id, reference: order.order_number } : null,
-    can_pay_online: order.status === 'pending_payment' && razorpayConfigured(),
-    can_pay_upi: order.status === 'pending_payment' && Boolean(settings.upi_id),
-    can_pay_bank: order.status === 'pending_payment' && Boolean(settings.bank?.account_number && settings.bank?.ifsc),
-    razorpay_key_id: order.status === 'pending_payment' ? razorpayKeyId() : null,
+      order.status === 'pending_payment' && manual && !direct ? { bank: settings.bank, upi_id: settings.upi_id, reference: order.order_number } : null,
+    can_pay_online: order.status === 'pending_payment' && !direct && razorpayConfigured(),
+    can_pay_upi: order.status === 'pending_payment' && !direct && Boolean(settings.upi_id),
+    can_pay_bank: order.status === 'pending_payment' && !direct && Boolean(settings.bank?.account_number && settings.bank?.ifsc),
+    razorpay_key_id: order.status === 'pending_payment' && !direct ? razorpayKeyId() : null,
     seller: settings.seller,
     support: { email: settings.support_email, phone: settings.support_phone, whatsapp: settings.whatsapp_number },
   }
