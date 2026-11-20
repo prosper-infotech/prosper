@@ -158,3 +158,23 @@ export async function forwardOrderLead(order, items, base = '') {
   const results = await Promise.allSettled(jobs)
   return { sent: results.filter((r) => r.status === 'fulfilled').length, failed: results.filter((r) => r.status === 'rejected').length }
 }
+
+// Keeps the CRM Orders tab in step when staff change an order's status.
+const CRM_STATUS = { pending_payment: 'placed', paid: 'paid', processing: 'confirmed', shipped: 'shipped', delivered: 'delivered', cancelled: 'cancelled', refunded: 'cancelled' }
+
+export async function sendOrderStatusToCrm(order) {
+  const ep = ordersEndpoint()
+  if (!ep || !leadForwardingOn() || !CRM_STATUS[order.status]) return { skipped: true }
+  try {
+    const res = await fetch(ep.url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', [ep.header]: ep.secret },
+      body: JSON.stringify({ order_number: order.order_number, status: CRM_STATUS[order.status] }),
+      signal: AbortSignal.timeout(6000),
+    })
+    return { ok: res.ok }
+  } catch (err) {
+    console.error('[shop] CRM status update failed', err.message)
+    return { ok: false }
+  }
+}

@@ -5,6 +5,7 @@ import { db, one, getSettings, addEvent } from './db.js'
 import { HttpError } from './http.js'
 import { sendEmail, templates, salesRecipients } from './email.js'
 import { razorpayConfigured, razorpayKeyId } from './razorpay.js'
+import { sendOrderStatusToCrm } from './crm.js'
 
 export const STATUSES = ['pending_payment', 'paid', 'processing', 'shipped', 'delivered', 'cancelled', 'refunded']
 export const PAYMENT_METHODS = ['razorpay', 'bank_transfer', 'upi_manual']
@@ -70,7 +71,7 @@ export async function markPaid(order, { by = 'system', note = '' } = {}) {
   ;[paid] = await db().update('orders', { id: paid.id }, { stock_deducted: true, invoice_number: invoiceNumber, invoice_date: new Date().toISOString() })
   await addEvent(paid.id, 'paid', `Payment confirmed${note ? `: ${note}` : ''}. Invoice ${invoiceNumber}.`, by)
 
-  await Promise.allSettled([notify(paid, 'paymentReceived'), notify(paid, 'salesPaid', { toSales: true }), lowStockAlert(items, settings, paid)])
+  await Promise.allSettled([notify(paid, 'paymentReceived'), notify(paid, 'salesPaid', { toSales: true }), lowStockAlert(items, settings, paid), sendOrderStatusToCrm(paid)])
   return paid
 }
 
@@ -111,6 +112,7 @@ export async function changeStatus(order, next, { by = 'staff', note = '' } = {}
   await addEvent(result.id, next, note || `Status changed to ${next}.`, by)
   const mail = { delivered: 'delivered', cancelled: 'cancelled', refunded: 'refunded' }[next]
   if (mail) await notify(result, mail, { extra: note })
+  await sendOrderStatusToCrm(result)
   return result
 }
 
@@ -131,6 +133,7 @@ export async function shipOrder(order, { courier, awb, tracking_url, by = 'staff
   }
   await addEvent(order.id, 'shipped', `${existing ? 'Tracking updated' : 'Shipped'} with ${courier}${awb ? `, tracking ${awb}` : ''}.`, by)
   await notify(result, 'shipped', { extra: shipment })
+  if (order.status !== 'shipped') await sendOrderStatusToCrm(result)
   return { order: result, shipment }
 }
 
