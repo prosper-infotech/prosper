@@ -59,9 +59,10 @@ export function orderPayload(order, items, base = '') {
     company: c.company || '',
     gstin: order.gstin || '',
     items: items.map((i) => ({ sku: i.sku, name: i.name, qty: i.qty, unit_price: formatINR(i.unit_price_paise), line_total: formatINR(i.line_total_paise) })),
-    subtotal: formatINR(order.subtotal_paise),
+    // Shop prices include GST, so the GST amount is part of the total, not added to it.
+    subtotal: `${formatINR(order.subtotal_paise)} (incl. GST)`,
     shipping: order.shipping_paise ? formatINR(order.shipping_paise) : 'Free',
-    gst: formatINR(order.gst_paise),
+    gst: `${formatINR(order.gst_paise)} (included in total)`,
     total: formatINR(order.total_paise),
     total_paise: order.total_paise,
     address: addressText(a),
